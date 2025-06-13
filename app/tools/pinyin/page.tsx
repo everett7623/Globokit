@@ -1,13 +1,17 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { CopyButton } from '@/components/tools/copy-button'
-import { convertToPinyin, getInitials, PinyinOptions } from '@/lib/tools/pinyin'
+
+interface PinyinOptions {
+  toneType?: 'symbol' | 'num' | 'none';
+  separator?: string;
+}
 
 export default function PinyinPage() {
   const [input, setInput] = useState('')
@@ -15,12 +19,43 @@ export default function PinyinPage() {
   const [initialsResult, setInitialsResult] = useState('')
   const [toneType, setToneType] = useState<PinyinOptions['toneType']>('symbol')
   const [separator, setSeparator] = useState(' ')
+  const [isLoading, setIsLoading] = useState(false)
+  const [pinyinModule, setPinyinModule] = useState<any>(null)
 
-  const handleConvert = () => {
-    if (input) {
-      const result = convertToPinyin(input, { toneType, separator })
+  // 动态导入 pinyin-pro
+  useEffect(() => {
+    import('pinyin-pro').then(module => {
+      setPinyinModule(module)
+    }).catch(err => {
+      console.error('Failed to load pinyin module:', err)
+    })
+  }, [])
+
+  const handleConvert = async () => {
+    if (!input || !pinyinModule) return
+    
+    setIsLoading(true)
+    try {
+      // 使用 pinyin 函数
+      const result = pinyinModule.pinyin(input, {
+        toneType: toneType,
+        separator: separator,
+      })
       setPinyinResult(result)
-      setInitialsResult(getInitials(input))
+      
+      // 获取首字母
+      const initials = pinyinModule.pinyin(input, {
+        pattern: 'first',
+        toneType: 'none',
+        type: 'array'
+      })
+      setInitialsResult(initials.join('').toUpperCase())
+    } catch (error) {
+      console.error('Pinyin conversion error:', error)
+      setPinyinResult('转换失败，请重试')
+      setInitialsResult('')
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -92,9 +127,19 @@ export default function PinyinPage() {
               </div>
             </div>
 
-            <Button onClick={handleConvert} className="w-full">
-              转换拼音
+            <Button 
+              onClick={handleConvert} 
+              className="w-full" 
+              disabled={!pinyinModule || isLoading}
+            >
+              {isLoading ? '转换中...' : '转换拼音'}
             </Button>
+
+            {!pinyinModule && (
+              <div className="text-sm text-muted-foreground text-center">
+                正在加载拼音转换模块...
+              </div>
+            )}
 
             {pinyinResult && (
               <div className="space-y-4">
@@ -108,15 +153,17 @@ export default function PinyinPage() {
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <Label>拼音首字母</Label>
-                    <CopyButton text={initialsResult} />
+                {initialsResult && (
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <Label>拼音首字母</Label>
+                      <CopyButton text={initialsResult} />
+                    </div>
+                    <div className="rounded-md border bg-muted p-4">
+                      <p className="text-lg font-mono">{initialsResult}</p>
+                    </div>
                   </div>
-                  <div className="rounded-md border bg-muted p-4">
-                    <p className="text-lg font-mono">{initialsResult}</p>
-                  </div>
-                </div>
+                )}
               </div>
             )}
 
