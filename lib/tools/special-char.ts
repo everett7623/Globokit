@@ -51,4 +51,18 @@ export function checkSpecialChars(text: string): SpecialCharResult {
   if (nonAsciiMatches) {
     nonAsciiMatches.forEach(char => {
       if (!specialChars.includes(char)) {
-        specialChars.push(char)
+        specialChars.push(char);
+      }
+    });
+  }
+  
+  // 清理文本 - 只保留ASCII字符
+  cleanedText = text.replace(nonAsciiRegex, '');
+  
+  return {
+    hasSpecialChars: specialChars.length > 0,
+    specialChars: Array.from(new Set(specialChars)),
+    cleanedText,
+    replacedText
+  };
+}
