@@ -3,10 +3,13 @@ import type { Config } from 'tailwindcss'
 const config: Config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './Components/**/*.{js,ts,jsx,tsx,mdx}', // 添加大写版本
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/**/*.{js,ts,jsx,tsx,mdx}',
+    // 确保包含所有可能的路径
+    "./node_modules/@tremor/**/*.{js,ts,jsx,tsx}", // 如果使用第三方组件库
   ],
   theme: {
     container: {
