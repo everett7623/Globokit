@@ -11,15 +11,46 @@ import { numberToChinese } from '@/lib/tools/rmb-converter'
 export default function RMBConverterPage() {
   const [amount, setAmount] = useState('')
   const [result, setResult] = useState('')
+  const [error, setError] = useState('')
 
   const handleConvert = () => {
+    setError('')
     const num = parseFloat(amount)
-    if (!isNaN(num) && num >= 0) {
-      setResult(numberToChinese(num))
-    } else {
-      setResult('请输入有效的金额')
+    
+    if (isNaN(num)) {
+      setError('请输入有效的数字')
+      setResult('')
+      return
+    }
+    
+    if (num < 0) {
+      setError('请输入正数')
+      setResult('')
+      return
+    }
+    
+    if (num > 999999999999999) {
+      setError('数字太大，无法转换')
+      setResult('')
+      return
+    }
+    
+    try {
+      const converted = numberToChinese(num)
+      setResult(converted)
+    } catch (err) {
+      setError('转换出错，请重试')
+      setResult('')
     }
   }
+
+  const commonAmounts = [
+    { value: '100', label: '100元' },
+    { value: '1000', label: '1千元' },
+    { value: '10000', label: '1万元' },
+    { value: '100000', label: '10万元' },
+    { value: '1000000', label: '100万元' },
+  ]
 
   return (
     <div className="container py-10">
@@ -42,6 +73,26 @@ export default function RMBConverterPage() {
                 onChange={(e) => setAmount(e.target.value)}
                 step="0.01"
               />
+              {error && (
+                <p className="text-sm text-destructive">{error}</p>
+              )}
+            </div>
+
+            {/* 快捷金额按钮 */}
+            <div className="flex flex-wrap gap-2">
+              {commonAmounts.map((item) => (
+                <Button
+                  key={item.value}
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setAmount(item.value)
+                    setError('')
+                  }}
+                >
+                  {item.label}
+                </Button>
+              ))}
             </div>
             
             <Button onClick={handleConvert} className="w-full">
@@ -68,9 +119,19 @@ export default function RMBConverterPage() {
               <ul className="list-disc list-inside space-y-1 text-muted-foreground">
                 <li>支持小数点后两位（角、分）</li>
                 <li>最大支持千万亿级别的金额</li>
-                <li>自动添加"元整"或"元X角X分"</li>
+                <li>自动添加"人民币"前缀和"元整"或"元X角X分"后缀</li>
                 <li>符合财务规范的大写格式</li>
               </ul>
+            </div>
+
+            {/* 示例展示 */}
+            <div className="rounded-lg bg-blue-50 p-4 text-sm">
+              <p className="font-medium text-blue-900 mb-2">转换示例：</p>
+              <div className="space-y-1 text-blue-700">
+                <p>123.45 → 人民币壹佰贰拾叁元肆角伍分</p>
+                <p>10000 → 人民币壹万元整</p>
+                <p>50000.5 → 人民币伍万元伍角</p>
+              </div>
             </div>
           </CardContent>
         </Card>
