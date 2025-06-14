@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import './globals.css'
+import './globals.css'  // 这一行必须存在！
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 
