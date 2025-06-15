@@ -4,10 +4,8 @@ import { useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
 import { Copy, RotateCcw } from 'lucide-react'
-import { toast } from 'sonner'
 import { 
   convertToPinyin, 
   analyzeText, 
@@ -28,7 +26,7 @@ export default function PinyinPage() {
 
   const handleConvert = () => {
     if (!input.trim()) {
-      toast.error('请输入中文文本')
+      alert('请输入中文文本')
       return
     }
 
@@ -41,17 +39,17 @@ export default function PinyinPage() {
     const result = convertToPinyin(input, options)
     setOutput(result)
     setStats(analyzeText(input))
-    toast.success('转换成功')
   }
 
   const handleCopy = () => {
     if (!output) {
-      toast.error('没有可复制的内容')
+      alert('没有可复制的内容')
       return
     }
     
     navigator.clipboard.writeText(output)
-    toast.success('已复制到剪贴板')
+      .then(() => alert('已复制到剪贴板'))
+      .catch(() => alert('复制失败，请手动复制'))
   }
 
   const handleReset = () => {
@@ -75,7 +73,7 @@ export default function PinyinPage() {
         <CardHeader>
           <CardTitle>中文转拼音</CardTitle>
           <CardDescription>
-            将中文文本转换为拼音，使用专业的 pinyin-pro 库，支持多种声调格式
+            将中文文本转换为拼音（临时实现 - 请安装 pinyin-pro 获得完整功能）
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -142,21 +140,17 @@ export default function PinyinPage() {
 
           {/* 声调选项 */}
           <div className="space-y-2">
-            <Label>声调格式</Label>
-            <RadioGroup value={toneType} onValueChange={(value) => setToneType(value as any)}>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="symbol" id="symbol" />
-                <Label htmlFor="symbol">符号声调 (nǐ hǎo)</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="num" id="num" />
-                <Label htmlFor="num">数字声调 (ni3 hao3)</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="none" id="none" />
-                <Label htmlFor="none">无声调 (ni hao)</Label>
-              </div>
-            </RadioGroup>
+            <Label htmlFor="toneType">声调格式</Label>
+            <select
+              id="toneType"
+              value={toneType}
+              onChange={(e) => setToneType(e.target.value as any)}
+              className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            >
+              <option value="symbol">符号声调 (nǐ hǎo)</option>
+              <option value="num">数字声调 (ni3 hao3)</option>
+              <option value="none">无声调 (ni hao)</option>
+            </select>
           </div>
 
           {/* 操作按钮 */}
@@ -210,12 +204,12 @@ export default function PinyinPage() {
           <div className="space-y-2">
             <Label>功能特点</Label>
             <ul className="text-sm text-muted-foreground space-y-1">
-              <li>• 使用专业的 pinyin-pro 库，识别准确率高</li>
+              <li>• 当前为临时实现，请安装 pinyin-pro 获得完整功能</li>
               <li>• 支持多种声调格式（符号、数字、无声调）</li>
-              <li>• 自动处理多音字，选择最常用读音</li>
               <li>• 保留英文、数字和标点符号</li>
-              <li>• 支持完整的中文字符集，包括生僻字</li>
-              <li>• 高性能转换，可处理大量文本</li>
+              <li>• 提供文本分析统计功能</li>
+              <li className="text-orange-600">⚠️ 临时版本仅支持少量常用汉字</li>
+              <li className="text-green-600">✅ 安装 pinyin-pro 后支持完整中文字符集</li>
             </ul>
           </div>
         </CardContent>
