@@ -16,7 +16,7 @@ import {
 export default function PinyinPage() {
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
-  const [toneType, setToneType] = useState<'symbol' | 'num' | 'none'>('symbol')
+  const [toneType, setToneType] = useState<'symbol' | 'num' | 'none'>('none')
   const [stats, setStats] = useState({
     totalChars: 0,
     chineseChars: 0,
@@ -73,7 +73,7 @@ export default function PinyinPage() {
         <CardHeader>
           <CardTitle>中文转拼音</CardTitle>
           <CardDescription>
-            将中文文本转换为拼音，使用专业的 pinyin-pro 库，支持多种声调格式
+            将中文文本转换为拼音，默认无声调格式，支持符号声调和数字声调
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -147,9 +147,9 @@ export default function PinyinPage() {
               onChange={(e) => setToneType(e.target.value as any)}
               className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
+              <option value="none">无声调 (ni hao)</option>
               <option value="symbol">符号声调 (nǐ hǎo)</option>
               <option value="num">数字声调 (ni3 hao3)</option>
-              <option value="none">无声调 (ni hao)</option>
             </select>
           </div>
 
@@ -204,8 +204,9 @@ export default function PinyinPage() {
           <div className="space-y-2">
             <Label>功能特点</Label>
             <ul className="text-sm text-muted-foreground space-y-1">
+              <li>• 默认使用无声调格式，更适合常见使用场景</li>
+              <li>• 支持多种声调格式（无声调、符号声调、数字声调）</li>
               <li>• 使用专业的 pinyin-pro 库，识别准确率高</li>
-              <li>• 支持多种声调格式（符号、数字、无声调）</li>
               <li>• 自动处理多音字，选择最常用读音</li>
               <li>• 保留英文、数字和标点符号</li>
               <li>• 支持完整的中文字符集，包括生僻字</li>
