@@ -1,98 +1,79 @@
-// lib/tools/pinyin.ts
-// 最小化修改版本 - 保持现有接口，使用 pinyin-pro 提供功能
-
 import { pinyin } from 'pinyin-pro';
 
-/**
- * 中文转拼音 - 保持原有函数签名
- * @param text 中文文本
- * @param separator 分隔符，默认空格
- * @param tone 是否显示音调，默认不显示
- * @returns 拼音字符串
- */
-export function chineseToPinyin(
-  text: string, 
-  separator: string = ' ',
-  tone: boolean = false
-): string {
-  return pinyin(text, {
-    toneType: tone ? 'symbol' : 'none',
-    type: 'string',
-    separator: separator
+export interface PinyinOptions {
+  toneType?: 'symbol' | 'num' | 'none'; // 声调类型
+  pattern?: 'pinyin' | 'initial' | 'final' | 'num' | 'first'; // 输出模式
+  multiple?: boolean; // 是否返回多音字的所有拼音
+  separator?: string; // 拼音之间的分隔符
+  nonZh?: 'spaced' | 'consecutive' | 'removed'; // 非中文字符处理
+}
+
+export function convertToPinyin(text: string, options: PinyinOptions = {}): string {
+  const defaultOptions: PinyinOptions = {
+    toneType: 'symbol', // 默认使用符号声调
+    pattern: 'pinyin',
+    multiple: false,
+    separator: ' ',
+    nonZh: 'spaced', // 保留非中文字符
+    ...options
+  };
+
+  return pinyin(text, defaultOptions);
+}
+
+// 获取带声调的拼音
+export function getPinyinWithTone(text: string): string {
+  return convertToPinyin(text, {
+    toneType: 'symbol',
+    separator: ' '
   });
 }
 
-/**
- * 获取拼音首字母
- * @param text 中文文本
- * @returns 首字母字符串（大写）
- */
-export function getFirstLetter(text: string): string {
-  return pinyin(text, {
+// 获取不带声调的拼音
+export function getPinyinWithoutTone(text: string): string {
+  return convertToPinyin(text, {
+    toneType: 'none',
+    separator: ' '
+  });
+}
+
+// 获取拼音首字母
+export function getPinyinInitials(text: string): string {
+  return convertToPinyin(text, {
     pattern: 'first',
-    type: 'string'
-  }).toUpperCase().replace(/\s/g, '');
+    separator: ''
+  });
 }
 
-/**
- * 判断是否包含中文
- * @param text 文本
- * @returns 是否包含中文
- */
-export function containsChinese(text: string): boolean {
-  return /[\u4e00-\u9fa5]/.test(text);
+// 获取数字声调拼音
+export function getPinyinWithNumTone(text: string): string {
+  return convertToPinyin(text, {
+    toneType: 'num',
+    separator: ' '
+  });
 }
 
-/**
- * 获取转换统计
- * @param text 文本
- * @returns 统计信息
- */
-export function getConversionStats(text: string) {
-  const chineseChars = (text.match(/[\u4e00-\u9fa5]/g) || []).length;
+// 分析文本中的中文字符
+export function analyzeText(text: string) {
   const totalChars = text.length;
+  const chineseChars = (text.match(/[\u4e00-\u9fa5]/g) || []).length;
+  const nonChineseChars = totalChars - chineseChars;
   const conversionRate = totalChars > 0 ? (chineseChars / totalChars * 100).toFixed(2) : '0';
-  
+
   return {
     totalChars,
     chineseChars,
-    nonChineseChars: totalChars - chineseChars,
-    conversionRate: `${conversionRate}%`,
-    // pinyin-pro 支持的字符数
-    supportedChars: '20000+',
-    // 原有字库大小
-    originalDictSize: 1158,
-    // 扩展后的提升
-    improvement: '17x'
+    nonChineseChars,
+    conversionRate: `${conversionRate}%`
   };
 }
 
-// 导出默认对象，保持向后兼容
-export default {
-  convert: chineseToPinyin,
-  getFirstLetter,
-  containsChinese,
-  getStats: getConversionStats
+// 示例数据
+export const examples = {
+  basic: '你好世界',
+  greeting: '早上好，祝您工作顺利！',
+  classic: '春眠不觉晓，处处闻啼鸟。',
+  daily: '今天天气真好，我们去公园散步吧。',
+  names: '张三李四王五赵六',
+  address: '北京市朝阳区建国门外大街1号'
 };
-
-// 为了兼容可能的直接函数调用
-export { chineseToPinyin as convert };
-
-// ===== 使用示例 =====
-// 以下是如何在您现有的页面中使用
-
-/*
-// app/tools/pinyin/page.tsx
-import pinyin from '@/lib/tools/pinyin';
-// 或者
-import { convert } from '@/lib/tools/pinyin';
-
-// 使用方式完全不变
-const result = pinyin.convert('中国人'); // 'zhong guo ren'
-const withTone = pinyin.convert('中国人', ' ', true); // 'zhōng guó rén'
-const firstLetters = pinyin.getFirstLetter('中国人'); // 'ZGR'
-const stats = pinyin.getStats('中国人 123'); // 获取统计信息
-
-// 现在自动支持 20000+ 汉字！
-const complexText = pinyin.convert('豗喆堃垚淼焱'); // 能正确转换生僻字
-*/
