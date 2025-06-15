@@ -73,7 +73,7 @@ export default function PinyinPage() {
         <CardHeader>
           <CardTitle>中文转拼音</CardTitle>
           <CardDescription>
-            将中文文本转换为拼音，默认无声调格式，支持符号声调和数字声调
+            将中文文本转换为拼音，使用专业的 pinyin-pro 库，支持多种声调格式
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -204,9 +204,8 @@ export default function PinyinPage() {
           <div className="space-y-2">
             <Label>功能特点</Label>
             <ul className="text-sm text-muted-foreground space-y-1">
-              <li>• 默认使用无声调格式，更适合常见使用场景</li>
-              <li>• 支持多种声调格式（无声调、符号声调、数字声调）</li>
               <li>• 使用专业的 pinyin-pro 库，识别准确率高</li>
+              <li>• 支持多种声调格式（符号、数字、无声调）</li>
               <li>• 自动处理多音字，选择最常用读音</li>
               <li>• 保留英文、数字和标点符号</li>
               <li>• 支持完整的中文字符集，包括生僻字</li>
