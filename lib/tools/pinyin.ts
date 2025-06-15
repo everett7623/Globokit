@@ -10,11 +10,11 @@ export interface PinyinOptions {
 
 export function convertToPinyin(text: string, options: PinyinOptions = {}): string {
   const defaultOptions: PinyinOptions = {
-    toneType: 'symbol', // 默认使用符号声调
+    toneType: 'symbol',
     pattern: 'pinyin',
     multiple: false,
     separator: ' ',
-    nonZh: 'spaced', // 保留非中文字符
+    nonZh: 'spaced',
     ...options
   };
 
