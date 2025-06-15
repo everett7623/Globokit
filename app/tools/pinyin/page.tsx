@@ -1,8 +1,3 @@
-# 扩展版拼音转换 - 包含1000+汉字
-
-## `app/tools/pinyin/page.tsx`
-
-```typescript
 'use client'
 
 import { useState } from 'react'
@@ -12,7 +7,6 @@ import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { CopyButton } from '@/components/tools/copy-button'
 
-// 使用函数创建拼音映射，避免重复键错误
 function createPinyinMap(): { [key: string]: string } {
   const data = [
     // 数字
@@ -520,26 +514,3 @@ export default function PinyinPage() {
     </div>
   )
 }
-```
-
-## 特点说明
-
-1. **扩展至1000+汉字**
-   - 覆盖日常使用的95%以上汉字
-   - 包含常用姓氏、地名、称谓等
-   - 涵盖生活、工作、学习等各领域常用字
-
-2. **分类清晰**
-   - 按使用场景分类（时间、人物、地理、动作等）
-   - 方便后续维护和扩展
-
-3. **新增功能**
-   - 显示识别率百分比
-   - 显示字库大小
-   - 更多示例文本
-
-4. **用户体验优化**
-   - 双色提示框（绿色显示识别率，橙色显示未识别数）
-   - 更详细的功能说明
-
-这个版本包含了大量常用汉字，应该能满足大部分日常使用需求！
