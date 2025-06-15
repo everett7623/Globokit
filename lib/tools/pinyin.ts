@@ -10,7 +10,7 @@ export interface PinyinOptions {
 
 export function convertToPinyin(text: string, options: PinyinOptions = {}): string {
   const defaultOptions: PinyinOptions = {
-    toneType: 'symbol', // 默认使用符号声调
+    toneType: 'none', // 默认使用无声调
     pattern: 'pinyin',
     multiple: false,
     separator: ' ',
