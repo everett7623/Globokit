@@ -73,7 +73,7 @@ export default function PinyinPage() {
         <CardHeader>
           <CardTitle>中文转拼音</CardTitle>
           <CardDescription>
-            将中文文本转换为拼音，使用专业的 pinyin-pro 库，支持多种声调格式
+            将中文文本转换为拼音，使用专业的 pinyin-pro 库，默认无声调格式，支持符号声调和数字声调
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
