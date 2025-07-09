@@ -10,7 +10,7 @@ const tools = [
   { href: '/tools/special-char', label: '特殊字符' },
   { href: '/tools/number-to-english', label: '数字转英文' },
   { href: '/tools/pinyin', label: '中文转拼音' },
-  { href: '/tools/holiday-query', label: '节假日查询' },
+  { href: '/tools/holiday-query', label: '国际节假日查询' },
 ]
 
 export function Navigation() {
