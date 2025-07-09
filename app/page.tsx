@@ -7,6 +7,7 @@ import {
   AlertCircle, 
   Hash, 
   Languages,
+  Globe,
   ArrowRight 
 } from 'lucide-react'
 
@@ -46,6 +47,13 @@ const tools = [
     href: '/tools/pinyin',
     color: 'text-red-600',
   },
+  {
+    title: '国际节假日查询',
+    description: '查询全球主要贸易国家的节假日安排',
+    icon: Globe,
+    href: '/tools/holiday-query',
+    color: 'text-indigo-600',
+  },
 ]
 
 export default function Home() {
@@ -59,7 +67,7 @@ export default function Home() {
           专为外贸人打造的实用工具集，提高工作效率，简化日常操作
         </p>
       </div>
-
+      
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
         {tools.map((tool) => {
           const Icon = tool.icon
