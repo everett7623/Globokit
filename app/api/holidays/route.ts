@@ -72,8 +72,9 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(result)
   } catch (error) {
     console.error('Holiday API error:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
     return NextResponse.json(
-      { error: 'Failed to fetch holiday data', message: error.message },
+      { error: 'Failed to fetch holiday data', message: errorMessage },
       { status: 500 }
     )
   }
@@ -95,11 +96,11 @@ export async function POST(request: NextRequest) {
       
       const response = await fetch(apiUrl)
       
-      if (!response.ok) {
-        throw new Error(`Holiday API error: ${response.status}`)
-      }
-      
       const data = await response.json()
+      
+      if (!response.ok) {
+        throw new Error(data.error || `Holiday API error: ${response.status}`)
+      }
       
       // 转换国家数据
       const countries = Object.entries(data.countries || {}).map(([code, country]: [string, any]) => ({
@@ -125,8 +126,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid action' }, { status: 400 })
   } catch (error) {
     console.error('Holiday API error:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
     return NextResponse.json(
-      { error: 'Failed to fetch data', message: error.message },
+      { error: 'Failed to fetch data', message: errorMessage },
       { status: 500 }
     )
   }
