@@ -126,8 +126,102 @@ export function generateHolidayData(year: number): Record<string, Holiday[]> {
       { name: '中秋节', localName: 'Mid-Autumn Festival', type: 'public', impact: 'high' },
       { name: '国庆节', localName: 'National Day', type: 'public', impact: 'high' },
     ],
-    // 在 holidays2025 中添加更多国家的数据模板
 
+    // 添加更多国家...
+  }
+  
+  // 这里应该根据年份计算实际日期，特别是移动节日
+  // 为了示例，我们返回一些固定数据
+  return getHolidaysForYear(year)
+}
+
+// 获取特定年份的节假日数据
+function getHolidaysForYear(year: number): Record<string, Holiday[]> {
+  // 2025年数据
+  if (year === 2025) {
+    return holidays2025
+  }
+  
+  // 2026年数据
+  if (year === 2026) {
+    return holidays2026
+  }
+  
+  // 其他年份返回估算数据或空数据
+  return {}
+}
+
+// 2025年各国节假日数据
+export const holidays2025: Record<string, Holiday[]> = {
+  US: [
+    { date: '2025-01-01', name: "New Year's Day", type: 'public', impact: 'high' },
+    { date: '2025-01-20', name: 'Martin Luther King Jr. Day', type: 'public', impact: 'medium' },
+    { date: '2025-02-17', name: "Presidents' Day", type: 'public', impact: 'medium' },
+    { date: '2025-05-26', name: 'Memorial Day', type: 'public', impact: 'high' },
+    { date: '2025-06-19', name: 'Juneteenth', type: 'public', impact: 'medium' },
+    { date: '2025-07-04', name: 'Independence Day', type: 'public', impact: 'high' },
+    { date: '2025-09-01', name: 'Labor Day', type: 'public', impact: 'high' },
+    { date: '2025-10-13', name: 'Columbus Day', type: 'public', impact: 'low' },
+    { date: '2025-11-11', name: 'Veterans Day', type: 'public', impact: 'medium' },
+    { date: '2025-11-27', name: 'Thanksgiving Day', type: 'public', impact: 'high' },
+    { date: '2025-11-28', name: 'Black Friday', type: 'observance', impact: 'high' },
+    { date: '2025-12-25', name: 'Christmas Day', type: 'public', impact: 'high' },
+  ],
+  UK: [
+    { date: '2025-01-01', name: "New Year's Day", type: 'public', impact: 'high' },
+    { date: '2025-04-18', name: 'Good Friday', type: 'public', impact: 'high' },
+    { date: '2025-04-21', name: 'Easter Monday', type: 'public', impact: 'high' },
+    { date: '2025-05-05', name: 'Early May Bank Holiday', type: 'public', impact: 'medium' },
+    { date: '2025-05-26', name: 'Spring Bank Holiday', type: 'public', impact: 'medium' },
+    { date: '2025-08-25', name: 'Summer Bank Holiday', type: 'public', impact: 'medium' },
+    { date: '2025-12-25', name: 'Christmas Day', type: 'public', impact: 'high' },
+    { date: '2025-12-26', name: 'Boxing Day', type: 'public', impact: 'high' },
+  ],
+  DE: [
+    { date: '2025-01-01', name: 'Neujahr', localName: "New Year's Day", type: 'public', impact: 'high' },
+    { date: '2025-01-06', name: 'Heilige Drei Könige', localName: 'Epiphany', type: 'regional', impact: 'low' },
+    { date: '2025-04-18', name: 'Karfreitag', localName: 'Good Friday', type: 'public', impact: 'high' },
+    { date: '2025-04-21', name: 'Ostermontag', localName: 'Easter Monday', type: 'public', impact: 'high' },
+    { date: '2025-05-01', name: 'Tag der Arbeit', localName: 'Labour Day', type: 'public', impact: 'high' },
+    { date: '2025-05-29', name: 'Christi Himmelfahrt', localName: 'Ascension Day', type: 'public', impact: 'medium' },
+    { date: '2025-06-09', name: 'Pfingstmontag', localName: 'Whit Monday', type: 'public', impact: 'medium' },
+    { date: '2025-10-03', name: 'Tag der Deutschen Einheit', localName: 'German Unity Day', type: 'public', impact: 'high' },
+    { date: '2025-12-25', name: '1. Weihnachtstag', localName: 'Christmas Day', type: 'public', impact: 'high' },
+    { date: '2025-12-26', name: '2. Weihnachtstag', localName: 'Boxing Day', type: 'public', impact: 'high' },
+  ],
+  JP: [
+    { date: '2025-01-01', name: '元日', localName: "New Year's Day", type: 'public', impact: 'high' },
+    { date: '2025-01-13', name: '成人の日', localName: 'Coming of Age Day', type: 'public', impact: 'medium' },
+    { date: '2025-02-11', name: '建国記念の日', localName: 'National Foundation Day', type: 'public', impact: 'medium' },
+    { date: '2025-02-23', name: '天皇誕生日', localName: "Emperor's Birthday", type: 'public', impact: 'medium' },
+    { date: '2025-03-20', name: '春分の日', localName: 'Vernal Equinox', type: 'public', impact: 'medium' },
+    { date: '2025-04-29', name: '昭和の日', localName: 'Showa Day', type: 'public', impact: 'high' },
+    { date: '2025-05-03', name: '憲法記念日', localName: 'Constitution Day', type: 'public', impact: 'high' },
+    { date: '2025-05-04', name: 'みどりの日', localName: 'Greenery Day', type: 'public', impact: 'high' },
+    { date: '2025-05-05', name: 'こどもの日', localName: "Children's Day", type: 'public', impact: 'high' },
+    { date: '2025-07-21', name: '海の日', localName: 'Marine Day', type: 'public', impact: 'medium' },
+    { date: '2025-08-11', name: '山の日', localName: 'Mountain Day', type: 'public', impact: 'medium' },
+    { date: '2025-09-15', name: '敬老の日', localName: 'Respect for the Aged Day', type: 'public', impact: 'medium' },
+    { date: '2025-09-23', name: '秋分の日', localName: 'Autumnal Equinox', type: 'public', impact: 'medium' },
+    { date: '2025-10-13', name: 'スポーツの日', localName: 'Sports Day', type: 'public', impact: 'medium' },
+    { date: '2025-11-03', name: '文化の日', localName: 'Culture Day', type: 'public', impact: 'medium' },
+    { date: '2025-11-23', name: '勤労感謝の日', localName: 'Labor Thanksgiving', type: 'public', impact: 'medium' },
+  ],
+  CN: [
+    { date: '2025-01-01', name: '元旦', localName: "New Year's Day", type: 'public', impact: 'medium' },
+    { date: '2025-01-28', name: '春节除夕', localName: 'Spring Festival Eve', type: 'public', impact: 'high' },
+    { date: '2025-01-29', name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
+    { date: '2025-01-30', name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
+    { date: '2025-01-31', name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
+    { date: '2025-02-01', name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
+    { date: '2025-02-02', name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
+    { date: '2025-04-04', name: '清明节', localName: 'Qingming Festival', type: 'public', impact: 'medium' },
+    { date: '2025-05-01', name: '劳动节', localName: 'Labour Day', type: 'public', impact: 'medium' },
+    { date: '2025-05-31', name: '端午节', localName: 'Dragon Boat Festival', type: 'public', impact: 'medium' },
+    { date: '2025-10-01', name: '国庆节', localName: 'National Day', type: 'public', impact: 'high' },
+    { date: '2025-10-06', name: '中秋节', localName: 'Mid-Autumn Festival', type: 'public', impact: 'high' },
+  ],
+  // 添加更多国家的2025年数据...
 // 法国
 FR: [
   { date: '2025-01-01', name: 'Jour de l\'an', localName: '新年', type: 'public', impact: 'high' },
@@ -254,101 +348,6 @@ AU: [
   { date: '2025-12-25', name: 'Christmas Day', localName: '圣诞节', type: 'public', impact: 'high' },
   { date: '2025-12-26', name: 'Boxing Day', localName: '节礼日', type: 'public', impact: 'high' },
 ]
-    // 添加更多国家...
-  }
-  
-  // 这里应该根据年份计算实际日期，特别是移动节日
-  // 为了示例，我们返回一些固定数据
-  return getHolidaysForYear(year)
-}
-
-// 获取特定年份的节假日数据
-function getHolidaysForYear(year: number): Record<string, Holiday[]> {
-  // 2025年数据
-  if (year === 2025) {
-    return holidays2025
-  }
-  
-  // 2026年数据
-  if (year === 2026) {
-    return holidays2026
-  }
-  
-  // 其他年份返回估算数据或空数据
-  return {}
-}
-
-// 2025年各国节假日数据
-export const holidays2025: Record<string, Holiday[]> = {
-  US: [
-    { date: '2025-01-01', name: "New Year's Day", type: 'public', impact: 'high' },
-    { date: '2025-01-20', name: 'Martin Luther King Jr. Day', type: 'public', impact: 'medium' },
-    { date: '2025-02-17', name: "Presidents' Day", type: 'public', impact: 'medium' },
-    { date: '2025-05-26', name: 'Memorial Day', type: 'public', impact: 'high' },
-    { date: '2025-06-19', name: 'Juneteenth', type: 'public', impact: 'medium' },
-    { date: '2025-07-04', name: 'Independence Day', type: 'public', impact: 'high' },
-    { date: '2025-09-01', name: 'Labor Day', type: 'public', impact: 'high' },
-    { date: '2025-10-13', name: 'Columbus Day', type: 'public', impact: 'low' },
-    { date: '2025-11-11', name: 'Veterans Day', type: 'public', impact: 'medium' },
-    { date: '2025-11-27', name: 'Thanksgiving Day', type: 'public', impact: 'high' },
-    { date: '2025-11-28', name: 'Black Friday', type: 'observance', impact: 'high' },
-    { date: '2025-12-25', name: 'Christmas Day', type: 'public', impact: 'high' },
-  ],
-  UK: [
-    { date: '2025-01-01', name: "New Year's Day", type: 'public', impact: 'high' },
-    { date: '2025-04-18', name: 'Good Friday', type: 'public', impact: 'high' },
-    { date: '2025-04-21', name: 'Easter Monday', type: 'public', impact: 'high' },
-    { date: '2025-05-05', name: 'Early May Bank Holiday', type: 'public', impact: 'medium' },
-    { date: '2025-05-26', name: 'Spring Bank Holiday', type: 'public', impact: 'medium' },
-    { date: '2025-08-25', name: 'Summer Bank Holiday', type: 'public', impact: 'medium' },
-    { date: '2025-12-25', name: 'Christmas Day', type: 'public', impact: 'high' },
-    { date: '2025-12-26', name: 'Boxing Day', type: 'public', impact: 'high' },
-  ],
-  DE: [
-    { date: '2025-01-01', name: 'Neujahr', localName: "New Year's Day", type: 'public', impact: 'high' },
-    { date: '2025-01-06', name: 'Heilige Drei Könige', localName: 'Epiphany', type: 'regional', impact: 'low' },
-    { date: '2025-04-18', name: 'Karfreitag', localName: 'Good Friday', type: 'public', impact: 'high' },
-    { date: '2025-04-21', name: 'Ostermontag', localName: 'Easter Monday', type: 'public', impact: 'high' },
-    { date: '2025-05-01', name: 'Tag der Arbeit', localName: 'Labour Day', type: 'public', impact: 'high' },
-    { date: '2025-05-29', name: 'Christi Himmelfahrt', localName: 'Ascension Day', type: 'public', impact: 'medium' },
-    { date: '2025-06-09', name: 'Pfingstmontag', localName: 'Whit Monday', type: 'public', impact: 'medium' },
-    { date: '2025-10-03', name: 'Tag der Deutschen Einheit', localName: 'German Unity Day', type: 'public', impact: 'high' },
-    { date: '2025-12-25', name: '1. Weihnachtstag', localName: 'Christmas Day', type: 'public', impact: 'high' },
-    { date: '2025-12-26', name: '2. Weihnachtstag', localName: 'Boxing Day', type: 'public', impact: 'high' },
-  ],
-  JP: [
-    { date: '2025-01-01', name: '元日', localName: "New Year's Day", type: 'public', impact: 'high' },
-    { date: '2025-01-13', name: '成人の日', localName: 'Coming of Age Day', type: 'public', impact: 'medium' },
-    { date: '2025-02-11', name: '建国記念の日', localName: 'National Foundation Day', type: 'public', impact: 'medium' },
-    { date: '2025-02-23', name: '天皇誕生日', localName: "Emperor's Birthday", type: 'public', impact: 'medium' },
-    { date: '2025-03-20', name: '春分の日', localName: 'Vernal Equinox', type: 'public', impact: 'medium' },
-    { date: '2025-04-29', name: '昭和の日', localName: 'Showa Day', type: 'public', impact: 'high' },
-    { date: '2025-05-03', name: '憲法記念日', localName: 'Constitution Day', type: 'public', impact: 'high' },
-    { date: '2025-05-04', name: 'みどりの日', localName: 'Greenery Day', type: 'public', impact: 'high' },
-    { date: '2025-05-05', name: 'こどもの日', localName: "Children's Day", type: 'public', impact: 'high' },
-    { date: '2025-07-21', name: '海の日', localName: 'Marine Day', type: 'public', impact: 'medium' },
-    { date: '2025-08-11', name: '山の日', localName: 'Mountain Day', type: 'public', impact: 'medium' },
-    { date: '2025-09-15', name: '敬老の日', localName: 'Respect for the Aged Day', type: 'public', impact: 'medium' },
-    { date: '2025-09-23', name: '秋分の日', localName: 'Autumnal Equinox', type: 'public', impact: 'medium' },
-    { date: '2025-10-13', name: 'スポーツの日', localName: 'Sports Day', type: 'public', impact: 'medium' },
-    { date: '2025-11-03', name: '文化の日', localName: 'Culture Day', type: 'public', impact: 'medium' },
-    { date: '2025-11-23', name: '勤労感謝の日', localName: 'Labor Thanksgiving', type: 'public', impact: 'medium' },
-  ],
-  CN: [
-    { date: '2025-01-01', name: '元旦', localName: "New Year's Day", type: 'public', impact: 'medium' },
-    { date: '2025-01-28', name: '春节除夕', localName: 'Spring Festival Eve', type: 'public', impact: 'high' },
-    { date: '2025-01-29', name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
-    { date: '2025-01-30', name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
-    { date: '2025-01-31', name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
-    { date: '2025-02-01', name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
-    { date: '2025-02-02', name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
-    { date: '2025-04-04', name: '清明节', localName: 'Qingming Festival', type: 'public', impact: 'medium' },
-    { date: '2025-05-01', name: '劳动节', localName: 'Labour Day', type: 'public', impact: 'medium' },
-    { date: '2025-05-31', name: '端午节', localName: 'Dragon Boat Festival', type: 'public', impact: 'medium' },
-    { date: '2025-10-01', name: '国庆节', localName: 'National Day', type: 'public', impact: 'high' },
-    { date: '2025-10-06', name: '中秋节', localName: 'Mid-Autumn Festival', type: 'public', impact: 'high' },
-  ],
-  // 添加更多国家的2025年数据...
 }
 
 // 2026年各国节假日数据（预测）
