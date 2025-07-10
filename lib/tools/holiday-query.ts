@@ -126,6 +126,134 @@ export function generateHolidayData(year: number): Record<string, Holiday[]> {
       { name: '中秋节', localName: 'Mid-Autumn Festival', type: 'public', impact: 'high' },
       { name: '国庆节', localName: 'National Day', type: 'public', impact: 'high' },
     ],
+    // 在 holidays2025 中添加更多国家的数据模板
+
+// 法国
+FR: [
+  { date: '2025-01-01', name: 'Jour de l\'an', localName: '新年', type: 'public', impact: 'high' },
+  { date: '2025-04-21', name: 'Lundi de Pâques', localName: '复活节星期一', type: 'public', impact: 'high' },
+  { date: '2025-05-01', name: 'Fête du Travail', localName: '劳动节', type: 'public', impact: 'high' },
+  { date: '2025-05-08', name: 'Victoire 1945', localName: '二战胜利日', type: 'public', impact: 'medium' },
+  { date: '2025-05-29', name: 'Ascension', localName: '耶稣升天节', type: 'public', impact: 'medium' },
+  { date: '2025-06-09', name: 'Lundi de Pentecôte', localName: '圣灵降临节', type: 'public', impact: 'medium' },
+  { date: '2025-07-14', name: 'Fête nationale', localName: '国庆日', type: 'public', impact: 'high' },
+  { date: '2025-08-15', name: 'Assomption', localName: '圣母升天节', type: 'public', impact: 'medium' },
+  { date: '2025-11-01', name: 'Toussaint', localName: '万圣节', type: 'public', impact: 'medium' },
+  { date: '2025-11-11', name: 'Armistice 1918', localName: '一战停战日', type: 'public', impact: 'medium' },
+  { date: '2025-12-25', name: 'Noël', localName: '圣诞节', type: 'public', impact: 'high' },
+],
+
+// 意大利
+IT: [
+  { date: '2025-01-01', name: 'Capodanno', localName: '新年', type: 'public', impact: 'high' },
+  { date: '2025-01-06', name: 'Epifania', localName: '主显节', type: 'public', impact: 'medium' },
+  { date: '2025-04-21', name: 'Lunedì di Pasqua', localName: '复活节星期一', type: 'public', impact: 'high' },
+  { date: '2025-04-25', name: 'Festa della Liberazione', localName: '解放日', type: 'public', impact: 'medium' },
+  { date: '2025-05-01', name: 'Festa del Lavoro', localName: '劳动节', type: 'public', impact: 'high' },
+  { date: '2025-06-02', name: 'Festa della Repubblica', localName: '共和国日', type: 'public', impact: 'high' },
+  { date: '2025-08-15', name: 'Ferragosto', localName: '八月节', type: 'public', impact: 'high' },
+  { date: '2025-11-01', name: 'Ognissanti', localName: '万圣节', type: 'public', impact: 'medium' },
+  { date: '2025-12-08', name: 'Immacolata Concezione', localName: '圣母无染原罪节', type: 'public', impact: 'medium' },
+  { date: '2025-12-25', name: 'Natale', localName: '圣诞节', type: 'public', impact: 'high' },
+  { date: '2025-12-26', name: 'Santo Stefano', localName: '圣斯德望日', type: 'public', impact: 'high' },
+],
+
+// 西班牙
+ES: [
+  { date: '2025-01-01', name: 'Año Nuevo', localName: '新年', type: 'public', impact: 'high' },
+  { date: '2025-01-06', name: 'Epifanía del Señor', localName: '主显节', type: 'public', impact: 'medium' },
+  { date: '2025-04-18', name: 'Viernes Santo', localName: '耶稣受难日', type: 'public', impact: 'high' },
+  { date: '2025-05-01', name: 'Día del Trabajador', localName: '劳动节', type: 'public', impact: 'high' },
+  { date: '2025-08-15', name: 'Asunción de la Virgen', localName: '圣母升天节', type: 'public', impact: 'medium' },
+  { date: '2025-10-12', name: 'Fiesta Nacional', localName: '国庆日', type: 'public', impact: 'high' },
+  { date: '2025-11-01', name: 'Todos los Santos', localName: '万圣节', type: 'public', impact: 'medium' },
+  { date: '2025-12-06', name: 'Día de la Constitución', localName: '宪法日', type: 'public', impact: 'medium' },
+  { date: '2025-12-08', name: 'Inmaculada Concepción', localName: '圣母无染原罪节', type: 'public', impact: 'medium' },
+  { date: '2025-12-25', name: 'Navidad', localName: '圣诞节', type: 'public', impact: 'high' },
+],
+
+// 韩国
+KR: [
+  { date: '2025-01-01', name: '신정', localName: '新年', type: 'public', impact: 'high' },
+  { date: '2025-01-28', name: '설날', localName: '春节', type: 'public', impact: 'high' },
+  { date: '2025-01-29', name: '설날', localName: '春节', type: 'public', impact: 'high' },
+  { date: '2025-01-30', name: '설날', localName: '春节', type: 'public', impact: 'high' },
+  { date: '2025-03-01', name: '삼일절', localName: '三一节', type: 'public', impact: 'medium' },
+  { date: '2025-05-05', name: '어린이날', localName: '儿童节', type: 'public', impact: 'medium' },
+  { date: '2025-06-06', name: '현충일', localName: '显忠日', type: 'public', impact: 'medium' },
+  { date: '2025-08-15', name: '광복절', localName: '光复节', type: 'public', impact: 'medium' },
+  { date: '2025-10-03', name: '개천절', localName: '开天节', type: 'public', impact: 'medium' },
+  { date: '2025-10-05', name: '추석', localName: '中秋节', type: 'public', impact: 'high' },
+  { date: '2025-10-06', name: '추석', localName: '中秋节', type: 'public', impact: 'high' },
+  { date: '2025-10-07', name: '추석', localName: '中秋节', type: 'public', impact: 'high' },
+  { date: '2025-10-09', name: '한글날', localName: '韩文日', type: 'public', impact: 'medium' },
+  { date: '2025-12-25', name: '성탄절', localName: '圣诞节', type: 'public', impact: 'high' },
+],
+
+// 印度
+IN: [
+  { date: '2025-01-26', name: 'Republic Day', localName: '共和国日', type: 'public', impact: 'high' },
+  { date: '2025-03-17', name: 'Holi', localName: '洒红节', type: 'public', impact: 'high' },
+  { date: '2025-03-30', name: 'Eid ul-Fitr', localName: '开斋节', type: 'public', impact: 'high' },
+  { date: '2025-04-10', name: 'Ram Navami', localName: '罗摩诞辰', type: 'public', impact: 'medium' },
+  { date: '2025-04-18', name: 'Good Friday', localName: '耶稣受难日', type: 'public', impact: 'medium' },
+  { date: '2025-05-12', name: 'Buddha Purnima', localName: '佛诞日', type: 'public', impact: 'medium' },
+  { date: '2025-06-07', name: 'Eid ul-Adha', localName: '宰牲节', type: 'public', impact: 'high' },
+  { date: '2025-08-15', name: 'Independence Day', localName: '独立日', type: 'public', impact: 'high' },
+  { date: '2025-08-16', name: 'Janmashtami', localName: '黑天诞辰', type: 'public', impact: 'medium' },
+  { date: '2025-10-02', name: 'Gandhi Jayanti', localName: '甘地诞辰', type: 'public', impact: 'high' },
+  { date: '2025-10-20', name: 'Dussehra', localName: '十胜节', type: 'public', impact: 'high' },
+  { date: '2025-11-10', name: 'Diwali', localName: '排灯节', type: 'public', impact: 'high' },
+  { date: '2025-11-15', name: 'Guru Nanak Jayanti', localName: '古鲁那纳克诞辰', type: 'public', impact: 'medium' },
+  { date: '2025-12-25', name: 'Christmas', localName: '圣诞节', type: 'public', impact: 'medium' },
+],
+
+// 巴西
+BR: [
+  { date: '2025-01-01', name: 'Ano Novo', localName: '新年', type: 'public', impact: 'high' },
+  { date: '2025-03-03', name: 'Carnaval', localName: '狂欢节', type: 'public', impact: 'high' },
+  { date: '2025-03-04', name: 'Carnaval', localName: '狂欢节', type: 'public', impact: 'high' },
+  { date: '2025-04-18', name: 'Sexta-feira Santa', localName: '耶稣受难日', type: 'public', impact: 'high' },
+  { date: '2025-04-21', name: 'Tiradentes', localName: '蒂拉登特斯日', type: 'public', impact: 'medium' },
+  { date: '2025-05-01', name: 'Dia do Trabalho', localName: '劳动节', type: 'public', impact: 'high' },
+  { date: '2025-06-19', name: 'Corpus Christi', localName: '基督圣体节', type: 'public', impact: 'medium' },
+  { date: '2025-09-07', name: 'Independência', localName: '独立日', type: 'public', impact: 'high' },
+  { date: '2025-10-12', name: 'Nossa Senhora Aparecida', localName: '圣母显现日', type: 'public', impact: 'medium' },
+  { date: '2025-11-02', name: 'Finados', localName: '万灵节', type: 'public', impact: 'medium' },
+  { date: '2025-11-15', name: 'Proclamação da República', localName: '共和国成立日', type: 'public', impact: 'medium' },
+  { date: '2025-11-20', name: 'Consciência Negra', localName: '黑人意识日', type: 'regional', impact: 'low' },
+  { date: '2025-12-25', name: 'Natal', localName: '圣诞节', type: 'public', impact: 'high' },
+],
+
+// 加拿大
+CA: [
+  { date: '2025-01-01', name: "New Year's Day", localName: '新年', type: 'public', impact: 'high' },
+  { date: '2025-02-17', name: 'Family Day', localName: '家庭日', type: 'regional', impact: 'medium' },
+  { date: '2025-04-18', name: 'Good Friday', localName: '耶稣受难日', type: 'public', impact: 'high' },
+  { date: '2025-04-21', name: 'Easter Monday', localName: '复活节星期一', type: 'regional', impact: 'medium' },
+  { date: '2025-05-19', name: 'Victoria Day', localName: '维多利亚日', type: 'public', impact: 'medium' },
+  { date: '2025-07-01', name: 'Canada Day', localName: '加拿大日', type: 'public', impact: 'high' },
+  { date: '2025-08-04', name: 'Civic Holiday', localName: '公民假日', type: 'regional', impact: 'low' },
+  { date: '2025-09-01', name: 'Labour Day', localName: '劳动节', type: 'public', impact: 'high' },
+  { date: '2025-09-30', name: 'Truth and Reconciliation Day', localName: '真相与和解日', type: 'public', impact: 'medium' },
+  { date: '2025-10-13', name: 'Thanksgiving', localName: '感恩节', type: 'public', impact: 'high' },
+  { date: '2025-11-11', name: 'Remembrance Day', localName: '纪念日', type: 'public', impact: 'medium' },
+  { date: '2025-12-25', name: 'Christmas Day', localName: '圣诞节', type: 'public', impact: 'high' },
+  { date: '2025-12-26', name: 'Boxing Day', localName: '节礼日', type: 'public', impact: 'high' },
+],
+
+// 澳大利亚
+AU: [
+  { date: '2025-01-01', name: "New Year's Day", localName: '新年', type: 'public', impact: 'high' },
+  { date: '2025-01-26', name: 'Australia Day', localName: '澳大利亚日', type: 'public', impact: 'high' },
+  { date: '2025-04-18', name: 'Good Friday', localName: '耶稣受难日', type: 'public', impact: 'high' },
+  { date: '2025-04-19', name: 'Easter Saturday', localName: '复活节星期六', type: 'public', impact: 'medium' },
+  { date: '2025-04-21', name: 'Easter Monday', localName: '复活节星期一', type: 'public', impact: 'high' },
+  { date: '2025-04-25', name: 'Anzac Day', localName: '澳新军团日', type: 'public', impact: 'high' },
+  { date: '2025-06-09', name: "Queen's Birthday", localName: '女王生日', type: 'public', impact: 'medium' },
+  { date: '2025-12-25', name: 'Christmas Day', localName: '圣诞节', type: 'public', impact: 'high' },
+  { date: '2025-12-26', name: 'Boxing Day', localName: '节礼日', type: 'public', impact: 'high' },
+]
     // 添加更多国家...
   }
   
