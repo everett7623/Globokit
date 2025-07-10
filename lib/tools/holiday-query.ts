@@ -102,6 +102,105 @@ export const internationalHolidays: Holiday[] = [
   { date: '12-25', name: 'Christmas Day', localName: '圣诞节', type: 'international', impact: 'high', description: '西方最重要节日' },
 ]
 
+// 宗教节日（2025年具体日期）
+export const religiousHolidays2025: Holiday[] = [
+  // 基督教
+  { date: '2025-01-06', name: 'Epiphany', localName: '主显节', type: 'observance', impact: 'medium', description: '基督教：纪念贤士朝拜圣婴' },
+  { date: '2025-03-05', name: 'Ash Wednesday', localName: '圣灰星期三', type: 'observance', impact: 'low', description: '基督教：四旬期开始' },
+  { date: '2025-04-13', name: 'Palm Sunday', localName: '棕枝主日', type: 'observance', impact: 'medium', description: '基督教：纪念耶稣进入耶路撒冷' },
+  { date: '2025-04-18', name: 'Good Friday', localName: '耶稣受难日', type: 'observance', impact: 'high', description: '基督教：纪念耶稣受难' },
+  { date: '2025-04-20', name: 'Easter Sunday', localName: '复活节', type: 'observance', impact: 'high', description: '基督教：纪念耶稣复活' },
+  { date: '2025-05-29', name: 'Ascension Day', localName: '耶稣升天节', type: 'observance', impact: 'medium', description: '基督教：纪念耶稣升天' },
+  { date: '2025-06-08', name: 'Pentecost', localName: '圣灵降临节', type: 'observance', impact: 'medium', description: '基督教：纪念圣灵降临' },
+  
+  // 伊斯兰教（注：伊斯兰历日期可能有1-2天偏差）
+  { date: '2025-03-01', name: 'Isra and Mi\'raj', localName: '夜行登霄', type: 'observance', impact: 'medium', description: '伊斯兰教：纪念先知夜行' },
+  { date: '2025-03-28', name: 'Ramadan Begins', localName: '斋月开始', type: 'observance', impact: 'high', description: '伊斯兰教：斋戒月开始' },
+  { date: '2025-04-23', name: 'Laylat al-Qadr', localName: '盖德尔夜', type: 'observance', impact: 'high', description: '伊斯兰教：权力之夜' },
+  { date: '2025-04-27', name: 'Eid al-Fitr', localName: '开斋节', type: 'observance', impact: 'high', description: '伊斯兰教：斋月结束庆典' },
+  { date: '2025-07-04', name: 'Eid al-Adha', localName: '宰牲节/古尔邦节', type: 'observance', impact: 'high', description: '伊斯兰教：献祭节' },
+  { date: '2025-07-27', name: 'Muharram/Islamic New Year', localName: '伊斯兰新年', type: 'observance', impact: 'medium', description: '伊斯兰教：新年' },
+  { date: '2025-08-05', name: 'Ashura', localName: '阿舒拉节', type: 'observance', impact: 'medium', description: '伊斯兰教：什叶派重要节日' },
+  { date: '2025-10-05', name: 'Mawlid al-Nabi', localName: '圣纪节', type: 'observance', impact: 'medium', description: '伊斯兰教：先知诞辰' },
+  
+  // 印度教
+  { date: '2025-03-14', name: 'Holi', localName: '洒红节/胡里节', type: 'observance', impact: 'high', description: '印度教：色彩节' },
+  { date: '2025-03-30', name: 'Ram Navami', localName: '罗摩诞辰', type: 'observance', impact: 'medium', description: '印度教：罗摩神诞辰' },
+  { date: '2025-08-16', name: 'Janmashtami', localName: '黑天诞辰', type: 'observance', impact: 'medium', description: '印度教：黑天神诞辰' },
+  { date: '2025-08-28', name: 'Ganesh Chaturthi', localName: '象头神节', type: 'observance', impact: 'medium', description: '印度教：象头神诞辰' },
+  { date: '2025-10-02', name: 'Navaratri Begins', localName: '九夜节开始', type: 'observance', impact: 'medium', description: '印度教：女神节' },
+  { date: '2025-10-11', name: 'Dussehra', localName: '十胜节', type: 'observance', impact: 'high', description: '印度教：庆祝罗摩战胜罗波那' },
+  { date: '2025-10-31', name: 'Diwali', localName: '排灯节/万灯节', type: 'observance', impact: 'high', description: '印度教：光明节' },
+  { date: '2025-11-01', name: 'Bhai Dooj', localName: '兄妹节', type: 'observance', impact: 'low', description: '印度教：兄妹情谊节' },
+  
+  // 佛教
+  { date: '2025-02-12', name: 'Mahayana New Year', localName: '大乘佛教新年', type: 'observance', impact: 'medium', description: '佛教：大乘新年' },
+  { date: '2025-05-12', name: 'Vesak/Buddha Purnima', localName: '卫塞节/佛诞', type: 'observance', impact: 'high', description: '佛教：佛陀诞生、成道、涅槃' },
+  { date: '2025-07-11', name: 'Asalha Puja', localName: '阿莎叻哈节', type: 'observance', impact: 'medium', description: '佛教：纪念佛陀首次讲道' },
+  
+  // 犹太教
+  { date: '2025-04-12', name: 'Passover Begins', localName: '逾越节开始', type: 'observance', impact: 'high', description: '犹太教：纪念出埃及' },
+  { date: '2025-06-01', name: 'Shavuot', localName: '七七节', type: 'observance', impact: 'medium', description: '犹太教：收获节' },
+  { date: '2025-09-22', name: 'Rosh Hashanah', localName: '犹太新年', type: 'observance', impact: 'high', description: '犹太教：新年' },
+  { date: '2025-10-01', name: 'Yom Kippur', localName: '赎罪日', type: 'observance', impact: 'high', description: '犹太教：最神圣的日子' },
+  { date: '2025-10-06', name: 'Sukkot Begins', localName: '住棚节开始', type: 'observance', impact: 'medium', description: '犹太教：收获感恩节' },
+  { date: '2025-12-14', name: 'Hanukkah Begins', localName: '光明节开始', type: 'observance', impact: 'medium', description: '犹太教：灯节' },
+  
+  // 锡克教
+  { date: '2025-01-13', name: 'Lohri', localName: '洛里节', type: 'observance', impact: 'low', description: '锡克教/印度教：丰收节' },
+  { date: '2025-04-13', name: 'Vaisakhi', localName: '丰收节', type: 'observance', impact: 'medium', description: '锡克教：新年和收获节' },
+  { date: '2025-11-15', name: 'Guru Nanak Jayanti', localName: '古鲁那纳克诞辰', type: 'observance', impact: 'high', description: '锡克教：创始人诞辰' },
+]
+
+// 购物季和促销节日
+export const shoppingHolidays: Holiday[] = [
+  // 全球购物节
+  { date: '01-01', name: 'New Year Sales', localName: '新年促销', type: 'observance', impact: 'medium', description: '全球：新年清仓促销' },
+  { date: '11-11', name: "Singles' Day", localName: '双十一', type: 'observance', impact: 'high', description: '中国发起，全球最大网购节' },
+  { date: '11-29', name: 'Black Friday', localName: '黑色星期五', type: 'observance', impact: 'high', description: '美国发起，全球购物狂欢' },
+  { date: '12-02', name: 'Cyber Monday', localName: '网络星期一', type: 'observance', impact: 'high', description: '线上购物节' },
+  { date: '12-12', name: 'Double 12', localName: '双十二', type: 'observance', impact: 'medium', description: '年终购物节' },
+  { date: '12-26', name: 'Boxing Day Sales', localName: '节礼日促销', type: 'observance', impact: 'high', description: '英联邦国家传统促销日' },
+  
+  // 地区性购物季
+  { date: '06-18', name: '618 Shopping Festival', localName: '618购物节', type: 'observance', impact: 'medium', description: '中国年中购物节' },
+  { date: '08-08', name: 'August Sale', localName: '88购物节', type: 'observance', impact: 'low', description: '东南亚购物节' },
+  { date: '09-09', name: '9.9 Shopping Day', localName: '99大促', type: 'observance', impact: 'low', description: '东南亚购物节' },
+  { date: '10-10', name: '10.10 Sale', localName: '双十购物节', type: 'observance', impact: 'medium', description: '亚洲购物节' },
+  
+  // 行业特定购物季
+  { date: '07-15', name: 'Amazon Prime Day', localName: '亚马逊会员日', type: 'observance', impact: 'high', description: '全球最大电商促销（日期每年略有变化）' },
+  { date: '03-08', name: "Women's Day Sales", localName: '妇女节促销', type: 'observance', impact: 'low', description: '女性用品促销' },
+  { date: '05-10', name: "Mother's Day Sales", localName: '母亲节促销', type: 'observance', impact: 'medium', description: '礼品类促销高峰' },
+  { date: '06-15', name: "Father's Day Sales", localName: '父亲节促销', type: 'observance', impact: 'low', description: '男性用品促销' },
+  { date: '09-01', name: 'Back to School', localName: '返校季', type: 'observance', impact: 'medium', description: '学生用品采购高峰' },
+  
+  // 季节性促销
+  { date: '01-15', name: 'Winter Clearance', localName: '冬季清仓', type: 'observance', impact: 'medium', description: '冬装清仓' },
+  { date: '03-20', name: 'Spring Sale', localName: '春季促销', type: 'observance', impact: 'low', description: '换季促销' },
+  { date: '06-21', name: 'Summer Sale', localName: '夏季促销', type: 'observance', impact: 'medium', description: '夏装促销' },
+  { date: '09-22', name: 'Fall/Autumn Sale', localName: '秋季促销', type: 'observance', impact: 'low', description: '秋装上新' },
+  { date: '07-01', name: 'Mid-Year Sale', localName: '年中大促', type: 'observance', impact: 'medium', description: '年中清仓' },
+  { date: '12-31', name: 'Year-End Clearance', localName: '年终清仓', type: 'observance', impact: 'high', description: '年底大清仓' },
+]
+
+// 获取所有特殊日期（包括宗教节日和购物季）
+export function getAllSpecialDates(year: number = 2025): {
+  religious: Holiday[],
+  shopping: Holiday[]
+} {
+  // 对于购物季，添加年份
+  const shoppingWithYear = shoppingHolidays.map(holiday => ({
+    ...holiday,
+    date: `${year}-${holiday.date}`
+  }))
+  
+  return {
+    religious: year === 2025 ? religiousHolidays2025 : [],
+    shopping: shoppingWithYear
+  }
+}
+
 // 节假日数据生成函数（支持多年份）
 export function generateHolidayData(year: number): Record<string, Holiday[]> {
   // 基础节假日模板（每年固定日期的节日）
@@ -126,7 +225,6 @@ export function generateHolidayData(year: number): Record<string, Holiday[]> {
       { name: '中秋节', localName: 'Mid-Autumn Festival', type: 'public', impact: 'high' },
       { name: '国庆节', localName: 'National Day', type: 'public', impact: 'high' },
     ],
-
     // 添加更多国家...
   }
   
@@ -221,7 +319,8 @@ export const holidays2025: Record<string, Holiday[]> = {
     { date: '2025-10-01', name: '国庆节', localName: 'National Day', type: 'public', impact: 'high' },
     { date: '2025-10-06', name: '中秋节', localName: 'Mid-Autumn Festival', type: 'public', impact: 'high' },
   ],
-  // 添加更多国家的2025年数据...
+  // 在 holidays2025 中添加更多国家的数据模板
+
 // 法国
 FR: [
   { date: '2025-01-01', name: 'Jour de l\'an', localName: '新年', type: 'public', impact: 'high' },
@@ -348,6 +447,7 @@ AU: [
   { date: '2025-12-25', name: 'Christmas Day', localName: '圣诞节', type: 'public', impact: 'high' },
   { date: '2025-12-26', name: 'Boxing Day', localName: '节礼日', type: 'public', impact: 'high' },
 ]
+  // 添加更多国家的2025年数据...
 }
 
 // 2026年各国节假日数据（预测）
@@ -410,6 +510,7 @@ export function getUpcomingHolidays(daysAhead: number = 30, year: number = new D
   const upcoming: UpcomingHoliday[] = []
   const yearHolidays = generateHolidayData(year)
   
+  // 国家法定节假日
   Object.entries(yearHolidays).forEach(([countryCode, holidays]) => {
     holidays.forEach(holiday => {
       const holidayDate = new Date(holiday.date)
@@ -438,6 +539,38 @@ export function getUpcomingHolidays(daysAhead: number = 30, year: number = new D
         date: holidayDate.toISOString().split('T')[0],
         country: '国际',
         flag: '🌍',
+        daysUntil
+      })
+    }
+  })
+  
+  // 添加宗教节日
+  const { religious } = getAllSpecialDates(year)
+  religious.forEach(holiday => {
+    const holidayDate = new Date(holiday.date)
+    const daysUntil = Math.ceil((holidayDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
+    
+    if (daysUntil > 0 && daysUntil <= daysAhead) {
+      upcoming.push({
+        ...holiday,
+        country: '宗教节日',
+        flag: '🙏',
+        daysUntil
+      })
+    }
+  })
+  
+  // 添加购物节（只添加影响较大的）
+  const { shopping } = getAllSpecialDates(year)
+  shopping.filter(h => h.impact !== 'low').forEach(holiday => {
+    const holidayDate = new Date(holiday.date)
+    const daysUntil = Math.ceil((holidayDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
+    
+    if (daysUntil > 0 && daysUntil <= daysAhead) {
+      upcoming.push({
+        ...holiday,
+        country: '购物节',
+        flag: '🛍️',
         daysUntil
       })
     }
