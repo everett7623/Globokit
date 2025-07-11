@@ -12,6 +12,7 @@ export interface Holiday {
   date: string
   name: string
   localName?: string
+  nameCN?: string
   type: 'public' | 'regional' | 'observance' | 'international'
   impact: 'high' | 'medium' | 'low'
   description?: string
