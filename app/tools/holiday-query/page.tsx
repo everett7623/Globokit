@@ -234,9 +234,9 @@ export default function HolidayQueryPage() {
                                 <div className="flex items-center gap-2">
                                   <h4 className="font-semibold">
                                     {holiday.name}
-                                    {holiday.localName && (
+                                    {(holiday.nameCN || holiday.localName) && (
                                       <span className="text-sm text-muted-foreground ml-2">
-                                        ({holiday.localName})
+                                        ({holiday.nameCN || holiday.localName})
                                       </span>
                                     )}
                                   </h4>
@@ -296,12 +296,12 @@ export default function HolidayQueryPage() {
                             <span className="text-2xl">{holiday.flag}</span>
                             <div>
                               <h4 className="font-semibold">
-                                {holiday.name}
-                                {holiday.localName && (
-                                  <span className="text-sm text-muted-foreground ml-2">
-                                    ({holiday.localName})
-                                  </span>
-                                )}
+                                    {holiday.name}
+                                    {(holiday.nameCN || holiday.localName) && (
+                                      <span className="text-sm text-muted-foreground ml-2">
+                                        ({holiday.nameCN || holiday.localName})
+                                      </span>
+                                    )}
                               </h4>
                               <p className="text-sm text-muted-foreground">
                                 {holiday.country} • {new Date(holiday.date).toLocaleDateString('zh-CN')}
@@ -350,7 +350,7 @@ export default function HolidayQueryPage() {
                       </CardHeader>
                       <CardContent>
                         <p className="text-sm text-muted-foreground mb-2">
-                          {holiday.localName} • {holiday.date}
+                          {holiday.nameCN || holiday.localName} • {holiday.date}
                         </p>
                         <p className="text-xs">{holiday.description}</p>
                       </CardContent>
@@ -389,7 +389,7 @@ export default function HolidayQueryPage() {
                                   </Badge>
                                 </div>
                                 <p className="text-sm text-muted-foreground">
-                                  {holiday.localName} • {new Date(holiday.date).toLocaleDateString('zh-CN')}
+                                  {holiday.nameCN || holiday.localName} • {new Date(holiday.date).toLocaleDateString('zh-CN')}
                                 </p>
                                 <p className="text-xs">{holiday.description}</p>
                                 {holiday.name.includes('Ramadan') && (
@@ -427,7 +427,7 @@ export default function HolidayQueryPage() {
                                   </Badge>
                                 </div>
                                 <p className="text-sm text-muted-foreground">
-                                  {holiday.localName} • {new Date(holiday.date).toLocaleDateString('zh-CN')}
+                                  {holiday.nameCN || holiday.localName} • {new Date(holiday.date).toLocaleDateString('zh-CN')}
                                 </p>
                                 <p className="text-xs">{holiday.description}</p>
                               </div>
@@ -457,7 +457,7 @@ export default function HolidayQueryPage() {
                                   </Badge>
                                 </div>
                                 <p className="text-sm text-muted-foreground">
-                                  {holiday.localName} • {new Date(holiday.date).toLocaleDateString('zh-CN')}
+                                  {holiday.nameCN || holiday.localName} • {new Date(holiday.date).toLocaleDateString('zh-CN')}
                                 </p>
                                 <p className="text-xs">{holiday.description}</p>
                               </div>
@@ -488,7 +488,7 @@ export default function HolidayQueryPage() {
                                   </Badge>
                                 </div>
                                 <p className="text-sm text-muted-foreground">
-                                  {holiday.localName} • {new Date(holiday.date).toLocaleDateString('zh-CN')}
+                                  {holiday.nameCN || holiday.localName} • {new Date(holiday.date).toLocaleDateString('zh-CN')}
                                 </p>
                                 <p className="text-xs">{holiday.description}</p>
                               </div>
