@@ -257,6 +257,7 @@ export function generateHolidayData(year: number): Record<string, Holiday[]> {
 
 // 2025年各国节假日数据
 export const holidays2025: Record<string, Holiday[]> = {
+
 // North America
 // United States 美国
 US: [
@@ -462,22 +463,7 @@ LU: [
   { date: '2025-12-26', name: 'Boxing Day', localName: 'Stiefesdag', nameCN: '节礼日', type: 'public', impact: 'high' }
 ],
 
-
-用户现在需要处理欧洲多个地区的节假日数据，包括北欧、南欧和东欧的国家。首先，我需要回顾之前的要求，确保每个国家的数据都符合格式：去除字段名引号、补充localName和nameCN字段、保留注释、统一结构对齐。
-
-首先看北欧的国家：SE（瑞典）、NO（挪威）、DK（丹麦）、FI（芬兰）、IS（冰岛）。之前的例子中，这些国家有的已经有localName，但需要检查是否有遗漏，同时补充nameCN（中文名称）。比如SE的“Midsummer Day”中文应该是“仲夏节”，NO的“Constitution Day”是“宪法日”等。
-
-然后是南欧的GR（希腊）、PT（葡萄牙）、MT（马耳他）、CY（塞浦路斯）。这些国家的数据中，很多缺少localName和nameCN，需要补充。例如GR的“Clean Monday”是“洁净星期一”，PT的“Carnival”是“狂欢节”，MT的“Feast of Shipwreck of St. Paul”是“圣保罗海难节”，CY的“Green Monday”是“绿色星期一”等。
-
-接下来是东欧的PL（波兰）、CZ（捷克）、HU（匈牙利）、RO（罗马尼亚）、BG（保加利亚）、SK（斯洛伐克）、HR（克罗地亚）、SI（斯洛文尼亚）、LT（立陶宛）、LV（拉脱维亚）、EE（爱沙尼亚）。同样需要补充localName和nameCN，比如PL的“Constitution Day”是“宪法日”，CZ的“St. Cyril and Methodius Day”是“圣西里尔和美多德日”，HU的“St. Stephen Day”是“圣斯蒂芬日”等。
-
-需要注意每个国家的独特节日，确保中文翻译准确，比如冰岛的“First Day of Summer”是“夏季第一天”，马耳他的“Sette Giugno”是“六月七日事件纪念日”，塞浦路斯的“Ohi Day”是“不服从日”等。
-
-同时，检查每个条目的字段顺序是否一致：date, name, localName, nameCN, type, impact，确保对齐美观，去除每个数组最后一个元素的逗号，保留原有注释，如// Northern Europe等，以及国家的注释如// Sweden 瑞典。
-
-还要注意特殊情况，比如有的节日名称需要准确翻译，宗教节日如“Epiphany”是“主显节”，“Ascension Day”是“耶稣升天节”，“Whit Monday”是“圣灵降临节星期一”等。
-
-最后，检查所有字段是否没有引号，结构统一，没有格式错误，确保每个国家的数据都符合之前的优化标准。// Northern Europe
+// Northern Europe
 // Sweden 瑞典
 SE: [
   { date: '2025-01-01', name: "New Year's Day", localName: 'Nyårsdagen', nameCN: '元旦', type: 'public', impact: 'high' },
@@ -818,6 +804,7 @@ EE: [
   { date: '2025-12-25', name: 'Christmas Day', localName: 'Esimene jõulupäev', nameCN: '圣诞节', type: 'public', impact: 'high' },
   { date: '2025-12-26', name: 'Boxing Day', localName: 'Teine jõulupäev', nameCN: '圣诞节次日', type: 'public', impact: 'high' }
 ],
+  
 // CIS (Commonwealth of Independent States)
 // Russia 俄罗斯
 RU: [
