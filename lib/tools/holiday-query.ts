@@ -258,48 +258,51 @@ export function generateHolidayData(year: number): Record<string, Holiday[]> {
 // 2025年各国节假日数据
 export const holidays2025: Record<string, Holiday[]> = {
 // North America
+// United States 美国
 US: [
-  { date: '2025-01-01', name: 'New Year\'s Day', nameCN: '元旦', type: 'public', impact: 'high' },
-  { date: '2025-01-20', name: 'Martin Luther King Jr. Day', nameCN: '马丁·路德·金纪念日', type: 'public', impact: 'medium' },
-  { date: '2025-02-17', name: 'Presidents\' Day', nameCN: '总统日', type: 'public', impact: 'medium' },
-  { date: '2025-05-26', name: 'Memorial Day', nameCN: '阵亡将士纪念日', type: 'public', impact: 'high' },
-  { date: '2025-06-19', name: 'Juneteenth', nameCN: '解放日', type: 'public', impact: 'medium' },
-  { date: '2025-07-04', name: 'Independence Day', nameCN: '独立日', type: 'public', impact: 'high' },
-  { date: '2025-09-01', name: 'Labor Day', nameCN: '劳动节', type: 'public', impact: 'high' },
-  { date: '2025-10-13', name: 'Columbus Day', nameCN: '哥伦布日', type: 'public', impact: 'low' },
-  { date: '2025-11-11', name: 'Veterans Day', nameCN: '退伍军人节', type: 'public', impact: 'medium' },
-  { date: '2025-11-27', name: 'Thanksgiving Day', nameCN: '感恩节', type: 'public', impact: 'high' },
-  { date: '2025-11-28', name: 'Black Friday', nameCN: '黑色星期五', type: 'observance', impact: 'high' },
-  { date: '2025-12-25', name: 'Christmas Day', nameCN: '圣诞节', type: 'public', impact: 'high' }
+  { date: '2025-01-01', name: 'New Year\'s Day', localName: 'New Year\'s Day', nameCN: '元旦', type: 'public', impact: 'high' },
+  { date: '2025-01-20', name: 'Martin Luther King Jr. Day', localName: 'Martin Luther King Jr. Day', nameCN: '马丁·路德·金纪念日', type: 'public', impact: 'medium' },
+  { date: '2025-02-17', name: 'Presidents\' Day', localName: 'Presidents\' Day', nameCN: '总统日', type: 'public', impact: 'medium' },
+  { date: '2025-05-26', name: 'Memorial Day', localName: 'Memorial Day', nameCN: '阵亡将士纪念日', type: 'public', impact: 'high' },
+  { date: '2025-06-19', name: 'Juneteenth', localName: 'Juneteenth National Independence Day', nameCN: '解放日', type: 'public', impact: 'medium' },
+  { date: '2025-07-04', name: 'Independence Day', localName: 'Independence Day', nameCN: '独立日', type: 'public', impact: 'high' },
+  { date: '2025-09-01', name: 'Labor Day', localName: 'Labor Day', nameCN: '劳动节', type: 'public', impact: 'high' },
+  { date: '2025-10-13', name: 'Columbus Day', localName: 'Columbus Day', nameCN: '哥伦布日', type: 'public', impact: 'low' },
+  { date: '2025-11-11', name: 'Veterans Day', localName: 'Veterans Day', nameCN: '退伍军人节', type: 'public', impact: 'medium' },
+  { date: '2025-11-27', name: 'Thanksgiving Day', localName: 'Thanksgiving Day', nameCN: '感恩节', type: 'public', impact: 'high' },
+  { date: '2025-11-28', name: 'Black Friday', localName: 'Black Friday', nameCN: '黑色星期五', type: 'observance', impact: 'high' },
+  { date: '2025-12-25', name: 'Christmas Day', localName: 'Christmas Day', nameCN: '圣诞节', type: 'public', impact: 'high' }
 ],
 
+// Canada 加拿大
 CA: [
-  { date: '2025-01-01', name: 'New Year\'s Day', nameCN: '新年', type: 'public', impact: 'high' },
-  { date: '2025-02-17', name: 'Family Day', nameCN: '家庭日', type: 'regional', impact: 'medium' }, // Most provinces
-  { date: '2025-04-18', name: 'Good Friday', nameCN: '耶稣受难日', type: 'public', impact: 'high' },
-  { date: '2025-04-21', name: 'Easter Monday', nameCN: '复活节星期一', type: 'regional', impact: 'medium' }, // Some provinces
-  { date: '2025-05-19', name: 'Victoria Day', nameCN: '维多利亚日', type: 'public', impact: 'medium' },
-  { date: '2025-07-01', name: 'Canada Day', nameCN: '加拿大日', type: 'public', impact: 'high' },
-  { date: '2025-08-04', name: 'Civic Holiday', nameCN: '公民假日', type: 'regional', impact: 'low' }, // Most provinces, names vary
-  { date: '2025-09-01', name: 'Labour Day', nameCN: '劳动节', type: 'public', impact: 'high' },
-  { date: '2025-09-30', name: 'National Day for Truth and Reconciliation', nameCN: '真相与和解日', type: 'public', impact: 'medium' },
-  { date: '2025-10-13', name: 'Thanksgiving', nameCN: '感恩节', type: 'public', impact: 'high' },
-  { date: '2025-11-11', name: 'Remembrance Day', nameCN: '纪念日', type: 'public', impact: 'medium' },
-  { date: '2025-12-25', name: 'Christmas Day', nameCN: '圣诞节', type: 'public', impact: 'high' },
-  { date: '2025-12-26', name: 'Boxing Day', nameCN: '节礼日', type: 'public', impact: 'high' }
+  { date: '2025-01-01', name: 'New Year\'s Day', localName: 'New Year\'s Day', nameCN: '新年', type: 'public', impact: 'high' },
+  { date: '2025-02-17', name: 'Family Day', localName: 'Family Day', nameCN: '家庭日', type: 'regional', impact: 'medium' }, // Most provinces
+  { date: '2025-04-18', name: 'Good Friday', localName: 'Good Friday', nameCN: '耶稣受难日', type: 'public', impact: 'high' },
+  { date: '2025-04-21', name: 'Easter Monday', localName: 'Easter Monday', nameCN: '复活节星期一', type: 'regional', impact: 'medium' }, // Some provinces
+  { date: '2025-05-19', name: 'Victoria Day', localName: 'Victoria Day', nameCN: '维多利亚日', type: 'public', impact: 'medium' },
+  { date: '2025-07-01', name: 'Canada Day', localName: 'Canada Day', nameCN: '加拿大日', type: 'public', impact: 'high' },
+  { date: '2025-08-04', name: 'Civic Holiday', localName: 'Civic Holiday', nameCN: '公民假日', type: 'regional', impact: 'low' }, // Most provinces, names vary
+  { date: '2025-09-01', name: 'Labour Day', localName: 'Labour Day', nameCN: '劳动节', type: 'public', impact: 'high' },
+  { date: '2025-09-30', name: 'National Day for Truth and Reconciliation', localName: 'National Day for Truth and Reconciliation', nameCN: '真相与和解日', type: 'public', impact: 'medium' },
+  { date: '2025-10-13', name: 'Thanksgiving', localName: 'Thanksgiving Day', nameCN: '感恩节', type: 'public', impact: 'high' },
+  { date: '2025-11-11', name: 'Remembrance Day', localName: 'Remembrance Day', nameCN: '纪念日', type: 'public', impact: 'medium' },
+  { date: '2025-12-25', name: 'Christmas Day', localName: 'Christmas Day', nameCN: '圣诞节', type: 'public', impact: 'high' },
+  { date: '2025-12-26', name: 'Boxing Day', localName: 'Boxing Day', nameCN: '节礼日', type: 'public', impact: 'high' }
 ],
 
+// Mexico 墨西哥
 MX: [
-  { date: '2025-01-01', name: 'Año Nuevo', nameCN: '新年', type: 'public', impact: 'high' },
-  { date: '2025-02-03', name: 'Día de la Constitución', nameCN: '宪法日', type: 'public', impact: 'medium' },
-  { date: '2025-03-17', name: 'Natalicio de Benito Juárez', nameCN: '贝尼托·华雷斯诞辰', type: 'public', impact: 'medium' },
-  { date: '2025-04-17', name: 'Jueves Santo', nameCN: '濯足节', type: 'observance', impact: 'low' },
-  { date: '2025-04-18', name: 'Viernes Santo', nameCN: '耶稣受难日', type: 'public', impact: 'high' },
-  { date: '2025-05-01', name: 'Día del Trabajo', nameCN: '劳动节', type: 'public', impact: 'high' },
-  { date: '2025-09-16', name: 'Día de la Independencia', nameCN: '独立日', type: 'public', impact: 'high' },
-  { date: '2025-11-17', name: 'Día de la Revolución', nameCN: '革命日', type: 'public', impact: 'medium' },
-  { date: '2025-12-01', name: 'Transmisión del Poder Ejecutivo Federal', nameCN: '总统就职日', type: 'public', impact: 'low' }, // 每6年举行
-  { date: '2025-12-25', name: 'Navidad', nameCN: '圣诞节', type: 'public', impact: 'high' }
+  { date: '2025-01-01', name: 'Año Nuevo', localName: 'Año Nuevo', nameCN: '新年', type: 'public', impact: 'high' },
+  { date: '2025-02-03', name: 'Día de la Constitución', localName: 'Día de la Constitución', nameCN: '宪法日', type: 'public', impact: 'medium' },
+  { date: '2025-03-17', name: 'Natalicio de Benito Juárez', localName: 'Natalicio de Benito Juárez', nameCN: '贝尼托·华雷斯诞辰', type: 'public', impact: 'medium' },
+  { date: '2025-04-17', name: 'Jueves Santo', localName: 'Jueves Santo', nameCN: '濯足节', type: 'observance', impact: 'low' },
+  { date: '2025-04-18', name: 'Viernes Santo', localName: 'Viernes Santo', nameCN: '耶稣受难日', type: 'public', impact: 'high' },
+  { date: '2025-05-01', name: 'Día del Trabajo', localName: 'Día del Trabajo', nameCN: '劳动节', type: 'public', impact: 'high' },
+  { date: '2025-09-16', name: 'Día de la Independencia', localName: 'Día de la Independencia', nameCN: '独立日', type: 'public', impact: 'high' },
+  { date: '2025-11-17', name: 'Día de la Revolución', localName: 'Día de la Revolución', nameCN: '革命日', type: 'public', impact: 'medium' },
+  { date: '2025-12-01', name: 'Transmisión del Poder Ejecutivo Federal', localName: 'Transmisión del Poder Ejecutivo Federal', nameCN: '总统就职日', type: 'public', impact: 'low' }, // 每6年举行
+  { date: '2025-12-25', name: 'Navidad', localName: 'Navidad', nameCN: '圣诞节', type: 'public', impact: 'high' }
 ],
 
 // Western Europe
