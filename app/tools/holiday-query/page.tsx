@@ -2,7 +2,7 @@
 // 描述: 查询全球主要贸易国家的节假日安排，便于外贸业务安排
 // 路径: https://raw.githubusercontent.com/everett7623/seedtool/main/tools/holiday-query/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2025-07-09
+// 更新时间: 2025-07-11
 
 'use client'
 
@@ -18,6 +18,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { 
   countries, 
   internationalHolidays,
+  religiousHolidays2025,
   getCountryHolidays, 
   getUpcomingHolidays,
   filterHolidaysByMonth,
@@ -43,7 +44,7 @@ export default function HolidayQueryPage() {
     ? countryHolidays 
     : filterHolidaysByMonth(countryHolidays, parseInt(selectedMonth))
   
-  // 获取即将到来的节假日（包括国际节日）
+  // 获取即将到来的节假日
   const upcomingHolidays = getUpcomingHolidays(30)
   
   // 按地区分组的国家
@@ -58,7 +59,7 @@ export default function HolidayQueryPage() {
   }
 
   // 热门外贸国家
-  const hotCountries = ['US', 'UK', 'DE', 'JP', 'CN', 'FR', 'AU', 'CA', 'KR', 'IN']
+  const hotCountries = ['US', 'UK', 'DE', 'JP', 'FR', 'IN', 'AU', 'CA', 'KR', 'BR', 'AE', 'SG']
 
   return (
     <div className="container py-10">
@@ -70,15 +71,16 @@ export default function HolidayQueryPage() {
               国际节假日查询
             </CardTitle>
             <CardDescription>
-              查询全球60+主要贸易国家的节假日安排，合理规划外贸业务
+              查询全球100+主要贸易国家的节假日安排，合理规划外贸业务
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="country" className="space-y-4">
-              <TabsList className="grid w-full grid-cols-4">
+              <TabsList className="grid w-full grid-cols-5">
                 <TabsTrigger value="country">按国家查询</TabsTrigger>
                 <TabsTrigger value="upcoming">即将到来</TabsTrigger>
                 <TabsTrigger value="international">国际节日</TabsTrigger>
+                <TabsTrigger value="religious">宗教节日</TabsTrigger>
                 <TabsTrigger value="calendar">年历视图</TabsTrigger>
               </TabsList>
               
@@ -94,12 +96,20 @@ export default function HolidayQueryPage() {
                       <SelectContent>
                         <SelectItem value="all">全部地区</SelectItem>
                         <SelectItem value="北美">北美</SelectItem>
-                        <SelectItem value="欧洲">欧洲</SelectItem>
-                        <SelectItem value="亚太">亚太</SelectItem>
-                        <SelectItem value="中东">中东</SelectItem>
-                        <SelectItem value="南美">南美</SelectItem>
-                        <SelectItem value="非洲">非洲</SelectItem>
+                        <SelectItem value="西欧">西欧</SelectItem>
+                        <SelectItem value="北欧">北欧</SelectItem>
+                        <SelectItem value="南欧">南欧</SelectItem>
                         <SelectItem value="东欧">东欧</SelectItem>
+                        <SelectItem value="独联体">独联体</SelectItem>
+                        <SelectItem value="东亚">东亚</SelectItem>
+                        <SelectItem value="东南亚">东南亚</SelectItem>
+                        <SelectItem value="南亚">南亚</SelectItem>
+                        <SelectItem value="中东">中东</SelectItem>
+                        <SelectItem value="大洋洲">大洋洲</SelectItem>
+                        <SelectItem value="南美">南美</SelectItem>
+                        <SelectItem value="中美洲">中美洲</SelectItem>
+                        <SelectItem value="加勒比">加勒比</SelectItem>
+                        <SelectItem value="非洲">非洲</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -110,7 +120,7 @@ export default function HolidayQueryPage() {
                       <SelectTrigger id="country">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="max-h-[300px]">
                         {/* 热门国家 */}
                         <SelectItem value="divider-hot" disabled>
                           <span className="font-semibold text-orange-600">🔥 热门国家</span>
@@ -208,7 +218,7 @@ export default function HolidayQueryPage() {
                 )}
                 
                 {/* 节假日列表 */}
-                <div className="space-y-3">
+                <div className="space-y-3 max-h-[600px] overflow-y-auto pr-2">
                   {filteredHolidays.length > 0 ? (
                     filteredHolidays.map((holiday, index) => {
                       const date = new Date(holiday.date)
@@ -221,14 +231,6 @@ export default function HolidayQueryPage() {
                               <div className="space-y-2">
                                 <div className="flex items-center gap-2">
                                   <h4 className="font-semibold">
-                                    {holiday.name}
-                                    {holiday.localName && (
-                                      <span className="text-sm text-muted-foreground ml-2">
-                                        ({holiday.localName})
-                                      </span>
-                                    )}
-                                  </h4>
-                                  <Badge variant={holiday.type === 'public' ? 'default' : 'secondary'}>
                                     {getHolidayTypeName(holiday.type)}
                                   </Badge>
                                 </div>
@@ -250,11 +252,6 @@ export default function HolidayQueryPage() {
                                     {impactDescriptions[holiday.impact]}
                                   </span>
                                 </div>
-                                {holiday.description && (
-                                  <p className="text-xs text-muted-foreground italic">
-                                    {holiday.description}
-                                  </p>
-                                )}
                               </div>
                             </div>
                           </CardContent>
@@ -280,8 +277,8 @@ export default function HolidayQueryPage() {
                   </AlertDescription>
                 </Alert>
                 
-                <div className="space-y-3">
-                  {upcomingHolidays.slice(0, 10).map((holiday, index) => (
+                <div className="space-y-3 max-h-[600px] overflow-y-auto pr-2">
+                  {upcomingHolidays.slice(0, 20).map((holiday, index) => (
                     <Card key={index}>
                       <CardContent className="pt-6">
                         <div className="flex items-center justify-between">
@@ -330,7 +327,7 @@ export default function HolidayQueryPage() {
                   </AlertDescription>
                 </Alert>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[600px] overflow-y-auto pr-2">
                   {internationalHolidays.map((holiday, index) => (
                     <Card key={index}>
                       <CardHeader className="pb-3">
@@ -349,6 +346,147 @@ export default function HolidayQueryPage() {
                       </CardContent>
                     </Card>
                   ))}
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="religious" className="space-y-4">
+                <Alert>
+                  <Info className="h-4 w-4" />
+                  <AlertDescription>
+                    主要宗教节日对相关国家和地区的商业活动有重要影响。
+                    注意：伊斯兰历和部分宗教历法日期可能有1-2天偏差。
+                  </AlertDescription>
+                </Alert>
+                
+                <div className="space-y-6 max-h-[600px] overflow-y-auto pr-2">
+                  {/* 伊斯兰教节日 */}
+                  <div>
+                    <h3 className="font-semibold mb-3 flex items-center gap-2">
+                      ☪️ 伊斯兰教节日
+                      <Badge variant="outline">影响中东、东南亚、南亚、北非</Badge>
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {religiousHolidays2025
+                        .filter(h => h.description?.includes('伊斯兰教'))
+                        .map((holiday, index) => (
+                          <Card key={index}>
+                            <CardContent className="pt-4">
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between">
+                                  <h4 className="font-semibold">{holiday.name}</h4>
+                                  <Badge variant={holiday.impact === 'high' ? 'destructive' : 'default'}>
+                                    {getImpactLevelName(holiday.impact)}影响
+                                  </Badge>
+                                </div>
+                                <p className="text-sm text-muted-foreground">
+                                  {holiday.localName} • {new Date(holiday.date).toLocaleDateString('zh-CN')}
+                                </p>
+                                <p className="text-xs">{holiday.description}</p>
+                                {holiday.name.includes('Ramadan') && (
+                                  <Alert className="mt-2">
+                                    <AlertCircle className="h-3 w-3" />
+                                    <AlertDescription className="text-xs">
+                                      斋月期间，穆斯林国家工作时间缩短，商务活动减少
+                                    </AlertDescription>
+                                  </Alert>
+                                )}
+                              </div>
+                            </CardContent>
+                          </Card>
+                        ))}
+                    </div>
+                  </div>
+                  
+                  {/* 基督教节日 */}
+                  <div>
+                    <h3 className="font-semibold mb-3 flex items-center gap-2">
+                      ✝️ 基督教节日
+                      <Badge variant="outline">影响欧美、拉美、非洲</Badge>
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {religiousHolidays2025
+                        .filter(h => h.description?.includes('基督教'))
+                        .map((holiday, index) => (
+                          <Card key={index}>
+                            <CardContent className="pt-4">
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between">
+                                  <h4 className="font-semibold">{holiday.name}</h4>
+                                  <Badge variant={holiday.impact === 'high' ? 'destructive' : 'default'}>
+                                    {getImpactLevelName(holiday.impact)}影响
+                                  </Badge>
+                                </div>
+                                <p className="text-sm text-muted-foreground">
+                                  {holiday.localName} • {new Date(holiday.date).toLocaleDateString('zh-CN')}
+                                </p>
+                                <p className="text-xs">{holiday.description}</p>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        ))}
+                    </div>
+                  </div>
+                  
+                  {/* 印度教节日 */}
+                  <div>
+                    <h3 className="font-semibold mb-3 flex items-center gap-2">
+                      🕉️ 印度教节日
+                      <Badge variant="outline">影响印度、尼泊尔、斯里兰卡</Badge>
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {religiousHolidays2025
+                        .filter(h => h.description?.includes('印度教'))
+                        .map((holiday, index) => (
+                          <Card key={index}>
+                            <CardContent className="pt-4">
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between">
+                                  <h4 className="font-semibold">{holiday.name}</h4>
+                                  <Badge variant={holiday.impact === 'high' ? 'destructive' : 'default'}>
+                                    {getImpactLevelName(holiday.impact)}影响
+                                  </Badge>
+                                </div>
+                                <p className="text-sm text-muted-foreground">
+                                  {holiday.localName} • {new Date(holiday.date).toLocaleDateString('zh-CN')}
+                                </p>
+                                <p className="text-xs">{holiday.description}</p>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        ))}
+                    </div>
+                  </div>
+                  
+                  {/* 其他宗教节日 */}
+                  <div>
+                    <h3 className="font-semibold mb-3">其他宗教节日</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {religiousHolidays2025
+                        .filter(h => 
+                          !h.description?.includes('伊斯兰教') && 
+                          !h.description?.includes('基督教') && 
+                          !h.description?.includes('印度教')
+                        )
+                        .map((holiday, index) => (
+                          <Card key={index}>
+                            <CardContent className="pt-4">
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between">
+                                  <h4 className="font-semibold">{holiday.name}</h4>
+                                  <Badge variant={holiday.impact === 'high' ? 'destructive' : 'default'}>
+                                    {getImpactLevelName(holiday.impact)}影响
+                                  </Badge>
+                                </div>
+                                <p className="text-sm text-muted-foreground">
+                                  {holiday.localName} • {new Date(holiday.date).toLocaleDateString('zh-CN')}
+                                </p>
+                                <p className="text-xs">{holiday.description}</p>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        ))}
+                    </div>
+                  </div>
                 </div>
               </TabsContent>
               
@@ -443,8 +581,9 @@ export default function HolidayQueryPage() {
             <Alert className="mt-4">
               <AlertCircle className="h-4 w-4" />
               <AlertDescription>
-                <strong>外贸提示：</strong>重要订单请在客户节假日前至少一周确认，
-                避免因假期影响订单处理和货物运输。圣诞节、春节、斋月等重大节日需特别注意。
+                <strong>外贸提示：</strong>
+                重要节日影响：圣诞节（欧美停工2周）、斋月（中东效率降低）、
+                排灯节（印度停工1周）、春节（东亚停工2周）。请提前安排！
               </AlertDescription>
             </Alert>
           </CardContent>
@@ -452,4 +591,12 @@ export default function HolidayQueryPage() {
       </div>
     </div>
   )
-}
+}holiday.name}
+                                    {holiday.localName && (
+                                      <span className="text-sm text-muted-foreground ml-2">
+                                        ({holiday.localName})
+                                      </span>
+                                    )}
+                                  </h4>
+                                  <Badge variant={holiday.type === 'public' ? 'default' : 'secondary'}>
+                                    {
