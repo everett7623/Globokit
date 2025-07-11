@@ -121,7 +121,7 @@ export default function HolidayQueryPage() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent className="max-h-[300px]">
-                        {/* 热门国家 */}
+                        {/* 热门国家/地区 */}
                         <SelectItem value="divider-hot" disabled>
                           <span className="font-semibold text-orange-600">🔥 热门国家</span>
                         </SelectItem>
@@ -140,7 +140,7 @@ export default function HolidayQueryPage() {
                         })}
                         
                         <SelectItem value="divider-all" disabled>
-                          <span className="font-semibold">所有国家</span>
+                          <span className="font-semibold">所有国家/地区</span>
                         </SelectItem>
                         {getFilteredCountries().map(([code, country]) => (
                           <SelectItem key={code} value={code}>
