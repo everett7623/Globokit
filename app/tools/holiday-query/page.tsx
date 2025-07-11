@@ -187,25 +187,27 @@ export default function HolidayQueryPage() {
                 </div>
                 
                 {/* 国家信息 */}
-                <Card>
-                  <CardContent className="pt-6">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <span className="text-3xl">{countryInfo.flag}</span>
-                        <div>
-                          <h3 className="font-semibold text-lg">{countryInfo.name}</h3>
-                          <p className="text-sm text-muted-foreground">
-                            <MapPin className="inline h-3 w-3 mr-1" />
-                            {countryInfo.region} | 时区: {countryInfo.timezone} | 货币: {countryInfo.currency}
-                          </p>
+                {countryInfo && (
+                  <Card>
+                    <CardContent className="pt-6">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <span className="text-3xl">{countryInfo.flag}</span>
+                          <div>
+                            <h3 className="font-semibold text-lg">{countryInfo.name}</h3>
+                            <p className="text-sm text-muted-foreground">
+                              <MapPin className="inline h-3 w-3 mr-1" />
+                              {countryInfo.region} | 时区: {countryInfo.timezone} | 货币: {countryInfo.currency}
+                            </p>
+                          </div>
                         </div>
+                        <Badge variant="outline">
+                          {filteredHolidays.length} 个节假日
+                        </Badge>
                       </div>
-                      <Badge variant="outline">
-                        {filteredHolidays.length} 个节假日
-                      </Badge>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                )}
                 
                 {/* 年份提示 */}
                 {selectedYear === '2026' && (
@@ -231,6 +233,14 @@ export default function HolidayQueryPage() {
                               <div className="space-y-2">
                                 <div className="flex items-center gap-2">
                                   <h4 className="font-semibold">
+                                    {holiday.name}
+                                    {holiday.localName && (
+                                      <span className="text-sm text-muted-foreground ml-2">
+                                        ({holiday.localName})
+                                      </span>
+                                    )}
+                                  </h4>
+                                  <Badge variant={holiday.type === 'public' ? 'default' : 'secondary'}>
                                     {getHolidayTypeName(holiday.type)}
                                   </Badge>
                                 </div>
@@ -333,7 +343,7 @@ export default function HolidayQueryPage() {
                       <CardHeader className="pb-3">
                         <CardTitle className="text-base flex items-center justify-between">
                           <span>{holiday.name}</span>
-                          <Badge variant={holiday.impact === 'high' ? 'destructive' : 'default'}>
+                          <Badge variant={holiday.impact === 'high' ? 'destructive' : holiday.impact === 'medium' ? 'default' : 'secondary'}>
                             {getImpactLevelName(holiday.impact)}影响
                           </Badge>
                         </CardTitle>
@@ -494,7 +504,7 @@ export default function HolidayQueryPage() {
                 <Alert>
                   <Calendar className="h-4 w-4" />
                   <AlertDescription>
-                    {countryInfo.name} {selectedYear}年节假日分布图
+                    {countryInfo?.name || '国家'} {selectedYear}年节假日分布图
                   </AlertDescription>
                 </Alert>
                 
@@ -591,12 +601,4 @@ export default function HolidayQueryPage() {
       </div>
     </div>
   )
-}holiday.name}
-                                    {holiday.localName && (
-                                      <span className="text-sm text-muted-foreground ml-2">
-                                        ({holiday.localName})
-                                      </span>
-                                    )}
-                                  </h4>
-                                  <Badge variant={holiday.type === 'public' ? 'default' : 'secondary'}>
-                                    {
+}
