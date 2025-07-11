@@ -23,7 +23,7 @@ export interface UpcomingHoliday extends Holiday {
   daysUntil: number
 }
 
-// 扩展的国家/地区数据（按地区分组）- 去除中国
+// 扩展的国家/地区数据（按地区分组）
 export const countries: Record<string, Country> = {
   // 北美
   US: { name: '美国', flag: '🇺🇸', timezone: 'UTC-5', currency: 'USD', region: '北美' },
@@ -255,7 +255,7 @@ export function generateHolidayData(year: number): Record<string, Holiday[]> {
   return {}
 }
 
-// 2025年各国节假日数据（去除中国）
+// 2025年各国节假日数据
 export const holidays2025: Record<string, Holiday[]> = {
   US: [
     { date: '2025-01-01', name: "New Year's Day", type: 'public', impact: 'high' },
