@@ -23,48 +23,83 @@ export interface UpcomingHoliday extends Holiday {
   daysUntil: number
 }
 
-// 扩展的国家/地区数据（按地区分组）
+// 扩展的国家/地区数据（按地区分组）- 去除中国
 export const countries: Record<string, Country> = {
   // 北美
   US: { name: '美国', flag: '🇺🇸', timezone: 'UTC-5', currency: 'USD', region: '北美' },
   CA: { name: '加拿大', flag: '🇨🇦', timezone: 'UTC-5', currency: 'CAD', region: '北美' },
   MX: { name: '墨西哥', flag: '🇲🇽', timezone: 'UTC-6', currency: 'MXN', region: '北美' },
   
-  // 欧洲
-  UK: { name: '英国', flag: '🇬🇧', timezone: 'UTC+0', currency: 'GBP', region: '欧洲' },
-  DE: { name: '德国', flag: '🇩🇪', timezone: 'UTC+1', currency: 'EUR', region: '欧洲' },
-  FR: { name: '法国', flag: '🇫🇷', timezone: 'UTC+1', currency: 'EUR', region: '欧洲' },
-  IT: { name: '意大利', flag: '🇮🇹', timezone: 'UTC+1', currency: 'EUR', region: '欧洲' },
-  ES: { name: '西班牙', flag: '🇪🇸', timezone: 'UTC+1', currency: 'EUR', region: '欧洲' },
-  NL: { name: '荷兰', flag: '🇳🇱', timezone: 'UTC+1', currency: 'EUR', region: '欧洲' },
-  BE: { name: '比利时', flag: '🇧🇪', timezone: 'UTC+1', currency: 'EUR', region: '欧洲' },
-  CH: { name: '瑞士', flag: '🇨🇭', timezone: 'UTC+1', currency: 'CHF', region: '欧洲' },
-  SE: { name: '瑞典', flag: '🇸🇪', timezone: 'UTC+1', currency: 'SEK', region: '欧洲' },
-  NO: { name: '挪威', flag: '🇳🇴', timezone: 'UTC+1', currency: 'NOK', region: '欧洲' },
-  DK: { name: '丹麦', flag: '🇩🇰', timezone: 'UTC+1', currency: 'DKK', region: '欧洲' },
-  FI: { name: '芬兰', flag: '🇫🇮', timezone: 'UTC+2', currency: 'EUR', region: '欧洲' },
-  PL: { name: '波兰', flag: '🇵🇱', timezone: 'UTC+1', currency: 'PLN', region: '欧洲' },
-  CZ: { name: '捷克', flag: '🇨🇿', timezone: 'UTC+1', currency: 'CZK', region: '欧洲' },
-  AT: { name: '奥地利', flag: '🇦🇹', timezone: 'UTC+1', currency: 'EUR', region: '欧洲' },
-  GR: { name: '希腊', flag: '🇬🇷', timezone: 'UTC+2', currency: 'EUR', region: '欧洲' },
-  PT: { name: '葡萄牙', flag: '🇵🇹', timezone: 'UTC+0', currency: 'EUR', region: '欧洲' },
-  IE: { name: '爱尔兰', flag: '🇮🇪', timezone: 'UTC+0', currency: 'EUR', region: '欧洲' },
+  // 西欧
+  UK: { name: '英国', flag: '🇬🇧', timezone: 'UTC+0', currency: 'GBP', region: '西欧' },
+  DE: { name: '德国', flag: '🇩🇪', timezone: 'UTC+1', currency: 'EUR', region: '西欧' },
+  FR: { name: '法国', flag: '🇫🇷', timezone: 'UTC+1', currency: 'EUR', region: '西欧' },
+  IT: { name: '意大利', flag: '🇮🇹', timezone: 'UTC+1', currency: 'EUR', region: '西欧' },
+  ES: { name: '西班牙', flag: '🇪🇸', timezone: 'UTC+1', currency: 'EUR', region: '西欧' },
+  NL: { name: '荷兰', flag: '🇳🇱', timezone: 'UTC+1', currency: 'EUR', region: '西欧' },
+  BE: { name: '比利时', flag: '🇧🇪', timezone: 'UTC+1', currency: 'EUR', region: '西欧' },
+  CH: { name: '瑞士', flag: '🇨🇭', timezone: 'UTC+1', currency: 'CHF', region: '西欧' },
+  AT: { name: '奥地利', flag: '🇦🇹', timezone: 'UTC+1', currency: 'EUR', region: '西欧' },
+  IE: { name: '爱尔兰', flag: '🇮🇪', timezone: 'UTC+0', currency: 'EUR', region: '西欧' },
+  LU: { name: '卢森堡', flag: '🇱🇺', timezone: 'UTC+1', currency: 'EUR', region: '西欧' },
   
-  // 亚太
-  JP: { name: '日本', flag: '🇯🇵', timezone: 'UTC+9', currency: 'JPY', region: '亚太' },
-  KR: { name: '韩国', flag: '🇰🇷', timezone: 'UTC+9', currency: 'KRW', region: '亚太' },
-  CN: { name: '中国', flag: '🇨🇳', timezone: 'UTC+8', currency: 'CNY', region: '亚太' },
-  HK: { name: '香港', flag: '🇭🇰', timezone: 'UTC+8', currency: 'HKD', region: '亚太' },
-  TW: { name: '台湾', flag: '🇹🇼', timezone: 'UTC+8', currency: 'TWD', region: '亚太' },
-  SG: { name: '新加坡', flag: '🇸🇬', timezone: 'UTC+8', currency: 'SGD', region: '亚太' },
-  MY: { name: '马来西亚', flag: '🇲🇾', timezone: 'UTC+8', currency: 'MYR', region: '亚太' },
-  TH: { name: '泰国', flag: '🇹🇭', timezone: 'UTC+7', currency: 'THB', region: '亚太' },
-  ID: { name: '印度尼西亚', flag: '🇮🇩', timezone: 'UTC+7', currency: 'IDR', region: '亚太' },
-  PH: { name: '菲律宾', flag: '🇵🇭', timezone: 'UTC+8', currency: 'PHP', region: '亚太' },
-  VN: { name: '越南', flag: '🇻🇳', timezone: 'UTC+7', currency: 'VND', region: '亚太' },
-  IN: { name: '印度', flag: '🇮🇳', timezone: 'UTC+5:30', currency: 'INR', region: '亚太' },
-  AU: { name: '澳大利亚', flag: '🇦🇺', timezone: 'UTC+10', currency: 'AUD', region: '亚太' },
-  NZ: { name: '新西兰', flag: '🇳🇿', timezone: 'UTC+12', currency: 'NZD', region: '亚太' },
+  // 北欧
+  SE: { name: '瑞典', flag: '🇸🇪', timezone: 'UTC+1', currency: 'SEK', region: '北欧' },
+  NO: { name: '挪威', flag: '🇳🇴', timezone: 'UTC+1', currency: 'NOK', region: '北欧' },
+  DK: { name: '丹麦', flag: '🇩🇰', timezone: 'UTC+1', currency: 'DKK', region: '北欧' },
+  FI: { name: '芬兰', flag: '🇫🇮', timezone: 'UTC+2', currency: 'EUR', region: '北欧' },
+  IS: { name: '冰岛', flag: '🇮🇸', timezone: 'UTC+0', currency: 'ISK', region: '北欧' },
+  
+  // 南欧
+  GR: { name: '希腊', flag: '🇬🇷', timezone: 'UTC+2', currency: 'EUR', region: '南欧' },
+  PT: { name: '葡萄牙', flag: '🇵🇹', timezone: 'UTC+0', currency: 'EUR', region: '南欧' },
+  MT: { name: '马耳他', flag: '🇲🇹', timezone: 'UTC+1', currency: 'EUR', region: '南欧' },
+  CY: { name: '塞浦路斯', flag: '🇨🇾', timezone: 'UTC+2', currency: 'EUR', region: '南欧' },
+  
+  // 东欧
+  PL: { name: '波兰', flag: '🇵🇱', timezone: 'UTC+1', currency: 'PLN', region: '东欧' },
+  CZ: { name: '捷克', flag: '🇨🇿', timezone: 'UTC+1', currency: 'CZK', region: '东欧' },
+  HU: { name: '匈牙利', flag: '🇭🇺', timezone: 'UTC+1', currency: 'HUF', region: '东欧' },
+  RO: { name: '罗马尼亚', flag: '🇷🇴', timezone: 'UTC+2', currency: 'RON', region: '东欧' },
+  BG: { name: '保加利亚', flag: '🇧🇬', timezone: 'UTC+2', currency: 'BGN', region: '东欧' },
+  SK: { name: '斯洛伐克', flag: '🇸🇰', timezone: 'UTC+1', currency: 'EUR', region: '东欧' },
+  HR: { name: '克罗地亚', flag: '🇭🇷', timezone: 'UTC+1', currency: 'EUR', region: '东欧' },
+  SI: { name: '斯洛文尼亚', flag: '🇸🇮', timezone: 'UTC+1', currency: 'EUR', region: '东欧' },
+  LT: { name: '立陶宛', flag: '🇱🇹', timezone: 'UTC+2', currency: 'EUR', region: '东欧' },
+  LV: { name: '拉脱维亚', flag: '🇱🇻', timezone: 'UTC+2', currency: 'EUR', region: '东欧' },
+  EE: { name: '爱沙尼亚', flag: '🇪🇪', timezone: 'UTC+2', currency: 'EUR', region: '东欧' },
+  
+  // 独联体
+  RU: { name: '俄罗斯', flag: '🇷🇺', timezone: 'UTC+3', currency: 'RUB', region: '独联体' },
+  UA: { name: '乌克兰', flag: '🇺🇦', timezone: 'UTC+2', currency: 'UAH', region: '独联体' },
+  BY: { name: '白俄罗斯', flag: '🇧🇾', timezone: 'UTC+3', currency: 'BYN', region: '独联体' },
+  KZ: { name: '哈萨克斯坦', flag: '🇰🇿', timezone: 'UTC+6', currency: 'KZT', region: '独联体' },
+  
+  // 东亚
+  JP: { name: '日本', flag: '🇯🇵', timezone: 'UTC+9', currency: 'JPY', region: '东亚' },
+  KR: { name: '韩国', flag: '🇰🇷', timezone: 'UTC+9', currency: 'KRW', region: '东亚' },
+  HK: { name: '香港', flag: '🇭🇰', timezone: 'UTC+8', currency: 'HKD', region: '东亚' },
+  TW: { name: '台湾', flag: '🇹🇼', timezone: 'UTC+8', currency: 'TWD', region: '东亚' },
+  MO: { name: '澳门', flag: '🇲🇴', timezone: 'UTC+8', currency: 'MOP', region: '东亚' },
+  
+  // 东南亚
+  SG: { name: '新加坡', flag: '🇸🇬', timezone: 'UTC+8', currency: 'SGD', region: '东南亚' },
+  MY: { name: '马来西亚', flag: '🇲🇾', timezone: 'UTC+8', currency: 'MYR', region: '东南亚' },
+  TH: { name: '泰国', flag: '🇹🇭', timezone: 'UTC+7', currency: 'THB', region: '东南亚' },
+  ID: { name: '印度尼西亚', flag: '🇮🇩', timezone: 'UTC+7', currency: 'IDR', region: '东南亚' },
+  PH: { name: '菲律宾', flag: '🇵🇭', timezone: 'UTC+8', currency: 'PHP', region: '东南亚' },
+  VN: { name: '越南', flag: '🇻🇳', timezone: 'UTC+7', currency: 'VND', region: '东南亚' },
+  MM: { name: '缅甸', flag: '🇲🇲', timezone: 'UTC+6:30', currency: 'MMK', region: '东南亚' },
+  KH: { name: '柬埔寨', flag: '🇰🇭', timezone: 'UTC+7', currency: 'KHR', region: '东南亚' },
+  LA: { name: '老挝', flag: '🇱🇦', timezone: 'UTC+7', currency: 'LAK', region: '东南亚' },
+  BN: { name: '文莱', flag: '🇧🇳', timezone: 'UTC+8', currency: 'BND', region: '东南亚' },
+  
+  // 南亚
+  IN: { name: '印度', flag: '🇮🇳', timezone: 'UTC+5:30', currency: 'INR', region: '南亚' },
+  PK: { name: '巴基斯坦', flag: '🇵🇰', timezone: 'UTC+5', currency: 'PKR', region: '南亚' },
+  BD: { name: '孟加拉国', flag: '🇧🇩', timezone: 'UTC+6', currency: 'BDT', region: '南亚' },
+  LK: { name: '斯里兰卡', flag: '🇱🇰', timezone: 'UTC+5:30', currency: 'LKR', region: '南亚' },
+  NP: { name: '尼泊尔', flag: '🇳🇵', timezone: 'UTC+5:45', currency: 'NPR', region: '南亚' },
   
   // 中东
   AE: { name: '阿联酋', flag: '🇦🇪', timezone: 'UTC+4', currency: 'AED', region: '中东' },
@@ -72,6 +107,20 @@ export const countries: Record<string, Country> = {
   IL: { name: '以色列', flag: '🇮🇱', timezone: 'UTC+2', currency: 'ILS', region: '中东' },
   TR: { name: '土耳其', flag: '🇹🇷', timezone: 'UTC+3', currency: 'TRY', region: '中东' },
   EG: { name: '埃及', flag: '🇪🇬', timezone: 'UTC+2', currency: 'EGP', region: '中东' },
+  IR: { name: '伊朗', flag: '🇮🇷', timezone: 'UTC+3:30', currency: 'IRR', region: '中东' },
+  IQ: { name: '伊拉克', flag: '🇮🇶', timezone: 'UTC+3', currency: 'IQD', region: '中东' },
+  JO: { name: '约旦', flag: '🇯🇴', timezone: 'UTC+2', currency: 'JOD', region: '中东' },
+  KW: { name: '科威特', flag: '🇰🇼', timezone: 'UTC+3', currency: 'KWD', region: '中东' },
+  QA: { name: '卡塔尔', flag: '🇶🇦', timezone: 'UTC+3', currency: 'QAR', region: '中东' },
+  BH: { name: '巴林', flag: '🇧🇭', timezone: 'UTC+3', currency: 'BHD', region: '中东' },
+  OM: { name: '阿曼', flag: '🇴🇲', timezone: 'UTC+4', currency: 'OMR', region: '中东' },
+  LB: { name: '黎巴嫩', flag: '🇱🇧', timezone: 'UTC+2', currency: 'LBP', region: '中东' },
+  
+  // 大洋洲
+  AU: { name: '澳大利亚', flag: '🇦🇺', timezone: 'UTC+10', currency: 'AUD', region: '大洋洲' },
+  NZ: { name: '新西兰', flag: '🇳🇿', timezone: 'UTC+12', currency: 'NZD', region: '大洋洲' },
+  FJ: { name: '斐济', flag: '🇫🇯', timezone: 'UTC+12', currency: 'FJD', region: '大洋洲' },
+  PG: { name: '巴布亚新几内亚', flag: '🇵🇬', timezone: 'UTC+10', currency: 'PGK', region: '大洋洲' },
   
   // 南美
   BR: { name: '巴西', flag: '🇧🇷', timezone: 'UTC-3', currency: 'BRL', region: '南美' },
@@ -79,15 +128,41 @@ export const countries: Record<string, Country> = {
   CL: { name: '智利', flag: '🇨🇱', timezone: 'UTC-3', currency: 'CLP', region: '南美' },
   CO: { name: '哥伦比亚', flag: '🇨🇴', timezone: 'UTC-5', currency: 'COP', region: '南美' },
   PE: { name: '秘鲁', flag: '🇵🇪', timezone: 'UTC-5', currency: 'PEN', region: '南美' },
+  VE: { name: '委内瑞拉', flag: '🇻🇪', timezone: 'UTC-4', currency: 'VES', region: '南美' },
+  EC: { name: '厄瓜多尔', flag: '🇪🇨', timezone: 'UTC-5', currency: 'USD', region: '南美' },
+  UY: { name: '乌拉圭', flag: '🇺🇾', timezone: 'UTC-3', currency: 'UYU', region: '南美' },
+  PY: { name: '巴拉圭', flag: '🇵🇾', timezone: 'UTC-3', currency: 'PYG', region: '南美' },
+  BO: { name: '玻利维亚', flag: '🇧🇴', timezone: 'UTC-4', currency: 'BOB', region: '南美' },
+  
+  // 中美洲
+  PA: { name: '巴拿马', flag: '🇵🇦', timezone: 'UTC-5', currency: 'PAB', region: '中美洲' },
+  CR: { name: '哥斯达黎加', flag: '🇨🇷', timezone: 'UTC-6', currency: 'CRC', region: '中美洲' },
+  GT: { name: '危地马拉', flag: '🇬🇹', timezone: 'UTC-6', currency: 'GTQ', region: '中美洲' },
+  SV: { name: '萨尔瓦多', flag: '🇸🇻', timezone: 'UTC-6', currency: 'USD', region: '中美洲' },
+  HN: { name: '洪都拉斯', flag: '🇭🇳', timezone: 'UTC-6', currency: 'HNL', region: '中美洲' },
+  NI: { name: '尼加拉瓜', flag: '🇳🇮', timezone: 'UTC-6', currency: 'NIO', region: '中美洲' },
+  
+  // 加勒比
+  CU: { name: '古巴', flag: '🇨🇺', timezone: 'UTC-5', currency: 'CUP', region: '加勒比' },
+  DO: { name: '多米尼加', flag: '🇩🇴', timezone: 'UTC-4', currency: 'DOP', region: '加勒比' },
+  JM: { name: '牙买加', flag: '🇯🇲', timezone: 'UTC-5', currency: 'JMD', region: '加勒比' },
+  TT: { name: '特立尼达和多巴哥', flag: '🇹🇹', timezone: 'UTC-4', currency: 'TTD', region: '加勒比' },
   
   // 非洲
   ZA: { name: '南非', flag: '🇿🇦', timezone: 'UTC+2', currency: 'ZAR', region: '非洲' },
   NG: { name: '尼日利亚', flag: '🇳🇬', timezone: 'UTC+1', currency: 'NGN', region: '非洲' },
   KE: { name: '肯尼亚', flag: '🇰🇪', timezone: 'UTC+3', currency: 'KES', region: '非洲' },
-  
-  // 东欧
-  RU: { name: '俄罗斯', flag: '🇷🇺', timezone: 'UTC+3', currency: 'RUB', region: '东欧' },
-  UA: { name: '乌克兰', flag: '🇺🇦', timezone: 'UTC+2', currency: 'UAH', region: '东欧' },
+  MA: { name: '摩洛哥', flag: '🇲🇦', timezone: 'UTC+1', currency: 'MAD', region: '非洲' },
+  GH: { name: '加纳', flag: '🇬🇭', timezone: 'UTC+0', currency: 'GHS', region: '非洲' },
+  ET: { name: '埃塞俄比亚', flag: '🇪🇹', timezone: 'UTC+3', currency: 'ETB', region: '非洲' },
+  TZ: { name: '坦桑尼亚', flag: '🇹🇿', timezone: 'UTC+3', currency: 'TZS', region: '非洲' },
+  UG: { name: '乌干达', flag: '🇺🇬', timezone: 'UTC+3', currency: 'UGX', region: '非洲' },
+  DZ: { name: '阿尔及利亚', flag: '🇩🇿', timezone: 'UTC+1', currency: 'DZD', region: '非洲' },
+  TN: { name: '突尼斯', flag: '🇹🇳', timezone: 'UTC+1', currency: 'TND', region: '非洲' },
+  ZW: { name: '津巴布韦', flag: '🇿🇼', timezone: 'UTC+2', currency: 'ZWL', region: '非洲' },
+  CM: { name: '喀麦隆', flag: '🇨🇲', timezone: 'UTC+1', currency: 'XAF', region: '非洲' },
+  CI: { name: '科特迪瓦', flag: '🇨🇮', timezone: 'UTC+0', currency: 'XOF', region: '非洲' },
+  SN: { name: '塞内加尔', flag: '🇸🇳', timezone: 'UTC+0', currency: 'XOF', region: '非洲' },
 }
 
 // 国际热门节假日（全球性节日）
@@ -95,11 +170,16 @@ export const internationalHolidays: Holiday[] = [
   { date: '01-01', name: "New Year's Day", localName: '新年', type: 'international', impact: 'high', description: '全球大部分国家庆祝' },
   { date: '02-14', name: "Valentine's Day", localName: '情人节', type: 'international', impact: 'low', description: '全球商业节日' },
   { date: '03-08', name: "International Women's Day", localName: '国际妇女节', type: 'international', impact: 'medium', description: '部分国家法定假日' },
+  { date: '03-17', name: "St. Patrick's Day", localName: '圣帕特里克节', type: 'international', impact: 'low', description: '爱尔兰传统节日，全球庆祝' },
+  { date: '04-22', name: 'Earth Day', localName: '地球日', type: 'international', impact: 'low', description: '环保主题日' },
   { date: '05-01', name: 'Labour Day', localName: '劳动节', type: 'international', impact: 'high', description: '多数国家法定假日' },
+  { date: '06-05', name: 'World Environment Day', localName: '世界环境日', type: 'international', impact: 'low', description: '联合国环境日' },
+  { date: '10-24', name: 'United Nations Day', localName: '联合国日', type: 'international', impact: 'low', description: '纪念联合国成立' },
   { date: '10-31', name: 'Halloween', localName: '万圣节', type: 'international', impact: 'low', description: '西方国家流行' },
   { date: '11-11', name: "Singles' Day", localName: '双十一/光棍节', type: 'international', impact: 'medium', description: '全球最大购物节' },
   { date: '12-24', name: 'Christmas Eve', localName: '平安夜', type: 'international', impact: 'high', description: '基督教国家' },
   { date: '12-25', name: 'Christmas Day', localName: '圣诞节', type: 'international', impact: 'high', description: '西方最重要节日' },
+  { date: '12-31', name: "New Year's Eve", localName: '除夕', type: 'international', impact: 'medium', description: '跨年夜' },
 ]
 
 // 宗教节日（2025年具体日期）
@@ -112,29 +192,30 @@ export const religiousHolidays2025: Holiday[] = [
   { date: '2025-04-20', name: 'Easter Sunday', localName: '复活节', type: 'observance', impact: 'high', description: '基督教：纪念耶稣复活' },
   { date: '2025-05-29', name: 'Ascension Day', localName: '耶稣升天节', type: 'observance', impact: 'medium', description: '基督教：纪念耶稣升天' },
   { date: '2025-06-08', name: 'Pentecost', localName: '圣灵降临节', type: 'observance', impact: 'medium', description: '基督教：纪念圣灵降临' },
+  { date: '2025-11-01', name: 'All Saints Day', localName: '诸圣节', type: 'observance', impact: 'medium', description: '基督教：纪念所有圣徒' },
   
   // 伊斯兰教（注：伊斯兰历日期可能有1-2天偏差）
-  { date: '2025-03-01', name: 'Isra and Mi\'raj', localName: '夜行登霄', type: 'observance', impact: 'medium', description: '伊斯兰教：纪念先知夜行' },
-  { date: '2025-03-28', name: 'Ramadan Begins', localName: '斋月开始', type: 'observance', impact: 'high', description: '伊斯兰教：斋戒月开始' },
-  { date: '2025-04-23', name: 'Laylat al-Qadr', localName: '盖德尔夜', type: 'observance', impact: 'high', description: '伊斯兰教：权力之夜' },
-  { date: '2025-04-27', name: 'Eid al-Fitr', localName: '开斋节', type: 'observance', impact: 'high', description: '伊斯兰教：斋月结束庆典' },
-  { date: '2025-07-04', name: 'Eid al-Adha', localName: '宰牲节/古尔邦节', type: 'observance', impact: 'high', description: '伊斯兰教：献祭节' },
-  { date: '2025-07-27', name: 'Muharram/Islamic New Year', localName: '伊斯兰新年', type: 'observance', impact: 'medium', description: '伊斯兰教：新年' },
-  { date: '2025-08-05', name: 'Ashura', localName: '阿舒拉节', type: 'observance', impact: 'medium', description: '伊斯兰教：什叶派重要节日' },
-  { date: '2025-10-05', name: 'Mawlid al-Nabi', localName: '圣纪节', type: 'observance', impact: 'medium', description: '伊斯兰教：先知诞辰' },
+  { date: '2025-01-27', name: 'Isra and Mi\'raj', localName: '夜行登霄', type: 'observance', impact: 'medium', description: '伊斯兰教：纪念先知夜行' },
+  { date: '2025-02-28', name: 'Ramadan Begins', localName: '斋月开始', type: 'observance', impact: 'high', description: '伊斯兰教：斋戒月开始' },
+  { date: '2025-03-25', name: 'Laylat al-Qadr', localName: '盖德尔夜', type: 'observance', impact: 'high', description: '伊斯兰教：权力之夜' },
+  { date: '2025-03-30', name: 'Eid al-Fitr', localName: '开斋节', type: 'observance', impact: 'high', description: '伊斯兰教：斋月结束庆典' },
+  { date: '2025-06-06', name: 'Eid al-Adha', localName: '宰牲节/古尔邦节', type: 'observance', impact: 'high', description: '伊斯兰教：献祭节' },
+  { date: '2025-06-26', name: 'Muharram/Islamic New Year', localName: '伊斯兰新年', type: 'observance', impact: 'medium', description: '伊斯兰教：新年' },
+  { date: '2025-07-05', name: 'Ashura', localName: '阿舒拉节', type: 'observance', impact: 'medium', description: '伊斯兰教：什叶派重要节日' },
+  { date: '2025-09-04', name: 'Mawlid al-Nabi', localName: '圣纪节', type: 'observance', impact: 'medium', description: '伊斯兰教：先知诞辰' },
   
   // 印度教
+  { date: '2025-01-14', name: 'Makar Sankranti', localName: '丰收节', type: 'observance', impact: 'medium', description: '印度教：太阳节' },
   { date: '2025-03-14', name: 'Holi', localName: '洒红节/胡里节', type: 'observance', impact: 'high', description: '印度教：色彩节' },
   { date: '2025-03-30', name: 'Ram Navami', localName: '罗摩诞辰', type: 'observance', impact: 'medium', description: '印度教：罗摩神诞辰' },
   { date: '2025-08-16', name: 'Janmashtami', localName: '黑天诞辰', type: 'observance', impact: 'medium', description: '印度教：黑天神诞辰' },
-  { date: '2025-08-28', name: 'Ganesh Chaturthi', localName: '象头神节', type: 'observance', impact: 'medium', description: '印度教：象头神诞辰' },
+  { date: '2025-08-27', name: 'Ganesh Chaturthi', localName: '象头神节', type: 'observance', impact: 'medium', description: '印度教：象头神诞辰' },
   { date: '2025-10-02', name: 'Navaratri Begins', localName: '九夜节开始', type: 'observance', impact: 'medium', description: '印度教：女神节' },
-  { date: '2025-10-11', name: 'Dussehra', localName: '十胜节', type: 'observance', impact: 'high', description: '印度教：庆祝罗摩战胜罗波那' },
-  { date: '2025-10-31', name: 'Diwali', localName: '排灯节/万灯节', type: 'observance', impact: 'high', description: '印度教：光明节' },
-  { date: '2025-11-01', name: 'Bhai Dooj', localName: '兄妹节', type: 'observance', impact: 'low', description: '印度教：兄妹情谊节' },
+  { date: '2025-10-12', name: 'Dussehra', localName: '十胜节', type: 'observance', impact: 'high', description: '印度教：庆祝罗摩战胜罗波那' },
+  { date: '2025-11-01', name: 'Diwali', localName: '排灯节/万灯节', type: 'observance', impact: 'high', description: '印度教：光明节' },
   
   // 佛教
-  { date: '2025-02-12', name: 'Mahayana New Year', localName: '大乘佛教新年', type: 'observance', impact: 'medium', description: '佛教：大乘新年' },
+  { date: '2025-02-12', name: 'Chinese New Year', localName: '春节', type: 'observance', impact: 'high', description: '东亚：农历新年' },
   { date: '2025-05-12', name: 'Vesak/Buddha Purnima', localName: '卫塞节/佛诞', type: 'observance', impact: 'high', description: '佛教：佛陀诞生、成道、涅槃' },
   { date: '2025-07-11', name: 'Asalha Puja', localName: '阿莎叻哈节', type: 'observance', impact: 'medium', description: '佛教：纪念佛陀首次讲道' },
   
@@ -150,106 +231,31 @@ export const religiousHolidays2025: Holiday[] = [
   { date: '2025-01-13', name: 'Lohri', localName: '洛里节', type: 'observance', impact: 'low', description: '锡克教/印度教：丰收节' },
   { date: '2025-04-13', name: 'Vaisakhi', localName: '丰收节', type: 'observance', impact: 'medium', description: '锡克教：新年和收获节' },
   { date: '2025-11-15', name: 'Guru Nanak Jayanti', localName: '古鲁那纳克诞辰', type: 'observance', impact: 'high', description: '锡克教：创始人诞辰' },
+  
+  // 东正教
+  { date: '2025-01-07', name: 'Orthodox Christmas', localName: '东正教圣诞节', type: 'observance', impact: 'high', description: '东正教：圣诞节' },
+  { date: '2025-04-27', name: 'Orthodox Easter', localName: '东正教复活节', type: 'observance', impact: 'high', description: '东正教：复活节' },
 ]
 
-// 购物季和促销节日
-export const shoppingHolidays: Holiday[] = [
-  // 全球购物节
-  { date: '01-01', name: 'New Year Sales', localName: '新年促销', type: 'observance', impact: 'medium', description: '全球：新年清仓促销' },
-  { date: '11-11', name: "Singles' Day", localName: '双十一', type: 'observance', impact: 'high', description: '中国发起，全球最大网购节' },
-  { date: '11-29', name: 'Black Friday', localName: '黑色星期五', type: 'observance', impact: 'high', description: '美国发起，全球购物狂欢' },
-  { date: '12-02', name: 'Cyber Monday', localName: '网络星期一', type: 'observance', impact: 'high', description: '线上购物节' },
-  { date: '12-12', name: 'Double 12', localName: '双十二', type: 'observance', impact: 'medium', description: '年终购物节' },
-  { date: '12-26', name: 'Boxing Day Sales', localName: '节礼日促销', type: 'observance', impact: 'high', description: '英联邦国家传统促销日' },
-  
-  // 地区性购物季
-  { date: '06-18', name: '618 Shopping Festival', localName: '618购物节', type: 'observance', impact: 'medium', description: '中国年中购物节' },
-  { date: '08-08', name: 'August Sale', localName: '88购物节', type: 'observance', impact: 'low', description: '东南亚购物节' },
-  { date: '09-09', name: '9.9 Shopping Day', localName: '99大促', type: 'observance', impact: 'low', description: '东南亚购物节' },
-  { date: '10-10', name: '10.10 Sale', localName: '双十购物节', type: 'observance', impact: 'medium', description: '亚洲购物节' },
-  
-  // 行业特定购物季
-  { date: '07-15', name: 'Amazon Prime Day', localName: '亚马逊会员日', type: 'observance', impact: 'high', description: '全球最大电商促销（日期每年略有变化）' },
-  { date: '03-08', name: "Women's Day Sales", localName: '妇女节促销', type: 'observance', impact: 'low', description: '女性用品促销' },
-  { date: '05-10', name: "Mother's Day Sales", localName: '母亲节促销', type: 'observance', impact: 'medium', description: '礼品类促销高峰' },
-  { date: '06-15', name: "Father's Day Sales", localName: '父亲节促销', type: 'observance', impact: 'low', description: '男性用品促销' },
-  { date: '09-01', name: 'Back to School', localName: '返校季', type: 'observance', impact: 'medium', description: '学生用品采购高峰' },
-  
-  // 季节性促销
-  { date: '01-15', name: 'Winter Clearance', localName: '冬季清仓', type: 'observance', impact: 'medium', description: '冬装清仓' },
-  { date: '03-20', name: 'Spring Sale', localName: '春季促销', type: 'observance', impact: 'low', description: '换季促销' },
-  { date: '06-21', name: 'Summer Sale', localName: '夏季促销', type: 'observance', impact: 'medium', description: '夏装促销' },
-  { date: '09-22', name: 'Fall/Autumn Sale', localName: '秋季促销', type: 'observance', impact: 'low', description: '秋装上新' },
-  { date: '07-01', name: 'Mid-Year Sale', localName: '年中大促', type: 'observance', impact: 'medium', description: '年中清仓' },
-  { date: '12-31', name: 'Year-End Clearance', localName: '年终清仓', type: 'observance', impact: 'high', description: '年底大清仓' },
-]
-
-// 获取所有特殊日期（包括宗教节日和购物季）
-export function getAllSpecialDates(year: number = 2025): {
-  religious: Holiday[],
-  shopping: Holiday[]
-} {
-  // 对于购物季，添加年份
-  const shoppingWithYear = shoppingHolidays.map(holiday => ({
-    ...holiday,
-    date: `${year}-${holiday.date}`
-  }))
-  
-  return {
-    religious: year === 2025 ? religiousHolidays2025 : [],
-    shopping: shoppingWithYear
-  }
+// 节假日对外贸的影响说明
+export const impactDescriptions = {
+  high: '重大影响：政府机构、银行、大部分企业关闭，物流停运',
+  medium: '中等影响：部分企业放假，物流可能延迟',
+  low: '轻微影响：部分地区或行业放假，整体影响较小'
 }
 
 // 节假日数据生成函数（支持多年份）
 export function generateHolidayData(year: number): Record<string, Holiday[]> {
-  // 基础节假日模板（每年固定日期的节日）
-  const baseHolidays: Record<string, Omit<Holiday, 'date'>[]> = {
-    US: [
-      { name: "New Year's Day", type: 'public', impact: 'high' },
-      { name: 'Independence Day', type: 'public', impact: 'high' },
-      { name: 'Veterans Day', type: 'public', impact: 'medium' },
-      { name: 'Christmas Day', type: 'public', impact: 'high' },
-    ],
-    UK: [
-      { name: "New Year's Day", type: 'public', impact: 'high' },
-      { name: 'Christmas Day', type: 'public', impact: 'high' },
-      { name: 'Boxing Day', type: 'public', impact: 'high' },
-    ],
-    CN: [
-      { name: '元旦', localName: "New Year's Day", type: 'public', impact: 'medium' },
-      { name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
-      { name: '清明节', localName: 'Qingming Festival', type: 'public', impact: 'medium' },
-      { name: '劳动节', localName: 'Labour Day', type: 'public', impact: 'medium' },
-      { name: '端午节', localName: 'Dragon Boat Festival', type: 'public', impact: 'medium' },
-      { name: '中秋节', localName: 'Mid-Autumn Festival', type: 'public', impact: 'high' },
-      { name: '国庆节', localName: 'National Day', type: 'public', impact: 'high' },
-    ],
-    // 添加更多国家...
-  }
-  
-  // 这里应该根据年份计算实际日期，特别是移动节日
-  // 为了示例，我们返回一些固定数据
-  return getHolidaysForYear(year)
-}
-
-// 获取特定年份的节假日数据
-function getHolidaysForYear(year: number): Record<string, Holiday[]> {
-  // 2025年数据
   if (year === 2025) {
     return holidays2025
   }
-  
-  // 2026年数据
   if (year === 2026) {
     return holidays2026
   }
-  
-  // 其他年份返回估算数据或空数据
   return {}
 }
 
-// 2025年各国节假日数据
+// 2025年各国节假日数据（去除中国）
 export const holidays2025: Record<string, Holiday[]> = {
   US: [
     { date: '2025-01-01', name: "New Year's Day", type: 'public', impact: 'high' },
@@ -305,22 +311,6 @@ export const holidays2025: Record<string, Holiday[]> = {
     { date: '2025-11-03', name: '文化の日', localName: 'Culture Day', type: 'public', impact: 'medium' },
     { date: '2025-11-23', name: '勤労感謝の日', localName: 'Labor Thanksgiving', type: 'public', impact: 'medium' },
   ],
-  CN: [
-    { date: '2025-01-01', name: '元旦', localName: "New Year's Day", type: 'public', impact: 'medium' },
-    { date: '2025-01-28', name: '春节除夕', localName: 'Spring Festival Eve', type: 'public', impact: 'high' },
-    { date: '2025-01-29', name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
-    { date: '2025-01-30', name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
-    { date: '2025-01-31', name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
-    { date: '2025-02-01', name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
-    { date: '2025-02-02', name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
-    { date: '2025-04-04', name: '清明节', localName: 'Qingming Festival', type: 'public', impact: 'medium' },
-    { date: '2025-05-01', name: '劳动节', localName: 'Labour Day', type: 'public', impact: 'medium' },
-    { date: '2025-05-31', name: '端午节', localName: 'Dragon Boat Festival', type: 'public', impact: 'medium' },
-    { date: '2025-10-01', name: '国庆节', localName: 'National Day', type: 'public', impact: 'high' },
-    { date: '2025-10-06', name: '中秋节', localName: 'Mid-Autumn Festival', type: 'public', impact: 'high' },
-  ],
-  // 在 holidays2025 中添加更多国家的数据模板
-
 // 法国
 FR: [
   { date: '2025-01-01', name: 'Jour de l\'an', localName: '新年', type: 'public', impact: 'high' },
@@ -447,7 +437,6 @@ AU: [
   { date: '2025-12-25', name: 'Christmas Day', localName: '圣诞节', type: 'public', impact: 'high' },
   { date: '2025-12-26', name: 'Boxing Day', localName: '节礼日', type: 'public', impact: 'high' },
 ]
-  // 添加更多国家的2025年数据...
 }
 
 // 2026年各国节假日数据（预测）
@@ -474,28 +463,7 @@ export const holidays2026: Record<string, Holiday[]> = {
     { date: '2026-12-25', name: 'Christmas Day', type: 'public', impact: 'high' },
     { date: '2026-12-26', name: 'Boxing Day', type: 'public', impact: 'high' },
   ],
-  CN: [
-    { date: '2026-01-01', name: '元旦', localName: "New Year's Day", type: 'public', impact: 'medium' },
-    { date: '2026-02-16', name: '春节除夕', localName: 'Spring Festival Eve', type: 'public', impact: 'high' },
-    { date: '2026-02-17', name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
-    { date: '2026-02-18', name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
-    { date: '2026-02-19', name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
-    { date: '2026-02-20', name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
-    { date: '2026-02-21', name: '春节', localName: 'Spring Festival', type: 'public', impact: 'high' },
-    { date: '2026-04-05', name: '清明节', localName: 'Qingming Festival', type: 'public', impact: 'medium' },
-    { date: '2026-05-01', name: '劳动节', localName: 'Labour Day', type: 'public', impact: 'medium' },
-    { date: '2026-06-19', name: '端午节', localName: 'Dragon Boat Festival', type: 'public', impact: 'medium' },
-    { date: '2026-09-25', name: '中秋节', localName: 'Mid-Autumn Festival', type: 'public', impact: 'high' },
-    { date: '2026-10-01', name: '国庆节', localName: 'National Day', type: 'public', impact: 'high' },
-  ],
-  // 添加更多国家的2026年数据...
-}
-
-// 节假日对外贸的影响说明
-export const impactDescriptions = {
-  high: '重大影响：政府机构、银行、大部分企业关闭，物流停运',
-  medium: '中等影响：部分企业放假，物流可能延迟',
-  low: '轻微影响：部分地区或行业放假，整体影响较小'
+  // 添加更多国家数据...
 }
 
 // 获取特定国家的节假日
@@ -505,10 +473,11 @@ export function getCountryHolidays(countryCode: string, year: number = new Date(
 }
 
 // 获取即将到来的节假日
-export function getUpcomingHolidays(daysAhead: number = 30, year: number = new Date().getFullYear()): UpcomingHoliday[] {
+export function getUpcomingHolidays(daysAhead: number = 30): UpcomingHoliday[] {
   const today = new Date()
+  const currentYear = today.getFullYear()
   const upcoming: UpcomingHoliday[] = []
-  const yearHolidays = generateHolidayData(year)
+  const yearHolidays = generateHolidayData(currentYear)
   
   // 国家法定节假日
   Object.entries(yearHolidays).forEach(([countryCode, holidays]) => {
@@ -529,7 +498,6 @@ export function getUpcomingHolidays(daysAhead: number = 30, year: number = new D
   
   // 添加国际节假日
   internationalHolidays.forEach(holiday => {
-    const currentYear = today.getFullYear()
     const holidayDate = new Date(`${currentYear}-${holiday.date}`)
     const daysUntil = Math.ceil((holidayDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
     
@@ -544,37 +512,22 @@ export function getUpcomingHolidays(daysAhead: number = 30, year: number = new D
     }
   })
   
-  // 添加宗教节日
-  const { religious } = getAllSpecialDates(year)
-  religious.forEach(holiday => {
-    const holidayDate = new Date(holiday.date)
-    const daysUntil = Math.ceil((holidayDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
-    
-    if (daysUntil > 0 && daysUntil <= daysAhead) {
-      upcoming.push({
-        ...holiday,
-        country: '宗教节日',
-        flag: '🙏',
-        daysUntil
-      })
-    }
-  })
-  
-  // 添加购物节（只添加影响较大的）
-  const { shopping } = getAllSpecialDates(year)
-  shopping.filter(h => h.impact !== 'low').forEach(holiday => {
-    const holidayDate = new Date(holiday.date)
-    const daysUntil = Math.ceil((holidayDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
-    
-    if (daysUntil > 0 && daysUntil <= daysAhead) {
-      upcoming.push({
-        ...holiday,
-        country: '购物节',
-        flag: '🛍️',
-        daysUntil
-      })
-    }
-  })
+  // 添加重要宗教节日
+  if (currentYear === 2025) {
+    religiousHolidays2025.forEach(holiday => {
+      const holidayDate = new Date(holiday.date)
+      const daysUntil = Math.ceil((holidayDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
+      
+      if (daysUntil > 0 && daysUntil <= daysAhead && holiday.impact === 'high') {
+        upcoming.push({
+          ...holiday,
+          country: '宗教节日',
+          flag: '🙏',
+          daysUntil
+        })
+      }
+    })
+  }
   
   return upcoming.sort((a, b) => a.daysUntil - b.daysUntil)
 }
