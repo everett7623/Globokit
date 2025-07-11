@@ -257,6 +257,7 @@ export function generateHolidayData(year: number): Record<string, Holiday[]> {
 
 // 2025年各国节假日数据
 export const holidays2025: Record<string, Holiday[]> = {
+  // North America
   US: [
     { date: '2025-01-01', name: "New Year's Day", type: 'public', impact: 'high' },
     { date: '2025-01-20', name: 'Martin Luther King Jr. Day', type: 'public', impact: 'medium' },
@@ -270,6 +271,33 @@ export const holidays2025: Record<string, Holiday[]> = {
     { date: '2025-11-27', name: 'Thanksgiving Day', type: 'public', impact: 'high' },
     { date: '2025-11-28', name: 'Black Friday', type: 'observance', impact: 'high' },
     { date: '2025-12-25', name: 'Christmas Day', type: 'public', impact: 'high' },
+  ],
+  CA: [
+    { date: '2025-01-01', name: "New Year's Day", localName: '新年', type: 'public', impact: 'high' },
+    { date: '2025-02-17', name: 'Family Day', localName: '家庭日', type: 'regional', impact: 'medium' }, // Most provinces
+    { date: '2025-04-18', name: 'Good Friday', localName: '耶稣受难日', type: 'public', impact: 'high' },
+    { date: '2025-04-21', name: 'Easter Monday', localName: '复活节星期一', type: 'regional', impact: 'medium' }, // Some provinces
+    { date: '2025-05-19', name: 'Victoria Day', localName: '维多利亚日', type: 'public', impact: 'medium' },
+    { date: '2025-07-01', name: 'Canada Day', localName: '加拿大日', type: 'public', impact: 'high' },
+    { date: '2025-08-04', name: 'Civic Holiday', localName: '公民假日', type: 'regional', impact: 'low' }, // Most provinces, names vary
+    { date: '2025-09-01', name: 'Labour Day', localName: '劳动节', type: 'public', impact: 'high' },
+    { date: '2025-09-30', name: 'National Day for Truth and Reconciliation', localName: '真相与和解日', type: 'public', impact: 'medium' },
+    { date: '2025-10-13', name: 'Thanksgiving', localName: '感恩节', type: 'public', impact: 'high' },
+    { date: '2025-11-11', name: 'Remembrance Day', localName: '纪念日', type: 'public', impact: 'medium' },
+    { date: '2025-12-25', name: 'Christmas Day', localName: '圣诞节', type: 'public', impact: 'high' },
+    { date: '2025-12-26', name: 'Boxing Day', localName: '节礼日', type: 'public', impact: 'high' },
+  ],
+  MX: [
+    { date: '2025-01-01', name: 'Año Nuevo', localName: '新年', type: 'public', impact: 'high' },
+    { date: '2025-02-03', name: 'Día de la Constitución', localName: '宪法日', type: 'public', impact: 'medium' },
+    { date: '2025-03-17', name: 'Natalicio de Benito Juárez', localName: '贝尼托·华雷斯诞辰', type: 'public', impact: 'medium' },
+    { date: '2025-04-17', name: 'Jueves Santo', localName: '濯足节', type: 'observance', impact: 'low' },
+    { date: '2025-04-18', name: 'Viernes Santo', localName: '耶稣受难日', type: 'public', impact: 'high' },
+    { date: '2025-05-01', name: 'Día del Trabajo', localName: '劳动节', type: 'public', impact: 'high' },
+    { date: '2025-09-16', name: 'Día de la Independencia', localName: '独立日', type: 'public', impact: 'high' },
+    { date: '2025-11-17', name: 'Día de la Revolución', localName: '革命日', type: 'public', impact: 'medium' },
+    { date: '2025-12-01', name: 'Transmisión del Poder Ejecutivo Federal', localName: '总统就职日', type: 'public', impact: 'low' }, // Every 6 years
+    { date: '2025-12-25', name: 'Navidad', localName: '圣诞节', type: 'public', impact: 'high' },
   ],
   UK: [
     { date: '2025-01-01', name: "New Year's Day", type: 'public', impact: 'high' },
