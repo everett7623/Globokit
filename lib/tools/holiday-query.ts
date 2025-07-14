@@ -218,9 +218,6 @@ export const religiousHolidays2025: Holiday[] = [
 
   // 佛教
   // 注：农历新年（春节）虽然在东亚地区广泛庆祝，但在佛教中并非普遍性的宗教节日，更偏向文化节日。
-  // 您原列表中的“Chinese New Year”日期为 2025-02-12，但 2025 年的农历新年是 2025-01-29。
-  // 如果需要保留，建议修改日期并调整描述，或者考虑将其移出纯宗教节日列表。
-  // 考虑到用户列表已包含，我将其保留并修正日期，但添加了此备注。
   { date: '2025-01-29', name: 'Lunar New Year', localName: '农历新年/春节', type: 'observance', impact: 'high', description: '东亚：农历新年，多地华人与部分佛教徒庆祝的文化节日。' },
   { date: '2025-01-14', name: 'Mahayana New Year', localName: '大乘佛教新年', type: 'observance', impact: 'low', description: '佛教：大乘佛教新年' }, // 新增
   { date: '2025-02-15', name: 'Nirvana Day', localName: '涅槃节', type: 'observance', impact: 'medium', description: '佛教：纪念佛陀涅槃' }, // 新增
