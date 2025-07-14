@@ -183,60 +183,59 @@ export const internationalHolidays: Holiday[] = [
   { date: '12-31', name: "New Year's Eve", localName: '除夕', type: 'international', impact: 'medium', description: '跨年夜' },
 ]
 
-// 宗教节日（2025 年具体日期）
-export const religiousHolidays2025: Holiday [] = [
-// 基督教
-{date: '2025-01-06', name: 'Epiphany', localName: ' 主显节 ', type: 'observance', impact: 'medium', description: ' 基督教：纪念贤士朝拜圣婴，西班牙、希腊等国举行游行 '},
-{ date: '2025-03-05', name: 'Ash Wednesday', localName: ' 圣灰星期三 ', type: 'observance', impact: 'low', description: ' 基督教：四旬期开始，信徒以圣灰标记额头表忏悔 ' },
-{ date: '2025-04-13', name: 'Palm Sunday', localName: ' 棕枝主日 ', type: 'observance', impact: 'medium', description: ' 基督教：纪念耶稣进入耶路撒冷，信徒手持棕榈枝游行 ' },
-{ date: '2025-04-18', name: 'Good Friday', localName: ' 耶稣受难日 ', type: 'observance', impact: 'high', description: ' 基督教：纪念耶稣受难，多国法定假日 ' },
-{ date: '2025-04-20', name: 'Easter Sunday', localName: ' 复活节 ', type: 'observance', impact: 'high', description: ' 基督教：纪念耶稣复活，彩蛋、兔子为象征 ' },
-{ date: '2025-05-29', name: 'Ascension Day', localName: ' 耶稣升天节 ', type: 'observance', impact: 'medium', description: ' 基督教：复活节后第 40 天，纪念耶稣升天 ' },
-{ date: '2025-06-09', name: 'Pentecost', localName: ' 圣灵降临节 ', type: 'observance', impact: 'medium', description: ' 基督教：复活节后第 50 天，纪念圣灵降临 ' },
-{ date: '2025-08-15', name: 'Assumption of Mary', localName: ' 圣母升天节 ', type: 'observance', impact: 'medium', description: ' 基督教：纪念圣母玛利亚被接升天，天主教重要节日 ' },
-{ date: '2025-09-08', name: 'Nativity of Mary', localName: ' 圣母圣诞节 ', type: 'observance', impact: 'low', description: ' 基督教：纪念圣母玛利亚诞生，东正教和天主教共同庆祝 ' },
-{ date: '2025-11-01', name: 'All Saints Day', localName: ' 诸圣节 ', type: 'observance', impact: 'medium', description: ' 基督教：纪念所有圣徒，部分国家扫墓 ' },
-// 伊斯兰教（注：伊斯兰历日期可能有 1-2 天偏差）
-{date: '2025-01-27', name: 'Isra and Mi'raj', localName: ' 夜行登霄 ', type: 'observance', impact: 'medium', description: ' 伊斯兰教：纪念先知穆罕默德夜行登霄 '},
-{ date: '2025-02-28', name: 'Ramadan Begins', localName: ' 斋月开始 ', type: 'observance', impact: 'high', description: ' 伊斯兰教：每日黎明至日落禁食，加强宗教修行 ' },
-{ date: '2025-03-25', name: 'Laylat al-Qadr', localName: ' 盖德尔夜 ', type: 'observance', impact: 'high', description: ' 伊斯兰教：斋月中最神圣夜晚，纪念《古兰经》降示 ' },
-{ date: '2025-03-30', name: 'Eid al-Fitr', localName: ' 开斋节 ', type: 'observance', impact: 'high', description: ' 伊斯兰教：斋月结束，团聚宴饮、施舍 ' },
-{ date: '2025-06-06', name: 'Eid al-Adha', localName: ' 宰牲节 / 古尔邦节 ', type: 'observance', impact: 'high', description: ' 伊斯兰教：献祭纪念，朝觐活动重要节点 ' },
-{ date: '2025-06-26', name: 'Muharram/Islamic New Year', localName: ' 伊斯兰新年 ', type: 'observance', impact: 'medium', description: ' 伊斯兰教：穆罕默德迁徙麦地那纪念日 ' },
-{ date: '2025-07-05', name: 'Ashura', localName: ' 阿舒拉节 ', type: 'observance', impact: 'medium', description: ' 伊斯兰教：什叶派纪念侯赛因殉难，逊尼派斋戒日 ' },
-{ date: '2025-09-04', name: 'Mawlid al-Nabi', localName: ' 圣纪节 ', type: 'observance', impact: 'medium', description: ' 伊斯兰教：纪念先知穆罕默德诞辰 ' },
-// 印度教
-{date: '2025-01-14', name: 'Makar Sankranti', localName: ' 丰收节 ', type: 'observance', impact: 'medium', description: ' 印度教：太阳北移纪念日，放风筝、吃甜食 '},
-{ date: '2025-03-14', name: 'Holi', localName: ' 洒红节 / 胡里节 ', type: 'observance', impact: 'high', description: ' 印度教：庆祝春天与善胜恶，互泼彩色粉末 ' },
-{ date: '2025-03-30', name: 'Ram Navami', localName: ' 罗摩诞辰 ', type: 'observance', impact: 'medium', description: ' 印度教：纪念罗摩神诞辰，诵经游行 ' },
-{ date: '2025-08-16', name: 'Janmashtami', localName: ' 黑天诞辰 ', type: 'observance', impact: 'medium', description: ' 印度教：纪念黑天神诞辰，禁食守夜 ' },
-{ date: '2025-08-27', name: 'Ganesh Chaturthi', localName: ' 象头神节 ', type: 'observance', impact: 'medium', description: ' 印度教：象头神诞辰，供奉神像后 immersion 仪式 ' },
-{ date: '2025-10-02', name: 'Navaratri Begins', localName: ' 九夜节开始 ', type: 'observance', impact: 'medium', description: ' 印度教：九天敬女神，跳舞祈福 ' },
-{ date: '2025-10-12', name: 'Dussehra', localName: ' 十胜节 ', type: 'observance', impact: 'high', description: ' 印度教：焚烧拉瓦那像，庆祝罗摩胜利 ' },
-{ date: '2025-11-01', name: 'Diwali', localName: ' 排灯节 / 万灯节 ', type: 'observance', impact: 'high', description: ' 印度教：光明战胜黑暗，点油灯、放烟花 ' },
-// 佛教
-{date: '2025-01-29', name: 'Chinese New Year', localName: ' 春节 ', type: 'observance', impact: 'high', description: ' 东亚：农历新年，贴春联、吃年夜饭、拜年 '},
-{ date: '2025-05-13', name: 'Vesak/Buddha Purnima', localName: ' 卫塞节 / 佛诞 ', type: 'observance', impact: 'high', description: ' 佛教：纪念佛陀诞生、成道、涅槃，献花礼佛 ' },
-{ date: '2025-07-11', name: 'Asalha Puja', localName: ' 阿莎叻哈节 ', type: 'observance', impact: 'medium', description: ' 佛教：纪念佛陀首次讲道，僧侣集会 ' },
-{ date: '2025-08-15', name: 'Ullambana Festival', localName: ' 盂兰盆节 / 中元节 ', type: 'observance', impact: 'medium', description: ' 佛教：纪念目犍连救母，施斋供僧超度亡灵 ' },
-// 犹太教
-{date: '2025-04-12', name: 'Passover Begins', localName: ' 逾越节开始 ', type: 'observance', impact: 'high', description: ' 犹太教：纪念出埃及，吃无酵饼 '},
-{ date: '2025-06-01', name: 'Shavuot', localName: ' 七七节 ', type: 'observance', impact: 'medium', description: ' 犹太教：纪念律法颁布，吃乳制品 ' },
-{ date: '2025-09-22', name: 'Rosh Hashanah', localName: ' 犹太新年 ', type: 'observance', impact: 'high', description: ' 犹太教：吹羊角号，忏悔反思 ' },
-{ date: '2025-10-01', name: 'Yom Kippur', localName: ' 赎罪日 ', type: 'observance', impact: 'high', description: ' 犹太教：禁食祈祷，求神赦免 ' },
-{ date: '2025-10-06', name: 'Sukkot Begins', localName: ' 住棚节开始 ', type: 'observance', impact: 'medium', description: ' 犹太教：纪念旷野漂泊，搭建棚屋 ' },
-{ date: '2025-12-14', name: 'Hanukkah Begins', localName: ' 光明节开始 ', type: 'observance', impact: 'medium', description: ' 犹太教：点燃九烛台，纪念圣殿重建 ' },
-// 锡克教
-{date: '2025-01-13', name: 'Lohri', localName: ' 洛里节 ', type: 'observance', impact: 'low', description: ' 锡克教 / 印度教：感恩丰收，篝火晚会 '},
-{ date: '2025-04-13', name: 'Vaisakhi', localName: ' 丰收节 ', type: 'observance', impact: 'medium', description: ' 锡克教：新年与洗礼日，游行庆祝 ' },
-{ date: '2025-11-15', name: 'Guru Nanak Jayanti', localName: ' 古鲁那纳克诞辰 ', type: 'observance', impact: 'high', description: ' 锡克教：创始人诞辰，诵经游行 ' },
-// 东正教
-{date: '2025-01-07', name: 'Orthodox Christmas', localName: ' 东正教圣诞节 ', type: 'observance', impact: 'high', description: ' 东正教：使用儒略历，庆祝耶稣诞生 '},
-{ date: '2025-04-27', name: 'Orthodox Easter', localName: ' 东正教复活节 ', type: 'observance', impact: 'high', description: ' 东正教：比天主教晚一周，彩蛋祝福仪式 ' },
-// 道教
-{date: '2025-02-15', name: 'Lantern Festival', localName: ' 元宵节 ', type: 'observance', impact: 'medium', description: ' 道教：上元天官圣诞，赏花灯、吃汤圆 '},
-{ date: '2025-07-15', name: 'Zhongyuan Festival', localName: ' 中元节 ', type: 'observance', impact: 'medium', description: ' 道教：地官赦罪日，祭祀祖先超度亡魂 ' },
-{ date: '2025-10-15', name: 'Lower Yuan Festival', localName: ' 下元节 ', type: 'observance', impact: 'low', description: ' 道教：水官解厄日，祈求解除灾厄 ' }
+// 宗教节日（2025年具体日期）
+export const religiousHolidays2025: Holiday[] = [
+  // 基督教
+  { date: '2025-01-06', name: 'Epiphany', localName: '主显节', type: 'observance', impact: 'medium', description: '基督教：纪念贤士朝拜圣婴' },
+  { date: '2025-03-05', name: 'Ash Wednesday', localName: '圣灰星期三', type: 'observance', impact: 'low', description: '基督教：四旬期开始' },
+  { date: '2025-04-13', name: 'Palm Sunday', localName: '棕枝主日', type: 'observance', impact: 'medium', description: '基督教：纪念耶稣进入耶路撒冷' },
+  { date: '2025-04-18', name: 'Good Friday', localName: '耶稣受难日', type: 'observance', impact: 'high', description: '基督教：纪念耶稣受难' },
+  { date: '2025-04-20', name: 'Easter Sunday', localName: '复活节', type: 'observance', impact: 'high', description: '基督教：纪念耶稣复活' },
+  { date: '2025-05-29', name: 'Ascension Day', localName: '耶稣升天节', type: 'observance', impact: 'medium', description: '基督教：纪念耶稣升天' },
+  { date: '2025-06-08', name: 'Pentecost', localName: '圣灵降临节', type: 'observance', impact: 'medium', description: '基督教：纪念圣灵降临' },
+  { date: '2025-11-01', name: 'All Saints Day', localName: '诸圣节', type: 'observance', impact: 'medium', description: '基督教：纪念所有圣徒' },
+
+  // 伊斯兰教（注：伊斯兰历日期可能有1-2天偏差）
+  { date: '2025-01-27', name: 'Isra and Mi\'raj', localName: '夜行登霄', type: 'observance', impact: 'medium', description: '伊斯兰教：纪念先知夜行' },
+  { date: '2025-02-28', name: 'Ramadan Begins', localName: '斋月开始', type: 'observance', impact: 'high', description: '伊斯兰教：斋戒月开始' },
+  { date: '2025-03-25', name: 'Laylat al-Qadr', localName: '盖德尔夜', type: 'observance', impact: 'high', description: '伊斯兰教：权力之夜' },
+  { date: '2025-03-30', name: 'Eid al-Fitr', localName: '开斋节', type: 'observance', impact: 'high', description: '伊斯兰教：斋月结束庆典' },
+  { date: '2025-06-06', name: 'Eid al-Adha', localName: '宰牲节/古尔邦节', type: 'observance', impact: 'high', description: '伊斯兰教：献祭节' },
+  { date: '2025-06-26', name: 'Muharram/Islamic New Year', localName: '伊斯兰新年', type: 'observance', impact: 'medium', description: '伊斯兰教：新年' },
+  { date: '2025-07-05', name: 'Ashura', localName: '阿舒拉节', type: 'observance', impact: 'medium', description: '伊斯兰教：什叶派重要节日' },
+  { date: '2025-09-04', name: 'Mawlid al-Nabi', localName: '圣纪节', type: 'observance', impact: 'medium', description: '伊斯兰教：先知诞辰' },
+  
+  // 印度教
+  { date: '2025-01-14', name: 'Makar Sankranti', localName: '丰收节', type: 'observance', impact: 'medium', description: '印度教：太阳节' },
+  { date: '2025-03-14', name: 'Holi', localName: '洒红节/胡里节', type: 'observance', impact: 'high', description: '印度教：色彩节' },
+  { date: '2025-03-30', name: 'Ram Navami', localName: '罗摩诞辰', type: 'observance', impact: 'medium', description: '印度教：罗摩神诞辰' },
+  { date: '2025-08-16', name: 'Janmashtami', localName: '黑天诞辰', type: 'observance', impact: 'medium', description: '印度教：黑天神诞辰' },
+  { date: '2025-08-27', name: 'Ganesh Chaturthi', localName: '象头神节', type: 'observance', impact: 'medium', description: '印度教：象头神诞辰' },
+  { date: '2025-10-02', name: 'Navaratri Begins', localName: '九夜节开始', type: 'observance', impact: 'medium', description: '印度教：女神节' },
+  { date: '2025-10-12', name: 'Dussehra', localName: '十胜节', type: 'observance', impact: 'high', description: '印度教：庆祝罗摩战胜罗波那' },
+  { date: '2025-11-01', name: 'Diwali', localName: '排灯节/万灯节', type: 'observance', impact: 'high', description: '印度教：光明节' },
+  
+  // 佛教
+  { date: '2025-02-12', name: 'Chinese New Year', localName: '春节', type: 'observance', impact: 'high', description: '东亚：农历新年' },
+  { date: '2025-05-12', name: 'Vesak/Buddha Purnima', localName: '卫塞节/佛诞', type: 'observance', impact: 'high', description: '佛教：佛陀诞生、成道、涅槃' },
+  { date: '2025-07-11', name: 'Asalha Puja', localName: '阿莎叻哈节', type: 'observance', impact: 'medium', description: '佛教：纪念佛陀首次讲道' },
+  
+  // 犹太教
+  { date: '2025-04-12', name: 'Passover Begins', localName: '逾越节开始', type: 'observance', impact: 'high', description: '犹太教：纪念出埃及' },
+  { date: '2025-06-01', name: 'Shavuot', localName: '七七节', type: 'observance', impact: 'medium', description: '犹太教：收获节' },
+  { date: '2025-09-22', name: 'Rosh Hashanah', localName: '犹太新年', type: 'observance', impact: 'high', description: '犹太教：新年' },
+  { date: '2025-10-01', name: 'Yom Kippur', localName: '赎罪日', type: 'observance', impact: 'high', description: '犹太教：最神圣的日子' },
+  { date: '2025-10-06', name: 'Sukkot Begins', localName: '住棚节开始', type: 'observance', impact: 'medium', description: '犹太教：收获感恩节' },
+  { date: '2025-12-14', name: 'Hanukkah Begins', localName: '光明节开始', type: 'observance', impact: 'medium', description: '犹太教：灯节' },
+  
+  // 锡克教
+  { date: '2025-01-13', name: 'Lohri', localName: '洛里节', type: 'observance', impact: 'low', description: '锡克教/印度教：丰收节' },
+  { date: '2025-04-13', name: 'Vaisakhi', localName: '丰收节', type: 'observance', impact: 'medium', description: '锡克教：新年和收获节' },
+  { date: '2025-11-15', name: 'Guru Nanak Jayanti', localName: '古鲁那纳克诞辰', type: 'observance', impact: 'high', description: '锡克教：创始人诞辰' },
+  
+  // 东正教
+  { date: '2025-01-07', name: 'Orthodox Christmas', localName: '东正教圣诞节', type: 'observance', impact: 'high', description: '东正教：圣诞节' },
+  { date: '2025-04-27', name: 'Orthodox Easter', localName: '东正教复活节', type: 'observance', impact: 'high', description: '东正教：复活节' },
 ]
 
 // 节假日对外贸的影响说明
