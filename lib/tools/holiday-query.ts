@@ -696,48 +696,48 @@ HU: [
 // Romania 罗马尼亚
 RO: [
   { date: '2025-01-01', name: "New Year's Day", localName: 'Anul Nou', nameCN: '元旦', type: 'public', impact: 'high' },
-  { date: '2025-01-02', name: "New Year's Day (Second Day)", localName: 'Al doilea zi de Anul Nou', nameCN: '元旦次日', type: 'public', impact: 'high' },
-  { date: '2025-01-24', name: 'Union Day', localName: 'Ziua Unirii', nameCN: '统一日', type: 'public', impact: 'medium' },
-  { date: '2025-04-20', name: 'Easter Sunday', localName: 'Duminica de Paște', nameCN: '复活节星期日', type: 'public', impact: 'high' },
-  { date: '2025-04-21', name: 'Easter Monday', localName: 'Luni de Paște', nameCN: '复活节星期一', type: 'public', impact: 'medium' },
+  { date: '2025-01-02', name: "New Year's Day (Second Day)", localName: 'A doua zi de Anul Nou', nameCN: '元旦次日', type: 'public', impact: 'high' },
+  { date: '2025-01-24', name: 'Union Day', localName: 'Ziua Unirii Principatelor Române', nameCN: '罗马尼亚大统一日', type: 'public', impact: 'medium' }, // Adjusted nameCN for more specificity
+  { date: '2025-04-20', name: 'Easter Sunday (Orthodox)', localName: 'Duminica Paștelui', nameCN: '复活节星期日 (东正教)', type: 'public', impact: 'high' }, // Clarified Orthodox Easter
+  { date: '2025-04-21', name: 'Easter Monday (Orthodox)', localName: 'Lunea Paștelui', nameCN: '复活节星期一 (东正教)', type: 'public', impact: 'medium' }, // Clarified Orthodox Easter
   { date: '2025-05-01', name: 'Labour Day', localName: 'Ziua Muncii', nameCN: '劳动节', type: 'public', impact: 'high' },
   { date: '2025-06-01', name: "Children's Day", localName: 'Ziua Copilului', nameCN: '儿童节', type: 'public', impact: 'medium' },
-  { date: '2025-06-08', name: 'Pentecost', localName: 'Rusalii', nameCN: '圣灵降临节', type: 'public', impact: 'high' },
-  { date: '2025-06-09', name: 'Whit Monday', localName: 'Luni de Rusalii', nameCN: '圣灵降临节星期一', type: 'public', impact: 'medium' },
+  { date: '2025-06-08', name: 'Pentecost (Orthodox)', localName: 'Rusalii', nameCN: '圣灵降临节 (东正教)', type: 'public', impact: 'high' }, // Clarified Orthodox Pentecost
+  { date: '2025-06-09', name: 'Whit Monday (Orthodox)', localName: 'Lunea Rusaliilor', nameCN: '圣灵降临节星期一 (东正教)', type: 'public', impact: 'medium' }, // Clarified Orthodox Pentecost
   { date: '2025-08-15', name: 'Assumption of Mary', localName: 'Adormirea Maicii Domnului', nameCN: '圣母升天节', type: 'public', impact: 'high' },
   { date: '2025-11-30', name: 'St. Andrew Day', localName: 'Sfântul Andrei', nameCN: '圣安德鲁日', type: 'public', impact: 'medium' },
   { date: '2025-12-01', name: 'National Day', localName: 'Ziua Națională', nameCN: '国庆日', type: 'public', impact: 'high' },
   { date: '2025-12-25', name: 'Christmas Day', localName: 'Crăciun', nameCN: '圣诞节', type: 'public', impact: 'high' },
-  { date: '2025-12-26', name: 'Boxing Day', localName: 'Al doilea zi de Crăciun', nameCN: '圣诞节次日', type: 'public', impact: 'high' }
+  { date: '2025-12-26', name: 'Boxing Day', localName: 'A doua zi de Crăciun', nameCN: '圣诞节次日', type: 'public', impact: 'high' }
 ],
 
 // Bulgaria 保加利亚
 BG: [
   { date: '2025-01-01', name: "New Year's Day", localName: 'Нова година', nameCN: '元旦', type: 'public', impact: 'high' },
   { date: '2025-03-03', name: 'Liberation Day', localName: 'Ден на Освобождението', nameCN: '解放日', type: 'public', impact: 'high' },
-  { date: '2025-04-18', name: 'Good Friday', localName: 'Велики петък', nameCN: '耶稣受难日', type: 'public', impact: 'high' },
-  { date: '2025-04-20', name: 'Easter Sunday', localName: 'Велика неделя', nameCN: '复活节星期日', type: 'public', impact: 'high' },
-  { date: '2025-04-21', name: 'Easter Monday', localName: 'Велики понеделник', nameCN: '复活节星期一', type: 'public', impact: 'medium' },
-  { date: '2025-05-01', name: 'Labour Day', localName: 'Ден на труда', nameCN: '劳动节', type: 'public', impact: 'high' },
-  { date: '2025-05-06', name: 'St. George Day', localName: 'Гергьовден', nameCN: '圣乔治日', type: 'public', impact: 'high' },
-  { date: '2025-05-24', name: 'Cyril and Methodius Day', localName: 'Ден на Кирил и Методий', nameCN: '西里尔和美多德日', type: 'public', impact: 'high' },
+  { date: '2025-04-18', name: 'Good Friday (Orthodox)', localName: 'Велики петък', nameCN: '耶稣受难日 (东正教)', type: 'public', impact: 'high' }, // Clarified Orthodox Easter
+  { date: '2025-04-20', name: 'Easter Sunday (Orthodox)', localName: 'Великден', nameCN: '复活节星期日 (东正教)', type: 'public', impact: 'high' }, // Clarified Orthodox Easter
+  { date: '2025-04-21', name: 'Easter Monday (Orthodox)', localName: 'Великденски понеделник', nameCN: '复活节星期一 (东正教)', type: 'public', impact: 'medium' }, // Clarified Orthodox Easter
+  { date: '2025-05-01', name: 'Labour Day', localName: 'Ден на труда и на международната работническа солидарност', nameCN: '劳动节', type: 'public', impact: 'high' }, // Expanded localName
+  { date: '2025-05-06', name: 'St. George Day', localName: 'Гергьовден, Ден на храбростта и празник на Българската армия', nameCN: '圣乔治日/保加利亚军队日', type: 'public', impact: 'high' }, // Expanded localName and nameCN
+  { date: '2025-05-24', name: 'Cyril and Methodius Day', localName: 'Ден на българската просвета и култура и на славянската писменост', nameCN: '保加利亚教育和文化及斯拉夫文字日', type: 'public', impact: 'high' }, // Expanded localName and nameCN
   { date: '2025-09-06', name: 'Unification Day', localName: 'Ден на Съединението', nameCN: '统一日', type: 'public', impact: 'high' },
-  { date: '2025-09-22', name: 'Independence Day', localName: 'Ден на Независимостта', nameCN: '独立日', type: 'public', impact: 'high' },
+  { date: '2025-09-22', name: 'Independence Day', localName: 'Ден на Независимостта на България', nameCN: '独立日', type: 'public', impact: 'high' }, // Expanded localName
   { date: '2025-12-24', name: 'Christmas Eve', localName: 'Бъдни вечер', nameCN: '平安夜', type: 'public', impact: 'high' },
   { date: '2025-12-25', name: 'Christmas Day', localName: 'Рождество Христово', nameCN: '圣诞节', type: 'public', impact: 'high' },
-  { date: '2025-12-26', name: 'Boxing Day', localName: 'Рождество Христово (второ)', nameCN: '圣诞节次日', type: 'public', impact: 'high' }
+  { date: '2025-12-26', name: 'Boxing Day', localName: 'Втори ден на Коледа', nameCN: '圣诞节次日', type: 'public', impact: 'high' } // Changed localName for consistency
 ],
 
 // Slovakia 斯洛伐克
 SK: [
   { date: '2025-01-01', name: 'Slovak Republic Day', localName: 'Deň vzniku Slovenskej republiky', nameCN: '斯洛伐克共和国日', type: 'public', impact: 'high' },
-  { date: '2025-01-06', name: 'Epiphany', localName: 'Zjavenie Pána', nameCN: '主显节', type: 'public', impact: 'medium' },
+  { date: '2025-01-06', name: 'Epiphany', localName: 'Zjavenie Pána (Traja králi)', nameCN: '主显节 (三王节)', type: 'public', impact: 'medium' }, // Added common name
   { date: '2025-04-18', name: 'Good Friday', localName: 'Veľký piatok', nameCN: '耶稣受难日', type: 'public', impact: 'high' },
   { date: '2025-04-21', name: 'Easter Monday', localName: 'Veľkonočný pondelok', nameCN: '复活节星期一', type: 'public', impact: 'medium' },
   { date: '2025-05-01', name: 'Labour Day', localName: 'Sviatok práce', nameCN: '劳动节', type: 'public', impact: 'high' },
-  { date: '2025-05-08', name: 'Liberation Day', localName: 'Deň osvobozenia', nameCN: '解放日', type: 'public', impact: 'high' },
+  { date: '2025-05-08', name: 'Liberation Day', localName: 'Deň víťazstva nad fašizmom', nameCN: '战胜法西斯日', type: 'public', impact: 'high' }, // Clarified nameCN
   { date: '2025-07-05', name: 'St. Cyril and Methodius Day', localName: 'Sviatok svätých Cyrila a Metoda', nameCN: '圣西里尔和美多德日', type: 'public', impact: 'medium' },
-  { date: '2025-08-29', name: 'Slovak National Uprising Day', localName: 'Deň Slovenského národného povstania', nameCN: '斯洛伐克民族起义日', type: 'public', impact: 'high' },
+  { date: '2025-08-29', name: 'Slovak National Uprising Day', localName: 'Výročie Slovenského národného povstania', nameCN: '斯洛伐克民族起义日', type: 'public', impact: 'high' }, // Adjusted localName for common usage
   { date: '2025-09-01', name: 'Constitution Day', localName: 'Deň Ústavy Slovenskej republiky', nameCN: '宪法日', type: 'public', impact: 'high' },
   { date: '2025-09-15', name: 'Our Lady of Sorrows Day', localName: 'Sviatok Panny Márie Sedembolestnej', nameCN: '圣母七苦日', type: 'public', impact: 'medium' },
   { date: '2025-11-01', name: 'All Saints Day', localName: 'Sviatok všetkých svätých', nameCN: '诸圣节', type: 'public', impact: 'medium' },
@@ -745,42 +745,42 @@ SK: [
   { date: '2025-12-24', name: 'Christmas Eve', localName: 'Štedrý deň', nameCN: '平安夜', type: 'public', impact: 'high' },
   { date: '2025-12-25', name: 'Christmas Day', localName: 'Prvý sviatok vianočný', nameCN: '圣诞节', type: 'public', impact: 'high' },
   { date: '2025-12-26', name: 'Boxing Day', localName: 'Druhý sviatok vianočný', nameCN: '圣诞节次日', type: 'public', impact: 'high' }
-],
+C],
 
 // Croatia 克罗地亚
 HR: [
   { date: '2025-01-01', name: "New Year's Day", localName: 'Nova godina', nameCN: '元旦', type: 'public', impact: 'high' },
-  { date: '2025-01-06', name: 'Epiphany', localName: 'Bogojavljenje', nameCN: '主显节', type: 'public', impact: 'medium' },
+  { date: '2025-01-06', name: 'Epiphany', localName: 'Bogojavljenje ili Sveta tri kralja', nameCN: '主显节 (三王节)', type: 'public', impact: 'medium' }, // Added common name
   { date: '2025-04-20', name: 'Easter Sunday', localName: 'Uskrs', nameCN: '复活节星期日', type: 'public', impact: 'high' },
   { date: '2025-04-21', name: 'Easter Monday', localName: 'Uskrsni ponedjeljak', nameCN: '复活节星期一', type: 'public', impact: 'medium' },
-  { date: '2025-05-01', name: 'Labour Day', localName: 'Dan rada', nameCN: '劳动节', type: 'public', impact: 'high' },
-  { date: '2025-06-19', name: 'Corpus Christi', localName: 'Tijelca i krvi Isusa Krista', nameCN: '基督圣体节', type: 'public', impact: 'medium' },
+  { date: '2025-05-01', name: 'Labour Day', localName: 'Praznik rada', nameCN: '劳动节', type: 'public', impact: 'high' }, // Adjusted localName
+  { date: '2025-06-19', name: 'Corpus Christi', localName: 'Tijelovo', nameCN: '基督圣体节', type: 'public', impact: 'medium' }, // Adjusted localName for common usage
   { date: '2025-06-22', name: 'Anti-Fascist Struggle Day', localName: 'Dan antifašističke borbe', nameCN: '反法西斯斗争日', type: 'public', impact: 'high' },
   { date: '2025-06-25', name: 'Statehood Day', localName: 'Dan državnosti', nameCN: '国家日', type: 'public', impact: 'high' },
-  { date: '2025-08-05', name: 'Victory Day', localName: 'Dan pobjede i domovinske zahvalnosti', nameCN: '胜利日', type: 'public', impact: 'high' },
+  { date: '2025-08-05', name: 'Victory and Homeland Thanksgiving Day', localName: 'Dan pobjede i domovinske zahvalnosti i Dan hrvatskih branitelja', nameCN: '胜利与国土感谢日和克罗地亚卫国战士日', type: 'public', impact: 'high' }, // Expanded name and localName for full title
   { date: '2025-08-15', name: 'Assumption of Mary', localName: 'Velika Gospa', nameCN: '圣母升天节', type: 'public', impact: 'high' },
-  { date: '2025-11-01', name: 'All Saints Day', localName: 'Svi svetci', nameCN: '诸圣节', type: 'public', impact: 'medium' },
-  { date: '2025-11-18', name: 'Remembrance Day', localName: 'Dan sjećanja na žrtve Domovinskog rata', nameCN: '纪念日', type: 'public', impact: 'medium' },
+  { date: '2025-11-01', name: 'All Saints Day', localName: 'Svi sveti', nameCN: '诸圣节', type: 'public', impact: 'medium' }, // Adjusted localName for common usage
+  { date: '2025-11-18', name: 'Remembrance Day for the Victims of the Homeland War and Vukovar and Škabrnja', localName: 'Dan sjećanja na žrtve Domovinskog rata i Dan sjećanja na žrtvu Vukovara i Škabrnje', nameCN: '国土战争和武科瓦尔及什卡布尔尼亚遇难者纪念日', type: 'public', impact: 'medium' }, // Expanded full name and localName
   { date: '2025-12-25', name: 'Christmas Day', localName: 'Božić', nameCN: '圣诞节', type: 'public', impact: 'high' },
-  { date: '2025-12-26', name: 'Boxing Day', localName: 'Sveti Stjepan', nameCN: '圣斯德望日', type: 'public', impact: 'high' }
+  { date: '2025-12-26', name: 'St. Stephen\'s Day', localName: 'Sveti Stjepan', nameCN: '圣斯德望日', type: 'public', impact: 'high' } // More accurate name
 ],
 
 // Slovenia 斯洛文尼亚
 SI: [
-  { date: '2025-01-01', name: "New Year's Day", localName: 'Nova leto', nameCN: '元旦', type: 'public', impact: 'high' },
+  { date: '2025-01-01', name: "New Year's Day", localName: 'Novo leto', nameCN: '元旦', type: 'public', impact: 'high' },
   { date: '2025-01-02', name: "New Year's Day (Second Day)", localName: 'Drugi dan novega leta', nameCN: '元旦次日', type: 'public', impact: 'high' },
-  { date: '2025-02-08', name: 'Prešeren Day', localName: 'Prešernov dan', nameCN: '普雷舍伦日', type: 'public', impact: 'medium' },
+  { date: '2025-02-08', name: 'Prešeren Day', localName: 'Prešernov dan, slovenski kulturni praznik', nameCN: '普雷舍伦日 (斯洛文尼亚文化节)', type: 'public', impact: 'medium' }, // Added full localName and clarification
   { date: '2025-04-21', name: 'Easter Monday', localName: 'Velikonočni ponedeljek', nameCN: '复活节星期一', type: 'public', impact: 'medium' },
-  { date: '2025-04-27', name: 'Day of Uprising', localName: 'Dan upora proti okupatorju', nameCN: '反占领起义日', type: 'public', impact: 'high' },
+  { date: '2025-04-27', name: 'Day of Uprising Against Occupation', localName: 'Dan upora proti okupatorju', nameCN: '反占领起义日', type: 'public', impact: 'high' }, // Clarified name
   { date: '2025-05-01', name: 'Labour Day', localName: 'Praznik dela', nameCN: '劳动节', type: 'public', impact: 'high' },
   { date: '2025-05-02', name: 'Labour Day (Second Day)', localName: 'Drugi dan praznika dela', nameCN: '劳动节次日', type: 'public', impact: 'high' },
-  { date: '2025-06-08', name: 'Pentecost', localName: 'Binkoštna nedelja', nameCN: '圣灵降临节', type: 'public', impact: 'medium' },
+  { date: '2025-06-08', name: 'Pentecost Sunday', localName: 'Binkoštna nedelja', nameCN: '圣灵降临节星期日', type: 'public', impact: 'medium' }, // Added Sunday for clarity
   { date: '2025-06-25', name: 'Statehood Day', localName: 'Dan državnosti', nameCN: '国家日', type: 'public', impact: 'high' },
   { date: '2025-08-15', name: 'Assumption of Mary', localName: 'Marijino vnebovzetje', nameCN: '圣母升天节', type: 'public', impact: 'high' },
   { date: '2025-10-31', name: 'Reformation Day', localName: 'Dan reformacije', nameCN: '宗教改革日', type: 'public', impact: 'medium' },
   { date: '2025-11-01', name: 'Remembrance Day', localName: 'Dan spomina na mrtve', nameCN: '亡灵纪念日', type: 'public', impact: 'medium' },
   { date: '2025-12-25', name: 'Christmas Day', localName: 'Božič', nameCN: '圣诞节', type: 'public', impact: 'high' },
-  { date: '2025-12-26', name: 'Independence Day', localName: 'Dan neodvisnosti', nameCN: '独立日', type: 'public', impact: 'high' }
+  { date: '2025-12-26', name: 'Independence and Unity Day', localName: 'Dan samostojnosti in enotnosti', nameCN: '独立与统一日', type: 'public', impact: 'high' } // Expanded name and localName
 ],
 
 // Lithuania 立陶宛
@@ -789,48 +789,48 @@ LT: [
   { date: '2025-02-16', name: 'Restoration of the State Day', localName: 'Lietuvos valstybės atkūrimo diena', nameCN: '国家恢复日', type: 'public', impact: 'high' },
   { date: '2025-03-11', name: 'Restoration of Independence Day', localName: 'Lietuvos nepriklausomybės atkūrimo diena', nameCN: '独立恢复日', type: 'public', impact: 'high' },
   { date: '2025-04-20', name: 'Easter Sunday', localName: 'Velykos', nameCN: '复活节星期日', type: 'public', impact: 'high' },
-  { date: '2025-04-21', name: 'Easter Monday', localName: 'Velykų antroji diena', nameCN: '复活节星期一', type: 'public', impact: 'medium' },
+  { date: '2025-04-21', name: 'Easter Monday', localName: 'Antroji Velykų diena', nameCN: '复活节星期一', type: 'public', impact: 'medium' }, // Adjusted localName
   { date: '2025-05-01', name: 'Labour Day', localName: 'Darbo diena', nameCN: '劳动节', type: 'public', impact: 'high' },
-  { date: '2025-06-24', name: 'Midsummer Day', localName: 'Joninės', nameCN: '仲夏节', type: 'public', impact: 'medium' },
-  { date: '2025-07-06', name: 'Statehood Day', localName: 'Valstybės diena', nameCN: '国家日', type: 'public', impact: 'high' },
-  { date: '2025-08-15', name: 'Assumption of Mary', localName: 'Šv. Mergelės Marijos ėmimo į dangų diena', nameCN: '圣母升天节', type: 'public', impact: 'high' },
+  { date: '2025-06-24', name: 'St. John\'s Day (Midsummer)', localName: 'Joninės (Rasos)', nameCN: '圣约翰节 (仲夏节)', type: 'public', impact: 'medium' }, // Added full name and common alternative
+  { date: '2025-07-06', name: 'Statehood Day (Crowning of King Mindaugas)', localName: 'Valstybės diena (Lietuvos karaliaus Mindaugo karūnavimo diena)', nameCN: '国家日 (明道加斯国王加冕日)', type: 'public', impact: 'high' }, // Expanded name and localName
+  { date: '2025-08-15', name: 'Assumption of Mary', localName: 'Žolinė (Švč. Mergelės Marijos ėmimo į dangų diena)', nameCN: '圣母升天节', type: 'public', impact: 'high' }, // Added common name
   { date: '2025-11-01', name: 'All Saints Day', localName: 'Visų šventųjų diena', nameCN: '诸圣节', type: 'public', impact: 'medium' },
-  { date: '2025-11-02', name: 'All Souls Day', localName: 'Mirusiųjų atminimo diena', nameCN: '万灵节', type: 'public', impact: 'medium' },
+  { date: '2025-11-02', name: 'All Souls Day', localName: 'Vėlinės (Mirusiųjų atminimo diena)', nameCN: '万灵节', type: 'public', impact: 'medium' }, // Added common name
   { date: '2025-12-24', name: 'Christmas Eve', localName: 'Kūčios', nameCN: '平安夜', type: 'public', impact: 'high' },
   { date: '2025-12-25', name: 'Christmas Day', localName: 'Kalėdos', nameCN: '圣诞节', type: 'public', impact: 'high' },
-  { date: '2025-12-26', name: 'Boxing Day', localName: 'Kalėdų antroji diena', nameCN: '圣诞节次日', type: 'public', impact: 'high' }
+  { date: '2025-12-26', name: 'Second Day of Christmas', localName: 'Antroji Kalėdų diena', nameCN: '圣诞节次日', type: 'public', impact: 'high' } // Adjusted name and localName for consistency
 ],
 
 // Latvia 拉脱维亚
 LV: [
   { date: '2025-01-01', name: "New Year's Day", localName: 'Jaunais gads', nameCN: '元旦', type: 'public', impact: 'high' },
-  { date: '2025-03-31', name: 'Good Friday', localName: 'Lielā pieteika', nameCN: '耶稣受难日', type: 'public', impact: 'high' },
+  { date: '2025-04-18', name: 'Good Friday', localName: 'Lielā Piektdiena', nameCN: '耶稣受难日', type: 'public', impact: 'high' }, // Corrected date from 03-31 to 04-18 for 2025, common mistake as it's a movable feast, and adjusted localName capitalization
   { date: '2025-04-20', name: 'Easter Sunday', localName: 'Lieldienas', nameCN: '复活节星期日', type: 'public', impact: 'high' },
   { date: '2025-04-21', name: 'Easter Monday', localName: 'Otrās Lieldienas', nameCN: '复活节星期一', type: 'public', impact: 'medium' },
-  { date: '2025-05-01', name: 'Labour Day', localName: 'Darba diena', nameCN: '劳动节', type: 'public', impact: 'high' },
-  { date: '2025-05-04', name: 'Independence Declaration Day', localName: 'Neatkarības deklarācijas diena', nameCN: '独立宣言日', type: 'public', impact: 'high' },
-  { date: '2025-06-23', name: 'Midsummer Eve', localName: 'Jāņi', nameCN: '仲夏夜', type: 'public', impact: 'high' },
+  { date: '2025-05-01', name: 'Labour Day', localName: 'Darba svētki', nameCN: '劳动节', type: 'public', impact: 'high' }, // Adjusted localName
+  { date: '2025-05-04', name: 'Restoration of Independence Day', localName: 'Latvijas Republikas Neatkarības deklarācijas pasludināšanas diena', nameCN: '独立宣言日', type: 'public', impact: 'high' }, // Expanded localName for full title
+  { date: '2025-06-23', name: 'Midsummer Eve', localName: 'Līgo diena', nameCN: '仲夏夜', type: 'public', impact: 'high' }, // Adjusted localName for common usage
   { date: '2025-06-24', name: 'Midsummer Day', localName: 'Jāņu diena', nameCN: '仲夏节', type: 'public', impact: 'high' },
-  { date: '2025-11-18', name: 'Proclamation Day', localName: 'Latvijas Republikas proklamēšanas diena', nameCN: '共和国宣告日', type: 'public', impact: 'high' },
+  { date: '2025-11-18', name: 'Proclamation Day of the Republic of Latvia', localName: 'Latvijas Republikas proklamēšanas diena', nameCN: '共和国宣告日', type: 'public', impact: 'high' }, // Expanded name for full title
   { date: '2025-12-24', name: 'Christmas Eve', localName: 'Ziemassvētku vakars', nameCN: '平安夜', type: 'public', impact: 'high' },
-  { date: '2025-12-25', name: 'Christmas Day', localName: 'Ziemassvētki', nameCN: '圣诞节', type: 'public', impact: 'high' },
-  { date: '2025-12-26', name: 'Boxing Day', localName: 'Otrie Ziemassvētki', nameCN: '圣诞节次日', type: 'public', impact: 'high' },
+  { date: '2025-12-25', name: 'Christmas Day', localName: 'Pirmie Ziemassvētki', nameCN: '圣诞节', type: 'public', impact: 'high' }, // Adjusted localName for consistency
+  { date: '2025-12-26', name: 'Second Day of Christmas', localName: 'Otrie Ziemassvētki', nameCN: '圣诞节次日', type: 'public', impact: 'high' }, // Adjusted name and localName for consistency
   { date: '2025-12-31', name: "New Year's Eve", localName: 'Vecgada vakars', nameCN: '新年前夜', type: 'public', impact: 'high' }
 ],
 
 // Estonia 爱沙尼亚
 EE: [
-  { date: '2025-01-01', name: "New Year's Day", localName: 'Uus aasta', nameCN: '元旦', type: 'public', impact: 'high' },
+  { date: '2025-01-01', name: "New Year's Day", localName: 'Uusaasta', nameCN: '元旦', type: 'public', impact: 'high' }, // Adjusted localName
   { date: '2025-02-24', name: 'Independence Day', localName: 'Iseseisvuspäev', nameCN: '独立日', type: 'public', impact: 'high' },
   { date: '2025-04-18', name: 'Good Friday', localName: 'Suur reede', nameCN: '耶稣受难日', type: 'public', impact: 'high' },
-  { date: '2025-04-20', name: 'Easter Sunday', localName: 'Ülestõusmispühade pühapäev', nameCN: '复活节星期日', type: 'public', impact: 'high' },
+  { date: '2025-04-20', name: 'Easter Sunday', localName: 'Ülestõusmispühade 1. püha', nameCN: '复活节星期日', type: 'public', impact: 'high' }, // Adjusted localName for common usage
   { date: '2025-05-01', name: 'Spring Day', localName: 'Kevadpüha', nameCN: '春日', type: 'public', impact: 'high' },
   { date: '2025-06-23', name: 'Victory Day', localName: 'Võidupüha', nameCN: '胜利日', type: 'public', impact: 'high' },
   { date: '2025-06-24', name: 'Midsummer Day', localName: 'Jaanipäev', nameCN: '仲夏节', type: 'public', impact: 'high' },
-  { date: '2025-08-20', name: 'Restoration of Independence Day', localName: 'Iseseisvuse taastamise päev', nameCN: '独立恢复日', type: 'public', impact: 'high' },
-  { date: '2025-12-24', name: 'Christmas Eve', localName: 'Jõuluvana', nameCN: '平安夜', type: 'public', impact: 'high' },
-  { date: '2025-12-25', name: 'Christmas Day', localName: 'Esimene jõulupäev', nameCN: '圣诞节', type: 'public', impact: 'high' },
-  { date: '2025-12-26', name: 'Boxing Day', localName: 'Teine jõulupäev', nameCN: '圣诞节次日', type: 'public', impact: 'high' }
+  { date: '2025-08-20', name: 'Restoration of Independence Day', localName: 'Taasiseseisvumispäev', nameCN: '独立恢复日', type: 'public', impact: 'high' }, // Adjusted localName for common usage
+  { date: '2025-12-24', name: 'Christmas Eve', localName: 'Jõululaupäev', nameCN: '平安夜', type: 'public', impact: 'high' }, // Adjusted localName for common usage
+  { date: '2025-12-25', name: 'Christmas Day', localName: 'Esimene jõulupüha', nameCN: '圣诞节', type: 'public', impact: 'high' }, // Adjusted localName for common usage
+  { date: '2025-12-26', name: 'Second Christmas Day', localName: 'Teine jõulupüha', nameCN: '圣诞节次日', type: 'public', impact: 'high' } // Adjusted name and localName for consistency
 ],
   
 // CIS (Commonwealth of Independent States)
