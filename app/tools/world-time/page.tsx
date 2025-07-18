@@ -145,6 +145,7 @@ export default function WorldTimePage() {
   const [currentDateTime, setCurrentDateTime] = useState(new Date())
   const [favorites, setFavorites] = useState<string[]>([])
   const [activeTab, setActiveTab] = useState('all')
+  const [quickFilter, setQuickFilter] = useState<string>('')
 
   // 从localStorage加载收藏
   useEffect(() => {
@@ -202,9 +203,28 @@ export default function WorldTimePage() {
       city.nameEn.toLowerCase().includes(searchTerm.toLowerCase()) ||
       city.country.toLowerCase().includes(searchTerm.toLowerCase())
     
-    if (activeTab === 'favorites') {
-      return matchesSearch && favorites.includes(city.name)
+    // 标签页过滤
+    if (activeTab === 'favorites' && !favorites.includes(city.name)) {
+      return false
     }
+    
+    // 快捷过滤
+    if (quickFilter === 'working' && !city.isBusinessHours) {
+      return false
+    }
+    if (quickFilter === 'asia' && !['CN', 'HK', 'TW', 'JP', 'KR', 'SG', 'MY', 'TH', 'ID', 'PH', 'VN', 'IN', 'BD', 'PK'].includes(city.countryCode)) {
+      return false
+    }
+    if (quickFilter === 'europe' && !['GB', 'FR', 'DE', 'NL', 'BE', 'ES', 'IT', 'CH', 'AT', 'PL', 'CZ', 'HU', 'SE', 'DK', 'NO', 'FI', 'RU', 'UA', 'GR', 'PT', 'IE', 'TR'].includes(city.countryCode)) {
+      return false
+    }
+    if (quickFilter === 'americas' && !['US', 'CA', 'MX', 'BR', 'AR', 'CL', 'PE', 'CO', 'VE', 'EC', 'PA'].includes(city.countryCode)) {
+      return false
+    }
+    if (quickFilter === 'major' && !['北京', '上海', '香港', '东京', '首尔', '新加坡', '伦敦', '巴黎', '柏林', '纽约', '洛杉矶', '悉尼', '迪拜', '孟买'].includes(city.name)) {
+      return false
+    }
+    
     return matchesSearch
   })
 
@@ -267,6 +287,56 @@ export default function WorldTimePage() {
           </TabsList>
         </Tabs>
 
+        {/* 快捷过滤按钮 */}
+        <div className="flex flex-wrap gap-2">
+          <Button
+            variant={quickFilter === '' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setQuickFilter('')}
+          >
+            全部
+          </Button>
+          <Button
+            variant={quickFilter === 'working' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setQuickFilter(quickFilter === 'working' ? '' : 'working')}
+            className={quickFilter === 'working' ? 'bg-green-500 hover:bg-green-600' : ''}
+          >
+            <Clock className="h-4 w-4 mr-1" />
+            工作时间
+          </Button>
+          <Button
+            variant={quickFilter === 'major' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setQuickFilter(quickFilter === 'major' ? '' : 'major')}
+          >
+            <Star className="h-4 w-4 mr-1" />
+            主要城市
+          </Button>
+          <div className="h-8 w-px bg-border" />
+          <Button
+            variant={quickFilter === 'asia' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setQuickFilter(quickFilter === 'asia' ? '' : 'asia')}
+          >
+            亚洲
+          </Button>
+          <Button
+            variant={quickFilter === 'europe' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setQuickFilter(quickFilter === 'europe' ? '' : 'europe')}
+          >
+            欧洲
+          </Button>
+          <Button
+            variant={quickFilter === 'americas' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setQuickFilter(quickFilter === 'americas' ? '' : 'americas')}
+          >
+            美洲
+          </Button>
+        </div>
+
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
           <Input
@@ -278,6 +348,25 @@ export default function WorldTimePage() {
           />
         </div>
       </div>
+
+      {/* 统计信息 */}
+      {quickFilter === 'working' && (
+        <Card className="mb-4 bg-green-50 dark:bg-green-950 border-green-200 dark:border-green-800">
+          <CardContent className="pt-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Clock className="h-5 w-5 text-green-600" />
+                <span className="text-sm font-medium">
+                  当前有 {filteredCities.length} 个城市处于工作时间
+                </span>
+              </div>
+              <Badge variant="outline" className="bg-green-100 text-green-700 border-green-300">
+                {new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}
+              </Badge>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* 城市时间列表 */}
       <div className="space-y-6">
@@ -382,6 +471,7 @@ export default function WorldTimePage() {
           <p>• 绿色"工作时间"标签表示该地区处于周一至周五 9:00-18:00</p>
           <p>• 时差标签显示与您本地时间的差异，便于安排会议</p>
           <p>• 建议避开对方的午餐时间（12:00-14:00）和下班时间</p>
+          <p>• 使用快捷过滤按钮可以快速筛选特定地区或工作时间的城市</p>
         </CardContent>
       </Card>
     </div>
