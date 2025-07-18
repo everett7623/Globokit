@@ -141,6 +141,10 @@ export function getBestMeetingTime(timezones: string[]): {
     }
   }
   
+  // 按评分排序
+  return meetingTimes.sort((a, b) => b.score - a.score).slice(0, 3)
+}
+
 /**
  * 获取下一个工作时间
  * @param timezone 时区
@@ -194,4 +198,20 @@ export function formatDateTime(date: Date, timezone: string): {
     iso: date.toISOString(),
     unix: Math.floor(date.getTime() / 1000)
   }
+}
+
+/**
+ * 转换时间到指定时区
+ * @param date 原始日期时间
+ * @param fromTimezone 原时区
+ * @param toTimezone 目标时区
+ * @returns 转换后的日期时间
+ */
+export function convertTimeZone(
+  date: Date,
+  fromTimezone: string,
+  toTimezone: string
+): Date {
+  const utcDate = new Date(date.toLocaleString('en-US', { timeZone: fromTimezone }))
+  return new Date(utcDate.toLocaleString('en-US', { timeZone: toTimezone }))
 }
