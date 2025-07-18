@@ -146,6 +146,7 @@ export default function WorldTimePage() {
   const [favorites, setFavorites] = useState<string[]>([])
   const [activeTab, setActiveTab] = useState('all')
   const [quickFilter, setQuickFilter] = useState<string>('')
+  const [timeFormat, setTimeFormat] = useState<'12' | '24'>('24')
 
   // 从localStorage加载收藏
   useEffect(() => {
@@ -167,7 +168,15 @@ export default function WorldTimePage() {
         
         return {
           ...city,
-          currentTime: formatTime(cityTime),
+          currentTime: timeFormat === '24' 
+            ? formatTime(cityTime) 
+            : cityTime.toLocaleTimeString('en-US', { 
+                timeZone: city.timezone,
+                hour12: true,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+              }),
           date: cityTime.toLocaleDateString('zh-CN', {
             timeZone: city.timezone,
             month: 'long',
@@ -185,7 +194,7 @@ export default function WorldTimePage() {
     updateTimes()
     const interval = setInterval(updateTimes, 1000)
     return () => clearInterval(interval)
-  }, [])
+  }, [timeFormat])
 
   // 切换收藏
   const toggleFavorite = (cityName: string) => {
@@ -211,6 +220,14 @@ export default function WorldTimePage() {
     // 快捷过滤
     if (quickFilter === 'working' && !city.isBusinessHours) {
       return false
+    }
+    if (quickFilter === 'upcoming') {
+      if (city.isBusinessHours) return false
+      const now = new Date()
+      const cityTime = new Date(now.toLocaleString('en-US', { timeZone: city.timezone }))
+      const hour = cityTime.getHours()
+      const day = cityTime.getDay()
+      return day >= 1 && day <= 5 && hour >= 7 && hour < 9
     }
     if (quickFilter === 'asia' && !['CN', 'HK', 'TW', 'JP', 'KR', 'SG', 'MY', 'TH', 'ID', 'PH', 'VN', 'IN', 'BD', 'PK'].includes(city.countryCode)) {
       return false
@@ -242,6 +259,23 @@ export default function WorldTimePage() {
   const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone
   const localOffset = getTimeZoneOffset(localTimezone)
 
+  // 获取即将进入工作时间的城市（未来2小时内）
+  const getUpcomingWorkingCities = () => {
+    return cityTimes.filter(city => {
+      if (city.isBusinessHours) return false
+      
+      const now = new Date()
+      const cityTime = new Date(now.toLocaleString('en-US', { timeZone: city.timezone }))
+      const hour = cityTime.getHours()
+      const day = cityTime.getDay()
+      
+      // 工作日且在7-9点之间
+      return day >= 1 && day <= 5 && hour >= 7 && hour < 9
+    })
+  }
+
+  const upcomingWorkingCities = getUpcomingWorkingCities()
+
   return (
     <div className="container mx-auto p-6 max-w-7xl">
       <div className="mb-8">
@@ -259,11 +293,32 @@ export default function WorldTimePage() {
             本地时间
             <Badge variant="outline" className="ml-2">{localTimezone}</Badge>
             <Badge variant="secondary">UTC{localOffset}</Badge>
+            <div className="ml-auto flex items-center gap-1 text-xs font-normal">
+              <Button
+                variant={timeFormat === '12' ? 'default' : 'ghost'}
+                size="sm"
+                className="h-6 px-2 text-xs"
+                onClick={() => setTimeFormat('12')}
+              >
+                12H
+              </Button>
+              <Button
+                variant={timeFormat === '24' ? 'default' : 'ghost'}
+                size="sm"
+                className="h-6 px-2 text-xs"
+                onClick={() => setTimeFormat('24')}
+              >
+                24H
+              </Button>
+            </div>
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-4xl font-mono font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-            {currentDateTime.toLocaleTimeString('zh-CN')}
+            {timeFormat === '24' 
+              ? currentDateTime.toLocaleTimeString('zh-CN')
+              : currentDateTime.toLocaleTimeString('en-US', { hour12: true })
+            }
           </div>
           <div className="text-muted-foreground mt-1">
             {currentDateTime.toLocaleDateString('zh-CN', {
@@ -275,6 +330,69 @@ export default function WorldTimePage() {
           </div>
         </CardContent>
       </Card>
+
+      {/* 快捷信息卡片 */}
+      <div className="grid gap-4 mb-6 md:grid-cols-3">
+        {/* 当前工作时间城市数 */}
+        <Card className="bg-green-50 dark:bg-green-950 border-green-200 dark:border-green-800">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium flex items-center gap-2">
+              <div className="p-1.5 rounded-full bg-green-500">
+                <Clock className="h-3 w-3 text-white" />
+              </div>
+              正在工作时间
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-green-600">
+              {cityTimes.filter(c => c.isBusinessHours).length}
+            </div>
+            <p className="text-xs text-muted-foreground mt-1">
+              个城市（共{cityTimes.length}个）
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* 即将工作时间 */}
+        <Card className="bg-orange-50 dark:bg-orange-950 border-orange-200 dark:border-orange-800">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium flex items-center gap-2">
+              <div className="p-1.5 rounded-full bg-orange-500">
+                <Clock className="h-3 w-3 text-white" />
+              </div>
+              即将开始工作
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-orange-600">
+              {upcomingWorkingCities.length}
+            </div>
+            <p className="text-xs text-muted-foreground mt-1">
+              个城市（2小时内）
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* 收藏城市 */}
+        <Card className="bg-purple-50 dark:bg-purple-950 border-purple-200 dark:border-purple-800">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium flex items-center gap-2">
+              <div className="p-1.5 rounded-full bg-purple-500">
+                <Star className="h-3 w-3 text-white" />
+              </div>
+              已收藏城市
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-purple-600">
+              {favorites.length}
+            </div>
+            <p className="text-xs text-muted-foreground mt-1">
+              个常用城市
+            </p>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* 标签页和搜索框 */}
       <div className="mb-6 space-y-4">
@@ -294,7 +412,7 @@ export default function WorldTimePage() {
             size="sm"
             onClick={() => setQuickFilter('')}
           >
-            全部
+            全部显示
           </Button>
           <Button
             variant={quickFilter === 'working' ? 'default' : 'outline'}
@@ -303,7 +421,16 @@ export default function WorldTimePage() {
             className={quickFilter === 'working' ? 'bg-green-500 hover:bg-green-600' : ''}
           >
             <Clock className="h-4 w-4 mr-1" />
-            工作时间
+            工作时间 ({cityTimes.filter(c => c.isBusinessHours).length})
+          </Button>
+          <Button
+            variant={quickFilter === 'upcoming' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setQuickFilter(quickFilter === 'upcoming' ? '' : 'upcoming')}
+            className={quickFilter === 'upcoming' ? 'bg-orange-500 hover:bg-orange-600' : ''}
+          >
+            <Clock className="h-4 w-4 mr-1" />
+            即将上班 ({upcomingWorkingCities.length})
           </Button>
           <Button
             variant={quickFilter === 'major' ? 'default' : 'outline'}
@@ -348,25 +475,6 @@ export default function WorldTimePage() {
           />
         </div>
       </div>
-
-      {/* 统计信息 */}
-      {quickFilter === 'working' && (
-        <Card className="mb-4 bg-green-50 dark:bg-green-950 border-green-200 dark:border-green-800">
-          <CardContent className="pt-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Clock className="h-5 w-5 text-green-600" />
-                <span className="text-sm font-medium">
-                  当前有 {filteredCities.length} 个城市处于工作时间
-                </span>
-              </div>
-              <Badge variant="outline" className="bg-green-100 text-green-700 border-green-300">
-                {new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}
-              </Badge>
-            </div>
-          </CardContent>
-        </Card>
-      )}
 
       {/* 城市时间列表 */}
       <div className="space-y-6">
