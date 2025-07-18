@@ -62,10 +62,18 @@ export function isBusinessHours(date: Date): boolean {
  */
 export function getTimeDifference(timezone1: string, timezone2: string): number {
   const now = new Date()
+  
+  // 获取两个时区的偏移量
   const date1 = new Date(now.toLocaleString('en-US', { timeZone: timezone1 }))
   const date2 = new Date(now.toLocaleString('en-US', { timeZone: timezone2 }))
   
-  return (date1.getTime() - date2.getTime()) / (1000 * 60 * 60)
+  // 计算UTC偏移量
+  const utcDate = new Date(now.toLocaleString('en-US', { timeZone: 'UTC' }))
+  
+  const offset1 = (date1.getTime() - utcDate.getTime()) / (1000 * 60 * 60)
+  const offset2 = (date2.getTime() - utcDate.getTime()) / (1000 * 60 * 60)
+  
+  return Math.round(offset1 - offset2)
 }
 
 /**
@@ -133,22 +141,57 @@ export function getBestMeetingTime(timezones: string[]): {
     }
   }
   
-  // 按评分排序
-  return meetingTimes.sort((a, b) => b.score - a.score).slice(0, 3)
+/**
+ * 获取下一个工作时间
+ * @param timezone 时区
+ * @returns 下一个工作时间的描述
+ */
+export function getNextBusinessHours(timezone: string): string {
+  const now = new Date()
+  const localTime = new Date(now.toLocaleString('en-US', { timeZone: timezone }))
+  
+  const hour = localTime.getHours()
+  const day = localTime.getDay()
+  
+  // 当前是工作时间
+  if (day >= 1 && day <= 5 && hour >= 9 && hour < 18) {
+    return '当前为工作时间'
+  }
+  
+  // 工作日但不在工作时间
+  if (day >= 1 && day <= 5) {
+    if (hour < 9) {
+      return `今天 9:00 开始工作`
+    } else {
+      return `明天 9:00 开始工作`
+    }
+  }
+  
+  // 周末
+  let daysUntilMonday = day === 0 ? 1 : 8 - day
+  return `${daysUntilMonday}天后（周一）9:00 开始工作`
 }
 
 /**
- * 转换时间到指定时区
- * @param date 原始日期时间
- * @param fromTimezone 原时区
- * @param toTimezone 目标时区
- * @returns 转换后的日期时间
+ * 格式化日期时间为多种格式
+ * @param date Date对象
+ * @param timezone 时区
+ * @returns 格式化的日期时间对象
  */
-export function convertTimeZone(
-  date: Date,
-  fromTimezone: string,
-  toTimezone: string
-): Date {
-  const utcDate = new Date(date.toLocaleString('en-US', { timeZone: fromTimezone }))
-  return new Date(utcDate.toLocaleString('en-US', { timeZone: toTimezone }))
+export function formatDateTime(date: Date, timezone: string): {
+  time12: string
+  time24: string
+  date: string
+  iso: string
+  unix: number
+} {
+  const options = { timeZone: timezone }
+  
+  return {
+    time12: date.toLocaleTimeString('en-US', { ...options, hour12: true }),
+    time24: date.toLocaleTimeString('zh-CN', { ...options, hour12: false }),
+    date: date.toLocaleDateString('zh-CN', options),
+    iso: date.toISOString(),
+    unix: Math.floor(date.getTime() / 1000)
+  }
 }
