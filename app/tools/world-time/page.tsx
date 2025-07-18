@@ -10,8 +10,10 @@ import { useState, useEffect } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
-import { Clock, Search, Globe } from 'lucide-react'
-import { formatTime, getTimeZoneOffset, isBusinessHours } from '@/lib/tools/world-time'
+import { Button } from '@/components/ui/button'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Clock, Search, Globe, Star, StarOff, Calculator } from 'lucide-react'
+import { formatTime, getTimeZoneOffset, isBusinessHours, getTimeDifference } from '@/lib/tools/world-time'
 
 // 主要贸易城市时区配置
 const WORLD_CITIES = [
@@ -57,6 +59,16 @@ export default function WorldTimePage() {
   const [cityTimes, setCityTimes] = useState<CityTime[]>([])
   const [searchTerm, setSearchTerm] = useState('')
   const [currentDateTime, setCurrentDateTime] = useState(new Date())
+  const [favorites, setFavorites] = useState<string[]>([])
+  const [activeTab, setActiveTab] = useState('all')
+
+  // 从localStorage加载收藏
+  useEffect(() => {
+    const saved = localStorage.getItem('worldTimeFavorites')
+    if (saved) {
+      setFavorites(JSON.parse(saved))
+    }
+  }, [])
 
   // 更新时间
   useEffect(() => {
@@ -90,12 +102,27 @@ export default function WorldTimePage() {
     return () => clearInterval(interval)
   }, [])
 
+  // 切换收藏
+  const toggleFavorite = (cityName: string) => {
+    const newFavorites = favorites.includes(cityName)
+      ? favorites.filter(f => f !== cityName)
+      : [...favorites, cityName]
+    
+    setFavorites(newFavorites)
+    localStorage.setItem('worldTimeFavorites', JSON.stringify(newFavorites))
+  }
+
   // 过滤城市
-  const filteredCities = cityTimes.filter(city => 
-    city.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    city.nameEn.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    city.country.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  const filteredCities = cityTimes.filter(city => {
+    const matchesSearch = city.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      city.nameEn.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      city.country.toLowerCase().includes(searchTerm.toLowerCase())
+    
+    if (activeTab === 'favorites') {
+      return matchesSearch && favorites.includes(city.name)
+    }
+    return matchesSearch
+  })
 
   // 按时区分组
   const groupedCities = filteredCities.reduce((acc, city) => {
@@ -107,6 +134,10 @@ export default function WorldTimePage() {
     return acc
   }, {} as Record<string, CityTime[]>)
 
+  // 获取本地时区
+  const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+  const localOffset = getTimeZoneOffset(localTimezone)
+
   return (
     <div className="container mx-auto p-6 max-w-7xl">
       <div className="mb-8">
@@ -117,18 +148,20 @@ export default function WorldTimePage() {
       </div>
 
       {/* 当前本地时间 */}
-      <Card className="mb-6">
+      <Card className="mb-6 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950">
         <CardHeader className="pb-3">
           <CardTitle className="text-lg flex items-center gap-2">
             <Clock className="h-5 w-5" />
             本地时间
+            <Badge variant="outline" className="ml-2">{localTimezone}</Badge>
+            <Badge variant="secondary">UTC{localOffset}</Badge>
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-3xl font-mono font-bold">
+          <div className="text-4xl font-mono font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
             {currentDateTime.toLocaleTimeString('zh-CN')}
           </div>
-          <div className="text-muted-foreground">
+          <div className="text-muted-foreground mt-1">
             {currentDateTime.toLocaleDateString('zh-CN', {
               year: 'numeric',
               month: 'long',
@@ -139,16 +172,27 @@ export default function WorldTimePage() {
         </CardContent>
       </Card>
 
-      {/* 搜索框 */}
-      <div className="relative mb-6">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-        <Input
-          type="text"
-          placeholder="搜索城市名称或国家..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="pl-10"
-        />
+      {/* 标签页和搜索框 */}
+      <div className="mb-6 space-y-4">
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsList className="grid w-full max-w-md grid-cols-2">
+            <TabsTrigger value="all">所有城市</TabsTrigger>
+            <TabsTrigger value="favorites">
+              收藏城市 {favorites.length > 0 && `(${favorites.length})`}
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
+
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+          <Input
+            type="text"
+            placeholder="搜索城市名称或国家..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="pl-10"
+          />
+        </div>
       </div>
 
       {/* 城市时间列表 */}
@@ -166,23 +210,48 @@ export default function WorldTimePage() {
               </h3>
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {cities.map((city) => (
-                  <Card key={city.timezone} className="overflow-hidden">
+                  <Card 
+                    key={city.timezone} 
+                    className={`overflow-hidden transition-all hover:shadow-lg ${
+                      favorites.includes(city.name) ? 'ring-2 ring-yellow-400' : ''
+                    }`}
+                  >
                     <CardHeader className="pb-3">
                       <div className="flex items-start justify-between">
-                        <div>
+                        <div className="flex-1">
                           <CardTitle className="text-lg flex items-center gap-2">
                             <span className="text-2xl">{getFlagEmoji(city.countryCode)}</span>
                             {city.name}
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="ml-1 h-6 w-6 p-0"
+                              onClick={() => toggleFavorite(city.name)}
+                            >
+                              {favorites.includes(city.name) ? (
+                                <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                              ) : (
+                                <StarOff className="h-4 w-4" />
+                              )}
+                            </Button>
                           </CardTitle>
                           <CardDescription>
                             {city.nameEn} · {city.country}
                           </CardDescription>
                         </div>
-                        {city.isBusinessHours && (
-                          <Badge variant="default" className="bg-green-500">
-                            工作时间
-                          </Badge>
-                        )}
+                        <div className="flex flex-col items-end gap-1">
+                          {city.isBusinessHours && (
+                            <Badge variant="default" className="bg-green-500">
+                              工作时间
+                            </Badge>
+                          )}
+                          {localTimezone !== city.timezone && (
+                            <Badge variant="outline" className="text-xs">
+                              {getTimeDifference(city.timezone, localTimezone) > 0 ? '+' : ''}
+                              {getTimeDifference(city.timezone, localTimezone)}h
+                            </Badge>
+                          )}
+                        </div>
                       </div>
                     </CardHeader>
                     <CardContent>
@@ -208,9 +277,29 @@ export default function WorldTimePage() {
       {filteredCities.length === 0 && (
         <div className="text-center py-12">
           <Globe className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-          <p className="text-muted-foreground">没有找到匹配的城市</p>
+          <p className="text-muted-foreground">
+            {activeTab === 'favorites' && favorites.length === 0 
+              ? '还没有收藏任何城市，点击星标收藏常用城市'
+              : '没有找到匹配的城市'}
+          </p>
         </div>
       )}
+
+      {/* 实用提示 */}
+      <Card className="mt-8 bg-muted/50">
+        <CardHeader>
+          <CardTitle className="text-lg flex items-center gap-2">
+            <Calculator className="h-5 w-5" />
+            实用提示
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-2 text-sm text-muted-foreground">
+          <p>• 点击星标收藏常用城市，方便快速查看</p>
+          <p>• 绿色"工作时间"标签表示该地区处于周一至周五 9:00-18:00</p>
+          <p>• 时差标签显示与您本地时间的差异，便于安排会议</p>
+          <p>• 建议避开对方的午餐时间（12:00-14:00）和下班时间</p>
+        </CardContent>
+      </Card>
     </div>
   )
 }
