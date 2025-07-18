@@ -13,7 +13,6 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Clock, Search, Globe, Star, StarOff, Calculator } from 'lucide-react'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { formatTime, getTimeZoneOffset, isBusinessHours, getTimeDifference } from '@/lib/tools/world-time'
 
 // 主要贸易城市时区配置
