@@ -1,5 +1,5 @@
 // 路径: seedtool/app/page.tsx
-// 更新时间: 2025-07-18
+// 更新时间: 2025-07-19
 // 说明: 添加了世界时间工具
 
 import Link from 'next/link'
@@ -11,7 +11,8 @@ import {
   Hash, 
   Languages, 
   Calendar,
-  Clock
+  Clock,
+  CircleDollarSign
 } from 'lucide-react'
 
 const tools = [
@@ -63,6 +64,13 @@ const tools = [
     icon: Clock,
     href: '/tools/world-time',
     color: 'text-indigo-500'
+  },
+  {
+    title: '全球货币符号大全',
+    description: '查看和复制全球各国货币符号',
+    icon: CircleDollarSign,
+    href: '/tools/currency-symbols',
+    color: 'text-emerald-500'
   }
 ]
 
