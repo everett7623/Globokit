@@ -143,7 +143,7 @@ const CURRENCIES: Currency[] = [
   { code: 'AOA', name: '安哥拉宽扎', nameEn: 'Angolan Kwanza', symbol: 'Kz', country: '安哥拉', countryEn: 'Angola', region: 'africa', decimals: 2 },
   { code: 'MZN', name: '莫桑比克梅蒂卡尔', nameEn: 'Mozambican Metical', symbol: 'MT', country: '莫桑比克', countryEn: 'Mozambique', region: 'africa', decimals: 2 },
   { code: 'ZMW', name: '赞比亚克瓦查', nameEn: 'Zambian Kwacha', symbol: 'ZK', country: '赞比亚', countryEn: 'Zambia', region: 'africa', decimals: 2 },
-  { code: 'ZWL', name: '津巴布韦元', nameEn: 'Zimbabwean Dollar', symbol: '$', country: '津巴布韦', countryEn: 'Zimbabwe', region: 'africa', decimals: 2 },
+  { code: 'ZWL', name: '津巴布韦元', nameEn: 'Zimbabwean Dollar', symbol: ', country: '津巴布韦', countryEn: 'Zimbabwe', region: 'africa', decimals: 2 },
   { code: 'BWP', name: '博茨瓦纳普拉', nameEn: 'Botswana Pula', symbol: 'P', country: '博茨瓦纳', countryEn: 'Botswana', region: 'africa', decimals: 2 },
   { code: 'NAD', name: '纳米比亚元', nameEn: 'Namibian Dollar', symbol: ', country: '纳米比亚', countryEn: 'Namibia', region: 'africa', decimals: 2 },
   { code: 'MUR', name: '毛里求斯卢比', nameEn: 'Mauritian Rupee', symbol: '₨', country: '毛里求斯', countryEn: 'Mauritius', region: 'africa', decimals: 2 },
