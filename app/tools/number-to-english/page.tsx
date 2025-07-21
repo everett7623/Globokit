@@ -7,285 +7,121 @@
 'use client'
 
 import { useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Button } from '@/components/ui/button'
+import { CopyButton } from '@/components/tools/copy-button'
+import { numberToEnglish, convertOrdinal } from '@/lib/tools/number-english'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Badge } from '@/components/ui/badge'
-import { 
-  Copy, 
-  Check, 
-  Hash, 
-  Info,
-  TrendingUp,
-  Calculator,
-  FileText
-} from 'lucide-react'
-import { 
-  numberToWords, 
-  numberToOrdinal,
-  numberToCurrency,
-  numberToYear
-} from '@/lib/tools/number-english'
-
-type ConversionType = 'cardinal' | 'ordinal' | 'currency' | 'year'
 
 export default function NumberToEnglishPage() {
-  const [inputNumber, setInputNumber] = useState('')
-  const [result, setResult] = useState('')
-  const [conversionType, setConversionType] = useState<ConversionType>('cardinal')
-  const [isCopied, setIsCopied] = useState(false)
-
-  // 示例数字
-  const examples = [
-    { value: '123', label: '123' },
-    { value: '1000', label: '1,000' },
-    { value: '2024', label: '2024' },
-    { value: '1000000', label: '1,000,000' },
-    { value: '99.99', label: '99.99' },
-    { value: '365', label: '365' }
-  ]
+  const [number, setNumber] = useState('')
+  const [cardinalResult, setCardinalResult] = useState('')
+  const [ordinalResult, setOrdinalResult] = useState('')
 
   const handleConvert = () => {
-    if (!inputNumber) return
-
-    let converted = ''
-    switch (conversionType) {
-      case 'cardinal':
-        converted = numberToWords(inputNumber)
-        break
-      case 'ordinal':
-        converted = numberToOrdinal(inputNumber)
-        break
-      case 'currency':
-        converted = numberToCurrency(inputNumber)
-        break
-      case 'year':
-        converted = numberToYear(inputNumber)
-        break
+    const num = parseInt(number)
+    if (!isNaN(num)) {
+      setCardinalResult(numberToEnglish(num))
+      setOrdinalResult(convertOrdinal(num))
+    } else {
+      setCardinalResult('请输入有效的数字')
+      setOrdinalResult('请输入有效的数字')
     }
-    setResult(converted)
   }
 
-  const handleExampleClick = (value: string) => {
-    setInputNumber(value)
-    let converted = ''
-    switch (conversionType) {
-      case 'cardinal':
-        converted = numberToWords(value)
-        break
-      case 'ordinal':
-        converted = numberToOrdinal(value)
-        break
-      case 'currency':
-        converted = numberToCurrency(value)
-        break
-      case 'year':
-        converted = numberToYear(value)
-        break
-    }
-    setResult(converted)
-  }
-
-  const copyToClipboard = () => {
-    if (!result) return
-    
-    navigator.clipboard.writeText(result)
-    setIsCopied(true)
-    setTimeout(() => setIsCopied(false), 2000)
-  }
+  const examples = [
+    { num: '123', text: 'one hundred and twenty three' },
+    { num: '1000', text: 'one thousand' },
+    { num: '2024', text: 'two thousand and twenty four' },
+    { num: '1000000', text: 'one million' },
+  ]
 
   return (
-    <div className="container mx-auto p-6 max-w-5xl">
-      {/* 标题区域 */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">数字转英文</h1>
-        <p className="text-muted-foreground">
-          将数字转换为英文表达形式，支持基数词、序数词、金额和年份等多种格式
-        </p>
-      </div>
-
-      {/* 转换类型选择 */}
-      <Tabs value={conversionType} onValueChange={(value) => setConversionType(value as ConversionType)} className="mb-6">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="cardinal">基数词</TabsTrigger>
-          <TabsTrigger value="ordinal">序数词</TabsTrigger>
-          <TabsTrigger value="currency">金额</TabsTrigger>
-          <TabsTrigger value="year">年份</TabsTrigger>
-        </TabsList>
-      </Tabs>
-
-      {/* 主要功能区 */}
-      <div className="grid gap-6 md:grid-cols-2">
-        {/* 输入区域 */}
+    <div className="container py-10">
+      <div className="mx-auto max-w-3xl">
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Calculator className="h-5 w-5" />
-              输入数字
-            </CardTitle>
+            <CardTitle>数字转英文</CardTitle>
             <CardDescription>
-              请输入需要转换的数字
+              将数字转换为英文表达形式，支持基数词和序数词
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="number">数字</Label>
+              <Label htmlFor="number">输入数字</Label>
               <Input
                 id="number"
-                type="text"
-                placeholder={
-                  conversionType === 'currency' ? "请输入金额，如：99.99" :
-                  conversionType === 'year' ? "请输入年份，如：2024" :
-                  "请输入数字，如：123"
-                }
-                value={inputNumber}
-                onChange={(e) => setInputNumber(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleConvert()}
-                className="text-lg"
+                type="number"
+                placeholder="请输入数字，如：123"
+                value={number}
+                onChange={(e) => setNumber(e.target.value)}
               />
             </div>
 
-            {/* 示例数字 */}
-            <div className="space-y-2">
-              <Label>常见示例</Label>
-              <div className="grid grid-cols-3 gap-2">
-                {examples.map((example) => (
-                  <Button
-                    key={example.value}
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleExampleClick(example.value)}
-                  >
-                    {example.label}
-                  </Button>
-                ))}
-              </div>
-            </div>
-
-            <Button 
-              onClick={handleConvert} 
-              className="w-full"
-              size="lg"
-            >
-              <Hash className="h-4 w-4 mr-2" />
+            <Button onClick={handleConvert} className="w-full">
               转换为英文
             </Button>
-          </CardContent>
-        </Card>
 
-        {/* 结果区域 */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <FileText className="h-5 w-5" />
-              转换结果
-            </CardTitle>
-            <CardDescription>
-              英文表达形式
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {result ? (
-              <>
-                <div className="p-4 bg-muted rounded-lg">
-                  <p className="text-lg font-medium text-center break-words">
-                    {result}
-                  </p>
-                </div>
-                <Button
-                  variant="outline"
-                  className="w-full"
-                  onClick={copyToClipboard}
-                >
-                  {isCopied ? (
-                    <>
-                      <Check className="h-4 w-4 mr-2" />
-                      已复制
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="h-4 w-4 mr-2" />
-                      复制结果
-                    </>
-                  )}
-                </Button>
-              </>
-            ) : (
-              <div className="text-center py-8 text-muted-foreground">
-                转换结果将显示在这里
-              </div>
+            {(cardinalResult || ordinalResult) && (
+              <Tabs defaultValue="cardinal" className="w-full">
+                <TabsList className="grid w-full grid-cols-2">
+                  <TabsTrigger value="cardinal">基数词</TabsTrigger>
+                  <TabsTrigger value="ordinal">序数词</TabsTrigger>
+                </TabsList>
+                <TabsContent value="cardinal" className="space-y-2">
+                  <div className="relative">
+                    <div className="rounded-md border bg-muted p-4 pr-12">
+                      <p className="text-lg">{cardinalResult}</p>
+                    </div>
+                    <CopyButton 
+                      text={cardinalResult} 
+                      className="absolute right-2 top-2"
+                    />
+                  </div>
+                </TabsContent>
+                <TabsContent value="ordinal" className="space-y-2">
+                  <div className="relative">
+                    <div className="rounded-md border bg-muted p-4 pr-12">
+                      <p className="text-lg">{ordinalResult}</p>
+                    </div>
+                    <CopyButton 
+                      text={ordinalResult} 
+                      className="absolute right-2 top-2"
+                    />
+                  </div>
+                </TabsContent>
+              </Tabs>
             )}
+
+            <div className="space-y-4">
+              <div className="rounded-lg bg-muted p-4">
+                <p className="font-medium mb-3">常见示例：</p>
+                <div className="space-y-2">
+                  {examples.map((example, index) => (
+                    <div key={index} className="flex items-center justify-between text-sm">
+                      <span className="font-mono">{example.num}</span>
+                      <span className="text-muted-foreground">→</span>
+                      <span className="text-right flex-1 ml-2">{example.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-lg bg-muted p-4 text-sm">
+                <p className="font-medium mb-2">使用场景：</p>
+                <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                  <li>支票金额的英文大写</li>
+                  <li>合同中的数字表述</li>
+                  <li>正式文件的数字说明</li>
+                  <li>英文邮件中的数字表达</li>
+                </ul>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>
-
-      {/* 常见示例 */}
-      <Card className="mt-6">
-        <CardHeader>
-          <CardTitle className="text-lg flex items-center gap-2">
-            <TrendingUp className="h-5 w-5" />
-            常见示例
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid md:grid-cols-2 gap-4 text-sm">
-            <div className="space-y-2">
-              <div className="flex justify-between items-center p-2 bg-muted rounded">
-                <span className="font-mono">123</span>
-                <span>→</span>
-                <span className="text-muted-foreground">one hundred and twenty three</span>
-              </div>
-              <div className="flex justify-between items-center p-2 bg-muted rounded">
-                <span className="font-mono">1000</span>
-                <span>→</span>
-                <span className="text-muted-foreground">one thousand</span>
-              </div>
-              <div className="flex justify-between items-center p-2 bg-muted rounded">
-                <span className="font-mono">2024</span>
-                <span>→</span>
-                <span className="text-muted-foreground">two thousand and twenty four</span>
-              </div>
-            </div>
-            <div className="space-y-2">
-              <div className="flex justify-between items-center p-2 bg-muted rounded">
-                <span className="font-mono">1st</span>
-                <span>→</span>
-                <span className="text-muted-foreground">first</span>
-              </div>
-              <div className="flex justify-between items-center p-2 bg-muted rounded">
-                <span className="font-mono">$99.99</span>
-                <span>→</span>
-                <span className="text-muted-foreground">ninety nine dollars and ninety nine cents</span>
-              </div>
-              <div className="flex justify-between items-center p-2 bg-muted rounded">
-                <span className="font-mono">1000000</span>
-                <span>→</span>
-                <span className="text-muted-foreground">one million</span>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* 使用说明 */}
-      <Card className="mt-6 bg-muted/50">
-        <CardHeader>
-          <CardTitle className="text-lg flex items-center gap-2">
-            <Info className="h-5 w-5" />
-            使用说明
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-2 text-sm text-muted-foreground">
-          <p>• 支持基数词的英文表达（如：one, two, three）</p>
-          <p>• 支持序数词的英文表达（如：first, second, third）</p>
-          <p>• 支持金额的英文表达（如：dollars and cents）</p>
-          <p>• 支持年份的特殊读法（如：twenty twenty-four）</p>
-          <p>• 正式文件中的数字说明（如：合同、支票等）</p>
-          <p>• 英文邮件中的数字表达</p>
-        </CardContent>
-      </Card>
     </div>
   )
 }
