@@ -28,7 +28,7 @@ export const CURRENCY_REGIONS: Record<string, string> = {
   middle_east: '中东'
 }
 
-// 全球货币数据 - 修复所有符号问题
+// 全球货币数据
 const CURRENCIES: Currency[] = [
   // 亚洲货币
   { code: 'CNY', name: '人民币', nameEn: 'Chinese Yuan', symbol: '¥', country: '中国', countryEn: 'China', region: 'asia', decimals: 2, popular: true, trading: true },
@@ -48,13 +48,8 @@ const CURRENCIES: Currency[] = [
   { code: 'LKR', name: '斯里兰卡卢比', nameEn: 'Sri Lankan Rupee', symbol: 'Rs', country: '斯里兰卡', countryEn: 'Sri Lanka', region: 'asia', decimals: 2 },
   { code: 'NPR', name: '尼泊尔卢比', nameEn: 'Nepalese Rupee', symbol: 'रू', country: '尼泊尔', countryEn: 'Nepal', region: 'asia', decimals: 2 },
   { code: 'MMK', name: '缅甸元', nameEn: 'Myanmar Kyat', symbol: 'K', country: '缅甸', countryEn: 'Myanmar', region: 'asia', decimals: 2 },
-  { code: 'KHR', name: '柬埔寨瑞尔', nameEn: 'Cambodian Riel', symbol: '៛', country: '柬埔寨', countryEn: 'Cambodia', region: 'asia', decimals: 2 },
-  { code: 'LAK', name: '老挝基普', nameEn: 'Lao Kip', symbol: '₭', country: '老挝', countryEn: 'Laos', region: 'asia', decimals: 2 },
   { code: 'BND', name: '文莱元', nameEn: 'Brunei Dollar', symbol: 'B$', country: '文莱', countryEn: 'Brunei', region: 'asia', decimals: 2 },
   { code: 'MOP', name: '澳门元', nameEn: 'Macanese Pataca', symbol: 'MOP$', country: '中国澳门', countryEn: 'Macau', region: 'asia', decimals: 2 },
-  { code: 'MNT', name: '蒙古图格里克', nameEn: 'Mongolian Tugrik', symbol: '₮', country: '蒙古', countryEn: 'Mongolia', region: 'asia', decimals: 2 },
-  { code: 'KZT', name: '哈萨克斯坦坚戈', nameEn: 'Kazakhstani Tenge', symbol: '₸', country: '哈萨克斯坦', countryEn: 'Kazakhstan', region: 'asia', decimals: 2 },
-  { code: 'UZS', name: '乌兹别克斯坦索姆', nameEn: 'Uzbekistani Som', symbol: 'сўм', country: '乌兹别克斯坦', countryEn: 'Uzbekistan', region: 'asia', decimals: 2 },
   
   // 欧洲货币
   { code: 'EUR', name: '欧元', nameEn: 'Euro', symbol: '€', country: '欧元区', countryEn: 'Eurozone', region: 'europe', decimals: 2, popular: true, trading: true },
@@ -68,20 +63,10 @@ const CURRENCIES: Currency[] = [
   { code: 'HUF', name: '匈牙利福林', nameEn: 'Hungarian Forint', symbol: 'Ft', country: '匈牙利', countryEn: 'Hungary', region: 'europe', decimals: 2 },
   { code: 'RON', name: '罗马尼亚列伊', nameEn: 'Romanian Leu', symbol: 'lei', country: '罗马尼亚', countryEn: 'Romania', region: 'europe', decimals: 2 },
   { code: 'BGN', name: '保加利亚列弗', nameEn: 'Bulgarian Lev', symbol: 'лв', country: '保加利亚', countryEn: 'Bulgaria', region: 'europe', decimals: 2 },
-  { code: 'HRK', name: '克罗地亚库纳', nameEn: 'Croatian Kuna', symbol: 'kn', country: '克罗地亚', countryEn: 'Croatia', region: 'europe', decimals: 2 },
   { code: 'RUB', name: '俄罗斯卢布', nameEn: 'Russian Ruble', symbol: '₽', country: '俄罗斯', countryEn: 'Russia', region: 'europe', decimals: 2, popular: true },
   { code: 'UAH', name: '乌克兰格里夫纳', nameEn: 'Ukrainian Hryvnia', symbol: '₴', country: '乌克兰', countryEn: 'Ukraine', region: 'europe', decimals: 2 },
   { code: 'TRY', name: '土耳其里拉', nameEn: 'Turkish Lira', symbol: '₺', country: '土耳其', countryEn: 'Turkey', region: 'europe', decimals: 2 },
   { code: 'ISK', name: '冰岛克朗', nameEn: 'Icelandic Króna', symbol: 'kr', country: '冰岛', countryEn: 'Iceland', region: 'europe', decimals: 0 },
-  { code: 'RSD', name: '塞尔维亚第纳尔', nameEn: 'Serbian Dinar', symbol: 'дин', country: '塞尔维亚', countryEn: 'Serbia', region: 'europe', decimals: 2 },
-  { code: 'BAM', name: '波黑马克', nameEn: 'Bosnia Mark', symbol: 'KM', country: '波黑', countryEn: 'Bosnia and Herzegovina', region: 'europe', decimals: 2 },
-  { code: 'MKD', name: '马其顿第纳尔', nameEn: 'Macedonian Denar', symbol: 'ден', country: '北马其顿', countryEn: 'North Macedonia', region: 'europe', decimals: 2 },
-  { code: 'ALL', name: '阿尔巴尼亚列克', nameEn: 'Albanian Lek', symbol: 'L', country: '阿尔巴尼亚', countryEn: 'Albania', region: 'europe', decimals: 2 },
-  { code: 'MDL', name: '摩尔多瓦列伊', nameEn: 'Moldovan Leu', symbol: 'L', country: '摩尔多瓦', countryEn: 'Moldova', region: 'europe', decimals: 2 },
-  { code: 'BYN', name: '白俄罗斯卢布', nameEn: 'Belarusian Ruble', symbol: 'Br', country: '白俄罗斯', countryEn: 'Belarus', region: 'europe', decimals: 2 },
-  { code: 'GEL', name: '格鲁吉亚拉里', nameEn: 'Georgian Lari', symbol: '₾', country: '格鲁吉亚', countryEn: 'Georgia', region: 'europe', decimals: 2 },
-  { code: 'AMD', name: '亚美尼亚德拉姆', nameEn: 'Armenian Dram', symbol: '֏', country: '亚美尼亚', countryEn: 'Armenia', region: 'europe', decimals: 2 },
-  { code: 'AZN', name: '阿塞拜疆马纳特', nameEn: 'Azerbaijani Manat', symbol: '₼', country: '阿塞拜疆', countryEn: 'Azerbaijan', region: 'europe', decimals: 2 },
   
   // 美洲货币
   { code: 'USD', name: '美元', nameEn: 'US Dollar', symbol: '$', country: '美国', countryEn: 'United States', region: 'americas', decimals: 2, popular: true, trading: true },
@@ -97,21 +82,12 @@ const CURRENCIES: Currency[] = [
   { code: 'BOB', name: '玻利维亚诺', nameEn: 'Bolivian Boliviano', symbol: 'Bs', country: '玻利维亚', countryEn: 'Bolivia', region: 'americas', decimals: 2 },
   { code: 'VES', name: '委内瑞拉玻利瓦尔', nameEn: 'Venezuelan Bolívar', symbol: 'Bs', country: '委内瑞拉', countryEn: 'Venezuela', region: 'americas', decimals: 2 },
   { code: 'GTQ', name: '危地马拉格查尔', nameEn: 'Guatemalan Quetzal', symbol: 'Q', country: '危地马拉', countryEn: 'Guatemala', region: 'americas', decimals: 2 },
-  { code: 'HNL', name: '洪都拉斯伦皮拉', nameEn: 'Honduran Lempira', symbol: 'L', country: '洪都拉斯', countryEn: 'Honduras', region: 'americas', decimals: 2 },
-  { code: 'NIO', name: '尼加拉瓜科多巴', nameEn: 'Nicaraguan Córdoba', symbol: 'C$', country: '尼加拉瓜', countryEn: 'Nicaragua', region: 'americas', decimals: 2 },
   { code: 'CRC', name: '哥斯达黎加科朗', nameEn: 'Costa Rican Colón', symbol: '₡', country: '哥斯达黎加', countryEn: 'Costa Rica', region: 'americas', decimals: 2 },
   { code: 'PAB', name: '巴拿马巴波亚', nameEn: 'Panamanian Balboa', symbol: 'B/', country: '巴拿马', countryEn: 'Panama', region: 'americas', decimals: 2 },
   { code: 'DOP', name: '多米尼加比索', nameEn: 'Dominican Peso', symbol: 'RD$', country: '多米尼加', countryEn: 'Dominican Republic', region: 'americas', decimals: 2 },
   { code: 'CUP', name: '古巴比索', nameEn: 'Cuban Peso', symbol: '₱', country: '古巴', countryEn: 'Cuba', region: 'americas', decimals: 2 },
   { code: 'JMD', name: '牙买加元', nameEn: 'Jamaican Dollar', symbol: 'J$', country: '牙买加', countryEn: 'Jamaica', region: 'americas', decimals: 2 },
-  { code: 'HTG', name: '海地古德', nameEn: 'Haitian Gourde', symbol: 'G', country: '海地', countryEn: 'Haiti', region: 'americas', decimals: 2 },
   { code: 'TTD', name: '特立尼达和多巴哥元', nameEn: 'Trinidad and Tobago Dollar', symbol: 'TT$', country: '特立尼达和多巴哥', countryEn: 'Trinidad and Tobago', region: 'americas', decimals: 2 },
-  { code: 'BBD', name: '巴巴多斯元', nameEn: 'Barbadian Dollar', symbol: '$', country: '巴巴多斯', countryEn: 'Barbados', region: 'americas', decimals: 2 },
-  { code: 'BSD', name: '巴哈马元', nameEn: 'Bahamian Dollar', symbol: '$', country: '巴哈马', countryEn: 'Bahamas', region: 'americas', decimals: 2 },
-  { code: 'BZD', name: '伯利兹元', nameEn: 'Belize Dollar', symbol: 'BZ$', country: '伯利兹', countryEn: 'Belize', region: 'americas', decimals: 2 },
-  { code: 'XCD', name: '东加勒比元', nameEn: 'East Caribbean Dollar', symbol: '$', country: '东加勒比', countryEn: 'East Caribbean', region: 'americas', decimals: 2 },
-  { code: 'SRD', name: '苏里南元', nameEn: 'Surinamese Dollar', symbol: '$', country: '苏里南', countryEn: 'Suriname', region: 'americas', decimals: 2 },
-  { code: 'GYD', name: '圭亚那元', nameEn: 'Guyanese Dollar', symbol: '$', country: '圭亚那', countryEn: 'Guyana', region: 'americas', decimals: 2 },
   
   // 中东货币
   { code: 'AED', name: '阿联酋迪拉姆', nameEn: 'UAE Dirham', symbol: 'د.إ', country: '阿联酋', countryEn: 'UAE', region: 'middle_east', decimals: 2, popular: true },
@@ -128,7 +104,7 @@ const CURRENCIES: Currency[] = [
   { code: 'IRR', name: '伊朗里亚尔', nameEn: 'Iranian Rial', symbol: '﷼', country: '伊朗', countryEn: 'Iran', region: 'middle_east', decimals: 2 },
   { code: 'YER', name: '也门里亚尔', nameEn: 'Yemeni Rial', symbol: '﷼', country: '也门', countryEn: 'Yemen', region: 'middle_east', decimals: 2 },
   
-  // 非洲货币 - 主要货币
+  // 非洲货币
   { code: 'ZAR', name: '南非兰特', nameEn: 'South African Rand', symbol: 'R', country: '南非', countryEn: 'South Africa', region: 'africa', decimals: 2, popular: true },
   { code: 'EGP', name: '埃及镑', nameEn: 'Egyptian Pound', symbol: '£', country: '埃及', countryEn: 'Egypt', region: 'africa', decimals: 2 },
   { code: 'NGN', name: '尼日利亚奈拉', nameEn: 'Nigerian Naira', symbol: '₦', country: '尼日利亚', countryEn: 'Nigeria', region: 'africa', decimals: 2 },
@@ -140,24 +116,14 @@ const CURRENCIES: Currency[] = [
   { code: 'ETB', name: '埃塞俄比亚比尔', nameEn: 'Ethiopian Birr', symbol: 'Br', country: '埃塞俄比亚', countryEn: 'Ethiopia', region: 'africa', decimals: 2 },
   { code: 'UGX', name: '乌干达先令', nameEn: 'Ugandan Shilling', symbol: 'USh', country: '乌干达', countryEn: 'Uganda', region: 'africa', decimals: 0 },
   { code: 'TZS', name: '坦桑尼亚先令', nameEn: 'Tanzanian Shilling', symbol: 'TSh', country: '坦桑尼亚', countryEn: 'Tanzania', region: 'africa', decimals: 2 },
-  { code: 'AOA', name: '安哥拉宽扎', nameEn: 'Angolan Kwanza', symbol: 'Kz', country: '安哥拉', countryEn: 'Angola', region: 'africa', decimals: 2 },
-  { code: 'MZN', name: '莫桑比克梅蒂卡尔', nameEn: 'Mozambican Metical', symbol: 'MT', country: '莫桑比克', countryEn: 'Mozambique', region: 'africa', decimals: 2 },
-  { code: 'ZMW', name: '赞比亚克瓦查', nameEn: 'Zambian Kwacha', symbol: 'ZK', country: '赞比亚', countryEn: 'Zambia', region: 'africa', decimals: 2 },
-  { code: 'BWP', name: '博茨瓦纳普拉', nameEn: 'Botswana Pula', symbol: 'P', country: '博茨瓦纳', countryEn: 'Botswana', region: 'africa', decimals: 2 },
-  { code: 'MUR', name: '毛里求斯卢比', nameEn: 'Mauritian Rupee', symbol: '₨', country: '毛里求斯', countryEn: 'Mauritius', region: 'africa', decimals: 2 },
-  { code: 'SCR', name: '塞舌尔卢比', nameEn: 'Seychellois Rupee', symbol: '₨', country: '塞舌尔', countryEn: 'Seychelles', region: 'africa', decimals: 2 },
-  { code: 'MGA', name: '马达加斯加阿里亚里', nameEn: 'Malagasy Ariary', symbol: 'Ar', country: '马达加斯加', countryEn: 'Madagascar', region: 'africa', decimals: 2 },
   { code: 'XOF', name: '西非法郎', nameEn: 'West African CFA Franc', symbol: 'Fr', country: '西非经济货币联盟', countryEn: 'WAEMU', region: 'africa', decimals: 0 },
   { code: 'XAF', name: '中非法郎', nameEn: 'Central African CFA Franc', symbol: 'Fr', country: '中非经济货币共同体', countryEn: 'CEMAC', region: 'africa', decimals: 0 },
   
-  // 大洋洲货币 - 修复所有符号
-  { code: 'AUD', name: '澳大利亚元', nameEn: 'Australian Dollar', symbol: 'A, country: '澳大利亚', countryEn: 'Australia', region: 'oceania', decimals: 2, popular: true, trading: true },
-  { code: 'NZD', name: '新西兰元', nameEn: 'New Zealand Dollar', symbol: 'NZ, country: '新西兰', countryEn: 'New Zealand', region: 'oceania', decimals: 2, popular: true },
-  { code: 'FJD', name: '斐济元', nameEn: 'Fijian Dollar', symbol: 'FJ, country: '斐济', countryEn: 'Fiji', region: 'oceania', decimals: 2 },
+  // 大洋洲货币
+  { code: 'AUD', name: '澳大利亚元', nameEn: 'Australian Dollar', symbol: 'A$', country: '澳大利亚', countryEn: 'Australia', region: 'oceania', decimals: 2, popular: true, trading: true },
+  { code: 'NZD', name: '新西兰元', nameEn: 'New Zealand Dollar', symbol: 'NZ$', country: '新西兰', countryEn: 'New Zealand', region: 'oceania', decimals: 2, popular: true },
+  { code: 'FJD', name: '斐济元', nameEn: 'Fijian Dollar', symbol: 'FJ$', country: '斐济', countryEn: 'Fiji', region: 'oceania', decimals: 2 },
   { code: 'PGK', name: '巴布亚新几内亚基那', nameEn: 'Papua New Guinean Kina', symbol: 'K', country: '巴布亚新几内亚', countryEn: 'Papua New Guinea', region: 'oceania', decimals: 2 },
-  { code: 'SBD', name: '所罗门群岛元', nameEn: 'Solomon Islands Dollar', symbol: 'SI, country: '所罗门群岛', countryEn: 'Solomon Islands', region: 'oceania', decimals: 2 },
-  { code: 'TOP', name: '汤加潘加', nameEn: 'Tongan Paʻanga', symbol: 'T, country: '汤加', countryEn: 'Tonga', region: 'oceania', decimals: 2 },
-  { code: 'VUV', name: '瓦努阿图瓦图', nameEn: 'Vanuatu Vatu', symbol: 'Vt', country: '瓦努阿图', countryEn: 'Vanuatu', region: 'oceania', decimals: 0 },
   { code: 'WST', name: '萨摩亚塔拉', nameEn: 'Samoan Tala', symbol: 'T', country: '萨摩亚', countryEn: 'Samoa', region: 'oceania', decimals: 2 },
   { code: 'XPF', name: '太平洋法郎', nameEn: 'CFP Franc', symbol: '₣', country: '法属波利尼西亚', countryEn: 'French Polynesia', region: 'oceania', decimals: 0 }
 ]
