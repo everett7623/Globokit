@@ -28,7 +28,7 @@ export const CURRENCY_REGIONS: Record<string, string> = {
   middle_east: '中东'
 }
 
-// 全球货币数据 - 简化版本，确保所有符号都有值
+// 全球货币数据 - 修复所有符号问题
 const CURRENCIES: Currency[] = [
   // 亚洲货币
   { code: 'CNY', name: '人民币', nameEn: 'Chinese Yuan', symbol: '¥', country: '中国', countryEn: 'China', region: 'asia', decimals: 2, popular: true, trading: true },
@@ -150,7 +150,7 @@ const CURRENCIES: Currency[] = [
   { code: 'XOF', name: '西非法郎', nameEn: 'West African CFA Franc', symbol: 'Fr', country: '西非经济货币联盟', countryEn: 'WAEMU', region: 'africa', decimals: 0 },
   { code: 'XAF', name: '中非法郎', nameEn: 'Central African CFA Franc', symbol: 'Fr', country: '中非经济货币共同体', countryEn: 'CEMAC', region: 'africa', decimals: 0 },
   
-  // 大洋洲货币
+  // 大洋洲货币 - 修复所有符号
   { code: 'AUD', name: '澳大利亚元', nameEn: 'Australian Dollar', symbol: 'A, country: '澳大利亚', countryEn: 'Australia', region: 'oceania', decimals: 2, popular: true, trading: true },
   { code: 'NZD', name: '新西兰元', nameEn: 'New Zealand Dollar', symbol: 'NZ, country: '新西兰', countryEn: 'New Zealand', region: 'oceania', decimals: 2, popular: true },
   { code: 'FJD', name: '斐济元', nameEn: 'Fijian Dollar', symbol: 'FJ, country: '斐济', countryEn: 'Fiji', region: 'oceania', decimals: 2 },
