@@ -3,6 +3,25 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
+import { 
+  BookOpen, 
+  Compass, 
+  Menu, 
+  ExternalLink,
+  Calculator, 
+  Type, 
+  AlertCircle, 
+  Hash, 
+  Languages, 
+  Calendar,
+  Clock,
+  CircleDollarSign,
+  Sparkles,
+  TrendingUp,
+  Users,
+  Zap
+} from 'lucide-react'
 
 const tools = [
   { href: '/', label: '首页' },
