@@ -1,6 +1,10 @@
+// 路径: seedtool/app/layout.tsx
+// 更新时间: 2025-07-22
+// 说明: 根布局文件，包含全站通用的头部和底部
+
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import './globals.css'  // 这一行必须存在！
+import './globals.css'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 
@@ -8,21 +12,14 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'SeedTool - 外贸实用工具集',
-  description: '提供人民币大写转换、英文大小写转换、特殊字符检查、数字转英文、中文转拼音等实用工具',
-  keywords: '外贸工具,人民币大写,大小写转换,特殊字符,数字转英文,中文拼音',
+  description: '专为外贸从业者打造的在线工具平台，提供人民币大写转换、文本处理、货币符号查询等实用工具',
+  keywords: '外贸工具,人民币大写,英文大小写,特殊字符,数字转英文,中文拼音,国际节假日,世界时间,货币符号',
   authors: [{ name: 'Jensfrank' }],
-  creator: 'Jensfrank',
-  publisher: 'Jensfrank',
-  robots: {
-    index: true,
-    follow: true,
-  },
   openGraph: {
     title: 'SeedTool - 外贸实用工具集',
-    description: '提供人民币大写转换、英文大小写转换、特殊字符检查、数字转英文、中文转拼音等实用工具',
-    url: 'https://seedtool.vercel.app',
+    description: '专为外贸从业者打造的在线工具平台',
+    url: 'https://seedtool.com',
     siteName: 'SeedTool',
-    locale: 'zh_CN',
     type: 'website',
   },
 }
@@ -35,9 +32,11 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body className={inter.className}>
-        <div className="relative min-h-screen flex flex-col">
+        <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex flex-col">
           <Header />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 container mx-auto px-4 py-8 max-w-7xl">
+            {children}
+          </main>
           <Footer />
         </div>
       </body>
