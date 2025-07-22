@@ -1,6 +1,6 @@
 // 路径: seedtool/app/page.tsx
-// 更新时间: 2025-07-22
-// 说明: 优化顶部导航和底部区域，保留原有功能和布局
+// 更新时间: 2025-07-21
+// 说明: 优化布局，保留导航栏和外部链接
 
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -110,14 +110,14 @@ const stats = [
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex flex-col">
-      {/* 导航栏 - 优化版 */}
-      <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm transition-all duration-300">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      {/* 导航栏 */}
+      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="flex items-center justify-between h-16">
             {/* Logo区域 */}
             <div className="flex items-center gap-2">
-              <div className="p-2 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg shadow-md">
+              <div className="p-2 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg">
                 <Zap className="h-5 w-5 text-white" />
               </div>
               <span className="font-bold text-xl bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
@@ -129,19 +129,19 @@ export default function HomePage() {
             <div className="hidden md:flex items-center gap-6">
               <Link 
                 href="/" 
-                className="text-gray-900 font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-blue-500 after:rounded-full"
+                className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
               >
                 首页
               </Link>
               <Link 
                 href="#tools" 
-                className="text-gray-600 hover:text-gray-900 font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-blue-500 after:rounded-full after:transition-all hover:after:w-full"
+                className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
               >
                 工具集
               </Link>
               <Link 
                 href="#about" 
-                className="text-gray-600 hover:text-gray-900 font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-blue-500 after:rounded-full after:transition-all hover:after:w-full"
+                className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
               >
                 关于
               </Link>
@@ -169,7 +169,7 @@ export default function HomePage() {
               </Link>
               
               {/* 移动端菜单按钮 */}
-              <Button variant="ghost" size="icon" className="md:hidden hover:bg-gray-100">
+              <Button variant="ghost" size="icon" className="md:hidden">
                 <Menu className="h-5 w-5" />
               </Button>
             </div>
@@ -177,8 +177,8 @@ export default function HomePage() {
         </div>
       </nav>
 
-      <div className="flex-grow container mx-auto px-4 py-8 max-w-7xl">
-        {/* 头部区域 */}
+      <div className="container mx-auto px-4 py-8 max-w-7xl">
+        {/* 头部区域 - 增强视觉效果 */}
         <div className="text-center mb-12 pt-8">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium mb-6">
             <Sparkles className="h-4 w-4" />
@@ -291,55 +291,6 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-
-      {/* 页脚 - 优化版 */}
-      <footer className="mt-auto py-8 border-t border-gray-200 bg-white">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-2">
-              <div className="p-1.5 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg">
-                <Zap className="h-4 w-4 text-white" />
-              </div>
-              <span className="font-bold text-lg bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                SeedTool
-              </span>
-            </div>
-            
-            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm">
-              <Link 
-                href="https://seedloc.com" 
-                target="_blank"
-                className="text-gray-600 hover:text-gray-900 transition-colors flex items-center gap-1"
-              >
-                Seedloc 博客
-                <ExternalLink className="h-3 w-3" />
-              </Link>
-              <span className="text-gray-400">•</span>
-              <Link 
-                href="https://nav.seedloc.com" 
-                target="_blank"
-                className="text-gray-600 hover:text-gray-900 transition-colors flex items-center gap-1"
-              >
-                SeedNav 导航
-                <ExternalLink className="h-3 w-3" />
-              </Link>
-              <span className="text-gray-400">•</span>
-              <Link 
-                href="https://github.com/everett7623/seedtool" 
-                target="_blank"
-                className="text-gray-600 hover:text-gray-900 transition-colors flex items-center gap-1"
-              >
-                GitHub
-                <ExternalLink className="h-3 w-3" />
-              </Link>
-            </div>
-            
-            <p className="text-gray-500 text-sm">
-              © 2025 SeedTool. 为全球贸易赋能
-            </p>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }
