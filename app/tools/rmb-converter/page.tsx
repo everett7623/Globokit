@@ -1,4 +1,4 @@
-// 名称: 人民币大写转换器
+// 名称: 人民币大写转换
 // 描述: 将数字金额转换为中文大写格式，适用于发票、合同等正式文件
 // 路径: seedtool/app/tools/rmb-converter/page.tsx
 // 作者: Jensfrank
