@@ -1,17 +1,17 @@
 // 路径: seedtool/app/page.tsx
-// 更新时间: 2025-07-22
+// 更新时间: 2025-07-21
 // 说明: 优化布局，保留导航栏和外部链接
 
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import {
-  Calculator,
-  Type,
-  AlertCircle,
-  Hash,
-  Languages,
+import { 
+  Calculator, 
+  Type, 
+  AlertCircle, 
+  Hash, 
+  Languages, 
   Calendar,
   Clock,
   CircleDollarSign,
@@ -125,48 +125,32 @@ export default function HomePage() {
               </span>
             </div>
 
-            {/* 中间导航链接 - Only "首页" */}
+            {/* 中间导航链接 */}
             <div className="hidden md:flex items-center gap-6">
-              <Link
-                href="/"
+              <Link 
+                href="/" 
                 className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
               >
                 首页
+              </Link>
+              <Link 
+                href="#tools" 
+                className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+              >
+                工具集
+              </Link>
+              <Link 
+                href="#about" 
+                className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+              >
+                关于
               </Link>
             </div>
 
             {/* 右侧外部链接 */}
             <div className="flex items-center gap-3">
-              <Link
-                href="/tools/rmb-converter"
-                target="_blank"
-                className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all"
-              >
-                人民币大写转换
-              </Link>
-              <Link
-                href="/tools/text-case"
-                target="_blank"
-                className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all"
-              >
-                英文大小写转换
-              </Link>
-              <Link
-                href="/tools/pinyin"
-                target="_blank"
-                className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all"
-              >
-                中文转拼音
-              </Link>
-              <Link
-                href="/tools/holiday-query"
-                target="_blank"
-                className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all"
-              >
-                国际节假日查询
-              </Link>
-              <Link
-                href="https://seedloc.com"
+              <Link 
+                href="https://seedloc.com" 
                 target="_blank"
                 className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all"
               >
@@ -174,8 +158,8 @@ export default function HomePage() {
                 博客
                 <ExternalLink className="h-3 w-3" />
               </Link>
-              <Link
-                href="https://nav.seedloc.com"
+              <Link 
+                href="https://nav.seedloc.com" 
                 target="_blank"
                 className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 rounded-lg transition-all shadow-sm hover:shadow-md"
               >
@@ -183,7 +167,7 @@ export default function HomePage() {
                 导航站
                 <ExternalLink className="h-3 w-3" />
               </Link>
-
+              
               {/* 移动端菜单按钮 */}
               <Button variant="ghost" size="icon" className="md:hidden">
                 <Menu className="h-5 w-5" />
@@ -273,8 +257,8 @@ export default function HomePage() {
                   我们都为您提供了简单高效的解决方案。
                 </p>
                 <div className="flex flex-wrap gap-4 justify-center">
-                  <Link
-                    href="https://github.com/everett7623/seedtool"
+                  <Link 
+                    href="https://github.com/everett7623/seedtool" 
                     target="_blank"
                     className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
                   >
@@ -282,8 +266,8 @@ export default function HomePage() {
                     开源地址
                     <ExternalLink className="h-4 w-4" />
                   </Link>
-                  <Link
-                    href="https://seedloc.com"
+                  <Link 
+                    href="https://seedloc.com" 
                     target="_blank"
                     className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                   >
@@ -311,8 +295,8 @@ export default function HomePage() {
         <footer className="mt-16 py-8 border-t border-gray-200">
           <div className="text-center space-y-4">
             <div className="flex items-center justify-center gap-6 text-sm">
-              <Link
-                href="https://seedloc.com"
+              <Link 
+                href="https://seedloc.com" 
                 target="_blank"
                 className="text-gray-600 hover:text-gray-900 transition-colors flex items-center gap-1"
               >
@@ -320,8 +304,8 @@ export default function HomePage() {
                 <ExternalLink className="h-3 w-3" />
               </Link>
               <span className="text-gray-400">•</span>
-              <Link
-                href="https://nav.seedloc.com"
+              <Link 
+                href="https://nav.seedloc.com" 
                 target="_blank"
                 className="text-gray-600 hover:text-gray-900 transition-colors flex items-center gap-1"
               >
@@ -329,8 +313,8 @@ export default function HomePage() {
                 <ExternalLink className="h-3 w-3" />
               </Link>
               <span className="text-gray-400">•</span>
-              <Link
-                href="https://github.com/everett7623/seedtool"
+              <Link 
+                href="https://github.com/everett7623/seedtool" 
                 target="_blank"
                 className="text-gray-600 hover:text-gray-900 transition-colors flex items-center gap-1"
               >
