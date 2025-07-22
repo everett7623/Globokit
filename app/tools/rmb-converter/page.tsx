@@ -1,8 +1,6 @@
-// 名称: 人民币大写转换
-// 描述: 将数字金额转换为中文大写格式，适用于发票、合同等正式文件
 // 路径: seedtool/app/tools/rmb-converter/page.tsx
-// 作者: Jensfrank
 // 更新时间: 2025-07-22
+// 说明: 适配新布局的人民币大写转换工具
 
 'use client'
 
@@ -71,9 +69,9 @@ export default function RMBConverterPage() {
   ]
 
   return (
-    <div className="container mx-auto p-6 max-w-7xl">
+    <>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">人民币大写转换</h1>
+        <h1 className="text-3xl font-bold mb-2">人民币大写转换器</h1>
         <p className="text-muted-foreground">
           将数字金额转换为中文大写格式，适用于发票、合同等正式文件
         </p>
@@ -290,6 +288,6 @@ export default function RMBConverterPage() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </>
   )
 }
