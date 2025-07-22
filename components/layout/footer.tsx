@@ -3,7 +3,7 @@ export function Footer() {
     <footer className="border-t">
       <div className="container flex h-16 items-center justify-between">
         <p className="text-sm text-muted-foreground">
-          © 2025 SeedTool. 为全球贸易赋能
+          © 2025 SeedTool. 为全球贸易赋能 Built with ❤️ by Jensfrank 
         </p>
         <div className="flex items-center space-x-4">
           <a
