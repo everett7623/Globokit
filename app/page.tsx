@@ -46,7 +46,7 @@ const tools = [
     bgColor: 'bg-green-50'
   },
   {
-    title: '特殊字符检查',
+    title: '特殊字符检查与转换',
     description: '检查并转换文本中的特殊字符，避免邮件或文档中的乱码',
     icon: AlertCircle,
     href: '/tools/special-char',
