@@ -10,9 +10,9 @@ export const metadata: Metadata = {
   title: 'SeedTool - 外贸实用工具集',
   description: '提供人民币大写转换、英文大小写转换、特殊字符检查、数字转英文、中文转拼音等实用工具',
   keywords: '外贸工具,人民币大写,大小写转换,特殊字符,数字转英文,中文拼音',
-  authors: [{ name: 'everett7623' }],
-  creator: 'everett7623',
-  publisher: 'everett7623',
+  authors: [{ name: 'Jensfrank' }],
+  creator: 'Jensfrank',
+  publisher: 'Jensfrank',
   robots: {
     index: true,
     follow: true,
