@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 
 const tools = [
+  { href: '/tools', label: '首页' },
   { href: '/tools/rmb-converter', label: '人民币大写' },
   { href: '/tools/text-case', label: '大小写转换' },
   { href: '/tools/special-char', label: '特殊字符' },
