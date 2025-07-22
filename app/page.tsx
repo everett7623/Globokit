@@ -1,5 +1,5 @@
 // 路径: seedtool/app/page.tsx
-// 更新时间: 2025-07-21
+// 更新时间: 2025-07-22
 // 说明: 优化布局，保留导航栏和外部链接
 
 import Link from 'next/link'
@@ -111,72 +111,6 @@ const stats = [
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* 导航栏 */}
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo区域 */}
-            <div className="flex items-center gap-2">
-              <div className="p-2 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg">
-                <Zap className="h-5 w-5 text-white" />
-              </div>
-              <span className="font-bold text-xl bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                SeedTool
-              </span>
-            </div>
-
-            {/* 中间导航链接 */}
-            <div className="hidden md:flex items-center gap-6">
-              <Link 
-                href="/" 
-                className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
-              >
-                首页
-              </Link>
-              <Link 
-                href="#tools" 
-                className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
-              >
-                工具集
-              </Link>
-              <Link 
-                href="#about" 
-                className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
-              >
-                关于
-              </Link>
-            </div>
-
-            {/* 右侧外部链接 */}
-            <div className="flex items-center gap-3">
-              <Link 
-                href="https://seedloc.com" 
-                target="_blank"
-                className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all"
-              >
-                <BookOpen className="h-4 w-4" />
-                博客
-                <ExternalLink className="h-3 w-3" />
-              </Link>
-              <Link 
-                href="https://nav.seedloc.com" 
-                target="_blank"
-                className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 rounded-lg transition-all shadow-sm hover:shadow-md"
-              >
-                <Compass className="h-4 w-4" />
-                导航站
-                <ExternalLink className="h-3 w-3" />
-              </Link>
-              
-              {/* 移动端菜单按钮 */}
-              <Button variant="ghost" size="icon" className="md:hidden">
-                <Menu className="h-5 w-5" />
-              </Button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         {/* 头部区域 - 增强视觉效果 */}
         <div className="text-center mb-12 pt-8">
