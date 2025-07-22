@@ -1,5 +1,5 @@
 // 路径: seedtool/app/tools/rmb-converter/page.tsx
-// 更新时间: 2025-07-22
+// 更新时间: 2025-07-23
 // 说明: 适配新布局的人民币大写转换工具
 
 'use client'
