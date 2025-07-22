@@ -2,7 +2,7 @@
 // 描述: 快速转换英文文本的大小写格式，支持多种转换模式
 // 路径: seedtool/app/tools/text-case/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2025-07-21
+// 更新时间: 2025-07-23
 
 'use client'
 
