@@ -106,7 +106,7 @@ const convertCase = (text: string, caseType: TextCase): string => {
 export default function TextCasePage() {
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
-  const [caseType, setCaseType] = useState<TextCase>('sentence')
+  const [caseType, setCaseType] = useState<TextCase>('upper')
   const [error, setError] = useState('')
   const [copiedText, setCopiedText] = useState<string | null>(null)
   const [history, setHistory] = useState<Array<{input: string, output: string, type: string}>>([])
