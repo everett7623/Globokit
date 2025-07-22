@@ -2,7 +2,7 @@
 // 描述: 查询全球主要贸易国家的节假日安排，便于外贸业务安排
 // 路径: seedtool/app/tools/holiday-query/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2025-07-11
+// 更新时间: 2025-07-22
 
 'use client'
 
@@ -638,3 +638,93 @@ export default function HolidayQueryPage() {
             <p>• 节前1-2天回复变慢</p>
             <p>• 长假期间基本无回复</p>
             <p>• 节后2-3天逐步恢复</p>
+          </CardContent>
+        </Card>
+        
+        <Card className="bg-muted/50">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-sm flex items-center gap-2">
+              <Plane className="h-4 w-4" />
+              物流影响
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-1 text-sm text-muted-foreground">
+            <p>• 海运：节前爆仓涨价</p>
+            <p>• 空运：假期停飞减班</p>
+            <p>• 清关：延迟3-7天</p>
+          </CardContent>
+        </Card>
+        
+        <Card className="bg-muted/50">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-sm flex items-center gap-2">
+              <DollarSign className="h-4 w-4" />
+              付款提醒
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-1 text-sm text-muted-foreground">
+            <p>• 银行假期暂停转账</p>
+            <p>• 节前催收账款</p>
+            <p>• 预留充足时间</p>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-muted/50">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-sm flex items-center gap-2">
+              <AlertCircle className="h-4 w-4" />
+              重要提醒
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-1 text-sm text-muted-foreground">
+            <p>• 圣诞节：欧美停工2周</p>
+            <p>• 斋月：中东效率降低</p>
+            <p>• 春节：东亚停工2周</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* 使用说明 */}
+      <Card className="mt-4 bg-muted/50">
+        <CardHeader>
+          <CardTitle className="text-lg flex items-center gap-2">
+            <Info className="h-5 w-5" />
+            使用说明
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h4 className="font-medium mb-2">功能特点</h4>
+              <ul className="space-y-1 text-sm text-muted-foreground">
+                <li>• 覆盖全球100+主要贸易国家和地区</li>
+                <li>• 包含公共假期、银行假期、宗教节日</li>
+                <li>• 提供节假日对商业活动的影响评级</li>
+                <li>• 支持按地区、国家、月份筛选查看</li>
+                <li>• 实时提醒即将到来的重要节假日</li>
+                <li>• 年历视图直观展示节假日分布</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-medium mb-2">影响等级说明</h4>
+              <div className="space-y-2 text-sm">
+                <div className="flex items-center gap-2">
+                  <Badge variant="destructive">高影响</Badge>
+                  <span className="text-muted-foreground">大部分企业停工，银行关闭</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge variant="default">中影响</Badge>
+                  <span className="text-muted-foreground">部分企业放假，效率降低</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge variant="secondary">低影响</Badge>
+                  <span className="text-muted-foreground">正常工作，个别行业受影响</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
