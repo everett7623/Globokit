@@ -11,6 +11,8 @@ const tools = [
   { href: '/tools/number-to-english', label: '数字转英文' },
   { href: '/tools/pinyin', label: '中文转拼音' },
   { href: '/tools/holiday-query', label: '国际节假日查询' },
+  { href: '/tools/world-time', label: '世界时间' },
+  { href: '/tools/currency-symbols', label: '全球货币符号大全' },
 ]
 
 export function Navigation() {
