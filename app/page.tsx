@@ -125,27 +125,7 @@ export default function HomePage() {
               </span>
             </div>
 
-            {/* 中间导航链接 */}
-            <div className="hidden md:flex items-center gap-6">
-              <Link 
-                href="/" 
-                className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
-              >
-                首页
-              </Link>
-              <Link 
-                href="#tools" 
-                className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
-              >
-                工具集
-              </Link>
-              <Link 
-                href="#about" 
-                className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
-              >
-                关于
-              </Link>
-            </div>
+            {/* 中间导航链接 - 移除重复的导航 */}
 
             {/* 右侧外部链接 */}
             <div className="flex items-center gap-3">
@@ -323,7 +303,7 @@ export default function HomePage() {
               </Link>
             </div>
             <p className="text-gray-500 text-sm">
-              © 2024 SeedTool. Made with ❤️ for traders worldwide.
+              © 2025 SeedTool. Made with ❤️ for traders worldwide.
             </p>
           </div>
         </footer>
