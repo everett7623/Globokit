@@ -35,6 +35,32 @@ export function Navigation() {
           {tool.label}
         </Link>
       ))}
+  {/* 右侧外部链接 */}
+      <div className="flex items-center gap-3">
+        <Link 
+          href="https://seedloc.com" 
+          target="_blank"
+          className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all"
+        >
+          <BookOpen className="h-4 w-4" />
+          博客
+          <ExternalLink className="h-3 w-3" />
+        </Link>
+        <Link 
+          href="https://nav.seedloc.com" 
+          target="_blank"
+          className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 rounded-lg transition-all shadow-sm hover:shadow-md"
+        >
+          <Compass className="h-4 w-4" />
+          导航站
+          <ExternalLink className="h-3 w-3" />
+        </Link>
+        
+        {/* 移动端菜单按钮 */}
+        <button className="md:hidden flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary">
+          <Menu className="h-5 w-5" />
+        </button>
+      </div>
     </nav>
   )
 }
