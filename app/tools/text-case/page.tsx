@@ -2,7 +2,7 @@
 // 描述: 快速转换英文文本的大小写格式，支持多种转换模式
 // 路径: seedtool/app/tools/text-case/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2025-07-22
+// 更新时间: 2025-07-21
 
 'use client'
 
@@ -168,7 +168,7 @@ export default function TextCasePage() {
   // 示例文本
   const sampleTexts = [
     { 
-      text: 'FACE MASK 3 PLY', 
+      text: 'CATHETER SUCTION 16FR W/CON VALVE\nCATHETER SUCTION 08 FG / 14FG WITH FINGER CONTROL VALVE, STERILE', 
       label: '医疗设备' 
     },
     { 
