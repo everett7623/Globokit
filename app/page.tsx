@@ -187,7 +187,7 @@ export default function HomePage() {
                 </h2>
                 <p className="text-lg text-gray-700 mb-8 leading-relaxed">
                   SeedTool 是专为外贸从业者打造的在线工具平台，我们深知外贸工作中的各种痛点，
-                  因此精心开发了这些实用工具。无论是人民币大写转换、文本处理，还是进行货币符号查询等等，
+                  因此精心开发了这些实用工具。无论是人民币大写转换、文本处理，还是货币符号查询等等，
                   我们都为您提供了简单高效的解决方案。
                 </p>
                 <div className="flex flex-wrap gap-4 justify-center">
