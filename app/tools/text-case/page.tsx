@@ -168,7 +168,7 @@ export default function TextCasePage() {
   // 示例文本
   const sampleTexts = [
     { 
-      text: 'CATHETER SUCTION 16FR W/CON VALVE\nCATHETER SUCTION 08 FG / 14FG WITH FINGER CONTROL VALVE, STERILE', 
+      text: 'FACE MASK 3 PLY', 
       label: '医疗设备' 
     },
     { 
