@@ -8,6 +8,7 @@ export function Header() {
         <Link href="/" className="flex items-center space-x-2">
           <span className="text-2xl font-bold">🌱 SeedTool</span>
         </Link>
+        <Navigation />
       </div>
     </header>
   )
