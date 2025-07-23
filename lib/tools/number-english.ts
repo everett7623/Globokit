@@ -1,3 +1,9 @@
+// 名称: 数字转英文工具函数
+// 描述: 提供数字转英文工具函数
+// 路径: seedtool/lib/tools/number-english.ts
+// 作者: Jensfrank
+// 更新时间: 2025-07-23
+
 const ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
 const tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
 const teens = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
