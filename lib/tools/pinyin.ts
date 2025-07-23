@@ -1,3 +1,9 @@
+// 名称: 中文转拼音工具函数
+// 描述: 提供中文转拼音工具函数
+// 路径: seedtool/lib/tools/pinyin.ts
+// 作者: Jensfrank
+// 更新时间: 2025-07-23
+
 import { pinyin } from 'pinyin-pro';
 
 export interface PinyinOptions {
