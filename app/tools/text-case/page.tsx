@@ -71,9 +71,12 @@ export default function TextCasePage() {
   const caseOptions = [
     { value: 'upper', label: '全部大写', shortLabel: 'UPPERCASE', example: 'HELLO WORLD', icon: <Type className="h-4 w-4" /> },
     { value: 'lower', label: '全部小写', shortLabel: 'lowercase', example: 'hello world', icon: <Type className="h-4 w-4" /> },
-    { value: 'sentence', label: '句子首字母大写', shortLabel: 'Sentence case', example: 'Hello world', icon: <FileText className="h-4 w-4" /> },
+    { value: 'sentence', label: '句子首字母大写', shortLabel: 'Sentence case', example: 'Hello world. How are you?', icon: <FileText className="h-4 w-4" /> },
     { value: 'title', label: '标题格式', shortLabel: 'Title Case', example: 'Hello World', icon: <FileText className="h-4 w-4" /> },
+    { value: 'capitalize', label: '单词首字母大写', shortLabel: 'Capitalize Each', example: 'Hello World', icon: <Type className="h-4 w-4" /> },
     { value: 'toggle', label: '大小写反转', shortLabel: 'tOGGLE cASE', example: 'hELLO wORLD', icon: <RefreshCw className="h-4 w-4" /> },
+    { value: 'alternating', label: '交替大小写', shortLabel: 'aLtErNaTiNg', example: 'HeLLo WoRLd', icon: <RefreshCw className="h-4 w-4" /> },
+    { value: 'inverse', label: '反向格式', shortLabel: 'iNVERSE', example: 'hELLO WORLD', icon: <RefreshCw className="h-4 w-4" /> },
   ]
 
   // 示例文本
@@ -378,9 +381,9 @@ export default function TextCasePage() {
                 <span className="text-right flex-1 ml-2">Hello World</span>
               </div>
               <div className="flex items-center justify-between p-2 rounded bg-background">
-                <span className="font-mono">Hello World</span>
+                <span className="font-mono">hello world</span>
                 <span className="text-muted-foreground">→</span>
-                <span className="text-right flex-1 ml-2">hELLO wORLD</span>
+                <span className="text-right flex-1 ml-2">HeLLo WoRLd</span>
               </div>
             </div>
           </CardContent>
