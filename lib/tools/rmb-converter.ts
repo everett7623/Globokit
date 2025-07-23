@@ -1,3 +1,9 @@
+// 名称: 人民币大写转换工具函数
+// 描述: 提供人民币大写转换工具函数
+// 路径: seedtool/lib/tools/rmb-converter.ts
+// 作者: Jensfrank
+// 更新时间: 2025-07-23
+
 export function numberToChinese(num: number): string {
   const digits = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
   const units = ['', '拾', '佰', '仟'];
