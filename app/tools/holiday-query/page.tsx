@@ -2,7 +2,7 @@
 // 描述: 查询全球主要贸易国家的节假日安排，便于外贸业务安排
 // 路径: seedtool/app/tools/holiday-query/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2025-07-22
+// 更新时间: 2025-07-23
 
 'use client'
 
@@ -69,7 +69,7 @@ export default function HolidayQueryPage() {
   const upcomingCount = upcomingHolidays.filter(h => h.daysUntil <= 7).length
 
   return (
-    <div className="container mx-auto p-6 max-w-7xl">
+    <>
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">国际节假日查询</h1>
         <p className="text-muted-foreground">
@@ -725,6 +725,6 @@ export default function HolidayQueryPage() {
           </div>
         </CardContent>
       </Card>
-    </div>
+    </>
   )
 }
