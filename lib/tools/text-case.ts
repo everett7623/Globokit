@@ -1,4 +1,4 @@
-// 名称: 英文大小写转换ts
+// 名称: 英文大小写转换函数
 // 描述: 快速转换英文文本的大小写格式，支持多种转换模式
 // 路径: seedtool/lib/tools/text-case.ts
 // 作者: Jensfrank
