@@ -2,7 +2,7 @@
 // 描述: 检查文本中的特殊字符，并提供清理或替换选项
 // 路径: seedtool/app/tools/special-char/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2025-07-22
+// 更新时间: 2025-07-23
 
 'use client'
 
@@ -97,7 +97,7 @@ export default function SpecialCharPage() {
   const stats = result ? categorizeSpecialChars(result.specialChars) : null
 
   return (
-    <div className="container mx-auto p-6 max-w-7xl">
+    <>
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">特殊字符检查与转换</h1>
         <p className="text-muted-foreground">
@@ -480,6 +480,6 @@ export default function SpecialCharPage() {
           </div>
         </CardContent>
       </Card>
-    </div>
+    </>
   )
 }
