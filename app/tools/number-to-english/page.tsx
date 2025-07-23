@@ -2,7 +2,7 @@
 // 描述: 将数字转换为英文表达形式，支持基数词和序数词
 // 路径: seedtool/app/tools/number-to-english/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2025-07-22
+// 更新时间: 2025-07-23
 
 'use client'
 
@@ -104,7 +104,7 @@ export default function NumberToEnglishPage() {
   }
 
   return (
-    <div className="container mx-auto p-6 max-w-7xl">
+    <>
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">数字转英文</h1>
         <p className="text-muted-foreground">
@@ -474,6 +474,6 @@ export default function NumberToEnglishPage() {
           </div>
         </CardContent>
       </Card>
-    </div>
+    </>
   )
 }
