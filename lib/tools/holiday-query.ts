@@ -1,4 +1,8 @@
-// lib/tools/holiday-query.ts
+// 名称: 国际节假日查询工具函数
+// 描述: 提供国际节假日查询工具函数
+// 路径: seedtool/lib/tools/holiday-query.ts
+// 作者: Jensfrank
+// 更新时间: 2025-07-23
 
 export interface Country {
   name: string
