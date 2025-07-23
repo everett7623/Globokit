@@ -1,5 +1,5 @@
 // 路径: seedtool/components/layout/navigation.tsx
-// 更新时间: 2025-07-22
+// 更新时间: 2025-07-23
 // 说明: 优化导航组件，改进响应式设计
 
 'use client'
@@ -57,7 +57,7 @@ export function Navigation() {
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false)
 
   // 检查是否为工具页面
-  const isToolPage = pathname.startsWith('/tools/')
+  const isToolPage = pathname.startsWith('/tools/');
   
   return (
     <>
@@ -211,7 +211,7 @@ export function Navigation() {
                     <ExternalLink className="h-3 w-3 ml-auto" />
                   </Link>
                 )
-              )}
+              })}
             </div>
           </div>
         </div>
