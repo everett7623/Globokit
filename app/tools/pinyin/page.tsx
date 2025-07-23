@@ -2,7 +2,7 @@
 // 描述: 将中文文本转换为拼音，支持多种声调格式
 // 路径: seedtool/app/tools/pinyin/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2025-07-21
+// 更新时间: 2025-07-23
 
 'use client'
 
@@ -104,7 +104,7 @@ export default function PinyinPage() {
   ]
 
   return (
-    <div className="container mx-auto p-6 max-w-7xl">
+    <>
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">中文转拼音</h1>
         <p className="text-muted-foreground">
@@ -419,6 +419,6 @@ export default function PinyinPage() {
           </div>
         </CardContent>
       </Card>
-    </div>
+    </>
   )
 }
