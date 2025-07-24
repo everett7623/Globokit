@@ -5,22 +5,22 @@
 // 更新时间: 2025-07-24
 
 export interface Country {
-  name: string           // 中文名称
+  name: string          // 中文名称
   nameEn: string        // 英文名称
   capital: string       // 首都中文
   capitalEn: string     // 首都英文
   continent: string     // 大洲
-  iso2: string         // ISO 2位代码
-  iso3: string         // ISO 3位代码
-  phoneCode: string    // 电话区号
-  domain: string       // 域名后缀
-  timezone: string     // 主要时区
-  currency: string     // 货币代码
-  currencyName: string // 货币名称
-  languages: string[]  // 官方语言
-  tradePorts?: string[] // 主要贸易港口
+  iso2: string          // ISO 2位代码
+  iso3: string          // ISO 3位代码
+  phoneCode: string     // 电话区号
+  domain: string        // 域名后缀
+  timezone: string      // 主要时区
+  currency: string      // 货币代码
+  currencyName: string  // 货币名称
+  languages: string[]   // 官方语言
+  tradePorts?: string[]  // 主要贸易港口
   businessHours?: string // 工作时间
-  holidays?: string[]   // 重要节假日
+  holidays?: string[]    // 重要节假日
 }
 
 // 大洲分类
@@ -47,288 +47,7 @@ export const COUNTRIES: Country[] = [
     iso3: 'CHN',
     phoneCode: '+86',
     domain: '.cn',
-    timezone: 'UTC+2',
-    currency: 'EGP',
-    currencyName: '埃及镑',
-    languages: ['阿拉伯语'],
-    tradePorts: ['亚历山大', '塞得港', '苏伊士'],
-    businessHours: '周日至周四 8:00-16:00'
-  },
-  {
-    name: '尼日利亚',
-    nameEn: 'Nigeria',
-    capital: '阿布贾',
-    capitalEn: 'Abuja',
-    continent: 'africa',
-    iso2: 'NG',
-    iso3: 'NGA',
-    phoneCode: '+234',
-    domain: '.ng',
-    timezone: 'UTC+1',
-    currency: 'NGN',
-    currencyName: '尼日利亚奈拉',
-    languages: ['英语'],
-    tradePorts: ['拉各斯', '哈科特港'],
-    businessHours: '周一至周五 8:00-17:00'
-  },
-  {
-    name: '肯尼亚',
-    nameEn: 'Kenya',
-    capital: '内罗毕',
-    capitalEn: 'Nairobi',
-    continent: 'africa',
-    iso2: 'KE',
-    iso3: 'KEN',
-    phoneCode: '+254',
-    domain: '.ke',
-    timezone: 'UTC+3',
-    currency: 'KES',
-    currencyName: '肯尼亚先令',
-    languages: ['英语', '斯瓦希里语'],
-    tradePorts: ['蒙巴萨'],
-    businessHours: '周一至周五 8:00-17:00'
-  },
-  {
-    name: '摩洛哥',
-    nameEn: 'Morocco',
-    capital: '拉巴特',
-    capitalEn: 'Rabat',
-    continent: 'africa',
-    iso2: 'MA',
-    iso3: 'MAR',
-    phoneCode: '+212',
-    domain: '.ma',
-    timezone: 'UTC+1',
-    currency: 'MAD',
-    currencyName: '摩洛哥迪拉姆',
-    languages: ['阿拉伯语', '法语'],
-    tradePorts: ['卡萨布兰卡', '丹吉尔'],
-    businessHours: '周一至周五 8:30-18:30'
-  },
-
-  // 大洋洲
-  {
-    name: '澳大利亚',
-    nameEn: 'Australia',
-    capital: '堪培拉',
-    capitalEn: 'Canberra',
-    continent: 'oceania',
-    iso2: 'AU',
-    iso3: 'AUS',
-    phoneCode: '+61',
-    domain: '.au',
-    timezone: 'UTC+8 to UTC+11',
-    currency: 'AUD',
-    currencyName: '澳大利亚元',
-    languages: ['英语'],
-    tradePorts: ['墨尔本', '悉尼', '布里斯班', '弗里曼特尔'],
-    businessHours: '周一至周五 9:00-17:00',
-    holidays: ['新年', '澳大利亚日', '复活节', '澳新军团日', '女王生日', '圣诞节', '节礼日']
-  },
-  {
-    name: '新西兰',
-    nameEn: 'New Zealand',
-    capital: '惠灵顿',
-    capitalEn: 'Wellington',
-    continent: 'oceania',
-    iso2: 'NZ',
-    iso3: 'NZL',
-    phoneCode: '+64',
-    domain: '.nz',
-    timezone: 'UTC+12',
-    currency: 'NZD',
-    currencyName: '新西兰元',
-    languages: ['英语', '毛利语'],
-    tradePorts: ['奥克兰', '陶朗加', '惠灵顿'],
-    businessHours: '周一至周五 8:30-17:00'
-  }
-]
-
-/**
- * 根据条件搜索国家
- */
-export function searchCountries(query: string): Country[] {
-  const searchTerm = query.toLowerCase().trim()
-  
-  return COUNTRIES.filter(country => 
-    country.name.toLowerCase().includes(searchTerm) ||
-    country.nameEn.toLowerCase().includes(searchTerm) ||
-    country.capital.toLowerCase().includes(searchTerm) ||
-    country.capitalEn.toLowerCase().includes(searchTerm) ||
-    country.iso2.toLowerCase() === searchTerm ||
-    country.iso3.toLowerCase() === searchTerm ||
-    country.phoneCode.includes(searchTerm) ||
-    country.domain.includes(searchTerm)
-  )
-}
-
-/**
- * 按大洲筛选国家
- */
-export function filterByContinent(continent: string): Country[] {
-  if (continent === 'all') return COUNTRIES
-  return COUNTRIES.filter(country => country.continent === continent)
-}
-
-/**
- * 获取国家详情
- */
-export function getCountryByCode(code: string): Country | undefined {
-  const upperCode = code.toUpperCase()
-  return COUNTRIES.find(country => 
-    country.iso2 === upperCode || country.iso3 === upperCode
-  )
-}
-
-/**
- * 获取时差（相对于中国北京时间）
- */
-export function getTimeDifference(timezone: string): string {
-  // 北京时间是 UTC+8
-  const beijingOffset = 8
-  
-  // 解析时区偏移
-  const match = timezone.match(/UTC([+-])(\d+(?:\.\d+)?)/)
-  if (!match) return '复杂时区'
-  
-  const sign = match[1]
-  const offset = parseFloat(match[2])
-  const actualOffset = sign === '+' ? offset : -offset
-  
-  const diff = actualOffset - beijingOffset
-  
-  if (diff === 0) return '同北京时间'
-  if (diff > 0) return `快${Math.abs(diff)}小时`
-  return `慢${Math.abs(diff)}小时`
-}
-
-/**
- * 获取当前时间（指定时区）
- */
-export function getCurrentTime(timezone: string): string {
-  const now = new Date()
-  
-  // 处理复杂时区
-  if (timezone.includes('to')) {
-    // 返回主要时区的时间
-    const mainTimezone = timezone.split(' to ')[0]
-    return getCurrentTime(mainTimezone)
-  }
-  
-  // 解析时区偏移
-  const match = timezone.match(/UTC([+-])(\d+(?:\.\d+)?)/)
-  if (!match) return '时区解析错误'
-  
-  const sign = match[1]
-  const offset = parseFloat(match[2])
-  const offsetMinutes = (sign === '+' ? offset : -offset) * 60
-  
-  // 计算目标时区时间
-  const utc = now.getTime() + now.getTimezoneOffset() * 60000
-  const targetTime = new Date(utc + offsetMinutes * 60000)
-  
-  return targetTime.toLocaleTimeString('zh-CN', {
-    hour12: false,
-    hour: '2-digit',
-    minute: '2-digit'
-  })
-}
-
-/**
- * 获取商务礼仪提示
- */
-export function getBusinessEtiquette(countryCode: string): string[] {
-  const etiquetteMap: Record<string, string[]> = {
-    CN: [
-      '名片双手递接',
-      '准时很重要',
-      '避免谈论政治话题',
-      '送礼讲究双数'
-    ],
-    JP: [
-      '鞠躬问候',
-      '名片双手递接并仔细查看',
-      '进室内需脱鞋',
-      '避免直接说"不"'
-    ],
-    US: [
-      '握手问候',
-      '直接坦率的沟通方式',
-      '守时但稍有弹性',
-      '小费文化盛行'
-    ],
-    GB: [
-      '守时非常重要',
-      '保持礼貌和含蓄',
-      '避免过于直接',
-      '尊重个人空间'
-    ],
-    DE: [
-      '极其守时',
-      '正式和直接的沟通',
-      '重视头衔和等级',
-      '决策过程较长'
-    ],
-    FR: [
-      '见面行贴面礼',
-      '午餐时间较长',
-      '重视着装',
-      '避免在用餐时谈生意'
-    ],
-    AE: [
-      '右手握手',
-      '避免使用左手',
-      '斋月期间白天避免饮食',
-      '着装保守'
-    ],
-    IN: [
-      '合十礼问候',
-      '避免使用左手',
-      '素食者较多',
-      '等级观念明显'
-    ],
-    BR: [
-      '热情的问候方式',
-      '建立个人关系很重要',
-      '时间观念较灵活',
-      '避免OK手势'
-    ]
-  }
-  
-  return etiquetteMap[countryCode] || ['请查询具体国家的商务礼仪']
-}
-
-/**
- * 格式化国家信息为文本
- */
-export function formatCountryInfo(country: Country): string {
-  const lines = [
-    `国家：${country.name} (${country.nameEn})`,
-    `首都：${country.capital} (${country.capitalEn})`,
-    `大洲：${CONTINENTS[country.continent as keyof typeof CONTINENTS]}`,
-    `国家代码：${country.iso2} / ${country.iso3}`,
-    `电话区号：${country.phoneCode}`,
-    `域名后缀：${country.domain}`,
-    `时区：${country.timezone}`,
-    `时差：${getTimeDifference(country.timezone)}`,
-    `货币：${country.currencyName} (${country.currency})`,
-    `官方语言：${country.languages.join('、')}`,
-  ]
-  
-  if (country.tradePorts) {
-    lines.push(`主要港口：${country.tradePorts.join('、')}`)
-  }
-  
-  if (country.businessHours) {
-    lines.push(`工作时间：${country.businessHours}`)
-  }
-  
-  if (country.holidays) {
-    lines.push(`主要节假日：${country.holidays.join('、')}`)
-  }
-  
-  return lines.join('\n')
-} 'UTC+8',
+    timezone: 'UTC+8',
     currency: 'CNY',
     currencyName: '人民币',
     languages: ['中文'],
@@ -969,4 +688,82 @@ export function formatCountryInfo(country: Country): string {
     iso3: 'EGY',
     phoneCode: '+20',
     domain: '.eg',
-    timezone:
+    timezone: 'UTC+2',
+    currency: 'EGP',
+    currencyName: '埃及镑',
+    languages: ['阿拉伯语'],
+    tradePorts: ['亚历山大', '塞得港', '苏伊士'],
+    businessHours: '周日至周四 8:00-16:00'
+  },
+  {
+    name: '尼日利亚',
+    nameEn: 'Nigeria',
+    capital: '阿布贾',
+    capitalEn: 'Abuja',
+    continent: 'africa',
+    iso2: 'NG',
+    iso3: 'NGA',
+    phoneCode: '+234',
+    domain: '.ng',
+    timezone: 'UTC+1',
+    currency: 'NGN',
+    currencyName: '尼日利亚奈拉',
+    languages: ['英语'],
+    tradePorts: ['拉各斯', '哈科特港'],
+    businessHours: '周一至周五 8:00-17:00'
+  },
+  {
+    name: '肯尼亚',
+    nameEn: 'Kenya',
+    capital: '内罗毕',
+    capitalEn: 'Nairobi',
+    continent: 'africa',
+    iso2: 'KE',
+    iso3: 'KEN',
+    phoneCode: '+254',
+    domain: '.ke',
+    timezone: 'UTC+3',
+    currency: 'KES',
+    currencyName: '肯尼亚先令',
+    languages: ['斯瓦希里语', '英语'],
+    tradePorts: ['蒙巴萨'],
+    businessHours: '周一至周五 8:00-17:00'
+  },
+
+  // 大洋洲
+  {
+    name: '澳大利亚',
+    nameEn: 'Australia',
+    capital: '堪培拉',
+    capitalEn: 'Canberra',
+    continent: 'oceania',
+    iso2: 'AU',
+    iso3: 'AUS',
+    phoneCode: '+61',
+    domain: '.au',
+    timezone: 'UTC+8 to UTC+10.5',
+    currency: 'AUD',
+    currencyName: '澳大利亚元',
+    languages: ['英语'],
+    tradePorts: ['悉尼', '墨尔本', '布里斯班', '弗里曼特尔'],
+    businessHours: '周一至周五 9:00-17:00',
+    holidays: ['新年', '澳大利亚日', '复活节', '澳新军团日', '女王生日', '圣诞节', '节礼日']
+  },
+  {
+    name: '新西兰',
+    nameEn: 'New Zealand',
+    capital: '惠灵顿',
+    capitalEn: 'Wellington',
+    continent: 'oceania',
+    iso2: 'NZ',
+    iso3: 'NZL',
+    phoneCode: '+64',
+    domain: '.nz',
+    timezone: 'UTC+12',
+    currency: 'NZD',
+    currencyName: '新西兰元',
+    languages: ['英语', '毛利语'],
+    tradePorts: ['奥克兰', '陶朗加', '惠灵顿'],
+    businessHours: '周一至周五 9:00-17:00'
+  }
+]
