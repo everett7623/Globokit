@@ -2,7 +2,7 @@
 // 描述: 提供全球各国的基础信息、通讯代码、时区等数据
 // 路径: seedtool/lib/tools/country-info.ts
 // 作者: Jensfrank
-// 更新时间: 2025-07-23
+// 更新时间: 2025-07-24
 
 export interface Country {
   name: string           // 中文名称
