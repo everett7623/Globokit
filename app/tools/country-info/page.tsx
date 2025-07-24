@@ -4,6 +4,8 @@
 // 作者: Jensfrank
 // 更新时间: 2025-07-24
 
+"use client";
+
 import React, { useState, useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
