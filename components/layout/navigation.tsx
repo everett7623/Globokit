@@ -1,5 +1,5 @@
 // 路径: seedtool/components/layout/navigation.tsx
-// 更新时间: 2025-07-23
+// 更新时间: 2025-07-24
 // 说明: 优化导航组件，改进响应式设计
 
 'use client'
@@ -32,6 +32,7 @@ const navItems = [
       { href: '/tools/holiday-query', label: '国际节假日查询' },
       { href: '/tools/world-time', label: '世界时间' },
       { href: '/tools/currency-symbols', label: '全球货币符号' },
+      { href: '/tools/country-info', label: '全球国家信息' },
     ]
   }
 ]
