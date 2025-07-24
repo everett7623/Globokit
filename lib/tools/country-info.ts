@@ -5,25 +5,24 @@
 // 更新时间: 2025-07-24
 
 export interface Country {
-  name: string           // 中文名称
-  nameEn: string        // 英文名称
-  capital: string       // 首都中文
-  capitalEn: string     // 首都英文
-  continent: string     // 大洲
-  iso2: string         // ISO 2位代码
-  iso3: string         // ISO 3位代码
-  phoneCode: string    // 电话区号
-  domain: string       // 域名后缀
-  timezone: string     // 主要时区
-  currency: string     // 货币代码
-  currencyName: string // 货币名称
-  languages: string[]  // 官方语言
-  tradePorts?: string[] // 主要贸易港口
-  businessHours?: string // 工作时间
-  holidays?: string[]   // 重要节假日
+  name: string
+  nameEn: string
+  capital: string
+  capitalEn: string
+  continent: string
+  iso2: string
+  iso3: string
+  phoneCode: string
+  domain: string
+  timezone: string
+  currency: string
+  currencyName: string
+  languages: string[]
+  tradePorts?: string[]
+  businessHours?: string
+  holidays?: string[]
 }
 
-// 大洲分类
 export const CONTINENTS: Record<string, string> = {
   asia: '亚洲',
   europe: '欧洲',
@@ -34,9 +33,7 @@ export const CONTINENTS: Record<string, string> = {
   antarctica: '南极洲'
 }
 
-// 国家数据
 export const COUNTRIES: Country[] = [
-  // 亚洲
   {
     name: '中国',
     nameEn: 'China',
@@ -70,7 +67,8 @@ export const COUNTRIES: Country[] = [
     currencyName: '日元',
     languages: ['日语'],
     tradePorts: ['东京', '横滨', '大阪', '神户'],
-    businessHours: '周一至周五 9:00-17:00'
+    businessHours: '周一至周五 9:00-17:00',
+    holidays: ['元旦', '成人节', '建国纪念日', '春分', '昭和日']
   },
   {
     name: '韩国',
@@ -89,7 +87,40 @@ export const COUNTRIES: Country[] = [
     tradePorts: ['釜山', '仁川'],
     businessHours: '周一至周五 9:00-18:00'
   },
-  // 北美洲
+  {
+    name: '新加坡',
+    nameEn: 'Singapore',
+    capital: '新加坡',
+    capitalEn: 'Singapore',
+    continent: 'asia',
+    iso2: 'SG',
+    iso3: 'SGP',
+    phoneCode: '+65',
+    domain: '.sg',
+    timezone: 'UTC+8',
+    currency: 'SGD',
+    currencyName: '新加坡元',
+    languages: ['英语', '中文', '马来语', '泰米尔语'],
+    tradePorts: ['新加坡港'],
+    businessHours: '周一至周五 9:00-18:00'
+  },
+  {
+    name: '印度',
+    nameEn: 'India',
+    capital: '新德里',
+    capitalEn: 'New Delhi',
+    continent: 'asia',
+    iso2: 'IN',
+    iso3: 'IND',
+    phoneCode: '+91',
+    domain: '.in',
+    timezone: 'UTC+5:30',
+    currency: 'INR',
+    currencyName: '印度卢比',
+    languages: ['印地语', '英语'],
+    tradePorts: ['孟买', '钦奈', '加尔各答'],
+    businessHours: '周一至周六 10:00-18:00'
+  },
   {
     name: '美国',
     nameEn: 'United States',
@@ -125,7 +156,23 @@ export const COUNTRIES: Country[] = [
     tradePorts: ['温哥华', '蒙特利尔'],
     businessHours: '周一至周五 9:00-17:00'
   },
-  // 欧洲
+  {
+    name: '墨西哥',
+    nameEn: 'Mexico',
+    capital: '墨西哥城',
+    capitalEn: 'Mexico City',
+    continent: 'northAmerica',
+    iso2: 'MX',
+    iso3: 'MEX',
+    phoneCode: '+52',
+    domain: '.mx',
+    timezone: 'UTC-6 to UTC-8',
+    currency: 'MXN',
+    currencyName: '墨西哥比索',
+    languages: ['西班牙语'],
+    tradePorts: ['曼萨尼约', '拉萨罗卡德纳斯'],
+    businessHours: '周一至周五 9:00-18:00'
+  },
   {
     name: '英国',
     nameEn: 'United Kingdom',
@@ -141,7 +188,8 @@ export const COUNTRIES: Country[] = [
     currencyName: '英镑',
     languages: ['英语'],
     tradePorts: ['伦敦', '利物浦', '南安普顿'],
-    businessHours: '周一至周五 9:00-17:00'
+    businessHours: '周一至周五 9:00-17:00',
+    holidays: ['新年', '复活节', '圣诞节', '节礼日']
   },
   {
     name: '德国',
@@ -158,7 +206,8 @@ export const COUNTRIES: Country[] = [
     currencyName: '欧元',
     languages: ['德语'],
     tradePorts: ['汉堡', '不来梅'],
-    businessHours: '周一至周五 8:00-17:00'
+    businessHours: '周一至周五 8:00-17:00',
+    holidays: ['新年', '复活节', '劳动节', '圣诞节']
   },
   {
     name: '法国',
@@ -177,7 +226,91 @@ export const COUNTRIES: Country[] = [
     tradePorts: ['马赛', '勒阿弗尔'],
     businessHours: '周一至周五 9:00-17:00'
   },
-  // 大洋洲
+  {
+    name: '意大利',
+    nameEn: 'Italy',
+    capital: '罗马',
+    capitalEn: 'Rome',
+    continent: 'europe',
+    iso2: 'IT',
+    iso3: 'ITA',
+    phoneCode: '+39',
+    domain: '.it',
+    timezone: 'UTC+1',
+    currency: 'EUR',
+    currencyName: '欧元',
+    languages: ['意大利语'],
+    tradePorts: ['热那亚', '的里雅斯特'],
+    businessHours: '周一至周五 9:00-18:00'
+  },
+  {
+    name: '西班牙',
+    nameEn: 'Spain',
+    capital: '马德里',
+    capitalEn: 'Madrid',
+    continent: 'europe',
+    iso2: 'ES',
+    iso3: 'ESP',
+    phoneCode: '+34',
+    domain: '.es',
+    timezone: 'UTC+1',
+    currency: 'EUR',
+    currencyName: '欧元',
+    languages: ['西班牙语'],
+    tradePorts: ['巴塞罗那', '瓦伦西亚'],
+    businessHours: '周一至周五 9:00-14:00, 15:00-18:00'
+  },
+  {
+    name: '俄罗斯',
+    nameEn: 'Russia',
+    capital: '莫斯科',
+    capitalEn: 'Moscow',
+    continent: 'europe',
+    iso2: 'RU',
+    iso3: 'RUS',
+    phoneCode: '+7',
+    domain: '.ru',
+    timezone: 'UTC+3',
+    currency: 'RUB',
+    currencyName: '俄罗斯卢布',
+    languages: ['俄语'],
+    tradePorts: ['圣彼得堡', '新罗西斯克'],
+    businessHours: '周一至周五 9:00-18:00'
+  },
+  {
+    name: '巴西',
+    nameEn: 'Brazil',
+    capital: '巴西利亚',
+    capitalEn: 'Brasília',
+    continent: 'southAmerica',
+    iso2: 'BR',
+    iso3: 'BRA',
+    phoneCode: '+55',
+    domain: '.br',
+    timezone: 'UTC-3 to UTC-5',
+    currency: 'BRL',
+    currencyName: '巴西雷亚尔',
+    languages: ['葡萄牙语'],
+    tradePorts: ['桑托斯', '里约热内卢'],
+    businessHours: '周一至周五 8:00-18:00'
+  },
+  {
+    name: '阿根廷',
+    nameEn: 'Argentina',
+    capital: '布宜诺斯艾利斯',
+    capitalEn: 'Buenos Aires',
+    continent: 'southAmerica',
+    iso2: 'AR',
+    iso3: 'ARG',
+    phoneCode: '+54',
+    domain: '.ar',
+    timezone: 'UTC-3',
+    currency: 'ARS',
+    currencyName: '阿根廷比索',
+    languages: ['西班牙语'],
+    tradePorts: ['布宜诺斯艾利斯'],
+    businessHours: '周一至周五 9:00-18:00'
+  },
   {
     name: '澳大利亚',
     nameEn: 'Australia',
@@ -211,35 +344,74 @@ export const COUNTRIES: Country[] = [
     languages: ['英语', '毛利语'],
     tradePorts: ['奥克兰', '惠灵顿'],
     businessHours: '周一至周五 9:00-17:00'
+  },
+  {
+    name: '南非',
+    nameEn: 'South Africa',
+    capital: '比勒陀利亚',
+    capitalEn: 'Pretoria',
+    continent: 'africa',
+    iso2: 'ZA',
+    iso3: 'ZAF',
+    phoneCode: '+27',
+    domain: '.za',
+    timezone: 'UTC+2',
+    currency: 'ZAR',
+    currencyName: '南非兰特',
+    languages: ['英语', '南非荷兰语'],
+    tradePorts: ['德班', '开普敦'],
+    businessHours: '周一至周五 8:00-17:00'
+  },
+  {
+    name: '埃及',
+    nameEn: 'Egypt',
+    capital: '开罗',
+    capitalEn: 'Cairo',
+    continent: 'africa',
+    iso2: 'EG',
+    iso3: 'EGY',
+    phoneCode: '+20',
+    domain: '.eg',
+    timezone: 'UTC+2',
+    currency: 'EGP',
+    currencyName: '埃及镑',
+    languages: ['阿拉伯语'],
+    tradePorts: ['亚历山大', '塞得港'],
+    businessHours: '周日至周四 8:00-16:00'
   }
 ]
 
-/**
- * 根据关键词搜索国家
- */
 export function searchCountries(query: string): Country[] {
-  if (!query.trim()) return COUNTRIES;
-  const lowerQuery = query.toLowerCase();
-  return COUNTRIES.filter(country =>
-    country.name.toLowerCase().includes(lowerQuery) ||
-    country.nameEn.toLowerCase().includes(lowerQuery) ||
-    country.iso2.toLowerCase().includes(lowerQuery) ||
-    country.iso3.toLowerCase().includes(lowerQuery) ||
-    country.phoneCode.includes(query)
-  );
+  if (!query || !query.trim()) {
+    return COUNTRIES
+  }
+  
+  const searchTerm = query.toLowerCase().trim()
+  
+  return COUNTRIES.filter(country => {
+    return (
+      country.name.toLowerCase().includes(searchTerm) ||
+      country.nameEn.toLowerCase().includes(searchTerm) ||
+      country.iso2.toLowerCase() === searchTerm ||
+      country.iso3.toLowerCase() === searchTerm ||
+      country.phoneCode.includes(searchTerm) ||
+      country.capital.toLowerCase().includes(searchTerm) ||
+      country.capitalEn.toLowerCase().includes(searchTerm)
+    )
+  })
 }
 
-/**
- * 根据大洲筛选国家
- */
 export function filterCountriesByContinent(continentKey: string): Country[] {
-  if (!continentKey) return COUNTRIES;
-  return COUNTRIES.filter(country => country.continent === continentKey);
+  if (!continentKey || continentKey === '') {
+    return COUNTRIES
+  }
+  
+  return COUNTRIES.filter(country => country.continent === continentKey)
 }
 
-/**
- * 获取所有大洲选项
- */
 export function getContinentOptions() {
-  return Object.entries(CONTINENTS).map(([key, name]) => ({ key, name }));
+  return Object.entries(CONTINENTS).map(([key, name]) => ({
+    key,
+    name
+  }))
 }
