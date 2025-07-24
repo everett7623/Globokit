@@ -1,15 +1,16 @@
 // 名称: 全球国家信息工具函数
 // 描述: 提供全球各国的基础信息、通讯代码、时区等数据
 // 路径: seedtool/lib/tools/country-info.ts
-// 作者: Jensfrank
-// 更新时间: 2025-07-23
+// 作者: Jensfrank (基于 amz123.com 数据)
+// 更新时间: 2025-07-24
 
 export interface Country {
   name: string           // 中文名称
   nameEn: string        // 英文名称
   capital: string       // 首都中文
   capitalEn: string     // 首都英文
-  continent: string     // 大洲
+  continent: string     // 大洲 (内部键名，如 'asia')
+  continentName?: string // 大洲中文名称 (可选，用于显示)
   iso2: string         // ISO 2位代码
   iso3: string         // ISO 3位代码
   phoneCode: string    // 电话区号
@@ -23,8 +24,8 @@ export interface Country {
   holidays?: string[]   // 重要节假日
 }
 
-// 大洲分类
-export const CONTINENTS = {
+// 大洲分类 (内部键名到中文名称的映射)
+export const CONTINENTS: Record<string, string> = {
   asia: '亚洲',
   europe: '欧洲',
   africa: '非洲',
@@ -34,9 +35,9 @@ export const CONTINENTS = {
   antarctica: '南极洲'
 }
 
-// 国家数据
+// 国家数据 (此处为示例，实际应包含所有国家)
 export const COUNTRIES: Country[] = [
-  // 亚洲
+  // --- 亚洲 ---
   {
     name: '中国',
     nameEn: 'China',
@@ -277,8 +278,7 @@ export const COUNTRIES: Country[] = [
     tradePorts: ['伊斯坦布尔', '伊兹密尔', '梅尔辛'],
     businessHours: '周一至周五 8:30-17:30'
   },
-
-  // 欧洲
+  // --- 欧洲 ---
   {
     name: '英国',
     nameEn: 'United Kingdom',
@@ -518,8 +518,7 @@ export const COUNTRIES: Country[] = [
     tradePorts: ['格但斯克', '格丁尼亚', '什切青'],
     businessHours: '周一至周五 8:00-16:00'
   },
-
-  // 北美洲
+  // --- 北美洲 ---
   {
     name: '美国',
     nameEn: 'United States',
@@ -530,7 +529,7 @@ export const COUNTRIES: Country[] = [
     iso3: 'USA',
     phoneCode: '+1',
     domain: '.us',
-    timezone: 'UTC-5 to UTC-10',
+    timezone: 'UTC-5 to UTC-10', // 注意：美国横跨多个时区
     currency: 'USD',
     currencyName: '美元',
     languages: ['英语'],
@@ -548,7 +547,7 @@ export const COUNTRIES: Country[] = [
     iso3: 'CAN',
     phoneCode: '+1',
     domain: '.ca',
-    timezone: 'UTC-3.5 to UTC-8',
+    timezone: 'UTC-3.5 to UTC-8', // 注意：加拿大横跨多个时区
     currency: 'CAD',
     currencyName: '加拿大元',
     languages: ['英语', '法语'],
@@ -565,15 +564,14 @@ export const COUNTRIES: Country[] = [
     iso3: 'MEX',
     phoneCode: '+52',
     domain: '.mx',
-    timezone: 'UTC-6 to UTC-8',
+    timezone: 'UTC-6 to UTC-8', // 注意：墨西哥横跨多个时区
     currency: 'MXN',
     currencyName: '墨西哥比索',
     languages: ['西班牙语'],
     tradePorts: ['曼萨尼约', '拉萨罗卡德纳斯', '韦拉克鲁斯'],
     businessHours: '周一至周五 9:00-18:00'
   },
-
-  // 南美洲
+  // --- 南美洲 ---
   {
     name: '巴西',
     nameEn: 'Brazil',
@@ -584,7 +582,7 @@ export const COUNTRIES: Country[] = [
     iso3: 'BRA',
     phoneCode: '+55',
     domain: '.br',
-    timezone: 'UTC-3 to UTC-5',
+    timezone: 'UTC-3 to UTC-5', // 注意：巴西横跨多个时区
     currency: 'BRL',
     currencyName: '巴西雷亚尔',
     languages: ['葡萄牙语'],
@@ -659,8 +657,7 @@ export const COUNTRIES: Country[] = [
     tradePorts: ['卡塔赫纳', '布埃纳文图拉', '巴兰基亚'],
     businessHours: '周一至周五 8:00-17:00'
   },
-
-  // 非洲
+  // --- 非洲 ---
   {
     name: '南非',
     nameEn: 'South Africa',
@@ -720,4 +717,88 @@ export const COUNTRIES: Country[] = [
     continent: 'africa',
     iso2: 'KE',
     iso3: 'KEN',
-    phone
+    phoneCode: '+254',
+    domain: '.ke',
+    timezone: 'UTC+3',
+    currency: 'KES',
+    currencyName: '肯尼亚先令',
+    languages: ['英语', '斯瓦希里语'],
+    tradePorts: ['蒙巴萨', '内罗毕'],
+    businessHours: '周一至周五 8:00-17:00'
+  },
+  // --- 大洋洲 ---
+  {
+    name: '澳大利亚',
+    nameEn: 'Australia',
+    capital: '堪培拉',
+    capitalEn: 'Canberra',
+    continent: 'oceania',
+    iso2: 'AU',
+    iso3: 'AUS',
+    phoneCode: '+61',
+    domain: '.au',
+    timezone: 'UTC+8 to UTC+11', // 注意：澳大利亚横跨多个时区
+    currency: 'AUD',
+    currencyName: '澳大利亚元',
+    languages: ['英语'],
+    tradePorts: ['悉尼', '墨尔本', '布里斯班', '弗里曼特尔'],
+    businessHours: '周一至周五 9:00-17:00'
+  },
+  {
+    name: '新西兰',
+    nameEn: 'New Zealand',
+    capital: '惠灵顿',
+    capitalEn: 'Wellington',
+    continent: 'oceania',
+    iso2: 'NZ',
+    iso3: 'NZL',
+    phoneCode: '+64',
+    domain: '.nz',
+    timezone: 'UTC+12',
+    currency: 'NZD',
+    currencyName: '新西兰元',
+    languages: ['英语', '毛利语'],
+    tradePorts: ['奥克兰', '惠灵顿', '利特尔顿'],
+    businessHours: '周一至周五 9:00-17:00'
+  }
+  // ... 可以继续添加更多国家 ...
+]
+
+// --- 工具函数 ---
+
+/**
+ * 根据国家代码 (ISO2) 查找国家信息
+ */
+export function getCountryByCode(isoCode: string): Country | undefined {
+  return COUNTRIES.find(country => country.iso2.toLowerCase() === isoCode.toLowerCase());
+}
+
+/**
+ * 根据关键词 (名称, 代码, 区号) 搜索国家
+ */
+export function searchCountries(query: string): Country[] {
+  if (!query.trim()) return COUNTRIES;
+  const lowerQuery = query.toLowerCase();
+  return COUNTRIES.filter(country =>
+    country.name.toLowerCase().includes(lowerQuery) ||
+    country.nameEn.toLowerCase().includes(lowerQuery) ||
+    country.iso2.toLowerCase().includes(lowerQuery) ||
+    country.iso3.toLowerCase().includes(lowerQuery) ||
+    country.phoneCode.includes(lowerQuery) // 区号可能包含查询词 (如 '+1' 包含 '1')
+  );
+}
+
+/**
+ * 根据大洲筛选国家
+ */
+export function filterCountriesByContinent(continentKey: string): Country[] {
+  if (!continentKey) return COUNTRIES;
+  return COUNTRIES.filter(country => country.continent === continentKey);
+}
+
+/**
+ * 获取所有大洲选项 (用于筛选器)
+ */
+export function getContinentOptions() {
+  return Object.entries(CONTINENTS).map(([key, name]) => ({ key, name }));
+}
