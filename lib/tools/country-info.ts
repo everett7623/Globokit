@@ -2,25 +2,25 @@
 // 描述: 提供全球各国的基础信息、通讯代码、时区等数据
 // 路径: seedtool/lib/tools/country-info.ts
 // 作者: Jensfrank
-// 更新时间: 2025-07-24
+// 更新时间: 2025-07-23
 
 export interface Country {
-  name: string          // 中文名称
+  name: string           // 中文名称
   nameEn: string        // 英文名称
   capital: string       // 首都中文
   capitalEn: string     // 首都英文
   continent: string     // 大洲
-  iso2: string          // ISO 2位代码
-  iso3: string          // ISO 3位代码
-  phoneCode: string     // 电话区号
-  domain: string        // 域名后缀
-  timezone: string      // 主要时区
-  currency: string      // 货币代码
-  currencyName: string  // 货币名称
-  languages: string[]   // 官方语言
-  tradePorts?: string[]  // 主要贸易港口
+  iso2: string         // ISO 2位代码
+  iso3: string         // ISO 3位代码
+  phoneCode: string    // 电话区号
+  domain: string       // 域名后缀
+  timezone: string     // 主要时区
+  currency: string     // 货币代码
+  currencyName: string // 货币名称
+  languages: string[]  // 官方语言
+  tradePorts?: string[] // 主要贸易港口
   businessHours?: string // 工作时间
-  holidays?: string[]    // 重要节假日
+  holidays?: string[]   // 重要节假日
 }
 
 // 大洲分类
@@ -720,50 +720,4 @@ export const COUNTRIES: Country[] = [
     continent: 'africa',
     iso2: 'KE',
     iso3: 'KEN',
-    phoneCode: '+254',
-    domain: '.ke',
-    timezone: 'UTC+3',
-    currency: 'KES',
-    currencyName: '肯尼亚先令',
-    languages: ['斯瓦希里语', '英语'],
-    tradePorts: ['蒙巴萨'],
-    businessHours: '周一至周五 8:00-17:00'
-  },
-
-  // 大洋洲
-  {
-    name: '澳大利亚',
-    nameEn: 'Australia',
-    capital: '堪培拉',
-    capitalEn: 'Canberra',
-    continent: 'oceania',
-    iso2: 'AU',
-    iso3: 'AUS',
-    phoneCode: '+61',
-    domain: '.au',
-    timezone: 'UTC+8 to UTC+10.5',
-    currency: 'AUD',
-    currencyName: '澳大利亚元',
-    languages: ['英语'],
-    tradePorts: ['悉尼', '墨尔本', '布里斯班', '弗里曼特尔'],
-    businessHours: '周一至周五 9:00-17:00',
-    holidays: ['新年', '澳大利亚日', '复活节', '澳新军团日', '女王生日', '圣诞节', '节礼日']
-  },
-  {
-    name: '新西兰',
-    nameEn: 'New Zealand',
-    capital: '惠灵顿',
-    capitalEn: 'Wellington',
-    continent: 'oceania',
-    iso2: 'NZ',
-    iso3: 'NZL',
-    phoneCode: '+64',
-    domain: '.nz',
-    timezone: 'UTC+12',
-    currency: 'NZD',
-    currencyName: '新西兰元',
-    languages: ['英语', '毛利语'],
-    tradePorts: ['奥克兰', '陶朗加', '惠灵顿'],
-    businessHours: '周一至周五 9:00-17:00'
-  }
-]
+    phone
