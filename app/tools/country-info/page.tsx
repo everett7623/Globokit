@@ -13,40 +13,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
-import { Copy } from 'lucide-react';
+import { Copy, Check } from 'lucide-react';
 import { COUNTRIES, CONTINENTS, Country, getContinentOptions, searchCountries, filterCountriesByContinent } from '@/lib/tools/country-info';
-
-// 复制按钮组件
-function CopyButton({ textToCopy }: { textToCopy: string }) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(textToCopy);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy:', err);
-    }
-  };
-
-  return (
-    <Button
-      variant="outline"
-      size="sm"
-      onClick={handleCopy}
-      className="gap-2"
-    >
-      <Copy className="h-4 w-4" />
-      {copied ? '已复制' : '复制信息'}
-    </Button>
-  );
-}
 
 // 工具页面组件
 export default function CountryInfoPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedContinent, setSelectedContinent] = useState('');
+  const [copiedCountry, setCopiedCountry] = useState<string | null>(null);
 
   // 使用 useMemo 优化搜索和筛选性能
   const filteredCountries = useMemo(() => {
@@ -95,6 +69,18 @@ export default function CountryInfoPage() {
     return lines.join('\n');
   };
 
+  // 处理复制功能
+  const handleCopy = async (country: Country) => {
+    const infoText = generateCountryInfoText(country);
+    try {
+      await navigator.clipboard.writeText(infoText);
+      setCopiedCountry(country.iso2);
+      setTimeout(() => setCopiedCountry(null), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+
   return (
     <div className="container mx-auto py-8 px-4 max-w-6xl">
       <Card>
@@ -134,7 +120,7 @@ export default function CountryInfoPage() {
             {filteredCountries.length > 0 ? (
               <div className="grid gap-4 md:grid-cols-2">
                 {filteredCountries.map((country) => {
-                  const infoText = generateCountryInfoText(country);
+                  const isCopied = copiedCountry === country.iso2;
                   return (
                     <Card key={`${country.iso2}-${country.name}`} className="overflow-hidden hover:shadow-md transition-shadow">
                       <CardContent className="p-4">
@@ -160,7 +146,24 @@ export default function CountryInfoPage() {
                         </div>
                         <Separator className="my-3" />
                         <div className="flex justify-end">
-                          <CopyButton text={infoText} />
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleCopy(country)}
+                            className="gap-2"
+                          >
+                            {isCopied ? (
+                              <>
+                                <Check className="h-4 w-4" />
+                                已复制
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="h-4 w-4" />
+                                复制信息
+                              </>
+                            )}
+                          </Button>
                         </div>
                       </CardContent>
                     </Card>
