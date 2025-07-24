@@ -12,8 +12,36 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { CopyButton } from '@/components/tools/copy-button';
+import { Button } from '@/components/ui/button';
+import { Copy } from 'lucide-react';
 import { COUNTRIES, CONTINENTS, Country, getContinentOptions, searchCountries, filterCountriesByContinent } from '@/lib/tools/country-info';
+
+// 复制按钮组件
+function CopyButton({ textToCopy }: { textToCopy: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+
+  return (
+    <Button
+      variant="outline"
+      size="sm"
+      onClick={handleCopy}
+      className="gap-2"
+    >
+      <Copy className="h-4 w-4" />
+      {copied ? '已复制' : '复制信息'}
+    </Button>
+  );
+}
 
 // 工具页面组件
 export default function CountryInfoPage() {
@@ -132,7 +160,7 @@ export default function CountryInfoPage() {
                         </div>
                         <Separator className="my-3" />
                         <div className="flex justify-end">
-                          <CopyButton textToCopy={infoText} />
+                          <CopyButton text={infoText} />
                         </div>
                       </CardContent>
                     </Card>
