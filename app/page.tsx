@@ -1,5 +1,5 @@
 // 路径: seedtool/app/page.tsx
-// 更新时间: 2025-07-22
+// 更新时间: 2025-07-24
 // 说明: 使用独立组件的主页
 
 import Link from 'next/link'
@@ -20,7 +20,8 @@ import {
   Sparkles,
   TrendingUp,
   Users,
-  Zap
+  Zap,
+  Globe
 } from 'lucide-react'
 
 const tools = [
@@ -95,6 +96,16 @@ const tools = [
     bgColor: 'bg-emerald-50',
     badge: '新增',
     badgeColor: 'bg-green-100 text-green-700'
+  },
+  {
+    title: '全球国家信息查询',
+    description: '查询世界各国的中英文名称、区号、代码、时区、域名等信息',
+    icon: Globe, // 使用导入的图标
+    href: '/tools/country-info',
+    color: 'text-cyan-500', // 可选：设置不同的颜色
+    bgColor: 'bg-cyan-50',   // 可选：设置不同的背景色
+    badge: '新增', // 可选：添加标签
+    badgeColor: 'bg-green-100 text-green-700' // 可选：设置标签颜色
   }
 ]
 
