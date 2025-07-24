@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { CopyButton } from '@/components/tools/copy-button'; // 确保这个组件存在并能复制文本
+import { CopyButton } from '@/components/tools/copy-button';
 import { COUNTRIES, CONTINENTS, Country, getContinentOptions, searchCountries, filterCountriesByContinent } from '@/lib/tools/country-info';
 
 // 工具页面组件
@@ -23,12 +23,19 @@ export default function CountryInfoPage() {
   // 使用 useMemo 优化搜索和筛选性能
   const filteredCountries = useMemo(() => {
     let result = COUNTRIES;
-    if (searchTerm) {
-      result = searchCountries(searchTerm);
-    }
+    
+    // 先按大洲筛选
     if (selectedContinent) {
       result = filterCountriesByContinent(selectedContinent);
     }
+    
+    // 再按搜索词筛选
+    if (searchTerm) {
+      result = searchCountries(searchTerm).filter(country => 
+        !selectedContinent || country.continent === selectedContinent
+      );
+    }
+    
     return result;
   }, [searchTerm, selectedContinent]);
 
@@ -61,7 +68,7 @@ export default function CountryInfoPage() {
   };
 
   return (
-    <div className="container mx-auto py-8 px-4 max-w-4xl">
+    <div className="container mx-auto py-8 px-4 max-w-6xl">
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl font-bold">全球国家信息查询</CardTitle>
@@ -103,7 +110,7 @@ export default function CountryInfoPage() {
                   return (
                     <Card key={`${country.iso2}-${country.name}`} className="overflow-hidden hover:shadow-md transition-shadow">
                       <CardContent className="p-4">
-                        <div className="flex justify-between items-start">
+                        <div className="flex justify-between items-start mb-3">
                           <div>
                             <h3 className="font-semibold text-lg">{country.name}</h3>
                             <p className="text-sm text-muted-foreground">{country.nameEn}</p>
@@ -118,7 +125,7 @@ export default function CountryInfoPage() {
                           <div><span className="font-medium">区号:</span> {country.phoneCode}</div>
                           <div><span className="font-medium">代码:</span> {country.iso2} / {country.iso3}</div>
                           <div><span className="font-medium">域名:</span> {country.domain}</div>
-                          <div><span className="font-medium">时区:</span> {country.timezone}</div>
+                          <div className="col-span-2"><span className="font-medium">时区:</span> {country.timezone}</div>
                           {country.tradePorts && country.tradePorts.length > 0 && (
                             <div className="col-span-2"><span className="font-medium">港口:</span> {country.tradePorts.join(', ')}</div>
                           )}
