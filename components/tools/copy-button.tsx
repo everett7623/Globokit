@@ -1,3 +1,5 @@
+//路径: /components/tools/copy-button.tsx
+
 'use client'
 
 import { useState } from 'react'
