@@ -6,16 +6,37 @@
 
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, FC, ReactElement } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Badge } from '@/components/ui/badge'
 import { CopyButton } from '@/components/tools/copy-button'
 import { COUNTRY_DATA, getFlagEmoji, getTimeDifference, getContinents, CountryInfo } from '@/lib/tools/global-country-info'
 import { Search, Globe, Star, StarOff, Info, Clock, Phone, Code, Globe2, Landmark, DollarSign } from 'lucide-react'
 
+// 辅助组件：信息行
+interface InfoRowProps {
+  icon: React.ElementType;
+  label: string;
+  value: string | ReactElement;
+  hasCopy?: boolean;
+}
+
+const InfoRow: FC<InfoRowProps> = ({ icon: Icon, label, value, hasCopy = false }) => (
+  <div className="flex items-center justify-between py-1">
+    <div className="flex items-center gap-2 text-muted-foreground">
+      <Icon className="h-4 w-4" />
+      <span className="text-sm">{label}</span>
+    </div>
+    <div className="flex items-center gap-2 font-medium text-sm">
+      {typeof value === 'string' ? <span>{value}</span> : value}
+      {hasCopy && typeof value === 'string' && <CopyButton text={value} className="h-8 w-8" />}
+    </div>
+  </div>
+);
+
+// 主页面组件
 export default function GlobalCountryInfoPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [continentFilter, setContinentFilter] = useState('all')
@@ -31,65 +52,53 @@ export default function GlobalCountryInfoPage() {
   }, [])
 
   const filteredCountries = useMemo(() => {
-    let countries = COUNTRY_DATA.filter(country => {
-      const term = searchTerm.toLowerCase()
-      const matchesSearch =
-        country.name_cn.toLowerCase().includes(term) ||
-        country.name_en.toLowerCase().includes(term) ||
-        country.iso2.toLowerCase().includes(term) ||
-        country.iso3.toLowerCase().includes(term) ||
-        country.dial_code.includes(term)
-
-      const matchesContinent =
-        continentFilter === 'all' || country.continent_cn === continentFilter
-
-      return matchesSearch && matchesContinent
-    })
-
-    countries.sort((a, b) => {
-      const aIsFav = favorites.includes(a.iso2)
-      const bIsFav = favorites.includes(b.iso2)
-      if (aIsFav && !bIsFav) return -1
-      if (!aIsFav && bIsFav) return 1
-      return a.name_en.localeCompare(b.name_en)
-    })
-
-    return countries
+    return COUNTRY_DATA
+      .filter(country => {
+        const term = searchTerm.toLowerCase()
+        const matchesSearch =
+          country.name_cn.toLowerCase().includes(term) ||
+          country.name_en.toLowerCase().includes(term) ||
+          country.iso2.toLowerCase().includes(term) ||
+          country.iso3.toLowerCase().includes(term) ||
+          country.dial_code.includes(term)
+        const matchesContinent = continentFilter === 'all' || country.continent_cn === continentFilter
+        return matchesSearch && matchesContinent
+      })
+      .sort((a, b) => {
+        const aIsFav = favorites.includes(a.iso2)
+        const bIsFav = favorites.includes(b.iso2)
+        if (aIsFav && !bIsFav) return -1
+        if (!aIsFav && bIsFav) return 1
+        return a.name_en.localeCompare(b.name_en)
+      })
   }, [searchTerm, continentFilter, favorites])
 
   const toggleFavorite = (iso2: string) => {
-    const newFavorites = favorites.includes(iso2)
-      ? favorites.filter(f => f !== iso2)
-      : [...favorites, iso2]
-
+    const newFavorites = favorites.includes(iso2) ? favorites.filter(f => f !== iso2) : [...favorites, iso2]
     setFavorites(newFavorites)
     localStorage.setItem('countryFavorites', JSON.stringify(newFavorites))
   }
 
   if (!isMounted) {
-    return null;
+    return null
   }
 
   return (
     <>
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">全球国家信息查询</h1>
-        <p className="text-muted-foreground">
-          快速查找世界各国的区号、代码、时差等关键信息
-        </p>
+        <p className="text-muted-foreground">快速查找世界各国的区号、代码、时差等关键信息</p>
       </div>
 
       <Card>
         <CardHeader>
           <CardTitle>国家信息查询</CardTitle>
-          <CardDescription>
-            支持通过中英文名称、国家代码或电话区号进行搜索
-          </CardDescription>
+          <CardDescription>支持通过中英文名称、国家代码或电话区号进行搜索</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
               <Input
                 id="search"
                 type="text"
@@ -100,16 +109,10 @@ export default function GlobalCountryInfoPage() {
               />
             </div>
             <Select value={continentFilter} onValueChange={setContinentFilter}>
-              <SelectTrigger>
-                <SelectValue placeholder="筛选大洲" />
-              </SelectTrigger>
+              <SelectTrigger><SelectValue placeholder="筛选大洲" /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">所有大洲</SelectItem>
-                {getContinents().map(continent => (
-                  <SelectItem key={continent} value={continent}>
-                    {continent}
-                  </SelectItem>
-                ))}
+                {getContinents().map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}
               </SelectContent>
             </Select>
           </div>
@@ -118,48 +121,32 @@ export default function GlobalCountryInfoPage() {
             {filteredCountries.length > 0 ? (
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {filteredCountries.map((country) => {
-                  // 重构点：将复杂的逻辑计算移到 return 外部，使 JSX 更清晰
                   const timeDiff = getTimeDifference(country.timezone);
-                  const timeDiffDisplay = `UTC${timeDiff >= 0 ? '+' : ''}${timeDiff}h (本地)`;
-
+                  const timeDiffDisplay = `UTC${timeDiff >= 0 ? '+' : ''}${timeDiff}`;
                   return (
-                    <Card
-                      key={country.iso2}
-                      className={`overflow-hidden transition-all hover:shadow-lg ${
-                        favorites.includes(country.iso2) ? 'ring-2 ring-yellow-400' : ''
-                      }`}
-                    >
-                      <CardHeader className="pb-3">
+                    <Card key={country.iso2} className={`transition-all hover:shadow-lg ${favorites.includes(country.iso2) ? 'ring-2 ring-yellow-400' : ''}`}>
+                      <CardHeader>
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
                             <CardTitle className="text-lg flex items-center gap-2">
                               <span className="text-2xl">{getFlagEmoji(country.iso2)}</span>
                               {country.name_cn}
                             </CardTitle>
-                            <CardDescription>
-                              {country.name_en}
-                            </CardDescription>
+                            <CardDescription>{country.name_en}</CardDescription>
                           </div>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="ml-2 h-8 w-8"
-                            onClick={() => toggleFavorite(country.iso2)}
-                          >
-                            {favorites.includes(country.iso2) ? (
-                              <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                            ) : (
-                              <StarOff className="h-5 w-5" />
-                            )}
+                          <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => toggleFavorite(country.iso2)}>
+                            {favorites.includes(country.iso2)
+                              ? <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                              : <StarOff className="h-5 w-5" />}
                           </Button>
                         </div>
                       </CardHeader>
-                      <CardContent className="text-sm space-y-3">
+                      <CardContent className="space-y-1">
                         <InfoRow icon={Globe2} label="大洲" value={country.continent_cn} />
                         <InfoRow icon={Landmark} label="首都" value={country.capital_cn} />
                         <InfoRow icon={Phone} label="国际区号" value={country.dial_code} hasCopy />
                         <InfoRow icon={Code} label="国家代码" value={`${country.iso2} / ${country.iso3}`} hasCopy />
-                        <InfoRow icon={Clock} label="时差" value={timeDiffDisplay} />
+                        <InfoRow icon={Clock} label="时差 (vs 本地)" value={timeDiffDisplay} />
                         <InfoRow icon={DollarSign} label="货币" value={`${country.currency_name_cn} (${country.currency_code})`} />
                       </CardContent>
                     </Card>
@@ -179,10 +166,7 @@ export default function GlobalCountryInfoPage() {
 
       <Card className="mt-6 bg-muted/50">
         <CardHeader>
-          <CardTitle className="text-lg flex items-center gap-2">
-            <Info className="h-5 w-5" />
-            使用说明
-          </Title>
+          <CardTitle className="text-lg flex items-center gap-2"><Info className="h-5 w-5" />使用说明</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2 text-sm text-muted-foreground">
           <p>• 点击信息旁的复制按钮，可以快速复制代码或区号。</p>
@@ -194,17 +178,3 @@ export default function GlobalCountryInfoPage() {
     </>
   );
 }
-
-// 辅助组件：用于显示每一行信息
-const InfoRow = ({ icon: Icon, label, value, hasCopy = false }: { icon: React.ElementType, label: string, value: string, hasCopy?: boolean }) => (
-  <div className="flex items-center justify-between">
-    <div className="flex items-center gap-2 text-muted-foreground">
-      <Icon className="h-4 w-4" />
-      <span>{label}</span>
-    </div>
-    <div className="flex items-center gap-2 font-medium">
-      <span>{value}</span>
-      {hasCopy && <CopyButton text={value} className="h-8 w-8" />}
-    </div>
-  </div>
-);
