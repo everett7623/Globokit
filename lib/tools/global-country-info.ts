@@ -1,7 +1,7 @@
 // 名称: 全球国家信息查询
 // 描述: 提供全球国家和地区的详细信息，包括代码、区号、时区等
 // 路径: seedtool/lib/tools/global-country-info.ts
-// 作者: Jensfrank (由Gemini AI生成)
+// 作者: Jensfrank
 // 更新时间: 2025-07-25
 
 export interface CountryInfo {
@@ -35,13 +35,10 @@ export const COUNTRY_DATA: CountryInfo[] = [
   { name_cn: "巴西", name_en: "Brazil", iso2: "BR", iso3: "BRA", dial_code: "+55", capital_cn: "巴西利亚", capital_en: "Brasília", continent_cn: "南美洲", continent_en: "South America", tld: ".br", timezone: "America/Sao_Paulo", currency_code: "BRL", currency_name_cn: "巴西雷亚尔" },
   { name_cn: "印度", name_en: "India", iso2: "IN", iso3: "IND", dial_code: "+91", capital_cn: "新德里", capital_en: "New Delhi", continent_cn: "亚洲", continent_en: "Asia", tld: ".in", timezone: "Asia/Kolkata", currency_code: "INR", currency_name_cn: "印度卢比" },
   { name_cn: "韩国", name_en: "South Korea", iso2: "KR", iso3: "KOR", dial_code: "+82", capital_cn: "首尔", capital_en: "Seoul", continent_cn: "亚洲", continent_en: "Asia", tld: ".kr", timezone: "Asia/Seoul", currency_code: "KRW", currency_name_cn: "韩元" },
-  // ... 为保持简洁，此处仅列出部分国家。实际使用时请填充更完整的数据列表。
 ];
 
 /**
  * 获取国旗的emoji表示
- * @param countryCode ISO 3166-1 alpha-2 国家代码
- * @returns 返回国旗的emoji字符串
  */
 export function getFlagEmoji(countryCode: string): string {
   if (!countryCode || countryCode.length !== 2) return '🌐';
@@ -53,44 +50,28 @@ export function getFlagEmoji(countryCode: string): string {
 }
 
 /**
- * 获取指定时区与当前本地时区的时差（小时）
- * @param targetTimezone 目标时区，如 'America/New_York'
- * @returns 返回数字类型的时差
+ * [已重写] 获取指定时区与本地的时差（小时）
  */
 export function getTimeDifference(targetTimezone: string): number {
   try {
     const now = new Date();
-    const localOffset = now.getTimezoneOffset() * 60 * 1000;
-    
-    // 使用Intl.DateTimeFormat获取目标时区的当前时间信息
-    const formatter = new Intl.DateTimeFormat('en-US', {
-      timeZone: targetTimezone,
-      hour12: false,
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
-    });
-    
-    const parts = formatter.formatToParts(now);
-    const getPart = (partName: string) => parts.find(p => p.type === partName)?.value || '0';
-    
-    const targetDate = new Date(
-        `${getPart('year')}-${getPart('month')}-${getPart('day')}T${getPart('hour')}:${getPart('minute')}:${getPart('second')}`
-    );
-
-    const targetOffset = (now.getTime() - targetDate.getTime()) + localOffset;
-    
-    return Math.round(targetOffset / (1000 * 60 * 60)) * -1;
+    // 获取本地时间（格林尼治时间）的字符串，格式如 "1/25/2025, 10:00:00 AM"
+    const localTimeString = now.toLocaleString('en-US', { timeZone: targetTimezone });
+    // 将该字符串转回 Date 对象。此时JS引擎会用本地时区来解析它
+    const targetDate = new Date(localTimeString);
+    // 计算本地当前时间与目标时区时间的毫秒差
+    const diff = now.getTime() - targetDate.getTime();
+    // 将毫秒差转换为小时并四舍五入到最近的半小时
+    return Math.round(diff / (1000 * 60 * 30)) / 2;
   } catch (e) {
-    console.error(`Invalid timezone: ${targetTimezone}`);
-    return 0; // 如果时区无效，返回0
+    console.error(`Invalid timezone provided: ${targetTimezone}`);
+    return 0; // 如果时区名称错误，返回0
   }
 }
 
-// 获取所有大洲的唯一列表
+/**
+ * 获取所有大洲的唯一列表
+ */
 export const getContinents = () => {
   const continents = new Set(COUNTRY_DATA.map(c => c.continent_cn));
   return Array.from(continents);
