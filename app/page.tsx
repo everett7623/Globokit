@@ -106,6 +106,16 @@ const tools = [
     bgColor: 'bg-cyan-50',
     badge: '新增',
     badgeColor: 'bg-green-100 text-green-700'
+  },
+  {
+    title: '全球国家信息查询',
+    description: '查询世界各国的中英文名称、区号、代码、时区、域名等信息',
+    icon: Globe,
+    href: '/tools/country-info',
+    color: 'text-cyan-500',
+    bgColor: 'bg-cyan-50',
+    badge: '新增',
+    badgeColor: 'bg-green-100 text-green-700'
   }
 ]
 
