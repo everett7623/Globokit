@@ -91,10 +91,6 @@ export default function GlobalCountryInfoPage() {
       </div>
 
       <Card>
-        <CardHeader>
-          <CardTitle>国家信息查询</CardTitle>
-          <CardDescription>支持通过中英文名称、国家代码或电话区号进行搜索</CardDescription>
-        </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2">
             <div className="relative">
