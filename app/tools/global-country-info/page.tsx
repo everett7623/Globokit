@@ -22,7 +22,6 @@ export default function GlobalCountryInfoPage() {
   const [favorites, setFavorites] = useState<string[]>([])
   const [isMounted, setIsMounted] = useState(false)
 
-  // 从localStorage加载收藏
   useEffect(() => {
     const savedFavorites = localStorage.getItem('countryFavorites')
     if (savedFavorites) {
@@ -31,7 +30,6 @@ export default function GlobalCountryInfoPage() {
     setIsMounted(true)
   }, [])
 
-  // 筛选和排序逻辑
   const filteredCountries = useMemo(() => {
     let countries = COUNTRY_DATA.filter(country => {
       const term = searchTerm.toLowerCase()
@@ -48,7 +46,6 @@ export default function GlobalCountryInfoPage() {
       return matchesSearch && matchesContinent
     })
 
-    // 将收藏的国家排在前面
     countries.sort((a, b) => {
       const aIsFav = favorites.includes(a.iso2)
       const bIsFav = favorites.includes(b.iso2)
@@ -60,7 +57,6 @@ export default function GlobalCountryInfoPage() {
     return countries
   }, [searchTerm, continentFilter, favorites])
 
-  // 切换收藏
   const toggleFavorite = (iso2: string) => {
     const newFavorites = favorites.includes(iso2)
       ? favorites.filter(f => f !== iso2)
@@ -71,7 +67,7 @@ export default function GlobalCountryInfoPage() {
   }
 
   if (!isMounted) {
-    return null; // or a loading spinner
+    return null;
   }
 
   return (
@@ -121,48 +117,54 @@ export default function GlobalCountryInfoPage() {
           <div className="space-y-6 max-h-[800px] overflow-y-auto p-1">
             {filteredCountries.length > 0 ? (
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {filteredCountries.map((country) => (
-                  <Card
-                    key={country.iso2}
-                    className={`overflow-hidden transition-all hover:shadow-lg ${
-                      favorites.includes(country.iso2) ? 'ring-2 ring-yellow-400' : ''
-                    }`}
-                  >
-                    <CardHeader className="pb-3">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <CardTitle className="text-lg flex items-center gap-2">
-                            <span className="text-2xl">{getFlagEmoji(country.iso2)}</span>
-                            {country.name_cn}
-                          </CardTitle>
-                          <CardDescription>
-                            {country.name_en}
-                          </CardDescription>
+                {filteredCountries.map((country) => {
+                  // 重构点：将复杂的逻辑计算移到 return 外部，使 JSX 更清晰
+                  const timeDiff = getTimeDifference(country.timezone);
+                  const timeDiffDisplay = `UTC${timeDiff >= 0 ? '+' : ''}${timeDiff}h (本地)`;
+
+                  return (
+                    <Card
+                      key={country.iso2}
+                      className={`overflow-hidden transition-all hover:shadow-lg ${
+                        favorites.includes(country.iso2) ? 'ring-2 ring-yellow-400' : ''
+                      }`}
+                    >
+                      <CardHeader className="pb-3">
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <CardTitle className="text-lg flex items-center gap-2">
+                              <span className="text-2xl">{getFlagEmoji(country.iso2)}</span>
+                              {country.name_cn}
+                            </CardTitle>
+                            <CardDescription>
+                              {country.name_en}
+                            </CardDescription>
+                          </div>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="ml-2 h-8 w-8"
+                            onClick={() => toggleFavorite(country.iso2)}
+                          >
+                            {favorites.includes(country.iso2) ? (
+                              <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                            ) : (
+                              <StarOff className="h-5 w-5" />
+                            )}
+                          </Button>
                         </div>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="ml-2 h-8 w-8"
-                          onClick={() => toggleFavorite(country.iso2)}
-                        >
-                          {favorites.includes(country.iso2) ? (
-                            <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                          ) : (
-                            <StarOff className="h-5 w-5" />
-                          )}
-                        </Button>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="text-sm space-y-3">
-                      <InfoRow icon={Globe2} label="大洲" value={country.continent_cn} />
-                      <InfoRow icon={Landmark} label="首都" value={country.capital_cn} />
-                      <InfoRow icon={Phone} label="国际区号" value={country.dial_code} hasCopy />
-                      <InfoRow icon={Code} label="国家代码" value={`${country.iso2} / ${country.iso3}`} hasCopy />
-                      <InfoRow icon={Clock} label="时差" value={`UTC${getTimeDifference(country.timezone) > 0 ? '+' : ''}${getTimeDifference(country.timezone)}h (本地)`} />
-                      <InfoRow icon={DollarSign} label="货币" value={`${country.currency_name_cn} (${country.currency_code})`} />
-                    </CardContent>
-                  </Card>
-                ))}
+                      </CardHeader>
+                      <CardContent className="text-sm space-y-3">
+                        <InfoRow icon={Globe2} label="大洲" value={country.continent_cn} />
+                        <InfoRow icon={Landmark} label="首都" value={country.capital_cn} />
+                        <InfoRow icon={Phone} label="国际区号" value={country.dial_code} hasCopy />
+                        <InfoRow icon={Code} label="国家代码" value={`${country.iso2} / ${country.iso3}`} hasCopy />
+                        <InfoRow icon={Clock} label="时差" value={timeDiffDisplay} />
+                        <InfoRow icon={DollarSign} label="货币" value={`${country.currency_name_cn} (${country.currency_code})`} />
+                      </CardContent>
+                    </Card>
+                  );
+                })}
               </div>
             ) : (
               <div className="text-center py-16">
@@ -190,7 +192,7 @@ export default function GlobalCountryInfoPage() {
         </CardContent>
       </Card>
     </>
-  )
+  );
 }
 
 // 辅助组件：用于显示每一行信息
@@ -205,4 +207,4 @@ const InfoRow = ({ icon: Icon, label, value, hasCopy = false }: { icon: React.El
       {hasCopy && <CopyButton text={value} className="h-8 w-8" />}
     </div>
   </div>
-)
+);
