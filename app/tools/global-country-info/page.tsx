@@ -1,7 +1,7 @@
 // 名称: 全球国家信息查询
 // 描述: 查询全球国家和地区的详细信息，支持搜索和筛选
 // 路径: seedtool/app/tools/global-country-info/page.tsx
-// 作者: Jensfrank (由Gemini AI生成)
+// 作者: Jensfrank
 // 更新时间: 2025-07-25
 
 'use client'
@@ -35,14 +35,14 @@ export default function GlobalCountryInfoPage() {
   const filteredCountries = useMemo(() => {
     let countries = COUNTRY_DATA.filter(country => {
       const term = searchTerm.toLowerCase()
-      const matchesSearch = 
+      const matchesSearch =
         country.name_cn.toLowerCase().includes(term) ||
         country.name_en.toLowerCase().includes(term) ||
         country.iso2.toLowerCase().includes(term) ||
         country.iso3.toLowerCase().includes(term) ||
         country.dial_code.includes(term)
 
-      const matchesContinent = 
+      const matchesContinent =
         continentFilter === 'all' || country.continent_cn === continentFilter
 
       return matchesSearch && matchesContinent
@@ -65,7 +65,7 @@ export default function GlobalCountryInfoPage() {
     const newFavorites = favorites.includes(iso2)
       ? favorites.filter(f => f !== iso2)
       : [...favorites, iso2]
-    
+
     setFavorites(newFavorites)
     localStorage.setItem('countryFavorites', JSON.stringify(newFavorites))
   }
@@ -122,8 +122,8 @@ export default function GlobalCountryInfoPage() {
             {filteredCountries.length > 0 ? (
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {filteredCountries.map((country) => (
-                  <Card 
-                    key={country.iso2} 
+                  <Card
+                    key={country.iso2}
                     className={`overflow-hidden transition-all hover:shadow-lg ${
                       favorites.includes(country.iso2) ? 'ring-2 ring-yellow-400' : ''
                     }`}
@@ -158,7 +158,7 @@ export default function GlobalCountryInfoPage() {
                       <InfoRow icon={Landmark} label="首都" value={country.capital_cn} />
                       <InfoRow icon={Phone} label="国际区号" value={country.dial_code} hasCopy />
                       <InfoRow icon={Code} label="国家代码" value={`${country.iso2} / ${country.iso3}`} hasCopy />
-                      <InfoRow icon={Clock} label="时差" value={`UTC${getTimeDifference(country.timezone) > 0 ? '+' : ''}${getTimeDifference(country.timezone)} (vs 本地)`} />
+                      <InfoRow icon={Clock} label="时差" value={`UTC${getTimeDifference(country.timezone) > 0 ? '+' : ''}${getTimeDifference(country.timezone)}h (本地)`} />
                       <InfoRow icon={DollarSign} label="货币" value={`${country.currency_name_cn} (${country.currency_code})`} />
                     </CardContent>
                   </Card>
@@ -180,7 +180,7 @@ export default function GlobalCountryInfoPage() {
           <CardTitle className="text-lg flex items-center gap-2">
             <Info className="h-5 w-5" />
             使用说明
-          </CardTitle>
+          </Title>
         </CardHeader>
         <CardContent className="space-y-2 text-sm text-muted-foreground">
           <p>• 点击信息旁的复制按钮，可以快速复制代码或区号。</p>
@@ -202,7 +202,7 @@ const InfoRow = ({ icon: Icon, label, value, hasCopy = false }: { icon: React.El
     </div>
     <div className="flex items-center gap-2 font-medium">
       <span>{value}</span>
-      {hasCopy && <CopyButton textToCopy={value} />}
+      {hasCopy && <CopyButton text={value} className="h-8 w-8" />}
     </div>
   </div>
 )
