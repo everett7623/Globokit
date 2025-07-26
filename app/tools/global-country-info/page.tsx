@@ -195,7 +195,7 @@ export default function GlobalCountryInfoPage() {
 
   const selectedCountryData = selectedCountry 
     ? COUNTRY_DATA.find(c => c.iso2 === selectedCountry)
-    : null
+    : null;
 
   return (
     <>
@@ -462,4 +462,4 @@ export default function GlobalCountryInfoPage() {
                                   <span className="font-mono">{country.iso2} / {country.iso3}</span>
                                   <CopyButton text={`${country.iso2} / ${country.iso3}`} className="h-6 w-6" />
                                 </div>
-                       
+                      
