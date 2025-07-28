@@ -3210,17 +3210,6 @@ export const COUNTRY_DATA: CountryInfo[] = [
     voltage: "127V"
   },
   { 
-    name_cn: "库拉索", 
-    name_en: "Curaçao", 
-    iso2: "CW", 
-    iso3: "CUW", 
-    dial_code: "+599", 
-    capital_cn: "威廉斯塔德", 
-    capital_en: "Willemstad", 
-    continent_cn: "北美洲", 
-    continent_en: "North America", 
-    tld: ".cw", 
-  { 
     name_cn: "特立尼达和多巴哥", 
     name_en: "Trinidad and Tobago", 
     iso2: "TT", 
