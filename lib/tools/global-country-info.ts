@@ -48,7 +48,7 @@ export interface CountryInfo {
 // 精简版数据用于测试
 export const COUNTRY_DATA: CountryInfo[] = [
   { 
-//亚洲国家
+//亚洲国家数据
     name_cn: "中国", 
     name_en: "China", 
     iso2: "CN", 
