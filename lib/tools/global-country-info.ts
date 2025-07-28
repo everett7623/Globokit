@@ -1882,10 +1882,7 @@ export const COUNTRY_DATA: CountryInfo[] = [
     power_plug: "C",
     voltage: "220V"
   },
-
-  //美洲国家
-// 北美洲国家数据
-export const NORTH_AMERICA_COUNTRIES: CountryInfo[] = [
+  // 北美洲国家数据
   { 
     name_cn: "美国", 
     name_en: "United States", 
