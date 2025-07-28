@@ -2,7 +2,7 @@
 // 描述: 提供全球国家和地区的详细信息，包括代码、区号、时区、外贸相关信息等
 // 路径: seedtool/lib/tools/global-country-info.ts
 // 作者: Jensfrank
-// 更新时间: 2025-07-26
+// 更新时间: 2025-07-28
 
 export interface CountryInfo {
   // 基础信息
