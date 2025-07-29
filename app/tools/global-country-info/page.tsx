@@ -2,7 +2,7 @@
 // 描述: 查询全球国家和地区的详细信息，支持搜索和筛选
 // 路径: seedtool/app/tools/global-country-info/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2025-07-28
+// 更新时间: 2025-07-29
 
 'use client'
 
@@ -27,11 +27,46 @@ import {
   Search, Globe, Star, StarOff, Download, Filter, ChevronUp, ChevronDown,
   Phone, Globe2, Clock, DollarSign, MapPin, Hash, Info, X,
   Building2, Users, Languages, Briefcase, Calendar, Ship, Zap,
-  Car, Plug, Eye
+  Car, Plug, Eye, TrendingUp, Map
 } from 'lucide-react'
 
 type SortField = 'name' | 'continent' | 'timezone' | 'none'
 type SortOrder = 'asc' | 'desc'
+
+// 主要外贸大国列表
+const MAJOR_TRADE_COUNTRIES = [
+  'CN', // 中国
+  'US', // 美国
+  'DE', // 德国
+  'JP', // 日本
+  'GB', // 英国
+  'FR', // 法国
+  'IT', // 意大利
+  'NL', // 荷兰
+  'KR', // 韩国
+  'CA', // 加拿大
+  'IN', // 印度
+  'SG', // 新加坡
+  'MX', // 墨西哥
+  'ES', // 西班牙
+  'BE', // 比利时
+  'CH', // 瑞士
+  'RU', // 俄罗斯
+  'AU', // 澳大利亚
+  'BR', // 巴西
+  'AE', // 阿联酋
+]
+
+// 跨洲国家映射
+const TRANSCONTINENTAL_COUNTRIES: Record<string, string[]> = {
+  'RU': ['欧洲', '亚洲'], // 俄罗斯
+  'TR': ['亚洲', '欧洲'], // 土耳其
+  'EG': ['非洲', '亚洲'], // 埃及
+  'KZ': ['亚洲', '欧洲'], // 哈萨克斯坦
+  'GE': ['亚洲', '欧洲'], // 格鲁吉亚
+  'AZ': ['亚洲', '欧洲'], // 阿塞拜疆
+  'AM': ['亚洲', '欧洲'], // 亚美尼亚
+}
 
 export default function GlobalCountryInfoPage() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -40,6 +75,7 @@ export default function GlobalCountryInfoPage() {
   const [sortField, setSortField] = useState<SortField>('none')
   const [sortOrder, setSortOrder] = useState<SortOrder>('asc')
   const [showOnlyFavorites, setShowOnlyFavorites] = useState(false)
+  const [showOnlyMajorTrade, setShowOnlyMajorTrade] = useState(false)
   const [expandedRows, setExpandedRows] = useState<string[]>([])
   const [selectedCountry, setSelectedCountry] = useState<CountryInfo | null>(null)
 
@@ -59,6 +95,12 @@ export default function GlobalCountryInfoPage() {
     }
   }
 
+  // 获取包含跨洲国家的大洲列表
+  const getExtendedContinents = () => {
+    const continents = getContinents()
+    return ['all', ...continents, '跨洲国家']
+  }
+
   const filteredAndSortedCountries = useMemo(() => {
     let filtered = COUNTRY_DATA.filter(country => {
       const term = searchTerm.toLowerCase()
@@ -71,10 +113,25 @@ export default function GlobalCountryInfoPage() {
         country.capital_cn.toLowerCase().includes(term) ||
         country.capital_en.toLowerCase().includes(term)
       
-      const matchesContinent = continentFilter === 'all' || country.continent_cn === continentFilter
-      const matchesFavorites = !showOnlyFavorites || favorites.includes(country.iso2)
+      // 处理大洲筛选
+      let matchesContinent = false
+      if (continentFilter === 'all') {
+        matchesContinent = true
+      } else if (continentFilter === '跨洲国家') {
+        matchesContinent = TRANSCONTINENTAL_COUNTRIES.hasOwnProperty(country.iso2)
+      } else {
+        // 检查是否是跨洲国家
+        if (TRANSCONTINENTAL_COUNTRIES[country.iso2]) {
+          matchesContinent = TRANSCONTINENTAL_COUNTRIES[country.iso2].includes(continentFilter)
+        } else {
+          matchesContinent = country.continent_cn === continentFilter
+        }
+      }
       
-      return matchesSearch && matchesContinent && matchesFavorites
+      const matchesFavorites = !showOnlyFavorites || favorites.includes(country.iso2)
+      const matchesMajorTrade = !showOnlyMajorTrade || MAJOR_TRADE_COUNTRIES.includes(country.iso2)
+      
+      return matchesSearch && matchesContinent && matchesFavorites && matchesMajorTrade
     })
 
     // 排序逻辑
@@ -105,7 +162,7 @@ export default function GlobalCountryInfoPage() {
     })
 
     return filtered
-  }, [searchTerm, continentFilter, favorites, sortField, sortOrder, showOnlyFavorites])
+  }, [searchTerm, continentFilter, favorites, sortField, sortOrder, showOnlyFavorites, showOnlyMajorTrade])
 
   const toggleFavorite = (iso2: string) => {
     const newFavorites = favorites.includes(iso2) 
@@ -168,7 +225,50 @@ export default function GlobalCountryInfoPage() {
       <ChevronDown className="h-3 w-3" />
   }
 
+  // 主要外贸国家展示组件
+  const MajorTradeCountries = () => {
+    const majorCountries = COUNTRY_DATA.filter(c => MAJOR_TRADE_COUNTRIES.includes(c.iso2))
+    
+    return (
+      <Card className="mb-6">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <TrendingUp className="h-5 w-5" />
+            主要外贸伙伴国
+          </CardTitle>
+          <CardDescription>全球贸易额排名前20的国家和地区</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-10 gap-3">
+            {majorCountries.map(country => (
+              <Button
+                key={country.iso2}
+                variant="outline"
+                className="h-auto p-3 flex flex-col items-center gap-2 hover:shadow-md transition-shadow"
+                onClick={() => setSelectedCountry(country)}
+              >
+                <span className="text-2xl">{getFlagEmoji(country.iso2)}</span>
+                <span className="text-xs font-medium text-center">{country.name_cn}</span>
+              </Button>
+            ))}
+          </div>
+          <div className="mt-4 flex justify-end">
+            <Button
+              variant="link"
+              onClick={() => setShowOnlyMajorTrade(!showOnlyMajorTrade)}
+              className="text-sm"
+            >
+              {showOnlyMajorTrade ? '显示所有国家' : '仅显示主要贸易国'}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    )
+  }
+
   const CountryDetailModal = ({ country, onClose }: { country: CountryInfo, onClose: () => void }) => {
+    const isTranscontinental = TRANSCONTINENTAL_COUNTRIES.hasOwnProperty(country.iso2)
+    
     return (
       <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
         <Card className="w-full max-w-4xl max-h-[90vh] overflow-auto">
@@ -179,6 +279,12 @@ export default function GlobalCountryInfoPage() {
                 <div>
                   <CardTitle className="text-2xl">{country.name_cn}</CardTitle>
                   <CardDescription className="text-lg">{country.name_en}</CardDescription>
+                  {isTranscontinental && (
+                    <Badge variant="secondary" className="mt-1">
+                      <Map className="h-3 w-3 mr-1" />
+                      跨洲国家
+                    </Badge>
+                  )}
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -224,7 +330,19 @@ export default function GlobalCountryInfoPage() {
                         <Globe2 className="h-4 w-4" />
                         <span>大洲</span>
                       </div>
-                      <Badge>{country.continent_cn}</Badge>
+                      <div>
+                        {isTranscontinental ? (
+                          <div className="flex gap-1">
+                            {TRANSCONTINENTAL_COUNTRIES[country.iso2].map((cont, idx) => (
+                              <Badge key={idx} variant={idx === 0 ? "default" : "secondary"}>
+                                {cont}
+                              </Badge>
+                            ))}
+                          </div>
+                        ) : (
+                          <Badge>{country.continent_cn}</Badge>
+                        )}
+                      </div>
                     </div>
                     <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
                       <div className="flex items-center gap-2 text-muted-foreground">
@@ -455,6 +573,8 @@ export default function GlobalCountryInfoPage() {
         <p className="text-muted-foreground">快速查找世界各国的区号、代码、时差等关键信息，包含外贸相关的商务礼仪和贸易注意事项</p>
       </div>
 
+      <MajorTradeCountries />
+
       <Card className="mb-6">
         <CardHeader>
           <CardTitle>搜索和筛选</CardTitle>
@@ -480,6 +600,12 @@ export default function GlobalCountryInfoPage() {
                 {getContinents().map(continent => (
                   <SelectItem key={continent} value={continent}>{continent}</SelectItem>
                 ))}
+                <SelectItem value="跨洲国家">
+                  <span className="flex items-center gap-1">
+                    <Map className="h-3 w-3" />
+                    跨洲国家
+                  </span>
+                </SelectItem>
               </SelectContent>
             </Select>
 
@@ -561,6 +687,8 @@ export default function GlobalCountryInfoPage() {
                   const timeDiffDisplay = `UTC${timeDiff >= 0 ? '+' : ''}${timeDiff}`
                   const isExpanded = expandedRows.includes(country.iso2)
                   const isFavorite = favorites.includes(country.iso2)
+                  const isMajorTrade = MAJOR_TRADE_COUNTRIES.includes(country.iso2)
+                  const isTranscontinental = TRANSCONTINENTAL_COUNTRIES.hasOwnProperty(country.iso2)
 
                   return (
                     <>
@@ -572,13 +700,30 @@ export default function GlobalCountryInfoPage() {
                           <div className="flex items-center gap-3">
                             <span className="text-2xl">{getFlagEmoji(country.iso2)}</span>
                             <div>
-                              <div className="font-medium">{country.name_cn}</div>
+                              <div className="font-medium flex items-center gap-2">
+                                {country.name_cn}
+                                {isMajorTrade && (
+                                  <Badge variant="default" className="text-xs">
+                                    <TrendingUp className="h-3 w-3 mr-1" />
+                                    贸易大国
+                                  </Badge>
+                                )}
+                              </div>
                               <div className="text-sm text-muted-foreground">{country.name_en}</div>
                             </div>
                           </div>
                         </td>
                         <td className="p-4 hidden md:table-cell">
-                          <Badge variant="outline">{country.continent_cn}</Badge>
+                          {isTranscontinental ? (
+                            <div className="flex items-center gap-1">
+                              <Badge variant="outline" className="text-xs">
+                                <Map className="h-3 w-3 mr-1" />
+                                跨洲
+                              </Badge>
+                            </div>
+                          ) : (
+                            <Badge variant="outline">{country.continent_cn}</Badge>
+                          )}
                         </td>
                         <td className="p-4">
                           <div className="flex items-center gap-2">
@@ -652,6 +797,12 @@ export default function GlobalCountryInfoPage() {
                                 <Globe2 className="h-4 w-4 text-muted-foreground" />
                                 <span className="text-muted-foreground">大洲:</span>
                                 <span>{country.continent_cn}</span>
+                                {isTranscontinental && (
+                                  <Badge variant="secondary" className="text-xs">
+                                    <Map className="h-3 w-3 mr-1" />
+                                    跨洲国家
+                                  </Badge>
+                                )}
                               </div>
                               <div className="flex items-center gap-2">
                                 <MapPin className="h-4 w-4 text-muted-foreground" />
@@ -689,6 +840,14 @@ export default function GlobalCountryInfoPage() {
                                 <span className="text-muted-foreground">人口:</span>
                                 <span>{formatPopulation(country.population)}</span>
                               </div>
+                              {isMajorTrade && (
+                                <div className="flex items-center gap-2">
+                                  <TrendingUp className="h-4 w-4 text-muted-foreground" />
+                                  <Badge variant="default" className="text-xs">
+                                    主要贸易伙伴国
+                                  </Badge>
+                                </div>
+                              )}
                             </div>
                           </td>
                         </tr>
@@ -719,6 +878,8 @@ export default function GlobalCountryInfoPage() {
         </CardHeader>
         <CardContent className="space-y-2 text-sm text-muted-foreground">
           <p>• 点击<Eye className="h-4 w-4 inline mx-1" />查看按钮可查看国家的详细信息，包括商务礼仪、贸易注意事项等</p>
+          <p>• 带有<TrendingUp className="h-4 w-4 inline mx-1" />标记的是全球贸易额前20的主要贸易伙伴国</p>
+          <p>• 跨洲国家（如俄罗斯、土耳其等）会显示<Map className="h-4 w-4 inline mx-1" />跨洲标记</p>
           <p>• 点击表头可对国家名称、大洲和时差进行排序</p>
           <p>• 收藏的国家会优先显示在列表顶部，并有黄色背景标识</p>
           <p>• 支持导出当前筛选结果为CSV文件，包含所有详细信息</p>
