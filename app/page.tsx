@@ -1,5 +1,5 @@
-// 路径: seedtool/app/page.tsx
-// 更新时间: 2025-07-24
+// 路径: Globokit/app/page.tsx
+// 更新时间: 2025-09-01
 // 说明: 使用独立组件的主页
 
 import Link from 'next/link'
@@ -190,10 +190,10 @@ export default function HomePage() {
           <CardContent className="p-8 md:p-12">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-3xl font-bold mb-6 text-gray-900">
-                关于 SeedTool
+                关于 Globokit
               </h2>
               <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-                SeedTool 是专为外贸从业者打造的在线工具平台，我们深知外贸工作中的各种痛点，
+                Globokit 是专为外贸从业者打造的在线工具平台，我们深知外贸工作中的各种痛点，
                 因此精心开发了这些实用工具。无论是人民币大写转换、文本处理，还是货币符号查询等等，
                 我们都为您提供了简单高效的解决方案。
               </p>
