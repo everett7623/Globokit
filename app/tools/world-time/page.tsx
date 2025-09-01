@@ -2,7 +2,7 @@
 // 描述: 查看全球主要贸易城市的实时时间，便于外贸业务时间安排
 // 路径: seedtool/app/tools/world-time/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2025-07-24
+// 更新时间: 2025-09-01
 
 'use client'
 
@@ -106,17 +106,28 @@ export default function WorldTimePage() {
       return false
     }
     
-    // 快捷过滤
+    // 快捷过滤 (已更新)
     if (quickFilter === 'working' && !city.isBusinessHours) {
       return false
     }
-    if (quickFilter === 'asia' && !['CN', 'HK', 'TW', 'JP', 'KR', 'SG', 'MY', 'TH', 'ID', 'PH', 'VN', 'IN', 'BD', 'PK'].includes(city.countryCode)) {
+    // 亚洲 (包含中东)
+    if (quickFilter === 'asia' && !['CN', 'HK', 'TW', 'JP', 'KR', 'SG', 'MY', 'TH', 'ID', 'PH', 'VN', 'IN', 'BD', 'PK', 'KZ', 'AE', 'SA', 'QA', 'KW', 'OM', 'BH', 'IL', 'IR'].includes(city.countryCode)) {
       return false
     }
-    if (quickFilter === 'europe' && !['GB', 'FR', 'DE', 'NL', 'BE', 'ES', 'IT', 'CH', 'AT', 'PL', 'CZ', 'HU', 'SE', 'DK', 'NO', 'FI', 'RU', 'UA', 'GR', 'PT', 'IE', 'TR'].includes(city.countryCode)) {
+    // 欧洲
+    if (quickFilter === 'europe' && !['GB', 'FR', 'DE', 'NL', 'BE', 'ES', 'IT', 'CH', 'AT', 'PL', 'CZ', 'HU', 'RO', 'SE', 'DK', 'NO', 'FI', 'RU', 'UA', 'GR', 'PT', 'IE', 'TR'].includes(city.countryCode)) {
       return false
     }
-    if (quickFilter === 'americas' && !['US', 'CA', 'MX', 'BR', 'AR', 'CL', 'PE', 'CO', 'VE', 'EC', 'PA'].includes(city.countryCode)) {
+    // 美洲 (北美和中南美)
+    if (quickFilter === 'americas' && !['US', 'CA', 'MX', 'BR', 'AR', 'CL', 'PE', 'CO', 'VE', 'EC', 'PA', 'UY'].includes(city.countryCode)) {
+      return false
+    }
+    // 非洲
+    if (quickFilter === 'africa' && !['EG', 'ZA', 'NG', 'KE', 'MA', 'DZ', 'TN', 'ET', 'GH', 'SN'].includes(city.countryCode)) {
+      return false
+    }
+    // 大洋洲
+    if (quickFilter === 'oceania' && !['AU', 'NZ'].includes(city.countryCode)) {
       return false
     }
     
@@ -271,7 +282,7 @@ export default function WorldTimePage() {
             </TabsList>
           </Tabs>
 
-          {/* 快捷过滤按钮 */}
+          {/* 快捷过滤按钮 (已更新) */}
           <div className="space-y-2">
             <Label>快捷筛选</Label>
             <div className="flex flex-wrap gap-2">
@@ -309,6 +320,20 @@ export default function WorldTimePage() {
                 onClick={() => setQuickFilter(quickFilter === 'americas' ? '' : 'americas')}
               >
                 美洲
+              </Button>
+              <Button
+                variant={quickFilter === 'africa' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setQuickFilter(quickFilter === 'africa' ? '' : 'africa')}
+              >
+                非洲
+              </Button>
+              <Button
+                variant={quickFilter === 'oceania' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setQuickFilter(quickFilter === 'oceania' ? '' : 'oceania')}
+              >
+                大洋洲
               </Button>
             </div>
           </div>
