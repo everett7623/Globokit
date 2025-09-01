@@ -1,4 +1,4 @@
-// 路径: seedtool/app/layout.tsx
+// 路径: Globokit/app/layout.tsx
 // 更新时间: 2025-07-22
 // 说明: 根布局文件，包含全站通用的头部和底部
 
@@ -11,15 +11,15 @@ import { Footer } from '@/components/layout/footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'SeedTool - 外贸实用工具集',
+  title: 'Globokit - 外贸实用工具集',
   description: '专为外贸从业者打造的在线工具平台，提供人民币大写转换、文本处理、货币符号查询等实用工具',
   keywords: '外贸工具,人民币大写,英文大小写,特殊字符,数字转英文,中文拼音,国际节假日,世界时间,货币符号',
   authors: [{ name: 'Jensfrank' }],
   openGraph: {
     title: 'SeedTool - 外贸实用工具集',
     description: '专为外贸从业者打造的在线工具平台',
-    url: 'https://seedtool.com',
-    siteName: 'SeedTool',
+    url: 'https://Globokit.com',
+    siteName: 'Globokit',
     type: 'website',
   },
 }
