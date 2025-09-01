@@ -1,5 +1,5 @@
 // 路径: Globokit/app/layout.tsx
-// 更新时间: 2025-07-22
+// 更新时间: 2025-09-01
 // 说明: 根布局文件，包含全站通用的头部和底部
 
 import type { Metadata } from 'next'
