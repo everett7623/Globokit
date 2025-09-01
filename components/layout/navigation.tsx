@@ -1,5 +1,5 @@
-// 路径: seedtool/components/layout/navigation.tsx
-// 更新时间: 2025-07-24
+// 路径: GloboKit/components/layout/navigation.tsx
+// 更新时间: 2025-09-01
 // 说明: 优化导航组件，改进响应式设计
 
 'use client'
