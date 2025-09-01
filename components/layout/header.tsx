@@ -15,7 +15,7 @@ export function Header() {
             <Zap className="h-5 w-5 text-white" />
           </div>
           <span className="font-bold text-xl bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-            Globokit
+            GloboKit
           </span>
         </Link>
         <Navigation />
