@@ -1,5 +1,5 @@
-// 路径: seedtool/components/layout/header.tsx
-// 更新时间: 2025-07-22
+// 路径: Globokit/components/layout/header.tsx
+// 更新时间: 2025-09-01
 // 说明: 优化头部组件
 
 import Link from 'next/link'
@@ -15,7 +15,7 @@ export function Header() {
             <Zap className="h-5 w-5 text-white" />
           </div>
           <span className="font-bold text-xl bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-            SeedTool
+            Globokit
           </span>
         </Link>
         <Navigation />
