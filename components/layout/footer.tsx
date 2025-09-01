@@ -1,5 +1,5 @@
-// 路径: seedtool/components/layout/footer.tsx
-// 更新时间: 2025-07-22
+// 路径: Globokit/components/layout/footer.tsx
+// 更新时间: 2025-09-01
 // 说明: 优化页脚组件
 
 import Link from 'next/link'
@@ -12,7 +12,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-center md:text-left">
             <p className="text-sm text-muted-foreground">
-              © 2025 SeedTool. 为全球贸易赋能
+              © 2025 Globokit. 为全球贸易赋能
             </p>
             <p className="text-xs text-muted-foreground mt-1">
               Built with ❤️ by Jensfrank
@@ -21,7 +21,7 @@ export function Footer() {
           
           <div className="flex items-center gap-6 text-sm">
             <Link
-              href="https://github.com/everett7623/seedtool"
+              href="https://github.com/everett7623/Globokit"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors"
