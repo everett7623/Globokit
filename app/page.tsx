@@ -199,7 +199,7 @@ export default function HomePage() {
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Link 
-                  href="https://github.com/everett7623/seedtool" 
+                  href="https://github.com/everett7623/globokit" 
                   target="_blank"
                   className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
                 >
