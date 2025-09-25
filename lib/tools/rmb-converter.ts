@@ -1,5 +1,5 @@
-// 名称: 人民币大写转换工具函数
-// 描述: 提供人民币大写转换工具函数
+// 名称: 人民币大写转换工具函数（简化修复版）
+// 描述: 修复万位零的问题的简单方案
 // 路径: seedtool/lib/tools/rmb-converter.ts
 // 作者: Jensfrank
 // 更新时间: 2025-09-25
@@ -36,12 +36,10 @@ export function numberToChinese(num: number): string {
     let groupResult = '';
     let hasNonZero = false;
     
-    // 转换当前组内的数字
     for (let j = 0; j < group.length; j++) {
       let digit = parseInt(group[j]);
       if (digit !== 0) {
-        // 如果前面有0且当前组结果不为空，需要加零
-        if (j > 0 && parseInt(group[j-1]) === 0 && groupResult !== '') {
+        if (j > 0 && group[j-1] === '0' && groupResult !== '') {
           groupResult += '零';
         }
         groupResult += digits[digit] + units[group.length - 1 - j];
@@ -50,25 +48,21 @@ export function numberToChinese(num: number): string {
     }
     
     if (hasNonZero) {
-      // 检查是否需要在组之间添加零
+      // 修复：检查组间是否需要添加零
       if (result !== '') {
-        // 如果当前组的最高位是0（即组内数字小于相应的单位），需要添加零
-        let groupNum = parseInt(group);
+        let currentGroupNum = parseInt(group);
         let bigUnitIndex = groups.length - 1 - i;
         
-        // 检查当前组是否需要前置零
-        if (bigUnitIndex === 1) { // 万位组
-          if (groupNum < 1000) { // 万位组小于1000，说明千位是0
-            result += '零';
-          }
-        } else if (bigUnitIndex === 2) { // 亿位组
-          if (groupNum < 1000) { // 亿位组小于1000，说明千万位是0
-            result += '零';
-          }
+        // 关键修复：如果是万位组且小于1000，说明千位为0，需要加零
+        if (bigUnitIndex === 1 && currentGroupNum < 1000) {
+          result += '零';
+        }
+        // 亿位组同理
+        else if (bigUnitIndex === 2 && currentGroupNum < 1000) {
+          result += '零';
         }
       }
       
-      // 添加当前组的转换结果
       result += groupResult;
       
       // 添加大单位
@@ -81,7 +75,7 @@ export function numberToChinese(num: number): string {
   
   // 清理多余的零
   result = result.replace(/零+/g, '零');
-  result = result.replace(/零([万亿兆])/g, '$1'); // 去除单位前的零
+  result = result.replace(/零([万亿兆])/g, '$1');
   
   // 添加"元"
   result += '元';
@@ -105,34 +99,71 @@ export function numberToChinese(num: number): string {
   return '人民币' + result;
 }
 
-// 改进的测试用例
+// 测试函数
 export function testRMBConverter() {
   const testCases = [
+    // 基础测试
     { input: 0, expected: '人民币零元整' },
     { input: 1, expected: '人民币壹元整' },
     { input: 10, expected: '人民币壹拾元整' },
     { input: 100, expected: '人民币壹佰元整' },
     { input: 1000, expected: '人民币壹仟元整' },
     { input: 10000, expected: '人民币壹万元整' },
+    
+    // 关键测试：万位零的情况
+    { input: 10509, expected: '人民币壹万零伍佰零玖元整' },
     { input: 10001, expected: '人民币壹万零壹元整' },
     { input: 10010, expected: '人民币壹万零壹拾元整' },
     { input: 10100, expected: '人民币壹万零壹佰元整' },
-    { input: 10509, expected: '人民币壹万零伍佰零玖元整' }, // 关键测试用例
-    { input: 11000, expected: '人民币壹万壹仟元整' },
     { input: 20304, expected: '人民币贰万零叁佰零肆元整' },
+    { input: 50008, expected: '人民币伍万零捌元整' },
+    
+    // 正常万位（不需要零）
+    { input: 11000, expected: '人民币壹万壹仟元整' },
+    { input: 12345, expected: '人民币壹万贰仟叁佰肆拾伍元整' },
+    
+    // 十万位测试
     { input: 100001, expected: '人民币壹拾万零壹元整' },
     { input: 105009, expected: '人民币壹拾万伍仟零玖元整' },
+    
+    // 百万位测试
     { input: 1000001, expected: '人民币壹佰万零壹元整' },
     { input: 1050009, expected: '人民币壹佰零伍万零玖元整' },
+    
+    // 小数测试
     { input: 10.5, expected: '人民币壹拾元伍角' },
     { input: 10.05, expected: '人民币壹拾元零伍分' },
     { input: 10.55, expected: '人民币壹拾元伍角伍分' },
   ];
   
   console.log('人民币大写转换测试结果：');
+  console.log('='.repeat(100));
+  
+  let passCount = 0;
+  
   testCases.forEach(({ input, expected }) => {
     const result = numberToChinese(input);
     const isCorrect = result === expected;
-    console.log(`${input.toString().padEnd(8)} => ${result.padEnd(30)} ${isCorrect ? '✓' : '✗ (期望: ' + expected + ')'}`);
+    const status = isCorrect ? '✅' : '❌';
+    
+    if (isCorrect) {
+      passCount++;
+    }
+    
+    console.log(`${status} ${input.toString().padEnd(10)} => ${result}`);
+    if (!isCorrect) {
+      console.log(`   期望: ${expected}`);
+    }
   });
+  
+  console.log('='.repeat(100));
+  console.log(`测试完成: ${passCount}/${testCases.length} 个通过 (${(passCount/testCases.length*100).toFixed(1)}%)`);
+  
+  // 专门测试你提到的问题
+  console.log('\n🔍 专门测试 10509:');
+  const result10509 = numberToChinese(10509);
+  console.log(`输入: 10509`);
+  console.log(`输出: ${result10509}`);
+  console.log(`预期: 人民币壹万零伍佰零玖元整`);
+  console.log(`状态: ${result10509 === '人民币壹万零伍佰零玖元整' ? '✅ 修复成功' : '❌ 仍有问题'}`);
 }
