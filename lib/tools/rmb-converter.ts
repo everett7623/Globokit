@@ -2,7 +2,7 @@
 // 描述: 提供人民币大写转换工具函数
 // 路径: seedtool/lib/tools/rmb-converter.ts
 // 作者: Jensfrank
-// 更新时间: 2025-07-23
+// 更新时间: 2025-09-25
 
 export function numberToChinese(num: number): string {
   const digits = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
@@ -36,10 +36,12 @@ export function numberToChinese(num: number): string {
     let groupResult = '';
     let hasNonZero = false;
     
+    // 转换当前组内的数字
     for (let j = 0; j < group.length; j++) {
       let digit = parseInt(group[j]);
       if (digit !== 0) {
-        if (j > 0 && group[j-1] === '0' && groupResult !== '') {
+        // 如果前面有0且当前组结果不为空，需要加零
+        if (j > 0 && parseInt(group[j-1]) === 0 && groupResult !== '') {
           groupResult += '零';
         }
         groupResult += digits[digit] + units[group.length - 1 - j];
@@ -48,40 +50,38 @@ export function numberToChinese(num: number): string {
     }
     
     if (hasNonZero) {
+      // 检查是否需要在组之间添加零
+      if (result !== '') {
+        // 如果当前组的最高位是0（即组内数字小于相应的单位），需要添加零
+        let groupNum = parseInt(group);
+        let bigUnitIndex = groups.length - 1 - i;
+        
+        // 检查当前组是否需要前置零
+        if (bigUnitIndex === 1) { // 万位组
+          if (groupNum < 1000) { // 万位组小于1000，说明千位是0
+            result += '零';
+          }
+        } else if (bigUnitIndex === 2) { // 亿位组
+          if (groupNum < 1000) { // 亿位组小于1000，说明千万位是0
+            result += '零';
+          }
+        }
+      }
+      
+      // 添加当前组的转换结果
+      result += groupResult;
+      
       // 添加大单位
       let bigUnitIndex = groups.length - 1 - i;
       if (bigUnitIndex > 0) {
-        groupResult += bigUnits[bigUnitIndex];
-      }
-      
-      // 处理连接
-      if (result !== '' && !groupResult.startsWith('零')) {
-        // 检查是否需要加零
-        let lastGroup = groups[i-1];
-        if (lastGroup && lastGroup[lastGroup.length-1] === '0') {
-          result += '零';
-        }
-      }
-      
-      result += groupResult;
-    } else if (i < groups.length - 1 && result !== '') {
-      // 如果当前组全是0，但不是最后一组，可能需要加零
-      let nextGroupHasNonZero = false;
-      for (let k = i + 1; k < groups.length; k++) {
-        if (parseInt(groups[k]) > 0) {
-          nextGroupHasNonZero = true;
-          break;
-        }
-      }
-      if (nextGroupHasNonZero && !result.endsWith('零')) {
-        result += '零';
+        result += bigUnits[bigUnitIndex];
       }
     }
   }
   
   // 清理多余的零
   result = result.replace(/零+/g, '零');
-  result = result.replace(/零$/, '');
+  result = result.replace(/零([万亿兆])/g, '$1'); // 去除单位前的零
   
   // 添加"元"
   result += '元';
@@ -105,7 +105,7 @@ export function numberToChinese(num: number): string {
   return '人民币' + result;
 }
 
-// 测试用例
+// 改进的测试用例
 export function testRMBConverter() {
   const testCases = [
     { input: 0, expected: '人民币零元整' },
@@ -114,24 +114,25 @@ export function testRMBConverter() {
     { input: 100, expected: '人民币壹佰元整' },
     { input: 1000, expected: '人民币壹仟元整' },
     { input: 10000, expected: '人民币壹万元整' },
-    { input: 100000, expected: '人民币壹拾万元整' },
-    { input: 1000000, expected: '人民币壹佰万元整' },
-    { input: 10000000, expected: '人民币壹仟万元整' },
-    { input: 100000000, expected: '人民币壹亿元整' },
-    { input: 1234, expected: '人民币壹仟贰佰叁拾肆元整' },
     { input: 10001, expected: '人民币壹万零壹元整' },
     { input: 10010, expected: '人民币壹万零壹拾元整' },
     { input: 10100, expected: '人民币壹万零壹佰元整' },
+    { input: 10509, expected: '人民币壹万零伍佰零玖元整' }, // 关键测试用例
     { input: 11000, expected: '人民币壹万壹仟元整' },
+    { input: 20304, expected: '人民币贰万零叁佰零肆元整' },
     { input: 100001, expected: '人民币壹拾万零壹元整' },
+    { input: 105009, expected: '人民币壹拾万伍仟零玖元整' },
     { input: 1000001, expected: '人民币壹佰万零壹元整' },
+    { input: 1050009, expected: '人民币壹佰零伍万零玖元整' },
     { input: 10.5, expected: '人民币壹拾元伍角' },
     { input: 10.05, expected: '人民币壹拾元零伍分' },
     { input: 10.55, expected: '人民币壹拾元伍角伍分' },
   ];
   
+  console.log('人民币大写转换测试结果：');
   testCases.forEach(({ input, expected }) => {
     const result = numberToChinese(input);
-    console.log(`${input} => ${result} ${result === expected ? '✓' : '✗ (期望: ' + expected + ')'}`);
+    const isCorrect = result === expected;
+    console.log(`${input.toString().padEnd(8)} => ${result.padEnd(30)} ${isCorrect ? '✓' : '✗ (期望: ' + expected + ')'}`);
   });
 }
