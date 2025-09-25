@@ -151,7 +151,7 @@ export function testRMBConverter() {
   console.log('='.repeat(100));
   
   let passCount = 0;
-  let failedCases = [];
+  let failedCases: Array<{input: number, expected: string, result: string}> = [];
   
   testCases.forEach(({ input, expected }, index) => {
     const result = numberToChinese(input);
