@@ -32,18 +32,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-CN">
-      <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-JCBDVN470N"
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-JCBDVN470N');
-        `}
-      </Script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JCBDVN470N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JCBDVN470N');
+</script>
       <body className={inter.className}>
         <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex flex-col">
           <Header />
