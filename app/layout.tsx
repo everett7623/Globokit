@@ -1,5 +1,5 @@
 // 路径: Globokit/app/layout.tsx
-// 更新时间: 2025-09-01
+// 更新时间: 2025-11-26
 // 说明: 根布局文件，包含全站通用的头部和底部
 
 import type { Metadata } from 'next'
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   keywords: '外贸工具,人民币大写,英文大小写,特殊字符,数字转英文,中文拼音,国际节假日,世界时间,货币符号',
   authors: [{ name: 'Jensfrank' }],
   openGraph: {
-    title: 'SeedTool - 外贸实用工具集',
+    title: 'Globokit - 外贸实用工具集',
     description: '专为外贸从业者打造的在线工具平台',
     url: 'https://Globokit.com',
     siteName: 'Globokit',
@@ -32,15 +32,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-CN">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-JCBDVN470N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-JCBDVN470N');
-</script>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-JCBDVN470N"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-JCBDVN470N');
+        `}
+      </Script>
       <body className={inter.className}>
         <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex flex-col">
           <Header />
