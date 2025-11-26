@@ -33,7 +33,6 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body className={inter.className}>
-      {/* ========== Google Analytics 开始 ========== */}
         <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCBDVN470N"></script>
 <script>
@@ -43,7 +42,6 @@ export default function RootLayout({
 
   gtag('config', 'G-JCBDVN470N');
 </script>
-      {/* ========== Google Analytics 结束 ========== */}
         <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex flex-col">
           <Header />
           <main className="flex-1 container mx-auto px-4 py-8 max-w-7xl">
