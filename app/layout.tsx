@@ -7,6 +7,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -32,6 +33,17 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body className={inter.className}>
+      {/* ========== Google Analytics 开始 ========== */}
+        <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JCBDVN470N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JCBDVN470N');
+</script>
+      {/* ========== Google Analytics 结束 ========== */}
         <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex flex-col">
           <Header />
           <main className="flex-1 container mx-auto px-4 py-8 max-w-7xl">
