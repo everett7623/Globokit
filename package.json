@@ -1,5 +1,5 @@
 {
-  "name": "seedtool",
+  "name": "Globokit",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -24,7 +24,8 @@
     "react": "^18",
     "react-dom": "^18",
     "tailwind-merge": "^2.2.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "html2canvas": "^1.4.1"
   },
   "devDependencies": {
     "@types/node": "^20",
