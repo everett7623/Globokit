@@ -121,7 +121,7 @@ const tools = [
 ]
 
 const stats = [
-  { label: '工具总数', value: '8+', icon: Zap },
+  { label: '工具总数', value: '10+', icon: Zap },
   { label: '月活用户', value: '1000+', icon: Users },
   { label: '持续更新', value: '每周', icon: TrendingUp },
   { label: '用户好评', value: '98%', icon: Sparkles }
@@ -140,7 +140,7 @@ export default function HomePage() {
           外贸实用工具集
         </h1>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          精选8款专业工具，涵盖文本处理、时间管理、货币转换等外贸场景
+          精选10款专业工具，涵盖文本处理、时间管理、货币转换等外贸场景
           <br />让国际贸易更简单，让工作效率更高效
         </p>
       </div>
