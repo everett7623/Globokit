@@ -23,10 +23,10 @@
 
 ```bash
 # 克隆项目
-git clone https://github.com/everett7623/seedtool.git
+git clone https://github.com/everett7623/globokit.git
 
 # 进入项目目录
-cd seedtool
+cd globokit
 
 # 安装依赖
 npm install
