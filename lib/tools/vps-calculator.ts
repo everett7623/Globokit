@@ -2,7 +2,7 @@
 // 描述: 提供VPS价值计算、汇率转换和配置管理功能
 // 路径: Globokit/lib/tools/vps-calculator.ts
 // 作者: Jensfrank
-// 更新时间: 2025-07-24
+// 更新时间: 2025-11-29
 
 // VPS配置接口
 export interface VPSConfig {
@@ -48,9 +48,11 @@ export const RENEWAL_PERIODS = [
   { value: 1, label: '1个月' },
   { value: 3, label: '3个月' },
   { value: 6, label: '6个月' },
-  { value: 12, label: '1年' },
+  { value: 12, label: '1年（推荐）' },
   { value: 24, label: '2年' },
   { value: 36, label: '3年' },
+  { value: 60, label: '5年' },
+  { value: 0, label: '自定义' },
 ]
 
 // 汇率缓存
