@@ -21,7 +21,8 @@ import {
   TrendingUp,
   Users,
   Zap,
-  Globe
+  Globe,
+  Server
 } from 'lucide-react'
 
 const tools = [
