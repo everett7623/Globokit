@@ -107,6 +107,16 @@ const tools = [
     badge: '新增',
     badgeColor: 'bg-green-100 text-green-700'
   },
+  {
+    title: 'VPS剩余价值计算器',
+    description: '基于购买日期和到期时间精确计算VPS剩余价值，支持多币种转换',
+    icon: Server,
+    href: '/tools/vps-calculator',
+    color: 'text-violet-500',
+    bgColor: 'bg-violet-50',
+    badge: '新增',
+    badgeColor: 'bg-green-100 text-green-700'
+  },
 ]
 
 const stats = [
