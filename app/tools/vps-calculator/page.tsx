@@ -1,0 +1,563 @@
+// 名称: VPS剩余价值计算器
+// 描述: 基于购买日期和到期时间精确计算VPS剩余价值，支持多币种转换
+// 路径: Globokit/app/tools/vps-calculator/page.tsx
+// 作者: Jensfrank
+// 更新时间: 2025-11-28
+
+'use client'
+
+import { useState, useEffect, useRef } from 'react'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import {
+  Calculator,
+  Server,
+  TrendingUp,
+  TrendingDown,
+  Calendar,
+  Coins,
+  Info,
+  RefreshCw,
+  FileDown,
+  Image as ImageIcon,
+} from 'lucide-react'
+import {
+  fetchExchangeRates,
+  calculateVPSValue,
+  formatCurrency,
+  formatDate,
+  validateInput,
+  getExchangeRateText,
+  SUPPORTED_CURRENCIES,
+  RENEWAL_PERIODS,
+  type PriceMode,
+} from '@/lib/tools/vps-calculator'
+import html2canvas from 'html2canvas'
+
+export default function VPSCalculatorPage() {
+  // 基础输入
+  const [purchaseDate, setPurchaseDate] = useState('')
+  const [renewalPeriod, setRenewalPeriod] = useState('12')
+  const [purchasePrice, setPurchasePrice] = useState('')
+  const [currency, setCurrency] = useState('USD')
+  const [expectedPrice, setExpectedPrice] = useState('')
+  const [priceMode, setPriceMode] = useState<PriceMode>('total')
+
+  // 状态
+  const [exchangeRates, setExchangeRates] = useState<Record<string, number>>({})
+  const [result, setResult] = useState<any>(null)
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  // 导出相关
+  const resultRef = useRef<HTMLDivElement>(null)
+
+  // 初始化
+  useEffect(() => {
+    const today = new Date()
+    setPurchaseDate(today.toISOString().split('T')[0])
+    loadExchangeRates()
+  }, [])
+
+  // 加载汇率
+  const loadExchangeRates = async () => {
+    try {
+      const rates = await fetchExchangeRates()
+      setExchangeRates(rates)
+    } catch (err) {
+      console.error('加载汇率失败', err)
+    }
+  }
+
+  // 计算
+  const handleCalculate = () => {
+    setError('')
+    
+    const validation = validateInput(purchaseDate, parseFloat(purchasePrice))
+    if (!validation.valid) {
+      setError(validation.error || '')
+      return
+    }
+
+    setLoading(true)
+    
+    try {
+      const calculationResult = calculateVPSValue(
+        new Date(purchaseDate),
+        parseInt(renewalPeriod),
+        parseFloat(purchasePrice),
+        currency,
+        expectedPrice ? parseFloat(expectedPrice) : 0,
+        priceMode,
+        exchangeRates
+      )
+
+      setResult(calculationResult)
+    } catch (err) {
+      setError('计算失败，请检查输入数据')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // 重置
+  const handleReset = () => {
+    const today = new Date()
+    setPurchaseDate(today.toISOString().split('T')[0])
+    setRenewalPeriod('12')
+    setPurchasePrice('')
+    setCurrency('USD')
+    setExpectedPrice('')
+    setPriceMode('total')
+    setResult(null)
+    setError('')
+  }
+
+  // 刷新汇率
+  const handleRefreshRates = async () => {
+    setLoading(true)
+    await loadExchangeRates()
+    setLoading(false)
+  }
+
+  // 导出为MD
+  const exportToMarkdown = () => {
+    if (!result) return
+
+    const currencyName = SUPPORTED_CURRENCIES.find(c => c.code === currency)?.name || currency
+    const renewalLabel = RENEWAL_PERIODS.find(p => p.value === parseInt(renewalPeriod))?.label || renewalPeriod
+
+    let markdown = `# VPS剩余价值计算报告
+
+## 基本信息
+
+- **购买日期**: ${formatDate(new Date(purchaseDate))}
+- **续费周期**: ${renewalLabel}
+- **购买价格**: ${purchasePrice} ${currency} (${currencyName})
+- **价格模式**: ${priceMode === 'total' ? '整体价格' : priceMode === 'monthly' ? '月付价格' : '折扣模式'}
+${expectedPrice ? `- **期望售价**: ¥${expectedPrice}` : ''}
+
+## 计算结果
+
+### 剩余价值
+**¥${formatCurrency(result.remainingValue)}**
+
+### 详细数据
+
+| 项目 | 数值 |
+|------|------|
+| 购买价格(CNY) | ¥${formatCurrency(result.purchasePriceCNY)} |
+| 到期日期 | ${formatDate(result.expireDate)} |
+| 总天数 | ${result.totalDays} 天 |
+| 剩余天数 | ${result.remainingDays} 天 |
+| 剩余比例 | ${(result.remainingRatio * 100).toFixed(1)}% |
+`
+
+    if (result.premium !== undefined) {
+      markdown += `
+### 溢价分析
+
+${result.premium > 0 ? '📈 **溢价出售**' : '📉 **低于剩余价值**'}
+
+期望售价比剩余价值${result.premium > 0 ? '高' : '低'} **¥${formatCurrency(Math.abs(result.premium))}** (${Math.abs(result.premiumPercent || 0).toFixed(1)}%)
+`
+    }
+
+    markdown += `
+
+---
+*报告生成时间: ${new Date().toLocaleString('zh-CN')}*
+*工具: VPS剩余价值计算器 - Globokit*
+`
+
+    // 下载MD文件
+    const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `VPS剩余价值报告_${new Date().getTime()}.md`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+  }
+
+  // 导出为图片
+  const exportToImage = async () => {
+    if (!resultRef.current) return
+
+    try {
+      const canvas = await html2canvas(resultRef.current, {
+        backgroundColor: '#ffffff',
+        scale: 2,
+        logging: false,
+      })
+
+      canvas.toBlob((blob) => {
+        if (blob) {
+          const url = URL.createObjectURL(blob)
+          const link = document.createElement('a')
+          link.href = url
+          link.download = `VPS剩余价值_${new Date().getTime()}.png`
+          document.body.appendChild(link)
+          link.click()
+          document.body.removeChild(link)
+          URL.revokeObjectURL(url)
+        }
+      })
+    } catch (err) {
+      console.error('导出图片失败:', err)
+    }
+  }
+
+  const exchangeRateText = getExchangeRateText(currency, exchangeRates)
+
+  return (
+    <>
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold mb-2">VPS剩余价值计算器</h1>
+        <p className="text-muted-foreground">
+          基于购买日期和到期时间精确计算VPS剩余价值，支持多币种转换，智能分析转售溢价情况
+        </p>
+      </div>
+
+      {/* 统计卡片 */}
+      <div className="grid gap-4 mb-6 md:grid-cols-3">
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium flex items-center gap-2">
+              <Server className="h-4 w-4" />
+              支持币种
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{SUPPORTED_CURRENCIES.length}</div>
+            <p className="text-xs text-muted-foreground">种主流货币</p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium flex items-center gap-2">
+              <Calendar className="h-4 w-4" />
+              续费周期
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{RENEWAL_PERIODS.length}</div>
+            <p className="text-xs text-muted-foreground">种时长选项</p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium flex items-center gap-2">
+              <Calculator className="h-4 w-4" />
+              计算精度
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">精确到天</div>
+            <p className="text-xs text-muted-foreground">实时计算</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        {/* 左侧：输入表单 */}
+        <Card>
+          <CardHeader>
+            <CardTitle>VPS 信息输入</CardTitle>
+            <CardDescription>
+              填写VPS购买信息，系统将自动计算剩余价值
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {/* 购买日期 */}
+            <div className="space-y-2">
+              <Label htmlFor="purchaseDate">购买日期 *</Label>
+              <Input
+                id="purchaseDate"
+                type="date"
+                value={purchaseDate}
+                onChange={(e) => setPurchaseDate(e.target.value)}
+              />
+            </div>
+
+            {/* 续费周期 */}
+            <div className="space-y-2">
+              <Label htmlFor="renewalPeriod">续费周期 *</Label>
+              <Select value={renewalPeriod} onValueChange={setRenewalPeriod}>
+                <SelectTrigger id="renewalPeriod">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {RENEWAL_PERIODS.map((period) => (
+                    <SelectItem key={period.value} value={period.value.toString()}>
+                      {period.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* 价格输入模式 */}
+            <div className="space-y-2">
+              <Label>价格输入模式</Label>
+              <Tabs value={priceMode} onValueChange={(v) => setPriceMode(v as PriceMode)}>
+                <TabsList className="grid w-full grid-cols-3">
+                  <TabsTrigger value="total">整体价格</TabsTrigger>
+                  <TabsTrigger value="monthly">月付价格</TabsTrigger>
+                  <TabsTrigger value="discount">折扣模式</TabsTrigger>
+                </TabsList>
+              </Tabs>
+            </div>
+
+            {/* 购买价格和币种 */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="purchasePrice">
+                  {priceMode === 'total' ? '购买价格' : priceMode === 'monthly' ? '月付价格' : '折扣价格'} *
+                </Label>
+                <Input
+                  id="purchasePrice"
+                  type="number"
+                  placeholder="0.00"
+                  value={purchasePrice}
+                  onChange={(e) => setPurchasePrice(e.target.value)}
+                  step="0.01"
+                  min="0"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="currency">货币</Label>
+                <Select value={currency} onValueChange={setCurrency}>
+                  <SelectTrigger id="currency">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {SUPPORTED_CURRENCIES.map((curr) => (
+                      <SelectItem key={curr.code} value={curr.code}>
+                        {curr.code} - {curr.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {exchangeRateText && (
+                  <p className="text-xs text-muted-foreground">{exchangeRateText}</p>
+                )}
+              </div>
+            </div>
+
+            {/* 期望售价 */}
+            <div className="space-y-2">
+              <Label htmlFor="expectedPrice">期望售价（人民币）</Label>
+              <Input
+                id="expectedPrice"
+                type="number"
+                placeholder="可选，用于溢价分析"
+                value={expectedPrice}
+                onChange={(e) => setExpectedPrice(e.target.value)}
+                step="0.01"
+                min="0"
+              />
+            </div>
+
+            {/* 错误提示 */}
+            {error && (
+              <div className="p-3 bg-destructive/10 text-destructive rounded-lg text-sm">
+                {error}
+              </div>
+            )}
+
+            {/* 操作按钮 */}
+            <div className="flex gap-2">
+              <Button onClick={handleCalculate} disabled={loading} className="flex-1">
+                <Calculator className="h-4 w-4 mr-2" />
+                {loading ? '计算中...' : '计算价值'}
+              </Button>
+              <Button variant="outline" onClick={handleReset}>
+                重置
+              </Button>
+              <Button variant="outline" size="icon" onClick={handleRefreshRates} disabled={loading}>
+                <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* 右侧：计算结果 */}
+        <Card>
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <div>
+                <CardTitle>计算结果</CardTitle>
+                <CardDescription>
+                  {result ? '基于当前时间实时计算，精确到天' : '请填写左侧信息后点击计算'}
+                </CardDescription>
+              </div>
+              {result && (
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm" onClick={exportToMarkdown}>
+                    <FileDown className="h-4 w-4 mr-1" />
+                    导出MD
+                  </Button>
+                  <Button variant="outline" size="sm" onClick={exportToImage}>
+                    <ImageIcon className="h-4 w-4 mr-1" />
+                    下载图片
+                  </Button>
+                </div>
+              )}
+            </div>
+          </CardHeader>
+          <CardContent>
+            {!result ? (
+              <div className="flex flex-col items-center justify-center py-12 text-center">
+                <Calculator className="h-16 w-16 text-muted-foreground mb-4" />
+                <p className="text-muted-foreground">
+                  填写VPS信息后，点击"计算价值"查看结果
+                </p>
+              </div>
+            ) : (
+              <div ref={resultRef} className="space-y-6 p-4">
+                {/* 剩余价值 */}
+                <div className="text-center p-6 bg-primary/5 rounded-lg">
+                  <div className="text-sm text-muted-foreground mb-2">剩余价值</div>
+                  <div className="text-4xl font-bold text-primary mb-2">
+                    ¥ {formatCurrency(result.remainingValue)}
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    到期日期: {formatDate(result.expireDate)}
+                  </div>
+                </div>
+
+                {/* 详细信息 */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-4 border rounded-lg">
+                    <div className="text-sm text-muted-foreground mb-1">购买价格</div>
+                    <div className="text-xl font-semibold">
+                      ¥ {formatCurrency(result.purchasePriceCNY)}
+                    </div>
+                  </div>
+
+                  <div className="p-4 border rounded-lg">
+                    <div className="text-sm text-muted-foreground mb-1">剩余天数</div>
+                    <div className="text-xl font-semibold">
+                      {result.remainingDays} 天
+                    </div>
+                  </div>
+
+                  <div className="p-4 border rounded-lg">
+                    <div className="text-sm text-muted-foreground mb-1">总天数</div>
+                    <div className="text-xl font-semibold">
+                      {result.totalDays} 天
+                    </div>
+                  </div>
+
+                  <div className="p-4 border rounded-lg">
+                    <div className="text-sm text-muted-foreground mb-1">剩余比例</div>
+                    <div className="text-xl font-semibold">
+                      {(result.remainingRatio * 100).toFixed(1)}%
+                    </div>
+                  </div>
+                </div>
+
+                {/* 溢价分析 */}
+                {result.premium !== undefined && (
+                  <div
+                    className={`p-4 rounded-lg border-2 ${
+                      result.premium > 0
+                        ? 'bg-green-50 border-green-200 dark:bg-green-950 dark:border-green-800'
+                        : 'bg-red-50 border-red-200 dark:bg-red-950 dark:border-red-800'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      {result.premium > 0 ? (
+                        <TrendingUp className="h-5 w-5 text-green-600" />
+                      ) : (
+                        <TrendingDown className="h-5 w-5 text-red-600" />
+                      )}
+                      <span className="font-semibold">
+                        {result.premium > 0 ? '溢价出售' : '低于剩余价值'}
+                      </span>
+                    </div>
+                    <div className="text-sm">
+                      期望售价比剩余价值{result.premium > 0 ? '高' : '低'}{' '}
+                      <span className="font-bold">
+                        ¥{formatCurrency(Math.abs(result.premium))}
+                      </span>{' '}
+                      ({Math.abs(result.premiumPercent || 0).toFixed(1)}%)
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* 使用说明 */}
+      <div className="grid gap-4 mt-6 md:grid-cols-3">
+        <Card className="bg-muted/50">
+          <CardHeader>
+            <CardTitle className="text-lg flex items-center gap-2">
+              <Info className="h-5 w-5" />
+              计算原理
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2 text-sm text-muted-foreground">
+            <p>• 只需填写购买日期，选择续费周期，自动计算到期时间</p>
+            <p>• 支持多币种购买价格，自动转换为人民币</p>
+            <p>• 基于当前时间实时计算，精确到天</p>
+            <p>• 剩余价值 = (剩余天数 ÷ 总天数) × 购买价格(CNY)</p>
+            <p>• 溢价金额 = 期望售价 - 剩余价值</p>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-muted/50">
+          <CardHeader>
+            <CardTitle className="text-lg flex items-center gap-2">
+              <Coins className="h-5 w-5" />
+              适用场景
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2 text-sm text-muted-foreground">
+            <p>• VPS/云服务器转售价格评估</p>
+            <p>• 域名、SSL证书等时效性资源</p>
+            <p>• 软件授权许可证转让</p>
+            <p>• 云服务资源投资分析</p>
+            <p>• 各类订阅服务剩余价值计算</p>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-muted/50">
+          <CardHeader>
+            <CardTitle className="text-lg flex items-center gap-2">
+              <TrendingUp className="h-5 w-5" />
+              汇率说明
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2 text-sm text-muted-foreground">
+            <p>• 汇率数据来源于 open.er-api.com</p>
+            <p>• 购买币种自动转换为人民币计算</p>
+            <p>• 期望售价统一使用人民币</p>
+            <p>• 点击刷新按钮获取最新汇率数据</p>
+            <p>• 汇率缓存1小时，减少请求次数</p>
+          </CardContent>
+        </Card>
+      </div>
+    </>
+  )
+}
