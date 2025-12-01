@@ -24,6 +24,7 @@ export interface CalculationResult {
   premium?: number
   premiumPercent?: number
   expireDate: Date
+  expectedPrice?: number
 }
 
 // 价格输入模式
