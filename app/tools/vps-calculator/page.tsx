@@ -51,7 +51,7 @@ export default function VPSCalculatorPage() {
   const [renewalPeriod, setRenewalPeriod] = useState('12')
   const [purchasePrice, setPurchasePrice] = useState('')
   const [currency, setCurrency] = useState('USD')
-  const [expectedPrice, setExpectedPrice] = useState('')
+  const [expectedPrice, setExpectedPrice] = useState('100')
   const [priceMode, setPriceMode] = useState<PriceMode>('total')
   
   // 折扣模式
@@ -62,6 +62,7 @@ export default function VPSCalculatorPage() {
   const [result, setResult] = useState<any>(null)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [copySuccess, setCopySuccess] = useState(false)
 
   // 导出相关
   const resultRef = useRef<HTMLDivElement>(null)
@@ -91,6 +92,11 @@ export default function VPSCalculatorPage() {
     setError('')
     
     let finalPrice = parseFloat(purchasePrice)
+    
+    if (!finalPrice || finalPrice <= 0) {
+      setError('请输入有效的购买价格')
+      return
+    }
     
     // 折扣模式计算
     if (priceMode === 'discount' && discountValue) {
@@ -152,7 +158,7 @@ export default function VPSCalculatorPage() {
     setLoading(false)
   }
 
-  // 导出为MD
+  // 导出为MD - 改为复制到剪贴板
   const exportToMarkdown = () => {
     if (!result) return
 
@@ -166,7 +172,7 @@ export default function VPSCalculatorPage() {
 - **购买日期**: ${formatDate(new Date(purchaseDate))}
 - **续费周期**: ${renewalLabel}
 - **购买价格**: ${purchasePrice} ${currency} (${currencyName})
-- **价格模式**: ${priceMode === 'total' ? '整体价格' : priceMode === 'monthly' ? '月付价格' : '折扣模式'}
+- **价格模式**: ${priceMode === 'total' ? '整体价格' : priceMode === 'monthly' ? '溢价模式' : '折扣模式'}
 ${expectedPrice ? `- **期望售价**: ¥${expectedPrice}` : ''}
 
 ## 计算结果
@@ -202,15 +208,13 @@ ${result.premium > 0 ? '📈 **溢价出售**' : '📉 **低于剩余价值**'}
 *工具: VPS剩余价值计算器 - Globokit*
 `
 
-    const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' })
-    const url = URL.createObjectURL(blob)
-    const link = document.createElement('a')
-    link.href = url
-    link.download = `VPS剩余价值报告_${new Date().getTime()}.md`
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-    URL.revokeObjectURL(url)
+    // 复制到剪贴板
+    navigator.clipboard.writeText(markdown).then(() => {
+      setCopySuccess(true)
+      setTimeout(() => setCopySuccess(false), 2000)
+    }).catch(err => {
+      console.error('复制失败:', err)
+    })
   }
 
   // 导出为图片
@@ -357,7 +361,7 @@ ${result.premium > 0 ? '📈 **溢价出售**' : '📉 **低于剩余价值**'}
                   <SelectContent>
                     {SUPPORTED_CURRENCIES.map((curr) => (
                       <SelectItem key={curr.code} value={curr.code}>
-                        {curr.symbol} {curr.code}
+                        {curr.symbol} {curr.code} - {curr.name}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -419,15 +423,19 @@ ${result.premium > 0 ? '📈 **溢价出售**' : '📉 **低于剩余价值**'}
             {priceMode === 'total' && (
               <div className="space-y-2">
                 <Label htmlFor="expectedPrice">期望售价（人民币）</Label>
-                <Input
-                  id="expectedPrice"
-                  type="number"
-                  placeholder="可选，用于溢价分析"
-                  value={expectedPrice}
-                  onChange={(e) => setExpectedPrice(e.target.value)}
-                  step="0.01"
-                  min="0"
-                />
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">¥</span>
+                  <Input
+                    id="expectedPrice"
+                    type="number"
+                    placeholder="100"
+                    value={expectedPrice}
+                    onChange={(e) => setExpectedPrice(e.target.value)}
+                    step="0.01"
+                    min="0"
+                    className="pl-8"
+                  />
+                </div>
               </div>
             )}
 
@@ -435,15 +443,18 @@ ${result.premium > 0 ? '📈 **溢价出售**' : '📉 **低于剩余价值**'}
             {priceMode === 'monthly' && (
               <div className="space-y-2">
                 <Label htmlFor="expectedPrice">溢价金额（人民币）</Label>
-                <Input
-                  id="expectedPrice"
-                  type="number"
-                  placeholder="可选，用于溢价分析"
-                  value={expectedPrice}
-                  onChange={(e) => setExpectedPrice(e.target.value)}
-                  step="0.01"
-                  min="0"
-                />
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">¥</span>
+                  <Input
+                    id="expectedPrice"
+                    type="number"
+                    placeholder="可选，用于溢价分析"
+                    value={expectedPrice}
+                    onChange={(e) => setExpectedPrice(e.target.value)}
+                    step="0.01"
+                    className="pl-8"
+                  />
+                </div>
                 <p className="text-xs text-muted-foreground">
                   溢价金额 = 期望售价 - 剩余价值，可以为负数表示折价出售
                 </p>
@@ -485,9 +496,14 @@ ${result.premium > 0 ? '📈 **溢价出售**' : '📉 **低于剩余价值**'}
               </div>
               {result && (
                 <div className="flex gap-2">
-                  <Button variant="outline" size="sm" onClick={exportToMarkdown}>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={exportToMarkdown}
+                    disabled={copySuccess}
+                  >
                     <FileDown className="h-4 w-4 mr-1" />
-                    复制MD
+                    {copySuccess ? '已复制' : '复制MD'}
                   </Button>
                   <Button variant="outline" size="sm" onClick={exportToImage}>
                     <ImageIcon className="h-4 w-4 mr-1" />
