@@ -119,15 +119,44 @@ export default function VPSCalculatorPage() {
     setLoading(true)
     
     try {
-      const calculationResult = calculateVPSValue(
+      // 先计算基础结果
+      const baseResult = calculateVPSValue(
         new Date(purchaseDate),
         parseInt(renewalPeriod),
         finalPrice,
         currency,
-        expectedPrice ? parseFloat(expectedPrice) : 0,
+        0, // 先不传期望售价
         priceMode,
         exchangeRates
       )
+
+      let calculationResult = baseResult
+      
+      // 根据模式计算期望售价和溢价
+      if (priceMode === 'monthly') {
+        // 溢价模式：用户输入的是溢价金额
+        const premiumAmount = parseFloat(expectedPrice) || 0
+        const actualExpectedPrice = baseResult.remainingValue + premiumAmount
+        
+        calculationResult = {
+          ...baseResult,
+          premium: premiumAmount,
+          premiumPercent: baseResult.remainingValue > 0 ? (premiumAmount / baseResult.remainingValue) * 100 : 0,
+          expectedPrice: actualExpectedPrice
+        }
+      } else {
+        // 整体价格模式：用户输入的是期望售价
+        const userExpectedPrice = parseFloat(expectedPrice) || 0
+        if (userExpectedPrice > 0) {
+          const premium = userExpectedPrice - baseResult.remainingValue
+          calculationResult = {
+            ...baseResult,
+            premium,
+            premiumPercent: baseResult.remainingValue > 0 ? (premium / baseResult.remainingValue) * 100 : 0,
+            expectedPrice: userExpectedPrice
+          }
+        }
+      }
 
       setResult(calculationResult)
     } catch (err) {
@@ -298,7 +327,7 @@ ${result.premium > 0 ? '📈 **溢价出售**' : '📉 **低于剩余价值**'}
         </Card>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6" style={{ gridTemplateColumns: '35% 65%' }}>
         {/* 左侧：输入表单 */}
         <Card>
           <CardHeader>
@@ -448,7 +477,7 @@ ${result.premium > 0 ? '📈 **溢价出售**' : '📉 **低于剩余价值**'}
                   <Input
                     id="expectedPrice"
                     type="number"
-                    placeholder="可选，用于溢价分析"
+                    placeholder="300"
                     value={expectedPrice}
                     onChange={(e) => setExpectedPrice(e.target.value)}
                     step="0.01"
@@ -540,7 +569,11 @@ ${result.premium > 0 ? '📈 **溢价出售**' : '📉 **低于剩余价值**'}
                   <div className="p-6 bg-purple-50 border-2 border-purple-200 rounded-lg text-center dark:bg-purple-950 dark:border-purple-800">
                     <div className="text-sm text-purple-600 dark:text-purple-400 mb-2">期望售价</div>
                     <div className="text-3xl font-bold text-purple-700 dark:text-purple-300 mb-1">
-                      ¥ {formatCurrency(parseFloat(expectedPrice) || 0)}
+                      ¥ {formatCurrency(
+                        priceMode === 'monthly' && result.expectedPrice 
+                          ? result.expectedPrice 
+                          : parseFloat(expectedPrice) || 0
+                      )}
                     </div>
                     {result.premium !== undefined && (
                       <div className={`inline-block px-3 py-1 text-xs rounded-full ${
@@ -553,7 +586,7 @@ ${result.premium > 0 ? '📈 **溢价出售**' : '📉 **低于剩余价值**'}
                     )}
                   </div>
 
-                  {/* 折价损失或溢价收益 */}
+                  {/* 溢价收益或折价损失 */}
                   <div className={`p-6 border-2 rounded-lg text-center ${
                     result.premium !== undefined && result.premium > 0
                       ? 'bg-green-50 border-green-200 dark:bg-green-950 dark:border-green-800'
@@ -571,7 +604,7 @@ ${result.premium > 0 ? '📈 **溢价出售**' : '📉 **低于剩余价值**'}
                         ? 'text-green-700 dark:text-green-300'
                         : 'text-red-700 dark:text-red-300'
                     }`}>
-                      {result.premium !== undefined && result.premium > 0 ? '+' : '-'} ¥ {formatCurrency(Math.abs(result.premium || 0))}
+                      {result.premium !== undefined && result.premium > 0 ? '+ ' : '- '}¥ {formatCurrency(Math.abs(result.premium || 0))}
                     </div>
                     <div className={`inline-block px-3 py-1 text-xs rounded-full ${
                       result.premium !== undefined && result.premium > 0
@@ -597,7 +630,11 @@ ${result.premium > 0 ? '📈 **溢价出售**' : '📉 **低于剩余价值**'}
 
                     <div className="text-center p-3 bg-muted rounded-lg">
                       <div className="text-xs text-muted-foreground mb-1">期望售价</div>
-                      <div className="font-semibold text-sm">¥{formatCurrency(parseFloat(expectedPrice) || 0)}</div>
+                      <div className="font-semibold text-sm">¥{formatCurrency(
+                        priceMode === 'monthly' && result.expectedPrice 
+                          ? result.expectedPrice 
+                          : parseFloat(expectedPrice) || 0
+                      )}</div>
                     </div>
 
                     <div className="text-center p-3 bg-muted rounded-lg">
@@ -606,7 +643,9 @@ ${result.premium > 0 ? '📈 **溢价出售**' : '📉 **低于剩余价值**'}
                     </div>
 
                     <div className="text-center p-3 bg-muted rounded-lg">
-                      <div className="text-xs text-muted-foreground mb-1">折价损失</div>
+                      <div className="text-xs text-muted-foreground mb-1">
+                        {result.premium !== undefined && result.premium > 0 ? '溢价收益' : '折价损失'}
+                      </div>
                       <div className={`font-semibold text-sm ${
                         result.premium !== undefined && result.premium > 0 ? 'text-green-600' : 'text-red-600'
                       }`}>
