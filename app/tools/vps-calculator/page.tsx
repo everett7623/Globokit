@@ -522,77 +522,211 @@ ${result.premium > 0 ? '📈 **溢价出售**' : '📉 **低于剩余价值**'}
                 </p>
               </div>
             ) : (
-              <div ref={resultRef} className="space-y-6 p-4">
-                {/* 剩余价值 */}
-                <div className="text-center p-6 bg-primary/5 rounded-lg">
-                  <div className="text-sm text-muted-foreground mb-2">剩余价值</div>
-                  <div className="text-4xl font-bold text-primary mb-2">
-                    ¥ {formatCurrency(result.remainingValue)}
+              <div ref={resultRef} className="space-y-6">
+                {/* 三卡片横排展示 */}
+                <div className="grid grid-cols-3 gap-4">
+                  {/* 剩余价值 */}
+                  <div className="p-6 bg-blue-50 border-2 border-blue-200 rounded-lg text-center dark:bg-blue-950 dark:border-blue-800">
+                    <div className="text-sm text-blue-600 dark:text-blue-400 mb-2">剩余价值</div>
+                    <div className="text-3xl font-bold text-blue-700 dark:text-blue-300 mb-1">
+                      ¥ {formatCurrency(result.remainingValue)}
+                    </div>
+                    <div className="inline-block px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs rounded-full">
+                      剩余 {(result.remainingRatio * 100).toFixed(2)}%
+                    </div>
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    到期日期: {formatDate(result.expireDate)}
+
+                  {/* 期望售价 */}
+                  <div className="p-6 bg-purple-50 border-2 border-purple-200 rounded-lg text-center dark:bg-purple-950 dark:border-purple-800">
+                    <div className="text-sm text-purple-600 dark:text-purple-400 mb-2">期望售价</div>
+                    <div className="text-3xl font-bold text-purple-700 dark:text-purple-300 mb-1">
+                      ¥ {formatCurrency(parseFloat(expectedPrice) || 0)}
+                    </div>
+                    {result.premium !== undefined && (
+                      <div className={`inline-block px-3 py-1 text-xs rounded-full ${
+                        result.premium > 0 
+                          ? 'bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300'
+                          : 'bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300'
+                      }`}>
+                        回报金额 {result.premium > 0 ? '+' : ''}{(result.premiumPercent || 0).toFixed(2)}%
+                      </div>
+                    )}
+                  </div>
+
+                  {/* 折价损失或溢价收益 */}
+                  <div className={`p-6 border-2 rounded-lg text-center ${
+                    result.premium !== undefined && result.premium > 0
+                      ? 'bg-green-50 border-green-200 dark:bg-green-950 dark:border-green-800'
+                      : 'bg-red-50 border-red-200 dark:bg-red-950 dark:border-red-800'
+                  }`}>
+                    <div className={`text-sm mb-2 ${
+                      result.premium !== undefined && result.premium > 0
+                        ? 'text-green-600 dark:text-green-400'
+                        : 'text-red-600 dark:text-red-400'
+                    }`}>
+                      {result.premium !== undefined && result.premium > 0 ? '✓ 溢价收益' : '✗ 折价损失'}
+                    </div>
+                    <div className={`text-3xl font-bold mb-1 ${
+                      result.premium !== undefined && result.premium > 0
+                        ? 'text-green-700 dark:text-green-300'
+                        : 'text-red-700 dark:text-red-300'
+                    }`}>
+                      {result.premium !== undefined && result.premium > 0 ? '+' : '-'} ¥ {formatCurrency(Math.abs(result.premium || 0))}
+                    </div>
+                    <div className={`inline-block px-3 py-1 text-xs rounded-full ${
+                      result.premium !== undefined && result.premium > 0
+                        ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
+                        : 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300'
+                    }`}>
+                      {Math.abs(result.premiumPercent || 0).toFixed(2)}%
+                    </div>
                   </div>
                 </div>
 
-                {/* 详细信息 */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 border rounded-lg">
-                    <div className="text-sm text-muted-foreground mb-1">购买价格</div>
-                    <div className="text-xl font-semibold">
-                      ¥ {formatCurrency(result.purchasePriceCNY)}
+                {/* 详细分析 */}
+                <div className="border-t pt-6">
+                  <h3 className="text-lg font-semibold mb-4">详细分析</h3>
+                  
+                  {/* 数据点展示 */}
+                  <div className="grid grid-cols-5 gap-3 mb-6">
+                    <div className="text-center p-3 bg-muted rounded-lg">
+                      <div className="text-xs text-muted-foreground mb-1">原购买价格</div>
+                      <div className="font-semibold text-sm">{currency}${formatCurrency(parseFloat(purchasePrice))}</div>
+                      <div className="text-xs text-muted-foreground">≈ ¥{formatCurrency(result.purchasePriceCNY)}</div>
+                    </div>
+
+                    <div className="text-center p-3 bg-muted rounded-lg">
+                      <div className="text-xs text-muted-foreground mb-1">期望售价</div>
+                      <div className="font-semibold text-sm">¥{formatCurrency(parseFloat(expectedPrice) || 0)}</div>
+                    </div>
+
+                    <div className="text-center p-3 bg-muted rounded-lg">
+                      <div className="text-xs text-muted-foreground mb-1">剩余价值</div>
+                      <div className="font-semibold text-sm">¥{formatCurrency(result.remainingValue)}</div>
+                    </div>
+
+                    <div className="text-center p-3 bg-muted rounded-lg">
+                      <div className="text-xs text-muted-foreground mb-1">折价损失</div>
+                      <div className={`font-semibold text-sm ${
+                        result.premium !== undefined && result.premium > 0 ? 'text-green-600' : 'text-red-600'
+                      }`}>
+                        {result.premium !== undefined && result.premium > 0 ? '+' : ''}{formatCurrency(result.premium || 0)}
+                      </div>
+                    </div>
+
+                    <div className="text-center p-3 bg-muted rounded-lg">
+                      <div className="text-xs text-muted-foreground mb-1">投资回报率</div>
+                      <div className={`font-semibold text-sm ${
+                        result.premium !== undefined && result.premium > 0 ? 'text-green-600' : 'text-red-600'
+                      }`}>
+                        {result.premium !== undefined && result.premium > 0 ? '+' : ''}{(result.premiumPercent || 0).toFixed(2)}%
+                      </div>
                     </div>
                   </div>
 
-                  <div className="p-4 border rounded-lg">
-                    <div className="text-sm text-muted-foreground mb-1">剩余天数</div>
-                    <div className="text-xl font-semibold">
-                      {result.remainingDays} 天
+                  {/* 时间信息 */}
+                  <div className="grid grid-cols-5 gap-3 mb-6">
+                    <div className="text-center p-3 bg-muted rounded-lg">
+                      <div className="text-xs text-muted-foreground mb-1">购买日期</div>
+                      <div className="font-semibold text-sm">{formatDate(new Date(purchaseDate))}</div>
+                    </div>
+
+                    <div className="text-center p-3 bg-muted rounded-lg">
+                      <div className="text-xs text-muted-foreground mb-1">续费周期</div>
+                      <div className="font-semibold text-sm">
+                        {RENEWAL_PERIODS.find(p => p.value === parseInt(renewalPeriod))?.label || renewalPeriod}
+                      </div>
+                    </div>
+
+                    <div className="text-center p-3 bg-muted rounded-lg">
+                      <div className="text-xs text-muted-foreground mb-1">到期日期</div>
+                      <div className="font-semibold text-sm text-orange-600">{formatDate(result.expireDate)}</div>
+                    </div>
+
+                    <div className="text-center p-3 bg-muted rounded-lg">
+                      <div className="text-xs text-muted-foreground mb-1">总使用时间</div>
+                      <div className="font-semibold text-sm">{result.totalDays} 天</div>
+                    </div>
+
+                    <div className="text-center p-3 bg-muted rounded-lg">
+                      <div className="text-xs text-muted-foreground mb-1">已使用时间</div>
+                      <div className="font-semibold text-sm text-red-600">
+                        {result.totalDays - result.remainingDays} 天
+                      </div>
                     </div>
                   </div>
 
-                  <div className="p-4 border rounded-lg">
-                    <div className="text-sm text-muted-foreground mb-1">总天数</div>
-                    <div className="text-xl font-semibold">
-                      {result.totalDays} 天
+                  <div className="grid grid-cols-1 gap-3">
+                    <div className="text-center p-3 bg-muted rounded-lg">
+                      <div className="text-xs text-muted-foreground mb-1">剩余时间</div>
+                      <div className="font-semibold text-sm text-blue-600">{result.remainingDays} 天</div>
                     </div>
                   </div>
 
-                  <div className="p-4 border rounded-lg">
-                    <div className="text-sm text-muted-foreground mb-1">剩余比例</div>
-                    <div className="text-xl font-semibold">
-                      {(result.remainingRatio * 100).toFixed(1)}%
+                  {/* 使用进度条 */}
+                  <div className="mt-6">
+                    <div className="flex items-center justify-between text-sm mb-2">
+                      <span className="text-muted-foreground">使用进度</span>
+                      <span className="font-semibold">
+                        {((1 - result.remainingRatio) * 100).toFixed(0)}%
+                      </span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div 
+                        className="bg-orange-500 h-2 rounded-full transition-all"
+                        style={{ width: `${((1 - result.remainingRatio) * 100).toFixed(0)}%` }}
+                      />
                     </div>
                   </div>
                 </div>
 
-                {/* 溢价分析 */}
+                {/* 盈亏分析 */}
                 {result.premium !== undefined && (
-                  <div
-                    className={`p-4 rounded-lg border-2 ${
+                  <div className="border-t pt-6">
+                    <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                      <TrendingDown className="h-5 w-5" />
+                      盈亏分析
+                    </h3>
+                    <div className={`p-4 rounded-lg border-2 ${
                       result.premium > 0
                         ? 'bg-green-50 border-green-200 dark:bg-green-950 dark:border-green-800'
                         : 'bg-red-50 border-red-200 dark:bg-red-950 dark:border-red-800'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      {result.premium > 0 ? (
-                        <TrendingUp className="h-5 w-5 text-green-600" />
-                      ) : (
-                        <TrendingDown className="h-5 w-5 text-red-600" />
+                    }`}>
+                      <div className="flex items-center gap-2 mb-2">
+                        {result.premium > 0 ? (
+                          <>
+                            <TrendingUp className="h-5 w-5 text-green-600" />
+                            <span className="font-semibold text-green-700 dark:text-green-300">
+                              💰 盈利交易
+                            </span>
+                          </>
+                        ) : (
+                          <>
+                            <TrendingDown className="h-5 w-5 text-red-600" />
+                            <span className="font-semibold text-red-700 dark:text-red-300">
+                              📉 亏损交易
+                            </span>
+                          </>
+                        )}
+                      </div>
+                      <div className={`text-sm ${
+                        result.premium > 0 ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'
+                      }`}>
+                        按此价格出售可{result.premium > 0 ? '获利' : '亏损'}收益低 
+                        <span className="font-bold mx-1">
+                          ¥{formatCurrency(Math.abs(result.premium))}
+                        </span>
+                        ，亏损比例 
+                        <span className="font-bold ml-1">
+                          {Math.abs(result.premiumPercent || 0).toFixed(2)}%
+                        </span>
+                      </div>
+                      {result.premium < 0 && (
+                        <div className="mt-3 flex items-center gap-2 text-sm text-orange-700 dark:text-orange-300">
+                          <span>⚠️</span>
+                          <span>建议重新评估售价或等待更优惠时机</span>
+                        </div>
                       )}
-                      <span className="font-semibold">
-                        {result.premium > 0 ? '盈利交易' : '低于剩余价值'}
-                      </span>
-                    </div>
-                    <div className="text-sm">
-                      按此价格出售可获利收益{result.premium > 0 ? '高' : '低'}{' '}
-                      <span className="font-bold">
-                        ¥{formatCurrency(Math.abs(result.premium))}
-                      </span>
-                      ，投资回报率{' '}
-                      <span className="font-bold">
-                        {Math.abs(result.premiumPercent || 0).toFixed(2)}%
-                      </span>
                     </div>
                   </div>
                 )}
