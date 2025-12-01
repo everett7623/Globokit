@@ -192,49 +192,90 @@ export default function VPSCalculatorPage() {
     if (!result) return
 
     const currencyName = SUPPORTED_CURRENCIES.find(c => c.code === currency)?.name || currency
+    const currencySymbol = SUPPORTED_CURRENCIES.find(c => c.code === currency)?.symbol || currency
     const renewalLabel = RENEWAL_PERIODS.find(p => p.value === parseInt(renewalPeriod))?.label || renewalPeriod
+    const usedDays = result.totalDays - result.remainingDays
+    const usedRatio = result.totalDays > 0 ? ((usedDays / result.totalDays) * 100).toFixed(0) : 0
+    const dailyCost = result.totalDays > 0 ? (result.purchasePriceCNY / result.totalDays).toFixed(2) : 0
+    
+    const actualExpectedPrice = priceMode === 'monthly' && result.expectedPrice 
+      ? result.expectedPrice 
+      : parseFloat(expectedPrice) || 0
 
-    let markdown = `# VPS剩余价值计算报告
+    let markdown = `# VPS 剩余价值计算结果
 
-## 基本信息
+| **分类** | **项目** | **数值** | **说明** |
+|----------|----------|----------|----------|
+| **💰 价格信息** | 原购买价格 | ${currencySymbol}${formatCurrency(parseFloat(purchasePrice))} | 约 ¥${formatCurrency(result.purchasePriceCNY)} |
+| | 期望售价 | ¥${formatCurrency(actualExpectedPrice)} | 人民币计价 |
+| | 剩余价值 | ¥${formatCurrency(result.remainingValue)} | 当前估值 |`
 
-- **购买日期**: ${formatDate(new Date(purchaseDate))}
-- **续费周期**: ${renewalLabel}
-- **购买价格**: ${purchasePrice} ${currency} (${currencyName})
-- **价格模式**: ${priceMode === 'total' ? '整体价格' : priceMode === 'monthly' ? '溢价模式' : '折扣模式'}
-${expectedPrice ? `- **期望售价**: ¥${expectedPrice}` : ''}
+    if (result.premium !== undefined) {
+      if (result.premium > 0) {
+        markdown += `
+| | 💎 溢价收益 | +¥${formatCurrency(result.premium)} | 预期盈利 |
+| | 投资回报率 | +${(result.premiumPercent || 0).toFixed(2)}% | ROI 指标 |`
+      } else {
+        markdown += `
+| | ⚠️ 折价损失 | -¥${formatCurrency(Math.abs(result.premium))} | 预期亏损 |
+| | 投资回报率 | ${(result.premiumPercent || 0).toFixed(2)}% | ROI 指标 |`
+      }
+    }
 
-## 计算结果
+    markdown += `
+| **📅 时间信息** | 购买日期 | ${formatDate(new Date(purchaseDate))} | 起始时间 |
+| | 续费周期 | ${renewalLabel} | 服务期限 |
+| | 到期日期 | ${formatDate(result.expireDate)} | 截止时间 |
+| | 总使用期限 | ${result.totalDays} 天 | 完整周期 |
+| | 已使用时间 | ${usedDays} 天 | 已消耗时间 |
+| | 剩余时间 | ${result.remainingDays} 天 | 可用时间 |
+| | 使用进度 | ${usedRatio}% | 完成度 |
 
-### 剩余价值
-**¥${formatCurrency(result.remainingValue)}**
+## 📊 分析结论
 
-### 详细数据
-
-| 项目 | 数值 |
-|------|------|
-| 购买价格(CNY) | ¥${formatCurrency(result.purchasePriceCNY)} |
-| 到期日期 | ${formatDate(result.expireDate)} |
-| 总天数 | ${result.totalDays} 天 |
-| 剩余天数 | ${result.remainingDays} 天 |
-| 剩余比例 | ${(result.remainingRatio * 100).toFixed(1)}% |
 `
 
     if (result.premium !== undefined) {
-      markdown += `
-### 溢价分析
+      if (result.premium > 0) {
+        markdown += `**🎉 推荐交易**
 
-${result.premium > 0 ? '📈 **溢价出售**' : '📉 **低于剩余价值**'}
+✅ 按期望售价 **¥${formatCurrency(actualExpectedPrice)}** 出售，可获得 **¥${formatCurrency(result.premium)}** 的额外收益，投资回报率达到 **${(result.premiumPercent || 0).toFixed(2)}%**，建议按此价格进行交易。
 
-期望售价比剩余价值${result.premium > 0 ? '高' : '低'} **¥${formatCurrency(Math.abs(result.premium))}** (${Math.abs(result.premiumPercent || 0).toFixed(1)}%)
+**剩余价值比例:** ${(result.remainingRatio * 100).toFixed(2)}% - 基于时间进度的价值评估
+
+**成本效率:** 原价 ${currencySymbol}${formatCurrency(parseFloat(purchasePrice))} 约合 ¥${formatCurrency(result.purchasePriceCNY)}，每天成本约 ¥${dailyCost}
 `
+      } else {
+        markdown += `**⚠️ 谨慎交易**
+
+❌ 按期望售价 **¥${formatCurrency(actualExpectedPrice)}** 出售，将产生 **¥${formatCurrency(Math.abs(result.premium))}** 的损失，投资回报率为 **${(result.premiumPercent || 0).toFixed(2)}%**，建议重新评估售价。
+
+**剩余价值比例:** ${(result.remainingRatio * 100).toFixed(2)}% - 基于时间进度的价值评估
+
+**成本效率:** 原价 ${currencySymbol}${formatCurrency(parseFloat(purchasePrice))} 约合 ¥${formatCurrency(result.purchasePriceCNY)}，每天成本约 ¥${dailyCost}
+
+💡 **建议:** 当前剩余价值为 ¥${formatCurrency(result.remainingValue)}，建议售价不低于此价格以避免亏损。
+`
+      }
     }
 
     markdown += `
 
 ---
-*报告生成时间: ${new Date().toLocaleString('zh-CN')}*
-*工具: VPS剩余价值计算器 - Globokit*
+
+📋 *报告生成时间: ${new Date().toLocaleString('zh-CN', { 
+      year: 'numeric', 
+      month: '2-digit', 
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    })}*
+
+🔗 *数据来源: VPS 剩余价值计算器*
+
+🌐 *更多工具请访问: [GloboKit.com](https://www.globokit.com/)*
 `
 
     // 复制到剪贴板
