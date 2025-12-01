@@ -2,7 +2,7 @@
 // 描述: 基于购买日期和到期时间精确计算VPS剩余价值，支持多币种转换
 // 路径: Globokit/app/tools/vps-calculator/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2025-11-29
+// 更新时间: 2025-12-01
 
 'use client'
 
@@ -304,52 +304,39 @@ ${result.premium > 0 ? '📈 **溢价出售**' : '📉 **低于剩余价值**'}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {/* 购买日期 */}
-            <div className="space-y-2">
-              <Label htmlFor="purchaseDate">购买日期 *</Label>
-              <Input
-                id="purchaseDate"
-                type="date"
-                value={purchaseDate}
-                onChange={(e) => setPurchaseDate(e.target.value)}
-              />
-            </div>
+            {/* 购买日期和续费周期 - 并排 */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="purchaseDate">购买日期 *</Label>
+                <Input
+                  id="purchaseDate"
+                  type="date"
+                  value={purchaseDate}
+                  onChange={(e) => setPurchaseDate(e.target.value)}
+                />
+              </div>
 
-            {/* 续费周期 */}
-            <div className="space-y-2">
-              <Label htmlFor="renewalPeriod">续费周期 *</Label>
-              <Select value={renewalPeriod} onValueChange={setRenewalPeriod}>
-                <SelectTrigger id="renewalPeriod">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {RENEWAL_PERIODS.map((period) => (
-                    <SelectItem key={period.value} value={period.value.toString()}>
-                      {period.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* 价格输入模式 */}
-            <div className="space-y-2">
-              <Label>价格输入模式</Label>
-              <Tabs value={priceMode} onValueChange={(v) => setPriceMode(v as PriceMode)}>
-                <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="total">整体价格</TabsTrigger>
-                  <TabsTrigger value="monthly">溢价模式</TabsTrigger>
-                  <TabsTrigger value="discount">折扣模式</TabsTrigger>
-                </TabsList>
-              </Tabs>
+              <div className="space-y-2">
+                <Label htmlFor="renewalPeriod">续费周期 *</Label>
+                <Select value={renewalPeriod} onValueChange={setRenewalPeriod}>
+                  <SelectTrigger id="renewalPeriod">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {RENEWAL_PERIODS.map((period) => (
+                      <SelectItem key={period.value} value={period.value.toString()}>
+                        {period.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
 
             {/* 购买价格和币种 */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="purchasePrice">
-                  {priceMode === 'total' ? '购买价格' : priceMode === 'monthly' ? '期望售价' : '折扣 (按原价计算)'} *
-                </Label>
+                <Label htmlFor="purchasePrice">购买价格 *</Label>
                 <Input
                   id="purchasePrice"
                   type="number"
@@ -379,6 +366,18 @@ ${result.premium > 0 ? '📈 **溢价出售**' : '📉 **低于剩余价值**'}
                   <p className="text-xs text-muted-foreground">{exchangeRateText}</p>
                 )}
               </div>
+            </div>
+
+            {/* 价格输入模式 */}
+            <div className="space-y-2">
+              <Label>价格输入模式</Label>
+              <Tabs value={priceMode} onValueChange={(v) => setPriceMode(v as PriceMode)}>
+                <TabsList className="grid w-full grid-cols-3">
+                  <TabsTrigger value="total">整体价格</TabsTrigger>
+                  <TabsTrigger value="monthly">溢价模式</TabsTrigger>
+                  <TabsTrigger value="discount">折扣模式</TabsTrigger>
+                </TabsList>
+              </Tabs>
             </div>
 
             {/* 折扣模式特殊输入 */}
