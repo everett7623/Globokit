@@ -2,7 +2,7 @@
 // 描述: 提供VPS价值计算、汇率转换和配置管理功能
 // 路径: Globokit/lib/tools/vps-calculator.ts
 // 作者: Jensfrank
-// 更新时间: 2025-11-29
+// 更新时间: 2025-12-01
 
 // VPS配置接口
 export interface VPSConfig {
@@ -141,9 +141,10 @@ export function calculateVPSValue(
 
   // 根据价格模式调整
   if (priceMode === 'monthly') {
-    purchasePriceCNY = purchasePriceCNY * renewalMonths
+    // 溢价模式：不调整购买价格
+    purchasePriceCNY = purchasePriceCNY
   } else if (priceMode === 'discount') {
-    // 折扣模式保持原价
+    // 折扣模式：购买价格已经在前端计算好了
     purchasePriceCNY = purchasePriceCNY
   }
 
