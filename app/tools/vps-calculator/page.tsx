@@ -297,10 +297,7 @@ export default function VPSCalculatorPage() {
         backgroundColor: '#ffffff',
         scale: 2, // 高清截图
         logging: false,
-        windowWidth: resultRef.current.scrollWidth + 60, // 增加宽度
-        windowHeight: resultRef.current.scrollHeight + 60, // 增加高度
-        x: -30, // 左侧留白
-        y: -30, // 顶部留白
+        useCORS: true, // 支持跨域图片
       })
 
       // 转换为 Blob 并下载
@@ -607,7 +604,13 @@ export default function VPSCalculatorPage() {
                 </p>
               </div>
             ) : (
-              <div ref={resultRef} className="space-y-6 p-6">
+              <div>
+                <div ref={resultRef} className="space-y-6 p-6 bg-white rounded-lg">
+                  {/* 标题 */}
+                  <div className="flex items-center gap-2 mb-4">
+                    <TrendingUp className="h-5 w-5 text-green-600" />
+                    <h3 className="text-lg font-semibold">剩余价值计算结果</h3>
+                  </div>
                 {/* 三卡片横排展示 */}
                 <div className="grid grid-cols-3 gap-4">
                   {/* 剩余价值 */}
