@@ -2,7 +2,7 @@
 // 描述: 基于购买日期和到期时间精确计算VPS剩余价值，支持多币种转换
 // 路径: Globokit/app/tools/vps-calculator/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2025-12-01
+// 更新时间: 2025-12-02
 
 'use client'
 
@@ -292,26 +292,41 @@ export default function VPSCalculatorPage() {
     if (!resultRef.current) return
 
     try {
+      // 使用 html2canvas 截图，添加内边距
       const canvas = await html2canvas(resultRef.current, {
         backgroundColor: '#ffffff',
-        scale: 2,
+        scale: 2, // 高清截图
         logging: false,
+        windowWidth: resultRef.current.scrollWidth + 60, // 增加宽度
+        windowHeight: resultRef.current.scrollHeight + 60, // 增加高度
+        x: -30, // 左侧留白
+        y: -30, // 顶部留白
       })
 
+      // 转换为 Blob 并下载
       canvas.toBlob((blob) => {
         if (blob) {
           const url = URL.createObjectURL(blob)
           const link = document.createElement('a')
           link.href = url
-          link.download = `VPS剩余价值_${new Date().getTime()}.png`
+          
+          // 生成文件名：GloboKit-VPS-Value-Calculator-20251201.png
+          const today = new Date()
+          const timestamp = today.toISOString().slice(0, 10).replace(/-/g, '')
+          link.download = `GloboKit-VPS-Value-Calculator-${timestamp}.png`
+          
+          // 触发下载
           document.body.appendChild(link)
           link.click()
           document.body.removeChild(link)
+          
+          // 释放 URL 对象
           URL.revokeObjectURL(url)
         }
       })
     } catch (err) {
       console.error('导出图片失败:', err)
+      alert('导出图片失败，请重试')
     }
   }
 
@@ -592,7 +607,7 @@ export default function VPSCalculatorPage() {
                 </p>
               </div>
             ) : (
-              <div ref={resultRef} className="space-y-6">
+              <div ref={resultRef} className="space-y-6 p-6">
                 {/* 三卡片横排展示 */}
                 <div className="grid grid-cols-3 gap-4">
                   {/* 剩余价值 */}
