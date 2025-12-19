@@ -49,7 +49,7 @@ export const RENEWAL_PERIODS = [
   { value: 1, label: '1个月' },
   { value: 3, label: '3个月' },
   { value: 6, label: '6个月' },
-  { value: 12, label: '1年（推荐）' },
+  { value: 12, label: '1年' },
   { value: 24, label: '2年' },
   { value: 36, label: '3年' },
   { value: 60, label: '5年' },
