@@ -88,24 +88,30 @@ export default function VPSCalculatorPage() {
   const quickDiscounts = [95, 85, 75, 65, 9, 8, 7, 6, 5]
 
   // 计算
-const handleCalculate = () => {
+// 计算
+  const handleCalculate = () => {
     setError('')
     
-    // 1. 获取原始购买价格并转换为人民币
-    const rawPrice = parseFloat(purchasePrice)
+    let rawPrice = parseFloat(purchasePrice)
     if (!rawPrice || rawPrice <= 0) {
       setError('请输入有效的购买价格')
       return
     }
     
-    // 获取当前币种对人民币的汇率 (1 USD ≈ 7.051 CNY)
-    const rate = 1 / (exchangeRates[currency] || 1)
-    const purchasePriceCNY = rawPrice * rate
+    const validation = validateInput(purchaseDate, rawPrice)
+    if (!validation.valid) {
+      setError(validation.error || '')
+      return
+    }
 
     setLoading(true)
     
     try {
-      // 2. 计算客观的剩余价值 (基于时间比例)
+      // 1. 获取汇率并计算人民币原价 (用于折扣基数)
+      const rate = 1 / (exchangeRates[currency] || 1)
+      const purchasePriceCNY = rawPrice * rate
+
+      // 2. 计算客观的剩余价值 (baseResult)
       const baseResult = calculateVPSValue(
         new Date(purchaseDate),
         parseInt(renewalPeriod),
@@ -118,43 +124,38 @@ const handleCalculate = () => {
 
       let finalExpectedPrice = 0
 
-      // 3. 【核心修改】：按照截图逻辑计算期望售价
+      // 3. 根据模式计算“期望售价”
       if (priceMode === 'discount') {
-        // 折扣模式：期望售价 = 原购买价格(CNY) * 折扣率
+        // 【折扣模式】：期望售价 = 人民币原价 * 折扣百分比
         const discount = parseFloat(discountValue)
-        let factor = 1
-        if (discount >= 10) {
-          factor = discount / 100 // 例如：50折 -> 0.5，85折 -> 0.85
-        } else {
-          factor = discount / 10  // 例如：5折 -> 0.5
-        }
+        const factor = discount >= 10 ? discount / 100 : discount / 10
         finalExpectedPrice = purchasePriceCNY * factor
       } else if (priceMode === 'monthly') {
-        // 溢价模式：期望售价 = 剩余价值 + 溢价金额
+        // 【溢价模式】：期望售价 = 剩余价值 + 溢价金额
         const premiumAmount = parseFloat(expectedPrice) || 0
         finalExpectedPrice = baseResult.remainingValue + premiumAmount
       } else {
-        // 整体价格模式：直接取用户输入的值
+        // 【整体价格模式】：直接使用输入的期望售价
         finalExpectedPrice = parseFloat(expectedPrice) || 0
       }
 
-      // 4. 统一更新结果
+      // 4. 计算折价/溢价金额及回报率 (相对于原价)
       const premium = finalExpectedPrice - baseResult.remainingValue
+      
       setResult({
         ...baseResult,
-        purchasePriceCNY, // 确保使用最新的折算原价
+        purchasePriceCNY,
         expectedPrice: finalExpectedPrice,
         premium: premium,
-        // 回报率通常相对于原价计算（如截图中所示）
-        premiumPercent: (premium / purchasePriceCNY) * 100, 
+        // 根据截图，回报率是：(期望售价 - 剩余价值) / 原价
+        premiumPercent: (premium / purchasePriceCNY) * 100,
       })
-
     } catch (err) {
-      setError('计算失败')
+      setError('计算失败，请检查输入数据')
     } finally {
       setLoading(false)
     }
-  }
+  }; // <--- 确保这里有结尾大括号
 
   // 重置
   const handleReset = () => {
