@@ -151,13 +151,11 @@ export default function VPSCalculatorPage() {
     setError('')
   }
 
-  // --- 详细的 Markdown 导出逻辑 (还原原始复杂度) ---
+  // --- Markdown 导出 (修复符号逻辑) ---
   const exportToMarkdown = () => {
     if (!result) return
     const symbol = SUPPORTED_CURRENCIES.find(c => c.code === currency)?.symbol || currency
-    const renewalLabel = RENEWAL_PERIODS.find(p => p.value === parseInt(renewalPeriod))?.label || renewalPeriod
     const usedDays = result.totalDays - result.remainingDays
-    const usedRatio = ((usedDays / result.totalDays) * 100).toFixed(0)
     
     let markdown = `# VPS 剩余价值分析报告\n\n`
     markdown += `| 分类 | 项目 | 数值 | 说明 |\n`
@@ -165,15 +163,15 @@ export default function VPSCalculatorPage() {
     markdown += `| 💰 价格 | 原价 | ${symbol}${purchasePrice} | 约 ¥${result.purchasePriceCNY.toFixed(2)} |\n`
     markdown += `| | 期望售价 | ¥${result.expectedPrice.toFixed(2)} | 人民币计价 |\n`
     markdown += `| | 剩余价值 | ¥${result.remainingValue.toFixed(2)} | 当前估值 |\n`
-    markdown += `| | ${result.premium >= 0 ? '💎 溢价' : '⚠️ 折价'} | ${result.premium >= 0 ? '+' : '-'}¥${Math.abs(result.premium).toFixed(2)} | ROI: ${result.premiumPercent.toFixed(2)}% |\n`
+    markdown += `| | ${result.premium >= 0 ? '💎 溢价' : '⚠️ 折价'} | ${result.premium >= 0 ? '+' : '-'}¥${Math.abs(result.premium).toFixed(2)} | ROI: ${result.premium >= 0 ? '+' : '-'}${Math.abs(result.premiumPercent).toFixed(2)}% |\n`
     markdown += `| 📅 时间 | 购买日期 | ${purchaseDate} | |\n`
     markdown += `| | 到期日期 | ${formatDate(result.expireDate)} | |\n`
     markdown += `| | 剩余时间 | ${result.remainingDays} 天 | 总 ${result.totalDays} 天 |\n\n`
     
     if (result.premium >= 0) {
-      markdown += `### 📊 分析结论: 🎉 推荐交易\n按此价格出售可获得额外收益，投资回报率较好。`
+      markdown += `### 📊 分析结论: 🎉 推荐交易\n定价高于剩余价值，按此价格出售可获得盈利。`
     } else {
-      markdown += `### 📊 分析结论: ⚠️ 谨慎交易\n售价低于剩余价值，建议重新评估价格以避免损失。`
+      markdown += `### 📊 分析结论: ⚠️ 亏损交易\n定价低于当前剩余价值，按此价格出售将产生折价损失。`
     }
 
     navigator.clipboard.writeText(markdown).then(() => {
@@ -232,9 +230,9 @@ export default function VPSCalculatorPage() {
         </Card>
       </div>
 
-      {/* 核心计算区域 - 栅格化布局对齐 */}
+      {/* 核心计算区域 */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-        {/* 左侧：输入表单 (占 4/12) */}
+        {/* 左侧：输入表单 */}
         <Card className="lg:col-span-4 flex flex-col h-full shadow-md">
           <CardHeader>
             <CardTitle>VPS 信息输入</CardTitle>
@@ -319,7 +317,7 @@ export default function VPSCalculatorPage() {
           </CardContent>
         </Card>
 
-        {/* 右侧：计算结果 (占 8/12) */}
+        {/* 右侧：计算结果 */}
         <Card className="lg:col-span-8 flex flex-col h-full shadow-md">
           <CardHeader className="flex flex-row items-center justify-between">
             <div className="space-y-1">
@@ -362,10 +360,10 @@ export default function VPSCalculatorPage() {
                   <div className={`p-5 border-2 rounded-2xl text-center ${result.premium >= 0 ? 'bg-emerald-50 border-emerald-100' : 'bg-rose-50 border-rose-100'}`}>
                     <div className={`text-xs font-bold mb-1 ${result.premium >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>{result.premium >= 0 ? '预期溢价' : '预期折价'}</div>
                     <div className={`text-3xl font-black ${result.premium >= 0 ? 'text-emerald-700' : 'text-rose-700'}`}>
-                      {result.premium >= 0 ? '+' : ''}¥ {formatCurrency(Math.abs(result.premium))}
+                      {result.premium >= 0 ? '+' : '-'}¥ {formatCurrency(Math.abs(result.premium))}
                     </div>
                     <Badge className={`mt-2 border-none ${result.premium >= 0 ? 'bg-emerald-500 text-white' : 'bg-rose-500 text-white'}`}>
-                      {Math.abs(result.premiumPercent || 0).toFixed(1)}%
+                      {result.premium >= 0 ? '+' : '-'}{Math.abs(result.premiumPercent || 0).toFixed(1)}%
                     </Badge>
                   </div>
                 </div>
@@ -380,7 +378,7 @@ export default function VPSCalculatorPage() {
                     { label: "已使用天数", val: `${result.totalDays - result.remainingDays} 天` },
                     { label: "剩余天数", val: `${result.remainingDays} 天`, color: "text-blue-600" },
                     { label: "使用进度", val: `${((1 - result.remainingRatio) * 100).toFixed(1)}%` },
-                    { label: "日均成本", val: `¥${(result.purchasePriceCNY / result.totalDays).toFixed(2)}` }
+                    { label: "投资回报率", val: `${result.premium >= 0 ? '+' : '-'}${Math.abs(result.premiumPercent || 0).toFixed(2)}%`, color: result.premium >= 0 ? 'text-emerald-600' : 'text-rose-600' }
                   ].map((item, i) => (
                     <div key={i} className="flex flex-col">
                       <span className="text-[10px] font-bold text-muted-foreground uppercase">{item.label}</span>
@@ -405,7 +403,7 @@ export default function VPSCalculatorPage() {
                   {result.premium >= 0 ? <TrendingUp className="h-6 w-6 text-emerald-600" /> : <TrendingDown className="h-6 w-6 text-rose-600" />}
                   <div className="text-sm">
                     <span className="font-bold">{result.premium >= 0 ? '盈利方案：' : '亏损方案：'}</span>
-                    当前定价较剩余价值{result.premium >= 0 ? '高出' : '低'} ¥{formatCurrency(Math.abs(result.premium))}，投资回报率为 {result.premiumPercent.toFixed(2)}%。
+                    当前定价较剩余价值{result.premium >= 0 ? '高出' : '低'} <span className="font-bold">¥{formatCurrency(Math.abs(result.premium))}</span>，投资回报率为 <span className="font-bold">{result.premium >= 0 ? '+' : '-'}{Math.abs(result.premiumPercent).toFixed(2)}%</span>。
                   </div>
                 </div>
               </div>
