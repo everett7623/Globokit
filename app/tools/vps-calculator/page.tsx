@@ -87,75 +87,75 @@ export default function VPSCalculatorPage() {
   // 快速折扣选择
   const quickDiscounts = [95, 85, 75, 65, 9, 8, 7, 6, 5]
 
-  // 计算
 // 计算
-  const handleCalculate = () => {
-    setError('')
-    
-    let rawPrice = parseFloat(purchasePrice)
-    if (!rawPrice || rawPrice <= 0) {
-      setError('请输入有效的购买价格')
-      return
+
+const handleCalculate = () => {
+  setError('')
+  
+  let rawPrice = parseFloat(purchasePrice)
+  if (!rawPrice || rawPrice <= 0) {
+    setError('请输入有效的购买价格')
+    return
+  }
+  
+  const validation = validateInput(purchaseDate, rawPrice)
+  if (!validation.valid) {
+    setError(validation.error || '')
+    return
+  }
+
+  setLoading(true)
+  
+  try {
+    // 1. 获取汇率并计算人民币原价 (用于折扣基数)
+    const rate = 1 / (exchangeRates[currency] || 1)
+    const purchasePriceCNY = rawPrice * rate
+
+    // 2. 计算客观的剩余价值 (baseResult)
+    const baseResult = calculateVPSValue(
+      new Date(purchaseDate),
+      parseInt(renewalPeriod),
+      rawPrice,
+      currency,
+      0, 
+      'total', 
+      exchangeRates
+    )
+
+    let finalExpectedPrice = 0
+
+    // 3. 根据模式计算"期望售价"
+    if (priceMode === 'discount') {
+      // 【折扣模式】：期望售价 = 人民币原价 * 折扣百分比
+      const discount = parseFloat(discountValue)
+      const factor = discount >= 10 ? discount / 100 : discount / 10
+      finalExpectedPrice = purchasePriceCNY * factor
+    } else if (priceMode === 'monthly') {
+      // 【溢价模式】：期望售价 = 剩余价值 + 溢价金额
+      const premiumAmount = parseFloat(expectedPrice) || 0
+      finalExpectedPrice = baseResult.remainingValue + premiumAmount
+    } else {
+      // 【整体价格模式】：直接使用输入的期望售价
+      finalExpectedPrice = parseFloat(expectedPrice) || 0
     }
+
+    // 4. 计算折价/溢价金额及回报率 (相对于原价)
+    const premium = finalExpectedPrice - baseResult.remainingValue
     
-    const validation = validateInput(purchaseDate, rawPrice)
-    if (!validation.valid) {
-      setError(validation.error || '')
-      return
-    }
-
-    setLoading(true)
-    
-    try {
-      // 1. 获取汇率并计算人民币原价 (用于折扣基数)
-      const rate = 1 / (exchangeRates[currency] || 1)
-      const purchasePriceCNY = rawPrice * rate
-
-      // 2. 计算客观的剩余价值 (baseResult)
-      const baseResult = calculateVPSValue(
-        new Date(purchaseDate),
-        parseInt(renewalPeriod),
-        rawPrice,
-        currency,
-        0, 
-        'total', 
-        exchangeRates
-      )
-
-      let finalExpectedPrice = 0
-
-      // 3. 根据模式计算“期望售价”
-      if (priceMode === 'discount') {
-        // 【折扣模式】：期望售价 = 人民币原价 * 折扣百分比
-        const discount = parseFloat(discountValue)
-        const factor = discount >= 10 ? discount / 100 : discount / 10
-        finalExpectedPrice = purchasePriceCNY * factor
-      } else if (priceMode === 'monthly') {
-        // 【溢价模式】：期望售价 = 剩余价值 + 溢价金额
-        const premiumAmount = parseFloat(expectedPrice) || 0
-        finalExpectedPrice = baseResult.remainingValue + premiumAmount
-      } else {
-        // 【整体价格模式】：直接使用输入的期望售价
-        finalExpectedPrice = parseFloat(expectedPrice) || 0
-      }
-
-      // 4. 计算折价/溢价金额及回报率 (相对于原价)
-      const premium = finalExpectedPrice - baseResult.remainingValue
-      
-      setResult({
-        ...baseResult,
-        purchasePriceCNY,
-        expectedPrice: finalExpectedPrice,
-        premium: premium,
-        // 根据截图，回报率是：(期望售价 - 剩余价值) / 原价
-        premiumPercent: (premium / purchasePriceCNY) * 100,
-      })
-    } catch (err) {
-      setError('计算失败，请检查输入数据')
-    } finally {
-      setLoading(false)
-    }
-  }; // <--- 确保这里有结尾大括号
+    setResult({
+      ...baseResult,
+      purchasePriceCNY,
+      expectedPrice: finalExpectedPrice,
+      premium: premium,
+      // 根据截图,回报率是:(期望售价 - 剩余价值) / 原价
+      premiumPercent: (premium / purchasePriceCNY) * 100,
+    })
+  } catch (err) {
+    setError('计算失败,请检查输入数据')
+  } finally {
+    setLoading(false)
+  }
+} // <--- This closing brace was missing!
 
   // 重置
   const handleReset = () => {
