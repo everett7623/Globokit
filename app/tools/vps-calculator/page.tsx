@@ -88,79 +88,69 @@ export default function VPSCalculatorPage() {
   const quickDiscounts = [95, 85, 75, 65, 9, 8, 7, 6, 5]
 
   // 计算
-  const handleCalculate = () => {
+const handleCalculate = () => {
     setError('')
     
-    let finalPrice = parseFloat(purchasePrice)
-    
-    if (!finalPrice || finalPrice <= 0) {
+    // 1. 获取原始购买价格并转换为人民币
+    const rawPrice = parseFloat(purchasePrice)
+    if (!rawPrice || rawPrice <= 0) {
       setError('请输入有效的购买价格')
       return
     }
     
-    // 折扣模式计算
-    if (priceMode === 'discount' && discountValue) {
-      const discount = parseFloat(discountValue)
-      if (discount >= 10) {
-        // 85折 = 原价 × 85%
-        finalPrice = finalPrice * (discount / 100)
-      } else {
-        // 8折 = 原价 × 80%
-        finalPrice = finalPrice * (discount / 10)
-      }
-    }
-    
-    const validation = validateInput(purchaseDate, finalPrice)
-    if (!validation.valid) {
-      setError(validation.error || '')
-      return
-    }
+    // 获取当前币种对人民币的汇率 (1 USD ≈ 7.051 CNY)
+    const rate = 1 / (exchangeRates[currency] || 1)
+    const purchasePriceCNY = rawPrice * rate
 
     setLoading(true)
     
     try {
-      // 先计算基础结果
+      // 2. 计算客观的剩余价值 (基于时间比例)
       const baseResult = calculateVPSValue(
         new Date(purchaseDate),
         parseInt(renewalPeriod),
-        finalPrice,
+        rawPrice,
         currency,
-        0, // 先不传期望售价
-        priceMode,
+        0, 
+        'total', 
         exchangeRates
       )
 
-      let calculationResult = baseResult
-      
-      // 根据模式计算期望售价和溢价
-      if (priceMode === 'monthly') {
-        // 溢价模式：用户输入的是溢价金额
+      let finalExpectedPrice = 0
+
+      // 3. 【核心修改】：按照截图逻辑计算期望售价
+      if (priceMode === 'discount') {
+        // 折扣模式：期望售价 = 原购买价格(CNY) * 折扣率
+        const discount = parseFloat(discountValue)
+        let factor = 1
+        if (discount >= 10) {
+          factor = discount / 100 // 例如：50折 -> 0.5，85折 -> 0.85
+        } else {
+          factor = discount / 10  // 例如：5折 -> 0.5
+        }
+        finalExpectedPrice = purchasePriceCNY * factor
+      } else if (priceMode === 'monthly') {
+        // 溢价模式：期望售价 = 剩余价值 + 溢价金额
         const premiumAmount = parseFloat(expectedPrice) || 0
-        const actualExpectedPrice = baseResult.remainingValue + premiumAmount
-        
-        calculationResult = {
-          ...baseResult,
-          premium: premiumAmount,
-          premiumPercent: baseResult.remainingValue > 0 ? (premiumAmount / baseResult.remainingValue) * 100 : 0,
-          expectedPrice: actualExpectedPrice
-        }
+        finalExpectedPrice = baseResult.remainingValue + premiumAmount
       } else {
-        // 整体价格模式：用户输入的是期望售价
-        const userExpectedPrice = parseFloat(expectedPrice) || 0
-        if (userExpectedPrice > 0) {
-          const premium = userExpectedPrice - baseResult.remainingValue
-          calculationResult = {
-            ...baseResult,
-            premium,
-            premiumPercent: baseResult.remainingValue > 0 ? (premium / baseResult.remainingValue) * 100 : 0,
-            expectedPrice: userExpectedPrice
-          }
-        }
+        // 整体价格模式：直接取用户输入的值
+        finalExpectedPrice = parseFloat(expectedPrice) || 0
       }
 
-      setResult(calculationResult)
+      // 4. 统一更新结果
+      const premium = finalExpectedPrice - baseResult.remainingValue
+      setResult({
+        ...baseResult,
+        purchasePriceCNY, // 确保使用最新的折算原价
+        expectedPrice: finalExpectedPrice,
+        premium: premium,
+        // 回报率通常相对于原价计算（如截图中所示）
+        premiumPercent: (premium / purchasePriceCNY) * 100, 
+      })
+
     } catch (err) {
-      setError('计算失败，请检查输入数据')
+      setError('计算失败')
     } finally {
       setLoading(false)
     }
