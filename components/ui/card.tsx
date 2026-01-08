@@ -1,3 +1,9 @@
+// 名称: 卡片组件
+// 描述: 通用卡片容器，包含头部、标题、内容和底部区域的组合封装
+// 路径: Globokit/components/ui/card.tsx
+// 作者: Jensfrank
+// 更新时间: 2026-01-08
+
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
