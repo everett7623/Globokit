@@ -1,8 +1,8 @@
-// 名称: 数字转英文工具函数
-// 描述: 提供数字转英文工具函数
-// 路径: seedtool/lib/tools/number-english.ts
+// 名称: 数字转英文函数
+// 描述: 实现阿拉伯数字到英文单词的转换逻辑
+// 路径: Globokit/lib/tools/number-english.ts
 // 作者: Jensfrank
-// 更新时间: 2025-07-23
+// 更新时间: 2026-01-08
 
 const ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
 const tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
