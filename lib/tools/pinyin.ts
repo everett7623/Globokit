@@ -1,8 +1,8 @@
-// 名称: 中文转拼音工具函数
-// 描述: 提供中文转拼音工具函数
-// 路径: seedtool/lib/tools/pinyin.ts
+// 名称: 汉字转拼音函数
+// 描述: 处理汉字到拼音的转换，支持多音字和声调处理
+// 路径: Globokit/lib/tools/pinyin.ts
 // 作者: Jensfrank
-// 更新时间: 2025-07-23
+// 更新时间: 2026-01-08
 
 import { pinyin } from 'pinyin-pro';
 
