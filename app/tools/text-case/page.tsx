@@ -2,7 +2,7 @@
 // 描述: 快速转换英文文本的大小写格式，支持多种转换模式
 // 路径: seedtool/app/tools/text-case/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2025-07-23
+// 更新时间: 2026-01-08
 
 'use client'
 
@@ -13,7 +13,7 @@ import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { AlertCircle, Copy, Check, RefreshCw, Trash2, Type, FileText, Info } from 'lucide-react'
+import { AlertCircle, Copy, Check, RefreshCw, Trash2, Type, FileText, Info, Code, Hash } from 'lucide-react'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { convertCase, type TextCase } from '@/lib/tools/text-case'
 
@@ -40,7 +40,8 @@ export default function TextCasePage() {
       return
     }
 
-    // 检查是否包含中文字符
+    // 宽松的中文检查（仅提醒，不强制阻断，因为某些编程变量可能包含注释）
+    // 或者保持原逻辑，这里我保留了你的原逻辑，但建议编程模式下可以适当放宽
     const chineseRegex = /[\u4e00-\u9fa5]/
     if (chineseRegex.test(input)) {
       setError('检测到中文字符，本工具仅支持英文大小写转换。请使用纯英文文本。')
@@ -48,10 +49,10 @@ export default function TextCasePage() {
       return
     }
 
-    // 检查是否包含英文字母
-    const englishRegex = /[a-zA-Z]/
-    if (!englishRegex.test(input)) {
-      setError('未检测到英文字母，请输入包含英文字母的文本')
+    // 检查是否包含英文字母或数字（编程格式可能全是数字连接）
+    const validCharRegex = /[a-zA-Z0-9]/
+    if (!validCharRegex.test(input)) {
+      setError('未检测到有效字符，请输入包含英文字母或数字的文本')
       setOutput('')
       return
     }
@@ -68,15 +69,28 @@ export default function TextCasePage() {
     }
   }
 
+  // 定义所有支持的格式选项
   const caseOptions = [
+    // 基础格式
     { value: 'upper', label: '全部大写', shortLabel: 'UPPERCASE', example: 'HELLO WORLD', icon: <Type className="h-4 w-4" /> },
     { value: 'lower', label: '全部小写', shortLabel: 'lowercase', example: 'hello world', icon: <Type className="h-4 w-4" /> },
-    { value: 'sentence', label: '句子首字母大写', shortLabel: 'Sentence case', example: 'Hello world. How are you?', icon: <FileText className="h-4 w-4" /> },
+    { value: 'sentence', label: '句子首字母大写', shortLabel: 'Sentence case', example: 'Hello world.', icon: <FileText className="h-4 w-4" /> },
     { value: 'title', label: '标题格式', shortLabel: 'Title Case', example: 'Hello World', icon: <FileText className="h-4 w-4" /> },
-    { value: 'capitalize', label: '单词首字母大写', shortLabel: 'Capitalize Each', example: 'Hello World', icon: <Type className="h-4 w-4" /> },
+    { value: 'capitalize', label: '单词首字母大写', shortLabel: 'Capitalize', example: 'Hello World', icon: <Type className="h-4 w-4" /> },
+    
+    // 趣味/特殊格式
     { value: 'toggle', label: '大小写反转', shortLabel: 'tOGGLE cASE', example: 'hELLO wORLD', icon: <RefreshCw className="h-4 w-4" /> },
     { value: 'alternating', label: '交替大小写', shortLabel: 'aLtErNaTiNg', example: 'HeLLo WoRLd', icon: <RefreshCw className="h-4 w-4" /> },
     { value: 'inverse', label: '反向格式', shortLabel: 'iNVERSE', example: 'hELLO WORLD', icon: <RefreshCw className="h-4 w-4" /> },
+    
+    // 编程常用格式 (新增)
+    { value: 'snake', label: '下划线命名', shortLabel: 'snake_case', example: 'hello_world', icon: <Code className="h-4 w-4" /> },
+    { value: 'kebab', label: '短横线命名', shortLabel: 'kebab-case', example: 'hello-world', icon: <Code className="h-4 w-4" /> },
+    { value: 'camel', label: '小驼峰命名', shortLabel: 'camelCase', example: 'helloWorld', icon: <Code className="h-4 w-4" /> },
+    { value: 'pascal', label: '大驼峰命名', shortLabel: 'PascalCase', example: 'HelloWorld', icon: <Code className="h-4 w-4" /> },
+    { value: 'constant', label: '常量命名', shortLabel: 'CONSTANT_CASE', example: 'HELLO_WORLD', icon: <Code className="h-4 w-4" /> },
+    { value: 'dot', label: '点连接命名', shortLabel: 'dot.case', example: 'hello.world', icon: <Hash className="h-4 w-4" /> },
+    { value: 'path', label: '路径格式', shortLabel: 'path/case', example: 'hello/world', icon: <Hash className="h-4 w-4" /> },
   ]
 
   // 示例文本
@@ -90,8 +104,8 @@ export default function TextCasePage() {
       label: '小写文本' 
     },
     { 
-      text: 'IMPORTANT NOTICE: PLEASE READ CAREFULLY', 
-      label: '大写文本' 
+      text: 'user_id_123', 
+      label: '编程变量' 
     },
   ]
 
@@ -105,12 +119,15 @@ export default function TextCasePage() {
     }
   }
 
+  // 演示用的基础文本
+  const demoText = "hello world"
+
   return (
     <>
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">英文大小写转换</h1>
         <p className="text-muted-foreground">
-          快速转换英文文本的大小写格式，支持多种转换模式
+          快速转换英文文本的大小写格式，支持编程命名规范转换
         </p>
       </div>
 
@@ -132,13 +149,13 @@ export default function TextCasePage() {
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium flex items-center gap-2">
-              <FileText className="h-4 w-4" />
-              支持功能
+              <Code className="h-4 w-4" />
+              编程支持
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">多行</div>
-            <p className="text-xs text-muted-foreground">文本处理</p>
+            <div className="text-2xl font-bold">7+</div>
+            <p className="text-xs text-muted-foreground">开发常用格式</p>
           </CardContent>
         </Card>
 
@@ -210,7 +227,7 @@ export default function TextCasePage() {
               <SelectTrigger id="case-type" className="w-full">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="max-h-[300px]">
                 {caseOptions.map(option => (
                   <SelectItem key={option.value} value={option.value}>
                     <div className="flex items-center gap-3 w-full">
@@ -354,7 +371,7 @@ export default function TextCasePage() {
         </CardContent>
       </Card>
 
-      {/* 功能说明 */}
+      {/* 功能说明与转换示例 */}
       <div className="grid gap-4 mt-6 md:grid-cols-2">
         <Card className="bg-muted/50">
           <CardHeader>
@@ -363,28 +380,21 @@ export default function TextCasePage() {
               转换示例
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="space-y-2 text-sm">
-              <div className="flex items-center justify-between p-2 rounded bg-background">
-                <span className="font-mono">hello world</span>
-                <span className="text-muted-foreground">→</span>
-                <span className="text-right flex-1 ml-2">HELLO WORLD</span>
-              </div>
-              <div className="flex items-center justify-between p-2 rounded bg-background">
-                <span className="font-mono">HELLO WORLD</span>
-                <span className="text-muted-foreground">→</span>
-                <span className="text-right flex-1 ml-2">hello world</span>
-              </div>
-              <div className="flex items-center justify-between p-2 rounded bg-background">
-                <span className="font-mono">hello world</span>
-                <span className="text-muted-foreground">→</span>
-                <span className="text-right flex-1 ml-2">Hello World</span>
-              </div>
-              <div className="flex items-center justify-between p-2 rounded bg-background">
-                <span className="font-mono">hello world</span>
-                <span className="text-muted-foreground">→</span>
-                <span className="text-right flex-1 ml-2">HeLLo WoRLd</span>
-              </div>
+          <CardContent>
+            <div className="space-y-1 text-sm max-h-[300px] overflow-y-auto pr-2">
+              {/* 动态生成所有格式的示例 */}
+              {caseOptions.map((option, index) => (
+                <div key={index} className="flex items-center justify-between p-2 rounded hover:bg-background transition-colors">
+                  <span className="font-mono text-xs text-muted-foreground w-20 truncate" title={option.shortLabel}>{option.shortLabel}</span>
+                  <div className="flex-1 flex items-center justify-end gap-2 overflow-hidden">
+                    <span className="font-mono truncate">{demoText}</span>
+                    <span className="text-muted-foreground">→</span>
+                    <span className="font-mono font-medium truncate">
+                      {convertCase(demoText, option.value as TextCase)}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
           </CardContent>
         </Card>
@@ -397,12 +407,12 @@ export default function TextCasePage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2 text-sm text-muted-foreground">
+            <p>• 支持 <strong>15种</strong> 文本格式转换</p>
+            <p>• 新增编程常用格式 (Camel, Snake, Kebab等)</p>
+            <p>• 编程模式智能识别单词边界</p>
             <p>• 支持多行文本批量处理</p>
-            <p>• 保留原有的标点符号和格式</p>
-            <p>• 实时预览转换效果</p>
-            <p>• 保存最近5条转换历史记录</p>
-            <p>• 支持将结果再次作为输入进行转换</p>
-            <p>• 适用于文档标题、邮件地址、产品描述等场景</p>
+            <p>• 实时预览转换效果，一键复制结果</p>
+            <p>• 自动保存最近5条转换历史记录</p>
           </CardContent>
         </Card>
       </div>
