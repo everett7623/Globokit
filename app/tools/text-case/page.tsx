@@ -13,14 +13,14 @@ import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { AlertCircle, Copy, Check, RefreshCw, Trash2, Type, FileText, Info, Code, Hash } from 'lucide-react'
+import { AlertCircle, Copy, Check, RefreshCw, Trash2, Type, FileText, Info, Code, Hash, Keyboard } from 'lucide-react'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { convertCase, type TextCase } from '@/lib/tools/text-case'
 
 export default function TextCasePage() {
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
-  const [caseType, setCaseType] = useState<TextCase>('dot') // 默认改为点连接，方便你测试
+  const [caseType, setCaseType] = useState<TextCase>('dot')
   const [error, setError] = useState('')
   const [copiedText, setCopiedText] = useState<string | null>(null)
   const [history, setHistory] = useState<Array<{input: string, output: string, type: string}>>([])
@@ -40,7 +40,6 @@ export default function TextCasePage() {
       return
     }
 
-    // 宽松的中文检查（仅提醒）
     const chineseRegex = /[\u4e00-\u9fa5]/
     if (chineseRegex.test(input)) {
       setError('检测到中文字符，本工具仅支持英文大小写转换。')
@@ -48,7 +47,6 @@ export default function TextCasePage() {
       return
     }
 
-    // 检查是否包含英文字母或数字
     const validCharRegex = /[a-zA-Z0-9]/
     if (!validCharRegex.test(input)) {
       setError('未检测到有效字符，请输入包含英文字母或数字的文本')
@@ -59,7 +57,6 @@ export default function TextCasePage() {
     try {
       const result = convertCase(input, caseType)
       setOutput(result)
-      // 添加到历史记录
       const typeLabel = caseOptions.find(opt => opt.value === caseType)?.shortLabel || caseType
       setHistory(prev => [{input: input.slice(0, 50), output: result.slice(0, 50), type: typeLabel}, ...prev.slice(0, 4)])
     } catch (err) {
@@ -92,19 +89,19 @@ export default function TextCasePage() {
     { value: 'path', label: '路径格式', shortLabel: '路径格式', example: 'hello/world', icon: <Hash className="h-4 w-4" /> },
   ]
 
-  // 示例文本 (更新为你关注的场景)
+  // 还原为通用的示例文本
   const sampleTexts = [
     { 
-      text: 'Yi Wen Si De Zhong Guo Qing Yuan S01 2025 1080p HDTV x264 AAC', 
-      label: '影视命名' 
+      text: 'The Quick Brown Fox Jumps Over The Lazy Dog', 
+      label: '完整句子' 
     },
     { 
       text: 'hello world, this is a test message', 
       label: '小写文本' 
     },
     { 
-      text: 'user_id_123', 
-      label: '编程变量' 
+      text: 'IMPORTANT NOTICE: PLEASE READ CAREFULLY', 
+      label: '大写文本' 
     },
   ]
 
@@ -118,7 +115,7 @@ export default function TextCasePage() {
     }
   }
 
-  // 演示用的基础文本
+  // 演示用的基础文本 (保持 hello world)
   const demoText = "hello world"
 
   return (
@@ -384,7 +381,6 @@ export default function TextCasePage() {
               {/* 动态生成所有格式的示例 */}
               {caseOptions.map((option, index) => (
                 <div key={index} className="flex items-center justify-between p-2 rounded hover:bg-background transition-colors">
-                  {/* 修改：将宽度增加到 w-28，防止中文被截断 */}
                   <span className="font-mono text-xs text-muted-foreground w-28 shrink-0 truncate" title={option.shortLabel}>{option.shortLabel}</span>
                   <div className="flex-1 flex items-center justify-end gap-2 overflow-hidden ml-2">
                     <span className="font-mono truncate text-xs sm:text-sm">{demoText}</span>
@@ -402,16 +398,31 @@ export default function TextCasePage() {
         <Card className="bg-muted/50">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <Info className="h-5 w-5" />
+              <Keyboard className="h-5 w-5" />
               使用说明
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-2 text-sm text-muted-foreground">
-            <p>• 支持 <strong>15种</strong> 文本格式转换</p>
-            <p>• <strong>点连接命名</strong>：保留原大小写（适用于影视文件名）</p>
-            <p>• 智能识别：不破坏 HDTV、S01 等专用名词</p>
-            <p>• 支持多行文本批量处理</p>
-            <p>• 实时预览转换效果，一键复制结果</p>
+          <CardContent className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p className="flex items-start gap-2">
+              <span className="font-semibold text-foreground shrink-0">• 多模式支持:</span>
+              <span>支持 15 种转换模式，涵盖基础大小写与 Camel/Snake 等编程命名规范。</span>
+            </p>
+            <p className="flex items-start gap-2">
+              <span className="font-semibold text-foreground shrink-0">• 智能分词:</span>
+              <span>精准识别单词边界，正确处理驼峰命名与缩写词（如 XML, HDTV），避免错误拆分。</span>
+            </p>
+            <p className="flex items-start gap-2">
+              <span className="font-semibold text-foreground shrink-0">• 文件命名:</span>
+              <span>特有的“点连接命名”可保留原始大小写（如 S01.HDTV），完美适配影视资源命名场景。</span>
+            </p>
+            <p className="flex items-start gap-2">
+              <span className="font-semibold text-foreground shrink-0">• 批量处理:</span>
+              <span>支持大段多行文本输入，一键批量转换，保留原有换行。</span>
+            </p>
+            <p className="flex items-start gap-2">
+              <span className="font-semibold text-foreground shrink-0">• 历史回溯:</span>
+              <span>自动保存最近 5 条转换记录，点击复制图标即可快速复用。</span>
+            </p>
           </CardContent>
         </Card>
       </div>
