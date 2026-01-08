@@ -1,7 +1,8 @@
-// 文件路径: seedtool/components/ui/dialog.tsx
-// 描述: 对话框/弹窗组件，基于 Radix UI 构建
+// 名称: 对话框组件
+// 描述: 模态对话框(Modal)，用于重要信息的展示或操作确认
+// 路径: Globokit/components/ui/dialog.tsx
 // 作者: Jensfrank
-// 更新时间: 2025-07-25
+// 更新时间: 2026-01-08
 
 "use client"
 
