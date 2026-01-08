@@ -75,7 +75,6 @@ const tools = [
     href: '/tools/holiday-query',
     color: 'text-orange-500',
     bgColor: 'bg-orange-50',
-    badge: '新增',
     badgeColor: 'bg-green-100 text-green-700'
   },
   {
@@ -85,7 +84,6 @@ const tools = [
     href: '/tools/world-time',
     color: 'text-indigo-500',
     bgColor: 'bg-indigo-50',
-    badge: '新增',
     badgeColor: 'bg-green-100 text-green-700'
   },
   {
@@ -95,7 +93,6 @@ const tools = [
     href: '/tools/currency-symbols',
     color: 'text-emerald-500',
     bgColor: 'bg-emerald-50',
-    badge: '新增',
     badgeColor: 'bg-green-100 text-green-700'
   },
   {
@@ -105,7 +102,6 @@ const tools = [
     href: '/tools/global-country-info',
     color: 'text-cyan-500',
     bgColor: 'bg-cyan-50',
-    badge: '新增',
     badgeColor: 'bg-green-100 text-green-700'
   },
   {
