@@ -1,3 +1,9 @@
+// 名称: 工具卡片组件
+// 描述: 首页及列表页使用的工具入口卡片，展示图标、标题、描述及跳转按钮
+// 路径: Globokit/components/tools/tool-card.tsx
+// 作者: Jensfrank
+// 更新时间: 2026-01-08
+
 import Link from 'next/link'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
