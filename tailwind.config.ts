@@ -1,3 +1,9 @@
+// 名称: Tailwind CSS 配置文件
+// 描述: 定义项目的设计系统、自定义主题变量、插件及内容扫描路径
+// 路径: Globokit/tailwind.config.ts
+// 作者: Jensfrank
+// 更新时间: 2026-01-08
+
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
