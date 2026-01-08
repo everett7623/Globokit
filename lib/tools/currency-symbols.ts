@@ -1,8 +1,8 @@
-// 名称: 货币符号工具函数
-// 描述: 提供全球货币符号数据和格式化函数
-// 路径: seedtool/lib/tools/currency-symbols.ts
+// 名称: 货币符号数据函数
+// 描述: 提供全球货币代码、符号及国家对应关系的数据检索
+// 路径: Globokit/lib/tools/currency-symbols.ts
 // 作者: Jensfrank
-// 更新时间: 2025-07-20
+// 更新时间: 2026-01-08
 
 // 定义Currency类型
 export interface Currency {
