@@ -1,8 +1,8 @@
 // 名称: 特殊字符检查与转换
-// 描述: 检查文本中的特殊字符，并提供清理或替换选项
-// 路径: seedtool/app/tools/special-char/page.tsx
+// 描述: 检查并转换文本中的特殊字符，避免邮件或文档中的乱码
+// 路径: Globokit/app/tools/special-char/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2025-07-23
+// 更新时间: 2026-01-08
 
 'use client'
 
