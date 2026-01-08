@@ -20,22 +20,30 @@ export type TextCase =
   | 'snake'     // hello_world
   | 'kebab'     // hello-world
   | 'constant'  // HELLO_WORLD
-  | 'dot'       // hello.world
+  | 'dot'       // Hello.World (修改为保留原大小写，适应文件名场景)
   | 'path';     // hello/world
 
 /**
  * 辅助函数：将文本拆分为单词数组
- * 处理空格、下划线、短横线、驼峰等情况
+ * 改进版：智能处理驼峰、缩写词和数字，不破坏连续的大写字母 (如 HDTV)
  */
 function toWords(text: string): string[] {
+  if (!text) return [];
+  
   return text
-    // 在大写字母前添加空格（处理驼峰）
-    .replace(/([A-Z])/g, ' $1')
-    // 将非字母数字字符替换为空格
+    // 1. 处理驼峰 (camelCase): 小写字母后跟大写字母 -> 插入空格
+    // 例如: helloWorld -> hello World
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    
+    // 2. 处理连续大写后的分界 (Acronyms): 连续大写后跟小写 -> 在最后一个大写前插空格
+    // 例如: XMLHttp -> XML Http (保留 XML 作为一个词)
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
+    
+    // 3. 将非字母数字字符替换为空格，并按空格拆分
     .replace(/[^a-zA-Z0-9]+/g, ' ')
-    // 去除首尾空格并分割
     .trim()
-    .split(/\s+/);
+    .split(/\s+/)
+    .filter(word => word.length > 0);
 }
 
 /**
@@ -45,7 +53,6 @@ function toWords(text: string): string[] {
  * @returns 转换后的文本
  */
 export function convertCase(text: string, textCase: TextCase): string {
-  // 如果文本为空，直接返回
   if (!text) return text;
 
   switch (textCase) {
@@ -57,11 +64,9 @@ export function convertCase(text: string, textCase: TextCase): string {
       return text.toLowerCase();
     
     case 'sentence':
-      // 句子格式：首字母大写，其余小写
       return text.toLowerCase().replace(/(^\s*\w|[.!?]\s+\w)/g, (match) => match.toUpperCase());
     
     case 'title':
-      // 标题格式：排除虚词
       const smallWords = ['a', 'an', 'and', 'as', 'at', 'but', 'by', 'for', 'if', 'in', 'nor', 'of', 'on', 'or', 'so', 'the', 'to', 'up', 'yet'];
       return text.toLowerCase().replace(/\w\S*/g, (word, index) => {
         if (index === 0 || !smallWords.includes(word.toLowerCase())) {
@@ -71,17 +76,14 @@ export function convertCase(text: string, textCase: TextCase): string {
       });
     
     case 'toggle':
-      // 大小写反转
       return text.split('').map(char => 
         char === char.toUpperCase() ? char.toLowerCase() : char.toUpperCase()
       ).join('');
     
     case 'capitalize':
-      // 单词首字母大写
       return text.toLowerCase().replace(/\b\w/g, char => char.toUpperCase());
 
     case 'alternating':
-      // 交替大小写
       let isUpper = true;
       return text.split('').map(char => {
         if (/[a-zA-Z]/.test(char)) {
@@ -93,12 +95,11 @@ export function convertCase(text: string, textCase: TextCase): string {
       }).join('');
 
     case 'inverse':
-      // 反向首字母小写
       return text.charAt(0).toLowerCase() + text.slice(1).toUpperCase();
 
-    // --- 编程常用格式 (基于单词拆分重组) ---
-    case 'camel':
-      // 驼峰: helloWorld
+    // --- 编程与文件命名格式 ---
+    
+    case 'camel': // helloWorld
       return toWords(text)
         .map((word, index) => {
           const lower = word.toLowerCase();
@@ -106,8 +107,7 @@ export function convertCase(text: string, textCase: TextCase): string {
         })
         .join('');
 
-    case 'pascal':
-      // 帕斯卡: HelloWorld
+    case 'pascal': // HelloWorld
       return toWords(text)
         .map(word => {
           const lower = word.toLowerCase();
@@ -115,32 +115,27 @@ export function convertCase(text: string, textCase: TextCase): string {
         })
         .join('');
 
-    case 'snake':
-      // 下划线: hello_world
+    case 'snake': // hello_world
       return toWords(text)
         .map(word => word.toLowerCase())
         .join('_');
 
-    case 'kebab':
-      // 短横线: hello-world
+    case 'kebab': // hello-world
       return toWords(text)
         .map(word => word.toLowerCase())
         .join('-');
 
-    case 'constant':
-      // 常量: HELLO_WORLD
+    case 'constant': // HELLO_WORLD
       return toWords(text)
         .map(word => word.toUpperCase())
         .join('_');
 
-    case 'dot':
-      // 点连接: hello.world
-      return toWords(text)
-        .map(word => word.toLowerCase())
-        .join('.');
+    case 'dot': 
+      // 修改：保留单词原大小写，仅用点连接
+      // 适应场景：Yi.Wen.Si...S01.HDTV
+      return toWords(text).join('.');
 
-    case 'path':
-      // 路径: hello/world
+    case 'path': // hello/world
       return toWords(text)
         .map(word => word.toLowerCase())
         .join('/');
