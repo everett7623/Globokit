@@ -1,8 +1,8 @@
 // 名称: 全球国家信息查询
-// 描述: 查询全球国家和地区的详细信息，支持搜索和筛选
-// 路径: seedtool/app/tools/global-country-info/page.tsx
+// 描述: 查询世界各国的中英文名称、区号、代码、时区、域名等信息
+// 路径: Globokit/app/tools/global-country-info/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2025-07-29
+// 更新时间: 2026-01-08
 
 'use client'
 
