@@ -74,11 +74,6 @@
 ## 📦 目录结构
 
 ```bash
-好的，Jensfrank。根据你提供的最新项目截图，我为你整理了一份完整、精确的目录结构树。
-
-你可以将 `README.md` 中的 **📦 目录结构** 部分替换为以下内容：
-
-```bash
 Globokit/
 ├── .github/
 │   └── workflows/
@@ -141,7 +136,6 @@ Globokit/
 └── tsconfig.json               # TypeScript 配置
 ```
 
-```
 ---
 
 ## 🚀 快速开始
