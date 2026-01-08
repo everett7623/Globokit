@@ -1,8 +1,8 @@
-// 名称: 人民币大写转换工具函数（最终正确版）
-// 描述: 逐位处理，正确处理所有零的情况
-// 路径: seedtool/lib/tools/rmb-converter.ts
+// 名称: 人民币大写转换函数
+// 描述: 实现数字金额到中文大写金额的算法逻辑
+// 路径: Globokit/lib/tools/rmb-converter.ts
 // 作者: Jensfrank
-// 更新时间: 2025-09-25
+// 更新时间: 2026-01-08
 
 export function numberToChinese(num: number): string {
   if (num === 0) return '人民币零元整';
