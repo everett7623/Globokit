@@ -1,8 +1,8 @@
 // 名称: 数字转英文
 // 描述: 将数字转换为英文表达形式，支持基数词和序数词
-// 路径: seedtool/app/tools/number-to-english/page.tsx
+// 路径: Globokit/app/tools/number-to-english/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2025-07-23
+// 更新时间: 2026-01-08
 
 'use client'
 
