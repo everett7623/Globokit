@@ -1,6 +1,8 @@
+// 名称: 全局根布局
+// 描述: 定义全站基础结构，包含SEO元数据、字体配置、Google Analytics统计及通用页头页脚
 // 路径: Globokit/app/layout.tsx
-// 更新时间: 2025-11-26
-// 说明: 根布局文件，包含全站通用的头部和底部
+// 作者: Jensfrank
+// 更新时间: 2026-01-08
 
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
