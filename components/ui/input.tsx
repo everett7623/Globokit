@@ -1,3 +1,9 @@
+// 名称: 输入框组件
+// 描述: 基础单行文本输入框，支持各种 HTML Input 属性
+// 路径: Globokit/components/ui/input.tsx
+// 作者: Jensfrank
+// 更新时间: 2026-01-08
+
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
