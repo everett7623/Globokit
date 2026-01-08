@@ -1,5 +1,5 @@
 // 路径: Globokit/app/page.tsx
-// 更新时间: 2025-09-01
+// 更新时间: 2026-01-08
 // 说明: 使用独立组件的主页
 
 import Link from 'next/link'
