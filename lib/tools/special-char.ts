@@ -1,8 +1,8 @@
-// 名称: 特殊字符检查与转换函数
-// 描述: 检查文本中的特殊字符，并提供清理或替换函数
-// 路径: seedtool/lib/tools/special-char.ts
+// 名称: 特殊字符处理函数
+// 描述: 识别和替换文本中的非标准字符及乱码
+// 路径: Globokit/lib/tools/special-char.ts
 // 作者: Jensfrank
-// 更新时间: 2025-07-23
+// 更新时间: 2026-01-08
 
 export interface SpecialCharResult {
   hasSpecialChars: boolean;
