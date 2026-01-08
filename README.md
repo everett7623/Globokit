@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Built%20with-Next.js%2014-black)](https://nextjs.org)
 [![Tailwind CSS](https://img.shields.io/badge/Styled%20with-Tailwind%20CSS-38B2AC)](https://tailwindcss.com)
-[![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000)](https://vercel.com)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/everett7623/Globokit)
 
 **GloboKit** 是一个专为外贸从业者和开发者打造的现代化在线工具平台。我们致力于解决国际贸易工作中的痛点，提供从文本处理、财务计算到全球信息查询的一站式解决方案。
 
@@ -141,6 +141,12 @@ Globokit/
 ## 🚀 快速开始
 
 想要在本地运行本项目？请遵循以下步骤：
+
+想要拥有自己的外贸工具站？你可以一键部署：
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/everett7623/Globokit)
+
+或者在本地运行：
 
 1. **克隆项目**
 ```bash
