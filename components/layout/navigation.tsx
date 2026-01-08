@@ -1,6 +1,8 @@
-// 路径: GloboKit/components/layout/navigation.tsx
-// 更新时间: 2025-09-01
-// 说明: 优化导航组件，改进响应式设计
+// 名称: 导航栏组件
+// 描述: 全局顶部导航栏，包含移动端适配、下拉菜单及工具集入口配置
+// 路径: Globokit/components/layout/navigation.tsx
+// 作者: Jensfrank
+// 更新时间: 2026-01-08
 
 'use client'
 
@@ -33,6 +35,7 @@ const navItems = [
       { href: '/tools/world-time', label: '世界时间' },
       { href: '/tools/currency-symbols', label: '全球货币符号' },
       { href: '/tools/country-info', label: '全球国家信息' },
+      { href: '/tools/vps-calculator', label: 'VPS剩余价值计算器' },
     ]
   }
 ]
