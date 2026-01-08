@@ -1,3 +1,9 @@
+// 名称: 徽章组件
+// 描述: 用于展示状态、标签或数值的小型视觉元素
+// 路径: Globokit/components/ui/badge.tsx
+// 作者: Jensfrank
+// 更新时间: 2026-01-08
+
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
