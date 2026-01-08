@@ -1,3 +1,9 @@
+// 名称: 标签页组件
+// 描述: 选项卡切换组件，用于同一区域内不同内容的切换显示
+// 路径: Globokit/components/ui/tabs.tsx
+// 作者: Jensfrank
+// 更新时间: 2026-01-08
+
 import * as React from "react"
 import * as TabsPrimitive from "@radix-ui/react-tabs"
 
