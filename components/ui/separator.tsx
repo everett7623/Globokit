@@ -1,6 +1,8 @@
-// 路径: seedtool/components/ui/separator.tsx
-// 更新时间: 2025-07-24
-// 说明: 
+// 名称: 分割线组件
+// 描述: 用于区分内容的视觉分割线，支持水平和垂直方向
+// 路径: Globokit/components/ui/separator.tsx
+// 作者: Jensfrank
+// 更新时间: 2026-01-08
 
 "use client"
 
