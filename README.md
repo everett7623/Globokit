@@ -1,15 +1,37 @@
-# GloboKit - 外贸实用工具集
+<div align="center">
+  <h1 align="center">GloboKit - 外贸实用工具集</h1>
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Next.js](https://img.shields.io/badge/Built%20with-Next.js%2014-black)](https://nextjs.org)
-[![Tailwind CSS](https://img.shields.io/badge/Styled%20with-Tailwind%20CSS-38B2AC)](https://tailwindcss.com)
+  <p align="center">
+    <a href="LICENSE">
+      <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License">
+    </a>
+    <a href="https://nextjs.org">
+      <img src="https://img.shields.io/badge/Built%20with-Next.js%2014-black" alt="Next.js">
+    </a>
+    <a href="https://tailwindcss.com">
+      <img src="https://img.shields.io/badge/Styled%20with-Tailwind%20CSS-38B2AC" alt="Tailwind CSS">
+    </a>
+  </p>
 
-**GloboKit** 是一个专为外贸从业者和开发者打造的现代化在线工具平台。我们致力于解决国际贸易工作中的痛点，提供从文本处理、财务计算到全球信息查询的一站式解决方案。
+  <p align="center">
+    <strong>GloboKit</strong> 是一个专为外贸从业者和开发者打造的现代化在线工具平台。<br/>
+    我们致力于解决国际贸易工作中的痛点，提供从文本处理、财务计算到全球信息查询的一站式解决方案。
+  </p>
 
-[在线演示](https://globokit.com) · [报告问题](https://github.com/everett7623/Globokit/issues) · [博客](https://seedloc.com)
+  <p align="center">
+    <a href="https://globokit.com">在线演示</a>
+    ·
+    <a href="https://github.com/everett7623/Globokit/issues">报告问题</a>
+    ·
+    <a href="https://seedloc.com">博客</a>
+  </p>
 
-🚀 快速开始
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/everett7623/Globokit)
+  <p align="center">
+    <a href="https://vercel.com/new/clone?repository-url=https://github.com/everett7623/Globokit">
+      <img src="https://vercel.com/button" alt="Deploy with Vercel">
+    </a>
+  </p>
+</div>
 
 ---
 
