@@ -1,3 +1,9 @@
+// 名称: 多行输入框组件
+// 描述: 基础多行文本输入区域，适用于长文本输入场景
+// 路径: Globokit/components/ui/textarea.tsx
+// 作者: Jensfrank
+// 更新时间: 2026-01-08
+
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
