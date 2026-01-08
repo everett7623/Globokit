@@ -1,3 +1,9 @@
+// 名称: 标签组件
+// 描述: 表单控件的文本标签，基于 Radix UI Primitive
+// 路径: Globokit/components/ui/label.tsx
+// 作者: Jensfrank
+// 更新时间: 2026-01-08
+
 import * as React from "react"
 import * as LabelPrimitive from "@radix-ui/react-label"
 import { cva, type VariantProps } from "class-variance-authority"
