@@ -1,6 +1,6 @@
 // 名称: 英文大小写转换
 // 描述: 快速转换英文文本的大小写格式，支持多种转换模式
-// 路径: seedtool/app/tools/text-case/page.tsx
+// 路径: Globokit/app/tools/text-case/page.tsx
 // 作者: Jensfrank
 // 更新时间: 2026-01-08
 
@@ -20,7 +20,8 @@ import { convertCase, type TextCase } from '@/lib/tools/text-case'
 export default function TextCasePage() {
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
-  const [caseType, setCaseType] = useState<TextCase>('dot')
+  // 修改：默认值改为 'upper' (全部大写)
+  const [caseType, setCaseType] = useState<TextCase>('upper')
   const [error, setError] = useState('')
   const [copiedText, setCopiedText] = useState<string | null>(null)
   const [history, setHistory] = useState<Array<{input: string, output: string, type: string}>>([])
@@ -65,43 +66,43 @@ export default function TextCasePage() {
     }
   }
 
-  // 定义所有支持的格式选项，shortLabel 已完全汉化
+  // 定义选项：label 用中文（下拉菜单），shortLabel 用英文（示例列表）
   const caseOptions = [
     // 基础格式
-    { value: 'upper', label: '全部大写', shortLabel: '全部大写', example: 'HELLO WORLD', icon: <Type className="h-4 w-4" /> },
-    { value: 'lower', label: '全部小写', shortLabel: '全部小写', example: 'hello world', icon: <Type className="h-4 w-4" /> },
-    { value: 'sentence', label: '句子首字母大写', shortLabel: '句子格式', example: 'Hello world.', icon: <FileText className="h-4 w-4" /> },
-    { value: 'title', label: '标题格式', shortLabel: '标题格式', example: 'Hello World', icon: <FileText className="h-4 w-4" /> },
-    { value: 'capitalize', label: '单词首字母大写', shortLabel: '首字大写', example: 'Hello World', icon: <Type className="h-4 w-4" /> },
+    { value: 'upper', label: '全部大写', shortLabel: 'UPPERCASE', example: 'HELLO WORLD', icon: <Type className="h-4 w-4" /> },
+    { value: 'lower', label: '全部小写', shortLabel: 'lowercase', example: 'hello world', icon: <Type className="h-4 w-4" /> },
+    { value: 'sentence', label: '句子首字母大写', shortLabel: 'Sentence case', example: 'Hello world.', icon: <FileText className="h-4 w-4" /> },
+    { value: 'title', label: '标题格式', shortLabel: 'Title Case', example: 'Hello World', icon: <FileText className="h-4 w-4" /> },
+    { value: 'capitalize', label: '单词首字母大写', shortLabel: 'Capitalize', example: 'Hello World', icon: <Type className="h-4 w-4" /> },
     
     // 趣味/特殊格式
-    { value: 'toggle', label: '大小写反转', shortLabel: '大小写反转', example: 'hELLO wORLD', icon: <RefreshCw className="h-4 w-4" /> },
-    { value: 'alternating', label: '交替大小写', shortLabel: '交替大小写', example: 'HeLLo WoRLd', icon: <RefreshCw className="h-4 w-4" /> },
-    { value: 'inverse', label: '反向格式', shortLabel: '反向格式', example: 'hELLO WORLD', icon: <RefreshCw className="h-4 w-4" /> },
+    { value: 'toggle', label: '大小写反转', shortLabel: 'tOGGLE cASE', example: 'hELLO wORLD', icon: <RefreshCw className="h-4 w-4" /> },
+    { value: 'alternating', label: '交替大小写', shortLabel: 'aLtErNaTiNg', example: 'HeLLo WoRLd', icon: <RefreshCw className="h-4 w-4" /> },
+    { value: 'inverse', label: '反向格式', shortLabel: 'iNVERSE', example: 'hELLO WORLD', icon: <RefreshCw className="h-4 w-4" /> },
     
     // 编程常用格式
-    { value: 'snake', label: '下划线命名', shortLabel: '下划线命名', example: 'hello_world', icon: <Code className="h-4 w-4" /> },
-    { value: 'kebab', label: '短横线命名', shortLabel: '短横线命名', example: 'hello-world', icon: <Code className="h-4 w-4" /> },
-    { value: 'camel', label: '小驼峰命名', shortLabel: '小驼峰命名', example: 'helloWorld', icon: <Code className="h-4 w-4" /> },
-    { value: 'pascal', label: '大驼峰命名', shortLabel: '大驼峰命名', example: 'HelloWorld', icon: <Code className="h-4 w-4" /> },
-    { value: 'constant', label: '常量命名', shortLabel: '常量命名', example: 'HELLO_WORLD', icon: <Code className="h-4 w-4" /> },
-    { value: 'dot', label: '点连接命名', shortLabel: '点连接命名', example: 'hello.world', icon: <Hash className="h-4 w-4" /> },
-    { value: 'path', label: '路径格式', shortLabel: '路径格式', example: 'hello/world', icon: <Hash className="h-4 w-4" /> },
+    { value: 'snake', label: '下划线命名', shortLabel: 'snake_case', example: 'hello_world', icon: <Code className="h-4 w-4" /> },
+    { value: 'kebab', label: '短横线命名', shortLabel: 'kebab-case', example: 'hello-world', icon: <Code className="h-4 w-4" /> },
+    { value: 'camel', label: '小驼峰命名', shortLabel: 'camelCase', example: 'helloWorld', icon: <Code className="h-4 w-4" /> },
+    { value: 'pascal', label: '大驼峰命名', shortLabel: 'PascalCase', example: 'HelloWorld', icon: <Code className="h-4 w-4" /> },
+    { value: 'constant', label: '常量命名', shortLabel: 'CONSTANT_CASE', example: 'HELLO_WORLD', icon: <Code className="h-4 w-4" /> },
+    { value: 'dot', label: '点连接命名', shortLabel: 'dot.case', example: 'hello.world', icon: <Hash className="h-4 w-4" /> },
+    { value: 'path', label: '路径格式', shortLabel: 'path/case', example: 'hello/world', icon: <Hash className="h-4 w-4" /> },
   ]
 
-  // 还原为通用的示例文本
+  // 示例文本
   const sampleTexts = [
     { 
-      text: 'The Quick Brown Fox Jumps Over The Lazy Dog', 
-      label: '完整句子' 
+      text: 'Yi Wen Si De Zhong Guo Qing Yuan S01 2025 1080p HDTV x264 AAC', 
+      label: '影视命名' 
     },
     { 
       text: 'hello world, this is a test message', 
       label: '小写文本' 
     },
     { 
-      text: 'IMPORTANT NOTICE: PLEASE READ CAREFULLY', 
-      label: '大写文本' 
+      text: 'user_id_123', 
+      label: '编程变量' 
     },
   ]
 
@@ -115,7 +116,7 @@ export default function TextCasePage() {
     }
   }
 
-  // 演示用的基础文本 (保持 hello world)
+  // 演示用的基础文本
   const demoText = "hello world"
 
   return (
@@ -378,7 +379,7 @@ export default function TextCasePage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-1 text-sm max-h-[300px] overflow-y-auto pr-3">
-              {/* 动态生成所有格式的示例 */}
+              {/* 动态生成所有格式的示例，ShortLabel 为英文，DemoText 为 hello world */}
               {caseOptions.map((option, index) => (
                 <div key={index} className="flex items-center justify-between p-2 rounded hover:bg-background transition-colors">
                   <span className="font-mono text-xs text-muted-foreground w-28 shrink-0 truncate" title={option.shortLabel}>{option.shortLabel}</span>
@@ -405,23 +406,23 @@ export default function TextCasePage() {
           <CardContent className="space-y-3 text-sm text-muted-foreground leading-relaxed">
             <p className="flex items-start gap-2">
               <span className="font-semibold text-foreground shrink-0">• 多模式支持:</span>
-              <span>支持 15 种转换模式，涵盖基础大小写与 Camel/Snake 等编程命名规范。</span>
+              <span>内置 15 种转换算法，完美覆盖日常写作、编程开发及文件命名需求。</span>
             </p>
             <p className="flex items-start gap-2">
-              <span className="font-semibold text-foreground shrink-0">• 智能分词:</span>
-              <span>精准识别单词边界，正确处理驼峰命名与缩写词（如 XML, HDTV），避免错误拆分。</span>
+              <span className="font-semibold text-foreground shrink-0">• 影视与PT:</span>
+              <span>特有“点连接命名”模式，智能识别 S01/HDTV 等关键词，保留原始大小写，一键生成规范文件名。</span>
             </p>
             <p className="flex items-start gap-2">
-              <span className="font-semibold text-foreground shrink-0">• 文件命名:</span>
-              <span>特有的“点连接命名”可保留原始大小写（如 S01.HDTV），完美适配影视资源命名场景。</span>
+              <span className="font-semibold text-foreground shrink-0">• 开发者友好:</span>
+              <span>支持驼峰 (Camel)、下划线 (Snake) 等常用编程变量转换，自动识别单词边界。</span>
             </p>
             <p className="flex items-start gap-2">
-              <span className="font-semibold text-foreground shrink-0">• 批量处理:</span>
-              <span>支持大段多行文本输入，一键批量转换，保留原有换行。</span>
+              <span className="font-semibold text-foreground shrink-0">• 批量操作:</span>
+              <span>支持多段文本混合输入，毫秒级实时转换，自动保留原文本换行格式。</span>
             </p>
             <p className="flex items-start gap-2">
-              <span className="font-semibold text-foreground shrink-0">• 历史回溯:</span>
-              <span>自动保存最近 5 条转换记录，点击复制图标即可快速复用。</span>
+              <span className="font-semibold text-foreground shrink-0">• 快捷复用:</span>
+              <span>自动记录最近 5 次转换结果，点击右侧历史记录即可快速复制，提升工作效率。</span>
             </p>
           </CardContent>
         </Card>
