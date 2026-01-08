@@ -1,3 +1,9 @@
+// 名称: 警告提示组件
+// 描述: 用于展示重要提示或警告信息，支持多种状态样式
+// 路径: Globokit/components/ui/alert.tsx
+// 作者: Jensfrank
+// 更新时间: 2026-01-08
+
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
