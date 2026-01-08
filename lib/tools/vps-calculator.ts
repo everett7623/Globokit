@@ -1,8 +1,8 @@
-// 名称: VPS剩余价值计算器工具函数
-// 描述: 提供VPS价值计算、汇率转换和配置管理功能
+// 名称: VPS价值计算函数
+// 描述: 计算服务器剩余使用时间的折算价值及汇率转换
 // 路径: Globokit/lib/tools/vps-calculator.ts
 // 作者: Jensfrank
-// 更新时间: 2025-12-01
+// 更新时间: 2026-01-08
 
 // VPS配置接口
 export interface VPSConfig {
