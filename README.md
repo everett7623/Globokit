@@ -1,12 +1,3 @@
-好的，Jensfrank。
-
-基于我们刚刚完成的所有更新（特别是新增的 **VPS 计算器** 和增强版的 **英文大小写转换**），我为你重新撰写了一份内容详实、排版精美的 `README.md`。
-
-这份文档突出了项目的**外贸属性**与**开发者友好**特性，同时规范了技术栈和部署说明。
-
-你可以直接复制以下内容到 `README.md` 文件中：
-
-```markdown
 # GloboKit - 外贸实用工具集
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -23,40 +14,46 @@
 ## ✨ 功能特性
 
 ### 📊 财务与计算工具
+
 - **VPS剩余价值计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+  
   - 基于购买日期与续费周期，精确计算服务器剩余残值。
   - 支持 **多币种自动汇率** (USD, CNY, EUR等) 换算。
   - 智能推算剩余天数与日均价值，直观的进度条展示。
-  
 - **人民币大写转换**
+  
   - 将数字金额一键转换为标准的中文大写（壹, 贰, 叁...），适用于合同、发票及财务报表。
-
 - **全球货币符号大全**
+  
   - 汇集全球主要贸易国家的货币代码 (ISO 4217)、符号及其中英文名称对照。
 
 ### 📝 文本与效率工具
+
 - **专业级英文大小写转换**
+  
   - 支持 **15种** 转换模式，包括基础格式 (UPPERCASE, lowercase)。
   - **开发者友好**：支持 `camelCase`, `snake_case`, `kebab-case` 等编程命名规范。
   - **外贸/PT场景**：特有的 `dot.case` 模式，保留原始大小写（如 `S01.HDTV`），完美适配文件名生成。
-
 - **特殊字符检查与清洗**
+  
   - 快速识别文本中的非标准字符、乱码及不可见字符，防止邮件传输乱码。
-
 - **数字转英文**
+  
   - 将阿拉伯数字转换为标准的英文拼写（支持基数词与序数词），适用于外贸报价单。
-
 - **中文转拼音**
+  
   - 支持多音字识别、声调标注及多种输出格式配置。
 
 ### 🌍 全球信息查询
+
 - **全球国家信息库**
+  
   - 包含世界各国的 **中英文名称**、**ISO代码** (2位/3位)、**国际区号**、**顶级域名后缀**及所属时区。
-
 - **世界时间与时区**
+  
   - 实时查看全球主要贸易城市（纽约、伦敦、东京等）的当地时间，辅助跨时区会议安排。
-
 - **国际节假日查询**
+  
   - 查询全球主要贸易伙伴的公共假期安排，避免在客户休息日发送重要邮件。
 
 ---
@@ -142,11 +139,9 @@ Globokit/
 ├── postcss.config.js           # PostCSS 配置
 ├── tailwind.config.ts          # Tailwind CSS 配置
 └── tsconfig.json               # TypeScript 配置
-
 ```
 
 ```
-
 ---
 
 ## 🚀 快速开始
@@ -157,30 +152,26 @@ Globokit/
 ```bash
 git clone [https://github.com/everett7623/Globokit.git](https://github.com/everett7623/Globokit.git)
 cd Globokit
-
 ```
 
-
 2. **安装依赖**
+
 ```bash
 npm install
 # 或者使用 pnpm (推荐)
 pnpm install
-
 ```
 
-
 3. **启动开发服务器**
+
 ```bash
 npm run dev
 # 或者
 pnpm dev
-
 ```
 
-
 4. **访问**
-打开浏览器访问 [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000) 即可看到效果。
+   打开浏览器访问 [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000) 即可看到效果。
 
 ---
 
@@ -189,7 +180,3 @@ pnpm dev
 本项目采用 **MIT 协议** 开源。这意味着你可以免费地使用、复制、修改、合并、出版发行、散布、再授权及贩售软件的副本。
 
 Built with ❤️ by **[Jensfrank](https://github.com/everett7623)**.
-
-```
-
-```
