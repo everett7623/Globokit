@@ -1,8 +1,8 @@
-// 名称: 全球国家信息查询
-// 描述: 提供全球国家和地区的详细信息，包括代码、区号、时区、外贸相关信息等
-// 路径: seedtool/lib/tools/global-country-info.ts
+// 名称: 国家信息检索函数
+// 描述: 提供国家代码、区号、时区等综合信息的查询逻辑
+// 路径: Globokit/lib/tools/global-country-info.ts
 // 作者: Jensfrank
-// 更新时间: 2025-07-28
+// 更新时间: 2026-01-08
 
 export interface CountryInfo {
   // 基础信息
