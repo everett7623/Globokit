@@ -1,8 +1,8 @@
 // 名称: 世界时间
-// 描述: 查看全球主要贸易城市的实时时间，便于外贸业务时间安排
-// 路径: seedtool/app/tools/world-time/page.tsx
+// 描述: 查看全球主要贸易城市的实时时间，便于安排国际业务
+// 路径: Globokit/app/tools/world-time/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2025-09-01
+// 更新时间: 2026-01-08
 
 'use client'
 
