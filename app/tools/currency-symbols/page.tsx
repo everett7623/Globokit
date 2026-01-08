@@ -1,8 +1,8 @@
 // 名称: 全球货币符号大全
 // 描述: 查看和复制全球各国货币符号，便于外贸报价和合同编写
-// 路径: seedtool/app/tools/currency-symbols/page.tsx
+// 路径: Globokit/app/tools/currency-symbols/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2025-07-23
+// 更新时间: 2026-01-08
 
 'use client'
 
