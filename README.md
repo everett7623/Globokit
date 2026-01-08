@@ -144,7 +144,7 @@ Globokit/
 
 1. **克隆项目**
 ```bash
-git clone [https://github.com/everett7623/Globokit.git](https://github.com/everett7623/Globokit.git)
+git clone https://github.com/everett7623/Globokit.git
 cd Globokit
 ```
 
@@ -165,7 +165,7 @@ pnpm dev
 ```
 
 4. **访问**
-   打开浏览器访问 [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000) 即可看到效果。
+   打开浏览器访问 http://localhost:3000 即可看到效果。
 
 ---
 
