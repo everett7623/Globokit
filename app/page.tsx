@@ -1,6 +1,8 @@
+// 名称: 外贸工具集首页
+// 描述: 聚合各类外贸效率工具的导航主页，展示热门工具入口、统计数据及项目介绍
 // 路径: Globokit/app/page.tsx
+// 作者: Jensfrank
 // 更新时间: 2026-01-08
-// 说明: 使用独立组件的主页
 
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
