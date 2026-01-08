@@ -1,8 +1,8 @@
-// 名称: 国际节假日查询工具函数
-// 描述: 提供国际节假日查询工具函数
-// 路径: seedtool/lib/tools/holiday-query.ts
+// 名称: 节假日数据查询函数
+// 描述: 提供各国公共节假日的查询与日期计算逻辑
+// 路径: Globokit/lib/tools/holiday-query.ts
 // 作者: Jensfrank
-// 更新时间: 2025-07-23
+// 更新时间: 2026-01-08
 
 export interface Country {
   name: string
