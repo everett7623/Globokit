@@ -1,3 +1,9 @@
+// 名称: 选择器组件
+// 描述: 下拉选择菜单，支持单选、分组及自定义选项内容
+// 路径: Globokit/components/ui/select.tsx
+// 作者: Jensfrank
+// 更新时间: 2026-01-08
+
 import * as React from "react"
 import * as SelectPrimitive from "@radix-ui/react-select"
 import { Check, ChevronDown } from "lucide-react"
