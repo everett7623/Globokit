@@ -3,11 +3,12 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Built%20with-Next.js%2014-black)](https://nextjs.org)
 [![Tailwind CSS](https://img.shields.io/badge/Styled%20with-Tailwind%20CSS-38B2AC)](https://tailwindcss.com)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/everett7623/Globokit)
 
 **GloboKit** 是一个专为外贸从业者和开发者打造的现代化在线工具平台。我们致力于解决国际贸易工作中的痛点，提供从文本处理、财务计算到全球信息查询的一站式解决方案。
 
 [在线演示](https://globokit.com) · [报告问题](https://github.com/everett7623/Globokit/issues) · [博客](https://seedloc.com)
+🚀 快速开始
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/everett7623/Globokit)
 
 ---
 
