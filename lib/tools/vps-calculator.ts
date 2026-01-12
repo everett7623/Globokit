@@ -81,7 +81,7 @@ export function getExchangeRateText(currency: string, rates: Record<string, numb
 }
 
 /**
- * 核心计算逻辑 - 适配 type="date" 的 YYYY-MM-DD 格式
+ * 核心计算逻辑
  */
 export function calculateVPSValue(
   purchaseDateStr: string,
@@ -93,11 +93,10 @@ export function calculateVPSValue(
   rates: Record<string, number>,
   tradeDateStr: string
 ): CalculationResult {
-  // 1. 日期解析：处理 YYYY-MM-DD 字符串 (Native Date Input Standard)
+  // 1. 日期解析: 处理 YYYY-MM-DD (Native Date Input)
   const parseISO = (str: string) => {
     if (!str) return new Date()
     const [y, m, d] = str.split('-').map(Number)
-    // 设为中午12点防止时区偏差
     return new Date(y, m - 1, d, 12, 0, 0)
   }
 
@@ -123,12 +122,12 @@ export function calculateVPSValue(
 
   const usedDays = totalDays - remainingDays
 
-  // 4. 剩余价值计算 (日均价 * 剩余天数)
+  // 4. 剩余价值计算
   const dailyPrice = totalDays > 0 ? purchasePriceCNY / totalDays : 0
   const remainingValue = dailyPrice * remainingDays
   const remainingRatio = totalDays > 0 ? remainingDays / totalDays : 0
 
-  // 5. 根据模式计算期望售价
+  // 5. 期望售价
   let expectedPrice = 0
   
   if (priceMode === 'total') {
@@ -143,7 +142,7 @@ export function calculateVPSValue(
     expectedPrice = remainingValue * discount
   }
 
-  // 6. 计算最终溢价
+  // 6. 溢价计算
   const premium = expectedPrice - remainingValue
   const premiumPercent = remainingValue > 0 ? (premium / remainingValue) * 100 : 0
 
