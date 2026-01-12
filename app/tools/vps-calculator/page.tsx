@@ -3,7 +3,6 @@
 // 路径: Globokit/app/tools/vps-calculator/page.tsx
 // 作者: Jensfrank
 // 更新时间: 2026-01-12
-
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
@@ -16,7 +15,7 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 import { 
   Calculator, RefreshCw, Copy, Download, Check, 
-  TrendingUp, TrendingDown, Info 
+  TrendingUp, TrendingDown 
 } from 'lucide-react'
 import {
   fetchExchangeRates,
@@ -39,12 +38,8 @@ export default function VPSCalculatorPage() {
   const [purchasePrice, setPurchasePrice] = useState('')
   const [currency, setCurrency] = useState('USD')
   
-  // --- 价格模式状态 (已恢复) ---
+  // --- 价格模式状态 ---
   const [priceMode, setPriceMode] = useState<PriceMode>('total')
-  // modeInput 存储当前模式下的输入值：
-  // total -> 期望总价
-  // premium -> 溢价金额 (+/-)
-  // discount -> 折扣率 (0.85)
   const [modeInput, setModeInput] = useState('') 
 
   // --- 逻辑状态 ---
@@ -87,14 +82,11 @@ export default function VPSCalculatorPage() {
     const priceNum = parseFloat(purchasePrice)
     if (!priceNum || !purchaseDate) return
 
-    // 处理不同模式下的输入值
     let val = parseFloat(modeInput)
-    
-    // 如果输入为空，根据模式给默认值
     if (modeInput === '' || isNaN(val)) {
-      if (priceMode === 'total') val = -1 // 标记未填
-      if (priceMode === 'premium') val = 0 // 默认无溢价
-      if (priceMode === 'discount') val = 1 // 默认原价(100%)
+      if (priceMode === 'total') val = -1
+      if (priceMode === 'premium') val = 0
+      if (priceMode === 'discount') val = 1
     }
 
     const res = calculateVPSValue(
@@ -143,283 +135,316 @@ export default function VPSCalculatorPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto pb-12 space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">VPS剩余价值计算器</h1>
-        <p className="text-muted-foreground mt-2">基于实时汇率与剩余天数，精确计算服务器残值与交易溢价。</p>
-      </div>
+    // 修改背景色为柔和的灰白色，增加整体质感
+    <div className="min-h-screen bg-slate-50/50 py-10 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto space-y-8">
+        {/* 头部标题美化 */}
+        <div className="text-center sm:text-left">
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 flex items-center justify-center sm:justify-start gap-3">
+            <span className="text-4xl">🧮</span> VPS 剩余价值计算器 <span className="text-2xl">🚀</span>
+          </h1>
+          <p className="text-lg text-slate-600 mt-3 max-w-2xl">
+            基于实时汇率与精确到天的时间计算，助您快速分析服务器残值与交易盈亏。
+          </p>
+        </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* 左侧：输入区 */}
-        <Card className="lg:col-span-4 shadow-sm h-fit">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-base">
-              <Calculator className="h-4 w-4 text-primary" /> 参数录入
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-5">
-            <div className="space-y-2">
-              <Label>购买价格 & 币种</Label>
-              <div className="flex gap-2">
-                <div className="relative flex-1">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-bold">
-                    {SUPPORTED_CURRENCIES.find(c => c.code === currency)?.symbol}
-                  </span>
-                  <Input 
-                    type="number" 
-                    value={purchasePrice} 
-                    onChange={e => setPurchasePrice(e.target.value)} 
-                    className="pl-8" 
-                    placeholder="0.00"
-                  />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* 左侧：输入区 */}
+          <Card className="lg:col-span-4 shadow-lg border-0 ring-1 ring-slate-200/50 h-fit sticky top-8">
+            <CardHeader className="pb-4 border-b border-slate-100 bg-slate-50/50 rounded-t-xl">
+              <CardTitle className="flex items-center gap-2 text-lg font-bold text-slate-800">
+                📝 参数配置
+              </CardTitle>
+              <CardDescription>输入基本信息，自动获取汇率</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6 pt-6">
+              {/* 价格和币种 */}
+              <div className="space-y-3">
+                <Label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">
+                  💵 购买价格 & 币种
+                </Label>
+                <div className="flex gap-3">
+                  <div className="relative flex-1 transition-all group focus-within:ring-2 ring-primary/20 rounded-md">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-bold">
+                      {SUPPORTED_CURRENCIES.find(c => c.code === currency)?.symbol}
+                    </span>
+                    <Input 
+                      type="number" 
+                      value={purchasePrice} 
+                      onChange={e => setPurchasePrice(e.target.value)} 
+                      className="pl-8 border-slate-200 shadow-sm focus-visible:ring-0" 
+                      placeholder="0.00"
+                    />
+                  </div>
+                  <Select value={currency} onValueChange={setCurrency}>
+                    <SelectTrigger className="w-[110px] border-slate-200 shadow-sm"><SelectValue /></SelectTrigger>
+                    <SelectContent>
+                      {SUPPORTED_CURRENCIES.map(c => <SelectItem key={c.code} value={c.code}><span className="mr-1">{c.symbol}</span>{c.code}</SelectItem>)}
+                    </SelectContent>
+                  </Select>
                 </div>
-                <Select value={currency} onValueChange={setCurrency}>
-                  <SelectTrigger className="w-[100px]"><SelectValue /></SelectTrigger>
-                  <SelectContent>
-                    {SUPPORTED_CURRENCIES.map(c => <SelectItem key={c.code} value={c.code}>{c.code}</SelectItem>)}
-                  </SelectContent>
-                </Select>
+                <div className="text-xs text-slate-500 flex justify-between items-center px-1">
+                  <span className="font-mono">{getExchangeRateText(currency, exchangeRates)}</span>
+                  <span className="cursor-pointer hover:text-primary flex items-center gap-1 transition-colors" onClick={loadExchangeRates}>
+                    <RefreshCw className="h-3 w-3"/> 🔄 刷新汇率
+                  </span>
+                </div>
               </div>
-              <div className="text-xs text-muted-foreground flex justify-between">
-                <span>{getExchangeRateText(currency, exchangeRates)}</span>
-                <span className="cursor-pointer hover:text-primary flex items-center gap-1" onClick={loadExchangeRates}>
-                  <RefreshCw className="h-3 w-3"/> 刷新
-                </span>
+
+              {/* 续费周期 */}
+              <div className="space-y-3">
+                <Label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">
+                 📅 续费周期
+                </Label>
+                <div className="grid grid-cols-4 gap-2">
+                  {RENEWAL_PERIODS.map(p => (
+                    <Button 
+                      key={p.value} 
+                      variant={parseInt(renewalPeriod) === p.value ? "default" : "outline"} 
+                      size="sm" 
+                      onClick={() => setRenewalPeriod(p.value.toString())}
+                      className={cn("text-xs shadow-sm border-slate-200 transition-all", parseInt(renewalPeriod) === p.value ? "font-bold shadow-md" : "hover:bg-slate-50 hover:text-slate-900")}
+                    >
+                      {p.label}
+                    </Button>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            <div className="space-y-2">
-              <Label>续费周期</Label>
-              <div className="grid grid-cols-4 gap-2">
-                {RENEWAL_PERIODS.map(p => (
-                  <Button 
-                    key={p.value} 
-                    variant={parseInt(renewalPeriod) === p.value ? "default" : "outline"} 
-                    size="sm" 
-                    onClick={() => setRenewalPeriod(p.value.toString())}
-                    className="text-xs"
-                  >
-                    {p.label}
-                  </Button>
-                ))}
+              {/* 日期选择 */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-3">
+                  <Label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">📆 购买日期</Label>
+                  <Input type="date" value={purchaseDate} onChange={e => setPurchaseDate(e.target.value)} className="font-mono border-slate-200 shadow-sm" />
+                </div>
+                <div className="space-y-3">
+                  <Label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">⏱️ 交易日期</Label>
+                  <Input type="date" value={tradeDate} onChange={e => setTradeDate(e.target.value)} className="font-mono border-slate-200 shadow-sm" />
+                </div>
               </div>
-            </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              <div className="space-y-2">
-                <Label>购买日期</Label>
-                <Input type="date" value={purchaseDate} onChange={e => setPurchaseDate(e.target.value)} className="font-mono" />
-              </div>
-              <div className="space-y-2">
-                <Label>交易日期</Label>
-                <Input type="date" value={tradeDate} onChange={e => setTradeDate(e.target.value)} className="font-mono" />
-              </div>
-            </div>
+              <div className="h-px bg-slate-100 my-2" />
 
-            <div className="h-px bg-border/50" />
+              {/* 定价策略 */}
+              <div className="space-y-4">
+                <Label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">🎯 定价策略</Label>
+                <Tabs value={priceMode} onValueChange={(v) => {
+                  setPriceMode(v as PriceMode);
+                  setModeInput('');
+                }} className="w-full">
+                  <TabsList className="grid w-full grid-cols-3 bg-slate-100/80 p-1">
+                    <TabsTrigger value="total" className="data-[state=active]:bg-white data-[state=active]:shadow-sm">🏷️ 一口价</TabsTrigger>
+                    <TabsTrigger value="premium" className="data-[state=active]:bg-white data-[state=active]:shadow-sm">📈 溢价模式</TabsTrigger>
+                    <TabsTrigger value="discount" className="data-[state=active]:bg-white data-[state=active]:shadow-sm">📉 折扣模式</TabsTrigger>
+                  </TabsList>
+                </Tabs>
 
-            {/* 价格模式 Tabs (已恢复) */}
-            <div className="space-y-3">
-              <Label>定价策略</Label>
-              <Tabs value={priceMode} onValueChange={(v) => {
-                setPriceMode(v as PriceMode);
-                setModeInput(''); // 切换模式清空输入
-              }}>
-                <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="total">一口价</TabsTrigger>
-                  <TabsTrigger value="premium">溢价模式</TabsTrigger>
-                  <TabsTrigger value="discount">折扣模式</TabsTrigger>
-                </TabsList>
-              </Tabs>
-
-              {/* 动态输入区域 */}
-              <div className="pt-1">
-                {priceMode === 'discount' ? (
-                  <div className="space-y-3">
-                    <div className="flex flex-wrap gap-2">
-                      {quickDiscounts.map(d => (
-                        <Button 
-                          key={d} 
-                          variant={Math.abs(parseFloat(modeInput) - d) < 0.01 ? "default" : "outline"} 
-                          size="sm" 
-                          onClick={() => setModeInput(d.toString())}
-                          className="flex-1 h-8 text-xs"
-                        >
-                          {d * 10}折
-                        </Button>
-                      ))}
+                {/* 动态输入区域 */}
+                <div className="pt-1">
+                  {priceMode === 'discount' ? (
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-4 gap-2">
+                        {quickDiscounts.map(d => (
+                          <Button 
+                            key={d} 
+                            variant={Math.abs(parseFloat(modeInput) - d) < 0.01 ? "default" : "outline"} 
+                            size="sm" 
+                            onClick={() => setModeInput(d.toString())}
+                            className={cn("h-9 text-xs font-medium shadow-sm border-slate-200", Math.abs(parseFloat(modeInput) - d) < 0.01 ? "font-bold shadow-md" : "hover:bg-slate-50")}
+                          >
+                            {d * 10}折
+                          </Button>
+                        ))}
+                      </div>
+                      <div className="relative transition-all group focus-within:ring-2 ring-primary/20 rounded-md">
+                        <Input 
+                          type="number" 
+                          value={modeInput} 
+                          onChange={e => setModeInput(e.target.value)} 
+                          placeholder="输入自定义折扣 (如 0.8)"
+                          className="pl-3 pr-24 border-slate-200 shadow-sm focus-visible:ring-0 font-mono"
+                        />
+                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded-md">
+                          💸 x 剩余价值
+                        </span>
+                      </div>
                     </div>
-                    <div className="relative">
+                  ) : (
+                    <div className="relative transition-all group focus-within:ring-2 ring-primary/20 rounded-md">
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-bold">¥</span>
                       <Input 
                         type="number" 
                         value={modeInput} 
                         onChange={e => setModeInput(e.target.value)} 
-                        placeholder="输入折扣 (如 0.8)"
-                        className="pl-3"
+                        className="pl-8 border-slate-200 shadow-sm focus-visible:ring-0 font-mono"
+                        placeholder={
+                          priceMode === 'total' 
+                            ? (result ? Math.round(result.remainingValue).toString() : "期望卖多少钱？") 
+                            : "输入溢价金额 (+/-)"
+                        }
                       />
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">x 剩余价值</span>
                     </div>
-                  </div>
+                  )}
+                </div>
+              </div>
+
+              <Button variant="outline" className="w-full mt-2 border-slate-200 hover:bg-slate-50 text-slate-600" onClick={handleReset}>🔄 重置所有选项</Button>
+            </CardContent>
+          </Card>
+
+          {/* 右侧：结果展示区 */}
+          <div className="lg:col-span-8 space-y-6 sticky top-8">
+            {/* 交易卡片容器 */}
+            <div className="relative group perspective-1000">
+              <div 
+                ref={resultRef}
+                // 增加阴影和边框质感，背景纯白
+                className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200/50 transition-all duration-300 p-8 min-h-[480px] flex flex-col justify-between bg-white border border-slate-100 text-slate-900"
+              >
+                {result ? (
+                  <>
+                    <div className="flex items-center gap-3 mb-8 relative z-10 pb-4 border-b border-slate-100">
+                      <div className="p-2.5 bg-blue-50 rounded-xl">
+                        <TrendingUp className="h-7 w-7 text-blue-600" />
+                      </div>
+                      <div>
+                        <h2 className="text-2xl font-extrabold text-slate-800">📊 剩余价值分析报告</h2>
+                        <p className="text-sm text-slate-500 mt-0.5">基于 {tradeDate} 汇率结算</p>
+                      </div>
+                    </div>
+
+                    {/* 核心三栏数据 - 美化版 */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 relative z-10">
+                      {/* 1. 剩余价值 */}
+                      <div className="p-6 rounded-2xl text-center border-2 bg-gradient-to-b from-blue-50 to-white border-blue-100 shadow-sm transition-transform hover:scale-[1.02]">
+                        <div className="text-sm mb-3 font-bold text-blue-600 flex items-center justify-center gap-1">
+                          💎 剩余价值
+                        </div>
+                        <div className="text-4xl font-black tracking-tight text-blue-900 font-mono">
+                          <span className="text-2xl mr-1 text-blue-600">¥</span>{formatCurrency(result.remainingValue)}
+                        </div>
+                        <div className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold mt-3 bg-blue-100 text-blue-700">
+                          剩余 {(result.remainingRatio * 100).toFixed(1)}%
+                        </div>
+                      </div>
+
+                      {/* 2. 期望售价 */}
+                      <div className="p-6 rounded-2xl text-center border-2 bg-gradient-to-b from-purple-50 to-white border-purple-100 shadow-sm transition-transform hover:scale-[1.02]">
+                        <div className="text-sm mb-3 font-bold text-purple-600 flex items-center justify-center gap-1">
+                          💰 期望售价
+                        </div>
+                        <div className="text-4xl font-black tracking-tight text-purple-900 font-mono">
+                          <span className="text-2xl mr-1 text-purple-600">¥</span>{formatCurrency(result.expectedPrice)}
+                        </div>
+                        <div className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold mt-3 bg-purple-100 text-purple-700">
+                          {priceMode === 'discount' ? `🏷️ ${(parseFloat(modeInput||'1')*10).toFixed(1)}折` : '汇率转换后'}
+                        </div>
+                      </div>
+
+                      {/* 3. 溢价/折价 */}
+                      <div className={cn("p-6 rounded-2xl text-center border-2 shadow-sm transition-transform hover:scale-[1.02]", 
+                        result.premium >= 0 
+                          ? "bg-gradient-to-b from-emerald-50 to-white border-emerald-100"
+                          : "bg-gradient-to-b from-rose-50 to-white border-rose-100"
+                      )}>
+                        <div className={cn("text-sm mb-3 font-bold flex items-center justify-center gap-1", result.premium >= 0 ? "text-emerald-600" : "text-rose-600")}>
+                          {result.premium >= 0 ? '🎉 预期溢价' : '💔 预期折价'}
+                        </div>
+                        <div className={cn("text-4xl font-black tracking-tight font-mono", result.premium >= 0 ? "text-emerald-800" : "text-rose-800")}>
+                          <span className={cn("text-2xl mr-1", result.premium >= 0 ? "text-emerald-600" : "text-rose-600")}>
+                            {result.premium >= 0 ? '+' : ''}¥
+                          </span>
+                          {formatCurrency(Math.abs(result.premium))}
+                        </div>
+                        <div className={cn("inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold mt-3", 
+                          result.premium >= 0 ? "bg-emerald-100 text-emerald-700" : "bg-rose-100 text-rose-700"
+                        )}>
+                          {result.premium >= 0 ? '📈 +' : '📉 '}{Math.abs(result.premiumPercent).toFixed(2)}%
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 详细信息表格 - 增加 Emoji 和呼吸感 */}
+                    <div className="p-6 rounded-2xl relative z-10 bg-slate-50/80 border border-slate-100">
+                      <h3 className="text-sm font-bold mb-5 text-slate-700 flex items-center gap-2">
+                        <Info className="h-4 w-4" /> 详细数据清单
+                      </h3>
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-6 gap-x-8">
+                        <DetailItem emoji="💵" label="原购价格" value={`${SUPPORTED_CURRENCIES.find(c=>c.code===currency)?.symbol}${purchasePrice}`} subValue={`≈ ¥${formatCurrency(result.purchasePriceCNY)}`} />
+                        <DetailItem emoji="📅" label="续费周期" value={RENEWAL_PERIODS.find(r=>r.value===parseInt(renewalPeriod))?.label || '-'} />
+                        <DetailItem emoji="⏳" label="到期日期" value={formatDate(new Date(result.expireDate))} valueClassName="text-orange-600 font-bold" />
+                        <DetailItem emoji="🗓️" label="总服务期限" value={`${result.totalDays} 天`} />
+                        <DetailItem emoji="🕰️" label="已用天数" value={`${result.usedDays} 天`} />
+                        <DetailItem emoji="⏱️" label="剩余天数" value={`${result.remainingDays} 天`} valueClassName="text-blue-600 font-bold" />
+                        <DetailItem emoji="📊" label="使用进度" value={`${((1-result.remainingRatio)*100).toFixed(1)}%`} />
+                        <DetailItem emoji="📆" label="日均成本" value={`¥ ${result.dailyPrice.toFixed(2)}`} />
+                      </div>
+
+                      <div className="mt-7">
+                        <div className="flex justify-between text-xs font-bold text-slate-500 mb-2">
+                          <span>⏳ VPS 生命周期进度</span>
+                          <span>{((1-result.remainingRatio)*100).toFixed(1)}%</span>
+                        </div>
+                        <div className="h-2.5 w-full rounded-full overflow-hidden bg-slate-200 shadow-inner">
+                          <div 
+                            className={cn("h-full transition-all duration-1000 rounded-full", isCardDark ? "bg-blue-500" : "bg-gradient-to-r from-blue-500 to-indigo-600")}
+                            style={{ width: `${(1-result.remainingRatio)*100}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 底部总结栏 */}
+                    <div className={cn("mt-6 p-4 rounded-xl flex items-start gap-3 text-sm shadow-sm border", result.premium >= 0 ? "bg-emerald-50/80 border-emerald-100 text-emerald-800" : "bg-rose-50/80 border-rose-100 text-rose-800")}>
+                      <div className={cn("p-1.5 rounded-full shrink-0 mt-0.5", result.premium >= 0 ? "bg-emerald-100" : "bg-rose-100")}>
+                        {result.premium >= 0 ? <TrendingUp className="h-5 w-5 text-emerald-600" /> : <TrendingDown className="h-5 w-5 text-rose-600" />}
+                      </div>
+                      <div className="leading-relaxed">
+                        <span className="font-bold text-base block mb-1">{result.premium >= 0 ? '🚀 盈利方案评估' : '🔻 亏损方案评估'}</span>
+                        当前定价较理论剩余价值{result.premium >= 0 ? '高出' : '低'} <span className="font-bold font-mono mx-1">¥{formatCurrency(Math.abs(result.premium))}</span>。
+                        {result.premium >= 0 ? '是一个不错的出理财机会。' : '建议适当调整价格以减少损失。'}
+                      </div>
+                    </div>
+                  </>
                 ) : (
-                  <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-bold">¥</span>
-                    <Input 
-                      type="number" 
-                      value={modeInput} 
-                      onChange={e => setModeInput(e.target.value)} 
-                      className="pl-8"
-                      placeholder={
-                        priceMode === 'total' 
-                          ? (result ? Math.round(result.remainingValue).toString() : "期望卖多少钱？") 
-                          : "输入溢价金额 (+/-)"
-                      }
-                    />
+                  <div className="flex flex-col items-center justify-center h-full py-20 text-slate-400">
+                    <div className="bg-slate-50 p-6 rounded-full mb-6">
+                      <Calculator className="h-16 w-16 text-slate-300" />
+                    </div>
+                    <p className="text-xl font-medium text-slate-600">🤔 等待输入参数...</p>
+                    <p className="text-sm mt-2">请在左侧填写信息以生成分析报告</p>
                   </div>
                 )}
               </div>
             </div>
 
-            <Button variant="outline" className="w-full mt-4" onClick={handleReset}>重置所有</Button>
-          </CardContent>
-        </Card>
-
-        {/* 右侧：结果展示区 (默认使用清爽的白底风格) */}
-        <div className="lg:col-span-8 space-y-4">
-          <div className="relative group">
-            <div 
-              ref={resultRef}
-              className="rounded-xl overflow-hidden shadow-sm transition-all duration-300 p-8 min-h-[400px] flex flex-col justify-between border bg-white border-slate-200 text-slate-900"
-            >
-              {result ? (
-                <>
-                  <div className="flex items-center gap-2 mb-8 relative z-10">
-                    <TrendingUp className="h-6 w-6 text-blue-600" />
-                    <h2 className="text-xl font-bold">剩余价值计算结果</h2>
-                  </div>
-
-                  {/* 核心三栏数据 */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 relative z-10">
-                    {/* 1. 剩余价值 */}
-                    <div className="p-6 rounded-2xl text-center border-2 bg-blue-50 border-blue-100">
-                      <div className="text-sm mb-2 font-bold text-blue-600">剩余价值</div>
-                      <div className="text-4xl font-black tracking-tight text-blue-900">
-                        <span className="text-2xl mr-1">¥</span>{formatCurrency(result.remainingValue)}
-                      </div>
-                      <div className="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold mt-2 bg-blue-200/50 text-blue-700">
-                        剩余 {(result.remainingRatio * 100).toFixed(1)}%
-                      </div>
-                    </div>
-
-                    {/* 2. 期望售价 */}
-                    <div className="p-6 rounded-2xl text-center border-2 bg-purple-50 border-purple-100">
-                      <div className="text-sm mb-2 font-bold text-purple-600">期望售价</div>
-                      <div className="text-4xl font-black tracking-tight text-purple-900">
-                        <span className="text-2xl mr-1">¥</span>{formatCurrency(result.expectedPrice)}
-                      </div>
-                      <div className="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold mt-2 bg-purple-200/50 text-purple-700">
-                        {priceMode === 'discount' ? `${(parseFloat(modeInput||'1')*10).toFixed(1)}折` : '汇率转换后'}
-                      </div>
-                    </div>
-
-                    {/* 3. 溢价/折价 */}
-                    <div className={cn("p-6 rounded-2xl text-center border-2", 
-                      result.premium >= 0 
-                        ? "bg-emerald-50 border-emerald-100"
-                        : "bg-rose-50 border-rose-100"
-                    )}>
-                      <div className={cn("text-sm mb-2 font-bold", result.premium >= 0 ? "text-emerald-600" : "text-rose-600")}>
-                        {result.premium >= 0 ? '预期溢价' : '预期折价'}
-                      </div>
-                      <div className={cn("text-4xl font-black tracking-tight", result.premium >= 0 ? "text-emerald-600" : "text-rose-600")}>
-                        <span className="text-2xl mr-1">{result.premium >= 0 ? '+' : ''}¥</span>{formatCurrency(Math.abs(result.premium))}
-                      </div>
-                      <div className={cn("inline-block px-2 py-0.5 rounded-full text-[10px] font-bold mt-2", 
-                        result.premium >= 0 ? "bg-emerald-200/50 text-emerald-700" : "bg-rose-200/50 text-rose-700"
-                      )}>
-                        {result.premium >= 0 ? '+' : ''}{Math.abs(result.premiumPercent).toFixed(2)}%
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 详细信息表格 */}
-                  <div className="p-6 rounded-xl relative z-10 bg-gray-50">
-                    <h3 className="text-sm font-bold mb-4 opacity-70">详细分析</h3>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-6 gap-x-4">
-                      <div>
-                        <div className="text-xs opacity-50 mb-1">原购价格</div>
-                        <div className="font-bold">{SUPPORTED_CURRENCIES.find(c=>c.code===currency)?.symbol}{purchasePrice}</div>
-                        <div className="text-[10px] opacity-50">≈ ¥{formatCurrency(result.purchasePriceCNY)}</div>
-                      </div>
-                      <div>
-                        <div className="text-xs opacity-50 mb-1">续费周期</div>
-                        <div className="font-bold">{RENEWAL_PERIODS.find(r=>r.value===parseInt(renewalPeriod))?.label}</div>
-                      </div>
-                      <div>
-                        <div className="text-xs opacity-50 mb-1">到期日期</div>
-                        <div className="font-bold text-orange-500">{formatDate(new Date(result.expireDate))}</div>
-                      </div>
-                      <div>
-                        <div className="text-xs opacity-50 mb-1">总使用期限</div>
-                        <div className="font-bold">{result.totalDays} 天</div>
-                      </div>
-                      <div>
-                        <div className="text-xs opacity-50 mb-1">已使用天数</div>
-                        <div className="font-bold">{result.usedDays} 天</div>
-                      </div>
-                      <div>
-                        <div className="text-xs opacity-50 mb-1">剩余天数</div>
-                        <div className="font-bold text-blue-500">{result.remainingDays} 天</div>
-                      </div>
-                      <div>
-                        <div className="text-xs opacity-50 mb-1">使用进度</div>
-                        <div className="font-bold">{((1-result.remainingRatio)*100).toFixed(1)}%</div>
-                      </div>
-                      <div>
-                        <div className="text-xs opacity-50 mb-1">日均成本</div>
-                        <div className="font-bold">¥ {result.dailyPrice.toFixed(2)}</div>
-                      </div>
-                    </div>
-
-                    <div className="mt-6">
-                      <div className="text-xs opacity-50 mb-2">VPS 生命周期进度</div>
-                      <div className="h-2 w-full rounded-full overflow-hidden bg-gray-200">
-                        <div 
-                          className="h-full transition-all duration-1000 bg-blue-600"
-                          style={{ width: `${(1-result.remainingRatio)*100}%` }}
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className={cn("mt-4 p-3 rounded-lg flex items-start gap-2 text-sm", result.premium >= 0 ? "bg-emerald-50 text-emerald-800" : "bg-rose-50 text-rose-800")}>
-                    {result.premium >= 0 ? <TrendingUp className="h-5 w-5" /> : <TrendingDown className="h-5 w-5" />}
-                    <div>
-                      <span className="font-bold">{result.premium >= 0 ? '盈利方案：' : '亏损方案：'}</span>
-                      当前定价较剩余价值{result.premium >= 0 ? '高出' : '低'} <span className="font-bold">¥{formatCurrency(Math.abs(result.premium))}</span>。
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <div className="flex flex-col items-center justify-center h-full opacity-30">
-                  <Calculator className="h-16 w-16 mb-4" />
-                  <p>输入参数以查看分析结果</p>
-                </div>
-              )}
+            {/* 按钮组 */}
+            <div className="flex gap-4 justify-end pt-2">
+              <Button variant="outline" size="lg" className="border-slate-200 shadow-sm hover:bg-slate-50 text-slate-700" onClick={exportToMarkdown} disabled={!result}>
+                {copySuccess ? <Check className="h-5 w-5 mr-2 text-emerald-500"/> : <Copy className="h-5 w-5 mr-2"/>}
+                {copySuccess ? '已成功复制!' : '📋 复制 Markdown'}
+              </Button>
+              <Button size="lg" className="bg-slate-900 text-white hover:bg-slate-800 shadow-md" onClick={exportToImage} disabled={!result || generatingImg}>
+                {generatingImg ? <RefreshCw className="h-5 w-5 mr-2 animate-spin"/> : <Download className="h-5 w-5 mr-2"/>}
+                🖼️ 下载分析图
+              </Button>
             </div>
-          </div>
-
-          <div className="flex gap-4 justify-end">
-            <Button variant="outline" onClick={exportToMarkdown} disabled={!result}>
-              {copySuccess ? <Check className="h-4 w-4 mr-2"/> : <Copy className="h-4 w-4 mr-2"/>}
-              {copySuccess ? '已复制' : '复制MD'}
-            </Button>
-            <Button className="bg-slate-900 text-white hover:bg-slate-800" onClick={exportToImage} disabled={!result || generatingImg}>
-              {generatingImg ? <RefreshCw className="h-4 w-4 mr-2 animate-spin"/> : <Download className="h-4 w-4 mr-2"/>}
-              下载图片
-            </Button>
           </div>
         </div>
       </div>
+    </div>
+  )
+}
+
+// 辅助组件：详细数据项
+function DetailItem({ emoji, label, value, subValue, valueClassName }: { emoji: string, label: string, value: string, subValue?: string, valueClassName?: string }) {
+  return (
+    <div className="flex flex-col gap-1">
+      <dt className="text-xs font-medium text-slate-500 flex items-center gap-1.5">
+        <span className="text-sm">{emoji}</span> {label}
+      </dt>
+      <dd className={cn("font-bold text-slate-800 font-mono text-[15px]", valueClassName)}>{value}</dd>
+      {subValue && <dd className="text-[11px] text-slate-400 font-mono">{subValue}</dd>}
     </div>
   )
 }
