@@ -68,6 +68,7 @@ export function formatCurrency(amount: number): string {
 }
 
 export function formatDate(date: Date): string {
+  // 输出展示统一用 YYYY/MM/DD
   const y = date.getFullYear()
   const m = (date.getMonth() + 1).toString().padStart(2, '0')
   const d = date.getDate().toString().padStart(2, '0')
@@ -81,46 +82,41 @@ export function getExchangeRateText(currency: string, rates: Record<string, numb
 }
 
 /**
- * 核心计算逻辑 - 专门处理 MM/DD/YYYY 格式输入
+ * 核心计算逻辑 - 改回 ISO (YYYY-MM-DD) 解析
+ * 因为原生 type="date" 传回来的值永远是 2025-12-07 这种格式
  */
 export function calculateVPSValue(
-  purchaseDateStr: string, // 格式: "12/07/2025"
+  purchaseDateStr: string, // 格式: "2025-12-07"
   renewalMonths: number,
   purchasePrice: number,
   currency: string,
   modeValue: number, 
   priceMode: PriceMode,
   rates: Record<string, number>,
-  tradeDateStr: string // 格式: "01/12/2026"
+  tradeDateStr: string // 格式: "2026-01-12"
 ): CalculationResult {
   
-  // 日期解析: MM/DD/YYYY -> Date Object
-  const parseUSDate = (str: string) => {
-    if (!str || !str.includes('/')) return new Date()
-    const parts = str.split('/')
-    if (parts.length !== 3) return new Date()
-
-    const m = parseInt(parts[0], 10)
-    const d = parseInt(parts[1], 10)
-    const y = parseInt(parts[2], 10)
-
-    if (isNaN(d) || isNaN(m) || isNaN(y)) return new Date()
-    
-    // JS Date 月份从0开始
+  // 1. 日期解析: 专门处理 YYYY-MM-DD (ISO)
+  const parseISO = (str: string) => {
+    if (!str) return new Date()
+    const [y, m, d] = str.split('-').map(Number)
+    // 设为中午12点防止时区偏差
     return new Date(y, m - 1, d, 12, 0, 0)
   }
 
-  const purchaseDate = parseUSDate(purchaseDateStr)
-  const tradeDate = parseUSDate(tradeDateStr)
+  const purchaseDate = parseISO(purchaseDateStr)
+  const tradeDate = parseISO(tradeDateStr)
 
   const expireDate = new Date(purchaseDate)
   expireDate.setMonth(expireDate.getMonth() + renewalMonths)
   expireDate.setHours(12, 0, 0, 0)
   
+  // 2. 汇率转换
   const rate = rates[currency] || 1
   const rateToCNY = currency === 'CNY' ? 1 : (rate > 0 ? 1/rate : 1)
   const purchasePriceCNY = purchasePrice * rateToCNY
 
+  // 3. 天数计算
   const msPerDay = 1000 * 60 * 60 * 24
   const totalDays = Math.round((expireDate.getTime() - purchaseDate.getTime()) / msPerDay)
   
@@ -130,10 +126,12 @@ export function calculateVPSValue(
 
   const usedDays = totalDays - remainingDays
 
+  // 4. 剩余价值计算
   const dailyPrice = totalDays > 0 ? purchasePriceCNY / totalDays : 0
   const remainingValue = dailyPrice * remainingDays
   const remainingRatio = totalDays > 0 ? remainingDays / totalDays : 0
 
+  // 5. 期望售价
   let expectedPrice = 0
   if (priceMode === 'total') {
     expectedPrice = modeValue >= 0 ? modeValue : remainingValue
@@ -147,6 +145,7 @@ export function calculateVPSValue(
     expectedPrice = remainingValue * discount
   }
 
+  // 6. 溢价计算
   const premium = expectedPrice - remainingValue
   const premiumPercent = remainingValue > 0 ? (premium / remainingValue) * 100 : 0
 
