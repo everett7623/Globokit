@@ -12,10 +12,11 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 import { 
-  Calculator, RefreshCw, Copy, Download, Check, Moon, Sun, 
-  TrendingUp, TrendingDown, DollarSign 
+  Calculator, RefreshCw, Copy, Download, Check, 
+  TrendingUp, TrendingDown, Info 
 } from 'lucide-react'
 import {
   fetchExchangeRates,
@@ -24,7 +25,9 @@ import {
   formatDate,
   getExchangeRateText,
   SUPPORTED_CURRENCIES,
-  type CalculationResult
+  RENEWAL_PERIODS,
+  type CalculationResult,
+  type PriceMode
 } from '@/lib/tools/vps-calculator'
 import html2canvas from 'html2canvas'
 
@@ -32,13 +35,19 @@ export default function VPSCalculatorPage() {
   // --- 输入状态 ---
   const [purchaseDate, setPurchaseDate] = useState('')
   const [tradeDate, setTradeDate] = useState('')
-  const [renewalPeriod, setRenewalPeriod] = useState('36') // 默认三年
+  const [renewalPeriod, setRenewalPeriod] = useState('36')
   const [purchasePrice, setPurchasePrice] = useState('')
   const [currency, setCurrency] = useState('USD')
-  const [expectedPrice, setExpectedPrice] = useState('')
+  
+  // --- 价格模式状态 (已恢复) ---
+  const [priceMode, setPriceMode] = useState<PriceMode>('total')
+  // modeInput 存储当前模式下的输入值：
+  // total -> 期望总价
+  // premium -> 溢价金额 (+/-)
+  // discount -> 折扣率 (0.85)
+  const [modeInput, setModeInput] = useState('') 
 
   // --- 逻辑状态 ---
-  const [isCardDark, setIsCardDark] = useState(false) // 默认浅色模式
   const [exchangeRates, setExchangeRates] = useState<Record<string, number>>({})
   const [result, setResult] = useState<CalculationResult | null>(null)
   const [copySuccess, setCopySuccess] = useState(false)
@@ -46,11 +55,13 @@ export default function VPSCalculatorPage() {
 
   const resultRef = useRef<HTMLDivElement>(null)
 
-  // 初始化: 生成标准的 YYYY-MM-DD 字符串
+  // 快捷折扣选项
+  const quickDiscounts = [0.95, 0.9, 0.85, 0.8, 0.75, 0.7, 0.6, 0.5]
+
+  // 初始化
   useEffect(() => {
     const getTodayISO = () => {
       const d = new Date()
-      // padStart 确保月份和日期永远是两位数 (01-12, 01-31)
       return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
     }
     const today = getTodayISO()
@@ -59,13 +70,13 @@ export default function VPSCalculatorPage() {
     loadExchangeRates()
   }, [])
 
-  // 自动计算 (300ms 防抖)
+  // 自动计算监听
   useEffect(() => {
     if (purchasePrice && purchaseDate && tradeDate) {
       const timer = setTimeout(handleCalculate, 300)
       return () => clearTimeout(timer)
     }
-  }, [purchasePrice, purchaseDate, tradeDate, renewalPeriod, currency, expectedPrice, exchangeRates])
+  }, [purchasePrice, purchaseDate, tradeDate, renewalPeriod, currency, priceMode, modeInput, exchangeRates])
 
   const loadExchangeRates = async () => {
     const rates = await fetchExchangeRates()
@@ -74,17 +85,25 @@ export default function VPSCalculatorPage() {
 
   const handleCalculate = () => {
     const priceNum = parseFloat(purchasePrice)
-    // -1 代表未填期望价格
-    const expectedNum = expectedPrice === '' ? -1 : parseFloat(expectedPrice)
-    
     if (!priceNum || !purchaseDate) return
+
+    // 处理不同模式下的输入值
+    let val = parseFloat(modeInput)
+    
+    // 如果输入为空，根据模式给默认值
+    if (modeInput === '' || isNaN(val)) {
+      if (priceMode === 'total') val = -1 // 标记未填
+      if (priceMode === 'premium') val = 0 // 默认无溢价
+      if (priceMode === 'discount') val = 1 // 默认原价(100%)
+    }
 
     const res = calculateVPSValue(
       purchaseDate,
       parseInt(renewalPeriod),
       priceNum,
       currency,
-      expectedNum,
+      val,
+      priceMode,
       exchangeRates,
       tradeDate
     )
@@ -97,14 +116,15 @@ export default function VPSCalculatorPage() {
     setPurchaseDate(today)
     setTradeDate(today)
     setPurchasePrice('')
-    setExpectedPrice('')
+    setModeInput('')
+    setPriceMode('total')
     setResult(null)
   }
 
   const exportToMarkdown = () => {
     if (!result) return
     const symbol = SUPPORTED_CURRENCIES.find(c => c.code === currency)?.symbol
-    const md = `【VPS交易】\n原价：${symbol}${purchasePrice} / ${parseInt(renewalPeriod) === 12 ? '年' : parseInt(renewalPeriod) + '个月'}\n到期：${formatDate(new Date(result.expireDate))}\n剩余：${result.remainingDays}天\n价值：¥${formatCurrency(result.remainingValue)}\n售价：¥${formatCurrency(result.expectedPrice)}\n溢价：¥${formatCurrency(result.premium)}\n计算：Globokit.com`
+    const md = `【VPS交易】\n原价：${symbol}${purchasePrice} / ${RENEWAL_PERIODS.find(r=>r.value===parseInt(renewalPeriod))?.label}\n到期：${formatDate(new Date(result.expireDate))}\n剩余：${result.remainingDays}天\n价值：¥${formatCurrency(result.remainingValue)}\n售价：¥${formatCurrency(result.expectedPrice)}\n溢价：¥${formatCurrency(result.premium)}\n计算：Globokit.com`
     navigator.clipboard.writeText(md).then(() => {
       setCopySuccess(true); setTimeout(() => setCopySuccess(false), 2000)
     })
@@ -160,23 +180,26 @@ export default function VPSCalculatorPage() {
                   </SelectContent>
                 </Select>
               </div>
-              <div className="text-xs text-muted-foreground text-right">
-                {getExchangeRateText(currency, exchangeRates)}
+              <div className="text-xs text-muted-foreground flex justify-between">
+                <span>{getExchangeRateText(currency, exchangeRates)}</span>
+                <span className="cursor-pointer hover:text-primary flex items-center gap-1" onClick={loadExchangeRates}>
+                  <RefreshCw className="h-3 w-3"/> 刷新
+                </span>
               </div>
             </div>
 
             <div className="space-y-2">
               <Label>续费周期</Label>
               <div className="grid grid-cols-4 gap-2">
-                {[{l:'月',v:'1'}, {l:'季',v:'3'}, {l:'半年',v:'6'}, {l:'年',v:'12'}, {l:'两年',v:'24'}, {l:'三年',v:'36'}, {l:'五年',v:'60'}].map(p => (
+                {RENEWAL_PERIODS.map(p => (
                   <Button 
-                    key={p.v} 
-                    variant={parseInt(renewalPeriod) === parseInt(p.v) ? "default" : "outline"} 
+                    key={p.value} 
+                    variant={parseInt(renewalPeriod) === p.value ? "default" : "outline"} 
                     size="sm" 
-                    onClick={() => setRenewalPeriod(p.v)}
+                    onClick={() => setRenewalPeriod(p.value.toString())}
                     className="text-xs"
                   >
-                    {p.l}
+                    {p.label}
                   </Button>
                 ))}
               </div>
@@ -185,76 +208,101 @@ export default function VPSCalculatorPage() {
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-2">
                 <Label>购买日期</Label>
-                <Input 
-                  type="date" 
-                  value={purchaseDate} 
-                  onChange={e => setPurchaseDate(e.target.value)} 
-                  className="font-mono"
-                />
+                <Input type="date" value={purchaseDate} onChange={e => setPurchaseDate(e.target.value)} className="font-mono" />
               </div>
               <div className="space-y-2">
                 <Label>交易日期</Label>
-                <Input 
-                  type="date" 
-                  value={tradeDate} 
-                  onChange={e => setTradeDate(e.target.value)} 
-                  className="font-mono"
-                />
+                <Input type="date" value={tradeDate} onChange={e => setTradeDate(e.target.value)} className="font-mono" />
               </div>
             </div>
 
             <div className="h-px bg-border/50" />
 
-            <div className="space-y-2">
-              <Label className="flex justify-between">
-                <span>期望售价 (人民币)</span>
-              </Label>
-              <div className="relative">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-bold">¥</span>
-                <Input 
-                  type="number" 
-                  value={expectedPrice} 
-                  onChange={e => setExpectedPrice(e.target.value)} 
-                  className="pl-8"
-                  placeholder={result ? Math.round(result.remainingValue).toString() : "0"}
-                />
+            {/* 价格模式 Tabs (已恢复) */}
+            <div className="space-y-3">
+              <Label>定价策略</Label>
+              <Tabs value={priceMode} onValueChange={(v) => {
+                setPriceMode(v as PriceMode);
+                setModeInput(''); // 切换模式清空输入
+              }}>
+                <TabsList className="grid w-full grid-cols-3">
+                  <TabsTrigger value="total">一口价</TabsTrigger>
+                  <TabsTrigger value="premium">溢价模式</TabsTrigger>
+                  <TabsTrigger value="discount">折扣模式</TabsTrigger>
+                </TabsList>
+              </Tabs>
+
+              {/* 动态输入区域 */}
+              <div className="pt-1">
+                {priceMode === 'discount' ? (
+                  <div className="space-y-3">
+                    <div className="flex flex-wrap gap-2">
+                      {quickDiscounts.map(d => (
+                        <Button 
+                          key={d} 
+                          variant={Math.abs(parseFloat(modeInput) - d) < 0.01 ? "default" : "outline"} 
+                          size="sm" 
+                          onClick={() => setModeInput(d.toString())}
+                          className="flex-1 h-8 text-xs"
+                        >
+                          {d * 10}折
+                        </Button>
+                      ))}
+                    </div>
+                    <div className="relative">
+                      <Input 
+                        type="number" 
+                        value={modeInput} 
+                        onChange={e => setModeInput(e.target.value)} 
+                        placeholder="输入折扣 (如 0.8)"
+                        className="pl-3"
+                      />
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">x 剩余价值</span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-bold">¥</span>
+                    <Input 
+                      type="number" 
+                      value={modeInput} 
+                      onChange={e => setModeInput(e.target.value)} 
+                      className="pl-8"
+                      placeholder={
+                        priceMode === 'total' 
+                          ? (result ? Math.round(result.remainingValue).toString() : "期望卖多少钱？") 
+                          : "输入溢价金额 (+/-)"
+                      }
+                    />
+                  </div>
+                )}
               </div>
             </div>
 
-            <Button variant="outline" className="w-full" onClick={handleReset}>重置</Button>
+            <Button variant="outline" className="w-full mt-4" onClick={handleReset}>重置所有</Button>
           </CardContent>
         </Card>
 
-        {/* 右侧：结果展示区 */}
+        {/* 右侧：结果展示区 (默认使用清爽的白底风格) */}
         <div className="lg:col-span-8 space-y-4">
           <div className="relative group">
             <div 
               ref={resultRef}
-              className={cn(
-                "rounded-xl overflow-hidden shadow-sm transition-all duration-300 p-8 min-h-[400px] flex flex-col justify-between border",
-                isCardDark ? "bg-[#0f172a] border-slate-800 text-slate-100" : "bg-white border-slate-200 text-slate-900"
-              )}
+              className="rounded-xl overflow-hidden shadow-sm transition-all duration-300 p-8 min-h-[400px] flex flex-col justify-between border bg-white border-slate-200 text-slate-900"
             >
-              {/* 主题切换 */}
-              <div className="absolute top-6 right-6 z-50" data-html2canvas-ignore>
-                <Button variant="ghost" size="icon" onClick={() => setIsCardDark(!isCardDark)} className="rounded-full">
-                  {isCardDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-                </Button>
-              </div>
-
               {result ? (
                 <>
                   <div className="flex items-center gap-2 mb-8 relative z-10">
-                    <TrendingUp className={cn("h-6 w-6", isCardDark ? "text-blue-400" : "text-blue-600")} />
+                    <TrendingUp className="h-6 w-6 text-blue-600" />
                     <h2 className="text-xl font-bold">剩余价值计算结果</h2>
                   </div>
 
                   {/* 核心三栏数据 */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 relative z-10">
                     {/* 1. 剩余价值 */}
-                    <div className={cn("p-6 rounded-2xl text-center border-2", isCardDark ? "bg-blue-500/10 border-blue-500/20" : "bg-blue-50 border-blue-100")}>
-                      <div className={cn("text-sm mb-2 font-bold", isCardDark ? "text-blue-400" : "text-blue-600")}>剩余价值</div>
-                      <div className={cn("text-4xl font-black tracking-tight", isCardDark ? "text-blue-100" : "text-blue-900")}>
+                    <div className="p-6 rounded-2xl text-center border-2 bg-blue-50 border-blue-100">
+                      <div className="text-sm mb-2 font-bold text-blue-600">剩余价值</div>
+                      <div className="text-4xl font-black tracking-tight text-blue-900">
                         <span className="text-2xl mr-1">¥</span>{formatCurrency(result.remainingValue)}
                       </div>
                       <div className="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold mt-2 bg-blue-200/50 text-blue-700">
@@ -263,21 +311,21 @@ export default function VPSCalculatorPage() {
                     </div>
 
                     {/* 2. 期望售价 */}
-                    <div className={cn("p-6 rounded-2xl text-center border-2", isCardDark ? "bg-purple-500/10 border-purple-500/20" : "bg-purple-50 border-purple-100")}>
-                      <div className={cn("text-sm mb-2 font-bold", isCardDark ? "text-purple-400" : "text-purple-600")}>期望售价</div>
-                      <div className={cn("text-4xl font-black tracking-tight", isCardDark ? "text-purple-100" : "text-purple-900")}>
+                    <div className="p-6 rounded-2xl text-center border-2 bg-purple-50 border-purple-100">
+                      <div className="text-sm mb-2 font-bold text-purple-600">期望售价</div>
+                      <div className="text-4xl font-black tracking-tight text-purple-900">
                         <span className="text-2xl mr-1">¥</span>{formatCurrency(result.expectedPrice)}
                       </div>
                       <div className="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold mt-2 bg-purple-200/50 text-purple-700">
-                        汇率转换后
+                        {priceMode === 'discount' ? `${(parseFloat(modeInput||'1')*10).toFixed(1)}折` : '汇率转换后'}
                       </div>
                     </div>
 
                     {/* 3. 溢价/折价 */}
                     <div className={cn("p-6 rounded-2xl text-center border-2", 
                       result.premium >= 0 
-                        ? (isCardDark ? "bg-emerald-500/10 border-emerald-500/20" : "bg-emerald-50 border-emerald-100")
-                        : (isCardDark ? "bg-rose-500/10 border-rose-500/20" : "bg-rose-50 border-rose-100")
+                        ? "bg-emerald-50 border-emerald-100"
+                        : "bg-rose-50 border-rose-100"
                     )}>
                       <div className={cn("text-sm mb-2 font-bold", result.premium >= 0 ? "text-emerald-600" : "text-rose-600")}>
                         {result.premium >= 0 ? '预期溢价' : '预期折价'}
@@ -294,7 +342,7 @@ export default function VPSCalculatorPage() {
                   </div>
 
                   {/* 详细信息表格 */}
-                  <div className={cn("p-6 rounded-xl relative z-10", isCardDark ? "bg-white/5" : "bg-gray-50")}>
+                  <div className="p-6 rounded-xl relative z-10 bg-gray-50">
                     <h3 className="text-sm font-bold mb-4 opacity-70">详细分析</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-6 gap-x-4">
                       <div>
@@ -304,7 +352,7 @@ export default function VPSCalculatorPage() {
                       </div>
                       <div>
                         <div className="text-xs opacity-50 mb-1">续费周期</div>
-                        <div className="font-bold">{parseInt(renewalPeriod) === 12 ? '年付' : parseInt(renewalPeriod) === 36 ? '三年付' : renewalPeriod + '个月'}</div>
+                        <div className="font-bold">{RENEWAL_PERIODS.find(r=>r.value===parseInt(renewalPeriod))?.label}</div>
                       </div>
                       <div>
                         <div className="text-xs opacity-50 mb-1">到期日期</div>
@@ -327,18 +375,16 @@ export default function VPSCalculatorPage() {
                         <div className="font-bold">{((1-result.remainingRatio)*100).toFixed(1)}%</div>
                       </div>
                       <div>
-                        <div className="text-xs opacity-50 mb-1">投资回报率</div>
-                        <div className={cn("font-bold", result.premium >= 0 ? "text-emerald-500" : "text-rose-500")}>
-                          {result.premium >= 0 ? '+' : ''}{result.premiumPercent.toFixed(2)}%
-                        </div>
+                        <div className="text-xs opacity-50 mb-1">日均成本</div>
+                        <div className="font-bold">¥ {result.dailyPrice.toFixed(2)}</div>
                       </div>
                     </div>
 
                     <div className="mt-6">
                       <div className="text-xs opacity-50 mb-2">VPS 生命周期进度</div>
-                      <div className="h-2 w-full rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700">
+                      <div className="h-2 w-full rounded-full overflow-hidden bg-gray-200">
                         <div 
-                          className={cn("h-full transition-all duration-1000", isCardDark ? "bg-blue-500" : "bg-slate-800")}
+                          className="h-full transition-all duration-1000 bg-blue-600"
                           style={{ width: `${(1-result.remainingRatio)*100}%` }}
                         ></div>
                       </div>
@@ -352,7 +398,6 @@ export default function VPSCalculatorPage() {
                       当前定价较剩余价值{result.premium >= 0 ? '高出' : '低'} <span className="font-bold">¥{formatCurrency(Math.abs(result.premium))}</span>。
                     </div>
                   </div>
-
                 </>
               ) : (
                 <div className="flex flex-col items-center justify-center h-full opacity-30">
@@ -363,7 +408,6 @@ export default function VPSCalculatorPage() {
             </div>
           </div>
 
-          {/* 按钮组 */}
           <div className="flex gap-4 justify-end">
             <Button variant="outline" onClick={exportToMarkdown} disabled={!result}>
               {copySuccess ? <Check className="h-4 w-4 mr-2"/> : <Copy className="h-4 w-4 mr-2"/>}
