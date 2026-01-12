@@ -54,7 +54,7 @@ export default function VPSCalculatorPage() {
   // 快捷折扣选项
   const quickDiscounts = [0.95, 0.9, 0.85, 0.8, 0.75, 0.7, 0.6, 0.5]
 
-  // 初始化 - 使用 YYYY-MM-DD 格式 (HTML date input 标准)
+  // 初始化
   useEffect(() => {
     const getTodayISO = () => {
       const d = new Date()
@@ -136,9 +136,9 @@ export default function VPSCalculatorPage() {
   }
 
   return (
-    // 修改: 宽度 max-w-[1600px]
+    // 修改 1: 使用 max-w-7xl (约1280px) 统一宽度，更适合工具类展示
     <div className="min-h-screen bg-slate-50/50 py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-[1600px] mx-auto space-y-8">
+      <div className="max-w-7xl mx-auto space-y-8">
         
         {/* 头部标题 */}
         <div className="text-center sm:text-left">
@@ -164,14 +164,15 @@ export default function VPSCalculatorPage() {
               </CardHeader>
               
               <CardContent className="space-y-6 pt-6 flex-1">
-                {/* 价格和币种 - 使用 Flex 解决重叠 */}
+                {/* 价格和币种 - 修改 2: Flex自适应布局，修复货币符号重叠问题 */}
                 <div className="space-y-3">
                   <Label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">
                     💵 购买价格 & 币种
                   </Label>
                   <div className="flex gap-3">
-                    <div className="flex-1 flex rounded-md shadow-sm ring-1 ring-inset ring-slate-200 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary/20 transition-all overflow-hidden bg-white">
-                      <span className="flex select-none items-center pl-3 pr-2 text-slate-500 font-bold bg-slate-50/50 border-r border-slate-100 sm:text-sm shrink-0 min-w-[3rem] justify-center">
+                    <div className="flex-1 flex rounded-md shadow-sm ring-1 ring-inset ring-slate-200 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary/20 transition-all bg-white overflow-hidden">
+                      {/* 货币符号：不固定宽度，自适应内容，左右padding */}
+                      <span className="flex select-none items-center px-3 text-slate-500 font-bold bg-slate-50/50 border-r border-slate-100 sm:text-sm whitespace-nowrap">
                         {SUPPORTED_CURRENCIES.find(c => c.code === currency)?.symbol}
                       </span>
                       <Input 
@@ -217,12 +218,15 @@ export default function VPSCalculatorPage() {
                   </div>
                 </div>
 
-                {/* 日期选择 - 改回 type="date" 以支持点击选择 */}
+                {/* 日期选择 - 修改 3: 默认Text显示格式提示，聚焦变Date */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-3">
                     <Label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">📆 购买日期</Label>
                     <Input 
-                      type="date" 
+                      type="text" 
+                      placeholder="dd/mm/yyyy"
+                      onFocus={(e) => e.target.type = 'date'}
+                      onBlur={(e) => { if(!e.target.value) e.target.type = 'text' }}
                       value={purchaseDate} 
                       onChange={e => setPurchaseDate(e.target.value)} 
                       className="font-mono border-slate-200 shadow-sm" 
@@ -231,7 +235,10 @@ export default function VPSCalculatorPage() {
                   <div className="space-y-3">
                     <Label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">⏱️ 交易日期</Label>
                     <Input 
-                      type="date" 
+                      type="text" 
+                      placeholder="dd/mm/yyyy"
+                      onFocus={(e) => e.target.type = 'date'}
+                      onBlur={(e) => { if(!e.target.value) e.target.type = 'text' }}
                       value={tradeDate} 
                       onChange={e => setTradeDate(e.target.value)} 
                       className="font-mono border-slate-200 shadow-sm" 
@@ -287,7 +294,7 @@ export default function VPSCalculatorPage() {
                       </div>
                     ) : (
                       <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-slate-200 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary/20 transition-all overflow-hidden bg-white">
-                        <span className="flex select-none items-center pl-3 pr-2 text-slate-500 font-bold bg-slate-50/50 border-r border-slate-100 sm:text-sm shrink-0 min-w-[2.5rem] justify-center">
+                        <span className="flex select-none items-center px-3 text-slate-500 font-bold bg-slate-50/50 border-r border-slate-100 sm:text-sm whitespace-nowrap">
                           ¥
                         </span>
                         <Input 
@@ -367,7 +374,7 @@ export default function VPSCalculatorPage() {
                           </div>
                         </div>
 
-                        {/* 3. 溢价/折价 - 修改: 增加 +/- 符号 */}
+                        {/* 3. 溢价/折价 - 修改 4: 强制显示 + 或 - 号 */}
                         <div className={cn("p-6 rounded-2xl text-center border-2 shadow-sm transition-transform hover:scale-[1.02]", 
                           result.premium >= 0 
                             ? "bg-gradient-to-b from-emerald-50 to-white border-emerald-100"
