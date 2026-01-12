@@ -4,132 +4,234 @@
 // 作者: Jensfrank
 // 更新时间: 2026-01-08
 
-// 计算结果接口
-export interface CalculationResult {
-  purchasePriceCNY: number // 原价(CNY)
-  remainingDays: number    // 剩余天数
-  totalDays: number        // 总周期天数
-  usedDays: number         // 已用天数
-  remainingRatio: number   // 剩余比例 (0-1)
-  remainingValue: number   // 剩余价值(CNY)
-  premium: number          // 溢价金额 (+/-)
-  premiumPercent: number   // 溢价百分比
-  expireDate: Date         // 到期日
-  expectedPrice: number    // 期望售价
-  dailyPrice: number       // 日均价格
+// VPS配置接口
+export interface VPSConfig {
+  vpsPlan?: string
+  cpuCores?: number
+  ramSize?: number
+  diskSize?: number
+  bandwidth?: number
+  vendor?: string
 }
 
+// 计算结果接口
+export interface CalculationResult {
+  purchasePriceCNY: number
+  remainingDays: number
+  totalDays: number
+  remainingRatio: number
+  remainingValue: number
+  premium?: number
+  premiumPercent?: number
+  expireDate: Date
+  expectedPrice?: number
+}
+
+// 价格输入模式
 export type PriceMode = 'total' | 'monthly' | 'discount'
 
 // 支持的货币列表
 export const SUPPORTED_CURRENCIES = [
-  { code: 'USD', name: '美元', symbol: '$' },
   { code: 'CNY', name: '人民币', symbol: '¥' },
+  { code: 'USD', name: '美元', symbol: '$' },
   { code: 'EUR', name: '欧元', symbol: '€' },
   { code: 'GBP', name: '英镑', symbol: '£' },
-  { code: 'JPY', name: '日元', symbol: 'JP¥' },
+  { code: 'JPY', name: '日元', symbol: '¥' },
   { code: 'HKD', name: '港币', symbol: 'HK$' },
   { code: 'KRW', name: '韩元', symbol: '₩' },
   { code: 'AUD', name: '澳元', symbol: 'A$' },
+  { code: 'CAD', name: '加元', symbol: 'C$' },
+  { code: 'SGD', name: '新加坡元', symbol: 'S$' },
 ]
 
-// 汇率缓存 (示例，实际建议从API获取)
-let exchangeRatesCache: Record<string, number> = {
-  CNY: 1, USD: 0.138, EUR: 0.128, GBP: 0.11, JPY: 21.5, HKD: 1.08,
-}
-let lastFetchTime = 0
+// 续费周期选项
+export const RENEWAL_PERIODS = [
+  { value: 1, label: '1个月' },
+  { value: 3, label: '3个月' },
+  { value: 6, label: '6个月' },
+  { value: 12, label: '1年' },
+  { value: 24, label: '2年' },
+  { value: 36, label: '3年' },
+  { value: 60, label: '5年' },
+  { value: 0, label: '自定义' },
+]
 
-// 获取汇率
+// 汇率缓存
+let exchangeRatesCache: Record<string, number> = {
+  CNY: 1,
+  USD: 0.14,
+  EUR: 0.13,
+  GBP: 0.11,
+  JPY: 21.5,
+  HKD: 1.09,
+  KRW: 192.5,
+  AUD: 0.21,
+  CAD: 0.19,
+  SGD: 0.19,
+}
+
+let lastFetchTime = 0
+const CACHE_DURATION = 3600000 // 1小时
+
+/**
+ * 获取实时汇率
+ */
 export async function fetchExchangeRates(): Promise<Record<string, number>> {
   const now = Date.now()
-  if (now - lastFetchTime < 3600000) return exchangeRatesCache
+  
+  // 如果缓存未过期，直接返回缓存
+  if (now - lastFetchTime < CACHE_DURATION) {
+    return exchangeRatesCache
+  }
+
   try {
-    const res = await fetch('https://open.er-api.com/v6/latest/CNY')
-    const data = await res.json()
+    const response = await fetch('https://open.er-api.com/v6/latest/CNY')
+    const data = await response.json()
+    
     if (data.rates) {
       exchangeRatesCache = data.rates
       lastFetchTime = now
     }
+    
     return exchangeRatesCache
-  } catch (e) { return exchangeRatesCache }
-}
-
-// 格式化货币
-export function formatCurrency(amount: number): string {
-  return amount.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-}
-
-// 格式化日期
-export function formatDate(date: Date): string {
-  return date.toISOString().split('T')[0]
-}
-
-// 获取汇率文本
-export function getExchangeRateText(currency: string, rates: Record<string, number>): string {
-  if (currency === 'CNY') return ''
-  const rate = rates[currency]
-  return rate ? `1 ${currency} ≈ ${(1/rate).toFixed(4)} CNY` : ''
+  } catch (error) {
+    console.error('获取汇率失败:', error)
+    // 返回默认汇率
+    return exchangeRatesCache
+  }
 }
 
 /**
- * 核心计算逻辑
+ * 将外币转换为人民币
+ */
+export function convertToCNY(
+  amount: number,
+  currency: string,
+  rates: Record<string, number>
+): number {
+  if (currency === 'CNY') return amount
+  
+  const rate = rates[currency]
+  if (!rate) return amount
+  
+  return amount / rate
+}
+
+/**
+ * 计算VPS剩余价值
  */
 export function calculateVPSValue(
-  purchaseDateStr: string,
+  purchaseDate: Date,
   renewalMonths: number,
   purchasePrice: number,
   currency: string,
-  expectedPriceInput: number,
-  rates: Record<string, number>,
-  tradeDateStr: string
+  expectedPrice: number = 0,
+  priceMode: PriceMode = 'total',
+  rates: Record<string, number>
 ): CalculationResult {
-  // 1. 处理日期 (全部设为中午12点，避免时区导致的 +/- 1天误差)
-  const purchaseDate = new Date(purchaseDateStr)
-  purchaseDate.setHours(12, 0, 0, 0)
-  
-  const tradeDate = new Date(tradeDateStr)
-  tradeDate.setHours(12, 0, 0, 0)
-
+  const today = new Date()
   const expireDate = new Date(purchaseDate)
   expireDate.setMonth(expireDate.getMonth() + renewalMonths)
-  
-  // 2. 转换原价到人民币
-  const rate = rates[currency] || 1
-  const purchasePriceCNY = currency === 'CNY' ? purchasePrice : purchasePrice / rate
 
-  // 3. 计算天数
-  const msPerDay = 1000 * 60 * 60 * 24
-  const totalDays = Math.round((expireDate.getTime() - purchaseDate.getTime()) / msPerDay)
-  
-  // 剩余天数 = 到期日 - 交易日
-  let remainingDays = Math.round((expireDate.getTime() - tradeDate.getTime()) / msPerDay)
-  if (remainingDays < 0) remainingDays = 0
-  if (remainingDays > totalDays) remainingDays = totalDays // 交易日早于购买日的情况修正
+  // 计算总天数和剩余天数
+  const totalDays = Math.ceil((expireDate.getTime() - purchaseDate.getTime()) / (1000 * 60 * 60 * 24))
+  const remainingDays = Math.max(0, Math.ceil((expireDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)))
 
-  const usedDays = totalDays - remainingDays
+  // 转换为人民币
+  let purchasePriceCNY = convertToCNY(purchasePrice, currency, rates)
 
-  // 4. 计算价值
-  const dailyPrice = totalDays > 0 ? purchasePriceCNY / totalDays : 0
-  const remainingValue = dailyPrice * remainingDays
+  // 根据价格模式调整
+  if (priceMode === 'monthly') {
+    // 溢价模式：不调整购买价格
+    purchasePriceCNY = purchasePriceCNY
+  } else if (priceMode === 'discount') {
+    // 折扣模式：购买价格已经在前端计算好了
+    purchasePriceCNY = purchasePriceCNY
+  }
+
+  // 计算剩余价值
   const remainingRatio = totalDays > 0 ? remainingDays / totalDays : 0
+  const remainingValue = purchasePriceCNY * remainingRatio
 
-  // 5. 计算溢价 (期望售价 - 剩余价值)
-  // 如果用户没填期望售价，默认期望售价 = 剩余价值（即溢价为0）
-  const expectedPrice = expectedPriceInput > 0 ? expectedPriceInput : remainingValue
-  const premium = expectedPrice - remainingValue
-  const premiumPercent = remainingValue > 0 ? (premium / remainingValue) * 100 : 0
+  // 计算溢价
+  let premium: number | undefined
+  let premiumPercent: number | undefined
+
+  if (expectedPrice > 0) {
+    premium = expectedPrice - remainingValue
+    premiumPercent = remainingValue > 0 ? (premium / remainingValue) * 100 : 0
+  }
 
   return {
     purchasePriceCNY,
     remainingDays,
     totalDays,
-    usedDays,
     remainingRatio,
     remainingValue,
     premium,
     premiumPercent,
     expireDate,
-    expectedPrice,
-    dailyPrice
   }
+}
+
+/**
+ * 格式化货币显示
+ */
+export function formatCurrency(amount: number, decimals: number = 2): string {
+  return amount.toLocaleString('zh-CN', {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  })
+}
+
+/**
+ * 格式化日期显示
+ */
+export function formatDate(date: Date): string {
+  return date.toLocaleDateString('zh-CN', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  })
+}
+
+/**
+ * 验证输入数据
+ */
+export function validateInput(
+  purchaseDate: string,
+  purchasePrice: number
+): { valid: boolean; error?: string } {
+  if (!purchaseDate) {
+    return { valid: false, error: '请选择购买日期' }
+  }
+
+  if (!purchasePrice || purchasePrice <= 0) {
+    return { valid: false, error: '请输入有效的购买价格' }
+  }
+
+  const date = new Date(purchaseDate)
+  const today = new Date()
+  
+  if (date > today) {
+    return { valid: false, error: '购买日期不能晚于今天' }
+  }
+
+  return { valid: true }
+}
+
+/**
+ * 获取汇率信息文本
+ */
+export function getExchangeRateText(
+  currency: string,
+  rates: Record<string, number>
+): string {
+  if (currency === 'CNY') return ''
+  
+  const rate = rates[currency]
+  if (!rate) return ''
+  
+  const cnyRate = (1 / rate).toFixed(4)
+  return `1 ${currency} ≈ ${cnyRate} CNY`
 }
