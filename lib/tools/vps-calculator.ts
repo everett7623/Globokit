@@ -81,37 +81,30 @@ export function getExchangeRateText(currency: string, rates: Record<string, numb
 }
 
 /**
- * 核心计算逻辑 - 专门处理 MM/DD/YYYY 格式输入
+ * 核心计算逻辑 - 恢复 ISO (YYYY-MM-DD) 解析
+ * 配合原生 input type="date" 使用
  */
 export function calculateVPSValue(
-  purchaseDateStr: string, // 格式: "12/07/2025" (月/日/年)
+  purchaseDateStr: string, // 格式: "2025-12-07"
   renewalMonths: number,
   purchasePrice: number,
   currency: string,
   modeValue: number, 
   priceMode: PriceMode,
   rates: Record<string, number>,
-  tradeDateStr: string // 格式: "01/12/2026" (月/日/年)
+  tradeDateStr: string // 格式: "2026-01-12"
 ): CalculationResult {
   
-  // 1. 日期解析: MM/DD/YYYY -> Date Object
-  const parseUSDate = (str: string) => {
-    if (!str || !str.includes('/')) return new Date()
-    const parts = str.split('/')
-    if (parts.length !== 3) return new Date()
-
-    const m = parseInt(parts[0], 10)
-    const d = parseInt(parts[1], 10)
-    const y = parseInt(parts[2], 10)
-
-    if (isNaN(d) || isNaN(m) || isNaN(y)) return new Date()
-    
-    // JS Date 月份从0开始
+  // 1. 日期解析: 专门处理 YYYY-MM-DD (ISO)
+  const parseISO = (str: string) => {
+    if (!str) return new Date()
+    const [y, m, d] = str.split('-').map(Number)
+    // 设为中午12点防止时区偏差
     return new Date(y, m - 1, d, 12, 0, 0)
   }
 
-  const purchaseDate = parseUSDate(purchaseDateStr)
-  const tradeDate = parseUSDate(tradeDateStr)
+  const purchaseDate = parseISO(purchaseDateStr)
+  const tradeDate = parseISO(tradeDateStr)
 
   const expireDate = new Date(purchaseDate)
   expireDate.setMonth(expireDate.getMonth() + renewalMonths)
