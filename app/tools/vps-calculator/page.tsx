@@ -23,7 +23,6 @@ import {
   calculateVPSValue,
   formatCurrency,
   formatDate,
-  getExchangeRateText,
   SUPPORTED_CURRENCIES,
   RENEWAL_PERIODS,
   type CalculationResult,
@@ -33,6 +32,7 @@ import html2canvas from 'html2canvas'
 
 export default function VPSCalculatorPage() {
   // --- 输入状态 ---
+  // 使用原生 date input，初始化为空以显示 placeholder
   const [purchaseDate, setPurchaseDate] = useState('') 
   const [tradeDate, setTradeDate] = useState('')
   const [renewalPeriod, setRenewalPeriod] = useState('36')
@@ -110,7 +110,7 @@ export default function VPSCalculatorPage() {
     setResult(null)
   }
 
-  // --- 核心优化：Markdown 生成逻辑 ---
+  // --- Markdown 生成 (定制底部水印) ---
   const exportToMarkdown = () => {
     if (!result) return
     const symbol = SUPPORTED_CURRENCIES.find(c => c.code === currency)?.symbol
@@ -119,9 +119,9 @@ export default function VPSCalculatorPage() {
     const profitSign = isProfit ? '+' : ''
     const profitColorObj = isProfit ? '💎 溢价收益' : '⚠️ 折价损失'
     const now = new Date()
-    const formattedTime = now.toLocaleString('zh-CN', { hour12: false }).replace(/\//g, '/') // 确保是 YYYY/M/D HH:mm:ss 格式
+    // 格式化时间 2026/1/12 16:38:21
+    const formattedTime = `${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()} ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`
 
-    // 生成精美 Markdown 表格
     const md = `
 # VPS 剩余价值计算结果
 
@@ -146,9 +146,6 @@ ${isProfit
   ? `**🦄 推荐交易**\n\n✅ 按期望售价 **¥${formatCurrency(result.expectedPrice)}** 出售，可获得 **¥${formatCurrency(result.premium)}** 的额外收益，投资回报率达到 **${result.premiumPercent.toFixed(2)}%**，建议按此价格进行交易。` 
   : `**⚠️ 性价比交易**\n\n📉 当前定价低于剩余价值，属于折价出售。买家相当于获得了 **${formatCurrency(Math.abs(result.premium))}元** 的优惠，性价比极高！`
 }
-
-**剩余价值比例**: ${(result.remainingRatio * 100).toFixed(2)}% - 基于时间进度的价值评估
-**成本效率**: 原价 ${symbol}${purchasePrice} 约合 ¥${formatCurrency(result.purchasePriceCNY)}，每天成本约 ¥${result.dailyPrice.toFixed(2)}
 
 ---
 
@@ -228,7 +225,6 @@ ${isProfit
                       </SelectContent>
                     </Select>
                   </div>
-                  {/* 已移除：刷新汇率行 */}
                 </div>
 
                 {/* 续费周期 */}
@@ -251,13 +247,15 @@ ${isProfit
                   </div>
                 </div>
 
-                {/* 日期选择 - 原生 type="date" */}
+                {/* 日期选择 */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-3 relative">
                     <Label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">📆 购买日期</Label>
                     <div className="relative">
                       <Input 
                         type="date" 
+                        // 增加 max 限制防止输入超长年份
+                        max="9999-12-31"
                         value={purchaseDate} 
                         onChange={e => setPurchaseDate(e.target.value)} 
                         className="font-mono border-slate-200 shadow-sm"
@@ -270,6 +268,7 @@ ${isProfit
                     <div className="relative">
                       <Input 
                         type="date" 
+                        max="9999-12-31"
                         value={tradeDate} 
                         onChange={e => setTradeDate(e.target.value)} 
                         className="font-mono border-slate-200 shadow-sm" 
