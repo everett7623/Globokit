@@ -23,7 +23,6 @@ import {
   calculateVPSValue,
   formatCurrency,
   formatDate,
-  getExchangeRateText,
   SUPPORTED_CURRENCIES,
   RENEWAL_PERIODS,
   type CalculationResult,
@@ -50,31 +49,19 @@ export default function VPSCalculatorPage() {
   const [generatingImg, setGeneratingImg] = useState(false)
 
   const resultRef = useRef<HTMLDivElement>(null)
-  
-  // 隐藏的日期选择器引用
-  const hiddenPurchaseDateRef = useRef<HTMLInputElement>(null)
-  const hiddenTradeDateRef = useRef<HTMLInputElement>(null)
 
   const quickDiscounts = [0.95, 0.9, 0.85, 0.8, 0.75, 0.7, 0.6, 0.5]
 
   // 初始化
   useEffect(() => {
-    const getTodayUS = () => {
-      const d = new Date()
-      const day = String(d.getDate()).padStart(2, '0')
-      const month = String(d.getMonth() + 1).padStart(2, '0')
-      const year = d.getFullYear()
-      return `${month}/${day}/${year}`
-    }
-    setTradeDate(getTodayUS())
+    const today = new Date().toISOString().split('T')[0]
+    setTradeDate(today)
     loadExchangeRates()
   }, [])
 
   // 自动计算监听
   useEffect(() => {
-    const isValidDate = (d: string) => d && d.length === 10 && /^\d{2}\/\d{2}\/\d{4}$/.test(d)
-
-    if (purchasePrice && isValidDate(purchaseDate) && isValidDate(tradeDate)) {
+    if (purchasePrice && purchaseDate && tradeDate) {
       const timer = setTimeout(handleCalculate, 300)
       return () => clearTimeout(timer)
     }
@@ -83,14 +70,6 @@ export default function VPSCalculatorPage() {
   const loadExchangeRates = async () => {
     const rates = await fetchExchangeRates()
     setExchangeRates(rates)
-  }
-
-  // 处理原生日期选择器
-  const handleNativeDateChange = (e: React.ChangeEvent<HTMLInputElement>, setter: (s: string) => void) => {
-    const isoVal = e.target.value
-    if (!isoVal) return
-    const [y, m, d] = isoVal.split('-')
-    setter(`${m}/${d}/${y}`)
   }
 
   const handleCalculate = () => {
@@ -121,8 +100,7 @@ export default function VPSCalculatorPage() {
   }
 
   const handleReset = () => {
-    const d = new Date()
-    const today = `${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}/${d.getFullYear()}`
+    const today = new Date().toISOString().split('T')[0]
     setPurchaseDate('') 
     setTradeDate(today)
     setPurchasePrice('')
@@ -131,17 +109,16 @@ export default function VPSCalculatorPage() {
     setResult(null)
   }
 
-  // --- 核心优化：Markdown 生成逻辑加强版 ---
+  // --- 核心优化：Markdown 生成逻辑 (表格版) ---
   const exportToMarkdown = () => {
     if (!result) return
-    
     const symbol = SUPPORTED_CURRENCIES.find(c => c.code === currency)?.symbol
     const cycleLabel = RENEWAL_PERIODS.find(r=>r.value===parseInt(renewalPeriod))?.label
     const isProfit = result.premium >= 0
     const profitSign = isProfit ? '+' : '-'
     const profitColorObj = isProfit ? '💎 溢价收益' : '🔻 折价让利'
     
-    // 生成精美的 Markdown 表格
+    // 生成精美 Markdown 表格
     const md = `
 # 📊 VPS 剩余价值计算报告
 
@@ -185,6 +162,7 @@ ${isProfit
   }
 
   return (
+    // 宽度 max-w-[1400px]
     <div className="min-h-screen bg-slate-50/50 py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-[1400px] mx-auto space-y-8">
         
@@ -226,7 +204,7 @@ ${isProfit
                         type="number" 
                         value={purchasePrice} 
                         onChange={e => setPurchasePrice(e.target.value)} 
-                        className="block flex-1 border-0 bg-transparent py-1.5 pl-2 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm sm:leading-6" 
+                        className="block flex-1 border-0 bg-transparent py-1.5 pl-2 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm sm:leading-6 font-mono"
                         placeholder="0.00"
                       />
                     </div>
@@ -259,7 +237,7 @@ ${isProfit
                   </div>
                 </div>
 
-                {/* 日期选择 */}
+                {/* 日期选择 - 原生 type="date" */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-3 relative">
                     <Label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">📆 购买日期</Label>
