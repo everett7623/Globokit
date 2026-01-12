@@ -33,6 +33,7 @@ import html2canvas from 'html2canvas'
 
 export default function VPSCalculatorPage() {
   // --- 输入状态 ---
+  // 存储格式为 mm/dd/yyyy
   const [purchaseDate, setPurchaseDate] = useState('') 
   const [tradeDate, setTradeDate] = useState('')
   const [renewalPeriod, setRenewalPeriod] = useState('36')
@@ -57,7 +58,7 @@ export default function VPSCalculatorPage() {
 
   const quickDiscounts = [0.95, 0.9, 0.85, 0.8, 0.75, 0.7, 0.6, 0.5]
 
-  // 初始化 - 仅设置交易日期为今天，购买日期留空以显示 Placeholder
+  // 初始化 - 设置交易日期为今天 (mm/dd/yyyy)
   useEffect(() => {
     const getTodayUS = () => {
       const d = new Date()
@@ -72,7 +73,7 @@ export default function VPSCalculatorPage() {
 
   // 自动计算监听
   useEffect(() => {
-    // 简单正则校验 mm/dd/yyyy
+    // 校验 mm/dd/yyyy 格式是否完整
     const isValidDate = (d: string) => d && /^\d{2}\/\d{2}\/\d{4}$/.test(d)
 
     if (purchasePrice && isValidDate(purchaseDate) && isValidDate(tradeDate)) {
@@ -86,7 +87,24 @@ export default function VPSCalculatorPage() {
     setExchangeRates(rates)
   }
 
-  // 处理原生日期选择器 (yyyy-mm-dd) 转 (mm/dd/yyyy)
+  // --- 核心功能：处理日期输入自动格式化 ---
+  // 输入 11242025 -> 自动变成 11/24/2025
+  const handleDateInput = (e: React.ChangeEvent<HTMLInputElement>, setter: (s: string) => void) => {
+    let v = e.target.value.replace(/\D/g, ''); // 只保留数字
+    
+    // 限制长度 (MMDDYYYY = 8位数字)
+    if (v.length > 8) v = v.slice(0, 8);
+
+    // 自动添加斜杠
+    if (v.length >= 5) {
+      v = `${v.slice(0, 2)}/${v.slice(2, 4)}/${v.slice(4)}`;
+    } else if (v.length >= 3) {
+      v = `${v.slice(0, 2)}/${v.slice(2)}`;
+    }
+    setter(v);
+  }
+
+  // 处理原生日期选择器 (yyyy-mm-dd) -> (mm/dd/yyyy)
   const handleNativeDateChange = (e: React.ChangeEvent<HTMLInputElement>, setter: (s: string) => void) => {
     const isoVal = e.target.value
     if (!isoVal) return
@@ -124,7 +142,7 @@ export default function VPSCalculatorPage() {
   const handleReset = () => {
     const d = new Date()
     const today = `${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}/${d.getFullYear()}`
-    setPurchaseDate('') // 重置为空
+    setPurchaseDate('') 
     setTradeDate(today)
     setPurchasePrice('')
     setModeInput('')
@@ -154,6 +172,7 @@ export default function VPSCalculatorPage() {
   }
 
   return (
+    // 布局宽度调整：max-w-[1400px]
     <div className="min-h-screen bg-slate-50/50 py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-[1400px] mx-auto space-y-8">
         
@@ -188,7 +207,6 @@ export default function VPSCalculatorPage() {
                   </Label>
                   <div className="flex gap-3">
                     <div className="flex-1 flex rounded-md shadow-sm ring-1 ring-inset ring-slate-200 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary/20 transition-all bg-white overflow-hidden">
-                      {/* 货币符号 */}
                       <span className="flex select-none items-center px-3 text-slate-500 font-bold bg-slate-50/50 border-r border-slate-100 sm:text-sm whitespace-nowrap">
                         {SUPPORTED_CURRENCIES.find(c => c.code === currency)?.symbol}
                       </span>
@@ -235,7 +253,7 @@ export default function VPSCalculatorPage() {
                   </div>
                 </div>
 
-                {/* 日期选择 */}
+                {/* 日期选择 - 支持自动格式化输入 */}
                 <div className="grid grid-cols-2 gap-4">
                   {/* 购买日期 */}
                   <div className="space-y-3 relative">
@@ -246,7 +264,7 @@ export default function VPSCalculatorPage() {
                         placeholder="mm/dd/yyyy"
                         maxLength={10}
                         value={purchaseDate} 
-                        onChange={e => setPurchaseDate(e.target.value)} 
+                        onChange={(e) => handleDateInput(e, setPurchaseDate)} 
                         className="font-mono border-slate-200 shadow-sm pr-10" 
                       />
                       <CalendarIcon 
@@ -271,7 +289,7 @@ export default function VPSCalculatorPage() {
                         placeholder="mm/dd/yyyy"
                         maxLength={10}
                         value={tradeDate} 
-                        onChange={e => setTradeDate(e.target.value)} 
+                        onChange={(e) => handleDateInput(e, setTradeDate)} 
                         className="font-mono border-slate-200 shadow-sm pr-10" 
                       />
                       <CalendarIcon 
@@ -416,7 +434,7 @@ export default function VPSCalculatorPage() {
                           </div>
                         </div>
 
-                        {/* 3. 溢价/折价 */}
+                        {/* 3. 溢价/折价 - 明确符号 */}
                         <div className={cn("p-6 rounded-2xl text-center border-2 shadow-sm transition-transform hover:scale-[1.02]", 
                           result.premium >= 0 
                             ? "bg-gradient-to-b from-emerald-50 to-white border-emerald-100"
