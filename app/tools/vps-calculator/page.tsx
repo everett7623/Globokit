@@ -33,8 +33,8 @@ import html2canvas from 'html2canvas'
 
 export default function VPSCalculatorPage() {
   // --- 输入状态 ---
-  // 这里的日期状态存储的是显示的字符串 (mm/dd/yyyy)
-  const [purchaseDate, setPurchaseDate] = useState('')
+  // 注意：这里存储的是 mm/dd/yyyy 格式的字符串，或者空字符串
+  const [purchaseDate, setPurchaseDate] = useState('') 
   const [tradeDate, setTradeDate] = useState('')
   const [renewalPeriod, setRenewalPeriod] = useState('36')
   const [purchasePrice, setPurchasePrice] = useState('')
@@ -51,13 +51,14 @@ export default function VPSCalculatorPage() {
   const [generatingImg, setGeneratingImg] = useState(false)
 
   const resultRef = useRef<HTMLDivElement>(null)
-  // 隐藏的日期选择器引用
+  
+  // 隐藏的日期选择器引用，用于点击图标触发
   const hiddenPurchaseDateRef = useRef<HTMLInputElement>(null)
   const hiddenTradeDateRef = useRef<HTMLInputElement>(null)
 
   const quickDiscounts = [0.95, 0.9, 0.85, 0.8, 0.75, 0.7, 0.6, 0.5]
 
-  // 初始化 - 生成 mm/dd/yyyy 格式
+  // 初始化 - 仅设置交易日期为今天，购买日期留空以显示 Placeholder
   useEffect(() => {
     const getTodayUS = () => {
       const d = new Date()
@@ -66,18 +67,16 @@ export default function VPSCalculatorPage() {
       const year = d.getFullYear()
       return `${month}/${day}/${year}`
     }
-    const today = getTodayUS()
-    setPurchaseDate(today)
-    setTradeDate(today)
+    setTradeDate(getTodayUS())
     loadExchangeRates()
   }, [])
 
   // 自动计算监听
   useEffect(() => {
-    // 简单校验格式 mm/dd/yyyy
-    const isValid = (d: string) => d && /^\d{2}\/\d{2}\/\d{4}$/.test(d)
+    // 简单正则校验 mm/dd/yyyy
+    const isValidDate = (d: string) => d && /^\d{2}\/\d{2}\/\d{4}$/.test(d)
 
-    if (purchasePrice && isValid(purchaseDate) && isValid(tradeDate)) {
+    if (purchasePrice && isValidDate(purchaseDate) && isValidDate(tradeDate)) {
       const timer = setTimeout(handleCalculate, 300)
       return () => clearTimeout(timer)
     }
@@ -88,12 +87,12 @@ export default function VPSCalculatorPage() {
     setExchangeRates(rates)
   }
 
-  // 处理原生日期选择器的变化 (yyyy-mm-dd -> mm/dd/yyyy)
+  // 处理原生日期选择器 (yyyy-mm-dd) 转 (mm/dd/yyyy)
   const handleNativeDateChange = (e: React.ChangeEvent<HTMLInputElement>, setter: (s: string) => void) => {
-    const isoVal = e.target.value // 2025-12-07
+    const isoVal = e.target.value
     if (!isoVal) return
     const [y, m, d] = isoVal.split('-')
-    setter(`${m}/${d}/${y}`) // 转换为 12/07/2025
+    setter(`${m}/${d}/${y}`)
   }
 
   const handleCalculate = () => {
@@ -117,6 +116,8 @@ export default function VPSCalculatorPage() {
       exchangeRates,
       tradeDate
     )
+    
+    // 简单防错
     if (res.totalDays > 0 && !isNaN(res.remainingValue)) {
         setResult(res)
     }
@@ -125,7 +126,7 @@ export default function VPSCalculatorPage() {
   const handleReset = () => {
     const d = new Date()
     const today = `${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}/${d.getFullYear()}`
-    setPurchaseDate(today)
+    setPurchaseDate('') // 重置为空，显示 placeholder
     setTradeDate(today)
     setPurchasePrice('')
     setModeInput('')
@@ -155,9 +156,9 @@ export default function VPSCalculatorPage() {
   }
 
   return (
-    // 修正: 宽度统一为 max-w-7xl
+    // 修改: 宽度 max-w-[1400px] 宽屏
     <div className="min-h-screen bg-slate-50/50 py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-8">
+      <div className="max-w-[1400px] mx-auto space-y-8">
         
         {/* 头部标题 */}
         <div className="text-center sm:text-left">
@@ -183,13 +184,14 @@ export default function VPSCalculatorPage() {
               </CardHeader>
               
               <CardContent className="space-y-6 pt-6 flex-1">
-                {/* 价格和币种 - Flex 自适应布局 */}
+                {/* 价格和币种 - Flex 布局解决重叠 */}
                 <div className="space-y-3">
                   <Label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">
                     💵 购买价格 & 币种
                   </Label>
                   <div className="flex gap-3">
                     <div className="flex-1 flex rounded-md shadow-sm ring-1 ring-inset ring-slate-200 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary/20 transition-all bg-white overflow-hidden">
+                      {/* 货币符号 */}
                       <span className="flex select-none items-center px-3 text-slate-500 font-bold bg-slate-50/50 border-r border-slate-100 sm:text-sm whitespace-nowrap">
                         {SUPPORTED_CURRENCIES.find(c => c.code === currency)?.symbol}
                       </span>
@@ -236,7 +238,7 @@ export default function VPSCalculatorPage() {
                   </div>
                 </div>
 
-                {/* 日期选择 - 双轨制：文本输入 + 点击选择 */}
+                {/* 日期选择 - 双轨制: Text Input + Hidden Date Picker */}
                 <div className="grid grid-cols-2 gap-4">
                   {/* 购买日期 */}
                   <div className="space-y-3 relative">
@@ -245,6 +247,7 @@ export default function VPSCalculatorPage() {
                       <Input 
                         type="text" 
                         placeholder="mm/dd/yyyy"
+                        maxLength={10}
                         value={purchaseDate} 
                         onChange={e => setPurchaseDate(e.target.value)} 
                         className="font-mono border-slate-200 shadow-sm pr-10" 
@@ -253,7 +256,7 @@ export default function VPSCalculatorPage() {
                         className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 cursor-pointer hover:text-primary"
                         onClick={() => hiddenPurchaseDateRef.current?.showPicker()}
                       />
-                      {/* 隐藏的原生日期选择器，用于触发弹窗 */}
+                      {/* 隐藏的日期选择器 */}
                       <input 
                         type="date" 
                         ref={hiddenPurchaseDateRef}
@@ -270,6 +273,7 @@ export default function VPSCalculatorPage() {
                       <Input 
                         type="text" 
                         placeholder="mm/dd/yyyy"
+                        maxLength={10}
                         value={tradeDate} 
                         onChange={e => setTradeDate(e.target.value)} 
                         className="font-mono border-slate-200 shadow-sm pr-10" 
@@ -359,173 +363,3 @@ export default function VPSCalculatorPage() {
               </CardContent>
 
               {/* 左侧卡片底部：注释 */}
-              <div className="p-4 bg-slate-50 rounded-b-xl border-t border-slate-100 text-xs text-slate-500 leading-relaxed flex gap-2 items-start">
-                <Info className="h-4 w-4 shrink-0 mt-0.5 text-slate-400" />
-                <p>注：剩余价值 = (剩余天数 ÷ 总天数) × 购买价格。请按 mm/dd/yyyy (月/日/年) 格式输入日期，或点击图标选择。</p>
-              </div>
-            </Card>
-          </div>
-
-          {/* --- 右侧：结果展示区 --- */}
-          <div className="lg:col-span-8 flex flex-col">
-            {/* 交易卡片容器 */}
-            <div className="relative group perspective-1000 flex flex-col h-full">
-              <div 
-                ref={resultRef}
-                className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200/50 transition-all duration-300 flex flex-col bg-white border border-slate-100 text-slate-900 h-full"
-              >
-                {result ? (
-                  <div className="flex flex-col h-full">
-                    {/* 卡片内容区域 (Padding) */}
-                    <div className="p-8 flex-1">
-                      <div className="flex items-center gap-3 mb-8 relative z-10 pb-4 border-b border-slate-100">
-                        <div className="p-2.5 bg-blue-50 rounded-xl">
-                          <TrendingUp className="h-7 w-7 text-blue-600" />
-                        </div>
-                        <div>
-                          <h2 className="text-2xl font-extrabold text-slate-800">📊 剩余价值分析报告</h2>
-                          <p className="text-sm text-slate-500 mt-0.5">基于 {tradeDate} 汇率结算</p>
-                        </div>
-                      </div>
-
-                      {/* 核心三栏数据 */}
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 relative z-10">
-                        {/* 1. 剩余价值 */}
-                        <div className="p-6 rounded-2xl text-center border-2 bg-gradient-to-b from-blue-50 to-white border-blue-100 shadow-sm transition-transform hover:scale-[1.02]">
-                          <div className="text-sm mb-3 font-bold text-blue-600 flex items-center justify-center gap-1">
-                            💎 剩余价值
-                          </div>
-                          <div className="text-4xl font-black tracking-tight text-blue-900 font-mono">
-                            <span className="text-2xl mr-1 text-blue-600">¥</span>{formatCurrency(result.remainingValue)}
-                          </div>
-                          <div className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold mt-3 bg-blue-100 text-blue-700">
-                            剩余 {(result.remainingRatio * 100).toFixed(1)}%
-                          </div>
-                        </div>
-
-                        {/* 2. 期望售价 */}
-                        <div className="p-6 rounded-2xl text-center border-2 bg-gradient-to-b from-purple-50 to-white border-purple-100 shadow-sm transition-transform hover:scale-[1.02]">
-                          <div className="text-sm mb-3 font-bold text-purple-600 flex items-center justify-center gap-1">
-                            💰 期望售价
-                          </div>
-                          <div className="text-4xl font-black tracking-tight text-purple-900 font-mono">
-                            <span className="text-2xl mr-1 text-purple-600">¥</span>{formatCurrency(result.expectedPrice)}
-                          </div>
-                          <div className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold mt-3 bg-purple-100 text-purple-700">
-                            {priceMode === 'discount' ? `🏷️ ${(parseFloat(modeInput||'1')*10).toFixed(1)}折` : '汇率转换后'}
-                          </div>
-                        </div>
-
-                        {/* 3. 溢价/折价 - 修正: 明确 +/- 号 */}
-                        <div className={cn("p-6 rounded-2xl text-center border-2 shadow-sm transition-transform hover:scale-[1.02]", 
-                          result.premium >= 0 
-                            ? "bg-gradient-to-b from-emerald-50 to-white border-emerald-100"
-                            : "bg-gradient-to-b from-rose-50 to-white border-rose-100"
-                        )}>
-                          <div className={cn("text-sm mb-3 font-bold flex items-center justify-center gap-1", result.premium >= 0 ? "text-emerald-600" : "text-rose-600")}>
-                            {result.premium >= 0 ? '🎉 预期溢价' : '💔 预期折价'}
-                          </div>
-                          <div className={cn("text-4xl font-black tracking-tight font-mono", result.premium >= 0 ? "text-emerald-800" : "text-rose-800")}>
-                            <span className={cn("text-2xl mr-1", result.premium >= 0 ? "text-emerald-600" : "text-rose-600")}>
-                              {result.premium >= 0 ? '+' : '-'}¥
-                            </span>
-                            {formatCurrency(Math.abs(result.premium))}
-                          </div>
-                          <div className={cn("inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold mt-3", 
-                            result.premium >= 0 ? "bg-emerald-100 text-emerald-700" : "bg-rose-100 text-rose-700"
-                          )}>
-                            {result.premium >= 0 ? '📈 +' : '📉 -'}{Math.abs(result.premiumPercent).toFixed(2)}%
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* 详细信息表格 */}
-                      <div className="p-6 rounded-2xl relative z-10 bg-slate-50/80 border border-slate-100">
-                        <h3 className="text-sm font-bold mb-5 text-slate-700 flex items-center gap-2">
-                          <Info className="h-4 w-4" /> 详细数据清单
-                        </h3>
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-6 gap-x-8">
-                          <DetailItem emoji="💵" label="原购价格" value={`${SUPPORTED_CURRENCIES.find(c=>c.code===currency)?.symbol}${purchasePrice}`} subValue={`≈ ¥${formatCurrency(result.purchasePriceCNY)}`} />
-                          <DetailItem emoji="📅" label="续费周期" value={RENEWAL_PERIODS.find(r=>r.value===parseInt(renewalPeriod))?.label || '-'} />
-                          <DetailItem emoji="⏳" label="到期日期" value={formatDate(new Date(result.expireDate))} valueClassName="text-orange-600 font-bold" />
-                          <DetailItem emoji="🗓️" label="总服务期限" value={`${result.totalDays} 天`} />
-                          <DetailItem emoji="🕰️" label="已用天数" value={`${result.usedDays} 天`} />
-                          <DetailItem emoji="⏱️" label="剩余天数" value={`${result.remainingDays} 天`} valueClassName="text-blue-600 font-bold" />
-                          <DetailItem emoji="📊" label="使用进度" value={`${((1-result.remainingRatio)*100).toFixed(1)}%`} />
-                          <DetailItem emoji="📆" label="日均成本" value={`¥ ${result.dailyPrice.toFixed(2)}`} />
-                        </div>
-
-                        <div className="mt-7">
-                          <div className="flex justify-between text-xs font-bold text-slate-500 mb-2">
-                            <span>⏳ VPS 生命周期进度</span>
-                            <span>{((1-result.remainingRatio)*100).toFixed(1)}%</span>
-                          </div>
-                          <div className="h-2.5 w-full rounded-full overflow-hidden bg-slate-200 shadow-inner">
-                            <div 
-                              className="h-full transition-all duration-1000 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600"
-                              style={{ width: `${(1-result.remainingRatio)*100}%` }}
-                            ></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* 右侧卡片底部：注释 + 按钮 (通栏布局) */}
-                    <div className="px-8 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between mt-auto">
-                      <div className="text-xs text-slate-400 font-mono flex items-center gap-2">
-                        <span className="bg-slate-200/50 px-1.5 py-0.5 rounded">Globokit.com</span>
-                        <span>Generated by VPS Calculator</span>
-                      </div>
-                      <div className="flex gap-3" data-html2canvas-ignore>
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
-                          className="h-8 text-xs border-slate-200 shadow-sm hover:bg-white text-slate-600" 
-                          onClick={exportToMarkdown} 
-                          disabled={!result}
-                        >
-                          {copySuccess ? <Check className="h-3 w-3 mr-1.5 text-emerald-500"/> : <Copy className="h-3 w-3 mr-1.5"/>}
-                          {copySuccess ? '已复制' : '复制MD'}
-                        </Button>
-                        <Button 
-                          size="sm" 
-                          className="h-8 text-xs bg-slate-900 text-white hover:bg-slate-800 shadow-md" 
-                          onClick={exportToImage} 
-                          disabled={!result || generatingImg}
-                        >
-                          {generatingImg ? <RefreshCw className="h-3 w-3 mr-1.5 animate-spin"/> : <Download className="h-3 w-3 mr-1.5"/>}
-                          下载图片
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="flex flex-col items-center justify-center h-full py-20 text-slate-400">
-                    <div className="bg-slate-50 p-6 rounded-full mb-6">
-                      <Calculator className="h-16 w-16 text-slate-300" />
-                    </div>
-                    <p className="text-xl font-medium text-slate-600">🤔 等待输入参数...</p>
-                    <p className="text-sm mt-2">请在左侧填写信息以生成分析报告</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-// 辅助组件：详细数据项
-function DetailItem({ emoji, label, value, subValue, valueClassName }: { emoji: string, label: string, value: string, subValue?: string, valueClassName?: string }) {
-  return (
-    <div className="flex flex-col gap-1">
-      <dt className="text-xs font-medium text-slate-500 flex items-center gap-1.5">
-        <span className="text-sm">{emoji}</span> {label}
-      </dt>
-      <dd className={cn("font-bold text-slate-800 font-mono text-[15px]", valueClassName)}>{value}</dd>
-      {subValue && <dd className="text-[11px] text-slate-400 font-mono">{subValue}</dd>}
-    </div>
-  )
-}
