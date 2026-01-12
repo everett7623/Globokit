@@ -23,6 +23,7 @@ import {
   calculateVPSValue,
   formatCurrency,
   formatDate,
+  getExchangeRateText,
   SUPPORTED_CURRENCIES,
   RENEWAL_PERIODS,
   type CalculationResult,
@@ -32,10 +33,7 @@ import html2canvas from 'html2canvas'
 
 export default function VPSCalculatorPage() {
   // --- 输入状态 ---
-  // 注意：使用原生 date input，这里存储的值格式永远是 yyyy-mm-dd
-  // 初始化为空字符串，这样浏览器就会显示原生掩码 (例如 mm/dd/yyyy)
   const [purchaseDate, setPurchaseDate] = useState('') 
-  // 交易日期默认给个今天
   const [tradeDate, setTradeDate] = useState('')
   const [renewalPeriod, setRenewalPeriod] = useState('36')
   const [purchasePrice, setPurchasePrice] = useState('')
@@ -52,21 +50,31 @@ export default function VPSCalculatorPage() {
   const [generatingImg, setGeneratingImg] = useState(false)
 
   const resultRef = useRef<HTMLDivElement>(null)
+  
+  // 隐藏的日期选择器引用
+  const hiddenPurchaseDateRef = useRef<HTMLInputElement>(null)
+  const hiddenTradeDateRef = useRef<HTMLInputElement>(null)
 
   const quickDiscounts = [0.95, 0.9, 0.85, 0.8, 0.75, 0.7, 0.6, 0.5]
 
-  // 初始化 - 设置交易日期为今天
+  // 初始化
   useEffect(() => {
-    // 获取 YYYY-MM-DD 格式的今天
-    const today = new Date().toISOString().split('T')[0]
-    setTradeDate(today)
+    const getTodayUS = () => {
+      const d = new Date()
+      const day = String(d.getDate()).padStart(2, '0')
+      const month = String(d.getMonth() + 1).padStart(2, '0')
+      const year = d.getFullYear()
+      return `${month}/${day}/${year}`
+    }
+    setTradeDate(getTodayUS())
     loadExchangeRates()
   }, [])
 
   // 自动计算监听
   useEffect(() => {
-    // 只要有日期和价格，就开始计算
-    if (purchasePrice && purchaseDate && tradeDate) {
+    const isValidDate = (d: string) => d && d.length === 10 && /^\d{2}\/\d{2}\/\d{4}$/.test(d)
+
+    if (purchasePrice && isValidDate(purchaseDate) && isValidDate(tradeDate)) {
       const timer = setTimeout(handleCalculate, 300)
       return () => clearTimeout(timer)
     }
@@ -75,6 +83,14 @@ export default function VPSCalculatorPage() {
   const loadExchangeRates = async () => {
     const rates = await fetchExchangeRates()
     setExchangeRates(rates)
+  }
+
+  // 处理原生日期选择器
+  const handleNativeDateChange = (e: React.ChangeEvent<HTMLInputElement>, setter: (s: string) => void) => {
+    const isoVal = e.target.value
+    if (!isoVal) return
+    const [y, m, d] = isoVal.split('-')
+    setter(`${m}/${d}/${y}`)
   }
 
   const handleCalculate = () => {
@@ -105,8 +121,9 @@ export default function VPSCalculatorPage() {
   }
 
   const handleReset = () => {
-    const today = new Date().toISOString().split('T')[0]
-    setPurchaseDate('') // 设为空，显示原生掩码
+    const d = new Date()
+    const today = `${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}/${d.getFullYear()}`
+    setPurchaseDate('') 
     setTradeDate(today)
     setPurchasePrice('')
     setModeInput('')
@@ -114,12 +131,44 @@ export default function VPSCalculatorPage() {
     setResult(null)
   }
 
+  // --- 核心优化：Markdown 生成逻辑加强版 ---
   const exportToMarkdown = () => {
     if (!result) return
+    
     const symbol = SUPPORTED_CURRENCIES.find(c => c.code === currency)?.symbol
-    const md = `【VPS交易】\n原价：${symbol}${purchasePrice} / ${RENEWAL_PERIODS.find(r=>r.value===parseInt(renewalPeriod))?.label}\n到期：${formatDate(new Date(result.expireDate))}\n剩余：${result.remainingDays}天\n价值：¥${formatCurrency(result.remainingValue)}\n售价：¥${formatCurrency(result.expectedPrice)}\n溢价：¥${formatCurrency(result.premium)}\n计算：Globokit.com`
-    navigator.clipboard.writeText(md).then(() => {
-      setCopySuccess(true); setTimeout(() => setCopySuccess(false), 2000)
+    const cycleLabel = RENEWAL_PERIODS.find(r=>r.value===parseInt(renewalPeriod))?.label
+    const isProfit = result.premium >= 0
+    const profitSign = isProfit ? '+' : '-'
+    const profitColorObj = isProfit ? '💎 溢价收益' : '🔻 折价让利'
+    
+    // 生成精美的 Markdown 表格
+    const md = `
+# 📊 VPS 剩余价值计算报告
+
+| 分类 | 项目 | 数值 | 说明 |
+| :--- | :--- | :--- | :--- |
+| **💰 价格信息** | 原购价格 | ${symbol}${purchasePrice} | ≈ ¥${formatCurrency(result.purchasePriceCNY)} |
+| | 期望售价 | **¥${formatCurrency(result.expectedPrice)}** | 人民币计价 |
+| | 剩余价值 | ¥${formatCurrency(result.remainingValue)} | 当前理论价值 |
+| | ${profitColorObj} | **${profitSign}¥${formatCurrency(Math.abs(result.premium))}** | ${isProfit ? '溢价' : '折价'}率: ${Math.abs(result.premiumPercent).toFixed(2)}% |
+| **🗓️ 时间信息** | 购买日期 | ${purchaseDate} | 起始时间 |
+| | 到期日期 | ${formatDate(new Date(result.expireDate))} | 截止时间 |
+| | 续费周期 | ${cycleLabel} | 服务期限 |
+| | 剩余时间 | **${result.remainingDays} 天** | 总 ${result.totalDays} 天 |
+| | 使用进度 | ${((1-result.remainingRatio)*100).toFixed(1)}% | 日均 ¥${result.dailyPrice.toFixed(3)} |
+
+## 📝 分析结论
+
+${isProfit 
+  ? `✅ **推荐交易**：当前定价高于剩余价值，按 **¥${formatCurrency(result.expectedPrice)}** 出售，您将获得 **¥${formatCurrency(result.premium)}** 的溢价收益，投资回报率达 **${result.premiumPercent.toFixed(2)}%**。` 
+  : `⚠️ **性价比之选**：当前定价低于剩余价值 **¥${formatCurrency(Math.abs(result.premium))}**，属于折价出售。买家相当于以 **${(100 - Math.abs(result.premiumPercent)).toFixed(1)}折** 的价格接手，性价比极高！`
+}
+
+> *报告生成时间: ${new Date().toLocaleString('zh-CN')}* > *计算工具: [Globokit.com](https://globokit.com)*
+`
+    navigator.clipboard.writeText(md.trim()).then(() => {
+      setCopySuccess(true)
+      setTimeout(() => setCopySuccess(false), 2000)
     })
   }
 
@@ -136,7 +185,6 @@ export default function VPSCalculatorPage() {
   }
 
   return (
-    // 宽度 max-w-[1400px]
     <div className="min-h-screen bg-slate-50/50 py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-[1400px] mx-auto space-y-8">
         
@@ -178,7 +226,7 @@ export default function VPSCalculatorPage() {
                         type="number" 
                         value={purchasePrice} 
                         onChange={e => setPurchasePrice(e.target.value)} 
-                        className="block flex-1 border-0 bg-transparent py-1.5 pl-2 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm sm:leading-6 font-mono"
+                        className="block flex-1 border-0 bg-transparent py-1.5 pl-2 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm sm:leading-6" 
                         placeholder="0.00"
                       />
                     </div>
@@ -189,7 +237,6 @@ export default function VPSCalculatorPage() {
                       </SelectContent>
                     </Select>
                   </div>
-                  {/* 已移除：刷新汇率展示 */}
                 </div>
 
                 {/* 续费周期 */}
@@ -212,7 +259,7 @@ export default function VPSCalculatorPage() {
                   </div>
                 </div>
 
-                {/* 日期选择 - 原生 type="date" */}
+                {/* 日期选择 */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-3 relative">
                     <Label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">📆 购买日期</Label>
