@@ -2,7 +2,7 @@
 // 描述: 基于购买日期和到期时间精确计算VPS剩余价值，支持多币种转换，支持生成交易卡片
 // 路径: Globokit/app/tools/vps-calculator/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2026-01-12
+// 更新时间: 2026-01-08
 
 'use client'
 
@@ -54,13 +54,17 @@ export default function VPSCalculatorPage() {
   // 快捷折扣选项
   const quickDiscounts = [0.95, 0.9, 0.85, 0.8, 0.75, 0.7, 0.6, 0.5]
 
-  // 初始化
+  // 初始化 - 生成 DD/MM/YYYY 格式的今日日期
   useEffect(() => {
-    const getTodayISO = () => {
+    const getTodayUK = () => {
       const d = new Date()
-      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+      // padStart 确保是两位数
+      const day = String(d.getDate()).padStart(2, '0')
+      const month = String(d.getMonth() + 1).padStart(2, '0')
+      const year = d.getFullYear()
+      return `${day}/${month}/${year}`
     }
-    const today = getTodayISO()
+    const today = getTodayUK()
     setPurchaseDate(today)
     setTradeDate(today)
     loadExchangeRates()
@@ -68,7 +72,10 @@ export default function VPSCalculatorPage() {
 
   // 自动计算监听
   useEffect(() => {
-    if (purchasePrice && purchaseDate && tradeDate) {
+    // 简单校验日期格式是否大概正确 (包含两个/)
+    const isDateValid = (dateStr: string) => dateStr && dateStr.includes('/') && dateStr.split('/').length === 3;
+
+    if (purchasePrice && isDateValid(purchaseDate) && isDateValid(tradeDate)) {
       const timer = setTimeout(handleCalculate, 300)
       return () => clearTimeout(timer)
     }
@@ -100,12 +107,15 @@ export default function VPSCalculatorPage() {
       exchangeRates,
       tradeDate
     )
-    setResult(res)
+    // 简单防错：如果日期解析失败导致 totalDays 为 NaN 或 0，则不显示结果
+    if (res.totalDays > 0 && !isNaN(res.remainingValue)) {
+        setResult(res)
+    }
   }
 
   const handleReset = () => {
     const d = new Date()
-    const today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+    const today = `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`
     setPurchaseDate(today)
     setTradeDate(today)
     setPurchasePrice('')
@@ -136,8 +146,9 @@ export default function VPSCalculatorPage() {
   }
 
   return (
+    // 修改 1: 增加最大宽度到 1600px
     <div className="min-h-screen bg-slate-50/50 py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-8">
+      <div className="max-w-[1600px] mx-auto space-y-8">
         
         {/* 头部标题 */}
         <div className="text-center sm:text-left">
@@ -149,7 +160,7 @@ export default function VPSCalculatorPage() {
           </p>
         </div>
 
-        {/* 核心布局：Grid items-stretch 确保高度一致 */}
+        {/* 核心布局 */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
           {/* --- 左侧：输入区 --- */}
@@ -163,21 +174,23 @@ export default function VPSCalculatorPage() {
               </CardHeader>
               
               <CardContent className="space-y-6 pt-6 flex-1">
-                {/* 价格和币种 */}
+                {/* 价格和币种 - 修改 2: 使用 Flex 布局解决重叠 */}
                 <div className="space-y-3">
                   <Label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">
                     💵 购买价格 & 币种
                   </Label>
                   <div className="flex gap-3">
-                    <div className="relative flex-1 transition-all group focus-within:ring-2 ring-primary/20 rounded-md">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-bold">
+                    <div className="flex-1 flex rounded-md shadow-sm ring-1 ring-inset ring-slate-200 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary/20 transition-all overflow-hidden">
+                      {/* 货币符号固定宽度容器 */}
+                      <span className="flex select-none items-center pl-3 pr-2 text-slate-500 font-bold bg-slate-50/50 border-r border-slate-100 sm:text-sm shrink-0 min-w-[3rem] justify-center">
                         {SUPPORTED_CURRENCIES.find(c => c.code === currency)?.symbol}
                       </span>
                       <Input 
                         type="number" 
                         value={purchasePrice} 
                         onChange={e => setPurchasePrice(e.target.value)} 
-                        className="pl-8 border-slate-200 shadow-sm focus-visible:ring-0" 
+                        // 去掉原来的 pl-8, 改为无边框，由外层容器控制
+                        className="block flex-1 border-0 bg-transparent py-1.5 pl-2 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm sm:leading-6" 
                         placeholder="0.00"
                       />
                     </div>
@@ -216,15 +229,29 @@ export default function VPSCalculatorPage() {
                   </div>
                 </div>
 
-                {/* 日期选择 */}
+                {/* 日期选择 - 修改 3: 改为文本输入，placeholder 为 DD/MM/YYYY */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-3">
                     <Label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">📆 购买日期</Label>
-                    <Input type="date" value={purchaseDate} onChange={e => setPurchaseDate(e.target.value)} className="font-mono border-slate-200 shadow-sm" />
+                    <Input 
+                        type="text" 
+                        placeholder="DD/MM/YYYY"
+                        maxLength={10}
+                        value={purchaseDate} 
+                        onChange={e => setPurchaseDate(e.target.value)} 
+                        className="font-mono border-slate-200 shadow-sm" 
+                    />
                   </div>
                   <div className="space-y-3">
                     <Label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">⏱️ 交易日期</Label>
-                    <Input type="date" value={tradeDate} onChange={e => setTradeDate(e.target.value)} className="font-mono border-slate-200 shadow-sm" />
+                    <Input 
+                        type="text" 
+                        placeholder="DD/MM/YYYY"
+                        maxLength={10}
+                        value={tradeDate} 
+                        onChange={e => setTradeDate(e.target.value)} 
+                        className="font-mono border-slate-200 shadow-sm" 
+                    />
                   </div>
                 </div>
 
@@ -275,13 +302,16 @@ export default function VPSCalculatorPage() {
                         </div>
                       </div>
                     ) : (
-                      <div className="relative transition-all group focus-within:ring-2 ring-primary/20 rounded-md">
-                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-bold">¥</span>
+                        // 这里也应用了新的 Flex 输入框样式
+                        <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-slate-200 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary/20 transition-all overflow-hidden">
+                        <span className="flex select-none items-center pl-3 pr-2 text-slate-500 font-bold bg-slate-50/50 border-r border-slate-100 sm:text-sm shrink-0 min-w-[2.5rem] justify-center">
+                          ¥
+                        </span>
                         <Input 
                           type="number" 
                           value={modeInput} 
                           onChange={e => setModeInput(e.target.value)} 
-                          className="pl-8 border-slate-200 shadow-sm focus-visible:ring-0 font-mono"
+                          className="block flex-1 border-0 bg-transparent py-1.5 pl-2 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm sm:leading-6 font-mono"
                           placeholder={
                             priceMode === 'total' 
                               ? (result ? Math.round(result.remainingValue).toString() : "期望卖多少钱？") 
@@ -299,7 +329,7 @@ export default function VPSCalculatorPage() {
               {/* 左侧卡片底部：注释 */}
               <div className="p-4 bg-slate-50 rounded-b-xl border-t border-slate-100 text-xs text-slate-500 leading-relaxed flex gap-2 items-start">
                 <Info className="h-4 w-4 shrink-0 mt-0.5 text-slate-400" />
-                <p>注：剩余价值 = (剩余天数 ÷ 总天数) × 购买价格。所有外币均按实时汇率折算为人民币进行评估。</p>
+                <p>注：剩余价值 = (剩余天数 ÷ 总天数) × 购买价格。所有外币均按实时汇率折算为人民币进行评估。请按 DD/MM/YYYY 格式输入日期。</p>
               </div>
             </Card>
           </div>
@@ -327,7 +357,7 @@ export default function VPSCalculatorPage() {
                         </div>
                       </div>
 
-                      {/* 核心三栏数据 - 美化版 */}
+                      {/* 核心三栏数据 */}
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 relative z-10">
                         {/* 1. 剩余价值 */}
                         <div className="p-6 rounded-2xl text-center border-2 bg-gradient-to-b from-blue-50 to-white border-blue-100 shadow-sm transition-transform hover:scale-[1.02]">
@@ -355,7 +385,7 @@ export default function VPSCalculatorPage() {
                           </div>
                         </div>
 
-                        {/* 3. 溢价/折价 */}
+                        {/* 3. 溢价/折价 - 修改 4: 增加明确的 +/- 符号 */}
                         <div className={cn("p-6 rounded-2xl text-center border-2 shadow-sm transition-transform hover:scale-[1.02]", 
                           result.premium >= 0 
                             ? "bg-gradient-to-b from-emerald-50 to-white border-emerald-100"
@@ -366,19 +396,19 @@ export default function VPSCalculatorPage() {
                           </div>
                           <div className={cn("text-4xl font-black tracking-tight font-mono", result.premium >= 0 ? "text-emerald-800" : "text-rose-800")}>
                             <span className={cn("text-2xl mr-1", result.premium >= 0 ? "text-emerald-600" : "text-rose-600")}>
-                              {result.premium >= 0 ? '+' : ''}¥
+                              {result.premium >= 0 ? '+' : '-'}¥
                             </span>
                             {formatCurrency(Math.abs(result.premium))}
                           </div>
                           <div className={cn("inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold mt-3", 
                             result.premium >= 0 ? "bg-emerald-100 text-emerald-700" : "bg-rose-100 text-rose-700"
                           )}>
-                            {result.premium >= 0 ? '📈 +' : '📉 '}{Math.abs(result.premiumPercent).toFixed(2)}%
+                            {result.premium >= 0 ? '📈 +' : '📉 -'}{Math.abs(result.premiumPercent).toFixed(2)}%
                           </div>
                         </div>
                       </div>
 
-                      {/* 详细信息表格 - 增加 Emoji 和呼吸感 */}
+                      {/* 详细信息表格 */}
                       <div className="p-6 rounded-2xl relative z-10 bg-slate-50/80 border border-slate-100">
                         <h3 className="text-sm font-bold mb-5 text-slate-700 flex items-center gap-2">
                           <Info className="h-4 w-4" /> 详细数据清单
