@@ -2,7 +2,7 @@
 // 描述: 计算服务器剩余使用时间的折算价值及汇率转换
 // 路径: Globokit/lib/tools/vps-calculator.ts
 // 作者: Jensfrank
-// 更新时间: 2026-01-12
+// 更新时间: 2026-01-08
 
 export interface CalculationResult {
   purchasePriceCNY: number
@@ -18,9 +18,9 @@ export interface CalculationResult {
   dailyPrice: number
 }
 
-export type PriceMode = 'total' | 'monthly' | 'discount'
+// 恢复价格模式定义
+export type PriceMode = 'total' | 'premium' | 'discount'
 
-// 完整保留所有货币
 export const SUPPORTED_CURRENCIES = [
   { code: 'CNY', name: '人民币', symbol: '¥' },
   { code: 'USD', name: '美元', symbol: '$' },
@@ -44,27 +44,15 @@ export const RENEWAL_PERIODS = [
   { value: 60, label: '五年' },
 ]
 
-// 扩充默认缓存，防止API失败时汇率缺失
 let exchangeRatesCache: Record<string, number> = { 
-  CNY: 1, 
-  USD: 0.138, 
-  EUR: 0.128, 
-  GBP: 0.11, 
-  JPY: 21.5, 
-  HKD: 1.08,
-  KRW: 192.5,
-  AUD: 0.21,
-  CAD: 0.19,
-  SGD: 0.19
+  CNY: 1, USD: 0.138, EUR: 0.128, GBP: 0.11, JPY: 21.5, 
+  HKD: 1.08, KRW: 192.5, AUD: 0.21, CAD: 0.19, SGD: 0.19 
 }
 let lastFetchTime = 0
 
 export async function fetchExchangeRates(): Promise<Record<string, number>> {
   const now = Date.now()
-  // 缓存 1 小时
-  if (now - lastFetchTime < 3600000 && Object.keys(exchangeRatesCache).length > 5) {
-    return exchangeRatesCache
-  }
+  if (now - lastFetchTime < 3600000 && Object.keys(exchangeRatesCache).length > 5) return exchangeRatesCache
   try {
     const res = await fetch('https://open.er-api.com/v6/latest/CNY')
     const data = await res.json()
@@ -73,10 +61,7 @@ export async function fetchExchangeRates(): Promise<Record<string, number>> {
       lastFetchTime = now
     }
     return exchangeRatesCache
-  } catch (e) { 
-    console.error('汇率API请求失败，使用默认缓存', e)
-    return exchangeRatesCache 
-  }
+  } catch (e) { return exchangeRatesCache }
 }
 
 export function formatCurrency(amount: number): string {
@@ -97,59 +82,73 @@ export function getExchangeRateText(currency: string, rates: Record<string, numb
 }
 
 /**
- * 核心计算逻辑 - 强制使用 YYYY-MM-DD 解析，防止 input errors
+ * 核心计算逻辑
  */
 export function calculateVPSValue(
   purchaseDateStr: string,
   renewalMonths: number,
   purchasePrice: number,
   currency: string,
-  expectedPriceInput: number,
+  modeValue: number, // 输入框的值（可能是总价、溢价额或折扣率）
+  priceMode: PriceMode, // 价格模式
   rates: Record<string, number>,
   tradeDateStr: string
 ): CalculationResult {
-  // 1. 强制解析逻辑：不依赖 new Date(str) 的自动识别，手动拆解 YYYY-MM-DD
+  // 1. 日期强制解析 (YYYY-MM-DD)
   const parseISO = (str: string) => {
     if (!str) return new Date()
     const [y, m, d] = str.split('-').map(Number)
-    // 设为中午12点防止时区回拨导致少算一天
     return new Date(y, m - 1, d, 12, 0, 0)
   }
 
   const purchaseDate = parseISO(purchaseDateStr)
   const tradeDate = parseISO(tradeDateStr)
 
-  // 计算到期日
   const expireDate = new Date(purchaseDate)
   expireDate.setMonth(expireDate.getMonth() + renewalMonths)
-  expireDate.setHours(12, 0, 0, 0) // 保持时间一致
+  expireDate.setHours(12, 0, 0, 0)
   
-  // 2. 转换原价到人民币
+  // 2. 汇率转换
   const rate = rates[currency] || 1
   const rateToCNY = currency === 'CNY' ? 1 : (rate > 0 ? 1/rate : 1)
   const purchasePriceCNY = purchasePrice * rateToCNY
 
-  // 3. 计算天数 (毫秒差 / 每天毫秒数)
+  // 3. 天数计算
   const msPerDay = 1000 * 60 * 60 * 24
   const totalDays = Math.round((expireDate.getTime() - purchaseDate.getTime()) / msPerDay)
   
-  // 剩余天数 = 到期日 - 交易日
   let remainingDays = Math.round((expireDate.getTime() - tradeDate.getTime()) / msPerDay)
-  
-  // 边界修正
   if (remainingDays < 0) remainingDays = 0
   if (remainingDays > totalDays) remainingDays = totalDays
 
   const usedDays = totalDays - remainingDays
 
-  // 4. 计算价值 (核心公式：日均价 * 剩余天数)
+  // 4. 剩余价值计算 (日均价 * 剩余天数)
   const dailyPrice = totalDays > 0 ? purchasePriceCNY / totalDays : 0
   const remainingValue = dailyPrice * remainingDays
   const remainingRatio = totalDays > 0 ? remainingDays / totalDays : 0
 
-  // 5. 溢价计算
-  // 如果输入了期望价格(>=0)，则按输入计算；否则默认期望价格=剩余价值(溢价0)
-  const expectedPrice = expectedPriceInput >= 0 ? expectedPriceInput : remainingValue
+  // 5. 根据模式计算期望售价 (Expected Price)
+  let expectedPrice = 0
+  
+  if (priceMode === 'total') {
+    // 模式1：一口价 (输入值即为售价)
+    expectedPrice = modeValue >= 0 ? modeValue : remainingValue
+  } 
+  else if (priceMode === 'premium') {
+    // 模式2：溢价模式 (输入值是溢价金额)
+    // 期望售价 = 剩余价值 + 溢价
+    const premiumAmount = isNaN(modeValue) ? 0 : modeValue
+    expectedPrice = remainingValue + premiumAmount
+  } 
+  else if (priceMode === 'discount') {
+    // 模式3：折扣模式 (输入值是折扣率)
+    // 期望售价 = 剩余价值 * 折扣率
+    const discount = modeValue > 0 ? modeValue : 1
+    expectedPrice = remainingValue * discount
+  }
+
+  // 6. 计算最终溢价
   const premium = expectedPrice - remainingValue
   const premiumPercent = remainingValue > 0 ? (premium / remainingValue) * 100 : 0
 
