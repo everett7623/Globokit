@@ -23,6 +23,7 @@ import {
   calculateVPSValue,
   formatCurrency,
   formatDate,
+  getExchangeRateText,
   SUPPORTED_CURRENCIES,
   RENEWAL_PERIODS,
   type CalculationResult,
@@ -109,39 +110,51 @@ export default function VPSCalculatorPage() {
     setResult(null)
   }
 
-  // --- 核心优化：Markdown 生成逻辑 (表格版) ---
+  // --- 核心优化：Markdown 生成逻辑 ---
   const exportToMarkdown = () => {
     if (!result) return
     const symbol = SUPPORTED_CURRENCIES.find(c => c.code === currency)?.symbol
     const cycleLabel = RENEWAL_PERIODS.find(r=>r.value===parseInt(renewalPeriod))?.label
     const isProfit = result.premium >= 0
-    const profitSign = isProfit ? '+' : '-'
-    const profitColorObj = isProfit ? '💎 溢价收益' : '🔻 折价让利'
-    
+    const profitSign = isProfit ? '+' : ''
+    const profitColorObj = isProfit ? '💎 溢价收益' : '⚠️ 折价损失'
+    const now = new Date()
+    const formattedTime = now.toLocaleString('zh-CN', { hour12: false }).replace(/\//g, '/') // 确保是 YYYY/M/D HH:mm:ss 格式
+
     // 生成精美 Markdown 表格
     const md = `
-# 📊 VPS 剩余价值计算报告
+# VPS 剩余价值计算结果
 
 | 分类 | 项目 | 数值 | 说明 |
 | :--- | :--- | :--- | :--- |
-| **💰 价格信息** | 原购价格 | ${symbol}${purchasePrice} | ≈ ¥${formatCurrency(result.purchasePriceCNY)} |
-| | 期望售价 | **¥${formatCurrency(result.expectedPrice)}** | 人民币计价 |
-| | 剩余价值 | ¥${formatCurrency(result.remainingValue)} | 当前理论价值 |
-| | ${profitColorObj} | **${profitSign}¥${formatCurrency(Math.abs(result.premium))}** | ${isProfit ? '溢价' : '折价'}率: ${Math.abs(result.premiumPercent).toFixed(2)}% |
+| **💰 价格信息** | 原购价格 | ${symbol}${purchasePrice} | 约 ¥${formatCurrency(result.purchasePriceCNY)} |
+| | 期望售价 | ¥${formatCurrency(result.expectedPrice)} | 人民币计价 |
+| | 剩余价值 | ¥${formatCurrency(result.remainingValue)} | 当前估值 |
+| | ${profitColorObj} | ${profitSign}¥${formatCurrency(result.premium)} | 预期${isProfit ? '盈利' : '亏损'} |
+| | 投资回报率 | ${profitSign}${result.premiumPercent.toFixed(2)}% | ROI 指标 |
 | **🗓️ 时间信息** | 购买日期 | ${purchaseDate} | 起始时间 |
-| | 到期日期 | ${formatDate(new Date(result.expireDate))} | 截止时间 |
 | | 续费周期 | ${cycleLabel} | 服务期限 |
-| | 剩余时间 | **${result.remainingDays} 天** | 总 ${result.totalDays} 天 |
-| | 使用进度 | ${((1-result.remainingRatio)*100).toFixed(1)}% | 日均 ¥${result.dailyPrice.toFixed(3)} |
+| | 到期日期 | ${formatDate(new Date(result.expireDate))} | 截止时间 |
+| | 总使用期限 | ${result.totalDays} 天 | 完整周期 |
+| | 已使用时间 | ${result.usedDays} 天 | 已消耗时间 |
+| | 剩余时间 | ${result.remainingDays} 天 | 可用时间 |
+| | 使用进度 | ${((1-result.remainingRatio)*100).toFixed(0)}% | 完成度 |
 
-## 📝 分析结论
+## 📊 分析结论
 
 ${isProfit 
-  ? `✅ **推荐交易**：当前定价高于剩余价值，按 **¥${formatCurrency(result.expectedPrice)}** 出售，您将获得 **¥${formatCurrency(result.premium)}** 的溢价收益，投资回报率达 **${result.premiumPercent.toFixed(2)}%**。` 
-  : `⚠️ **性价比之选**：当前定价低于剩余价值 **¥${formatCurrency(Math.abs(result.premium))}**，属于折价出售。买家相当于以 **${(100 - Math.abs(result.premiumPercent)).toFixed(1)}折** 的价格接手，性价比极高！`
+  ? `**🦄 推荐交易**\n\n✅ 按期望售价 **¥${formatCurrency(result.expectedPrice)}** 出售，可获得 **¥${formatCurrency(result.premium)}** 的额外收益，投资回报率达到 **${result.premiumPercent.toFixed(2)}%**，建议按此价格进行交易。` 
+  : `**⚠️ 性价比交易**\n\n📉 当前定价低于剩余价值，属于折价出售。买家相当于获得了 **${formatCurrency(Math.abs(result.premium))}元** 的优惠，性价比极高！`
 }
 
-> *报告生成时间: ${new Date().toLocaleString('zh-CN')}* > *计算工具: [Globokit.com](https://globokit.com)*
+**剩余价值比例**: ${(result.remainingRatio * 100).toFixed(2)}% - 基于时间进度的价值评估
+**成本效率**: 原价 ${symbol}${purchasePrice} 约合 ¥${formatCurrency(result.purchasePriceCNY)}，每天成本约 ¥${result.dailyPrice.toFixed(2)}
+
+---
+
+📋 报告生成时间：${formattedTime}
+🔗 数据来源：VPS 剩余价值计算器
+🌐 更多工具请访问：Globokit.com
 `
     navigator.clipboard.writeText(md.trim()).then(() => {
       setCopySuccess(true)
@@ -215,6 +228,7 @@ ${isProfit
                       </SelectContent>
                     </Select>
                   </div>
+                  {/* 已移除：刷新汇率行 */}
                 </div>
 
                 {/* 续费周期 */}
