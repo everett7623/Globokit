@@ -68,7 +68,6 @@ export function formatCurrency(amount: number): string {
 }
 
 export function formatDate(date: Date): string {
-  // 输出展示统一用 YYYY/MM/DD
   const y = date.getFullYear()
   const m = (date.getMonth() + 1).toString().padStart(2, '0')
   const d = date.getDate().toString().padStart(2, '0')
