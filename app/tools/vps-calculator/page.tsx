@@ -16,7 +16,7 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 import { 
   Calculator, RefreshCw, Copy, Download, Check, 
-  TrendingUp, TrendingDown, Info, Calendar as CalendarIcon 
+  TrendingUp, TrendingDown, Info 
 } from 'lucide-react'
 import {
   fetchExchangeRates,
@@ -33,8 +33,10 @@ import html2canvas from 'html2canvas'
 
 export default function VPSCalculatorPage() {
   // --- 输入状态 ---
-  // 存储格式为 mm/dd/yyyy
+  // 注意：使用原生 date input，这里存储的值格式永远是 yyyy-mm-dd (例如 2025-12-07)
+  // 初始化为空字符串，这样浏览器就会显示 "mm/dd/yyyy" 的占位符掩码
   const [purchaseDate, setPurchaseDate] = useState('') 
+  // 交易日期默认给个今天，方便计算，但用户也可以清空
   const [tradeDate, setTradeDate] = useState('')
   const [renewalPeriod, setRenewalPeriod] = useState('36')
   const [purchasePrice, setPurchasePrice] = useState('')
@@ -51,32 +53,21 @@ export default function VPSCalculatorPage() {
   const [generatingImg, setGeneratingImg] = useState(false)
 
   const resultRef = useRef<HTMLDivElement>(null)
-  
-  // 隐藏的日期选择器引用
-  const hiddenPurchaseDateRef = useRef<HTMLInputElement>(null)
-  const hiddenTradeDateRef = useRef<HTMLInputElement>(null)
 
   const quickDiscounts = [0.95, 0.9, 0.85, 0.8, 0.75, 0.7, 0.6, 0.5]
 
-  // 初始化 - 设置交易日期为今天 (mm/dd/yyyy)
+  // 初始化
   useEffect(() => {
-    const getTodayUS = () => {
-      const d = new Date()
-      const day = String(d.getDate()).padStart(2, '0')
-      const month = String(d.getMonth() + 1).padStart(2, '0')
-      const year = d.getFullYear()
-      return `${month}/${day}/${year}`
-    }
-    setTradeDate(getTodayUS())
+    // 交易日期默认为今天 (yyyy-mm-dd)
+    const today = new Date().toISOString().split('T')[0]
+    setTradeDate(today)
     loadExchangeRates()
   }, [])
 
   // 自动计算监听
   useEffect(() => {
-    // 校验 mm/dd/yyyy 格式是否完整
-    const isValidDate = (d: string) => d && /^\d{2}\/\d{2}\/\d{4}$/.test(d)
-
-    if (purchasePrice && isValidDate(purchaseDate) && isValidDate(tradeDate)) {
+    // purchaseDate 和 tradeDate 只要有值，必然是有效的 yyyy-mm-dd
+    if (purchasePrice && purchaseDate && tradeDate) {
       const timer = setTimeout(handleCalculate, 300)
       return () => clearTimeout(timer)
     }
@@ -85,31 +76,6 @@ export default function VPSCalculatorPage() {
   const loadExchangeRates = async () => {
     const rates = await fetchExchangeRates()
     setExchangeRates(rates)
-  }
-
-  // --- 核心功能：处理日期输入自动格式化 ---
-  // 输入 11242025 -> 自动变成 11/24/2025
-  const handleDateInput = (e: React.ChangeEvent<HTMLInputElement>, setter: (s: string) => void) => {
-    let v = e.target.value.replace(/\D/g, ''); // 只保留数字
-    
-    // 限制长度 (MMDDYYYY = 8位数字)
-    if (v.length > 8) v = v.slice(0, 8);
-
-    // 自动添加斜杠
-    if (v.length >= 5) {
-      v = `${v.slice(0, 2)}/${v.slice(2, 4)}/${v.slice(4)}`;
-    } else if (v.length >= 3) {
-      v = `${v.slice(0, 2)}/${v.slice(2)}`;
-    }
-    setter(v);
-  }
-
-  // 处理原生日期选择器 (yyyy-mm-dd) -> (mm/dd/yyyy)
-  const handleNativeDateChange = (e: React.ChangeEvent<HTMLInputElement>, setter: (s: string) => void) => {
-    const isoVal = e.target.value
-    if (!isoVal) return
-    const [y, m, d] = isoVal.split('-')
-    setter(`${m}/${d}/${y}`)
   }
 
   const handleCalculate = () => {
@@ -140,9 +106,8 @@ export default function VPSCalculatorPage() {
   }
 
   const handleReset = () => {
-    const d = new Date()
-    const today = `${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}/${d.getFullYear()}`
-    setPurchaseDate('') 
+    const today = new Date().toISOString().split('T')[0]
+    setPurchaseDate('') // 设为空，显示原生掩码 mm/dd/yyyy
     setTradeDate(today)
     setPurchasePrice('')
     setModeInput('')
@@ -172,7 +137,7 @@ export default function VPSCalculatorPage() {
   }
 
   return (
-    // 布局宽度调整：max-w-[1400px]
+    // 宽度调整为宽屏 max-w-[1400px]
     <div className="min-h-screen bg-slate-50/50 py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-[1400px] mx-auto space-y-8">
         
@@ -200,13 +165,14 @@ export default function VPSCalculatorPage() {
               </CardHeader>
               
               <CardContent className="space-y-6 pt-6 flex-1">
-                {/* 价格和币种 */}
+                {/* 价格和币种 - 使用 Flex 布局解决符号重叠 */}
                 <div className="space-y-3">
                   <Label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">
                     💵 购买价格 & 币种
                   </Label>
                   <div className="flex gap-3">
                     <div className="flex-1 flex rounded-md shadow-sm ring-1 ring-inset ring-slate-200 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary/20 transition-all bg-white overflow-hidden">
+                      {/* 货币符号：自适应宽度 */}
                       <span className="flex select-none items-center px-3 text-slate-500 font-bold bg-slate-50/50 border-r border-slate-100 sm:text-sm whitespace-nowrap">
                         {SUPPORTED_CURRENCIES.find(c => c.code === currency)?.symbol}
                       </span>
@@ -214,7 +180,7 @@ export default function VPSCalculatorPage() {
                         type="number" 
                         value={purchasePrice} 
                         onChange={e => setPurchasePrice(e.target.value)} 
-                        className="block flex-1 border-0 bg-transparent py-1.5 pl-2 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm sm:leading-6" 
+                        className="block flex-1 border-0 bg-transparent py-1.5 pl-2 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm sm:leading-6 font-mono"
                         placeholder="0.00"
                       />
                     </div>
@@ -253,56 +219,26 @@ export default function VPSCalculatorPage() {
                   </div>
                 </div>
 
-                {/* 日期选择 - 支持自动格式化输入 */}
+                {/* 日期选择 - 原生 type="date" 完美支持 mm/dd/yyyy 掩码 */}
                 <div className="grid grid-cols-2 gap-4">
-                  {/* 购买日期 */}
-                  <div className="space-y-3 relative">
+                  <div className="space-y-3">
                     <Label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">📆 购买日期</Label>
-                    <div className="relative">
-                      <Input 
-                        type="text" 
-                        placeholder="mm/dd/yyyy"
-                        maxLength={10}
-                        value={purchaseDate} 
-                        onChange={(e) => handleDateInput(e, setPurchaseDate)} 
-                        className="font-mono border-slate-200 shadow-sm pr-10" 
-                      />
-                      <CalendarIcon 
-                        className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 cursor-pointer hover:text-primary"
-                        onClick={() => hiddenPurchaseDateRef.current?.showPicker()}
-                      />
-                      <input 
-                        type="date" 
-                        ref={hiddenPurchaseDateRef}
-                        className="absolute opacity-0 pointer-events-none w-0 h-0"
-                        onChange={(e) => handleNativeDateChange(e, setPurchaseDate)}
-                      />
-                    </div>
+                    <Input 
+                      type="date" 
+                      value={purchaseDate} 
+                      onChange={e => setPurchaseDate(e.target.value)} 
+                      className="font-mono border-slate-200 shadow-sm"
+                      // 当值为空时，浏览器自动显示 mm/dd/yyyy
+                    />
                   </div>
-
-                  {/* 交易日期 */}
-                  <div className="space-y-3 relative">
+                  <div className="space-y-3">
                     <Label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">⏱️ 交易日期</Label>
-                    <div className="relative">
-                      <Input 
-                        type="text" 
-                        placeholder="mm/dd/yyyy"
-                        maxLength={10}
-                        value={tradeDate} 
-                        onChange={(e) => handleDateInput(e, setTradeDate)} 
-                        className="font-mono border-slate-200 shadow-sm pr-10" 
-                      />
-                      <CalendarIcon 
-                        className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 cursor-pointer hover:text-primary"
-                        onClick={() => hiddenTradeDateRef.current?.showPicker()}
-                      />
-                      <input 
-                        type="date" 
-                        ref={hiddenTradeDateRef}
-                        className="absolute opacity-0 pointer-events-none w-0 h-0"
-                        onChange={(e) => handleNativeDateChange(e, setTradeDate)}
-                      />
-                    </div>
+                    <Input 
+                      type="date" 
+                      value={tradeDate} 
+                      onChange={e => setTradeDate(e.target.value)} 
+                      className="font-mono border-slate-200 shadow-sm" 
+                    />
                   </div>
                 </div>
 
