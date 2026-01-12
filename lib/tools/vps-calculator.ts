@@ -2,7 +2,7 @@
 // 描述: 计算服务器剩余使用时间的折算价值及汇率转换
 // 路径: Globokit/lib/tools/vps-calculator.ts
 // 作者: Jensfrank
-// 更新时间: 2026-01-12
+// 更新时间: 2026-01-08
 
 export interface CalculationResult {
   purchasePriceCNY: number
@@ -18,7 +18,6 @@ export interface CalculationResult {
   dailyPrice: number
 }
 
-// 恢复价格模式定义
 export type PriceMode = 'total' | 'premium' | 'discount'
 
 export const SUPPORTED_CURRENCIES = [
@@ -69,7 +68,6 @@ export function formatCurrency(amount: number): string {
 }
 
 export function formatDate(date: Date): string {
-  // 输出格式保持 YYYY/MM/DD 不变，仅用于显示
   const y = date.getFullYear()
   const m = (date.getMonth() + 1).toString().padStart(2, '0')
   const d = date.getDate().toString().padStart(2, '0')
@@ -83,7 +81,7 @@ export function getExchangeRateText(currency: string, rates: Record<string, numb
 }
 
 /**
- * 核心计算逻辑
+ * 核心计算逻辑 - 适配 type="date" 的 YYYY-MM-DD 格式
  */
 export function calculateVPSValue(
   purchaseDateStr: string,
@@ -95,26 +93,16 @@ export function calculateVPSValue(
   rates: Record<string, number>,
   tradeDateStr: string
 ): CalculationResult {
-  // 1. 日期解析修改：专门解析 DD/MM/YYYY 格式的文本输入
-  const parseUKDate = (str: string) => {
-    if (!str || !str.includes('/')) return new Date()
-    const parts = str.split('/')
-    // 简单验证格式是否为3部分
-    if (parts.length !== 3) return new Date()
-
-    const d = parseInt(parts[0], 10)
-    const m = parseInt(parts[1], 10)
-    const y = parseInt(parts[2], 10)
-
-    // 验证数字是否有效
-    if (isNaN(d) || isNaN(m) || isNaN(y)) return new Date()
-    
+  // 1. 日期解析：处理 YYYY-MM-DD 字符串 (Native Date Input Standard)
+  const parseISO = (str: string) => {
+    if (!str) return new Date()
+    const [y, m, d] = str.split('-').map(Number)
     // 设为中午12点防止时区偏差
     return new Date(y, m - 1, d, 12, 0, 0)
   }
 
-  const purchaseDate = parseUKDate(purchaseDateStr)
-  const tradeDate = parseUKDate(tradeDateStr)
+  const purchaseDate = parseISO(purchaseDateStr)
+  const tradeDate = parseISO(tradeDateStr)
 
   const expireDate = new Date(purchaseDate)
   expireDate.setMonth(expireDate.getMonth() + renewalMonths)
@@ -140,7 +128,7 @@ export function calculateVPSValue(
   const remainingValue = dailyPrice * remainingDays
   const remainingRatio = totalDays > 0 ? remainingDays / totalDays : 0
 
-  // 5. 根据模式计算期望售价 (Expected Price)
+  // 5. 根据模式计算期望售价
   let expectedPrice = 0
   
   if (priceMode === 'total') {
