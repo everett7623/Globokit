@@ -34,7 +34,7 @@ const navItems = [
       { href: '/tools/holiday-query', label: '国际节假日查询' },
       { href: '/tools/world-time', label: '世界时间' },
       { href: '/tools/currency-symbols', label: '全球货币符号' },
-      { href: '/tools/country-info', label: '全球国家信息' },
+      { href: '/tools/global-country-info', label: '全球国家信息' },
       { href: '/tools/vps-calculator', label: 'VPS剩余价值计算器' },
     ]
   }
