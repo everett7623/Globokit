@@ -2,7 +2,7 @@
 // 描述: 计算服务器剩余使用时间的折算价值及汇率转换
 // 路径: Globokit/lib/tools/vps-calculator.ts
 // 作者: Jensfrank
-// 更新时间: 2026-01-08
+// 更新时间: 2026-01-12
 
 export interface CalculationResult {
   purchasePriceCNY: number
