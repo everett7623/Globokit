@@ -68,6 +68,7 @@ export function formatCurrency(amount: number): string {
 }
 
 export function formatDate(date: Date): string {
+  // 结果展示我们也统一用 YYYY/MM/DD，避免歧义
   const y = date.getFullYear()
   const m = (date.getMonth() + 1).toString().padStart(2, '0')
   const d = date.getDate().toString().padStart(2, '0')
@@ -84,24 +85,35 @@ export function getExchangeRateText(currency: string, rates: Record<string, numb
  * 核心计算逻辑
  */
 export function calculateVPSValue(
-  purchaseDateStr: string,
+  purchaseDateStr: string, // 这里传入的是 mm/dd/yyyy 格式的字符串
   renewalMonths: number,
   purchasePrice: number,
   currency: string,
   modeValue: number, 
   priceMode: PriceMode,
   rates: Record<string, number>,
-  tradeDateStr: string
+  tradeDateStr: string // 这里传入的是 mm/dd/yyyy 格式的字符串
 ): CalculationResult {
-  // 1. 日期解析: 处理 YYYY-MM-DD (Native Date Input)
-  const parseISO = (str: string) => {
-    if (!str) return new Date()
-    const [y, m, d] = str.split('-').map(Number)
+  
+  // 1. 日期解析: 专门处理 MM/DD/YYYY 文本格式
+  const parseUSDate = (str: string) => {
+    if (!str || !str.includes('/')) return new Date()
+    const parts = str.split('/')
+    if (parts.length !== 3) return new Date()
+
+    // 格式: Month / Day / Year
+    const m = parseInt(parts[0], 10)
+    const d = parseInt(parts[1], 10)
+    const y = parseInt(parts[2], 10)
+
+    if (isNaN(d) || isNaN(m) || isNaN(y)) return new Date()
+    
+    // JS Date 月份从0开始 (0=Jan)
     return new Date(y, m - 1, d, 12, 0, 0)
   }
 
-  const purchaseDate = parseISO(purchaseDateStr)
-  const tradeDate = parseISO(tradeDateStr)
+  const purchaseDate = parseUSDate(purchaseDateStr)
+  const tradeDate = parseUSDate(tradeDateStr)
 
   const expireDate = new Date(purchaseDate)
   expireDate.setMonth(expireDate.getMonth() + renewalMonths)
@@ -129,7 +141,6 @@ export function calculateVPSValue(
 
   // 5. 期望售价
   let expectedPrice = 0
-  
   if (priceMode === 'total') {
     expectedPrice = modeValue >= 0 ? modeValue : remainingValue
   } 
