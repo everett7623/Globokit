@@ -2,7 +2,7 @@
 // 描述: 定义全站基础结构，包含SEO元数据、字体配置、Google Analytics统计及通用页头页脚
 // 路径: Globokit/app/layout.tsx
 // 作者: Jensfrank
-// 更新时间: 2026-01-08
+// 更新时间: 2026-01-12
 
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -24,6 +24,12 @@ export const metadata: Metadata = {
     url: 'https://Globokit.com',
     siteName: 'Globokit',
     type: 'website',
+  },
+  // 新增：图标配置，指定使用 png
+  icons: {
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
   },
 }
 
