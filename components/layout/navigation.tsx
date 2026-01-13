@@ -2,7 +2,7 @@
 // 描述: 全局顶部导航栏，包含移动端适配、下拉菜单及工具集入口配置
 // 路径: Globokit/components/layout/navigation.tsx
 // 作者: Jensfrank
-// 更新时间: 2026-01-08
+// 更新时间: 2026-01-12
 
 'use client'
 
@@ -51,7 +51,9 @@ const externalLinks = [
     href: 'https://nav.seedloc.com', 
     label: '导航站', 
     icon: Compass,
-    className: 'text-white bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 shadow-sm hover:shadow-md'
+    // 修改：将原来的蓝紫渐变改为 青绿渐变 (emerald -> teal)
+    // 呼应 Logo 的绿色部分
+    className: 'text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 shadow-sm hover:shadow-md'
   }
 ]
 
