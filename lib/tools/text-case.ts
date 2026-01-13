@@ -3,7 +3,7 @@
  * 描述: 快速转换英文文本的大小写格式，支持多种转换模式
  * 路径: Globokit/lib/tools/text-case.ts
  * 作者: Jensfrank
- * 更新时间: 2026-01-08
+ * 更新时间: 2026-01-12
  */
 
 export type TextCase = 
@@ -20,23 +20,21 @@ export type TextCase =
   | 'snake'     // hello_world
   | 'kebab'     // hello-world
   | 'constant'  // HELLO_WORLD
-  | 'dot'       // Hello.World (修改为保留原大小写，适应文件名场景)
+  | 'dot'       // Hello.World
   | 'path';     // hello/world
 
 /**
  * 辅助函数：将文本拆分为单词数组
- * 改进版：智能处理驼峰、缩写词和数字，不破坏连续的大写字母 (如 HDTV)
+ * 用于编程变量转换 (如 camel, snake)，会处理驼峰和特殊符号
  */
 function toWords(text: string): string[] {
   if (!text) return [];
   
   return text
     // 1. 处理驼峰 (camelCase): 小写字母后跟大写字母 -> 插入空格
-    // 例如: helloWorld -> hello World
     .replace(/([a-z])([A-Z])/g, '$1 $2')
     
     // 2. 处理连续大写后的分界 (Acronyms): 连续大写后跟小写 -> 在最后一个大写前插空格
-    // 例如: XMLHttp -> XML Http (保留 XML 作为一个词)
     .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
     
     // 3. 将非字母数字字符替换为空格，并按空格拆分
@@ -131,9 +129,9 @@ export function convertCase(text: string, textCase: TextCase): string {
         .join('_');
 
     case 'dot': 
-      // 修改：保留单词原大小写，仅用点连接
-      // 适应场景：Yi.Wen.Si...S01.HDTV
-      return toWords(text).join('.');
+      // 修改：只识别空格进行转换，严格保留原始大小写和特殊符号（如连字符）
+      // 适应场景：Hello World S01-02 -> Hello.World.S01-02
+      return text.trim().replace(/\s+/g, '.');
 
     case 'path': // hello/world
       return toWords(text)
