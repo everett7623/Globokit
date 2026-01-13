@@ -2,7 +2,7 @@
 // 描述: 快速转换英文文本的大小写格式，支持多种转换模式
 // 路径: Globokit/app/tools/text-case/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2026-01-08
+// 更新时间: 2026-01-13
 
 'use client'
 
@@ -20,7 +20,7 @@ import { convertCase, type TextCase } from '@/lib/tools/text-case'
 export default function TextCasePage() {
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
-  // 修改：默认值改为 'upper' (全部大写)
+  // 默认值改为 'upper'
   const [caseType, setCaseType] = useState<TextCase>('upper')
   const [error, setError] = useState('')
   const [copiedText, setCopiedText] = useState<string | null>(null)
@@ -66,7 +66,7 @@ export default function TextCasePage() {
     }
   }
 
-  // 定义选项：label 用中文（下拉菜单），shortLabel 用英文（示例列表）
+  // 定义选项
   const caseOptions = [
     // 基础格式
     { value: 'upper', label: '全部大写', shortLabel: 'UPPERCASE', example: 'HELLO WORLD', icon: <Type className="h-4 w-4" /> },
@@ -90,11 +90,11 @@ export default function TextCasePage() {
     { value: 'path', label: '路径格式', shortLabel: 'path/case', example: 'hello/world', icon: <Hash className="h-4 w-4" /> },
   ]
 
-  // 示例文本
+  // 示例文本 - 已按要求更新第一个
   const sampleTexts = [
     { 
-      text: 'Yi Wen Si De Zhong Guo Qing Yuan S01 2025 1080p HDTV x264 AAC', 
-      label: '影视命名' 
+      text: 'HELLO WORLD', 
+      label: '大写文本' 
     },
     { 
       text: 'hello world, this is a test message', 
