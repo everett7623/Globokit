@@ -1,245 +1,216 @@
-// 名称: 外贸工具集首页
-// 描述: 聚合各类外贸效率工具的导航主页，展示热门工具入口、统计数据及项目介绍
+// 名称: 首页组件
+// 描述: 展示核心工具卡片、统计数据及平台介绍
 // 路径: Globokit/app/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2026-01-08
+// 更新时间: 2026-01-12
 
 import Link from 'next/link'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 import { 
   Calculator, 
   Type, 
   AlertCircle, 
-  Hash, 
   Languages, 
-  Calendar,
-  Clock,
-  CircleDollarSign,
-  ExternalLink,
-  BookOpen,
-  Github,
-  Sparkles,
-  TrendingUp,
-  Users,
+  FileText, 
+  CalendarDays, 
+  Clock, 
+  Coins, 
+  Globe2, 
+  Server,
   Zap,
-  Globe,
-  Server
+  Users,
+  TrendingUp,
+  Sparkles,
+  Github,
+  BookOpen
 } from 'lucide-react'
 
+// 工具列表配置
 const tools = [
   {
+    href: '/tools/rmb-converter',
     title: '人民币大写转换',
     description: '将数字金额转换为中文大写形式，适用于发票、合同等正式文件',
     icon: Calculator,
-    href: '/tools/rmb-converter',
-    color: 'text-blue-500',
-    bgColor: 'bg-blue-50',
     badge: '热门',
-    badgeColor: 'bg-orange-100 text-orange-700'
+    color: 'text-blue-500' // 保持原有图标色或改为 emerald
   },
   {
+    href: '/tools/text-case',
     title: '英文大小写转换',
     description: '快速转换英文文本的大小写格式，支持多种转换模式',
     icon: Type,
-    href: '/tools/text-case',
-    color: 'text-green-500',
-    bgColor: 'bg-green-50'
+    color: 'text-green-500'
   },
   {
+    href: '/tools/special-char',
     title: '特殊字符检查与转换',
     description: '检查并转换文本中的特殊字符，避免邮件或文档中的乱码',
     icon: AlertCircle,
-    href: '/tools/special-char',
-    color: 'text-yellow-500',
-    bgColor: 'bg-yellow-50'
+    color: 'text-yellow-500'
   },
   {
+    href: '/tools/number-to-english',
     title: '数字转英文',
     description: '将数字转换为英文表达形式，支持基数词和序数词',
-    icon: Hash,
-    href: '/tools/number-to-english',
-    color: 'text-purple-500',
-    bgColor: 'bg-purple-50'
+    icon: Languages,
+    color: 'text-purple-500'
   },
   {
+    href: '/tools/pinyin',
     title: '中文转拼音',
     description: '将中文文本转换为汉语拼音，支持声调和多种格式',
-    icon: Languages,
-    href: '/tools/pinyin',
-    color: 'text-red-500',
-    bgColor: 'bg-red-50'
+    icon: FileText,
+    color: 'text-red-500'
   },
   {
+    href: '/tools/holiday-query',
     title: '国际节假日查询',
     description: '查询全球主要贸易国家的节假日安排，便于外贸业务安排',
-    icon: Calendar,
-    href: '/tools/holiday-query',
-    color: 'text-orange-500',
-    bgColor: 'bg-orange-50',
-    badgeColor: 'bg-green-100 text-green-700'
+    icon: CalendarDays,
+    color: 'text-orange-500'
   },
   {
+    href: '/tools/world-time',
     title: '世界时间',
     description: '查看全球主要贸易城市的实时时间，便于安排国际业务',
     icon: Clock,
-    href: '/tools/world-time',
-    color: 'text-indigo-500',
-    bgColor: 'bg-indigo-50',
-    badgeColor: 'bg-green-100 text-green-700'
+    color: 'text-indigo-500'
   },
   {
+    href: '/tools/currency-symbols',
     title: '全球货币符号大全',
     description: '查看和复制全球各国货币符号，便于外贸报价和合同编写',
-    icon: CircleDollarSign,
-    href: '/tools/currency-symbols',
-    color: 'text-emerald-500',
-    bgColor: 'bg-emerald-50',
-    badgeColor: 'bg-green-100 text-green-700'
+    icon: Coins,
+    color: 'text-emerald-500'
   },
   {
+    href: '/tools/global-country-info',
     title: '全球国家信息查询',
     description: '查询世界各国的中英文名称、区号、代码、时区、域名等信息',
-    icon: Globe,
-    href: '/tools/global-country-info',
-    color: 'text-cyan-500',
-    bgColor: 'bg-cyan-50',
-    badgeColor: 'bg-green-100 text-green-700'
+    icon: Globe2,
+    color: 'text-cyan-500'
   },
   {
+    href: '/tools/vps-calculator',
     title: 'VPS剩余价值计算器',
     description: '基于购买日期和到期时间精确计算VPS剩余价值，支持多币种转换',
     icon: Server,
-    href: '/tools/vps-calculator',
-    color: 'text-violet-500',
-    bgColor: 'bg-violet-50',
     badge: '新增',
-    badgeColor: 'bg-green-100 text-green-700'
-  },
+    color: 'text-violet-500'
+  }
 ]
 
+// 统计数据
 const stats = [
   { label: '工具总数', value: '10+', icon: Zap },
-  { label: '月活用户', value: '1000+', icon: Users },
+  { label: '月活跃用户', value: '1000+', icon: Users },
   { label: '持续更新', value: '每周', icon: TrendingUp },
-  { label: '用户好评', value: '98%', icon: Sparkles }
+  { label: '用户好评', value: '98%', icon: Sparkles },
 ]
 
-export default function HomePage() {
+export default function Home() {
   return (
-    <>
-      {/* 头部区域 - 增强视觉效果 */}
-      <div className="text-center mb-12 pt-16">
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium mb-6">
-          <Sparkles className="h-4 w-4" />
-          专为外贸人打造的效率工具
+    <div className="space-y-12 py-8">
+      
+      {/* Hero 区域 */}
+      <section className="text-center space-y-6 max-w-3xl mx-auto">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-sm font-medium animate-in fade-in zoom-in duration-500">
+          <Sparkles className="h-3.5 w-3.5" />
+          <span>专为外贸人打造的效率工具</span>
         </div>
-        <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+        
+        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900">
           外贸实用工具集
         </h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          精选10款专业工具，涵盖文本处理、时间管理、货币转换等外贸场景
-          <br />让国际贸易更简单，让工作效率更高效
+        
+        <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          精选10款专业工具，涵盖文本处理、时间管理、货币转换等外贸场景<br className="hidden sm:inline" />
+          让国际贸易更简单，让工作效率更高效
+        </p>
+      </section>
+
+      {/* 统计数据 */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {stats.map((stat, idx) => (
+          <Card key={idx} className="border-none shadow-sm bg-white/50 hover:bg-white transition-colors">
+            <div className="p-6 flex flex-col items-center justify-center text-center space-y-2">
+              <div className="p-2.5 bg-emerald-50 rounded-full text-emerald-600 mb-1">
+                <stat.icon className="h-6 w-6" />
+              </div>
+              <div className="text-2xl font-bold text-slate-900">{stat.value}</div>
+              <div className="text-sm text-slate-500 font-medium">{stat.label}</div>
+            </div>
+          </Card>
+        ))}
+      </div>
+
+      {/* 工具网格 */}
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {tools.map((tool) => (
+          <Link key={tool.href} href={tool.href} className="group block h-full">
+            <Card className="h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-slate-200/60 hover:border-emerald-200 bg-white">
+              <CardHeader>
+                <div className="flex items-center justify-between mb-2">
+                  <div className={`p-2.5 rounded-xl bg-slate-50 group-hover:bg-emerald-50 transition-colors ${tool.color.replace('text-', 'text-slate-500 group-hover:text-')}`}>
+                    <tool.icon className="h-6 w-6" />
+                  </div>
+                  {tool.badge && (
+                    <span className={`px-2.5 py-0.5 text-xs font-semibold rounded-full ${
+                      tool.badge === '热门' 
+                        ? 'bg-orange-50 text-orange-600' 
+                        : 'bg-emerald-50 text-emerald-600'
+                    }`}>
+                      {tool.badge}
+                    </span>
+                  )}
+                </div>
+                <CardTitle className="text-lg group-hover:text-emerald-700 transition-colors">
+                  {tool.title}
+                </CardTitle>
+                <CardDescription className="line-clamp-2 mt-2 leading-relaxed">
+                  {tool.description}
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          </Link>
+        ))}
+      </div>
+
+      {/* 底部关于区域 */}
+      <section className="bg-gradient-to-br from-slate-50 to-white rounded-3xl p-8 sm:p-12 text-center space-y-8 border border-slate-100 shadow-sm">
+        <div className="space-y-4 max-w-2xl mx-auto">
+          <h2 className="text-2xl font-bold text-slate-900">关于 GloboKit</h2>
+          <p className="text-slate-600 leading-relaxed">
+            GloboKit 是专为外贸从业者打造的在线工具平台，我们深知外贸工作中的各种痛点，因此精心开发了这些实用工具。无论是人民币大写转换、文本处理，还是货币符号查询等等，我们都为您提供了简单高效的解决方案。
+          </p>
+        </div>
+        
+        <div className="flex flex-wrap justify-center gap-4">
+          <Button variant="default" size="lg" className="h-11 px-8 shadow-md bg-slate-900 hover:bg-slate-800" asChild>
+            <Link href="https://github.com/everett7623/Globokit" target="_blank">
+              <Github className="mr-2 h-4 w-4" />
+              开源地址
+            </Link>
+          </Button>
+          <Button variant="outline" size="lg" className="h-11 px-8 border-slate-200 hover:bg-white hover:text-emerald-700" asChild>
+            <Link href="https://seedloc.com" target="_blank">
+              <BookOpen className="mr-2 h-4 w-4" />
+              访问博客
+            </Link>
+          </Button>
+        </div>
+      </section>
+
+      {/* 底部 Banner */}
+      <div className="rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 p-4 text-center border border-emerald-100/50">
+        <p className="text-sm font-medium text-emerald-700 flex items-center justify-center gap-2">
+          <Sparkles className="h-4 w-4" />
+          更多实用工具正在开发中，敬请期待...
         </p>
       </div>
 
-      {/* 统计数据 */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-        {stats.map((stat, index) => {
-          const Icon = stat.icon
-          return (
-            <div key={index} className="bg-white rounded-xl p-6 text-center shadow-sm border border-gray-100">
-              <Icon className="h-8 w-8 mx-auto mb-2 text-blue-500" />
-              <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
-              <p className="text-sm text-gray-600">{stat.label}</p>
-            </div>
-          )
-        })}
-      </div>
-
-      {/* 工具卡片网格 */}
-      <div id="tools" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {tools.map((tool) => {
-          const Icon = tool.icon
-          return (
-            <Link key={tool.href} href={tool.href} className="group">
-              <Card className="h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer border-gray-200 overflow-hidden relative">
-                {tool.badge && (
-                  <div className="absolute top-4 right-4 z-10">
-                    <Badge className={`${tool.badgeColor} border-0 font-medium`}>
-                      {tool.badge}
-                    </Badge>
-                  </div>
-                )}
-                <CardHeader className="pb-4">
-                  <div className="flex items-start justify-between mb-3">
-                    <div className={`p-3 rounded-lg ${tool.bgColor} ${tool.color} transition-transform duration-300 group-hover:scale-110`}>
-                      <Icon className="h-6 w-6" />
-                    </div>
-                  </div>
-                  <CardTitle className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
-                    {tool.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-sm text-gray-600 line-clamp-2">
-                    {tool.description}
-                  </CardDescription>
-                </CardContent>
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-              </Card>
-            </Link>
-          )
-        })}
-      </div>
-
-      {/* 关于区域 */}
-      <div id="about" className="mt-20 mb-12">
-        <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-0">
-          <CardContent className="p-8 md:p-12">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl font-bold mb-6 text-gray-900">
-                关于 GloboKit
-              </h2>
-              <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-                GloboKit 是专为外贸从业者打造的在线工具平台，我们深知外贸工作中的各种痛点，
-                因此精心开发了这些实用工具。无论是人民币大写转换、文本处理，还是货币符号查询等等，
-                我们都为您提供了简单高效的解决方案。
-              </p>
-              <div className="flex flex-wrap gap-4 justify-center">
-                <Link 
-                  href="https://github.com/everett7623/globokit" 
-                  target="_blank"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
-                >
-                  <Github className="h-5 w-5" />
-                  开源地址
-                  <ExternalLink className="h-4 w-4" />
-                </Link>
-                <Link 
-                  href="https://seedloc.com" 
-                  target="_blank"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-                >
-                  <BookOpen className="h-5 w-5" />
-                  访问博客
-                  <ExternalLink className="h-4 w-4" />
-                </Link>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* 底部信息 */}
-      <div className="text-center py-8">
-        <div className="inline-flex items-center justify-center p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg">
-          <p className="text-blue-700 font-medium flex items-center gap-2">
-            <Sparkles className="h-5 w-5" />
-            更多实用工具正在开发中，敬请期待...
-          </p>
-        </div>
-      </div>
-    </>
+    </div>
   )
 }
