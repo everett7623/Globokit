@@ -3,7 +3,7 @@
  * 描述: 定义Tailwind CSS的基础样式、主题变量(Variables)及深色模式适配
  * 路径: Globokit/app/globals.css
  * 作者: Jensfrank
- * 更新时间: 2026-01-08
+ * 更新时间: 2026-01-12
  */
 
 @tailwind base;
@@ -18,8 +18,11 @@
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
+    
+    /* 修改：提取自新 Logo 文字的 "深海蓝" */
+    --primary: 208 90% 42%; 
     --primary-foreground: 210 40% 98%;
+    
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
@@ -30,7 +33,10 @@
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    
+    /* 修改：光圈颜色同步 */
+    --ring: 208 90% 42%;
+    
     --radius: 0.5rem;
   }
 
@@ -41,8 +47,11 @@
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
+    
+    /* 修改：深色模式下稍微提亮一点蓝色 */
+    --primary: 208 90% 55%;
     --primary-foreground: 222.2 47.4% 11.2%;
+    
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
@@ -53,7 +62,9 @@
     --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    
+    /* 修改：光圈颜色同步 */
+    --ring: 208 90% 55%;
   }
 }
 
