@@ -51,8 +51,6 @@ const externalLinks = [
     href: 'https://nav.seedloc.com', 
     label: '导航站', 
     icon: Compass,
-    // 修改：将原来的蓝紫渐变改为 青绿渐变 (emerald -> teal)
-    // 呼应 Logo 的绿色部分
     className: 'text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 shadow-sm hover:shadow-md'
   }
 ]
@@ -99,9 +97,11 @@ export function Navigation() {
                       key={child.href}
                       href={child.href}
                       className={cn(
-                        "block px-4 py-2 text-sm transition-colors hover:bg-gray-100",
+                        "block px-4 py-2 text-sm transition-colors",
+                        // 修改处：悬停效果改为 浅祖母绿背景 + 深祖母绿文字
+                        "hover:bg-emerald-50 hover:text-emerald-700",
                         pathname === child.href
-                          ? "text-blue-600 bg-blue-50"
+                          ? "text-emerald-700 bg-emerald-50 font-medium" // 选中状态也改为祖母绿
                           : "text-gray-700"
                       )}
                     >
@@ -171,8 +171,8 @@ export function Navigation() {
               className={cn(
                 "block px-3 py-2 rounded-lg text-base font-medium",
                 pathname === "/" 
-                  ? "bg-blue-50 text-blue-600" 
-                  : "text-gray-700 hover:bg-gray-100"
+                  ? "bg-emerald-50 text-emerald-700" // 移动端选中态修改
+                  : "text-gray-700 hover:bg-emerald-50 hover:text-emerald-700" // 移动端悬停态修改
               )}
             >
               首页
@@ -192,8 +192,8 @@ export function Navigation() {
                 className={cn(
                   "block px-3 py-2 rounded-lg text-sm",
                   pathname === tool.href
-                    ? "bg-blue-50 text-blue-600"
-                    : "text-gray-700 hover:bg-gray-100"
+                    ? "bg-emerald-50 text-emerald-700 font-medium" // 移动端选中态修改
+                    : "text-gray-700 hover:bg-emerald-50 hover:text-emerald-700" // 移动端悬停态修改
                 )}
               >
                 {tool.label}
