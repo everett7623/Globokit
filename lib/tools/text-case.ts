@@ -3,7 +3,7 @@
  * 描述: 快速转换英文文本的大小写格式，支持多种转换模式
  * 路径: Globokit/lib/tools/text-case.ts
  * 作者: Jensfrank
- * 更新时间: 2026-01-13
+ * 更新时间: 2026-01-16
  */
 
 export type TextCase = 
@@ -17,11 +17,11 @@ export type TextCase =
   | 'inverse'
   | 'camel'     // helloWorld
   | 'pascal'    // HelloWorld
-  | 'snake'     // hello_world
-  | 'kebab'     // hello-world
+  | 'snake'     // Hello_World (修改：保留原大小写)
+  | 'kebab'     // Hello-World (修改：保留原大小写)
   | 'constant'  // HELLO_WORLD
   | 'dot'       // Hello.World
-  | 'path';     // hello/world
+  | 'path';     // Hello/World (修改：保留原大小写)
 
 /**
  * 辅助函数：将文本拆分为单词数组
@@ -113,29 +113,25 @@ export function convertCase(text: string, textCase: TextCase): string {
         })
         .join('');
 
-    case 'snake': // hello_world
+    case 'snake': // Hello_World (修改：不再强制小写)
       return toWords(text)
-        .map(word => word.toLowerCase())
         .join('_');
 
-    case 'kebab': // hello-world
+    case 'kebab': // Hello-World (修改：不再强制小写)
       return toWords(text)
-        .map(word => word.toLowerCase())
         .join('-');
 
-    case 'constant': // HELLO_WORLD
+    case 'constant': // HELLO_WORLD (常量通常必须大写，保持不变)
       return toWords(text)
         .map(word => word.toUpperCase())
         .join('_');
 
     case 'dot': 
-      // 修改：只识别空格进行转换，严格保留原始大小写和特殊符号（如连字符）
-      // 适应场景：Hello World S01-02 -> Hello.World.S01-02
+      // 只识别空格进行转换，严格保留原始大小写和特殊符号
       return text.trim().replace(/\s+/g, '.');
 
-    case 'path': // hello/world
+    case 'path': // Hello/World (修改：不再强制小写)
       return toWords(text)
-        .map(word => word.toLowerCase())
         .join('/');
 
     default:
