@@ -3,6 +3,7 @@
 // 路径: Globokit/lib/tools/vps-calculator.ts
 // 作者: Jensfrank
 // 更新时间: 2026-03-16
+// 更新内容: 续费周期添加默认十年
 
 export interface CalculationResult {
   purchasePriceCNY: number
