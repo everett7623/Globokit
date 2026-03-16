@@ -200,7 +200,7 @@ ${isProfit
             <img
               src="https://vpsknow.com/favicon.png"
               alt="VPSKnow Logo"
-              className="w-8 h-8 rounded-lg object-contain flex-shrink-0"
+              className="w-12 h-12 rounded-xl object-contain flex-shrink-0 shadow-sm"
             />
             <div className="min-w-0">
               <div className="flex items-center gap-1.5 mb-1">
