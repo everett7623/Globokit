@@ -352,11 +352,11 @@ ${isProfit
                             type="number" 
                             value={modeInput} 
                             onChange={e => setModeInput(e.target.value)}
-                            placeholder="输入折扣 (如0.1，表示白送)"
+                            placeholder="输入折扣 (如0.1表示白送)"
                             className="pl-3 pr-24 border-slate-200 shadow-sm focus-visible:ring-0 font-mono"
                           />
                           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded-md">
-                            💸 x 剩余价值
+                             x 剩余价值
                           </span>
                         </div>
                         {parseFloat(modeInput) === 0 && modeInput !== '' && (
