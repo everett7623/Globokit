@@ -41,6 +41,7 @@ export const RENEWAL_PERIODS = [
   { value: 24, label: '两年' },
   { value: 36, label: '三年' },
   { value: 60, label: '五年' },
+  { value: 120, label: '十年' },
 ]
 
 let exchangeRatesCache: Record<string, number> = { 
