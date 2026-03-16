@@ -3,7 +3,7 @@
 // 路径: Globokit/app/tools/vps-calculator/page.tsx
 // 作者: Jensfrank
 // 更新时间: 2026-03-16
-// 更新内容: 头部标题区右侧新增 VPSKnow 站点推荐卡片（含 Logo、描述及外链跳转）
+// 更新内容: 新增 VPSKnow 推荐卡片；优化购买日期上限、汇率失败提示、折扣为0提示
 
 'use client'
 
@@ -17,7 +17,7 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 import { 
   Calculator, RefreshCw, Copy, Download, Check, 
-  TrendingUp, TrendingDown, Info, Calendar as CalendarIcon 
+  TrendingUp, Info
 } from 'lucide-react'
 import {
   fetchExchangeRates,
@@ -32,27 +32,35 @@ import {
 import html2canvas from 'html2canvas'
 
 export default function VPSCalculatorPage() {
+  // --- 输入状态 ---
   const [purchaseDate, setPurchaseDate] = useState('') 
   const [tradeDate, setTradeDate] = useState('')
   const [renewalPeriod, setRenewalPeriod] = useState('36')
   const [purchasePrice, setPurchasePrice] = useState('')
   const [currency, setCurrency] = useState('USD')
+  
+  // --- 价格模式状态 ---
   const [priceMode, setPriceMode] = useState<PriceMode>('total')
   const [modeInput, setModeInput] = useState('') 
+
+  // --- 逻辑状态 ---
   const [exchangeRates, setExchangeRates] = useState<Record<string, number>>({})
   const [result, setResult] = useState<CalculationResult | null>(null)
   const [copySuccess, setCopySuccess] = useState(false)
   const [generatingImg, setGeneratingImg] = useState(false)
+  const [rateError, setRateError] = useState(false)
 
   const resultRef = useRef<HTMLDivElement>(null)
   const quickDiscounts = [0.95, 0.9, 0.85, 0.8, 0.75, 0.7, 0.6, 0.5]
+  const today = new Date().toISOString().split('T')[0]
 
+  // 初始化
   useEffect(() => {
-    const today = new Date().toISOString().split('T')[0]
     setTradeDate(today)
     loadExchangeRates()
   }, [])
 
+  // 自动计算监听
   useEffect(() => {
     if (purchasePrice && purchaseDate && tradeDate) {
       const timer = setTimeout(handleCalculate, 300)
@@ -62,7 +70,12 @@ export default function VPSCalculatorPage() {
 
   const loadExchangeRates = async () => {
     const rates = await fetchExchangeRates()
-    setExchangeRates(rates)
+    if (!rates || Object.keys(rates).length === 0) {
+      setRateError(true)
+    } else {
+      setRateError(false)
+      setExchangeRates(rates)
+    }
   }
 
   const handleCalculate = () => {
@@ -93,7 +106,6 @@ export default function VPSCalculatorPage() {
   }
 
   const handleReset = () => {
-    const today = new Date().toISOString().split('T')[0]
     setPurchaseDate('') 
     setTradeDate(today)
     setPurchasePrice('')
@@ -102,10 +114,11 @@ export default function VPSCalculatorPage() {
     setResult(null)
   }
 
+  // --- Markdown 生成 ---
   const exportToMarkdown = () => {
     if (!result) return
     const symbol = SUPPORTED_CURRENCIES.find(c => c.code === currency)?.symbol
-    const cycleLabel = RENEWAL_PERIODS.find(r=>r.value===parseInt(renewalPeriod))?.label
+    const cycleLabel = RENEWAL_PERIODS.find(r => r.value === parseInt(renewalPeriod))?.label
     const isProfit = result.premium >= 0
     const profitSign = isProfit ? '+' : ''
     const profitColorObj = isProfit ? '💎 溢价收益' : '⚠️ 折价损失'
@@ -178,16 +191,16 @@ ${isProfit
           </div>
 
           {/* VPSKnow 推荐卡片 */}
-          
-            <a href="https://vpsknow.com"
+          <a
+            href="https://vpsknow.com"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex-shrink-0 flex items-center gap-4 px-5 py-4 rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 hover:border-blue-200 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer max-w-xs"
           >
             <img
-              src="https://vpsknow.com/favicon.png"
+              src="https://vpsknow.com/logo.png"
               alt="VPSKnow Logo"
-              className="w-12 h-12 rounded-xl object-contain flex-shrink-0 shadow-sm"
+              className="w-8 h-8 rounded-lg object-contain flex-shrink-0"
             />
             <div className="min-w-0">
               <div className="flex items-center gap-1.5 mb-1">
@@ -203,6 +216,14 @@ ${isProfit
             </svg>
           </a>
         </div>
+
+        {/* 汇率异常提示 */}
+        {rateError && (
+          <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-700 text-sm">
+            <span>⚠️</span>
+            <span>实时汇率获取失败，计算结果可能不准确，请稍后刷新重试。</span>
+          </div>
+        )}
 
         {/* 核心布局 */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
@@ -272,7 +293,7 @@ ${isProfit
                     <div className="relative">
                       <Input 
                         type="date" 
-                        max="9999-12-31"
+                        max={today}
                         value={purchaseDate} 
                         onChange={e => setPurchaseDate(e.target.value)} 
                         className="font-mono border-slate-200 shadow-sm"
@@ -310,6 +331,7 @@ ${isProfit
                     </TabsList>
                   </Tabs>
 
+                  {/* 动态输入区域 */}
                   <div className="pt-1">
                     {priceMode === 'discount' ? (
                       <div className="space-y-4">
@@ -330,14 +352,17 @@ ${isProfit
                           <Input 
                             type="number" 
                             value={modeInput} 
-                            onChange={e => setModeInput(e.target.value)} 
-                            placeholder="输入自定义折扣 (如 0.8)"
+                            onChange={e => setModeInput(e.target.value)}
+                            placeholder="输入折扣 (如 0.8，负数表示倒贴)"
                             className="pl-3 pr-24 border-slate-200 shadow-sm focus-visible:ring-0 font-mono"
                           />
                           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded-md">
                             💸 x 剩余价值
                           </span>
                         </div>
+                        {parseFloat(modeInput) === 0 && modeInput !== '' && (
+                          <p className="text-xs text-amber-500">⚠️ 折扣为 0 表示免费赠送，请确认是否正确</p>
+                        )}
                       </div>
                     ) : (
                       <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-slate-200 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary/20 transition-all overflow-hidden bg-white">
@@ -363,6 +388,7 @@ ${isProfit
                 <Button variant="outline" className="w-full mt-2 border-slate-200 hover:bg-slate-50 text-slate-600" onClick={handleReset}>🔄 重置所有选项</Button>
               </CardContent>
 
+              {/* 左侧卡片底部：注释 */}
               <div className="p-4 bg-slate-50 rounded-b-xl border-t border-slate-100 text-xs text-slate-500 leading-relaxed flex gap-2 items-start">
                 <Info className="h-4 w-4 shrink-0 mt-0.5 text-slate-400" />
                 <p>注：剩余价值 = (剩余天数 ÷ 总天数) × 购买价格。所有外币均按实时汇率折算为人民币进行评估。</p>
@@ -390,6 +416,7 @@ ${isProfit
                         </div>
                       </div>
 
+                      {/* 核心三栏数据 */}
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 relative z-10">
                         <div className="p-6 rounded-2xl text-center border-2 bg-gradient-to-b from-blue-50 to-white border-blue-100 shadow-sm transition-transform hover:scale-[1.02]">
                           <div className="text-sm mb-3 font-bold text-blue-600 flex items-center justify-center gap-1">
@@ -437,6 +464,7 @@ ${isProfit
                         </div>
                       </div>
 
+                      {/* 详细信息表格 */}
                       <div className="p-6 rounded-2xl relative z-10 bg-slate-50/80 border border-slate-100">
                         <h3 className="text-sm font-bold mb-5 text-slate-700 flex items-center gap-2">
                           <Info className="h-4 w-4" /> 详细数据清单
@@ -467,6 +495,7 @@ ${isProfit
                       </div>
                     </div>
 
+                    {/* 右侧卡片底部 */}
                     <div className="px-8 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between mt-auto">
                       <div className="text-xs text-slate-400 font-mono flex items-center gap-2">
                         <span className="bg-slate-200/50 px-1.5 py-0.5 rounded">Globokit.com</span>
@@ -513,6 +542,7 @@ ${isProfit
   )
 }
 
+// 辅助组件：详细数据项
 function DetailItem({ emoji, label, value, subValue, valueClassName }: { emoji: string, label: string, value: string, subValue?: string, valueClassName?: string }) {
   return (
     <div className="flex flex-col gap-1">
