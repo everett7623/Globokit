@@ -285,27 +285,6 @@ ${isProfit
                     ))}
                   </div>
                 </div>
-                {/* 自定义月数输入 */}
-                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-slate-200 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary/20 transition-all overflow-hidden bg-white">
-                    <span className="flex select-none items-center px-3 text-slate-500 bg-slate-50/50 border-r border-slate-100 sm:text-sm whitespace-nowrap">
-                      自定义
-                    </span>
-                    <Input
-                      type="number"
-                      min="1"
-                      max="120"
-                      value={RENEWAL_PERIODS.some(p => p.value === parseInt(renewalPeriod)) ? '' : renewalPeriod}
-                      onChange={e => {
-                        const v = parseInt(e.target.value)
-                        if (v >= 1 && v <= 120) setRenewalPeriod(v.toString())
-                      }}
-                      className="block flex-1 border-0 bg-transparent py-1.5 pl-2 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm font-mono"
-                      placeholder="输入月数 (1-120)"
-                    />
-                    <span className="flex select-none items-center px-3 text-slate-500 bg-slate-50/50 border-l border-slate-100 sm:text-sm whitespace-nowrap">
-                      个月
-                    </span>
-                  </div>
                 {/* 日期选择 */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-3 relative">
