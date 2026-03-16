@@ -512,7 +512,7 @@ ${isProfit
     </div>
   )
 }
-
+// 辅助组件：详细数据项
 function DetailItem({ emoji, label, value, subValue, valueClassName }: { emoji: string, label: string, value: string, subValue?: string, valueClassName?: string }) {
   return (
     <div className="flex flex-col gap-1">
