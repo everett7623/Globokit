@@ -176,16 +176,44 @@ ${isProfit
     <div className="min-h-screen bg-slate-50/50 py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-[1400px] mx-auto space-y-8">
         
-        {/* 头部标题 */}
-        <div className="text-center sm:text-left">
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 flex items-center justify-center sm:justify-start gap-3">
-            <span className="text-4xl">🧮</span> VPS 剩余价值计算器 <span className="text-2xl">🚀</span>
-          </h1>
-          <p className="text-lg text-slate-600 mt-3 max-w-2xl">
-            基于实时汇率与精确到天的时间计算，助您快速分析服务器残值与交易盈亏。
-          </p>
-        </div>
+{/* 头部标题 */}
+<div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+  <div className="text-center sm:text-left">
+    <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 flex items-center justify-center sm:justify-start gap-3">
+      <span className="text-4xl">🧮</span> VPS 剩余价值计算器 <span className="text-2xl">🚀</span>
+    </h1>
+    <p className="text-lg text-slate-600 mt-3 max-w-2xl">
+      基于实时汇率与精确到天的时间计算，助您快速分析服务器残值与交易盈亏。
+    </p>
+  </div>
 
+  {/* VPSKnow 推荐卡片 */}
+  
+    href="https://vpsknow.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="group flex-shrink-0 flex items-center gap-4 px-5 py-4 rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 hover:border-blue-200 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer max-w-xs"
+  >
+    <img
+      src="https://vpsknow.com/logo.png"
+      alt="VPSKnow Logo"
+      className="w-12 h-12 rounded-xl object-contain flex-shrink-0 shadow-sm"
+    />
+    <div className="min-w-0">
+      <div className="flex items-center gap-1.5 mb-1">
+        <span className="text-[11px] font-bold text-blue-500 bg-blue-100 px-2 py-0.5 rounded-full">推荐</span>
+        <span className="text-sm font-extrabold text-slate-800 group-hover:text-blue-700 transition-colors">VPSKnow</span>
+      </div>
+      <p className="text-xs text-slate-500 leading-snug">
+        专业 VPS 评测 · 机场推荐<br/>全球云服务器与网络工具指南
+      </p>
+    </div>
+    <svg className="w-4 h-4 text-slate-300 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+    </svg>
+  </a>
+</div>
+      
         {/* 核心布局 */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
