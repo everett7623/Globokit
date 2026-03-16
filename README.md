@@ -23,7 +23,9 @@
     ·
     <a href="https://github.com/everett7623/Globokit/issues">报告问题</a>
     ·
-    <a href="https://seedloc.com">博客</a>
+    <a href="https://seedloc.com">Seedloc博客</a>
+    ·
+    <a href="https://vpsknow.com">VPSKnow站点</a>
   </p>
 
   <p align="center">
