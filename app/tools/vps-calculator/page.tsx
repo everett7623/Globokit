@@ -180,28 +180,28 @@ ${isProfit
           {/* VPSKnow 推荐卡片 */}
           
             <a href="https://vpsknow.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex-shrink-0 flex items-center gap-4 px-5 py-4 rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 hover:border-blue-200 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer max-w-xs"
-          >
-            <img
-              src="https://vpsknow.com/logo.png"
-              alt="VPSKnow Logo"
-              className="w-12 h-12 rounded-xl object-contain flex-shrink-0 shadow-sm"
-            />
-            <div className="min-w-0">
-              <div className="flex items-center gap-1.5 mb-1">
-                <span className="text-[11px] font-bold text-blue-500 bg-blue-100 px-2 py-0.5 rounded-full">推荐</span>
-                <span className="text-sm font-extrabold text-slate-800 group-hover:text-blue-700 transition-colors">VPSKnow</span>
-              </div>
-              <p className="text-xs text-slate-500 leading-snug">
-                专业 VPS 评测 · 机场推荐<br/>全球云服务器与网络工具指南
-              </p>
-            </div>
-            <svg className="w-4 h-4 text-slate-300 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
+  target="_blank"
+  rel="noopener noreferrer"
+  className="group flex-shrink-0 flex items-center gap-5 px-6 py-5 rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 hover:border-blue-200 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer w-80"
+>
+  <img
+    src="https://vpsknow.com/logo.png"
+    alt="VPSKnow Logo"
+    className="w-14 h-14 rounded-xl object-contain flex-shrink-0 shadow-sm"
+  />
+  <div className="min-w-0">
+    <div className="flex items-center gap-2 mb-1.5">
+      <span className="text-xs font-bold text-blue-500 bg-blue-100 px-2 py-0.5 rounded-full">推荐</span>
+      <span className="text-base font-extrabold text-slate-800 group-hover:text-blue-700 transition-colors">VPSKnow</span>
+    </div>
+    <p className="text-sm text-slate-500 leading-snug">
+      专业 VPS 评测 · 机场推荐<br/>全球云服务器与网络工具指南
+    </p>
+  </div>
+  <svg className="w-5 h-5 text-slate-300 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+  </svg>
+</a>
         </div>
 
         {/* 核心布局 */}
