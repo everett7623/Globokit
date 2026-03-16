@@ -179,7 +179,7 @@ ${isProfit
 
           {/* VPSKnow 推荐卡片 */}
           
-            href="https://vpsknow.com"
+            <a href="https://vpsknow.com"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex-shrink-0 flex items-center gap-4 px-5 py-4 rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 hover:border-blue-200 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer max-w-xs"
