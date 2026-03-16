@@ -46,6 +46,16 @@ export function Footer() {
             </Link>
             <span className="text-gray-300">|</span>
             <Link
+              href="https://vpsknow.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-gray-900 flex items-center gap-1.5 transition-colors"
+            >
+              VPSKnow 站点
+              <ExternalLink className="h-3 w-3 opacity-50" />
+            </Link>
+            <span className="text-gray-300">|</span>
+            <Link
               href="https://nav.seedloc.com"
               target="_blank"
               rel="noopener noreferrer"
