@@ -198,7 +198,7 @@ ${isProfit
             className="group flex-shrink-0 flex items-center gap-4 px-5 py-4 rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 hover:border-blue-200 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer max-w-xs"
           >
             <img
-              src="https://vpsknow.com/logo.png"
+              src="https://vpsknow.com/favicon.png"
               alt="VPSKnow Logo"
               className="w-8 h-8 rounded-lg object-contain flex-shrink-0"
             />
