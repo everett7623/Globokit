@@ -2,7 +2,8 @@
 // 描述: 基于购买日期和到期时间精确计算VPS剩余价值，支持多币种转换，支持生成交易卡片
 // 路径: Globokit/app/tools/vps-calculator/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2026-01-12
+// 更新时间: 2026-03-16
+// 更新内容: 头部标题区右侧新增 VPSKnow 站点推荐卡片（含 Logo、描述及外链跳转）
 
 'use client'
 
