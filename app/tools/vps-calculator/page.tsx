@@ -168,7 +168,7 @@ ${isProfit
     try {
       const canvas = await html2canvas(resultRef.current, { scale: 3, useCORS: true, backgroundColor: null })
       const link = document.createElement('a')
-      link.download = `VPS-Calc-${Date.now()}.png`
+      link.download = `Globokit-VPScalculator-${Date.now()}.png`
       link.href = canvas.toDataURL('image/png')
       link.click()
     } catch (e) { console.error(e) } finally { setGeneratingImg(false) }
