@@ -2,7 +2,7 @@
 // 描述: 全局顶部导航栏，包含移动端适配、下拉菜单及工具集入口配置
 // 路径: Globokit/components/layout/navigation.tsx
 // 作者: Jensfrank
-// 更新时间: 2026-01-12
+// 更新时间: 2026-07-01
 
 'use client'
 
@@ -19,24 +19,20 @@ import {
   Home,
   ChevronDown
 } from 'lucide-react'
+import { TOOL_REGISTRY, getToolsByCategory } from '@/lib/tools/registry'
+
+// Group tools by category for organized dropdown
+const toolsByCategory = getToolsByCategory()
 
 const navItems = [
   { href: '/', label: '首页', icon: Home },
   { 
     label: '工具集', 
     icon: ChevronDown,
-    children: [
-      { href: '/tools/rmb-converter', label: '人民币大写转换' },
-      { href: '/tools/text-case', label: '英文大小写转换' },
-      { href: '/tools/special-char', label: '特殊字符检查' },
-      { href: '/tools/number-to-english', label: '数字转英文' },
-      { href: '/tools/pinyin', label: '中文转拼音' },
-      { href: '/tools/holiday-query', label: '国际节假日查询' },
-      { href: '/tools/world-time', label: '世界时间' },
-      { href: '/tools/currency-symbols', label: '全球货币符号' },
-      { href: '/tools/global-country-info', label: '全球国家信息' },
-      { href: '/tools/vps-calculator', label: 'VPS剩余价值计算器' },
-    ]
+    children: TOOL_REGISTRY.map(tool => ({
+      href: tool.href,
+      label: tool.shortTitle,
+    }))
   }
 ]
 

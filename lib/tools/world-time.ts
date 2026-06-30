@@ -19,21 +19,49 @@ export function formatTime(date: Date): string {
 }
 
 /**
- * 获取时区偏移量
+ * 检查时区标识符是否有效
  * @param timezone 时区标识符
- * @returns UTC偏移量字符串 (例如: +08:00)
+ * @returns 是否为有效的IANA时区标识符
+ */
+export function isValidTimezone(timezone: string): boolean {
+  try {
+    new Intl.DateTimeFormat('en-US', { timeZone: timezone })
+    return true
+  } catch {
+    return false
+  }
+}
+
+/**
+ * 获取时区偏移量（使用 Intl.DateTimeFormat 精确计算，支持DST和亚小时精度）
+ * @param timezone 时区标识符
+ * @returns UTC偏移量字符串 (例如: +08:00, +05:30, +05:45)，无效时区返回空字符串
  */
 export function getTimeZoneOffset(timezone: string): string {
-  const now = new Date()
-  const tzDate = new Date(now.toLocaleString('en-US', { timeZone: timezone }))
-  const utcDate = new Date(now.toLocaleString('en-US', { timeZone: 'UTC' }))
-  
-  const diff = (tzDate.getTime() - utcDate.getTime()) / (1000 * 60 * 60)
-  const hours = Math.floor(Math.abs(diff))
-  const minutes = Math.floor((Math.abs(diff) - hours) * 60)
-  
-  const sign = diff >= 0 ? '+' : '-'
-  return `${sign}${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
+  try {
+    const formatter = new Intl.DateTimeFormat('en-US', {
+      timeZone: timezone,
+      timeZoneName: 'longOffset'
+    })
+    const parts = formatter.formatToParts(new Date())
+    const tzPart = parts.find(p => p.type === 'timeZoneName')
+    if (!tzPart) return ''
+    
+    const value = tzPart.value // e.g. "GMT+05:30", "GMT-05:00", "GMT"
+    if (value === 'GMT') return '+00:00'
+    
+    // Parse "GMT+05:30" → "+05:30"
+    const match = value.match(/^GMT([+-])(\d{1,2})(?::(\d{2}))?$/)
+    if (!match) return '+00:00'
+    
+    const sign = match[1]
+    const hours = match[2].padStart(2, '0')
+    const minutes = (match[3] || '00').padStart(2, '0')
+    
+    return `${sign}${hours}:${minutes}`
+  } catch {
+    return '' // Invalid timezone - caller handles omission
+  }
 }
 
 /**
@@ -55,25 +83,26 @@ export function isBusinessHours(date: Date): boolean {
 }
 
 /**
- * 计算两个时区之间的时差
+ * 计算两个时区之间的时差（使用 Intl.DateTimeFormat 精确计算，0.25小时精度）
  * @param timezone1 第一个时区
  * @param timezone2 第二个时区
- * @returns 时差（小时）
+ * @returns 时差（小时），0.25精度（15分钟粒度）
  */
 export function getTimeDifference(timezone1: string, timezone2: string): number {
-  const now = new Date()
+  const offset1 = getTimeZoneOffset(timezone1)
+  const offset2 = getTimeZoneOffset(timezone2)
   
-  // 获取两个时区的偏移量
-  const date1 = new Date(now.toLocaleString('en-US', { timeZone: timezone1 }))
-  const date2 = new Date(now.toLocaleString('en-US', { timeZone: timezone2 }))
+  if (!offset1 || !offset2) return 0
   
-  // 计算UTC偏移量
-  const utcDate = new Date(now.toLocaleString('en-US', { timeZone: 'UTC' }))
+  const parseOffset = (offset: string): number => {
+    const sign = offset[0] === '+' ? 1 : -1
+    const [hours, minutes] = offset.slice(1).split(':').map(Number)
+    return sign * (hours + minutes / 60)
+  }
   
-  const offset1 = (date1.getTime() - utcDate.getTime()) / (1000 * 60 * 60)
-  const offset2 = (date2.getTime() - utcDate.getTime()) / (1000 * 60 * 60)
-  
-  return Math.round(offset1 - offset2)
+  const diff = parseOffset(offset1) - parseOffset(offset2)
+  // Round to 0.25 precision (15-minute granularity)
+  return Math.round(diff * 4) / 4
 }
 
 /**
@@ -281,7 +310,7 @@ export const WORLD_CITIES = [
   { name: '马德里', nameEn: 'Madrid', timezone: 'Europe/Madrid', country: '西班牙', countryCode: 'ES' },
   { name: '巴塞罗那', nameEn: 'Barcelona', timezone: 'Europe/Madrid', country: '西班牙', countryCode: 'ES' },
   { name: '罗马', nameEn: 'Rome', timezone: 'Europe/Rome', country: '意大利', countryCode: 'IT' },
-  { name: '米米兰', nameEn: 'Milan', timezone: 'Europe/Rome', country: '意大利', countryCode: 'IT' },
+  { name: '米兰', nameEn: 'Milan', timezone: 'Europe/Rome', country: '意大利', countryCode: 'IT' },
   { name: '苏黎世', nameEn: 'Zurich', timezone: 'Europe/Zurich', country: '瑞士', countryCode: 'CH' },
   { name: '日内瓦', nameEn: 'Geneva', timezone: 'Europe/Zurich', country: '瑞士', countryCode: 'CH' },
   { name: '维也纳', nameEn: 'Vienna', timezone: 'Europe/Vienna', country: '奥地利', countryCode: 'AT' },

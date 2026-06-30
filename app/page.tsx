@@ -2,7 +2,7 @@
 // 描述: 聚合各类外贸效率工具的导航主页，展示热门工具入口、统计数据及项目介绍
 // 路径: Globokit/app/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2026-01-12
+// 更新时间: 2026-07-01
 
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -24,102 +24,52 @@ import {
   Users,
   Zap,
   Globe,
-  Server
+  Server,
+  Code,
+  FileSearch,
+  Code2,
 } from 'lucide-react'
+import { TOOL_REGISTRY } from '@/lib/tools/registry'
+import { TOOL_UI_CONFIG } from '@/lib/tools/registry-ui'
 
-const tools = [
-  {
-    title: '人民币大写转换',
-    description: '将数字金额转换为中文大写形式，适用于发票、合同等正式文件',
-    icon: Calculator,
-    href: '/tools/rmb-converter',
-    color: 'text-blue-500',
-    bgColor: 'bg-blue-50',
-    badge: '热门',
-    badgeColor: 'bg-orange-100 text-orange-700'
-  },
-  {
-    title: '英文大小写转换',
-    description: '快速转换英文文本的大小写格式，支持多种转换模式',
-    icon: Type,
-    href: '/tools/text-case',
-    color: 'text-green-500',
-    bgColor: 'bg-green-50'
-  },
-  {
-    title: '特殊字符检查与转换',
-    description: '检查并转换文本中的特殊字符，避免邮件或文档中的乱码',
-    icon: AlertCircle,
-    href: '/tools/special-char',
-    color: 'text-yellow-500',
-    bgColor: 'bg-yellow-50'
-  },
-  {
-    title: '数字转英文',
-    description: '将数字转换为英文表达形式，支持基数词和序数词',
-    icon: Hash,
-    href: '/tools/number-to-english',
-    color: 'text-purple-500',
-    bgColor: 'bg-purple-50'
-  },
-  {
-    title: '中文转拼音',
-    description: '将中文文本转换为汉语拼音，支持声调和多种格式',
-    icon: Languages,
-    href: '/tools/pinyin',
-    color: 'text-red-500',
-    bgColor: 'bg-red-50'
-  },
-  {
-    title: '国际节假日查询',
-    description: '查询全球主要贸易国家的节假日安排，便于外贸业务安排',
-    icon: Calendar,
-    href: '/tools/holiday-query',
-    color: 'text-orange-500',
-    bgColor: 'bg-orange-50',
-    badgeColor: 'bg-green-100 text-green-700'
-  },
-  {
-    title: '世界时间',
-    description: '查看全球主要贸易城市的实时时间，便于安排国际业务',
-    icon: Clock,
-    href: '/tools/world-time',
-    color: 'text-indigo-500',
-    bgColor: 'bg-indigo-50',
-    badgeColor: 'bg-green-100 text-green-700'
-  },
-  {
-    title: '全球货币符号大全',
-    description: '查看和复制全球各国货币符号，便于外贸报价和合同编写',
-    icon: CircleDollarSign,
-    href: '/tools/currency-symbols',
-    color: 'text-emerald-500',
-    bgColor: 'bg-emerald-50',
-    badgeColor: 'bg-green-100 text-green-700'
-  },
-  {
-    title: '全球国家信息查询',
-    description: '查询世界各国的中英文名称、区号、代码、时区、域名等信息',
-    icon: Globe,
-    href: '/tools/global-country-info',
-    color: 'text-cyan-500',
-    bgColor: 'bg-cyan-50',
-    badgeColor: 'bg-green-100 text-green-700'
-  },
-  {
-    title: 'VPS剩余价值计算器',
-    description: '基于购买日期和到期时间精确计算VPS剩余价值，支持多币种转换',
-    icon: Server,
-    href: '/tools/vps-calculator',
-    color: 'text-violet-500',
-    bgColor: 'bg-violet-50',
-    badge: '新增',
-    badgeColor: 'bg-emerald-100 text-emerald-700' // 这里的小徽章我也改成了 emerald
-  },
-]
+// Icon mapping for dynamic rendering based on registry iconName
+const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  Calculator,
+  Type,
+  AlertCircle,
+  Hash,
+  Languages,
+  Calendar,
+  Clock,
+  CircleDollarSign,
+  Globe,
+  Server,
+  FileSearch,
+  Code2,
+}
+
+const tools = TOOL_REGISTRY.map((tool) => {
+  const uiConfig = TOOL_UI_CONFIG[tool.id] || {
+    color: 'text-gray-500',
+    bgColor: 'bg-gray-50',
+  }
+  const IconComponent = ICON_MAP[tool.iconName] || Code
+  
+  return {
+    title: tool.title,
+    description: tool.description,
+    icon: IconComponent,
+    href: tool.href,
+    badge: tool.badge,
+    ...uiConfig,
+  }
+})
+
+// Legacy tools array kept for reference during migration
+const legacyTools = []
 
 const stats = [
-  { label: '工具总数', value: '10+', icon: Zap },
+  { label: '工具总数', value: `${tools.length}+`, icon: Zap },
   { label: '月活用户', value: '1000+', icon: Users },
   { label: '持续更新', value: '每周', icon: TrendingUp },
   { label: '用户好评', value: '98%', icon: Sparkles }
@@ -139,7 +89,7 @@ export default function HomePage() {
           外贸实用工具集
         </h1>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          精选10款专业工具，涵盖文本处理、时间管理、货币转换等外贸场景
+          精选{tools.length}款专业工具，涵盖文本处理、时间管理、货币转换与数据处理等外贸场景
           <br />让国际贸易更简单，让工作效率更高效
         </p>
       </div>

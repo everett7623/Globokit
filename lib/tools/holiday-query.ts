@@ -31,22 +31,22 @@ export interface UpcomingHoliday extends Holiday {
 // 扩展的国家/地区数据（按地区分组）
 export const countries: Record<string, Country> = {
   // 北美
-  US: { name: '美国', flag: '🇺🇸', timezone: 'UTC-5', currency: 'USD', region: '北美' },
-  CA: { name: '加拿大', flag: '🇨🇦', timezone: 'UTC-5', currency: 'CAD', region: '北美' },
-  MX: { name: '墨西哥', flag: '🇲🇽', timezone: 'UTC-6', currency: 'MXN', region: '北美' },
+  US: { name: '美国', flag: '🇺🇸', timezone: 'America/New_York', currency: 'USD', region: '北美' },
+  CA: { name: '加拿大', flag: '🇨🇦', timezone: 'America/Toronto', currency: 'CAD', region: '北美' },
+  MX: { name: '墨西哥', flag: '🇲🇽', timezone: 'America/Mexico_City', currency: 'MXN', region: '北美' },
   
   // 西欧
-  UK: { name: '英国', flag: '🇬🇧', timezone: 'UTC+0', currency: 'GBP', region: '西欧' },
-  DE: { name: '德国', flag: '🇩🇪', timezone: 'UTC+1', currency: 'EUR', region: '西欧' },
-  FR: { name: '法国', flag: '🇫🇷', timezone: 'UTC+1', currency: 'EUR', region: '西欧' },
-  IT: { name: '意大利', flag: '🇮🇹', timezone: 'UTC+1', currency: 'EUR', region: '西欧' },
-  ES: { name: '西班牙', flag: '🇪🇸', timezone: 'UTC+1', currency: 'EUR', region: '西欧' },
-  NL: { name: '荷兰', flag: '🇳🇱', timezone: 'UTC+1', currency: 'EUR', region: '西欧' },
-  BE: { name: '比利时', flag: '🇧🇪', timezone: 'UTC+1', currency: 'EUR', region: '西欧' },
-  CH: { name: '瑞士', flag: '🇨🇭', timezone: 'UTC+1', currency: 'CHF', region: '西欧' },
-  AT: { name: '奥地利', flag: '🇦🇹', timezone: 'UTC+1', currency: 'EUR', region: '西欧' },
-  IE: { name: '爱尔兰', flag: '🇮🇪', timezone: 'UTC+0', currency: 'EUR', region: '西欧' },
-  LU: { name: '卢森堡', flag: '🇱🇺', timezone: 'UTC+1', currency: 'EUR', region: '西欧' },
+  GB: { name: '英国', flag: '🇬🇧', timezone: 'Europe/London', currency: 'GBP', region: '西欧' },
+  DE: { name: '德国', flag: '🇩🇪', timezone: 'Europe/Berlin', currency: 'EUR', region: '西欧' },
+  FR: { name: '法国', flag: '🇫🇷', timezone: 'Europe/Paris', currency: 'EUR', region: '西欧' },
+  IT: { name: '意大利', flag: '🇮🇹', timezone: 'Europe/Rome', currency: 'EUR', region: '西欧' },
+  ES: { name: '西班牙', flag: '🇪🇸', timezone: 'Europe/Madrid', currency: 'EUR', region: '西欧' },
+  NL: { name: '荷兰', flag: '🇳🇱', timezone: 'Europe/Amsterdam', currency: 'EUR', region: '西欧' },
+  BE: { name: '比利时', flag: '🇧🇪', timezone: 'Europe/Brussels', currency: 'EUR', region: '西欧' },
+  CH: { name: '瑞士', flag: '🇨🇭', timezone: 'Europe/Zurich', currency: 'CHF', region: '西欧' },
+  AT: { name: '奥地利', flag: '🇦🇹', timezone: 'Europe/Vienna', currency: 'EUR', region: '西欧' },
+  IE: { name: '爱尔兰', flag: '🇮🇪', timezone: 'Europe/Dublin', currency: 'EUR', region: '西欧' },
+  LU: { name: '卢森堡', flag: '🇱🇺', timezone: 'Europe/Luxembourg', currency: 'EUR', region: '西欧' },
   
   // 北欧
   SE: { name: '瑞典', flag: '🇸🇪', timezone: 'UTC+1', currency: 'SEK', region: '北欧' },
