@@ -2,7 +2,7 @@
 // 描述: 查询全球主要贸易国家的节假日安排，便于外贸业务安排
 // 路径: Globokit/app/tools/holiday-query/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2026-01-08
+// 更新时间: 2026-07-06
 
 'use client'
 
@@ -26,18 +26,23 @@ import {
   getImpactLevelName,
   impactDescriptions,
   getCountriesByRegion,
-  generateHolidayData
+  generateHolidayData,
+  SUPPORTED_HOLIDAY_YEARS
 } from '@/lib/tools/holiday-query'
 
 export default function HolidayQueryPage() {
   const currentYear = new Date().getFullYear()
+  const defaultYear = SUPPORTED_HOLIDAY_YEARS.includes(currentYear as typeof SUPPORTED_HOLIDAY_YEARS[number])
+    ? currentYear
+    : SUPPORTED_HOLIDAY_YEARS[SUPPORTED_HOLIDAY_YEARS.length - 1]
   const [selectedCountry, setSelectedCountry] = useState<string>('US')
-  const [selectedYear, setSelectedYear] = useState<string>(currentYear.toString())
+  const [selectedYear, setSelectedYear] = useState<string>(defaultYear.toString())
   const [selectedMonth, setSelectedMonth] = useState<string>('all')
   const [selectedRegion, setSelectedRegion] = useState<string>('all')
   
+  const selectedYearNumber = parseInt(selectedYear)
   const countryInfo = countries[selectedCountry]
-  const countryHolidays = getCountryHolidays(selectedCountry, parseInt(selectedYear))
+  const countryHolidays = getCountryHolidays(selectedCountry, selectedYearNumber)
   
   // 按月份筛选
   const filteredHolidays = selectedMonth === 'all' 
@@ -49,6 +54,7 @@ export default function HolidayQueryPage() {
   
   // 按地区分组的国家
   const countriesByRegion = getCountriesByRegion()
+  const regionNames = Object.keys(countriesByRegion).sort((a, b) => a.localeCompare(b, 'zh-CN'))
   
   // 获取筛选后的国家列表
   const getFilteredCountries = () => {
@@ -59,13 +65,13 @@ export default function HolidayQueryPage() {
   }
 
   // 热门外贸国家
-  const hotCountries = ['US', 'UK', 'DE', 'JP', 'FR', 'IN', 'AU', 'CA', 'KR', 'BR', 'AE', 'SG']
+  const hotCountries = ['US', 'GB', 'DE', 'JP', 'FR', 'IN', 'AU', 'CA', 'KR', 'BR', 'AE', 'SG']
 
   // 统计数据
   const totalCountries = Object.keys(countries).length
-  const totalHolidaysThisYear = Object.keys(countries).reduce((sum, code) => {
-    return sum + getCountryHolidays(code, currentYear).length
-  }, 0)
+  const holidayDataThisYear = generateHolidayData(selectedYearNumber)
+  const countriesWithHolidayData = Object.values(holidayDataThisYear).filter((holidays) => holidays.length > 0).length
+  const totalHolidaysThisYear = Object.values(holidayDataThisYear).reduce((sum, holidays) => sum + holidays.length, 0)
   const upcomingCount = upcomingHolidays.filter(h => h.daysUntil <= 7).length
 
   return (
@@ -73,7 +79,7 @@ export default function HolidayQueryPage() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">国际节假日查询</h1>
         <p className="text-muted-foreground">
-          查询全球100+主要贸易国家的节假日安排，合理规划外贸业务
+          查询全球国家目录与主要贸易国家节假日安排，合理规划外贸业务
         </p>
       </div>
 
@@ -88,7 +94,7 @@ export default function HolidayQueryPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{totalCountries}+</div>
-            <p className="text-xs text-muted-foreground">个国家/地区</p>
+            <p className="text-xs text-muted-foreground">个国家/地区目录</p>
           </CardContent>
         </Card>
 
@@ -101,7 +107,7 @@ export default function HolidayQueryPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{totalHolidaysThisYear}</div>
-            <p className="text-xs text-muted-foreground">{currentYear}年总计</p>
+            <p className="text-xs text-muted-foreground">{selectedYear}年总计</p>
           </CardContent>
         </Card>
 
@@ -122,12 +128,12 @@ export default function HolidayQueryPage() {
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium flex items-center gap-2">
               <TrendingUp className="h-4 w-4" />
-              影响分级
+              详细数据
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">3</div>
-            <p className="text-xs text-muted-foreground">级影响评估</p>
+            <div className="text-2xl font-bold">{countriesWithHolidayData}</div>
+            <p className="text-xs text-muted-foreground">国有年度明细</p>
           </CardContent>
         </Card>
       </div>
@@ -155,21 +161,9 @@ export default function HolidayQueryPage() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="all">全部地区</SelectItem>
-                      <SelectItem value="北美">北美</SelectItem>
-                      <SelectItem value="西欧">西欧</SelectItem>
-                      <SelectItem value="北欧">北欧</SelectItem>
-                      <SelectItem value="南欧">南欧</SelectItem>
-                      <SelectItem value="东欧">东欧</SelectItem>
-                      <SelectItem value="独联体">独联体</SelectItem>
-                      <SelectItem value="东亚">东亚</SelectItem>
-                      <SelectItem value="东南亚">东南亚</SelectItem>
-                      <SelectItem value="南亚">南亚</SelectItem>
-                      <SelectItem value="中东">中东</SelectItem>
-                      <SelectItem value="大洋洲">大洋洲</SelectItem>
-                      <SelectItem value="南美">南美</SelectItem>
-                      <SelectItem value="中美洲">中美洲</SelectItem>
-                      <SelectItem value="加勒比">加勒比</SelectItem>
-                      <SelectItem value="非洲">非洲</SelectItem>
+                      {regionNames.map((region) => (
+                        <SelectItem key={region} value={region}>{region}</SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </div>
@@ -225,8 +219,11 @@ export default function HolidayQueryPage() {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="2025">2025年</SelectItem>
-                      <SelectItem value="2026">2026年（预测）</SelectItem>
+                      {SUPPORTED_HOLIDAY_YEARS.map((year) => (
+                        <SelectItem key={year} value={year.toString()}>
+                          {year}年{year >= 2026 ? '（预测）' : ''}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </div>
@@ -273,11 +270,11 @@ export default function HolidayQueryPage() {
               )}
               
               {/* 年份提示 */}
-              {selectedYear === '2026' && (
+              {selectedYearNumber >= 2026 && (
                 <Alert>
                   <Info className="h-4 w-4" />
                   <AlertDescription>
-                    2026年节假日为预测数据，实际日期以各国官方公布为准
+                    {selectedYear}年节假日为批量生成/预测数据，实际日期以各国官方公布为准
                   </AlertDescription>
                 </Alert>
               )}
@@ -351,47 +348,56 @@ export default function HolidayQueryPage() {
               </Alert>
               
               <div className="space-y-3 max-h-[600px] overflow-y-auto pr-2">
-                {upcomingHolidays.slice(0, 20).map((holiday, index) => (
-                  <Card key={index} className={holiday.daysUntil <= 7 ? 'border-orange-200' : ''}>
-                    <CardContent className="pt-6">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <span className="text-2xl">{holiday.flag}</span>
-                          <div className="flex-1">
-                            <h4 className="font-semibold">
-                              {holiday.name}
-                              {(holiday.nameCN || holiday.localName) && (
-                                <span className="text-sm text-muted-foreground ml-2">
-                                  ({holiday.nameCN || holiday.localName})
-                                </span>
-                              )}
-                            </h4>
-                            <p className="text-sm text-muted-foreground">
-                              {holiday.country} • {new Date(holiday.date).toLocaleDateString('zh-CN')}
-                            </p>
+                {upcomingHolidays.length > 0 ? (
+                  upcomingHolidays.slice(0, 20).map((holiday, index) => (
+                    <Card key={`${holiday.country}-${holiday.date}-${index}`} className={holiday.daysUntil <= 7 ? 'border-orange-200' : ''}>
+                      <CardContent className="pt-6">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <span className="text-2xl">{holiday.flag}</span>
+                            <div className="flex-1">
+                              <h4 className="font-semibold">
+                                {holiday.name}
+                                {(holiday.nameCN || holiday.localName) && (
+                                  <span className="text-sm text-muted-foreground ml-2">
+                                    ({holiday.nameCN || holiday.localName})
+                                  </span>
+                                )}
+                              </h4>
+                              <p className="text-sm text-muted-foreground">
+                                {holiday.country} • {new Date(holiday.date).toLocaleDateString('zh-CN')}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="text-right space-y-1">
+                            <Badge
+                              variant={holiday.daysUntil <= 7 ? "destructive" : "outline"}
+                              className="text-sm"
+                            >
+                              {holiday.daysUntil}天后
+                            </Badge>
+                            <Badge
+                              variant={
+                                holiday.impact === 'high' ? 'destructive' :
+                                holiday.impact === 'medium' ? 'default' : 'secondary'
+                              }
+                              className="text-xs block"
+                            >
+                              {getImpactLevelName(holiday.impact)}影响
+                            </Badge>
                           </div>
                         </div>
-                        <div className="text-right space-y-1">
-                          <Badge 
-                            variant={holiday.daysUntil <= 7 ? "destructive" : "outline"} 
-                            className="text-sm"
-                          >
-                            {holiday.daysUntil}天后
-                          </Badge>
-                          <Badge 
-                            variant={
-                              holiday.impact === 'high' ? 'destructive' : 
-                              holiday.impact === 'medium' ? 'default' : 'secondary'
-                            }
-                            className="text-xs block"
-                          >
-                            {getImpactLevelName(holiday.impact)}影响
-                          </Badge>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
+                      </CardContent>
+                    </Card>
+                  ))
+                ) : (
+                  <Alert>
+                    <Info className="h-4 w-4" />
+                    <AlertDescription>
+                      未来30天暂无已收录的高影响节假日
+                    </AlertDescription>
+                  </Alert>
+                )}
               </div>
             </TabsContent>
             
@@ -429,7 +435,7 @@ export default function HolidayQueryPage() {
               <Alert>
                 <Info className="h-4 w-4" />
                 <AlertDescription>
-                  主要宗教节日对相关国家和地区的商业活动有重要影响。
+                  主要宗教节日对相关国家和地区的商业活动有重要影响。以下日期为2025年参考数据。
                   注意：伊斯兰历和部分宗教历法日期可能有1-2天偏差。
                 </AlertDescription>
               </Alert>

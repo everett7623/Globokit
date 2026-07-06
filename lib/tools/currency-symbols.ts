@@ -4,6 +4,8 @@
 // 作者: Jensfrank
 // 更新时间: 2026-01-08
 
+import { COUNTRY_DATA } from './global-country-info'
+
 // 定义Currency类型
 export interface Currency {
   code: string
@@ -29,7 +31,7 @@ export const CURRENCY_REGIONS: Record<string, string> = {
 }
 
 // 全球货币数据
-const CURRENCIES: Currency[] = [
+const CURATED_CURRENCIES: Currency[] = [
   // 亚洲货币
   { code: 'CNY', name: '人民币', nameEn: 'Chinese Yuan', symbol: '¥', country: '中国', countryEn: 'China', region: 'asia', decimals: 2, popular: true, trading: true },
   { code: 'JPY', name: '日元', nameEn: 'Japanese Yen', symbol: '¥', country: '日本', countryEn: 'Japan', region: 'asia', decimals: 0, popular: true, trading: true },
@@ -128,18 +130,135 @@ const CURRENCIES: Currency[] = [
   { code: 'XPF', name: '太平洋法郎', nameEn: 'CFP Franc', symbol: '₣', country: '法属波利尼西亚', countryEn: 'French Polynesia', region: 'oceania', decimals: 0 }
 ]
 
+const REGION_BY_CONTINENT: Record<string, string> = {
+  '亚洲': 'asia',
+  '欧洲': 'europe',
+  '欧洲/亚洲': 'europe',
+  '北美洲': 'americas',
+  '南美洲': 'americas',
+  '非洲': 'africa',
+  '大洋洲': 'oceania',
+}
+
+const MIDDLE_EAST_COUNTRY_CODES = new Set([
+  'AE',
+  'SA',
+  'QA',
+  'KW',
+  'BH',
+  'OM',
+  'IL',
+  'JO',
+  'LB',
+  'SY',
+  'IQ',
+  'IR',
+  'YE',
+])
+
+const ZERO_DECIMAL_CURRENCIES = new Set(['BIF', 'CLP', 'DJF', 'GNF', 'ISK', 'JPY', 'KMF', 'KRW', 'PYG', 'RWF', 'UGX', 'VND', 'VUV', 'XAF', 'XOF', 'XPF'])
+const THREE_DECIMAL_CURRENCIES = new Set(['BHD', 'IQD', 'JOD', 'KWD', 'LYD', 'OMR', 'TND'])
+const POPULAR_CURRENCIES = new Set(['USD', 'EUR', 'CNY', 'JPY', 'GBP', 'CHF', 'CAD', 'AUD', 'SGD', 'HKD', 'AED', 'SAR', 'INR', 'BRL', 'MXN', 'ZAR'])
+const TRADING_CURRENCIES = new Set(['USD', 'EUR', 'CNY', 'JPY', 'GBP', 'CHF', 'CAD', 'AUD', 'NZD', 'SGD', 'HKD', 'SEK', 'NOK'])
+
+function getCurrencyDecimals(code: string) {
+  if (ZERO_DECIMAL_CURRENCIES.has(code)) return 0
+  if (THREE_DECIMAL_CURRENCIES.has(code)) return 3
+  return 2
+}
+
+function getCurrencyRegion(countryCode: string, continent: string) {
+  if (MIDDLE_EAST_COUNTRY_CODES.has(countryCode)) return 'middle_east'
+  return REGION_BY_CONTINENT[continent] || 'asia'
+}
+
+function buildCountryBackedCurrencies(): Currency[] {
+  const grouped = new Map<
+    string,
+    {
+      name: string
+      symbol: string
+      region: string
+      countriesCn: string[]
+      countriesEn: string[]
+    }
+  >()
+
+  for (const country of COUNTRY_DATA) {
+    if (!country.currency_code || !country.currency_name_cn) continue
+
+    const current = grouped.get(country.currency_code)
+    if (current) {
+      current.countriesCn.push(country.name_cn)
+      current.countriesEn.push(country.name_en)
+      continue
+    }
+
+    grouped.set(country.currency_code, {
+      name: country.currency_name_cn,
+      symbol: country.currency_symbol || country.currency_code,
+      region: getCurrencyRegion(country.iso2, country.continent_cn),
+      countriesCn: [country.name_cn],
+      countriesEn: [country.name_en],
+    })
+  }
+
+  return Array.from(grouped.entries()).map(([code, value]) => ({
+    code,
+    name: value.name,
+    nameEn: code,
+    symbol: value.symbol,
+    country: value.countriesCn.join('、'),
+    countryEn: value.countriesEn.join(', '),
+    region: value.region,
+    decimals: getCurrencyDecimals(code),
+    popular: POPULAR_CURRENCIES.has(code),
+    trading: TRADING_CURRENCIES.has(code),
+  }))
+}
+
+function mergeCurrencyData(): Currency[] {
+  const merged = new Map<string, Currency>()
+
+  for (const currency of buildCountryBackedCurrencies()) {
+    merged.set(currency.code, currency)
+  }
+
+  for (const currency of CURATED_CURRENCIES) {
+    const backed = merged.get(currency.code)
+    merged.set(currency.code, {
+      ...currency,
+      country: backed?.country || currency.country,
+      countryEn: backed?.countryEn || currency.countryEn,
+      popular: currency.popular || backed?.popular,
+      trading: currency.trading || backed?.trading,
+    })
+  }
+
+  return Array.from(merged.values()).sort((a, b) => {
+    if (a.trading && !b.trading) return -1
+    if (!a.trading && b.trading) return 1
+    if (a.popular && !b.popular) return -1
+    if (!a.popular && b.popular) return 1
+    return a.code.localeCompare(b.code)
+  })
+}
+
 /**
  * 获取货币数据
  */
 export function getCurrencyData(): Currency[] {
-  return CURRENCIES
+  return mergeCurrencyData()
 }
 
 /**
  * 格式化货币示例
  */
 export function formatCurrencyExample(symbol: string, decimals: number): string {
-  const amount = decimals > 0 ? '1,234.56' : '1,234'
+  const amount = new Intl.NumberFormat('en-US', {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  }).format(1234.56)
   return `${symbol}${amount}`
 }
 

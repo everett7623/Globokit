@@ -2,7 +2,7 @@
 // 描述: 查看全球主要贸易城市的实时时间，便于安排国际业务
 // 路径: Globokit/app/tools/world-time/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2026-01-08
+// 更新时间: 2026-07-06
 
 'use client'
 
@@ -13,7 +13,15 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Clock, Search, Globe, Star, StarOff, Calculator, Info } from 'lucide-react'
-import { formatTime, getTimeZoneOffset, isBusinessHours, getTimeDifference, WORLD_CITIES } from '@/lib/tools/world-time'
+import {
+  formatTime,
+  getTimeZoneOffset,
+  isBusinessHours,
+  getTimeDifference,
+  getWorldTimeRegion,
+  WORLD_CITIES,
+  WORLD_TIME_REGIONS,
+} from '@/lib/tools/world-time'
 import { Label } from '@/components/ui/label'
 
 interface CityTime {
@@ -28,8 +36,61 @@ interface CityTime {
   isBusinessHours: boolean
 }
 
+function parseOffsetValue(offset: string): number {
+  const match = offset.match(/^([+-])(\d{2}):(\d{2})$/)
+  if (!match) return 0
+
+  const sign = match[1] === '+' ? 1 : -1
+  return sign * (Number(match[2]) + Number(match[3]) / 60)
+}
+
+function readStoredStringArray(key: string): string[] {
+  try {
+    const saved = localStorage.getItem(key)
+    if (!saved) return []
+
+    const parsed = JSON.parse(saved)
+    return Array.isArray(parsed) ? parsed.filter((item) => typeof item === 'string') : []
+  } catch {
+    localStorage.removeItem(key)
+    return []
+  }
+}
+
+function buildCityTimes(now: Date, timeFormat: '12' | '24'): CityTime[] {
+  return WORLD_CITIES.flatMap(city => {
+    try {
+      const cityTime = new Date(now.toLocaleString('en-US', { timeZone: city.timezone }))
+      const offset = getTimeZoneOffset(city.timezone)
+
+      return [{
+        ...city,
+        currentTime: timeFormat === '24'
+          ? formatTime(cityTime)
+          : cityTime.toLocaleTimeString('en-US', {
+              timeZone: city.timezone,
+              hour12: true,
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit'
+            }),
+        date: cityTime.toLocaleDateString('zh-CN', {
+          timeZone: city.timezone,
+          month: 'long',
+          day: 'numeric',
+          weekday: 'short'
+        }),
+        offset,
+        isBusinessHours: isBusinessHours(cityTime)
+      }]
+    } catch {
+      return []
+    }
+  })
+}
+
 export default function WorldTimePage() {
-  const [cityTimes, setCityTimes] = useState<CityTime[]>([])
+  const [cityTimes, setCityTimes] = useState<CityTime[]>(() => buildCityTimes(new Date(), '24'))
   const [searchTerm, setSearchTerm] = useState('')
   const [currentDateTime, setCurrentDateTime] = useState(new Date())
   const [favorites, setFavorites] = useState<string[]>([])
@@ -39,10 +100,7 @@ export default function WorldTimePage() {
 
   // 从localStorage加载收藏
   useEffect(() => {
-    const saved = localStorage.getItem('worldTimeFavorites')
-    if (saved) {
-      setFavorites(JSON.parse(saved))
-    }
+    setFavorites(readStoredStringArray('worldTimeFavorites'))
   }, [])
 
   // 更新时间
@@ -50,34 +108,7 @@ export default function WorldTimePage() {
     const updateTimes = () => {
       const now = new Date()
       setCurrentDateTime(now)
-      
-      const times = WORLD_CITIES.map(city => {
-        const cityTime = new Date(now.toLocaleString('en-US', { timeZone: city.timezone }))
-        const offset = getTimeZoneOffset(city.timezone)
-        
-        return {
-          ...city,
-          currentTime: timeFormat === '24' 
-            ? formatTime(cityTime) 
-            : cityTime.toLocaleTimeString('en-US', { 
-                timeZone: city.timezone,
-                hour12: true,
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-              }),
-          date: cityTime.toLocaleDateString('zh-CN', {
-            timeZone: city.timezone,
-            month: 'long',
-            day: 'numeric',
-            weekday: 'short'
-          }),
-          offset,
-          isBusinessHours: isBusinessHours(cityTime)
-        }
-      })
-      
-      setCityTimes(times)
+      setCityTimes(buildCityTimes(now, timeFormat))
     }
 
     updateTimes()
@@ -106,28 +137,10 @@ export default function WorldTimePage() {
       return false
     }
     
-    // 快捷过滤 (已更新)
     if (quickFilter === 'working' && !city.isBusinessHours) {
       return false
     }
-    // 亚洲 (包含中东)
-    if (quickFilter === 'asia' && !['CN', 'HK', 'TW', 'JP', 'KR', 'SG', 'MY', 'TH', 'ID', 'PH', 'VN', 'IN', 'BD', 'PK', 'KZ', 'AE', 'SA', 'QA', 'KW', 'OM', 'BH', 'IL', 'IR'].includes(city.countryCode)) {
-      return false
-    }
-    // 欧洲
-    if (quickFilter === 'europe' && !['GB', 'FR', 'DE', 'NL', 'BE', 'ES', 'IT', 'CH', 'AT', 'PL', 'CZ', 'HU', 'RO', 'SE', 'DK', 'NO', 'FI', 'RU', 'UA', 'GR', 'PT', 'IE', 'TR'].includes(city.countryCode)) {
-      return false
-    }
-    // 美洲 (北美和中南美)
-    if (quickFilter === 'americas' && !['US', 'CA', 'MX', 'BR', 'AR', 'CL', 'PE', 'CO', 'VE', 'EC', 'PA', 'UY'].includes(city.countryCode)) {
-      return false
-    }
-    // 非洲
-    if (quickFilter === 'africa' && !['EG', 'ZA', 'NG', 'KE', 'MA', 'DZ', 'TN', 'ET', 'GH', 'SN'].includes(city.countryCode)) {
-      return false
-    }
-    // 大洋洲
-    if (quickFilter === 'oceania' && !['AU', 'NZ'].includes(city.countryCode)) {
+    if (quickFilter && quickFilter !== 'working' && getWorldTimeRegion(city.countryCode) !== quickFilter) {
       return false
     }
     
@@ -164,18 +177,32 @@ export default function WorldTimePage() {
   }
 
   const upcomingWorkingCities = getUpcomingWorkingCities()
+  const coveredCountries = new Set(cityTimes.map((city) => city.countryCode)).size
 
   return (
     <>
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">世界时间</h1>
         <p className="text-muted-foreground">
-          查看全球主要贸易城市的实时时间，便于安排国际业务
+          查看全球主要贸易城市和各国首都实时时间，便于安排国际业务
         </p>
       </div>
 
       {/* 统计卡片 */}
-      <div className="grid gap-4 mb-6 md:grid-cols-3">
+      <div className="grid gap-4 mb-6 md:grid-cols-4">
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium flex items-center gap-2">
+              <Globe className="h-4 w-4" />
+              覆盖城市
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{cityTimes.length}</div>
+            <p className="text-xs text-muted-foreground">{coveredCountries} 个国家/地区</p>
+          </CardContent>
+        </Card>
+
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium flex items-center gap-2">
@@ -268,7 +295,7 @@ export default function WorldTimePage() {
         <CardHeader>
           <CardTitle>城市时间查询</CardTitle>
           <CardDescription>
-            查看全球主要贸易城市的实时时间和工作状态
+            查看全球主要贸易城市、各国首都的实时时间和工作状态
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -282,7 +309,7 @@ export default function WorldTimePage() {
             </TabsList>
           </Tabs>
 
-          {/* 快捷过滤按钮 (已更新) */}
+          {/* 快捷过滤按钮 */}
           <div className="space-y-2">
             <Label>快捷筛选</Label>
             <div className="flex flex-wrap gap-2">
@@ -300,41 +327,16 @@ export default function WorldTimePage() {
               >
                 工作时间
               </Button>
-              <Button
-                variant={quickFilter === 'asia' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setQuickFilter(quickFilter === 'asia' ? '' : 'asia')}
-              >
-                亚洲
-              </Button>
-              <Button
-                variant={quickFilter === 'europe' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setQuickFilter(quickFilter === 'europe' ? '' : 'europe')}
-              >
-                欧洲
-              </Button>
-              <Button
-                variant={quickFilter === 'americas' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setQuickFilter(quickFilter === 'americas' ? '' : 'americas')}
-              >
-                美洲
-              </Button>
-              <Button
-                variant={quickFilter === 'africa' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setQuickFilter(quickFilter === 'africa' ? '' : 'africa')}
-              >
-                非洲
-              </Button>
-              <Button
-                variant={quickFilter === 'oceania' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setQuickFilter(quickFilter === 'oceania' ? '' : 'oceania')}
-              >
-                大洋洲
-              </Button>
+              {Object.entries(WORLD_TIME_REGIONS).map(([region, label]) => (
+                <Button
+                  key={region}
+                  variant={quickFilter === region ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setQuickFilter(quickFilter === region ? '' : region)}
+                >
+                  {label}
+                </Button>
+              ))}
             </div>
           </div>
 
@@ -357,9 +359,7 @@ export default function WorldTimePage() {
           <div className="space-y-6 max-h-[600px] overflow-y-auto">
             {Object.entries(groupedCities)
               .sort(([a], [b]) => {
-                const offsetA = parseInt(a.replace(/[^\d-]/g, ''))
-                const offsetB = parseInt(b.replace(/[^\d-]/g, ''))
-                return offsetB - offsetA
+                return parseOffsetValue(b) - parseOffsetValue(a)
               })
               .map(([offset, cities]) => (
                 <div key={offset}>
@@ -368,8 +368,8 @@ export default function WorldTimePage() {
                   </h3>
                   <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     {cities.map((city) => (
-                      <Card 
-                        key={city.timezone} 
+                      <Card
+                        key={`${city.countryCode}-${city.nameEn}`}
                         className={`overflow-hidden transition-all hover:shadow-lg ${
                           favorites.includes(city.name) ? 'ring-2 ring-yellow-400' : ''
                         }`}

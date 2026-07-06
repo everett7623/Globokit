@@ -2,7 +2,10 @@
 // 描述: 提供各国公共节假日的查询与日期计算逻辑
 // 路径: Globokit/lib/tools/holiday-query.ts
 // 作者: Jensfrank
-// 更新时间: 2026-01-08
+// 更新时间: 2026-07-06
+
+import { COUNTRY_DATA, getFlagEmoji } from './global-country-info'
+import { generatedHolidays2026, generatedHolidays2027 } from './holiday-query-generated'
 
 export interface Country {
   name: string
@@ -28,8 +31,20 @@ export interface UpcomingHoliday extends Holiday {
   daysUntil: number
 }
 
-// 扩展的国家/地区数据（按地区分组）
-export const countries: Record<string, Country> = {
+export const SUPPORTED_HOLIDAY_YEARS = [2025, 2026, 2027] as const
+
+function mergeHolidayRecords(
+  generated: Record<string, Holiday[]>,
+  curated: Record<string, Holiday[]> = {}
+): Record<string, Holiday[]> {
+  return {
+    ...generated,
+    ...curated,
+  }
+}
+
+// 手工维护的贸易国家/地区数据（按业务地区分组）
+const CURATED_COUNTRIES: Record<string, Country> = {
   // 北美
   US: { name: '美国', flag: '🇺🇸', timezone: 'America/New_York', currency: 'USD', region: '北美' },
   CA: { name: '加拿大', flag: '🇨🇦', timezone: 'America/Toronto', currency: 'CAD', region: '北美' },
@@ -170,6 +185,58 @@ export const countries: Record<string, Country> = {
   SN: { name: '塞内加尔', flag: '🇸🇳', timezone: 'UTC+0', currency: 'XOF', region: '非洲' },
 }
 
+const COUNTRY_DATA_BY_ISO2 = new Map(COUNTRY_DATA.map((country) => [country.iso2, country]))
+
+function getHolidayRegion(continent: string): string {
+  const regionMap: Record<string, string> = {
+    '亚洲': '亚洲',
+    '欧洲': '欧洲',
+    '欧洲/亚洲': '中东',
+    '北美洲': '北美',
+    '南美洲': '南美',
+    '非洲': '非洲',
+    '大洋洲': '大洋洲',
+  }
+
+  return regionMap[continent] || '其他'
+}
+
+function buildCountryDirectory(): Record<string, Country> {
+  const directory: Record<string, Country> = {}
+
+  for (const country of COUNTRY_DATA) {
+    directory[country.iso2] = {
+      name: country.name_cn,
+      flag: getFlagEmoji(country.iso2),
+      timezone: country.timezone,
+      currency: country.currency_code,
+      region: getHolidayRegion(country.continent_cn),
+    }
+  }
+
+  for (const [code, country] of Object.entries(CURATED_COUNTRIES)) {
+    const countryInfo = COUNTRY_DATA_BY_ISO2.get(code)
+    directory[code] = {
+      ...country,
+      flag: countryInfo ? getFlagEmoji(code) : country.flag,
+      timezone: countryInfo?.timezone || country.timezone,
+      currency: countryInfo?.currency_code || country.currency,
+      region: country.region,
+    }
+  }
+
+  return Object.fromEntries(
+    Object.entries(directory).sort(([, a], [, b]) => {
+      const regionCompare = a.region.localeCompare(b.region, 'zh-CN')
+      if (regionCompare !== 0) return regionCompare
+      return a.name.localeCompare(b.name, 'zh-CN')
+    })
+  )
+}
+
+// 完整国家/地区目录：详细节假日来自下方数据，国家基础信息来自全局国家库补齐。
+export const countries: Record<string, Country> = buildCountryDirectory()
+
 // 国际热门节假日（全球性节日）
 export const internationalHolidays: Holiday[] = [
   { date: '01-01', name: "New Year's Day", localName: '新年', type: 'international', impact: 'high', description: '全球大部分国家庆祝' },
@@ -284,6 +351,9 @@ export function generateHolidayData(year: number): Record<string, Holiday[]> {
   if (year === 2026) {
     return holidays2026
   }
+  if (year === 2027) {
+    return holidays2027
+  }
   return {}
 }
 
@@ -340,7 +410,7 @@ MX: [
 
 // Western Europe
 // United Kingdom 英国
-UK: [
+GB: [
   { date: '2025-01-01', name: "New Year's Day", localName: "New Year's Day", nameCN: '元旦', type: 'public', impact: 'high' },
   { date: '2025-04-18', name: 'Good Friday', localName: 'Good Friday', nameCN: '耶稣受难日', type: 'public', impact: 'high' },
   { date: '2025-04-21', name: 'Easter Monday', localName: 'Easter Monday', nameCN: '复活节星期一', type: 'public', impact: 'medium' },
@@ -2035,8 +2105,8 @@ SN: [
 ]
 }
 
-// 2026年各国节假日数据（预测）
-export const holidays2026: Record<string, Holiday[]> = {
+// 2026年手工修订数据（优先覆盖生成数据）
+const curatedHolidays2026: Record<string, Holiday[]> = {
   US: [
     { date: '2026-01-01', name: "New Year's Day", type: 'public', impact: 'high' },
     { date: '2026-01-19', name: 'Martin Luther King Jr. Day', type: 'public', impact: 'medium' },
@@ -2051,7 +2121,7 @@ export const holidays2026: Record<string, Holiday[]> = {
     { date: '2026-11-27', name: 'Black Friday', type: 'observance', impact: 'high' },
     { date: '2026-12-25', name: 'Christmas Day', type: 'public', impact: 'high' },
   ],
-  UK: [
+  GB: [
     { date: '2026-01-01', name: "New Year's Day", type: 'public', impact: 'high' },
     { date: '2026-04-03', name: 'Good Friday', type: 'public', impact: 'high' },
     { date: '2026-04-06', name: 'Easter Monday', type: 'public', impact: 'high' },
@@ -2205,8 +2275,11 @@ export const holidays2026: Record<string, Holiday[]> = {
     { date: '2026-12-25', name: 'Christmas Day', localName: '圣诞节', type: 'public', impact: 'high' },
     { date: '2026-12-28', name: 'Boxing Day (Additional Public Holiday)', localName: '节礼日', type: 'public', impact: 'high' }, // Boxing Day falls on a Saturday, so observed on Monday in many states
   ],
-  // 添加更多国家数据...
 }
+
+export const holidays2026: Record<string, Holiday[]> = mergeHolidayRecords(generatedHolidays2026, curatedHolidays2026)
+
+export const holidays2027: Record<string, Holiday[]> = generatedHolidays2027
 
 // 获取特定国家的节假日
 export function getCountryHolidays(countryCode: string, year: number = new Date().getFullYear()): Holiday[] {
@@ -2223,6 +2296,9 @@ export function getUpcomingHolidays(daysAhead: number = 30): UpcomingHoliday[] {
   
   // 国家法定节假日
   Object.entries(yearHolidays).forEach(([countryCode, holidays]) => {
+    const country = countries[countryCode]
+    if (!country) return
+
     holidays.forEach(holiday => {
       const holidayDate = new Date(holiday.date)
       const daysUntil = Math.ceil((holidayDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
@@ -2230,8 +2306,8 @@ export function getUpcomingHolidays(daysAhead: number = 30): UpcomingHoliday[] {
       if (daysUntil > 0 && daysUntil <= daysAhead) {
         upcoming.push({
           ...holiday,
-          country: countries[countryCode].name,
-          flag: countries[countryCode].flag,
+          country: country.name,
+          flag: country.flag,
           daysUntil
         })
       }
@@ -2312,6 +2388,10 @@ export function getCountriesByRegion(): Record<string, Array<{ code: string; cou
       grouped[country.region] = []
     }
     grouped[country.region].push({ code, country })
+  })
+
+  Object.values(grouped).forEach((items) => {
+    items.sort((a, b) => a.country.name.localeCompare(b.country.name, 'zh-CN'))
   })
   
   return grouped

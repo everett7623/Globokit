@@ -2,7 +2,7 @@
 // 描述: 查看和复制全球各国货币符号，便于外贸报价和合同编写
 // 路径: Globokit/app/tools/currency-symbols/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2026-01-08
+// 更新时间: 2026-07-06
 
 'use client'
 
@@ -40,7 +40,7 @@ interface Currency {
 }
 
 export default function CurrencySymbolsPage() {
-  const [currencies, setCurrencies] = useState<Currency[]>([])
+  const [currencies] = useState<Currency[]>(() => getCurrencyData())
   const [searchTerm, setSearchTerm] = useState('')
   const [copiedCode, setCopiedCode] = useState<string | null>(null)
   const [selectedRegion, setSelectedRegion] = useState('all')
@@ -53,8 +53,6 @@ export default function CurrencySymbolsPage() {
     if (saved) {
       setFavorites(JSON.parse(saved))
     }
-    // 加载货币数据
-    setCurrencies(getCurrencyData())
   }, [])
 
   // 复制功能
@@ -113,12 +111,12 @@ export default function CurrencySymbolsPage() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">全球货币符号大全</h1>
         <p className="text-muted-foreground">
-          查看和复制全球各国货币符号，便于外贸报价和合同编写
+          查看和复制全球货币符号，覆盖主要贸易国家和长尾市场
         </p>
       </div>
 
       {/* 统计卡片 */}
-      <div className="grid gap-4 mb-6 md:grid-cols-3">
+      <div className="grid gap-4 mb-6 md:grid-cols-4">
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium flex items-center gap-2">
@@ -149,6 +147,19 @@ export default function CurrencySymbolsPage() {
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium flex items-center gap-2">
               <Star className="h-4 w-4" />
+              贸易货币
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{tradingCount}</div>
+            <p className="text-xs text-muted-foreground">种重点结算</p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium flex items-center gap-2">
+              <Star className="h-4 w-4" />
               已收藏
             </CardTitle>
           </CardHeader>
@@ -164,7 +175,7 @@ export default function CurrencySymbolsPage() {
         <CardHeader>
           <CardTitle>货币符号查询</CardTitle>
           <CardDescription>
-            查找和复制全球各种货币的符号和代码
+            查找和复制全球各种货币的符号、代码和适用国家
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -289,8 +300,8 @@ export default function CurrencySymbolsPage() {
                           <div className="space-y-2">
                             <div className="text-sm">
                               <span className="text-muted-foreground">国家/地区：</span>
-                              <span className="font-medium">
-                                {currency.country} ({currency.countryEn})
+                              <span className="font-medium break-words" title={`${currency.country} (${currency.countryEn})`}>
+                                {currency.country}
                               </span>
                             </div>
                             <div className="text-sm">

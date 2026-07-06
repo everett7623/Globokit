@@ -2,7 +2,43 @@
 // 描述: 处理不同时区的时间转换与实时更新逻辑
 // 路径: Globokit/lib/tools/world-time.ts
 // 作者: Jensfrank
-// 更新时间: 2026-01-08
+// 更新时间: 2026-07-06
+
+import { COUNTRY_DATA } from './global-country-info'
+
+export interface WorldCity {
+  name: string
+  nameEn: string
+  timezone: string
+  country: string
+  countryCode: string
+}
+
+export const WORLD_TIME_REGIONS: Record<string, string> = {
+  asia: '亚洲',
+  europe: '欧洲',
+  americas: '美洲',
+  africa: '非洲',
+  oceania: '大洋洲',
+}
+
+const REGION_BY_CONTINENT: Record<string, string> = {
+  '亚洲': 'asia',
+  '欧洲': 'europe',
+  '欧洲/亚洲': 'asia',
+  '北美洲': 'americas',
+  '南美洲': 'americas',
+  '非洲': 'africa',
+  '大洋洲': 'oceania',
+}
+
+const COUNTRY_REGION_OVERRIDES: Record<string, string> = {
+  RU: 'europe',
+  TR: 'europe',
+  CY: 'europe',
+}
+
+const COUNTRY_BY_ISO2 = new Map(COUNTRY_DATA.map((country) => [country.iso2, country]))
 
 /**
  * 格式化时间显示
@@ -246,7 +282,7 @@ export function convertTimeZone(
 }
 
 // 主要贸易城市时区配置
-export const WORLD_CITIES = [
+const CURATED_WORLD_CITIES: WorldCity[] = [
   // 亚洲
   { name: '北京', nameEn: 'Beijing', timezone: 'Asia/Shanghai', country: '中国', countryCode: 'CN' },
   { name: '上海', nameEn: 'Shanghai', timezone: 'Asia/Shanghai', country: '中国', countryCode: 'CN' },
@@ -325,7 +361,7 @@ export const WORLD_CITIES = [
   { name: '莫斯科', nameEn: 'Moscow', timezone: 'Europe/Moscow', country: '俄罗斯', countryCode: 'RU' },
   { name: '圣彼得堡', nameEn: 'St. Petersburg', timezone: 'Europe/Moscow', country: '俄罗斯', countryCode: 'RU' },
   { name: '符拉迪沃斯托克', nameEn: 'Vladivostok', timezone: 'Asia/Vladivostok', country: '俄罗斯', countryCode: 'RU' },
-  { name: '基辅', nameEn: 'Kyiv', timezone: 'Europe/Kiev', country: '乌克兰', countryCode: 'UA' },
+  { name: '基辅', nameEn: 'Kyiv', timezone: 'Europe/Kyiv', country: '乌克兰', countryCode: 'UA' },
   { name: '雅典', nameEn: 'Athens', timezone: 'Europe/Athens', country: '希腊', countryCode: 'GR' },
   { name: '里斯本', nameEn: 'Lisbon', timezone: 'Europe/Lisbon', country: '葡萄牙', countryCode: 'PT' },
   { name: '都柏林', nameEn: 'Dublin', timezone: 'Europe/Dublin', country: '爱尔兰', countryCode: 'IE' },
@@ -393,3 +429,46 @@ export const WORLD_CITIES = [
   { name: '惠灵顿', nameEn: 'Wellington', timezone: 'Pacific/Auckland', country: '新西兰', countryCode: 'NZ' },
   { name: '基督城', nameEn: 'Christchurch', timezone: 'Pacific/Auckland', country: '新西兰', countryCode: 'NZ' }
 ]
+
+function getPrimaryName(value: string): string {
+  return value.split('/')[0].trim()
+}
+
+export function getWorldTimeRegion(countryCode: string): string {
+  if (COUNTRY_REGION_OVERRIDES[countryCode]) return COUNTRY_REGION_OVERRIDES[countryCode]
+
+  const country = COUNTRY_BY_ISO2.get(countryCode)
+  if (!country) return 'asia'
+  return REGION_BY_CONTINENT[country.continent_cn] || 'oceania'
+}
+
+function buildCapitalCities(): WorldCity[] {
+  return COUNTRY_DATA
+    .filter((country) => country.capital_cn && country.capital_en && isValidTimezone(country.timezone))
+    .map((country) => ({
+      name: getPrimaryName(country.capital_cn),
+      nameEn: getPrimaryName(country.capital_en),
+      timezone: country.timezone,
+      country: country.name_cn,
+      countryCode: country.iso2,
+    }))
+}
+
+function buildWorldCities(): WorldCity[] {
+  const cities = new Map<string, WorldCity>()
+
+  for (const city of CURATED_WORLD_CITIES) {
+    cities.set(`${city.countryCode}:${city.nameEn.toLowerCase()}`, city)
+  }
+
+  for (const city of buildCapitalCities()) {
+    const key = `${city.countryCode}:${city.nameEn.toLowerCase()}`
+    if (!cities.has(key)) {
+      cities.set(key, city)
+    }
+  }
+
+  return Array.from(cities.values())
+}
+
+export const WORLD_CITIES: WorldCity[] = buildWorldCities()
