@@ -5,22 +5,23 @@
 // 更新时间: 2026-01-08
 
 import Link from 'next/link'
-import { Github, ExternalLink } from 'lucide-react'
+import { Github, ExternalLink, Globe2 } from 'lucide-react'
 import { SITE_NAME } from '@/lib/site'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="mt-auto border-t border-slate-200 bg-white">
-      <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+    <footer className="relative z-10 mt-auto border-t border-white/70 bg-white/75 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/70">
+      <div className="mx-auto w-full max-w-[1500px] px-4 py-10 sm:px-6 lg:px-8">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
           <div className="space-y-1 text-center md:text-left">
-            <p className="text-sm font-medium text-gray-900">
+            <p className="inline-flex items-center gap-2 text-sm font-semibold text-slate-950 dark:text-white">
+              <Globe2 className="h-4 w-4 text-emerald-600 dark:text-cyan-300" />
               © {currentYear} {SITE_NAME}. 为全球贸易赋能
             </p>
-            <p className="text-xs text-muted-foreground">
-              Built by Jensfrank
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Built for global trade teams
             </p>
           </div>
           
@@ -29,38 +30,38 @@ export function Footer() {
               href="https://github.com/everett7623/Globokit"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-gray-900 flex items-center gap-1.5 transition-colors"
+              className="flex items-center gap-1.5 text-slate-500 transition-colors hover:text-emerald-700 dark:text-slate-400 dark:hover:text-cyan-200"
             >
               <Github className="h-4 w-4" />
               GitHub
               <ExternalLink className="h-3 w-3 opacity-50" />
             </Link>
-            <span className="hidden text-gray-300 sm:inline">|</span>
+            <span className="hidden text-slate-300 dark:text-white/20 sm:inline">|</span>
             <Link
               href="https://seedloc.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-gray-900 flex items-center gap-1.5 transition-colors"
+              className="flex items-center gap-1.5 text-slate-500 transition-colors hover:text-emerald-700 dark:text-slate-400 dark:hover:text-cyan-200"
             >
               Seedloc 博客
               <ExternalLink className="h-3 w-3 opacity-50" />
             </Link>
-            <span className="hidden text-gray-300 sm:inline">|</span>
+            <span className="hidden text-slate-300 dark:text-white/20 sm:inline">|</span>
             <Link
               href="https://vpsknow.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-gray-900 flex items-center gap-1.5 transition-colors"
+              className="flex items-center gap-1.5 text-slate-500 transition-colors hover:text-emerald-700 dark:text-slate-400 dark:hover:text-cyan-200"
             >
               VPSKnow 站点
               <ExternalLink className="h-3 w-3 opacity-50" />
             </Link>
-            <span className="hidden text-gray-300 sm:inline">|</span>
+            <span className="hidden text-slate-300 dark:text-white/20 sm:inline">|</span>
             <Link
               href="https://nav.seedloc.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-gray-900 flex items-center gap-1.5 transition-colors"
+              className="flex items-center gap-1.5 text-slate-500 transition-colors hover:text-emerald-700 dark:text-slate-400 dark:hover:text-cyan-200"
             >
               SeedNav 导航
               <ExternalLink className="h-3 w-3 opacity-50" />
@@ -68,14 +69,14 @@ export function Footer() {
           </div>
         </div>
         
-        <div className="mt-8 border-t border-gray-200 pt-8">
-          <p className="text-center text-xs text-muted-foreground">
+        <div className="mt-8 border-t border-slate-200/80 pt-8 dark:border-white/10">
+          <p className="text-center text-xs text-slate-500 dark:text-slate-400">
             Powered by{' '}
             <Link
               href="https://vercel.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-medium hover:text-gray-900 transition-colors"
+              className="font-medium transition-colors hover:text-emerald-700 dark:hover:text-cyan-200"
             >
               Vercel
             </Link>
@@ -84,7 +85,7 @@ export function Footer() {
               href="https://nextjs.org"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-medium hover:text-gray-900 transition-colors"
+              className="font-medium transition-colors hover:text-emerald-700 dark:hover:text-cyan-200"
             >
               Next.js
             </Link>

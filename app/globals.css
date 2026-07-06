@@ -12,60 +12,52 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    
-    /* 修改：主色调改为 祖母绿 (Emerald Green) */
-    /* HSL: 160 84% 39% 对应 Tailwind 的 emerald-600 */
-    --primary: 160 84% 39%; 
+    --popover-foreground: 222 47% 11%;
+    --primary: 166 76% 34%;
     --primary-foreground: 210 40% 98%;
-    
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 198 100% 95%;
+    --secondary-foreground: 220 43% 16%;
+    --muted: 210 32% 94%;
+    --muted-foreground: 215 16% 43%;
+    --accent: 43 96% 90%;
+    --accent-foreground: 222 47% 11%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    
-    /* 修改：光圈颜色同步为祖母绿 */
-    --ring: 160 84% 39%;
-    
+    --border: 213 27% 86%;
+    --input: 213 27% 86%;
+    --ring: 166 76% 34%;
+
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 222 47% 6%;
     --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
+    --card: 222 42% 10%;
     --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
+    --popover: 222 42% 10%;
     --popover-foreground: 210 40% 98%;
-    
-    /* 修改：深色模式下使用稍亮的祖母绿 (emerald-500) */
-    --primary: 158 64% 52%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    
-    --secondary: 217.2 32.6% 17.5%;
+
+    --primary: 172 66% 50%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 217 33% 17%;
     --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
+    --muted: 217 33% 17%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 213 41% 20%;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    
-    /* 修改：光圈颜色同步 */
-    --ring: 158 64% 52%;
+    --border: 217 33% 18%;
+    --input: 217 33% 18%;
+    --ring: 172 66% 50%;
   }
 }
 
@@ -75,5 +67,103 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  ::selection {
+    @apply bg-emerald-200 text-slate-950;
+  }
+}
+
+@layer utilities {
+  .trade-grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(15, 23, 42, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: linear-gradient(to bottom, black, transparent 82%);
+  }
+
+  .dark .trade-grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(148, 163, 184, 0.12) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.09) 1px, transparent 1px);
+  }
+
+  .premium-panel {
+    @apply rounded-lg border border-white/70 bg-white/80 shadow-xl shadow-slate-900/[0.06] backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/60 dark:shadow-black/20;
+  }
+
+  .tool-panel {
+    @apply rounded-lg border border-slate-200/80 bg-white/90 shadow-sm shadow-slate-900/[0.04] backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/70 dark:shadow-black/20;
+  }
+
+  .dark .bg-white,
+  .dark .bg-white\/75,
+  .dark .bg-white\/80,
+  .dark .bg-white\/90,
+  .dark .bg-white\/95 {
+    background-color: hsl(var(--card) / 0.86);
+  }
+
+  .dark .bg-gray-50,
+  .dark .bg-gray-50\/80,
+  .dark .bg-slate-50,
+  .dark .bg-slate-50\/70,
+  .dark .bg-emerald-50,
+  .dark .bg-emerald-50\/60,
+  .dark .bg-emerald-50\/70,
+  .dark .bg-emerald-50\/80,
+  .dark .bg-blue-50,
+  .dark .bg-cyan-50,
+  .dark .bg-green-50,
+  .dark .bg-indigo-50,
+  .dark .bg-lime-50,
+  .dark .bg-orange-50,
+  .dark .bg-purple-50,
+  .dark .bg-red-50,
+  .dark .bg-sky-50,
+  .dark .bg-teal-50,
+  .dark .bg-violet-50,
+  .dark .bg-yellow-50 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  .dark .text-gray-950,
+  .dark .text-gray-900,
+  .dark .text-slate-950,
+  .dark .text-slate-900 {
+    color: hsl(210 40% 98%);
+  }
+
+  .dark .text-gray-800,
+  .dark .text-gray-700,
+  .dark .text-slate-800,
+  .dark .text-slate-700 {
+    color: hsl(214 32% 86%);
+  }
+
+  .dark .text-gray-600,
+  .dark .text-slate-600 {
+    color: hsl(215 20% 70%);
+  }
+
+  .dark .text-gray-500,
+  .dark .text-slate-500 {
+    color: hsl(215 20% 62%);
+  }
+
+  .dark .border-gray-100,
+  .dark .border-gray-200,
+  .dark .border-gray-300,
+  .dark .border-slate-100,
+  .dark .border-slate-200 {
+    border-color: hsl(217 33% 22% / 0.9);
+  }
+
+  .dark .shadow-slate-900\/10,
+  .dark .shadow-emerald-900\/5,
+  .dark .shadow-violet-900\/5 {
+    --tw-shadow-color: rgb(0 0 0 / 0.3);
+    --tw-shadow: var(--tw-shadow-colored);
   }
 }

@@ -74,8 +74,8 @@ export const TOOL_UI_CONFIG: Record<
 }
 
 export const TOOL_BADGE_STYLES: Record<string, string> = {
-  '热门': 'bg-amber-100 text-amber-700 ring-1 ring-amber-200/80',
-  '新增': 'bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200/80',
+  '热门': 'bg-amber-100 text-amber-700 ring-1 ring-amber-200/80 dark:bg-amber-300/15 dark:text-amber-200 dark:ring-amber-300/20',
+  '新增': 'bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200/80 dark:bg-cyan-300/15 dark:text-cyan-200 dark:ring-cyan-300/20',
 }
 
 export function getToolBadgeClassName(badge?: string) {

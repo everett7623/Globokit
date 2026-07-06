@@ -32,11 +32,11 @@ export function RelatedTools() {
   }
 
   return (
-    <section className="mt-10 border-t border-gray-200 pt-8">
+    <section className="mt-10 border-t border-slate-200/80 pt-8 dark:border-white/10">
       <div className="mb-4 flex items-end justify-between gap-4">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">相关工具</h2>
-          <p className="mt-1 text-sm text-muted-foreground">继续处理同一工作流里的常见任务</p>
+          <h2 className="text-xl font-semibold text-slate-950 dark:text-white">相关工具</h2>
+          <p className="mt-1 text-sm text-muted-foreground">同一业务链路里的常用入口</p>
         </div>
       </div>
 
@@ -48,12 +48,12 @@ export function RelatedTools() {
             <Link
               key={tool.id}
               href={tool.href}
-              className="group rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-md hover:shadow-emerald-900/5"
+              className="group rounded-lg border border-slate-200/80 bg-white/80 p-4 shadow-sm shadow-slate-900/[0.04] backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md hover:shadow-emerald-900/[0.05] dark:border-white/10 dark:bg-slate-950/60 dark:hover:border-cyan-300/50"
             >
               <div className="mb-3 flex items-start justify-between gap-3">
                 <div>
-                  <p className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700">{tool.shortTitle}</p>
-                  <p className="mt-1 text-xs text-gray-500">{tool.category}</p>
+                  <p className="text-sm font-semibold text-slate-950 group-hover:text-emerald-700 dark:text-white dark:group-hover:text-cyan-200">{tool.shortTitle}</p>
+                  <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{tool.category}</p>
                 </div>
                 {tool.badge && (
                   <Badge
@@ -64,8 +64,8 @@ export function RelatedTools() {
                   </Badge>
                 )}
               </div>
-              <p className="line-clamp-2 text-sm leading-6 text-gray-600">{tool.description}</p>
-              <div className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-emerald-700">
+              <p className="line-clamp-2 text-sm leading-6 text-slate-600 dark:text-slate-400">{tool.description}</p>
+              <div className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-emerald-700 dark:text-cyan-200">
                 打开工具
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </div>

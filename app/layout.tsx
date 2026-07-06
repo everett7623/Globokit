@@ -9,6 +9,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
+import { ThemeProvider } from '@/components/theme/theme-provider'
 import Script from 'next/script'
 import { SITE_NAME, SITE_URL } from '@/lib/site'
 
@@ -41,27 +42,48 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="zh-CN">
-      <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-JCBDVN470N"
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-JCBDVN470N');
-        `}
-      </Script>
-      <body className={`${inter.className} antialiased`}>
-        <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-white text-slate-950 flex flex-col">
-          <Header />
-          <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 md:py-10">
-            {children}
-          </main>
-          <Footer />
-        </div>
+    <html lang="zh-CN" suppressHydrationWarning>
+      <head>
+        <script
+          id="theme-init"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var storedTheme = localStorage.getItem('globokit-theme');
+                  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  var theme = storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : (prefersDark ? 'dark' : 'light');
+                  document.documentElement.classList.toggle('dark', theme === 'dark');
+                  document.documentElement.style.colorScheme = theme;
+                } catch (error) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className={`${inter.className} bg-background text-foreground antialiased`}>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-JCBDVN470N"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-JCBDVN470N');
+          `}
+        </Script>
+        <ThemeProvider>
+          <div className="relative flex min-h-screen flex-col overflow-hidden bg-[linear-gradient(180deg,#f8fafc_0%,#eef7f4_42%,#ffffff_100%)] text-slate-950 dark:bg-[linear-gradient(180deg,#020617_0%,#0b1220_48%,#07111d_100%)] dark:text-slate-50">
+            <div className="pointer-events-none fixed inset-0 z-0 opacity-70 dark:opacity-40 trade-grid-bg" />
+            <Header />
+            <main className="relative z-10 mx-auto w-full max-w-[1500px] flex-1 px-4 py-8 sm:px-6 lg:px-8 md:py-10">
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   )
