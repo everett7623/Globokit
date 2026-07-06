@@ -5,7 +5,7 @@
 // 更新时间: 2026-01-08
 
 import Link from 'next/link'
-import { Github, ExternalLink, Globe2 } from 'lucide-react'
+import { Github, ExternalLink, Globe2, PackageCheck } from 'lucide-react'
 import { SITE_NAME } from '@/lib/site'
 
 export function Footer() {
@@ -26,6 +26,14 @@ export function Footer() {
           </div>
           
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm md:justify-end">
+            <Link
+              href="/resources"
+              className="flex items-center gap-1.5 text-slate-500 transition-colors hover:text-emerald-700 dark:text-slate-400 dark:hover:text-cyan-200"
+            >
+              <PackageCheck className="h-4 w-4" />
+              业务资源
+            </Link>
+            <span className="hidden text-slate-300 dark:text-white/20 sm:inline">|</span>
             <Link
               href="https://github.com/everett7623/Globokit"
               target="_blank"

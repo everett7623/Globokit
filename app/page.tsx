@@ -145,6 +145,19 @@ const partnerTypeMeta: Record<PartnerResourceType, { icon: ComponentType<{ class
   '验证服务': { icon: MessageSquare, tone: 'text-orange-600 dark:text-orange-300' },
 }
 
+const featuredPartnerResourceIds = [
+  'laifaxin',
+  'talordata',
+  'usappid',
+  'xiaohuojian',
+  'gpt-mj',
+  'bitgetwallet',
+]
+
+const featuredPartnerResources = featuredPartnerResourceIds
+  .map((id) => PARTNER_RESOURCES.find((resource) => resource.id === id))
+  .filter((resource): resource is (typeof PARTNER_RESOURCES)[number] => Boolean(resource))
+
 export default function HomePage() {
   return (
     <div className="space-y-12">
@@ -263,25 +276,55 @@ export default function HomePage() {
         })}
       </section>
 
-      <section className="space-y-5">
+      <section id="tools" className="space-y-5">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <div className="mb-3 inline-flex items-center gap-2 rounded-md border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700 dark:border-cyan-300/20 dark:bg-cyan-300/10 dark:text-cyan-200">
+              <BadgeCheck className="h-3.5 w-3.5" />
+              工具目录
+            </div>
+            <h2 className="text-3xl font-semibold tracking-normal text-slate-950 dark:text-white">按业务流选择工具</h2>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {activeCategories.map((category) => (
+              <span key={category} className="rounded-md border border-slate-200 bg-white/80 px-3 py-1.5 text-xs font-medium text-slate-600 shadow-sm shadow-slate-900/[0.02] dark:border-white/10 dark:bg-slate-950/60 dark:text-slate-300">
+                {category} · {toolsByCategory[category].length}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {activeCategories.map((category) => (
+            <CategorySection key={category} category={category} tools={toolsByCategory[category]} />
+          ))}
+        </div>
+      </section>
+
+      <section id="resources" className="space-y-5">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
             <div className="mb-3 inline-flex items-center gap-2 rounded-md border border-cyan-200 bg-cyan-50 px-3 py-1.5 text-xs font-semibold text-cyan-700 dark:border-cyan-300/20 dark:bg-cyan-300/10 dark:text-cyan-200">
               <ShieldCheck className="h-3.5 w-3.5" />
               外贸资源精选
             </div>
-            <h2 className="text-2xl font-semibold tracking-normal text-slate-950 dark:text-white">可配合工具站使用的业务资源</h2>
+            <h2 className="text-2xl font-semibold tracking-normal text-slate-950 dark:text-white">配合工具站使用的业务资源</h2>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-400">
-              覆盖外贸获客、市场调研、跨区测试、账号支付、AI 服务和合规验证等出海场景。
+              首页只放高频入口，完整代理、账号、AI、验证和支付资源统一收纳到资源页。
             </p>
           </div>
-          <p className="max-w-md rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-xs leading-5 text-amber-800 dark:border-amber-300/20 dark:bg-amber-300/10 dark:text-amber-100">
-            资源仅用于合法公开信息调研、业务测试、订阅支付与团队管理，避免用于绕过平台规则、批量滥用或侵权采集。
-          </p>
+          <Link
+            href="/resources"
+            className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-slate-950 px-4 text-sm font-semibold text-white transition-colors hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-cyan-50"
+          >
+            查看全部资源
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {PARTNER_RESOURCES.map((resource) => {
+          {featuredPartnerResources.map((resource) => {
             const meta = partnerTypeMeta[resource.type]
             const Icon = meta.icon
 
@@ -318,47 +361,14 @@ export default function HomePage() {
                 <p className="line-clamp-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
                   {resource.description}
                 </p>
-
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {resource.bestFor.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-md border border-slate-200 bg-slate-50 px-2 py-1 text-[11px] font-medium text-slate-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
               </a>
             )
           })}
         </div>
-      </section>
 
-      <section id="tools" className="space-y-5">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div>
-            <div className="mb-3 inline-flex items-center gap-2 rounded-md border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700 dark:border-cyan-300/20 dark:bg-cyan-300/10 dark:text-cyan-200">
-              <BadgeCheck className="h-3.5 w-3.5" />
-              工具目录
-            </div>
-            <h2 className="text-3xl font-semibold tracking-normal text-slate-950 dark:text-white">按业务流选择工具</h2>
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            {activeCategories.map((category) => (
-              <span key={category} className="rounded-md border border-slate-200 bg-white/80 px-3 py-1.5 text-xs font-medium text-slate-600 shadow-sm shadow-slate-900/[0.02] dark:border-white/10 dark:bg-slate-950/60 dark:text-slate-300">
-                {category} · {toolsByCategory[category].length}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {activeCategories.map((category) => (
-            <CategorySection key={category} category={category} tools={toolsByCategory[category]} />
-          ))}
-        </div>
+        <p className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-xs leading-5 text-amber-800 dark:border-amber-300/20 dark:bg-amber-300/10 dark:text-amber-100">
+          资源仅用于合法公开信息调研、业务测试、订阅支付与团队管理，避免用于绕过平台规则、批量滥用或侵权采集。
+        </p>
       </section>
 
       <section className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_360px]">

@@ -99,4 +99,12 @@ export const PARTNER_RESOURCES: PartnerResource[] = [
     description: '可作为虚拟美元卡和出海支付的补充入口，用于购买 AI 工具等订阅服务。',
     bestFor: ['虚拟卡', 'AI 订阅', '出海支付'],
   },
+  {
+    id: 'bitgetwallet',
+    name: 'Bitget Wallet',
+    type: '账号与支付',
+    href: 'https://s.y8o.de/bitgetwallet',
+    description: 'Web3 钱包和支付补充工具，适合需要更便捷身份验证与备用支付的出海场景。',
+    bestFor: ['钱包工具', '身份验证', '支付备用'],
+  },
 ]

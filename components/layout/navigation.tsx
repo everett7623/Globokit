@@ -319,6 +319,17 @@ export function Navigation() {
           </div>
         </div>
 
+        <Link
+          href="/resources"
+          className={cn(
+            'inline-flex h-10 items-center gap-2 rounded-md px-3 text-sm font-medium transition-colors hover:bg-slate-900/[0.04] hover:text-emerald-700 dark:hover:bg-white/10 dark:hover:text-cyan-200',
+            pathname === '/resources' ? 'text-slate-950 dark:text-white' : 'text-slate-600 dark:text-slate-300'
+          )}
+        >
+          <PackageCheck className="h-4 w-4" />
+          业务资源
+        </Link>
+
         <div className="mx-2 h-5 w-px bg-slate-200 dark:bg-white/10" />
 
         {featuredTools.slice(0, 3).map((tool) => (
@@ -385,6 +396,20 @@ export function Navigation() {
             >
               <Home className="h-4 w-4" />
               首页
+            </Link>
+
+            <Link
+              href="/resources"
+              onClick={closeMenus}
+              className={cn(
+                'flex items-center gap-2 rounded-md px-3 py-2.5 text-base font-medium',
+                pathname === '/resources'
+                  ? 'bg-emerald-50 text-emerald-700 dark:bg-cyan-300/10 dark:text-cyan-200'
+                  : 'text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10'
+              )}
+            >
+              <PackageCheck className="h-4 w-4" />
+              业务资源
             </Link>
 
             <div className="flex items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2.5 dark:border-white/10 dark:bg-slate-900/80">
