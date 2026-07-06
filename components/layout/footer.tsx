@@ -13,7 +13,7 @@ export function Footer() {
 
   return (
     <footer className="relative z-10 mt-auto border-t border-white/70 bg-white/75 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/70">
-      <div className="mx-auto w-full max-w-[1500px] px-4 py-10 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-[1440px] px-4 py-10 sm:px-6 lg:px-8">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
           <div className="space-y-1 text-center md:text-left">
             <p className="inline-flex items-center gap-2 text-sm font-semibold text-slate-950 dark:text-white">

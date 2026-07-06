@@ -11,7 +11,7 @@ import { Navigation } from './navigation'
 export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/70 bg-white/80 shadow-sm shadow-slate-900/[0.03] backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/75 dark:shadow-black/20">
-      <div className="mx-auto flex h-[72px] w-full max-w-[1500px] items-center gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-[72px] w-full max-w-[1440px] items-center gap-4 px-4 sm:px-6 lg:px-8">
         <Link href="/" className="group flex min-w-0 items-center gap-3 transition-opacity hover:opacity-95">
           <Image 
             src="/logo.png" 

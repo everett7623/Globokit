@@ -81,14 +81,16 @@ export function Navigation() {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false)
+  const [activeCategory, setActiveCategory] = useState<ToolCategory>(activeCategories[0])
   const [query, setQuery] = useState('')
 
   const isToolPage = pathname.startsWith('/tools/')
+  const normalizedQuery = query.trim().toLowerCase()
+  const activeCategoryTools = toolsByCategory[activeCategory] ?? []
 
   const filteredTools = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase()
     if (!normalizedQuery) {
-      return featuredTools
+      return activeCategoryTools
     }
 
     return TOOL_REGISTRY.filter((tool) => {
@@ -102,7 +104,7 @@ export function Navigation() {
 
       return text.includes(normalizedQuery)
     }).slice(0, 8)
-  }, [query])
+  }, [activeCategoryTools, normalizedQuery])
 
   const closeMenus = () => {
     setToolsDropdownOpen(false)
@@ -145,13 +147,13 @@ export function Navigation() {
           <div
             id="desktop-tools-menu"
             className={cn(
-              'fixed left-1/2 top-[72px] z-50 w-[min(1120px,calc(100vw-2rem))] overflow-hidden rounded-lg border border-white/70 bg-white/95 shadow-2xl shadow-slate-900/10 backdrop-blur-xl transition-all dark:border-white/10 dark:bg-slate-950/95 dark:shadow-black/40',
+              'fixed left-1/2 top-[72px] z-50 w-[min(1200px,calc(100vw-2rem))] overflow-hidden rounded-lg border border-white/70 bg-white/95 shadow-2xl shadow-slate-900/10 backdrop-blur-xl transition-all dark:border-white/10 dark:bg-slate-950/95 dark:shadow-black/40',
               toolsDropdownOpen
                 ? 'visible -translate-x-1/2 translate-y-0 opacity-100'
                 : 'invisible -translate-x-1/2 -translate-y-2 opacity-0'
             )}
           >
-            <div className="grid min-h-[520px] grid-cols-[260px_minmax(0,1fr)_280px]">
+            <div className="grid min-h-[520px] grid-cols-[270px_minmax(0,1fr)_280px]">
               <aside className="border-r border-slate-200/80 bg-slate-50/80 p-4 dark:border-white/10 dark:bg-slate-900/70">
                 <div className="mb-4 flex items-center justify-between">
                   <div>
@@ -167,20 +169,30 @@ export function Navigation() {
                     const Icon = meta.icon
 
                     return (
-                      <Link
+                      <button
                         key={category}
-                        href="/#tools"
-                        onClick={closeMenus}
-                        className="group flex items-center justify-between rounded-md px-3 py-2.5 text-sm transition-colors hover:bg-white hover:shadow-sm dark:hover:bg-white/10"
+                        type="button"
+                        onMouseEnter={() => setActiveCategory(category)}
+                        onFocus={() => setActiveCategory(category)}
+                        onClick={() => setActiveCategory(category)}
+                        className={cn(
+                          'group flex w-full items-center justify-between rounded-md px-3 py-2.5 text-left text-sm transition-all hover:bg-white hover:shadow-sm dark:hover:bg-white/10',
+                          activeCategory === category && 'bg-white text-emerald-700 shadow-sm ring-1 ring-emerald-200/80 dark:bg-cyan-300/10 dark:text-cyan-200 dark:ring-cyan-300/20'
+                        )}
                       >
                         <span className="flex min-w-0 items-center gap-2">
                           <Icon className={cn('h-4 w-4 shrink-0', meta.tone)} />
-                          <span className="truncate font-medium text-slate-700 group-hover:text-slate-950 dark:text-slate-300 dark:group-hover:text-white">
+                          <span
+                            className={cn(
+                              'truncate font-medium text-slate-700 group-hover:text-slate-950 dark:text-slate-300 dark:group-hover:text-white',
+                              activeCategory === category && 'text-emerald-700 dark:text-cyan-200'
+                            )}
+                          >
                             {category}
                           </span>
                         </span>
                         <span className="text-xs text-slate-400">{toolsByCategory[category].length}</span>
-                      </Link>
+                      </button>
                     )
                   })}
                 </div>
@@ -220,9 +232,14 @@ export function Navigation() {
                 </div>
 
                 <div className="mb-3 flex items-center justify-between">
-                  <p className="text-sm font-semibold text-slate-950 dark:text-white">
-                    {query.trim() ? '搜索结果' : '外贸高频入口'}
-                  </p>
+                  <div>
+                    <p className="text-sm font-semibold text-slate-950 dark:text-white">
+                      {normalizedQuery ? '搜索结果' : `${activeCategory}工具`}
+                    </p>
+                    <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                      {normalizedQuery ? `匹配 ${filteredTools.length} 款工具` : `当前分类 ${activeCategoryTools.length} 款工具`}
+                    </p>
+                  </div>
                   <Link
                     href="/#tools"
                     onClick={closeMenus}

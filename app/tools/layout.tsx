@@ -12,7 +12,7 @@ export default function ToolsLayout({
   children: React.ReactNode
 }) {
   return (
-    <section className="mx-auto w-full max-w-7xl">
+    <section className="mx-auto w-full max-w-[1440px]">
       {children}
       <RelatedTools />
     </section>
