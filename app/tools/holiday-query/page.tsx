@@ -183,7 +183,10 @@ export default function HolidayQueryPage() {
                     <SelectContent className="max-h-[300px]">
                       {/* 热门国家/地区 */}
                       <SelectItem value="divider-hot" disabled>
-                        <span className="font-semibold text-orange-600">🔥 热门国家</span>
+                        <span className="flex items-center gap-2 font-semibold text-orange-600">
+                          <TrendingUp className="h-3.5 w-3.5" />
+                          热门国家
+                        </span>
                       </SelectItem>
                       {hotCountries.map(code => {
                         const country = countries[code]
@@ -435,7 +438,8 @@ export default function HolidayQueryPage() {
                 {/* 伊斯兰教节日 */}
                 <div>
                   <h3 className="font-semibold mb-3 flex items-center gap-2">
-                    ☪️ 伊斯兰教节日
+                    <Globe className="h-4 w-4 text-emerald-600" />
+                    伊斯兰教节日
                     <Badge variant="outline">影响中东、东南亚、南亚、北非</Badge>
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -473,7 +477,8 @@ export default function HolidayQueryPage() {
                 {/* 基督教节日 */}
                 <div>
                   <h3 className="font-semibold mb-3 flex items-center gap-2">
-                    ✝️ 基督教节日
+                    <Globe className="h-4 w-4 text-blue-600" />
+                    基督教节日
                     <Badge variant="outline">影响欧美、拉美、非洲</Badge>
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -503,7 +508,8 @@ export default function HolidayQueryPage() {
                 {/* 印度教节日 */}
                 <div>
                   <h3 className="font-semibold mb-3 flex items-center gap-2">
-                    🕉️ 印度教节日
+                    <Globe className="h-4 w-4 text-orange-600" />
+                    印度教节日
                     <Badge variant="outline">影响印度、尼泊尔、斯里兰卡</Badge>
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">

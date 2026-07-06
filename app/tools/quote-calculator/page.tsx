@@ -6,7 +6,6 @@
 
 'use client'
 
-import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
@@ -29,7 +28,6 @@ import {
   Check,
   Copy,
   DollarSign,
-  FileSearch,
   Info,
   Package,
   Percent,
@@ -526,25 +524,6 @@ export default function QuoteCalculatorPage() {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg">
-                <FileSearch className="h-5 w-5" />
-                可搭配工具
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="grid gap-2 sm:grid-cols-3">
-              <Link href="/tools/incoterms" className="rounded-lg border p-3 text-sm transition-colors hover:bg-muted">
-                贸易术语
-              </Link>
-              <Link href="/tools/currency-symbols" className="rounded-lg border p-3 text-sm transition-colors hover:bg-muted">
-                货币符号
-              </Link>
-              <Link href="/tools/rmb-converter" className="rounded-lg border p-3 text-sm transition-colors hover:bg-muted">
-                人民币大写
-              </Link>
-            </CardContent>
-          </Card>
         </div>
       </div>
     </>

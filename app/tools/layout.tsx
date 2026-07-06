@@ -4,6 +4,8 @@
 // 作者: Jensfrank
 // 更新时间: 2026-01-08
 
+import { RelatedTools } from '@/components/tools/related-tools'
+
 export default function ToolsLayout({
   children,
 }: {
@@ -11,9 +13,8 @@ export default function ToolsLayout({
 }) {
   return (
     <>
-      {/* 如果工具页面需要特殊的布局或样式，可以在这里添加 */}
-      {/* 例如：面包屑导航、侧边栏等 */}
       {children}
+      <RelatedTools />
     </>
   )
 }

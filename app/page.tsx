@@ -30,7 +30,7 @@ import {
   Code2,
   ReceiptText,
 } from 'lucide-react'
-import { TOOL_REGISTRY } from '@/lib/tools/registry'
+import { TOOL_REGISTRY, getActiveCategories, getToolsByCategory } from '@/lib/tools/registry'
 import { TOOL_UI_CONFIG, getToolBadgeClassName } from '@/lib/tools/registry-ui'
 
 // Icon mapping for dynamic rendering based on registry iconName
@@ -59,6 +59,7 @@ const tools = TOOL_REGISTRY.map((tool) => {
   
   return {
     title: tool.title,
+    category: tool.category,
     description: tool.description,
     icon: IconComponent,
     href: tool.href,
@@ -75,19 +76,22 @@ const stats = [
   { label: '用户好评', value: '98%', icon: Sparkles }
 ]
 
+const activeCategories = getActiveCategories()
+const toolsByCategory = getToolsByCategory()
+
 export default function HomePage() {
   return (
     <>
       {/* 头部区域 - 增强视觉效果 */}
-      <div className="text-center mb-12 pt-16">
+      <div className="text-center mb-12 pt-10 md:pt-16">
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-full text-sm font-medium mb-6">
           <Sparkles className="h-4 w-4" />
           专为外贸人打造的效率工具
         </div>
-        <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
           外贸实用工具集
         </h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
           精选{tools.length}款专业工具，涵盖文本处理、时间管理、货币转换与数据处理等外贸场景
           <br />让国际贸易更简单，让工作效率更高效
         </p>
@@ -98,8 +102,10 @@ export default function HomePage() {
         {stats.map((stat, index) => {
           const Icon = stat.icon
           return (
-            <div key={index} className="bg-white rounded-xl p-6 text-center shadow-sm border border-gray-100">
-              <Icon className="h-8 w-8 mx-auto mb-2 text-emerald-500" />
+            <div key={index} className="rounded-lg border border-gray-100 bg-white p-5 text-center shadow-sm">
+              <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-md bg-emerald-50 text-emerald-600">
+                <Icon className="h-5 w-5" />
+              </div>
               <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
               <p className="text-sm text-gray-600">{stat.label}</p>
             </div>
@@ -107,14 +113,28 @@ export default function HomePage() {
         })}
       </div>
 
+      <div id="tools" className="mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900">工具目录</h2>
+          <p className="mt-2 text-sm text-gray-600">按外贸场景分类整理，常用入口可从顶部导航快速打开</p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {activeCategories.map((category) => (
+            <span key={category} className="rounded-md border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-600">
+              {category} · {toolsByCategory[category].length}
+            </span>
+          ))}
+        </div>
+      </div>
+
       {/* 工具卡片网格 */}
-      <div id="tools" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {tools.map((tool) => {
           const Icon = tool.icon
           const BadgeIcon = tool.badge === '热门' ? TrendingUp : Sparkles
           return (
             <Link key={tool.href} href={tool.href} className="group">
-              <Card className="h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer border-gray-200 overflow-hidden relative">
+              <Card className="relative h-full overflow-hidden rounded-lg border-gray-200 bg-white/95 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200 hover:shadow-lg hover:shadow-emerald-900/5">
                 {tool.badge && (
                   <div className="absolute top-4 right-4 z-10">
                     <Badge variant="outline" className={`${tool.badgeClassName} border-0 font-medium shadow-sm`}>
@@ -123,18 +143,19 @@ export default function HomePage() {
                     </Badge>
                   </div>
                 )}
-                <CardHeader className="pb-4">
+                <CardHeader className={`pb-3 ${tool.badge ? 'pr-20' : ''}`}>
                   <div className="flex items-start justify-between mb-3">
-                    <div className={`p-3 rounded-lg ${tool.bgColor} ${tool.color} transition-transform duration-300 group-hover:scale-110`}>
+                    <div className={`rounded-md p-3 ${tool.bgColor} ${tool.color} transition-transform duration-300 group-hover:scale-105`}>
                       <Icon className="h-6 w-6" />
                     </div>
                   </div>
+                  <p className="mb-1 text-xs font-medium text-gray-500">{tool.category}</p>
                   <CardTitle className="text-lg font-semibold text-gray-900 group-hover:text-emerald-600 transition-colors">
                     {tool.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-sm text-gray-600 line-clamp-2">
+                  <CardDescription className="line-clamp-2 text-sm leading-6 text-gray-600">
                     {tool.description}
                   </CardDescription>
                 </CardContent>

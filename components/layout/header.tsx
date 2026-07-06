@@ -5,22 +5,21 @@
 // 更新时间: 2026-01-12
 
 import Link from 'next/link'
-import Image from 'next/image' // 引入 Image 组件
+import Image from 'next/image'
 import { Navigation } from './navigation'
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center">
-        {/* Logo 区域：替换为图片 */}
-        <Link href="/" className="flex items-center mr-6 transition-opacity hover:opacity-90">
+    <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/90 shadow-sm shadow-slate-900/[0.02] backdrop-blur supports-[backdrop-filter]:bg-white/75">
+      <div className="mx-auto flex h-16 w-full max-w-7xl items-center px-4 sm:px-6 lg:px-8">
+        <Link href="/" className="mr-6 flex items-center transition-opacity hover:opacity-90">
           <Image 
             src="/logo.png" 
             alt="Globokit Logo" 
-            width={140} // 设置适当的宽度，保持比例
-            height={40} // 导航栏高 h-16 (64px)，Logo 设置为 40px 比较协调
-            priority    // 关键属性：优先加载 Logo，防止闪烁
-            className="h-10 w-auto object-contain" // 确保图片按比例缩放不亦庄
+            width={140}
+            height={40}
+            priority
+            className="h-10 w-auto object-contain"
           />
         </Link>
         

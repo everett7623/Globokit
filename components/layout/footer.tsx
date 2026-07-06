@@ -6,20 +6,21 @@
 
 import Link from 'next/link'
 import { Github, ExternalLink } from 'lucide-react'
+import { SITE_NAME } from '@/lib/site'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="border-t bg-gray-50 mt-auto">
-      <div className="container py-12">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="text-center md:text-left space-y-1">
+    <footer className="mt-auto border-t border-slate-200 bg-white">
+      <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+          <div className="space-y-1 text-center md:text-left">
             <p className="text-sm font-medium text-gray-900">
-              © {currentYear} GloboKit. 为全球贸易赋能
+              © {currentYear} {SITE_NAME}. 为全球贸易赋能
             </p>
             <p className="text-xs text-muted-foreground">
-              Built with ❤️ by Jensfrank
+              Built by Jensfrank
             </p>
           </div>
           
@@ -67,7 +68,7 @@ export function Footer() {
           </div>
         </div>
         
-        <div className="mt-8 pt-8 border-t border-gray-200">
+        <div className="mt-8 border-t border-gray-200 pt-8">
           <p className="text-center text-xs text-muted-foreground">
             Powered by{' '}
             <Link

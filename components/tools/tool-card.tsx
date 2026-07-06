@@ -19,19 +19,21 @@ interface ToolCardProps {
 
 export function ToolCard({ title, description, icon: Icon, href, color = 'text-primary' }: ToolCardProps) {
   return (
-    <Card className="hover:shadow-lg transition-shadow">
+    <Card className="group h-full rounded-lg border-gray-200 bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-md hover:shadow-emerald-900/5">
       <CardHeader>
-        <div className="flex items-center gap-2 mb-2">
+        <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-md bg-emerald-50">
           <Icon className={`h-6 w-6 ${color}`} />
-          <CardTitle className="text-xl">{title}</CardTitle>
         </div>
-        <CardDescription>{description}</CardDescription>
+        <CardTitle className="text-lg text-gray-900 transition-colors group-hover:text-emerald-700">
+          {title}
+        </CardTitle>
+        <CardDescription className="line-clamp-2 leading-6">{description}</CardDescription>
       </CardHeader>
       <CardContent>
         <Link href={href}>
-          <Button className="w-full" variant="default">
+          <Button className="w-full" variant="outline">
             开始使用
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </Button>
         </Link>
       </CardContent>
