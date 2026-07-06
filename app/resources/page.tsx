@@ -222,7 +222,10 @@ export default function ResourcesPage() {
               <section
                 key={group.type}
                 id={meta.slug}
-                className="scroll-mt-28 space-y-3"
+                className={cn(
+                  'scroll-mt-28 space-y-3',
+                  (group.type === '主机与建站' || group.type === '域名服务') && 'xl:col-span-2'
+                )}
               >
                 <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                   <div className="flex min-w-0 items-center gap-3">
@@ -239,7 +242,12 @@ export default function ResourcesPage() {
                   </Badge>
                 </div>
 
-                <div className="grid gap-3">
+                <div
+                  className={cn(
+                    'grid gap-3',
+                    (group.type === '主机与建站' || group.type === '域名服务') && 'md:grid-cols-2 xl:grid-cols-3'
+                  )}
+                >
                   {group.resources.map((resource) => (
                     <a
                       key={resource.id}
