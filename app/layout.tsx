@@ -75,7 +75,7 @@ export default function RootLayout({
           `}
         </Script>
         <ThemeProvider>
-          <div className="relative flex min-h-screen flex-col overflow-hidden bg-[linear-gradient(180deg,#f8fafc_0%,#eef7f4_42%,#ffffff_100%)] text-slate-950 dark:bg-[linear-gradient(180deg,#020617_0%,#0b1220_48%,#07111d_100%)] dark:text-slate-50">
+          <div className="relative flex min-h-screen flex-col overflow-hidden bg-[linear-gradient(180deg,#f8fafc_0%,#eef7f4_42%,#ffffff_100%)] pt-[72px] text-slate-950 dark:bg-[linear-gradient(180deg,#020617_0%,#0b1220_48%,#07111d_100%)] dark:text-slate-50">
             <div className="pointer-events-none fixed inset-0 z-0 opacity-70 dark:opacity-40 trade-grid-bg" />
             <Header />
             <main className="relative z-10 mx-auto w-full max-w-[1440px] flex-1 px-4 py-8 sm:px-6 lg:px-8 md:py-10">

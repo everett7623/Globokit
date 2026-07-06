@@ -153,8 +153,11 @@ export function Navigation() {
                 : 'invisible -translate-x-1/2 -translate-y-2 opacity-0'
             )}
           >
-            <div className="grid min-h-[520px] grid-cols-[270px_minmax(0,1fr)_280px]">
-              <aside className="border-r border-slate-200/80 bg-slate-50/80 p-4 dark:border-white/10 dark:bg-slate-900/70">
+            <div
+              className="grid grid-cols-[270px_minmax(0,1fr)_280px]"
+              style={{ height: 'min(620px, calc(100vh - 88px))' }}
+            >
+              <aside className="h-full overflow-y-auto border-r border-slate-200/80 bg-slate-50/80 p-4 dark:border-white/10 dark:bg-slate-900/70">
                 <div className="mb-4 flex items-center justify-between">
                   <div>
                     <p className="text-sm font-semibold text-slate-950 dark:text-white">业务流程</p>
@@ -220,7 +223,7 @@ export function Navigation() {
                 </div>
               </aside>
 
-              <section className="p-5">
+              <section className="h-full overflow-y-auto p-5">
                 <div className="mb-5 flex items-center gap-3 rounded-lg border border-slate-200 bg-white px-4 py-3 shadow-sm dark:border-white/10 dark:bg-slate-900/70">
                   <Search className="h-4 w-4 text-slate-400" />
                   <input
@@ -265,7 +268,7 @@ export function Navigation() {
                 )}
               </section>
 
-              <aside className="border-l border-slate-200/80 bg-slate-950 p-4 text-white dark:border-white/10">
+              <aside className="h-full overflow-y-auto border-l border-slate-200/80 bg-slate-950 p-4 text-white dark:border-white/10">
                 <div className="mb-4 flex items-center gap-2">
                   <Sparkles className="h-4 w-4 text-amber-300" />
                   <p className="text-sm font-semibold">新增工具</p>
