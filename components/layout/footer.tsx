@@ -23,7 +23,7 @@ export function Footer() {
             </p>
           </div>
           
-          <div className="flex items-center gap-6 text-sm">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm md:justify-end">
             <Link
               href="https://github.com/everett7623/Globokit"
               target="_blank"
@@ -34,7 +34,7 @@ export function Footer() {
               GitHub
               <ExternalLink className="h-3 w-3 opacity-50" />
             </Link>
-            <span className="text-gray-300">|</span>
+            <span className="hidden text-gray-300 sm:inline">|</span>
             <Link
               href="https://seedloc.com"
               target="_blank"
@@ -44,7 +44,7 @@ export function Footer() {
               Seedloc 博客
               <ExternalLink className="h-3 w-3 opacity-50" />
             </Link>
-            <span className="text-gray-300">|</span>
+            <span className="hidden text-gray-300 sm:inline">|</span>
             <Link
               href="https://vpsknow.com"
               target="_blank"
@@ -54,7 +54,7 @@ export function Footer() {
               VPSKnow 站点
               <ExternalLink className="h-3 w-3 opacity-50" />
             </Link>
-            <span className="text-gray-300">|</span>
+            <span className="hidden text-gray-300 sm:inline">|</span>
             <Link
               href="https://nav.seedloc.com"
               target="_blank"

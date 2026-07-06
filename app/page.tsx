@@ -28,9 +28,10 @@ import {
   Code,
   FileSearch,
   Code2,
+  ReceiptText,
 } from 'lucide-react'
 import { TOOL_REGISTRY } from '@/lib/tools/registry'
-import { TOOL_UI_CONFIG } from '@/lib/tools/registry-ui'
+import { TOOL_UI_CONFIG, getToolBadgeClassName } from '@/lib/tools/registry-ui'
 
 // Icon mapping for dynamic rendering based on registry iconName
 const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -46,6 +47,7 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   Server,
   FileSearch,
   Code2,
+  ReceiptText,
 }
 
 const tools = TOOL_REGISTRY.map((tool) => {
@@ -61,12 +63,10 @@ const tools = TOOL_REGISTRY.map((tool) => {
     icon: IconComponent,
     href: tool.href,
     badge: tool.badge,
+    badgeClassName: getToolBadgeClassName(tool.badge),
     ...uiConfig,
   }
 })
-
-// Legacy tools array kept for reference during migration
-const legacyTools = []
 
 const stats = [
   { label: '工具总数', value: `${tools.length}+`, icon: Zap },
@@ -80,7 +80,6 @@ export default function HomePage() {
     <>
       {/* 头部区域 - 增强视觉效果 */}
       <div className="text-center mb-12 pt-16">
-        {/* 修改 1: 头部 Banner 徽章 -> Emerald */}
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-full text-sm font-medium mb-6">
           <Sparkles className="h-4 w-4" />
           专为外贸人打造的效率工具
@@ -100,7 +99,6 @@ export default function HomePage() {
           const Icon = stat.icon
           return (
             <div key={index} className="bg-white rounded-xl p-6 text-center shadow-sm border border-gray-100">
-              {/* 修改 2: 统计图标颜色 -> Emerald */}
               <Icon className="h-8 w-8 mx-auto mb-2 text-emerald-500" />
               <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
               <p className="text-sm text-gray-600">{stat.label}</p>
@@ -113,12 +111,14 @@ export default function HomePage() {
       <div id="tools" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {tools.map((tool) => {
           const Icon = tool.icon
+          const BadgeIcon = tool.badge === '热门' ? TrendingUp : Sparkles
           return (
             <Link key={tool.href} href={tool.href} className="group">
               <Card className="h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer border-gray-200 overflow-hidden relative">
                 {tool.badge && (
                   <div className="absolute top-4 right-4 z-10">
-                    <Badge className={`${tool.badgeColor} border-0 font-medium`}>
+                    <Badge variant="outline" className={`${tool.badgeClassName} border-0 font-medium shadow-sm`}>
+                      <BadgeIcon className="mr-1 h-3 w-3" />
                       {tool.badge}
                     </Badge>
                   </div>
@@ -129,7 +129,6 @@ export default function HomePage() {
                       <Icon className="h-6 w-6" />
                     </div>
                   </div>
-                  {/* 修改: 卡片标题 Hover 颜色 -> Emerald (可选，如果想统一 Hover 色) */}
                   <CardTitle className="text-lg font-semibold text-gray-900 group-hover:text-emerald-600 transition-colors">
                     {tool.title}
                   </CardTitle>
@@ -139,7 +138,6 @@ export default function HomePage() {
                     {tool.description}
                   </CardDescription>
                 </CardContent>
-                {/* 修改: 卡片底部条 -> Emerald 渐变 */}
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
               </Card>
             </Link>
@@ -149,7 +147,6 @@ export default function HomePage() {
 
       {/* 关于区域 */}
       <div id="about" className="mt-20 mb-12">
-        {/* 修改: 关于区域背景 -> Emerald/Teal 极淡渐变 (可选，或者保持原有的蓝紫色调也行，这里我改成极淡的 emerald) */}
         <Card className="bg-gradient-to-br from-emerald-50/50 to-teal-50/50 border-0">
           <CardContent className="p-8 md:p-12">
             <div className="max-w-4xl mx-auto text-center">
@@ -188,7 +185,6 @@ export default function HomePage() {
 
       {/* 底部信息 */}
       <div className="text-center py-8">
-        {/* 修改 3: 底部 Banner 背景及文字 -> Emerald/Teal */}
         <div className="inline-flex items-center justify-center p-4 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-lg">
           <p className="text-emerald-700 font-medium flex items-center gap-2">
             <Sparkles className="h-5 w-5" />

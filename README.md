@@ -46,6 +46,11 @@
   - 基于购买日期与续费周期，精确计算服务器剩余残值。
   - 支持 **多币种自动汇率** (USD, CNY, EUR等) 换算。
   - 智能推算剩余天数与日均价值，直观的进度条展示。
+- **外贸报价利润计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+  
+  - 根据采购成本、费用、汇率、佣金和目标利润率反推出报价单价。
+  - 支持 FOB/CIF 等常见报价口径，展示盈亏平衡价、订单利润与成本拆分。
+  - 可按已知售价快速核算销售利润率，辅助外贸报价与接单评估。
 - **人民币大写转换**
   
   - 将数字金额一键转换为标准的中文大写（壹, 贰, 叁...），适用于合同、发票及财务报表。
@@ -111,6 +116,7 @@ Globokit/
 │   │   ├── holiday-query/      # 国际节假日
 │   │   ├── number-to-english/  # 数字转英文
 │   │   ├── pinyin/             # 中文转拼音
+│   │   ├── quote-calculator/   # 外贸报价利润计算
 │   │   ├── rmb-converter/      # 人民币大写转换
 │   │   ├── special-char/       # 特殊字符检查
 │   │   ├── text-case/          # 英文大小写转换
@@ -147,6 +153,7 @@ Globokit/
 │   │   ├── holiday-query.ts
 │   │   ├── number-english.ts
 │   │   ├── pinyin.ts
+│   │   ├── quote-calculator.ts
 │   │   ├── rmb-converter.ts
 │   │   ├── special-char.ts
 │   │   ├── text-case.ts

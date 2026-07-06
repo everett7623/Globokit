@@ -6,20 +6,18 @@
 
 /**
  * UI styling configuration for tools on the homepage.
- * Maps tool IDs to their color scheme and badge styling.
+ * Maps tool IDs to their color scheme.
  */
 export const TOOL_UI_CONFIG: Record<
   string,
   {
     color: string
     bgColor: string
-    badgeColor?: string
   }
 > = {
   'rmb-converter': {
     color: 'text-blue-500',
     bgColor: 'bg-blue-50',
-    badgeColor: 'bg-orange-100 text-orange-700',
   },
   'text-case': {
     color: 'text-green-500',
@@ -40,38 +38,45 @@ export const TOOL_UI_CONFIG: Record<
   'holiday-query': {
     color: 'text-orange-500',
     bgColor: 'bg-orange-50',
-    badgeColor: 'bg-green-100 text-green-700',
   },
   'world-time': {
     color: 'text-indigo-500',
     bgColor: 'bg-indigo-50',
-    badgeColor: 'bg-green-100 text-green-700',
   },
   'currency-symbols': {
     color: 'text-emerald-500',
     bgColor: 'bg-emerald-50',
-    badgeColor: 'bg-green-100 text-green-700',
   },
   'global-country-info': {
     color: 'text-cyan-500',
     bgColor: 'bg-cyan-50',
-    badgeColor: 'bg-green-100 text-green-700',
+  },
+  'quote-calculator': {
+    color: 'text-sky-500',
+    bgColor: 'bg-sky-50',
   },
   'vps-calculator': {
     color: 'text-violet-500',
     bgColor: 'bg-violet-50',
-    badgeColor: 'bg-emerald-100 text-emerald-700',
   },
   'incoterms': {
     color: 'text-teal-500',
     bgColor: 'bg-teal-50',
-    badgeColor: 'bg-teal-100 text-teal-700',
   },
   'json-formatter': {
     color: 'text-orange-500',
     bgColor: 'bg-orange-50',
-    badgeColor: 'bg-orange-100 text-orange-700',
   },
+}
+
+export const TOOL_BADGE_STYLES: Record<string, string> = {
+  '热门': 'bg-amber-100 text-amber-700 ring-1 ring-amber-200/80',
+  '新增': 'bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200/80',
+}
+
+export function getToolBadgeClassName(badge?: string) {
+  if (!badge) return ''
+  return TOOL_BADGE_STYLES[badge] ?? 'bg-slate-100 text-slate-700 ring-1 ring-slate-200/80'
 }
 
 /**

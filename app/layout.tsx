@@ -14,9 +14,10 @@ import Script from 'next/script'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://globokit.com'),
   title: 'Globokit - 外贸实用工具集',
-  description: '专为外贸从业者打造的在线工具平台，提供人民币大写转换、文本处理、货币符号查询等实用工具',
-  keywords: '外贸工具,人民币大写,英文大小写,特殊字符,数字转英文,中文拼音,国际节假日,世界时间,货币符号',
+  description: '专为外贸从业者打造的在线工具平台，提供外贸报价利润计算、人民币大写转换、文本处理、货币符号查询等实用工具',
+  keywords: '外贸工具,外贸报价,利润计算,人民币大写,英文大小写,特殊字符,数字转英文,中文拼音,国际节假日,世界时间,货币符号',
   authors: [{ name: 'Jensfrank' }],
   openGraph: {
     title: 'Globokit - 外贸实用工具集',
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
     siteName: 'Globokit',
     type: 'website',
   },
-  // 新增：图标配置，指定使用 png
+  // 使用 PNG 图标，保持桌面与移动端显示一致
   icons: {
     icon: '/favicon.png',
     shortcut: '/favicon.png',
