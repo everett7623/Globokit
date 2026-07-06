@@ -10,6 +10,7 @@ import {
   AlertCircle,
   ArrowRight,
   BadgeCheck,
+  Bot,
   Calendar,
   Calculator,
   CircleDollarSign,
@@ -17,6 +18,7 @@ import {
   Code,
   Code2,
   Container,
+  CreditCard,
   Database,
   ExternalLink,
   Fingerprint,
@@ -25,6 +27,7 @@ import {
   Hash,
   Languages,
   MailCheck,
+  MessageSquare,
   Network,
   ReceiptText,
   Server,
@@ -137,6 +140,9 @@ const partnerTypeMeta: Record<PartnerResourceType, { icon: ComponentType<{ class
   '代理网络': { icon: Network, tone: 'text-cyan-600 dark:text-cyan-300' },
   '浏览器环境': { icon: Fingerprint, tone: 'text-violet-600 dark:text-violet-300' },
   '企业数据': { icon: Database, tone: 'text-amber-600 dark:text-amber-300' },
+  '账号与支付': { icon: CreditCard, tone: 'text-sky-600 dark:text-sky-300' },
+  'AI 工具': { icon: Bot, tone: 'text-fuchsia-600 dark:text-fuchsia-300' },
+  '验证服务': { icon: MessageSquare, tone: 'text-orange-600 dark:text-orange-300' },
 }
 
 export default function HomePage() {
@@ -266,11 +272,11 @@ export default function HomePage() {
             </div>
             <h2 className="text-2xl font-semibold tracking-normal text-slate-950 dark:text-white">可配合工具站使用的业务资源</h2>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-400">
-              只保留外贸获客、市场调研、跨区测试和团队环境管理相关资源。
+              覆盖外贸获客、市场调研、跨区测试、账号支付、AI 服务和合规验证等出海场景。
             </p>
           </div>
           <p className="max-w-md rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-xs leading-5 text-amber-800 dark:border-amber-300/20 dark:bg-amber-300/10 dark:text-amber-100">
-            资源仅用于合法公开信息调研、业务测试与团队管理，避免用于绕过平台规则或侵权采集。
+            资源仅用于合法公开信息调研、业务测试、订阅支付与团队管理，避免用于绕过平台规则、批量滥用或侵权采集。
           </p>
         </div>
 
