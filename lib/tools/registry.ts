@@ -14,6 +14,7 @@ export type ToolCategory =
   | '文本处理'
   | '时间与节假日'
   | '国家与货币'
+  | '物流与装柜'
   | 'VPS/站长工具'
   | '外贸沟通'
   | '文件与格式转换'
@@ -126,7 +127,24 @@ export const TOOL_REGISTRY: ToolMeta[] = [
     seoTitle: '外贸报价利润计算器 - FOB/CIF 报价测算 | Globokit',
     seoDescription: '免费在线外贸报价利润计算器，支持采购成本、运费、佣金、汇率和目标利润率测算，快速反推出 FOB/CIF 报价',
     useCases: ['外贸报价核算', '订单利润测算', 'FOB/CIF 价格评估'],
-    relatedTools: ['currency-symbols', 'incoterms', 'rmb-converter'],
+    relatedTools: ['currency-symbols', 'container-load-calculator', 'incoterms'],
+  },
+  {
+    id: 'container-load-calculator',
+    slug: 'container-load-calculator',
+    title: '装柜/箱规计算器',
+    shortTitle: '装柜计算',
+    description: '按纸箱尺寸、毛重、数量和柜型估算整柜装载数量、柜数与利用率',
+    category: '物流与装柜',
+    iconName: 'Container',
+    href: '/tools/container-load-calculator',
+    updatedAt: '2026-07-06',
+    badge: '新增',
+    keywords: ['container', '装柜', '箱规', 'CBM', '柜型', '物流', '20GP', '40HQ'],
+    seoTitle: '装柜/箱规计算器 - 纸箱 CBM 与整柜装载估算 | Globokit',
+    seoDescription: '免费在线装柜/箱规计算器，按纸箱尺寸、毛重、箱数和 20GP/40GP/40HQ/45HQ 柜型估算装载数量、柜数和利用率',
+    useCases: ['报价前估算装柜量', '核对纸箱 CBM', '评估整柜数量和载重限制'],
+    relatedTools: ['quote-calculator', 'incoterms', 'currency-symbols'],
   },
   {
     id: 'text-case',
@@ -255,7 +273,7 @@ export const TOOL_REGISTRY: ToolMeta[] = [
     seoTitle: '国际贸易术语速查 - Incoterms 2020 在线查询 | Globokit',
     seoDescription: '免费在线 Incoterms 2020 术语速查工具，快速查看 FOB/CIF/DDP 等条款的风险与费用责任划分',
     useCases: ['报价条款确认', '合同条款核对', '新业务员培训'],
-    relatedTools: ['holiday-query', 'world-time', 'currency-symbols', 'quote-calculator'],
+    relatedTools: ['container-load-calculator', 'quote-calculator', 'holiday-query', 'world-time'],
   },
   {
     id: 'json-formatter',
@@ -295,6 +313,7 @@ export function getToolsByCategory(): Record<ToolCategory, ToolMeta[]> {
     '文本处理': [],
     '时间与节假日': [],
     '国家与货币': [],
+    '物流与装柜': [],
     'VPS/站长工具': [],
     '外贸沟通': [],
     '文件与格式转换': [],
@@ -318,6 +337,7 @@ export function getActiveCategories(): ToolCategory[] {
     '文本处理',
     '时间与节假日',
     '国家与货币',
+    '物流与装柜',
     'VPS/站长工具',
     '外贸沟通',
     '文件与格式转换',

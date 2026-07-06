@@ -29,6 +29,7 @@ import {
   FileSearch,
   Code2,
   ReceiptText,
+  Container,
 } from 'lucide-react'
 import { TOOL_REGISTRY, getActiveCategories, getToolsByCategory } from '@/lib/tools/registry'
 import { TOOL_UI_CONFIG, getToolBadgeClassName } from '@/lib/tools/registry-ui'
@@ -48,6 +49,7 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   FileSearch,
   Code2,
   ReceiptText,
+  Container,
 }
 
 const tools = TOOL_REGISTRY.map((tool) => {

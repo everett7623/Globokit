@@ -55,6 +55,10 @@ export const TOOL_UI_CONFIG: Record<
     color: 'text-sky-500',
     bgColor: 'bg-sky-50',
   },
+  'container-load-calculator': {
+    color: 'text-lime-600',
+    bgColor: 'bg-lime-50',
+  },
   'vps-calculator': {
     color: 'text-violet-500',
     bgColor: 'bg-violet-50',
