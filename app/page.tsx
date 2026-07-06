@@ -140,6 +140,8 @@ const partnerTypeMeta: Record<PartnerResourceType, { icon: ComponentType<{ class
   '代理网络': { icon: Network, tone: 'text-cyan-600 dark:text-cyan-300' },
   '浏览器环境': { icon: Fingerprint, tone: 'text-violet-600 dark:text-violet-300' },
   '企业数据': { icon: Database, tone: 'text-amber-600 dark:text-amber-300' },
+  '主机与建站': { icon: Server, tone: 'text-indigo-600 dark:text-indigo-300' },
+  '域名服务': { icon: Globe, tone: 'text-blue-600 dark:text-blue-300' },
   '账号与支付': { icon: CreditCard, tone: 'text-sky-600 dark:text-sky-300' },
   'AI 工具': { icon: Bot, tone: 'text-fuchsia-600 dark:text-fuchsia-300' },
   '验证服务': { icon: MessageSquare, tone: 'text-orange-600 dark:text-orange-300' },
@@ -152,6 +154,8 @@ const featuredPartnerResourceIds = [
   'xiaohuojian',
   'gpt-mj',
   'bitgetwallet',
+  'dmit',
+  'namesilo',
 ]
 
 const featuredPartnerResources = featuredPartnerResourceIds
@@ -311,7 +315,7 @@ export default function HomePage() {
             </div>
             <h2 className="text-2xl font-semibold tracking-normal text-slate-950 dark:text-white">配合工具站使用的业务资源</h2>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-400">
-              首页只放高频入口，完整代理、账号、AI、验证和支付资源统一收纳到资源页。
+              首页只放高频入口，完整代理、账号、主机建站、域名、AI 和验证资源统一收纳到资源页。
             </p>
           </div>
           <Link
@@ -323,7 +327,7 @@ export default function HomePage() {
           </Link>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {featuredPartnerResources.map((resource) => {
             const meta = partnerTypeMeta[resource.type]
             const Icon = meta.icon

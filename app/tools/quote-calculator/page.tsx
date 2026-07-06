@@ -138,6 +138,46 @@ function buildSummary(result: QuoteResult, currency: QuoteCurrency, formatForeig
   ].join('\n')
 }
 
+function NumberField({
+  field,
+  label,
+  suffix,
+  value,
+  onValueChange,
+  step = '0.01',
+  min = '0',
+}: {
+  field: NumericField
+  label: string
+  suffix?: string
+  value: string
+  onValueChange: (field: NumericField, value: string) => void
+  step?: string
+  min?: string
+}) {
+  return (
+    <div className="space-y-2">
+      <Label htmlFor={field}>{label}</Label>
+      <div className="relative">
+        <Input
+          id={field}
+          type="number"
+          min={min}
+          step={step}
+          value={value}
+          onChange={(event) => onValueChange(field, event.target.value)}
+          className={cn(suffix && 'pr-16')}
+        />
+        {suffix && (
+          <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-xs text-muted-foreground">
+            {suffix}
+          </span>
+        )}
+      </div>
+    </div>
+  )
+}
+
 export default function QuoteCalculatorPage() {
   const [mode, setMode] = useState<QuoteMode>('target-margin')
   const [form, setForm] = useState<FormState>(initialForm)
@@ -206,40 +246,6 @@ export default function QuoteCalculatorPage() {
     setCopied(true)
     window.setTimeout(() => setCopied(false), 1800)
   }
-
-  const NumberField = ({
-    field,
-    label,
-    suffix,
-    step = '0.01',
-    min = '0',
-  }: {
-    field: NumericField
-    label: string
-    suffix?: string
-    step?: string
-    min?: string
-  }) => (
-    <div className="space-y-2">
-      <Label htmlFor={field}>{label}</Label>
-      <div className="relative">
-        <Input
-          id={field}
-          type="number"
-          min={min}
-          step={step}
-          value={form[field]}
-          onChange={(event) => updateField(field, event.target.value)}
-          className={cn(suffix && 'pr-16')}
-        />
-        {suffix && (
-          <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-xs text-muted-foreground">
-            {suffix}
-          </span>
-        )}
-      </div>
-    </div>
-  )
 
   const costRows = result
     ? [
@@ -368,19 +374,19 @@ export default function QuoteCalculatorPage() {
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
-              <NumberField field="unitCostCny" label="单件采购成本" suffix="CNY" />
-              <NumberField field="quantity" label="订单数量" suffix="件" step="1" />
-              <NumberField field="domesticFeeCny" label="内陆费用" suffix="CNY" />
-              <NumberField field="exportFeeCny" label="出口杂费" suffix="CNY" />
-              <NumberField field="internationalFreightCny" label="国际运费" suffix="CNY" />
-              <NumberField field="rebatePercent" label="出口退税率" suffix="%" />
-              <NumberField field="vatPercent" label="增值税率" suffix="%" />
-              <NumberField field="commissionPercent" label="佣金比例" suffix="%" />
-              <NumberField field="paymentFeePercent" label="收款手续费" suffix="%" />
+              <NumberField field="unitCostCny" label="单件采购成本" suffix="CNY" value={form.unitCostCny} onValueChange={updateField} />
+              <NumberField field="quantity" label="订单数量" suffix="件" step="1" value={form.quantity} onValueChange={updateField} />
+              <NumberField field="domesticFeeCny" label="内陆费用" suffix="CNY" value={form.domesticFeeCny} onValueChange={updateField} />
+              <NumberField field="exportFeeCny" label="出口杂费" suffix="CNY" value={form.exportFeeCny} onValueChange={updateField} />
+              <NumberField field="internationalFreightCny" label="国际运费" suffix="CNY" value={form.internationalFreightCny} onValueChange={updateField} />
+              <NumberField field="rebatePercent" label="出口退税率" suffix="%" value={form.rebatePercent} onValueChange={updateField} />
+              <NumberField field="vatPercent" label="增值税率" suffix="%" value={form.vatPercent} onValueChange={updateField} />
+              <NumberField field="commissionPercent" label="佣金比例" suffix="%" value={form.commissionPercent} onValueChange={updateField} />
+              <NumberField field="paymentFeePercent" label="收款手续费" suffix="%" value={form.paymentFeePercent} onValueChange={updateField} />
               {mode === 'target-margin' ? (
-                <NumberField field="targetMarginPercent" label="目标利润率" suffix="%" />
+                <NumberField field="targetMarginPercent" label="目标利润率" suffix="%" value={form.targetMarginPercent} onValueChange={updateField} />
               ) : (
-                <NumberField field="sellingPriceForeign" label="已知销售单价" suffix={form.currency} />
+                <NumberField field="sellingPriceForeign" label="已知销售单价" suffix={form.currency} value={form.sellingPriceForeign} onValueChange={updateField} />
               )}
             </div>
 
@@ -410,7 +416,7 @@ export default function QuoteCalculatorPage() {
                   </SelectContent>
                 </Select>
               </div>
-              <NumberField field="exchangeRate" label="汇率" suffix="CNY" step="0.0001" />
+              <NumberField field="exchangeRate" label="汇率" suffix="CNY" step="0.0001" value={form.exchangeRate} onValueChange={updateField} />
             </div>
           </CardContent>
         </Card>

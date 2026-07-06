@@ -9,6 +9,8 @@ export type PartnerResourceType =
   | '代理网络'
   | '浏览器环境'
   | '企业数据'
+  | '主机与建站'
+  | '域名服务'
   | '账号与支付'
   | 'AI 工具'
   | '验证服务'
@@ -42,12 +44,44 @@ export const PARTNER_RESOURCES: PartnerResource[] = [
     bestFor: ['区域测试', '价格监测', '市场调研'],
   },
   {
+    id: 'novproxy',
+    name: 'Novproxy',
+    type: '代理网络',
+    href: 'https://s.y8o.de/novproxy',
+    description: '住宅与动态代理资源，适合跨区域访问测试、页面检查和账号环境准备。',
+    bestFor: ['动态代理', '区域访问', '页面检查'],
+  },
+  {
+    id: 'smartproxy',
+    name: 'Smartproxy / Decodo',
+    type: '代理网络',
+    href: 'https://s.y8o.de/smartproxy',
+    description: '成熟代理与数据采集平台，适合需要稳定全球覆盖的业务调研。',
+    bestFor: ['公开数据', '广告验证', 'SERP 观察'],
+  },
+  {
+    id: 'webshare',
+    name: 'Webshare',
+    type: '代理网络',
+    href: 'https://s.y8o.de/webshare',
+    description: '成本友好的代理选择，适合轻量测试、站点检查和团队入门使用。',
+    bestFor: ['轻量测试', '预算友好', '静态代理'],
+  },
+  {
     id: 'adspower',
     name: 'AdsPower',
     type: '浏览器环境',
     href: 'https://s.y8o.de/adspower',
     description: '浏览器环境和资料隔离工具，适合团队管理多个业务环境与区域账号。',
     bestFor: ['环境隔离', '团队协作', '账号资料管理'],
+  },
+  {
+    id: 'hubstudio',
+    name: 'Hubstudio',
+    type: '浏览器环境',
+    href: 'https://s.y8o.de/hubstudio',
+    description: '多环境浏览器管理工具，适合外贸团队做账号资料隔离和协作。',
+    bestFor: ['多环境管理', '团队协作', '资料隔离'],
   },
   {
     id: 'brightdata',
@@ -57,6 +91,40 @@ export const PARTNER_RESOURCES: PartnerResource[] = [
     description: '企业级公开数据采集和代理平台，适合预算充足的数据团队。',
     bestFor: ['公开数据', '企业调研', '数据集'],
     badge: '企业级',
+  },
+  {
+    id: 'dmit',
+    name: 'DMIT',
+    type: '主机与建站',
+    href: 'https://s.y8o.de/dmit',
+    description: '高性能云服务器资源，适合外贸独立站、落地页、监控服务和开发环境。',
+    bestFor: ['VPS', '独立站', '开发环境'],
+    badge: 'VPS',
+  },
+  {
+    id: 'hostinger',
+    name: 'Hostinger',
+    type: '主机与建站',
+    href: 'https://www.hostinger.com/web-hosting',
+    description: '虚拟主机与 WordPress 建站平台，适合不想自己维护服务器的小团队。',
+    bestFor: ['虚拟主机', 'WordPress', '建站入门'],
+  },
+  {
+    id: 'cloudflare-pages',
+    name: 'Cloudflare Pages',
+    type: '主机与建站',
+    href: 'https://pages.cloudflare.com/',
+    description: '前端站点部署平台，适合官网、落地页、文档站和轻量静态项目。',
+    bestFor: ['静态站点', '落地页', '前端部署'],
+  },
+  {
+    id: 'namesilo',
+    name: 'NameSilo',
+    type: '域名服务',
+    href: 'https://s.y8o.de/namesilo',
+    description: '域名注册、DNS、邮箱转发和基础建站服务，适合外贸品牌域名管理。',
+    bestFor: ['域名注册', 'DNS 管理', '品牌邮箱'],
+    badge: '域名',
   },
   {
     id: 'usappid',
@@ -90,6 +158,14 @@ export const PARTNER_RESOURCES: PartnerResource[] = [
     href: 'https://s.y8o.de/nexsms',
     description: '短信验证服务资源，适合合规的出海账号测试和业务验证流程。',
     bestFor: ['短信验证', '账号测试', '流程验证'],
+  },
+  {
+    id: 'smsman',
+    name: 'SMS-Man',
+    type: '验证服务',
+    href: 'https://s.y8o.de/smsman',
+    description: '多地区短信验证服务，适合跨境业务测试和必要的账号验证准备。',
+    bestFor: ['多地区验证', '业务测试', '账号准备'],
   },
   {
     id: 'bitget',

@@ -15,9 +15,11 @@ import {
   Database,
   ExternalLink,
   Fingerprint,
+  Globe2,
   MailCheck,
   MessageSquare,
   Network,
+  Server,
   ShieldCheck,
   Sparkles,
 } from 'lucide-react'
@@ -26,8 +28,8 @@ import { PARTNER_RESOURCES, PartnerResourceType } from '@/lib/partner-resources'
 import { cn } from '@/lib/utils'
 
 export const metadata: Metadata = {
-  title: '外贸业务资源精选 - 代理、账号、AI 与验证服务 | Globokit',
-  description: '精选可配合 Globokit 工具站使用的外贸业务资源，覆盖客户开发、代理网络、浏览器环境、账号支付、AI 工具和验证服务。',
+  title: '外贸业务资源精选 - 代理、主机、域名、账号与 AI 服务 | Globokit',
+  description: '精选可配合 Globokit 工具站使用的外贸业务资源，覆盖客户开发、代理网络、浏览器环境、主机建站、域名服务、账号支付、AI 工具和验证服务。',
 }
 
 const resourceTypeOrder: PartnerResourceType[] = [
@@ -35,6 +37,8 @@ const resourceTypeOrder: PartnerResourceType[] = [
   '代理网络',
   '浏览器环境',
   '企业数据',
+  '主机与建站',
+  '域名服务',
   '账号与支付',
   'AI 工具',
   '验证服务',
@@ -77,6 +81,20 @@ const resourceTypeMeta: Record<
     bg: 'bg-amber-50 dark:bg-amber-300/10',
     note: '企业级公开数据和预算充足的数据调研。',
     slug: 'data',
+  },
+  '主机与建站': {
+    icon: Server,
+    tone: 'text-indigo-600 dark:text-indigo-300',
+    bg: 'bg-indigo-50 dark:bg-indigo-300/10',
+    note: 'VPS、虚拟主机、落地页和独立站部署。',
+    slug: 'hosting',
+  },
+  '域名服务': {
+    icon: Globe2,
+    tone: 'text-blue-600 dark:text-blue-300',
+    bg: 'bg-blue-50 dark:bg-blue-300/10',
+    note: '品牌域名、DNS、邮箱转发和基础建站。',
+    slug: 'domain',
   },
   '账号与支付': {
     icon: CreditCard,
@@ -134,7 +152,7 @@ export default function ResourcesPage() {
               外贸业务资源精选
             </h1>
             <p className="mt-5 max-w-3xl text-base leading-8 text-slate-300 md:text-lg">
-              把客户开发、代理网络、浏览器环境、账号支付、AI 服务和验证资源统一收纳，作为工具站之外的业务补充入口。
+              把客户开发、代理网络、浏览器环境、主机建站、域名、账号支付、AI 服务和验证资源统一收纳，作为工具站之外的业务补充入口。
             </p>
           </div>
 
@@ -153,7 +171,10 @@ export default function ResourcesPage() {
           { label: '资源数量', value: PARTNER_RESOURCES.length },
           { label: '业务分类', value: visibleGroups.length },
           { label: '账号支付', value: PARTNER_RESOURCES.filter((resource) => resource.type === '账号与支付').length },
-          { label: '首页精选', value: 6 },
+          {
+            label: '主机域名',
+            value: PARTNER_RESOURCES.filter((resource) => resource.type === '主机与建站' || resource.type === '域名服务').length,
+          },
         ].map((item) => (
           <div
             key={item.label}
@@ -192,13 +213,17 @@ export default function ResourcesPage() {
           </div>
         </aside>
 
-        <div className="space-y-8">
+        <div className="grid gap-5 xl:grid-cols-2">
           {visibleGroups.map((group) => {
             const meta = resourceTypeMeta[group.type]
             const Icon = meta.icon
 
             return (
-              <section key={group.type} id={meta.slug} className="scroll-mt-28 space-y-4">
+              <section
+                key={group.type}
+                id={meta.slug}
+                className="scroll-mt-28 space-y-3"
+              >
                 <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                   <div className="flex min-w-0 items-center gap-3">
                     <div className={cn('flex h-11 w-11 shrink-0 items-center justify-center rounded-md ring-1 ring-slate-200/80 dark:ring-white/10', meta.bg)}>
@@ -214,14 +239,14 @@ export default function ResourcesPage() {
                   </Badge>
                 </div>
 
-                <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                <div className="grid gap-3">
                   {group.resources.map((resource) => (
                     <a
                       key={resource.id}
                       href={resource.href}
                       target="_blank"
                       rel="sponsored noopener noreferrer"
-                      className="group flex min-h-[220px] flex-col rounded-lg border border-white/70 bg-white/80 p-5 shadow-lg shadow-slate-900/[0.04] backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-cyan-300 hover:shadow-xl hover:shadow-cyan-900/[0.06] dark:border-white/10 dark:bg-slate-950/60 dark:hover:border-cyan-300/50"
+                      className="group flex min-h-[160px] flex-col rounded-lg border border-slate-200/80 bg-white/85 p-4 shadow-sm shadow-slate-900/[0.03] transition-all hover:-translate-y-0.5 hover:border-cyan-300 hover:shadow-md hover:shadow-cyan-900/[0.05] dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-cyan-300/50"
                     >
                       <div className="mb-4 flex items-start justify-between gap-3">
                         <div className="min-w-0">
