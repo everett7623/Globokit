@@ -227,14 +227,14 @@ export default function AirFreightCalculatorPage() {
       <div className="relative">
         <Input
           id={field}
-          type="number"
-          min="0"
-          step={step}
+          type="text"
+          inputMode={step === '1' ? 'numeric' : 'decimal'}
+          pattern="[0-9]*[.]?[0-9]*"
           value={form[field]}
           onChange={(event) => updateField(field, event.target.value)}
-          className="pr-14"
+          className="h-11 pr-24 font-medium leading-normal tabular-nums"
         />
-        <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-xs text-muted-foreground">
+        <span className="pointer-events-none absolute inset-y-0 right-4 flex max-w-16 items-center justify-end text-right text-xs text-muted-foreground">
           {suffix}
         </span>
       </div>
@@ -318,13 +318,13 @@ export default function AirFreightCalculatorPage() {
               ))}
             </div>
 
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-[repeat(3,minmax(0,1fr))]">
               <NumberField field="lengthCm" label="外箱长" suffix="cm" />
               <NumberField field="widthCm" label="外箱宽" suffix="cm" />
               <NumberField field="heightCm" label="外箱高" suffix="cm" />
             </div>
 
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-[repeat(3,minmax(0,1fr))]">
               <NumberField field="grossWeightKg" label="单箱实重" suffix="kg" step="0.1" />
               <NumberField field="quantity" label="箱数" suffix="箱" />
               <div className="space-y-2">
@@ -345,7 +345,7 @@ export default function AirFreightCalculatorPage() {
               </div>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-[repeat(3,minmax(0,1fr))]">
               <NumberField field="divisor" label="泡重系数" suffix="cm3/kg" />
               <NumberField field="ratePerKg" label="每公斤运价" suffix="/kg" step="0.01" />
               <NumberField field="minCharge" label="最低收费" suffix="元" step="0.01" />

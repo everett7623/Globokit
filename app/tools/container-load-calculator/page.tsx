@@ -136,14 +136,14 @@ export default function ContainerLoadCalculatorPage() {
       <div className="relative">
         <Input
           id={field}
-          type="number"
-          min="0"
-          step={step}
+          type="text"
+          inputMode={step === '1' ? 'numeric' : 'decimal'}
+          pattern="[0-9]*[.]?[0-9]*"
           value={form[field]}
           onChange={(event) => updateField(field, event.target.value)}
-          className="pr-14"
+          className="h-11 pr-20 font-medium leading-normal tabular-nums"
         />
-        <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-xs text-muted-foreground">
+        <span className="pointer-events-none absolute inset-y-0 right-4 flex max-w-14 items-center justify-end text-right text-xs text-muted-foreground">
           {suffix}
         </span>
       </div>
@@ -227,13 +227,13 @@ export default function ContainerLoadCalculatorPage() {
               ))}
             </div>
 
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-[repeat(3,minmax(0,1fr))]">
               <NumberField field="lengthCm" label="外箱长" suffix="cm" />
               <NumberField field="widthCm" label="外箱宽" suffix="cm" />
               <NumberField field="heightCm" label="外箱高" suffix="cm" />
             </div>
 
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-[repeat(3,minmax(0,1fr))]">
               <NumberField field="grossWeightKg" label="单箱毛重" suffix="kg" step="0.1" />
               <NumberField field="quantity" label="总箱数" suffix="箱" />
               <div className="space-y-2">
