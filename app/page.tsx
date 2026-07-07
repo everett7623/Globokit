@@ -29,6 +29,7 @@ import {
   MailCheck,
   MessageSquare,
   Network,
+  Plane,
   ReceiptText,
   Server,
   ShieldCheck,
@@ -61,6 +62,7 @@ const ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
   Code2,
   ReceiptText,
   Container,
+  Plane,
 }
 
 const tools = TOOL_REGISTRY.map((tool) => {
@@ -83,8 +85,8 @@ const activeCategories = getActiveCategories()
 const heroToolIds = [
   'quote-calculator',
   'container-load-calculator',
+  'air-freight-calculator',
   'global-country-info',
-  'holiday-query',
 ]
 
 const heroTools = heroToolIds

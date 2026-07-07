@@ -54,6 +54,7 @@ const categoryMeta: Record<ToolCategory, { icon: ComponentType<{ className?: str
 const featuredToolIds = [
   'quote-calculator',
   'container-load-calculator',
+  'air-freight-calculator',
   'holiday-query',
   'global-country-info',
 ]
@@ -229,7 +230,7 @@ export function Navigation() {
                   <input
                     value={query}
                     onChange={(event) => setQuery(event.target.value)}
-                    placeholder="搜索报价、装柜、国家、节假日、JSON..."
+                    placeholder="搜索报价、装柜、空运、国家、节假日、JSON..."
                     className="min-w-0 flex-1 bg-transparent text-sm text-slate-900 outline-none placeholder:text-slate-400 dark:text-white"
                   />
                 </div>

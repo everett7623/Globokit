@@ -58,6 +58,21 @@
   
   - 汇集全球主要贸易国家的货币代码 (ISO 4217)、符号及其中英文名称对照。
 
+### 🚢 物流与出货工具
+
+- **空运/快递计费重计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 根据外箱尺寸、实重、泡重系数和箱数计算体积重、计费重与抛重差。
+  - 支持快递 5000、空运 6000、经济 7000 和自定义泡重口径。
+  - 可录入每公斤运价、最低收费、燃油附加和操作费，快速估算总费用与单箱费用。
+- **装柜/箱规计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 按纸箱尺寸、毛重、数量和柜型估算整柜装载数量、柜数与利用率。
+  - 支持 20GP、40GP、40HQ、45HQ 等常见柜型参数。
+- **国际贸易术语速查**
+
+  - 快速查询 Incoterms 2020 条款，明确风险转移点、费用责任和交付边界。
+
 ### 📝 文本与效率工具
 
 - **专业级英文大小写转换**
@@ -110,10 +125,15 @@ Globokit/
 │   └── workflows/
 │       └── deploy.yml          # CI/CD 部署配置
 ├── app/                        # Next.js App Router 页面
+│   ├── resources/              # 外贸业务资源页
 │   ├── tools/                  # 工具页面路由
+│   │   ├── air-freight-calculator/ # 空运/快递计费重计算
+│   │   ├── container-load-calculator/ # 装柜/箱规计算
 │   │   ├── currency-symbols/   # 全球货币符号
 │   │   ├── global-country-info/# 全球国家信息
 │   │   ├── holiday-query/      # 国际节假日
+│   │   ├── incoterms/          # 国际贸易术语速查
+│   │   ├── json-formatter/     # JSON 格式化与转换
 │   │   ├── number-to-english/  # 数字转英文
 │   │   ├── pinyin/             # 中文转拼音
 │   │   ├── quote-calculator/   # 外贸报价利润计算
@@ -148,12 +168,18 @@ Globokit/
 │       └── textarea.tsx
 ├── lib/                        # 核心逻辑与工具函数
 │   ├── tools/                  # 纯函数算法实现
+│   │   ├── air-freight-calculator.ts
+│   │   ├── container-load-calculator.ts
 │   │   ├── currency-symbols.ts
 │   │   ├── global-country-info.ts
 │   │   ├── holiday-query.ts
+│   │   ├── incoterms.ts
+│   │   ├── json-formatter.ts
 │   │   ├── number-english.ts
 │   │   ├── pinyin.ts
 │   │   ├── quote-calculator.ts
+│   │   ├── registry.ts
+│   │   ├── registry-ui.ts
 │   │   ├── rmb-converter.ts
 │   │   ├── special-char.ts
 │   │   ├── text-case.ts

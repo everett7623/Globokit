@@ -59,6 +59,10 @@ export const TOOL_UI_CONFIG: Record<
     color: 'text-lime-600',
     bgColor: 'bg-lime-50',
   },
+  'air-freight-calculator': {
+    color: 'text-blue-600',
+    bgColor: 'bg-blue-50',
+  },
   'vps-calculator': {
     color: 'text-violet-500',
     bgColor: 'bg-violet-50',
