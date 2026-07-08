@@ -63,6 +63,7 @@ const ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
   ReceiptText,
   Container,
   Plane,
+  Ship,
 }
 
 const tools = TOOL_REGISTRY.map((tool) => {

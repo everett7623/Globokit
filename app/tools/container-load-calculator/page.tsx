@@ -71,6 +71,42 @@ function formatPercent(value: number) {
   return `${value.toFixed(1)}%`
 }
 
+function NumberField({
+  field,
+  label,
+  suffix,
+  value,
+  onValueChange,
+  step = '1',
+}: {
+  field: NumericField
+  label: string
+  suffix: string
+  value: string
+  onValueChange: (field: NumericField, value: string) => void
+  step?: string
+}) {
+  return (
+    <div className="space-y-2">
+      <Label htmlFor={field}>{label}</Label>
+      <div className="relative">
+        <Input
+          id={field}
+          type="text"
+          inputMode={step === '1' ? 'numeric' : 'decimal'}
+          pattern="[0-9]*[.]?[0-9]*"
+          value={value}
+          onChange={(event) => onValueChange(field, event.target.value)}
+          className="h-11 pr-20 font-medium leading-normal tabular-nums"
+        />
+        <span className="pointer-events-none absolute inset-y-0 right-4 flex max-w-14 items-center justify-end text-right text-xs text-muted-foreground">
+          {suffix}
+        </span>
+      </div>
+    </div>
+  )
+}
+
 export default function ContainerLoadCalculatorPage() {
   const [form, setForm] = useState<FormState>(initialForm)
   const [copied, setCopied] = useState(false)
@@ -119,36 +155,6 @@ export default function ContainerLoadCalculatorPage() {
     setCopied(true)
     window.setTimeout(() => setCopied(false), 1800)
   }
-
-  const NumberField = ({
-    field,
-    label,
-    suffix,
-    step = '1',
-  }: {
-    field: NumericField
-    label: string
-    suffix: string
-    step?: string
-  }) => (
-    <div className="space-y-2">
-      <Label htmlFor={field}>{label}</Label>
-      <div className="relative">
-        <Input
-          id={field}
-          type="text"
-          inputMode={step === '1' ? 'numeric' : 'decimal'}
-          pattern="[0-9]*[.]?[0-9]*"
-          value={form[field]}
-          onChange={(event) => updateField(field, event.target.value)}
-          className="h-11 pr-20 font-medium leading-normal tabular-nums"
-        />
-        <span className="pointer-events-none absolute inset-y-0 right-4 flex max-w-14 items-center justify-end text-right text-xs text-muted-foreground">
-          {suffix}
-        </span>
-      </div>
-    </div>
-  )
 
   const resultCards = [
     {
@@ -228,14 +234,14 @@ export default function ContainerLoadCalculatorPage() {
             </div>
 
             <div className="grid gap-4 md:grid-cols-[repeat(3,minmax(0,1fr))]">
-              <NumberField field="lengthCm" label="外箱长" suffix="cm" />
-              <NumberField field="widthCm" label="外箱宽" suffix="cm" />
-              <NumberField field="heightCm" label="外箱高" suffix="cm" />
+              <NumberField field="lengthCm" label="外箱长" suffix="cm" value={form.lengthCm} onValueChange={updateField} />
+              <NumberField field="widthCm" label="外箱宽" suffix="cm" value={form.widthCm} onValueChange={updateField} />
+              <NumberField field="heightCm" label="外箱高" suffix="cm" value={form.heightCm} onValueChange={updateField} />
             </div>
 
             <div className="grid gap-4 md:grid-cols-[repeat(3,minmax(0,1fr))]">
-              <NumberField field="grossWeightKg" label="单箱毛重" suffix="kg" step="0.1" />
-              <NumberField field="quantity" label="总箱数" suffix="箱" />
+              <NumberField field="grossWeightKg" label="单箱毛重" suffix="kg" step="0.1" value={form.grossWeightKg} onValueChange={updateField} />
+              <NumberField field="quantity" label="总箱数" suffix="箱" value={form.quantity} onValueChange={updateField} />
               <div className="space-y-2">
                 <Label htmlFor="containerType">柜型</Label>
                 <Select

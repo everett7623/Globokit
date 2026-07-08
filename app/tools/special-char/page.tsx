@@ -456,7 +456,7 @@ export default function SpecialCharPage() {
             <div>
               <p className="font-medium mb-2">中文标点符号</p>
               <p className="text-muted-foreground">
-                ，。！？、；：""''（）【】《》
+                {'，。！？、；：""\'\'（）【】《》'}
               </p>
             </div>
             <div>

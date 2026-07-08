@@ -1,5 +1,33 @@
 # 开发进度记录
 
+## 2026-07-08
+
+### 已完成
+
+- 拉取远程 `origin/main`，当前代码已是最新。
+- 阅读 `README.md` 与上一轮 `PROGRESS.md`，确认本轮继续处理非交互 lint 配置。
+- 新增 `.eslintrc.json`，启用 Next.js 官方 `next/core-web-vitals` ESLint 规则集。
+- 修复现有页面中的 JSX 未转义引号 lint 错误。
+- 清理 hook 依赖、导航筛选数组引用和 VPSKnow 外部图片相关 lint 警告。
+- 修复空运/快递计费重计算器与装柜/箱规计算器数字输入中断问题：
+  - 将页面内部定义的 `NumberField` 提升为稳定组件，避免每次输入触发组件重挂载。
+  - 使用浏览器实测连续输入，多位数字可以完整输入且焦点保持在当前输入框。
+- 排查报价、人民币大写、数字转英文、VPS 等数字输入型工具，未发现同类重挂载问题。
+- 新增海运费用拆分计算器：
+  - 计算逻辑：`lib/tools/ocean-freight-calculator.ts`
+  - 工具页面：`app/tools/ocean-freight-calculator/page.tsx`
+  - 支持整柜 FCL 与拼箱 LCL，按海运费、港杂、拖车、报关、文件、保险和目的港费用测算每件、每公斤、每 CBM 与每柜成本。
+- 接入工具注册表、首页图标映射、相关工具、UI 配色和 sitemap 自动生成链路。
+- 更新 `README.md`，补充海运费用拆分工具介绍及目录结构。
+
+### 验证结果
+
+- 浏览器实测空运和装柜工具连续输入数字不再中断。
+- 浏览器实测海运费用拆分计算器连续输入数字不丢焦点，切换拼箱口径后结果区域正常显示。
+- `npm run lint` 通过，且无 warnings/errors。
+- `npx tsc --noEmit` 通过。
+- `npm run build` 通过，新路由 `/tools/ocean-freight-calculator` 已进入静态页面列表，当前共 23 个静态路由。
+
 ## 2026-07-07
 
 ### 已完成

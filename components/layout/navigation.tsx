@@ -87,7 +87,7 @@ export function Navigation() {
 
   const isToolPage = pathname.startsWith('/tools/')
   const normalizedQuery = query.trim().toLowerCase()
-  const activeCategoryTools = toolsByCategory[activeCategory] ?? []
+  const activeCategoryTools = useMemo(() => toolsByCategory[activeCategory] ?? [], [activeCategory])
 
   const filteredTools = useMemo(() => {
     if (!normalizedQuery) {

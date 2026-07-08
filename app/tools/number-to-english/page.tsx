@@ -425,7 +425,7 @@ export default function NumberToEnglishPage() {
             <CardContent className="space-y-2 text-sm text-muted-foreground">
               <p>• 基数词用于表示数量</p>
               <p>• 序数词用于表示顺序或排名</p>
-              <p>• 英式英语在百位后通常加"and"</p>
+              <p>• 英式英语在百位后通常加“and”</p>
               <p>• 支持0-999,999,999,999的数字</p>
             </CardContent>
           </Card>

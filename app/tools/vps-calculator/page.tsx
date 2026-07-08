@@ -6,7 +6,8 @@
 
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -65,21 +66,9 @@ export default function VPSCalculatorPage() {
   const [rateError, setRateError] = useState(false)
 
   const resultRef = useRef<HTMLDivElement>(null)
-  const today = new Date().toISOString().split('T')[0]
+  const today = useMemo(() => new Date().toISOString().split('T')[0], [])
 
-  useEffect(() => {
-    setTradeDate(today)
-    loadExchangeRates()
-  }, [])
-
-  useEffect(() => {
-    if (purchasePrice && purchaseDate && tradeDate) {
-      const timer = window.setTimeout(handleCalculate, 300)
-      return () => window.clearTimeout(timer)
-    }
-  }, [purchasePrice, purchaseDate, tradeDate, renewalPeriod, currency, priceMode, modeInput, exchangeRates])
-
-  const loadExchangeRates = async () => {
+  const loadExchangeRates = useCallback(async () => {
     const rates = await fetchExchangeRates()
     if (!rates || Object.keys(rates).length === 0) {
       setRateError(true)
@@ -88,9 +77,9 @@ export default function VPSCalculatorPage() {
 
     setRateError(false)
     setExchangeRates(rates)
-  }
+  }, [])
 
-  const handleCalculate = () => {
+  const handleCalculate = useCallback(() => {
     const priceNum = Number.parseFloat(purchasePrice)
     if (!priceNum || !purchaseDate) return
 
@@ -115,7 +104,19 @@ export default function VPSCalculatorPage() {
     if (nextResult.totalDays > 0 && !Number.isNaN(nextResult.remainingValue)) {
       setResult(nextResult)
     }
-  }
+  }, [currency, exchangeRates, modeInput, priceMode, purchaseDate, purchasePrice, renewalPeriod, tradeDate])
+
+  useEffect(() => {
+    setTradeDate(today)
+    loadExchangeRates()
+  }, [loadExchangeRates, today])
+
+  useEffect(() => {
+    if (purchasePrice && purchaseDate && tradeDate) {
+      const timer = window.setTimeout(handleCalculate, 300)
+      return () => window.clearTimeout(timer)
+    }
+  }, [handleCalculate, purchaseDate, purchasePrice, tradeDate])
 
   const handleReset = () => {
     setPurchaseDate('')
@@ -216,9 +217,11 @@ ${isProfit
           rel="noopener noreferrer"
           className="group flex w-full max-w-sm items-center gap-4 rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition-all hover:border-violet-200 hover:shadow-md hover:shadow-violet-900/5 lg:w-auto"
         >
-          <img
+          <Image
             src="https://vpsknow.com/favicon.png"
             alt="VPSKnow Logo"
+            width={44}
+            height={44}
             className="h-11 w-11 shrink-0 rounded-md border border-slate-100 object-contain"
           />
           <div className="min-w-0 flex-1">

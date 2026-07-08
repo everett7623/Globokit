@@ -63,6 +63,10 @@ export const TOOL_UI_CONFIG: Record<
     color: 'text-blue-600',
     bgColor: 'bg-blue-50',
   },
+  'ocean-freight-calculator': {
+    color: 'text-cyan-600',
+    bgColor: 'bg-cyan-50',
+  },
   'vps-calculator': {
     color: 'text-violet-500',
     bgColor: 'bg-violet-50',

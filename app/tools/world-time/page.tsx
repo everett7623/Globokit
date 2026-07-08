@@ -455,7 +455,7 @@ export default function WorldTimePage() {
         </CardHeader>
         <CardContent className="space-y-2 text-sm text-muted-foreground">
           <p>• 点击星标收藏常用城市，方便快速查看</p>
-          <p>• 绿色"工作时间"标签表示该地区处于周一至周五 9:00-18:00</p>
+          <p>• 绿色“工作时间”标签表示该地区处于周一至周五 9:00-18:00</p>
           <p>• 时差标签显示与您本地时间的差异，便于安排会议</p>
           <p>• 建议避开对方的午餐时间（12:00-14:00）和下班时间</p>
           <p>• 使用快捷筛选按钮可以快速查看特定地区的城市</p>

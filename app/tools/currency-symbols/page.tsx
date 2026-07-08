@@ -403,10 +403,10 @@ export default function CurrencySymbolsPage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2 text-sm text-muted-foreground">
-            <p>• 点击"复制符号"可快速复制货币符号到剪贴板</p>
-            <p>• 点击"复制代码"可复制ISO 4217标准货币代码</p>
-            <p>• 蓝色"常用"标签表示国际贸易中的主要结算货币</p>
-            <p>• 绿色"贸易"标签表示重要的国际贸易货币</p>
+            <p>• 点击“复制符号”可快速复制货币符号到剪贴板</p>
+            <p>• 点击“复制代码”可复制ISO 4217标准货币代码</p>
+            <p>• 蓝色“常用”标签表示国际贸易中的主要结算货币</p>
+            <p>• 绿色“贸易”标签表示重要的国际贸易货币</p>
             <p>• 收藏常用货币方便快速查找和使用</p>
             <p>• 在合同中建议同时标注货币符号和代码，如：$100 USD</p>
           </CardContent>

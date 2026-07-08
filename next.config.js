@@ -11,6 +11,12 @@ const nextConfig = {
   // 优化图片
   images: {
     formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'vpsknow.com',
+      },
+    ],
   },
   // 生产环境优化
   compiler: {

@@ -65,6 +65,11 @@
   - 根据外箱尺寸、实重、泡重系数和箱数计算体积重、计费重与抛重差。
   - 支持快递 5000、空运 6000、经济 7000 和自定义泡重口径。
   - 可录入每公斤运价、最低收费、燃油附加和操作费，快速估算总费用与单箱费用。
+- **海运费用拆分计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 汇总海运费、起运港杂费、拖车、报关、文件、保险和目的港费用。
+  - 支持整柜 FCL 与拼箱 LCL 两种测算口径，拼箱可设置最低计费 CBM。
+  - 自动折算每件、每公斤、每 CBM 与每柜成本，便于报价前拆分物流费用。
 - **装柜/箱规计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
 
   - 按纸箱尺寸、毛重、数量和柜型估算整柜装载数量、柜数与利用率。
@@ -135,6 +140,7 @@ Globokit/
 │   │   ├── incoterms/          # 国际贸易术语速查
 │   │   ├── json-formatter/     # JSON 格式化与转换
 │   │   ├── number-to-english/  # 数字转英文
+│   │   ├── ocean-freight-calculator/ # 海运费用拆分计算
 │   │   ├── pinyin/             # 中文转拼音
 │   │   ├── quote-calculator/   # 外贸报价利润计算
 │   │   ├── rmb-converter/      # 人民币大写转换
@@ -176,6 +182,7 @@ Globokit/
 │   │   ├── incoterms.ts
 │   │   ├── json-formatter.ts
 │   │   ├── number-english.ts
+│   │   ├── ocean-freight-calculator.ts
 │   │   ├── pinyin.ts
 │   │   ├── quote-calculator.ts
 │   │   ├── registry.ts

@@ -283,7 +283,7 @@ export default function RMBConverterPage() {
           <CardContent className="space-y-2 text-sm text-muted-foreground">
             <p>• 支持小数点后两位（角、分）</p>
             <p>• 最大支持千万亿级别的金额</p>
-            <p>• 自动添加"人民币"前缀和"元整"或"元X角X分"后缀</p>
+            <p>• 自动添加“人民币”前缀和“元整”或“元X角X分”后缀</p>
             <p>• 符合财务规范的大写格式</p>
             <p>• 适用于支票、发票、合同等正式财务文件</p>
             <p>• 转换结果可直接复制使用</p>
