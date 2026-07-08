@@ -1,8 +1,8 @@
 // 名称: 空运/快递计费重计算器
-// 描述: 根据外箱尺寸、实重、泡重系数和运价估算空运快递计费重量与费用
+// 描述: 根据外箱尺寸、毛重、净重、泡重系数和运价估算空运快递计费重量与费用
 // 路径: Globokit/app/tools/air-freight-calculator/page.tsx
 // 作者: Jensfrank / Codex
-// 更新时间: 2026-07-07
+// 更新时间: 2026-07-08
 
 'use client'
 
@@ -43,6 +43,7 @@ type NumericField =
   | 'widthCm'
   | 'heightCm'
   | 'grossWeightKg'
+  | 'netWeightKg'
   | 'quantity'
   | 'divisor'
   | 'ratePerKg'
@@ -61,6 +62,7 @@ const initialForm: FormState = {
   widthCm: String(DEFAULT_AIR_FREIGHT_INPUTS.widthCm),
   heightCm: String(DEFAULT_AIR_FREIGHT_INPUTS.heightCm),
   grossWeightKg: String(DEFAULT_AIR_FREIGHT_INPUTS.grossWeightKg),
+  netWeightKg: String(DEFAULT_AIR_FREIGHT_INPUTS.netWeightKg),
   quantity: String(DEFAULT_AIR_FREIGHT_INPUTS.quantity),
   divisor: String(DEFAULT_AIR_FREIGHT_INPUTS.divisor),
   ratePerKg: String(DEFAULT_AIR_FREIGHT_INPUTS.ratePerKg),
@@ -79,6 +81,7 @@ const presets: Array<{ label: string; values: Partial<FormState> }> = [
       widthCm: '45',
       heightCm: '40',
       grossWeightKg: '6.5',
+      netWeightKg: '5.8',
       quantity: '18',
       divisorChoice: 'express',
       divisor: String(AIR_FREIGHT_DIVISORS.express.value),
@@ -94,6 +97,7 @@ const presets: Array<{ label: string; values: Partial<FormState> }> = [
       widthCm: '40',
       heightCm: '35',
       grossWeightKg: '18',
+      netWeightKg: '16.5',
       quantity: '30',
       divisorChoice: 'air',
       divisor: String(AIR_FREIGHT_DIVISORS.air.value),
@@ -109,6 +113,7 @@ const presets: Array<{ label: string; values: Partial<FormState> }> = [
       widthCm: '32',
       heightCm: '28',
       grossWeightKg: '7.8',
+      netWeightKg: '7',
       quantity: '60',
       divisorChoice: 'economy',
       divisor: String(AIR_FREIGHT_DIVISORS.economy.value),
@@ -184,6 +189,7 @@ export default function AirFreightCalculatorPage() {
     widthCm: toNumber(form.widthCm),
     heightCm: toNumber(form.heightCm),
     grossWeightKg: toNumber(form.grossWeightKg),
+    netWeightKg: toNumber(form.netWeightKg),
     quantity: toNumber(form.quantity),
     divisor: toNumber(form.divisor),
     ratePerKg: toNumber(form.ratePerKg),
@@ -226,15 +232,17 @@ export default function AirFreightCalculatorPage() {
     const summary = [
       '空运/快递计费重测算',
       `箱规：${form.lengthCm} x ${form.widthCm} x ${form.heightCm} cm`,
-      `单箱实重：${form.grossWeightKg} kg`,
+      `单箱毛重：${form.grossWeightKg} kg`,
+      `单箱净重：${form.netWeightKg} kg`,
       `箱数：${form.quantity} 箱`,
       `泡重系数：${form.divisor}`,
       `单箱体积：${result.cartonCbm} CBM`,
       `总体积：${result.totalCbm} CBM`,
-      `总实重：${formatNumber(result.actualWeightKg, 2)} kg`,
+      `总毛重：${formatNumber(result.actualWeightKg, 2)} kg`,
+      `总净重：${formatNumber(result.netWeightKg, 2)} kg`,
       `总体积重：${formatNumber(result.volumetricWeightKg, 2)} kg`,
       `计费重量：${formatNumber(result.chargeableWeightKg, 2)} kg`,
-      `计费依据：${isVolumetric ? '体积重' : '实重'}`,
+      `计费依据：${isVolumetric ? '体积重' : '毛重'}`,
       `基础运费：${formatMoney(result.baseFreight)}`,
       `燃油附加：${formatMoney(result.fuelSurcharge)}`,
       `操作费：${formatMoney(result.handlingFee)}`,
@@ -251,7 +259,7 @@ export default function AirFreightCalculatorPage() {
     {
       label: '计费重量',
       value: `${formatNumber(result.chargeableWeightKg, 2)} kg`,
-      caption: isVolumetric ? '按体积重计费' : '按实重计费',
+      caption: isVolumetric ? '按体积重计费' : '按毛重计费',
       icon: Scale,
     },
     {
@@ -279,7 +287,7 @@ export default function AirFreightCalculatorPage() {
       <div className="mb-8">
         <h1 className="mb-2 text-3xl font-bold">空运/快递计费重计算器</h1>
         <p className="text-muted-foreground">
-          按箱规、实重、泡重系数和运价估算空运快递计费重量、抛重差与费用
+          按箱规、毛重、净重、泡重系数和运价估算空运快递计费重量、抛重差与费用
         </p>
       </div>
 
@@ -331,8 +339,12 @@ export default function AirFreightCalculatorPage() {
             </div>
 
             <div className="grid gap-4 md:grid-cols-[repeat(3,minmax(0,1fr))]">
-              <NumberField field="grossWeightKg" label="单箱实重" suffix="kg" step="0.1" value={form.grossWeightKg} onValueChange={updateField} />
+              <NumberField field="grossWeightKg" label="单箱毛重" suffix="kg" step="0.1" value={form.grossWeightKg} onValueChange={updateField} />
+              <NumberField field="netWeightKg" label="单箱净重" suffix="kg" step="0.1" value={form.netWeightKg} onValueChange={updateField} />
               <NumberField field="quantity" label="箱数" suffix="箱" value={form.quantity} onValueChange={updateField} />
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-[repeat(2,minmax(0,1fr))]">
               <div className="space-y-2">
                 <Label htmlFor="divisorChoice">泡重口径</Label>
                 <Select value={form.divisorChoice} onValueChange={(value) => updateDivisorChoice(value as DivisorChoice)}>
@@ -349,16 +361,16 @@ export default function AirFreightCalculatorPage() {
                   </SelectContent>
                 </Select>
               </div>
+              <NumberField field="divisor" label="泡重系数" suffix="cm3/kg" value={form.divisor} onValueChange={updateField} />
             </div>
 
             <div className="grid gap-4 md:grid-cols-[repeat(3,minmax(0,1fr))]">
-              <NumberField field="divisor" label="泡重系数" suffix="cm3/kg" value={form.divisor} onValueChange={updateField} />
               <NumberField field="ratePerKg" label="每公斤运价" suffix="/kg" step="0.01" value={form.ratePerKg} onValueChange={updateField} />
               <NumberField field="minCharge" label="最低收费" suffix="元" step="0.01" value={form.minCharge} onValueChange={updateField} />
+              <NumberField field="fuelSurchargePercent" label="燃油附加" suffix="%" step="0.1" value={form.fuelSurchargePercent} onValueChange={updateField} />
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
-              <NumberField field="fuelSurchargePercent" label="燃油附加" suffix="%" step="0.1" value={form.fuelSurchargePercent} onValueChange={updateField} />
               <NumberField field="handlingFee" label="操作/杂费" suffix="元" step="0.01" value={form.handlingFee} onValueChange={updateField} />
             </div>
 
@@ -388,7 +400,7 @@ export default function AirFreightCalculatorPage() {
               <CardTitle className="flex items-center justify-between gap-3">
                 <span>计费结果</span>
                 <Badge variant={isVolumetric ? 'destructive' : 'secondary'}>
-                  {isVolumetric ? '体积重计费' : '实重计费'}
+                  {isVolumetric ? '体积重计费' : '毛重计费'}
                 </Badge>
               </CardTitle>
               <CardDescription>
@@ -398,7 +410,8 @@ export default function AirFreightCalculatorPage() {
             <CardContent className="space-y-5">
               <div className="grid gap-3">
                 <ResultRow label="单箱体积" value={`${formatNumber(result.cartonCbm, 4)} CBM`} icon={Ruler} />
-                <ResultRow label="总实重" value={`${formatNumber(result.actualWeightKg, 2)} kg`} icon={Truck} />
+                <ResultRow label="总毛重" value={`${formatNumber(result.actualWeightKg, 2)} kg`} icon={Truck} />
+                <ResultRow label="总净重" value={`${formatNumber(result.netWeightKg, 2)} kg`} icon={Package} />
                 <ResultRow label="单箱体积重" value={`${formatNumber(result.volumetricWeightPerCartonKg, 2)} kg`} icon={Plane} />
                 <ResultRow label="单箱计费重" value={`${formatNumber(result.chargeableWeightPerCartonKg, 2)} kg`} icon={Scale} />
               </div>
@@ -467,7 +480,7 @@ function WeightCompareBar({
   return (
     <div className="space-y-3 rounded-md border border-slate-200 p-4 dark:border-white/10">
       <CompareItem
-        label="总实重"
+        label="总毛重"
         value={`${formatNumber(actualWeight, 2)} kg`}
         width={actualWidth}
         className="bg-slate-500"

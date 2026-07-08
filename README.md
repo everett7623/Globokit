@@ -67,7 +67,7 @@
 
 - **空运/快递计费重计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
 
-  - 根据外箱尺寸、实重、泡重系数和箱数计算体积重、计费重与抛重差。
+  - 根据外箱尺寸、毛重、净重、泡重系数和箱数计算体积重、计费重与抛重差。
   - 支持快递 5000、空运 6000、经济 7000 和自定义泡重口径。
   - 可录入每公斤运价、最低收费、燃油附加和操作费，快速估算总费用与单箱费用。
 - **海运费用拆分计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>

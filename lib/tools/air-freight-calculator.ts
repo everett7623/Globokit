@@ -1,8 +1,8 @@
 // 名称: 空运/快递计费重计算逻辑
-// 描述: 根据外箱尺寸、实重、泡重系数和运价估算空运快递计费重量与费用
+// 描述: 根据外箱尺寸、毛重、净重、泡重系数和运价估算空运快递计费重量与费用
 // 路径: Globokit/lib/tools/air-freight-calculator.ts
 // 作者: Jensfrank / Codex
-// 更新时间: 2026-07-07
+// 更新时间: 2026-07-08
 
 export type AirFreightMode = 'express' | 'air' | 'economy'
 
@@ -11,6 +11,7 @@ export interface AirFreightInputs {
   widthCm: number
   heightCm: number
   grossWeightKg: number
+  netWeightKg: number
   quantity: number
   divisor: number
   ratePerKg: number
@@ -23,6 +24,7 @@ export interface AirFreightResult {
   cartonCbm: number
   totalCbm: number
   actualWeightKg: number
+  netWeightKg: number
   volumetricWeightPerCartonKg: number
   volumetricWeightKg: number
   chargeableWeightKg: number
@@ -55,10 +57,11 @@ export const AIR_FREIGHT_DIVISORS: Record<AirFreightMode, { label: string; value
 }
 
 export const DEFAULT_AIR_FREIGHT_INPUTS: AirFreightInputs = {
-  lengthCm: 45,
-  widthCm: 35,
-  heightCm: 28,
-  grossWeightKg: 8.5,
+  lengthCm: 43,
+  widthCm: 33,
+  heightCm: 22,
+  grossWeightKg: 13,
+  netWeightKg: 12,
   quantity: 12,
   divisor: AIR_FREIGHT_DIVISORS.express.value,
   ratePerKg: 42,
@@ -81,6 +84,7 @@ export function calculateAirFreight(inputs: AirFreightInputs): AirFreightResult 
   const widthCm = safePositiveNumber(inputs.widthCm)
   const heightCm = safePositiveNumber(inputs.heightCm)
   const grossWeightKg = safePositiveNumber(inputs.grossWeightKg)
+  const netWeightKg = safePositiveNumber(inputs.netWeightKg)
   const quantity = Math.max(1, Math.floor(safePositiveNumber(inputs.quantity, 1)))
   const divisor = Math.max(1, safePositiveNumber(inputs.divisor, AIR_FREIGHT_DIVISORS.express.value))
   const ratePerKg = safePositiveNumber(inputs.ratePerKg)
@@ -91,6 +95,7 @@ export function calculateAirFreight(inputs: AirFreightInputs): AirFreightResult 
   const cartonCbm = lengthCm * widthCm * heightCm / 1_000_000
   const totalCbm = cartonCbm * quantity
   const actualWeightKg = grossWeightKg * quantity
+  const totalNetWeightKg = netWeightKg * quantity
   const volumetricWeightPerCartonKg = lengthCm * widthCm * heightCm / divisor
   const volumetricWeightKg = volumetricWeightPerCartonKg * quantity
   const chargeableWeightKg = Math.max(actualWeightKg, volumetricWeightKg)
@@ -103,6 +108,7 @@ export function calculateAirFreight(inputs: AirFreightInputs): AirFreightResult 
     cartonCbm: round(cartonCbm, 4),
     totalCbm: round(totalCbm, 3),
     actualWeightKg: round(actualWeightKg, 2),
+    netWeightKg: round(totalNetWeightKg, 2),
     volumetricWeightPerCartonKg: round(volumetricWeightPerCartonKg, 2),
     volumetricWeightKg: round(volumetricWeightKg, 2),
     chargeableWeightKg: round(chargeableWeightKg, 2),
