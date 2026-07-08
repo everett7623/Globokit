@@ -24,6 +24,10 @@
   - 计算逻辑：`lib/tools/import-landed-cost-calculator.ts`
   - 工具页面：`app/tools/import-landed-cost-calculator/page.tsx`
   - 支持按货值、国际运费、保险、关税、进口增值税、清关与本地费用测算到岸总成本、每件成本和销售毛利率。
+- 升级外贸报价利润计算器：
+  - 新增 EXW、FCA、FAS、FOB、CFR、CIF、CPT、CIP、DAP、DPU、DDP 条款选择。
+  - 按条款自动判断卖方计入成本，并拆分展示未计入报价的买方/后续费用。
+  - 对 CFR/CIF/CPT/CIP/DAP/DPU/DDP 等含运输或到门条款提示补充国际运输费、保险费、目的地费用或进口清关税费。
 - 接入工具注册表、首页图标映射、相关工具、UI 配色和 sitemap 自动生成链路。
 - 更新 `README.md`，补充海运费用拆分工具介绍及目录结构。
 - 更新 `README.md`，补充进口到岸成本工具介绍及目录结构。
@@ -37,10 +41,11 @@
 - 浏览器实测空运和装柜工具连续输入数字不再中断。
 - 浏览器实测海运费用拆分计算器连续输入数字不丢焦点，切换拼箱口径后结果区域正常显示。
 - 浏览器脚本实测进口到岸成本计算器页面渲染正常，连续输入 `12345` 后值完整保留且焦点停留在当前输入框。
+- 浏览器脚本实测报价利润计算器条款切换正常：CIF 缺少运费/保险时会提示，补充后提示消失，卖方计入成本与未计入费用区域正常显示。
 - 本地 Chrome 实测首页日夜切换后 Hero 背景图层 opacity 正确切换，主题按钮可见文本为空且无中文。
 - `npm run lint` 通过，且无 warnings/errors。
 - `npx tsc --noEmit` 通过。
-- `npm run build` 通过，新路由 `/tools/ocean-freight-calculator` 与 `/tools/import-landed-cost-calculator` 均已进入静态页面列表，当前共 24 个静态路由。
+- `npm run build` 通过，报价利润计算器、`/tools/ocean-freight-calculator` 与 `/tools/import-landed-cost-calculator` 均已进入静态页面列表，当前共 24 个静态路由。
 
 ## 2026-07-07
 

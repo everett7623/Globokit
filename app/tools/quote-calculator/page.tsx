@@ -2,7 +2,7 @@
 // 描述: 根据采购成本、费用、汇率、佣金和目标利润率计算外贸报价
 // 路径: Globokit/app/tools/quote-calculator/page.tsx
 // 作者: Jensfrank
-// 更新时间: 2026-07-06
+// 更新时间: 2026-07-08
 
 'use client'
 
@@ -19,9 +19,12 @@ import { cn } from '@/lib/utils'
 import {
   calculateQuote,
   DEFAULT_QUOTE_INPUTS,
+  QUOTE_TERM_CONFIGS,
+  QUOTE_TERM_OPTIONS,
   QuoteInputs,
   QuoteMode,
   QuoteResult,
+  QuoteTerm,
 } from '@/lib/tools/quote-calculator'
 import {
   Calculator,
@@ -37,8 +40,9 @@ import {
 } from 'lucide-react'
 
 type QuoteCurrency = 'USD' | 'EUR' | 'GBP' | 'CNY'
-type NumericField = keyof QuoteInputs
+type NumericField = Exclude<keyof QuoteInputs, 'quoteTerm'>
 type FormState = Record<NumericField, string> & {
+  quoteTerm: QuoteTerm
   currency: QuoteCurrency
 }
 
@@ -50,11 +54,15 @@ const currencyOptions: Array<{ value: QuoteCurrency; label: string; rate: string
 ]
 
 const initialForm: FormState = {
+  quoteTerm: DEFAULT_QUOTE_INPUTS.quoteTerm,
   unitCostCny: String(DEFAULT_QUOTE_INPUTS.unitCostCny),
   quantity: String(DEFAULT_QUOTE_INPUTS.quantity),
   domesticFeeCny: String(DEFAULT_QUOTE_INPUTS.domesticFeeCny),
   exportFeeCny: String(DEFAULT_QUOTE_INPUTS.exportFeeCny),
   internationalFreightCny: String(DEFAULT_QUOTE_INPUTS.internationalFreightCny),
+  insuranceFeeCny: String(DEFAULT_QUOTE_INPUTS.insuranceFeeCny),
+  destinationFeeCny: String(DEFAULT_QUOTE_INPUTS.destinationFeeCny),
+  importDutyTaxCny: String(DEFAULT_QUOTE_INPUTS.importDutyTaxCny),
   exchangeRate: String(DEFAULT_QUOTE_INPUTS.exchangeRate),
   targetMarginPercent: String(DEFAULT_QUOTE_INPUTS.targetMarginPercent),
   sellingPriceForeign: String(DEFAULT_QUOTE_INPUTS.sellingPriceForeign),
@@ -71,12 +79,16 @@ const scenarioPresets: Array<{
   values: Partial<FormState>
 }> = [
   {
-    label: 'FOB 常规',
+    label: 'FOB 装船',
     mode: 'target-margin',
     values: {
+      quoteTerm: 'FOB',
       domesticFeeCny: '300',
       exportFeeCny: '180',
       internationalFreightCny: '0',
+      insuranceFeeCny: '0',
+      destinationFeeCny: '0',
+      importDutyTaxCny: '0',
       commissionPercent: '0',
       paymentFeePercent: '1',
       targetMarginPercent: '22',
@@ -86,22 +98,61 @@ const scenarioPresets: Array<{
     label: 'CIF 含运费',
     mode: 'target-margin',
     values: {
+      quoteTerm: 'CIF',
       domesticFeeCny: '300',
       exportFeeCny: '180',
       internationalFreightCny: '650',
+      insuranceFeeCny: '80',
+      destinationFeeCny: '0',
+      importDutyTaxCny: '0',
       commissionPercent: '0',
       paymentFeePercent: '1.5',
       targetMarginPercent: '25',
     },
   },
   {
+    label: 'EXW 出厂',
+    mode: 'target-margin',
+    values: {
+      quoteTerm: 'EXW',
+      domesticFeeCny: '0',
+      exportFeeCny: '0',
+      internationalFreightCny: '0',
+      insuranceFeeCny: '0',
+      destinationFeeCny: '0',
+      importDutyTaxCny: '0',
+      commissionPercent: '0',
+      paymentFeePercent: '1',
+      targetMarginPercent: '18',
+    },
+  },
+  {
+    label: 'DDP 到门',
+    mode: 'target-margin',
+    values: {
+      quoteTerm: 'DDP',
+      domesticFeeCny: '300',
+      exportFeeCny: '180',
+      internationalFreightCny: '950',
+      insuranceFeeCny: '80',
+      destinationFeeCny: '1200',
+      importDutyTaxCny: '1600',
+      commissionPercent: '0',
+      paymentFeePercent: '2',
+      targetMarginPercent: '28',
+    },
+  },
+  {
     label: '平台订单',
     mode: 'known-price',
     values: {
+      quoteTerm: 'DAP',
       commissionPercent: '5',
       paymentFeePercent: '2.5',
       sellingPriceForeign: '12',
       internationalFreightCny: '650',
+      insuranceFeeCny: '0',
+      destinationFeeCny: '500',
     },
   },
 ]
@@ -126,8 +177,10 @@ function formatCny(value: number) {
 }
 
 function buildSummary(result: QuoteResult, currency: QuoteCurrency, formatForeign: (value: number) => string) {
+  const term = QUOTE_TERM_CONFIGS[result.quoteTerm]
   return [
     '外贸报价利润测算',
+    `贸易条款：${result.quoteTerm} ${term.nameCn}`,
     `建议/当前单价：${formatForeign(result.quotedUnitPriceForeign)}`,
     `盈亏平衡单价：${formatForeign(result.breakevenUnitPriceForeign)}`,
     `订单总额：${formatForeign(result.totalQuoteForeign)}`,
@@ -135,6 +188,9 @@ function buildSummary(result: QuoteResult, currency: QuoteCurrency, formatForeig
     `预估利润：${formatCny(result.profitCny)}`,
     `销售利润率：${formatPercent(result.marginPercent)}`,
     `报价币种：${currency}`,
+    `计入报价成本：${formatCny(result.effectiveCostCny)}`,
+    `未计入买方/后续费用：${formatCny(result.excludedCostCny)}`,
+    result.missingCostLabels.length ? `需要补充：${result.missingCostLabels.join('、')}` : '',
   ].join('\n')
 }
 
@@ -145,7 +201,6 @@ function NumberField({
   value,
   onValueChange,
   step = '0.01',
-  min = '0',
 }: {
   field: NumericField
   label: string
@@ -153,7 +208,6 @@ function NumberField({
   value: string
   onValueChange: (field: NumericField, value: string) => void
   step?: string
-  min?: string
 }) {
   return (
     <div className="space-y-2">
@@ -161,12 +215,12 @@ function NumberField({
       <div className="relative">
         <Input
           id={field}
-          type="number"
-          min={min}
-          step={step}
+          type="text"
+          inputMode={step === '1' ? 'numeric' : 'decimal'}
+          pattern="[0-9]*[.]?[0-9]*"
           value={value}
           onChange={(event) => onValueChange(field, event.target.value)}
-          className={cn(suffix && 'pr-16')}
+          className={cn('h-11 font-medium leading-normal tabular-nums', suffix && 'pr-16')}
         />
         {suffix && (
           <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-xs text-muted-foreground">
@@ -193,11 +247,15 @@ export default function QuoteCalculatorPage() {
   )
 
   const inputs = useMemo<QuoteInputs>(() => ({
+    quoteTerm: form.quoteTerm,
     unitCostCny: toNumber(form.unitCostCny),
     quantity: toNumber(form.quantity),
     domesticFeeCny: toNumber(form.domesticFeeCny),
     exportFeeCny: toNumber(form.exportFeeCny),
     internationalFreightCny: toNumber(form.internationalFreightCny),
+    insuranceFeeCny: toNumber(form.insuranceFeeCny),
+    destinationFeeCny: toNumber(form.destinationFeeCny),
+    importDutyTaxCny: toNumber(form.importDutyTaxCny),
     exchangeRate: toNumber(form.exchangeRate),
     targetMarginPercent: toNumber(form.targetMarginPercent),
     sellingPriceForeign: toNumber(form.sellingPriceForeign),
@@ -222,6 +280,7 @@ export default function QuoteCalculatorPage() {
   }, [inputs, mode])
 
   const result = calculation.result
+  const termConfig = QUOTE_TERM_CONFIGS[form.quoteTerm]
 
   const updateField = (field: NumericField, value: string) => {
     setForm((current) => ({ ...current, [field]: value }))
@@ -247,15 +306,9 @@ export default function QuoteCalculatorPage() {
     window.setTimeout(() => setCopied(false), 1800)
   }
 
-  const costRows = result
-    ? [
-        { label: '采购成本', value: result.totalProductCostCny },
-        { label: '内陆费用', value: toNumber(form.domesticFeeCny) },
-        { label: '出口杂费', value: toNumber(form.exportFeeCny) },
-        { label: '国际运费', value: toNumber(form.internationalFreightCny) },
-        { label: '退税抵扣', value: -result.rebateAmountCny },
-      ]
-    : []
+  const costRows = result ? result.costRows : []
+  const includedCostRows = costRows.filter((row) => row.included && row.value > 0)
+  const excludedCostRows = costRows.filter((row) => !row.included && row.value > 0)
 
   const maxCost = Math.max(...costRows.map((row) => Math.abs(row.value)), 1)
 
@@ -264,7 +317,7 @@ export default function QuoteCalculatorPage() {
       <div className="mb-8">
         <h1 className="mb-2 text-3xl font-bold">外贸报价利润计算器</h1>
         <p className="text-muted-foreground">
-          结合采购成本、运费、汇率、佣金和目标利润率，快速测算 FOB/CIF 等报价区间。
+          结合采购成本、运费、汇率、佣金和目标利润率，按 EXW/FCA/FOB/CFR/CIF/DDP 等条款测算报价区间。
         </p>
       </div>
 
@@ -373,12 +426,53 @@ export default function QuoteCalculatorPage() {
               ))}
             </div>
 
+            <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
+              <div className="space-y-2">
+                <Label htmlFor="quoteTerm">贸易条款</Label>
+                <Select
+                  value={form.quoteTerm}
+                  onValueChange={(value) => setForm((current) => ({ ...current, quoteTerm: value as QuoteTerm }))}
+                >
+                  <SelectTrigger id="quoteTerm" className="h-11">
+                    <SelectValue placeholder="选择贸易条款" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {QUOTE_TERM_OPTIONS.map((term) => (
+                      <SelectItem key={term.code} value={term.code}>
+                        {term.code} · {term.nameCn}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="rounded-md border bg-muted/40 px-4 py-3 text-sm">
+                <div className="font-semibold">
+                  {termConfig.code} {termConfig.nameCn}
+                  <span className="ml-2 text-xs font-normal text-muted-foreground">{termConfig.nameEn}</span>
+                </div>
+                <p className="mt-1 leading-6 text-muted-foreground">{termConfig.note}</p>
+              </div>
+            </div>
+
+            {result?.missingCostLabels.length ? (
+              <Alert>
+                <Info className="h-4 w-4" />
+                <AlertDescription>
+                  {result.quoteTerm} 报价需要补充 {result.missingCostLabels.join('、')}；未填写时仍可计算，但含运费/到门报价会偏低。
+                </AlertDescription>
+              </Alert>
+            ) : null}
+
             <div className="grid gap-4 md:grid-cols-2">
               <NumberField field="unitCostCny" label="单件采购成本" suffix="CNY" value={form.unitCostCny} onValueChange={updateField} />
               <NumberField field="quantity" label="订单数量" suffix="件" step="1" value={form.quantity} onValueChange={updateField} />
-              <NumberField field="domesticFeeCny" label="内陆费用" suffix="CNY" value={form.domesticFeeCny} onValueChange={updateField} />
-              <NumberField field="exportFeeCny" label="出口杂费" suffix="CNY" value={form.exportFeeCny} onValueChange={updateField} />
-              <NumberField field="internationalFreightCny" label="国际运费" suffix="CNY" value={form.internationalFreightCny} onValueChange={updateField} />
+              <NumberField field="domesticFeeCny" label="内陆/交货前费用" suffix="CNY" value={form.domesticFeeCny} onValueChange={updateField} />
+              <NumberField field="exportFeeCny" label="出口报关/起运港杂" suffix="CNY" value={form.exportFeeCny} onValueChange={updateField} />
+              <NumberField field="internationalFreightCny" label="国际运输费" suffix="CNY" value={form.internationalFreightCny} onValueChange={updateField} />
+              <NumberField field="insuranceFeeCny" label="运输保险费" suffix="CNY" value={form.insuranceFeeCny} onValueChange={updateField} />
+              <NumberField field="destinationFeeCny" label="目的地费用/派送" suffix="CNY" value={form.destinationFeeCny} onValueChange={updateField} />
+              <NumberField field="importDutyTaxCny" label="进口清关税费" suffix="CNY" value={form.importDutyTaxCny} onValueChange={updateField} />
               <NumberField field="rebatePercent" label="出口退税率" suffix="%" value={form.rebatePercent} onValueChange={updateField} />
               <NumberField field="vatPercent" label="增值税率" suffix="%" value={form.vatPercent} onValueChange={updateField} />
               <NumberField field="commissionPercent" label="佣金比例" suffix="%" value={form.commissionPercent} onValueChange={updateField} />
@@ -476,6 +570,7 @@ export default function QuoteCalculatorPage() {
                     <div className="rounded-lg border p-3">
                       <p className="text-xs text-muted-foreground">综合成本</p>
                       <p className="mt-1 text-lg font-semibold">{formatCny(result.effectiveCostCny)}</p>
+                      <p className="mt-1 text-xs text-muted-foreground">{result.quoteTerm} 计入卖方成本</p>
                     </div>
                     <div className="rounded-lg border p-3">
                       <p className="text-xs text-muted-foreground">加价率</p>
@@ -485,26 +580,57 @@ export default function QuoteCalculatorPage() {
 
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-semibold">成本拆分</h3>
-                      <span className="text-xs text-muted-foreground">退税按含税采购价估算</span>
+                      <h3 className="text-sm font-semibold">卖方计入成本</h3>
+                      <span className="text-xs text-muted-foreground">{result.quoteTerm} 条款口径</span>
                     </div>
                     <div className="space-y-3">
-                      {costRows.map((row) => (
-                        <div key={row.label} className="space-y-1">
+                      {includedCostRows.map((row) => (
+                        <div key={row.key} className="space-y-1">
                           <div className="flex items-center justify-between gap-3 text-sm">
                             <span className="text-muted-foreground">{row.label}</span>
-                            <span className={cn('font-medium', row.value < 0 && 'text-emerald-600')}>
+                            <span className="font-medium">
                               {formatCny(row.value)}
                             </span>
                           </div>
                           <div className="h-2 overflow-hidden rounded-full bg-muted">
                             <div
-                              className={cn('h-full rounded-full', row.value < 0 ? 'bg-emerald-500' : 'bg-slate-500')}
+                              className="h-full rounded-full bg-slate-500"
                               style={{ width: `${Math.max(4, Math.min(100, Math.abs(row.value) / maxCost * 100))}%` }}
                             />
                           </div>
                         </div>
                       ))}
+                      {result.rebateAmountCny > 0 && (
+                        <div className="space-y-1">
+                          <div className="flex items-center justify-between gap-3 text-sm">
+                            <span className="text-muted-foreground">退税抵扣</span>
+                            <span className="font-medium text-emerald-600">-{formatCny(result.rebateAmountCny)}</span>
+                          </div>
+                          <div className="h-2 overflow-hidden rounded-full bg-muted">
+                            <div
+                              className="h-full rounded-full bg-emerald-500"
+                              style={{ width: `${Math.max(4, Math.min(100, result.rebateAmountCny / maxCost * 100))}%` }}
+                            />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="rounded-lg border border-dashed p-4">
+                    <div className="flex items-center justify-between gap-3">
+                      <h3 className="text-sm font-semibold">未计入报价的后续费用</h3>
+                      <span className="text-sm font-semibold">{formatCny(result.excludedCostCny)}</span>
+                    </div>
+                    <div className="mt-3 space-y-2">
+                      {excludedCostRows.length ? excludedCostRows.map((row) => (
+                        <div key={row.key} className="flex items-center justify-between gap-3 text-sm">
+                          <span className="text-muted-foreground">{row.label}</span>
+                          <span className="font-medium">{formatCny(row.value)}</span>
+                        </div>
+                      )) : (
+                        <p className="text-sm text-muted-foreground">当前输入中没有被买方或后续环节承担的费用。</p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -526,7 +652,7 @@ export default function QuoteCalculatorPage() {
             <CardContent className="space-y-2 text-sm text-muted-foreground">
               <p>• 销售利润率按利润除以销售额计算，适合报价时控制毛利底线。</p>
               <p>• 退税金额按含税采购价、增值税率和退税率估算，实际申报以财务口径为准。</p>
-              <p>• CIF、DDP 等含运费或含税条款，建议先确认费用责任再输入对应费用。</p>
+              <p>• CFR/CIF/CPT/CIP/DAP/DPU/DDP 等含运输或到门条款，需要先确认货代、保险、目的地或税费报价再输入。</p>
             </CardContent>
           </Card>
 

@@ -49,8 +49,9 @@
 - **外贸报价利润计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
   
   - 根据采购成本、费用、汇率、佣金和目标利润率反推出报价单价。
-  - 支持 FOB/CIF 等常见报价口径，展示盈亏平衡价、订单利润与成本拆分。
-  - 可按已知售价快速核算销售利润率，辅助外贸报价与接单评估。
+  - 支持 EXW、FCA、FAS、FOB、CFR、CIF、CPT、CIP、DAP、DPU、DDP 等 Incoterms 2020 常见报价口径。
+  - 按条款自动判断卖方计入成本，含运费/到门/完税条款会提示补充运费、保险、目的地费用或进口税费。
+  - 可按已知售价快速核算销售利润率，展示盈亏平衡价、订单利润与成本拆分。
 - **进口到岸成本计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
   
   - 按货值、运费、保险、关税、进口增值税和清关/本地费用汇总到岸成本。
