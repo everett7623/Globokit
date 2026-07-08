@@ -51,6 +51,11 @@
   - 根据采购成本、费用、汇率、佣金和目标利润率反推出报价单价。
   - 支持 FOB/CIF 等常见报价口径，展示盈亏平衡价、订单利润与成本拆分。
   - 可按已知售价快速核算销售利润率，辅助外贸报价与接单评估。
+- **进口到岸成本计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+  
+  - 按货值、运费、保险、关税、进口增值税和清关/本地费用汇总到岸成本。
+  - 支持输入外币货值与汇率，自动折算 CIF、税费合计、每件到岸成本。
+  - 可输入目标销售单价，快速评估订单毛利和毛利率。
 - **人民币大写转换**
   
   - 将数字金额一键转换为标准的中文大写（壹, 贰, 叁...），适用于合同、发票及财务报表。
@@ -137,6 +142,7 @@ Globokit/
 │   │   ├── currency-symbols/   # 全球货币符号
 │   │   ├── global-country-info/# 全球国家信息
 │   │   ├── holiday-query/      # 国际节假日
+│   │   ├── import-landed-cost-calculator/ # 进口到岸成本计算
 │   │   ├── incoterms/          # 国际贸易术语速查
 │   │   ├── json-formatter/     # JSON 格式化与转换
 │   │   ├── number-to-english/  # 数字转英文
@@ -179,6 +185,7 @@ Globokit/
 │   │   ├── currency-symbols.ts
 │   │   ├── global-country-info.ts
 │   │   ├── holiday-query.ts
+│   │   ├── import-landed-cost-calculator.ts
 │   │   ├── incoterms.ts
 │   │   ├── json-formatter.ts
 │   │   ├── number-english.ts

@@ -85,6 +85,7 @@ const activeCategories = getActiveCategories()
 
 const heroToolIds = [
   'quote-calculator',
+  'import-landed-cost-calculator',
   'container-load-calculator',
   'air-freight-calculator',
   'global-country-info',
