@@ -19,11 +19,16 @@
   - 支持整柜 FCL 与拼箱 LCL，按海运费、港杂、拖车、报关、文件、保险和目的港费用测算每件、每公斤、每 CBM 与每柜成本。
 - 接入工具注册表、首页图标映射、相关工具、UI 配色和 sitemap 自动生成链路。
 - 更新 `README.md`，补充海运费用拆分工具介绍及目录结构。
+- 更新首页 Hero 昼夜视觉：
+  - 新增 `public/hero-trade-day.png` 与 `public/hero-trade-night.png` 两张 bitmap 背景图。
+  - 首页 Hero 根据主题在日间/夜间背景之间切换，并调整日间文字、按钮和高频入口面板对比度。
+  - 主题切换按钮移除可见中文文案，改为纯图标按钮，仅保留英文 `aria-label`。
 
 ### 验证结果
 
 - 浏览器实测空运和装柜工具连续输入数字不再中断。
 - 浏览器实测海运费用拆分计算器连续输入数字不丢焦点，切换拼箱口径后结果区域正常显示。
+- 本地 Chrome 实测首页日夜切换后 Hero 背景图层 opacity 正确切换，主题按钮可见文本为空且无中文。
 - `npm run lint` 通过，且无 warnings/errors。
 - `npx tsc --noEmit` 通过。
 - `npm run build` 通过，新路由 `/tools/ocean-freight-calculator` 已进入静态页面列表，当前共 23 个静态路由。
