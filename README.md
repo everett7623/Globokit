@@ -3,7 +3,7 @@
 
   <p align="center">
     <a href="LICENSE">
-      <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License">
+      <img src="https://img.shields.io/badge/license-GPL--3.0--only-blue.svg" alt="License">
     </a>
     <a href="https://nextjs.org">
       <img src="https://img.shields.io/badge/Built%20with-Next.js%2014-black" alt="Next.js">
@@ -251,6 +251,6 @@ pnpm dev
 
 ## 📄 开源协议
 
-本项目采用 **MIT 协议** 开源。这意味着你可以免费地使用、复制、修改、合并、出版发行、散布、再授权及贩售软件的副本。
+本项目采用 **GPL-3.0 协议** 开源。你可以在遵守 GNU General Public License v3 条款的前提下使用、复制、修改和分发本项目。
 
 Built with ❤️ by **[Jensfrank](https://github.com/everett7623)**.
