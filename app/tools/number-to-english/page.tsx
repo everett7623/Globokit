@@ -37,7 +37,7 @@ export default function NumberToEnglishPage() {
 
   const handleConvert = () => {
     setError('')
-    const num = parseInt(number)
+    const num = Number(number)
     
     if (!number.trim()) {
       setError('请输入数字')
@@ -46,8 +46,8 @@ export default function NumberToEnglishPage() {
       return
     }
     
-    if (isNaN(num)) {
-      setError('请输入有效的数字')
+    if (!Number.isFinite(num) || !Number.isInteger(num)) {
+      setError('请输入有效的整数')
       setCardinalResult('')
       setOrdinalResult('')
       return

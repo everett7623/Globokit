@@ -2290,51 +2290,50 @@ export function getCountryHolidays(countryCode: string, year: number = new Date(
 // 获取即将到来的节假日
 export function getUpcomingHolidays(daysAhead: number = 30): UpcomingHoliday[] {
   const today = new Date()
+  today.setHours(0, 0, 0, 0)
   const currentYear = today.getFullYear()
   const upcoming: UpcomingHoliday[] = []
-  const yearHolidays = generateHolidayData(currentYear)
+  const endDate = new Date(today)
+  endDate.setDate(endDate.getDate() + Math.max(0, daysAhead))
+  const years = endDate.getFullYear() === currentYear ? [currentYear] : [currentYear, endDate.getFullYear()]
+  const parseLocalDate = (date: string) => {
+    const [year, month, day] = date.split('-').map(Number)
+    return new Date(year, month - 1, day)
+  }
+  const getDaysUntil = (date: string) => Math.round(
+    (parseLocalDate(date).getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
+  )
   
   // 国家法定节假日
-  Object.entries(yearHolidays).forEach(([countryCode, holidays]) => {
-    const country = countries[countryCode]
-    if (!country) return
+  years.forEach((year) => {
+    Object.entries(generateHolidayData(year)).forEach(([countryCode, holidays]) => {
+      const country = countries[countryCode]
+      if (!country) return
 
-    holidays.forEach(holiday => {
-      const holidayDate = new Date(holiday.date)
-      const daysUntil = Math.ceil((holidayDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
-      
-      if (daysUntil > 0 && daysUntil <= daysAhead) {
-        upcoming.push({
-          ...holiday,
-          country: country.name,
-          flag: country.flag,
-          daysUntil
-        })
-      }
+      holidays.forEach(holiday => {
+        const daysUntil = getDaysUntil(holiday.date)
+        if (daysUntil > 0 && daysUntil <= daysAhead) {
+          upcoming.push({ ...holiday, country: country.name, flag: country.flag, daysUntil })
+        }
+      })
     })
   })
   
   // 添加国际节假日
-  internationalHolidays.forEach(holiday => {
-    const holidayDate = new Date(`${currentYear}-${holiday.date}`)
-    const daysUntil = Math.ceil((holidayDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
-    
-    if (daysUntil > 0 && daysUntil <= daysAhead) {
-      upcoming.push({
-        ...holiday,
-        date: holidayDate.toISOString().split('T')[0],
-        country: '国际',
-        flag: '🌍',
-        daysUntil
-      })
-    }
+  years.forEach((year) => {
+    internationalHolidays.forEach(holiday => {
+      const date = `${year}-${holiday.date}`
+      const daysUntil = getDaysUntil(date)
+      if (daysUntil > 0 && daysUntil <= daysAhead) {
+        upcoming.push({ ...holiday, date, country: '国际', flag: '🌍', daysUntil })
+      }
+    })
   })
   
   // 添加重要宗教节日
   if (currentYear === 2025) {
     religiousHolidays2025.forEach(holiday => {
-      const holidayDate = new Date(holiday.date)
-      const daysUntil = Math.ceil((holidayDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
+      const daysUntil = getDaysUntil(holiday.date)
       
       if (daysUntil > 0 && daysUntil <= daysAhead && holiday.impact === 'high') {
         upcoming.push({
@@ -2353,7 +2352,7 @@ export function getUpcomingHolidays(daysAhead: number = 30): UpcomingHoliday[] {
 // 按月份筛选节假日
 export function filterHolidaysByMonth(holidays: Holiday[], month: number): Holiday[] {
   return holidays.filter(holiday => {
-    const holidayMonth = new Date(holiday.date).getMonth() + 1
+    const holidayMonth = Number(holiday.date.split('-')[1])
     return holidayMonth === month
   })
 }

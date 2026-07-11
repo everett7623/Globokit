@@ -69,12 +69,14 @@ export function jsonToCSV(input: string): string {
     return ''
   }
 
-  if (typeof parsed[0] !== 'object' || parsed[0] === null) {
+  if (parsed.some((row) => typeof row !== 'object' || row === null || Array.isArray(row))) {
     throw new Error('数组元素必须是对象')
   }
 
-  const headers = Object.keys(parsed[0])
-  const headerLine = headers.map(h => `"${h}"`).join(',')
+  const headers = Array.from(new Set(
+    parsed.flatMap((row: Record<string, unknown>) => Object.keys(row))
+  ))
+  const headerLine = headers.map(csvEscape).join(',')
 
   const dataLines = parsed.map((row: Record<string, unknown>) => {
     return headers
@@ -83,8 +85,8 @@ export function jsonToCSV(input: string): string {
         if (value === null || value === undefined) {
           return ''
         }
-        const stringValue = String(value)
-        return `"${stringValue.replace(/"/g, '""')}"`
+        const stringValue = typeof value === 'object' ? JSON.stringify(value) : String(value)
+        return csvEscape(stringValue)
       })
       .join(',')
   })
@@ -93,16 +95,16 @@ export function jsonToCSV(input: string): string {
 }
 
 export function csvToJSON(csv: string): string {
-  const lines = csv.trim().split('\n')
-  if (lines.length === 0) {
+  const rows = parseCSV(csv.trim())
+  if (rows.length === 0 || (rows.length === 1 && rows[0].every((value) => value === ''))) {
     return '[]'
   }
 
-  const headers = parseCSVLine(lines[0])
+  const headers = rows[0]
   const data: Record<string, string>[] = []
 
-  for (let i = 1; i < lines.length; i++) {
-    const values = parseCSVLine(lines[i])
+  for (let i = 1; i < rows.length; i++) {
+    const values = rows[i]
     const row: Record<string, string> = {}
     headers.forEach((header, index) => {
       row[header] = values[index] || ''
@@ -156,14 +158,19 @@ function removeNullRecursive(obj: unknown): unknown {
   return result
 }
 
-function parseCSVLine(line: string): string[] {
-  const result: string[] = []
+function csvEscape(value: string): string {
+  return `"${value.replace(/"/g, '""')}"`
+}
+
+function parseCSV(csv: string): string[][] {
+  const rows: string[][] = []
+  let row: string[] = []
   let current = ''
   let insideQuotes = false
 
-  for (let i = 0; i < line.length; i++) {
-    const char = line[i]
-    const nextChar = line[i + 1]
+  for (let i = 0; i < csv.length; i++) {
+    const char = csv[i]
+    const nextChar = csv[i + 1]
 
     if (char === '"') {
       if (insideQuotes && nextChar === '"') {
@@ -172,14 +179,22 @@ function parseCSVLine(line: string): string[] {
       } else {
         insideQuotes = !insideQuotes
       }
-    } else if (char === ',' && !insideQuotes) {
-      result.push(current)
+    } else if (!insideQuotes && char === ',') {
+      row.push(current)
       current = ''
+    } else if (!insideQuotes && (char === '\n' || char === '\r')) {
+      row.push(current)
+      rows.push(row)
+      row = []
+      current = ''
+      if (char === '\r' && nextChar === '\n') i++
     } else {
       current += char
     }
   }
 
-  result.push(current)
-  return result
+  if (insideQuotes) throw new Error('CSV 包含未闭合的引号')
+  row.push(current)
+  rows.push(row)
+  return rows
 }

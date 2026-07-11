@@ -5,76 +5,58 @@
 // 更新时间: 2026-01-08
 
 export function numberToChinese(num: number): string {
+  if (!Number.isFinite(num)) return '请输入有效数字';
   if (num === 0) return '人民币零元整';
   if (num < 0) return '请输入正数';
   if (num > 999999999999999) return '数字太大，无法转换';
   
   const digits = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
-  
-  const intPart = Math.floor(num);
-  const decimal = Math.round((num - intPart) * 100);
-  
-  // 定义每一位的单位
-  const getUnit = (position: number): string => {
-    switch (position) {
-      case 0: return '';      // 个位
-      case 1: return '拾';     // 十位
-      case 2: return '佰';     // 百位
-      case 3: return '仟';     // 千位
-      case 4: return '万';     // 万位
-      case 5: return '拾';     // 十万位 (万位上的十位)
-      case 6: return '佰';     // 百万位 (万位上的百位)
-      case 7: return '仟';     // 千万位 (万位上的千位)
-      case 8: return '亿';     // 亿位
-      default: return '';
+  const smallUnits = ['', '拾', '佰', '仟'];
+  const groupUnits = ['', '万', '亿', '兆'];
+  // 先将完整金额取整到分，避免 1.999 四舍五入后产生“10角”。
+  const amountInFen = Math.round((num + Number.EPSILON) * 100);
+  const intPart = Math.floor(amountInFen / 100);
+  const decimal = amountInFen % 100;
+
+  const convertGroup = (group: number) => {
+    let text = '';
+    let pendingZero = false;
+    for (let position = 3; position >= 0; position--) {
+      const divisor = 10 ** position;
+      const digit = Math.floor(group / divisor) % 10;
+      if (digit === 0) {
+        if (text) pendingZero = true;
+      } else {
+        if (pendingZero) text += '零';
+        text += digits[digit] + smallUnits[position];
+        pendingZero = false;
+      }
     }
+    return text;
   };
-  
-  // 转换整数部分
-  const numStr = intPart.toString();
-  const len = numStr.length;
+
   let result = '';
-  let needZero = false;
-  
-  for (let i = 0; i < len; i++) {
-    const digit = parseInt(numStr[i]);
-    const position = len - i - 1; // 从右边数的位置
-    
-    if (digit === 0) {
-      // 当前位是0
-      if (position === 4 && result.length > 0) {
-        // 万位是0但前面有内容，需要加万
-        result += '万';
-        needZero = false;
-      } else if (position === 8 && result.length > 0) {
-        // 亿位是0但前面有内容，需要加亿
-        result += '亿';
-        needZero = false;
-      } else if (position > 0) {
-        // 其他位是0，标记需要加零（但不是万位和亿位）
-        needZero = true;
-      }
-    } else {
-      // 当前位不是0
-      if (needZero && result.length > 0) {
-        result += '零';
-      }
-      needZero = false;
-      
-      // 添加数字
-      result += digits[digit];
-      
-      // 添加单位
-      const unit = getUnit(position);
-      if (unit) {
-        result += unit;
-      }
+  if (intPart > 0) {
+    const groups: number[] = [];
+    let remaining = intPart;
+    while (remaining > 0) {
+      groups.push(remaining % 10000);
+      remaining = Math.floor(remaining / 10000);
     }
+    let pendingZero = false;
+    for (let index = groups.length - 1; index >= 0; index--) {
+      const group = groups[index];
+      if (group === 0) {
+        if (result) pendingZero = true;
+        continue;
+      }
+      if (result && (pendingZero || group < 1000)) result += '零';
+      result += convertGroup(group) + groupUnits[index];
+      pendingZero = false;
+    }
+  } else {
+    result = '零';
   }
-  
-  // 清理可能的重复万、亿
-  result = result.replace(/万万/g, '万');
-  result = result.replace(/亿亿/g, '亿');
   
   // 添加"元"
   result += '元';
@@ -88,6 +70,7 @@ export function numberToChinese(num: number): string {
       result += digits[jiao] + '角';
     }
     if (fen > 0) {
+      if (jiao === 0) result += '零';
       result += digits[fen] + '分';
     }
   } else {

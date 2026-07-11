@@ -23,8 +23,11 @@ import {
   ExternalLink,
   Fingerprint,
   FileSearch,
+  FileCheck2,
   Globe,
+  GitCompareArrows,
   Hash,
+  HandCoins,
   Languages,
   MailCheck,
   MessageSquare,
@@ -64,6 +67,9 @@ const ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
   Container,
   Plane,
   Ship,
+  FileCheck2,
+  GitCompareArrows,
+  HandCoins,
 }
 
 const tools = TOOL_REGISTRY.map((tool) => {

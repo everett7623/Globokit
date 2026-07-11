@@ -25,9 +25,9 @@ export default function RMBConverterPage() {
 
   const handleConvert = () => {
     setError('')
-    const num = parseFloat(amount)
+    const num = Number(amount)
     
-    if (isNaN(num)) {
+    if (!Number.isFinite(num)) {
       setError('请输入有效的数字')
       setResult('')
       return

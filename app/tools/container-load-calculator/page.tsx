@@ -122,6 +122,7 @@ export default function ContainerLoadCalculatorPage() {
 
   const result = useMemo(() => calculateContainerLoad(inputs), [inputs])
   const isWeightLimited = result.limitingFactor === 'weight'
+  const doesNotFit = !result.fitsContainer
 
   const updateField = (field: NumericField, value: string) => {
     setForm((current) => ({ ...current, [field]: value }))
@@ -148,7 +149,7 @@ export default function ContainerLoadCalculatorPage() {
       `单柜可装：${formatNumber(result.maxCartonsPerContainer)} 箱`,
       `预计柜数：${result.requiredContainers} 柜`,
       `末柜箱数：${formatNumber(result.lastContainerCartons)} 箱`,
-      `限制因素：${isWeightLimited ? '重量' : '体积/摆放'}`,
+      `限制因素：${doesNotFit ? '纸箱尺寸无法装入' : isWeightLimited ? '重量' : '体积/摆放'}`,
     ].join('\n')
 
     await navigator.clipboard.writeText(summary)
@@ -172,7 +173,7 @@ export default function ContainerLoadCalculatorPage() {
     {
       label: '单柜可装',
       value: `${formatNumber(result.maxCartonsPerContainer)} 箱`,
-      caption: `${isWeightLimited ? '重量' : '摆放/体积'}限制`,
+      caption: doesNotFit ? '纸箱尺寸无法装入' : `${isWeightLimited ? '重量' : '摆放/体积'}限制`,
       icon: Container,
     },
     {
@@ -269,6 +270,15 @@ export default function ContainerLoadCalculatorPage() {
               </AlertDescription>
             </Alert>
 
+            {doesNotFit && (
+              <Alert variant="destructive">
+                <Info className="h-4 w-4" />
+                <AlertDescription>
+                  当前纸箱在所有旋转方向下都无法通过所选柜型内尺寸，请调整包装尺寸或运输方案。
+                </AlertDescription>
+              </Alert>
+            )}
+
             <div className="flex flex-wrap gap-2">
               <Button type="button" onClick={copySummary}>
                 {copied ? <Check className="mr-2 h-4 w-4" /> : <ClipboardCopy className="mr-2 h-4 w-4" />}
@@ -287,8 +297,8 @@ export default function ContainerLoadCalculatorPage() {
             <CardHeader>
               <CardTitle className="flex items-center justify-between gap-3">
                 <span>装载结果</span>
-                <Badge variant={isWeightLimited ? 'destructive' : 'secondary'}>
-                  {isWeightLimited ? '重量限制' : '体积/摆放限制'}
+                <Badge variant={doesNotFit || isWeightLimited ? 'destructive' : 'secondary'}>
+                  {doesNotFit ? '无法装入' : isWeightLimited ? '重量限制' : '体积/摆放限制'}
                 </Badge>
               </CardTitle>
               <CardDescription>{result.container.name} · {result.container.lengthCm} x {result.container.widthCm} x {result.container.heightCm} cm</CardDescription>

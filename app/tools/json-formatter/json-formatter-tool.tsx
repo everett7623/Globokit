@@ -83,9 +83,9 @@ export default function JSONFormatterTool() {
 
   const stats = {
     size: input.length,
-    lines: input.split('\n').length,
+    lines: input ? input.split('\n').length : 0,
     minifiedSize: minified.length,
-    saved: Math.round(((input.length - minified.length) / input.length) * 100),
+    saved: input.length > 0 ? Math.round(((input.length - minified.length) / input.length) * 100) : 0,
   }
 
   return (

@@ -36,6 +36,7 @@ export interface LoadingOrientation {
 }
 
 export interface LoadingResult {
+  fitsContainer: boolean
   container: ContainerSpec
   cartonCbm: number
   totalCbm: number
@@ -47,7 +48,7 @@ export interface LoadingResult {
   lastContainerCartons: number
   volumeUtilizationPercent: number
   weightUtilizationPercent: number
-  limitingFactor: 'volume' | 'weight'
+  limitingFactor: 'volume' | 'weight' | 'dimensions'
 }
 
 export const CONTAINER_SPECS: Record<ContainerType, ContainerSpec> = {
@@ -153,15 +154,19 @@ export function calculateContainerLoad(inputs: CartonInputs): LoadingResult {
     orientations[0]
   )
 
-  const maxByWeight = Math.max(1, Math.floor(container.maxPayloadKg / grossWeightKg))
-  const maxCartonsPerContainer = Math.max(1, Math.min(bestOrientation.cartons, maxByWeight))
-  const requiredContainers = Math.ceil(quantity / maxCartonsPerContainer)
-  const lastContainerCartons = quantity % maxCartonsPerContainer || maxCartonsPerContainer
+  const fitsContainer = bestOrientation.cartons > 0
+  const maxByWeight = Math.max(0, Math.floor(container.maxPayloadKg / grossWeightKg))
+  const maxCartonsPerContainer = fitsContainer ? Math.min(bestOrientation.cartons, maxByWeight) : 0
+  const requiredContainers = maxCartonsPerContainer > 0 ? Math.ceil(quantity / maxCartonsPerContainer) : 0
+  const lastContainerCartons = maxCartonsPerContainer > 0
+    ? quantity % maxCartonsPerContainer || maxCartonsPerContainer
+    : 0
   const totalContainerVolume = container.volumeCbm * requiredContainers
   const totalPayload = container.maxPayloadKg * requiredContainers
 
   return {
     container,
+    fitsContainer,
     cartonCbm: round(cartonCbm, 4),
     totalCbm: round(totalCbm),
     totalWeightKg: round(totalWeightKg),
@@ -170,8 +175,8 @@ export function calculateContainerLoad(inputs: CartonInputs): LoadingResult {
     maxCartonsPerContainer,
     requiredContainers,
     lastContainerCartons,
-    volumeUtilizationPercent: round(totalCbm / totalContainerVolume * 100, 1),
-    weightUtilizationPercent: round(totalWeightKg / totalPayload * 100, 1),
-    limitingFactor: maxByWeight < bestOrientation.cartons ? 'weight' : 'volume',
+    volumeUtilizationPercent: totalContainerVolume > 0 ? round(totalCbm / totalContainerVolume * 100, 1) : 0,
+    weightUtilizationPercent: totalPayload > 0 ? round(totalWeightKg / totalPayload * 100, 1) : 0,
+    limitingFactor: !fitsContainer ? 'dimensions' : maxByWeight < bestOrientation.cartons ? 'weight' : 'volume',
   }
 }

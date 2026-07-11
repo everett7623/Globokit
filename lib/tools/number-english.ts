@@ -9,6 +9,7 @@ const tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 
 const teens = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
 
 export function numberToEnglish(num: number): string {
+  if (!Number.isFinite(num) || !Number.isInteger(num)) return 'invalid number';
   if (num === 0) return 'zero';
   if (num < 0) return 'negative ' + numberToEnglish(-num);
   
@@ -40,6 +41,8 @@ export function convertOrdinal(num: number): string {
     ordinal = word.replace(/two$/, 'second');
   } else if (lastWord.endsWith('three')) {
     ordinal = word.replace(/three$/, 'third');
+  } else if (lastWord.endsWith('nine')) {
+    ordinal = word.replace(/nine$/, 'ninth');
   } else if (lastWord.endsWith('ve')) {
     ordinal = word.replace(/ve$/, 'fth');
   } else if (lastWord.endsWith('t')) {

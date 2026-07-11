@@ -55,6 +55,10 @@ export const TOOL_UI_CONFIG: Record<
     color: 'text-sky-500',
     bgColor: 'bg-sky-50',
   },
+  'export-tax-rebate-calculator': {
+    color: 'text-green-600',
+    bgColor: 'bg-green-50',
+  },
   'import-landed-cost-calculator': {
     color: 'text-rose-600',
     bgColor: 'bg-rose-50',
@@ -70,6 +74,14 @@ export const TOOL_UI_CONFIG: Record<
   'ocean-freight-calculator': {
     color: 'text-cyan-600',
     bgColor: 'bg-cyan-50',
+  },
+  'customs-cost-calculator': {
+    color: 'text-emerald-600',
+    bgColor: 'bg-emerald-50',
+  },
+  'express-channel-comparison': {
+    color: 'text-amber-600',
+    bgColor: 'bg-amber-50',
   },
   'vps-calculator': {
     color: 'text-violet-500',
