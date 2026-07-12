@@ -66,6 +66,11 @@
 
 ### 🚢 物流与出货工具
 
+- **托盘装载计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 支持中国标准、欧标与北美标准托盘，按纸箱尺寸估算每层码放数量。
+  - 综合托盘限高和含托限重，计算单托箱数、托盘数量、毛重与空间利用率。
+
 - **空运/快递计费重计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
 
   - 根据外箱尺寸、毛重、净重、泡重系数和箱数计算体积重、计费重与抛重差。

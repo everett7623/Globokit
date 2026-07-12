@@ -67,6 +67,10 @@ export const TOOL_UI_CONFIG: Record<
     color: 'text-lime-600',
     bgColor: 'bg-lime-50',
   },
+  'pallet-load-calculator': {
+    color: 'text-fuchsia-600',
+    bgColor: 'bg-fuchsia-50',
+  },
   'air-freight-calculator': {
     color: 'text-blue-600',
     bgColor: 'bg-blue-50',
