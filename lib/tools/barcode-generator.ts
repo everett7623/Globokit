@@ -48,8 +48,8 @@ export const BARCODE_FORMATS: BarcodeFormat[] = [
   {
     id: 'gs1datamatrix', label: 'GS1 DataMatrix', bcid: 'gs1datamatrix', isGs1: true, is2D: true,
     description: 'GS1 AI 元素串、首位 FNC1 与 Data Matrix ECC 200',
-    example: '0126976244651064173106291020260630303000',
-    placeholder: '推荐：(01)26976244651064(17)310629(10)20260630303000',
+    example: '(01)00401234567893(17)311231(10)DEMO-2026',
+    placeholder: '虚构示例：(01)00401234567893(17)311231(10)DEMO-2026',
   },
   {
     id: 'gs1-128', label: 'GS1-128', bcid: 'gs1-128', isGs1: true, is2D: false,
