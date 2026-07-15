@@ -1,7 +1,7 @@
 // 名称: 人民币大写转换函数
 // 描述: 实现数字金额到中文大写金额的算法逻辑
 // 路径: Globokit/lib/tools/rmb-converter.ts
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-01-08
 
 export function numberToChinese(num: number): string {

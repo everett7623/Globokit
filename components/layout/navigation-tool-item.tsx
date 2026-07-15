@@ -1,7 +1,7 @@
 // 名称: 导航工具卡片
 // 描述: 复用桌面与移动导航中的工具入口样式
 // 路径: Globokit/components/layout/navigation-tool-item.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import Link from 'next/link'

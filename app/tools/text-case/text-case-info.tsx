@@ -1,7 +1,7 @@
 // 名称: 文本转换信息面板
 // 描述: 展示模式统计、转换示例与使用说明
 // 路径: Globokit/app/tools/text-case/text-case-info.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Code, Info, Keyboard, RefreshCw, Type } from 'lucide-react'

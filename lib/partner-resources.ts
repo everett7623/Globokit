@@ -1,7 +1,7 @@
 // 名称: 外贸资源精选
 // 描述: 管理可在首页展示的外贸相关资源推荐
 // 路径: Globokit/lib/partner-resources.ts
-// 作者: Jensfrank / Codex
+// 作者: everettlabs
 // 更新时间: 2026-07-06
 
 export type PartnerResourceType =

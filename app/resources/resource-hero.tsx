@@ -1,7 +1,7 @@
 // 名称: 资源页主视觉
 // 描述: 展示资源页介绍、返回入口和使用边界
 // 路径: Globokit/app/resources/resource-hero.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import Link from 'next/link'

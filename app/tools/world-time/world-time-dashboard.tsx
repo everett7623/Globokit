@@ -1,7 +1,7 @@
 // 名称: 世界时间概览
 // 描述: 展示城市统计、本地时间和使用说明
 // 路径: Globokit/app/tools/world-time/world-time-dashboard.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Clock, Globe, Info, Star } from 'lucide-react'

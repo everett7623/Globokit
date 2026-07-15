@@ -1,7 +1,7 @@
 // 名称: 工具注册表
 // 描述: 聚合工具元数据，作为导航、首页、SEO 和结构化数据的单一入口
 // 路径: Globokit/lib/tools/registry.ts
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { barcodeGeneratorTool } from './registry-barcode'

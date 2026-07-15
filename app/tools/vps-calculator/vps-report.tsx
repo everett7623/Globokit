@@ -1,7 +1,7 @@
 // 名称: VPS 剩余价值报告
 // 描述: 展示计算指标、明细与导出操作
 // 路径: Globokit/app/tools/vps-calculator/vps-report.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { forwardRef } from 'react'

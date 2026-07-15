@@ -1,7 +1,7 @@
 // 名称: 海运费用页面数据
 // 描述: 定义表单、预设及金额格式化函数
 // 路径: Globokit/app/tools/ocean-freight-calculator/ocean-freight-page-data.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { DEFAULT_OCEAN_FREIGHT_INPUTS, type OceanFreightInputs, type OceanFreightMode } from '@/lib/tools/ocean-freight-calculator'

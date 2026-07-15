@@ -1,7 +1,7 @@
 // 名称: 国际条码生成器注册信息
 // 描述: 独立维护条码工具元数据，避免继续扩大主注册表文件
 // 路径: Globokit/lib/tools/registry-barcode.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import type { ToolMeta } from './registry-types'

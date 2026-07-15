@@ -1,7 +1,7 @@
 // 名称: 货币符号数据函数
 // 描述: 提供全球货币代码、符号及国家对应关系的数据检索
 // 路径: Globokit/lib/tools/currency-symbols.ts
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-01-08
 
 import { COUNTRY_DATA } from './global-country-info'

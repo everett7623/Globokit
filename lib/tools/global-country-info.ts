@@ -1,7 +1,7 @@
 // 名称: 国家信息检索函数
 // 描述: 提供国家代码、区号、时区等综合信息的查询逻辑
 // 路径: Globokit/lib/tools/global-country-info.ts
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-01-08
 
 import countryData from './data/global-country-info.json'

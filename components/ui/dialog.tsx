@@ -1,7 +1,7 @@
 // 名称: 对话框组件
 // 描述: 模态对话框(Modal)，用于重要信息的展示或操作确认
 // 路径: Globokit/components/ui/dialog.tsx
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-01-08
 
 "use client"

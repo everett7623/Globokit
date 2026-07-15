@@ -1,7 +1,7 @@
 // 名称: 进口到岸成本计算逻辑
 // 描述: 按货值、运费、保险、关税、进口增值税和本地费用测算进口到岸总成本与单件成本
 // 路径: Globokit/lib/tools/import-landed-cost-calculator.ts
-// 作者: Jensfrank / Codex
+// 作者: everettlabs
 // 更新时间: 2026-07-08
 
 export type ImportCurrency = 'USD' | 'EUR' | 'GBP' | 'CNY'

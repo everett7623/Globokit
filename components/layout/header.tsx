@@ -1,7 +1,7 @@
 // 名称: 页头组件
 // 描述: 网站顶部容器，集成Logo与导航栏，支持粘性定位和毛玻璃效果
 // 路径: Globokit/components/layout/header.tsx
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-01-12
 
 import Link from 'next/link'

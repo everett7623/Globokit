@@ -1,7 +1,7 @@
 // 名称: 外贸报价结果
 // 描述: 展示报价概览、成本结构和报价口径提示
 // 路径: Globokit/app/tools/quote-calculator/quote-results.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Check, Copy, DollarSign, Info, Package, Percent, ReceiptText, TrendingUp } from 'lucide-react'

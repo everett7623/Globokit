@@ -1,7 +1,7 @@
 // 名称: 条码生成参数面板
 // 描述: 提供条码格式、数据内容与输出清晰度设置
 // 路径: Globokit/app/tools/barcode-generator/barcode-controls.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { CircleAlert, ScanLine } from 'lucide-react'

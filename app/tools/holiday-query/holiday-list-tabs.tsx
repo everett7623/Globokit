@@ -1,7 +1,7 @@
 // 名称: 节假日列表标签页
 // 描述: 展示即将到来和国际性节日
 // 路径: Globokit/app/tools/holiday-query/holiday-list-tabs.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Globe, Info, TrendingUp } from 'lucide-react'

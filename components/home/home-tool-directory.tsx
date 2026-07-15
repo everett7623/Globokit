@@ -1,7 +1,7 @@
 // 名称: 首页工具目录
 // 描述: 按注册表分类展示全部工具入口
 // 路径: Globokit/components/home/home-tool-directory.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import Link from 'next/link'

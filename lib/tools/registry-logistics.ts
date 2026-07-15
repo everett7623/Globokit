@@ -1,7 +1,7 @@
 // 名称: 物流与装柜工具注册信息
 // 描述: 集中维护物流与装柜分类的工具元数据
 // 路径: Globokit/lib/tools/registry-logistics.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import type { ToolMeta } from './registry-types'

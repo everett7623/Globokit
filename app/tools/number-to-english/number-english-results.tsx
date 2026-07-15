@@ -1,7 +1,7 @@
 // 名称: 数字转英文结果
 // 描述: 展示基数词、序数词和最近五次转换记录
 // 路径: Globokit/app/tools/number-to-english/number-english-results.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Check, Copy } from 'lucide-react'

@@ -1,7 +1,7 @@
 // 名称: 通用工具注册信息
 // 描述: 维护文本、时间、国家、站长、沟通与文件工具元数据
 // 路径: Globokit/lib/tools/registry-general.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import type { ToolMeta } from './registry-types'

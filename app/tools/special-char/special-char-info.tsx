@@ -1,7 +1,7 @@
 // 名称: 特殊字符说明面板
 // 描述: 展示功能、使用场景和常见字符类型
 // 路径: Globokit/app/tools/special-char/special-char-info.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Info } from 'lucide-react'

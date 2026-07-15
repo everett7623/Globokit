@@ -1,7 +1,7 @@
 // 名称: VPS 计算器页头
 // 描述: 展示工具介绍、推荐资源和汇率错误提示
 // 路径: Globokit/app/tools/vps-calculator/vps-header.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import Image from 'next/image'

@@ -1,7 +1,7 @@
 // 名称: 拼音页面数据
 // 描述: 定义示例、声调选项与历史记录类型
 // 路径: Globokit/app/tools/pinyin/pinyin-page-data.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { examples } from '@/lib/tools/pinyin'

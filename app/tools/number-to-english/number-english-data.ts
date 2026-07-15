@@ -1,7 +1,7 @@
 // 名称: 数字转英文页面数据
 // 描述: 定义常用数字、示例及历史记录类型
 // 路径: Globokit/app/tools/number-to-english/number-english-data.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 export interface NumberEnglishHistoryItem {

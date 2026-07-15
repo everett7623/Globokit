@@ -1,7 +1,7 @@
 // 名称: 移动导航
 // 描述: 展示移动端菜单开关、工具搜索、分类入口与外部链接
 // 路径: Globokit/components/layout/navigation-mobile.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import Link from 'next/link'

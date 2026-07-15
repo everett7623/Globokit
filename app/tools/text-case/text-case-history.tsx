@@ -1,7 +1,7 @@
 // 名称: 文本转换结果与历史
 // 描述: 展示当前转换结果及最近五次记录
 // 路径: Globokit/app/tools/text-case/text-case-history.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Check, Copy, RefreshCw } from 'lucide-react'

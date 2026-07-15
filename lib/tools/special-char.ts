@@ -1,7 +1,7 @@
 // 名称: 特殊字符处理函数
 // 描述: 识别和替换文本中的非标准字符及乱码
 // 路径: Globokit/lib/tools/special-char.ts
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-01-08
 
 export interface SpecialCharResult {

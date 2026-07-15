@@ -1,7 +1,7 @@
 // 名称: 桌面工具菜单
 // 描述: 组合分类侧栏、工具搜索结果与新工具侧栏
 // 路径: Globokit/components/layout/navigation-desktop-menu.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import Link from 'next/link'

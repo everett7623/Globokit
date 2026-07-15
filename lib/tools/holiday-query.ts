@@ -1,7 +1,7 @@
 // 名称: 节假日数据查询函数
 // 描述: 提供各国公共节假日的查询与日期计算逻辑
 // 路径: Globokit/lib/tools/holiday-query.ts
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-07-06
 
 import { COUNTRY_DATA, getFlagEmoji } from './global-country-info'

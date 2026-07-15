@@ -1,7 +1,7 @@
 // 名称: 国家详情弹层
 // 描述: 展示国家详情导航、收藏和关闭操作
 // 路径: Globokit/app/tools/global-country-info/country-detail-modal.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Map, Star, StarOff, X } from 'lucide-react'

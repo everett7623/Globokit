@@ -1,7 +1,7 @@
 // 名称: 外贸报价表单
 // 描述: 展示条款、成本、利润、币种和场景预设控件
 // 路径: Globokit/app/tools/quote-calculator/quote-form.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Calculator, Info, RefreshCw } from 'lucide-react'

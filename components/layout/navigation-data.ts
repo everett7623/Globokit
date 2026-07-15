@@ -1,7 +1,7 @@
 // 名称: 导航展示数据
 // 描述: 维护导航分类、精选工具、新工具与外部入口映射
 // 路径: Globokit/components/layout/navigation-data.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import type { ComponentType } from 'react'

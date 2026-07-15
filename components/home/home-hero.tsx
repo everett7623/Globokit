@@ -1,7 +1,7 @@
 // 名称: 首页主视觉
 // 描述: 展示首页标题、行动入口、统计信息与高频工具
 // 路径: Globokit/components/home/home-hero.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import Link from 'next/link'

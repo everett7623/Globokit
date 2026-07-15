@@ -1,7 +1,7 @@
 // 名称: 世界时间筛选控件
 // 描述: 展示收藏、地区、工作时间和城市搜索筛选
 // 路径: Globokit/app/tools/world-time/world-time-controls.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Search } from 'lucide-react'

@@ -1,7 +1,7 @@
 // 名称: 数字转英文信息面板
 // 描述: 展示统计、示例、使用场景和单位对照
 // 路径: Globokit/app/tools/number-to-english/number-english-info.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Calculator, Hash, Info, Type, Zap } from 'lucide-react'

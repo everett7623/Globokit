@@ -1,7 +1,7 @@
 // 名称: 工具 UI 配置
 // 描述: 为工具注册表条目提供 UI 样式映射（颜色、徽章颜色等）
 // 路径: Globokit/lib/tools/registry-ui.ts
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-07-01
 
 /**

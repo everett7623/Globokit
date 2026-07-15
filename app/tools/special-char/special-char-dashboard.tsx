@@ -1,7 +1,7 @@
 // 名称: 特殊字符统计与历史
 // 描述: 展示检查统计和最近五次检查结果
 // 路径: Globokit/app/tools/special-char/special-char-dashboard.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { AlertCircle, CheckCircle, FileWarning, Search, Shield, Zap } from 'lucide-react'

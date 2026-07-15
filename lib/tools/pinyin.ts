@@ -1,7 +1,7 @@
 // 名称: 汉字转拼音函数
 // 描述: 处理汉字到拼音的转换，支持多音字和声调处理
 // 路径: Globokit/lib/tools/pinyin.ts
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-01-08
 
 import { pinyin } from 'pinyin-pro';

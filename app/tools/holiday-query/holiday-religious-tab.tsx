@@ -1,7 +1,7 @@
 // 名称: 宗教节日标签页
 // 描述: 按宗教分组展示 2025 年参考节日
 // 路径: Globokit/app/tools/holiday-query/holiday-religious-tab.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { AlertCircle, Globe, Info } from 'lucide-react'

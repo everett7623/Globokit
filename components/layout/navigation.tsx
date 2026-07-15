@@ -1,7 +1,7 @@
 // 名称: 导航栏组件
 // 描述: 统一管理桌面与移动导航的搜索、分类和开关状态
 // 路径: Globokit/components/layout/navigation.tsx
-// 作者: Jensfrank / Codex
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 'use client'

@@ -2,7 +2,7 @@
  * 名称: 英文大小写转换函数
  * 描述: 快速转换英文文本的大小写格式，支持多种转换模式
  * 路径: Globokit/lib/tools/text-case.ts
- * 作者: Jensfrank
+ * 作者: everettlabs
  * 更新时间: 2026-01-16
  */
 

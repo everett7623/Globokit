@@ -1,6 +1,6 @@
 // 名称: 工具数据资产校验
 // 描述: 校验国家资料与节假日 JSON 的字段契约和基础一致性
-// 作者: wwj
+// 作者: everettlabs
 
 const assert = require('node:assert/strict')
 

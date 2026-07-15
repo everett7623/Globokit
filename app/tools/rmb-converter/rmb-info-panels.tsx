@@ -1,7 +1,7 @@
 // 名称: 人民币转换信息面板
 // 描述: 展示转换统计、示例和使用说明
 // 路径: Globokit/app/tools/rmb-converter/rmb-info-panels.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Calculator, Info, TrendingUp } from 'lucide-react'

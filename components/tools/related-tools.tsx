@@ -1,7 +1,7 @@
 // 名称: 相关工具推荐组件
 // 描述: 根据工具注册表的 relatedTools 字段在工具页底部展示关联入口
 // 路径: Globokit/components/tools/related-tools.tsx
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-07-06
 
 'use client'

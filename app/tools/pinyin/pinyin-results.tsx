@@ -1,7 +1,7 @@
 // 名称: 拼音转换结果
 // 描述: 展示转换文本、字符统计和最近五次历史
 // 路径: Globokit/app/tools/pinyin/pinyin-results.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Check, Copy } from 'lucide-react'

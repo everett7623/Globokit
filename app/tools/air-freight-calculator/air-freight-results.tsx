@@ -1,7 +1,7 @@
 // 名称: 空运计费结果
 // 描述: 展示计费重量、重量对比和费用拆分
 // 路径: Globokit/app/tools/air-freight-calculator/air-freight-results.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import type { ComponentType } from 'react'

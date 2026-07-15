@@ -1,7 +1,7 @@
 // 名称: 文本大小写页面数据
 // 描述: 定义转换选项、快速示例与历史记录类型
 // 路径: Globokit/app/tools/text-case/text-case-data.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Code, FileText, Hash, RefreshCw, Type } from 'lucide-react'

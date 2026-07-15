@@ -1,7 +1,7 @@
 // 名称: 货币信息面板
 // 描述: 展示货币统计、示例与使用说明
 // 路径: Globokit/app/tools/currency-symbols/currency-info-panels.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { CircleDollarSign, Info, Star, TrendingUp } from 'lucide-react'

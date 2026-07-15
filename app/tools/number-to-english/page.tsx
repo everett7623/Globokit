@@ -1,7 +1,7 @@
 // 名称: 数字转英文
 // 描述: 将数字转换为英文表达形式，支持基数词和序数词
 // 路径: Globokit/app/tools/number-to-english/page.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 'use client'

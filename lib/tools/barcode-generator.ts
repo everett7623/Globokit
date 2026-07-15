@@ -1,7 +1,7 @@
 // 名称: 国际条码生成器核心配置
 // 描述: 定义条码格式、示例及 GS1/数字型条码输入规范化规则
 // 路径: Globokit/lib/tools/barcode-generator.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 export const BARCODE_FORMAT_IDS = [

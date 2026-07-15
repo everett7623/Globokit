@@ -1,7 +1,7 @@
 // 名称: 节假日国家查询
 // 描述: 展示查询条件、国家信息、年度提示和节假日列表
 // 路径: Globokit/app/tools/holiday-query/holiday-country-tab.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { AlertCircle, Calendar, Info, MapPin, TrendingUp } from 'lucide-react'

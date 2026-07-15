@@ -1,7 +1,7 @@
 // 名称: 全球国家信息查询
 // 描述: 查询世界各国的中英文名称、区号、代码、时区、域名等信息
 // 路径: Globokit/app/tools/global-country-info/page.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 'use client'

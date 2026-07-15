@@ -1,7 +1,7 @@
 // 名称: VPS 计算参数表单
 // 描述: 展示购买信息、周期、日期和定价策略控件
 // 路径: Globokit/app/tools/vps-calculator/vps-form.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { AlertTriangle, Calendar, Calculator, Clock, Info, RotateCcw, Tag, Wallet } from 'lucide-react'

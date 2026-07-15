@@ -1,7 +1,7 @@
 // 名称: 主题状态 Provider
 // 描述: 管理 Globokit 的日间/夜间主题，并同步到 documentElement
 // 路径: Globokit/components/theme/theme-provider.tsx
-// 作者: Jensfrank / Codex
+// 作者: everettlabs
 // 更新时间: 2026-07-06
 
 'use client'

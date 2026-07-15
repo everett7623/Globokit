@@ -1,7 +1,7 @@
 // 名称: JSON 格式化工具
 // 描述: 管理 JSON 格式化、压缩及 CSV 双向转换状态
 // 路径: Globokit/app/tools/json-formatter/json-formatter-tool.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 'use client'

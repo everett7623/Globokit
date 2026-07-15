@@ -1,7 +1,7 @@
 // 名称: 进口成本结果
 // 描述: 展示到岸成本概览、成本拆分与销售口径
 // 路径: Globokit/app/tools/import-landed-cost-calculator/import-cost-results.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import type { ComponentType } from 'react'

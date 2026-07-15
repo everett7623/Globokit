@@ -1,7 +1,7 @@
 // 名称: 国际节假日查询
 // 描述: 查询全球主要贸易国家的节假日安排，便于外贸业务安排
 // 路径: Globokit/app/tools/holiday-query/page.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 'use client'

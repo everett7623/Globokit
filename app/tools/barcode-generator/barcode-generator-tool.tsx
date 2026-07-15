@@ -1,7 +1,7 @@
 // 名称: 国际条码生成器交互入口
 // 描述: 管理条码类型、输入数据、清晰度与生成请求状态
 // 路径: Globokit/app/tools/barcode-generator/barcode-generator-tool.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 'use client'

@@ -1,7 +1,7 @@
 // 名称: 首页精选资源
 // 描述: 展示精选外贸资源卡片与使用边界
 // 路径: Globokit/components/home/home-resources.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import Link from 'next/link'

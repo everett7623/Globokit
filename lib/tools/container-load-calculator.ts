@@ -1,7 +1,7 @@
 // 名称: 装柜/箱规计算逻辑
 // 描述: 根据纸箱尺寸、重量和柜型估算装柜数量与空间利用率
 // 路径: Globokit/lib/tools/container-load-calculator.ts
-// 作者: Jensfrank / Codex
+// 作者: everettlabs
 // 更新时间: 2026-07-06
 
 export type ContainerType = '20GP' | '40GP' | '40HQ' | '45HQ'

@@ -1,7 +1,7 @@
 // 名称: 中文转拼音
 // 描述: 将中文文本转换为汉语拼音，支持声调和多种格式
 // 路径: Globokit/app/tools/pinyin/page.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 'use client'

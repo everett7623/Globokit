@@ -1,7 +1,7 @@
 // 名称: 国家信息筛选控件
 // 描述: 展示主要贸易国、搜索、大洲、收藏和导出控件
 // 路径: Globokit/app/tools/global-country-info/country-controls.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Download, Filter, Map, Search, Star, TrendingUp } from 'lucide-react'

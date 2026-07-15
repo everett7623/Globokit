@@ -1,7 +1,7 @@
 // 名称: VPS价值计算函数
 // 描述: 计算服务器剩余使用时间的折算价值及汇率转换
 // 路径: Globokit/lib/tools/vps-calculator.ts
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-03-16
 // 更新内容: 续费周期添加默认十年
 

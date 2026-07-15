@@ -1,7 +1,7 @@
 // 名称: 装柜计算结果
 // 描述: 展示概览、装载结果、利用率和柜型参数
 // 路径: Globokit/app/tools/container-load-calculator/container-load-results.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Boxes, Container, PackageCheck, Ruler, Truck, Weight } from 'lucide-react'

@@ -1,7 +1,7 @@
 // 名称: 外贸业务资源页
 // 描述: 展示可配合 Globokit 工具站使用的外贸业务资源推荐
 // 路径: Globokit/app/resources/page.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import type { Metadata } from 'next'

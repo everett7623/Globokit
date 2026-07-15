@@ -1,7 +1,7 @@
 // 名称: 海运费用结果
 // 描述: 展示概览、费用拆分和摊销口径
 // 路径: Globokit/app/tools/ocean-freight-calculator/ocean-freight-results.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import type { ComponentType } from 'react'

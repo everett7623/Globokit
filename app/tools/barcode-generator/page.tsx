@@ -1,7 +1,7 @@
 // 名称: 国际条码生成器
 // 描述: 生成符合 GS1 数据规则及常见国际条码规范的 PNG/SVG 条码
 // 路径: Globokit/app/tools/barcode-generator/page.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { BadgeCheck, Info, Printer } from 'lucide-react'

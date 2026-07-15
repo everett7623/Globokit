@@ -1,7 +1,7 @@
 // 名称: 条码预览与下载
 // 描述: 使用浏览器端编码器渲染条码并导出 PNG/SVG
 // 路径: Globokit/app/tools/barcode-generator/barcode-preview.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 'use client'

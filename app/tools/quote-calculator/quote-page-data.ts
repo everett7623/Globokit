@@ -1,7 +1,7 @@
 // 名称: 外贸报价页面数据
 // 描述: 定义币种、表单、场景预设、摘要与格式化函数
 // 路径: Globokit/app/tools/quote-calculator/quote-page-data.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { DEFAULT_QUOTE_INPUTS, QUOTE_TERM_CONFIGS, type QuoteInputs, type QuoteMode, type QuoteResult, type QuoteTerm } from '@/lib/tools/quote-calculator'

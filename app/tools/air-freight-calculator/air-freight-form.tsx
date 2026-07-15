@@ -1,7 +1,7 @@
 // 名称: 空运计费表单
 // 描述: 展示箱规、重量、泡重、运价和附加费用控件
 // 路径: Globokit/app/tools/air-freight-calculator/air-freight-form.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Check, ClipboardCopy, Info, RotateCcw } from 'lucide-react'

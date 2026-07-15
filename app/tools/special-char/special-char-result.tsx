@@ -1,7 +1,7 @@
 // 名称: 特殊字符检查结果
 // 描述: 展示字符详情、分类统计和两种清理结果
 // 路径: Globokit/app/tools/special-char/special-char-result.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { AlertCircle, Check, CheckCircle, Copy } from 'lucide-react'

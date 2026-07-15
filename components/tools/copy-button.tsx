@@ -1,7 +1,7 @@
 // 名称: 通用复制按钮组件
 // 描述: 封装剪贴板复制逻辑与交互反馈的复用组件
 // 路径: Globokit/components/tools/copy-button.tsx
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-01-08
 
 'use client'

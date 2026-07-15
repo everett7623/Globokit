@@ -1,7 +1,7 @@
 // 名称: 海运费用表单
 // 描述: 展示运输模式、费用字段、预设和操作控件
 // 路径: Globokit/app/tools/ocean-freight-calculator/ocean-freight-form.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Calculator, Check, ClipboardCopy, Info, RotateCcw } from 'lucide-react'

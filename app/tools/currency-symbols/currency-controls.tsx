@@ -1,7 +1,7 @@
 // 名称: 货币查询控件
 // 描述: 展示地区、主要货币与关键词筛选控件
 // 路径: Globokit/app/tools/currency-symbols/currency-controls.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Search, TrendingUp } from 'lucide-react'

@@ -1,7 +1,7 @@
 // 名称: 桌面导航侧栏
 // 描述: 展示工具分类、精选链路、新工具与外部入口
 // 路径: Globokit/components/layout/navigation-desktop-sidebars.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import Link from 'next/link'

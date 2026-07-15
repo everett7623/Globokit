@@ -1,7 +1,7 @@
 // 名称: 首页业务流程
 // 描述: 展示四类高频业务流程入口及对应工具数量
 // 路径: Globokit/components/home/home-workflows.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import Link from 'next/link'

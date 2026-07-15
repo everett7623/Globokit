@@ -1,7 +1,7 @@
 // 名称: 国家详情标签内容
 // 描述: 展示基础、通讯、文化和商务信息
 // 路径: Globokit/app/tools/global-country-info/country-detail-tabs.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Briefcase, Building2, Calendar, Car, Clock, DollarSign, Globe, Globe2, Hash, Info, Languages, MapPin, Phone, Plug, Ship, Users, Zap } from 'lucide-react'

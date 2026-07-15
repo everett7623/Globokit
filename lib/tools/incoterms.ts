@@ -1,7 +1,7 @@
 // 名称: 国际贸易术语速查数据与检索
 // 描述: 提供 Incoterms 2020 术语数据、搜索与筛选能力
 // 路径: Globokit/lib/tools/incoterms.ts
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-06-30
 
 export type IncotermTransportMode = 'any' | 'sea'

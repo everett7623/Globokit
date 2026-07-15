@@ -1,7 +1,7 @@
 // 名称: 按钮组件
 // 描述: 交互式按钮组件，支持多种样式(Variant)和尺寸(Size)
 // 路径: Globokit/components/ui/button.tsx
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-01-08
 
 import * as React from "react"

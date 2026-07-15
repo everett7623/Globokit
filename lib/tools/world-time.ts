@@ -1,7 +1,7 @@
 // 名称: 世界时间计算函数
 // 描述: 处理不同时区的时间转换与实时更新逻辑
 // 路径: Globokit/lib/tools/world-time.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { COUNTRY_DATA } from './global-country-info'

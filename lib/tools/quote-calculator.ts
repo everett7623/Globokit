@@ -1,7 +1,7 @@
 // 名称: 外贸报价利润计算逻辑
 // 描述: 根据采购成本、费用、汇率、佣金和目标利润率计算外贸报价
 // 路径: Globokit/lib/tools/quote-calculator.ts
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-07-08
 
 export type QuoteMode = 'target-margin' | 'known-price'

@@ -1,7 +1,7 @@
 // 名称: 装柜/箱规计算器
 // 描述: 根据纸箱尺寸、毛重、数量和柜型估算装柜数量与空间利用率
 // 路径: Globokit/app/tools/container-load-calculator/page.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 'use client'

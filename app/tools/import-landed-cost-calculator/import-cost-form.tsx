@@ -1,7 +1,7 @@
 // 名称: 进口成本表单
 // 描述: 展示币种、采购、税率、本地费用和预设控件
 // 路径: Globokit/app/tools/import-landed-cost-calculator/import-cost-form.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Calculator, Check, ClipboardCopy, Info, RotateCcw } from 'lucide-react'

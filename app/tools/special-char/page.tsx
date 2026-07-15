@@ -1,7 +1,7 @@
 // 名称: 特殊字符检查与转换
 // 描述: 检查并转换文本中的特殊字符，避免邮件或文档中的乱码
 // 路径: Globokit/app/tools/special-char/page.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 'use client'

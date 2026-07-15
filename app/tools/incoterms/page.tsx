@@ -1,7 +1,7 @@
 // 名称: 国际贸易术语速查
 // 描述: 查询 Incoterms 2020 术语定义、风险转移点与费用责任边界
 // 路径: Globokit/app/tools/incoterms/page.tsx
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-06-30
 
 import IncotermsTool from './incoterms-tool'

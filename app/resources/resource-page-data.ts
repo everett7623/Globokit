@@ -1,7 +1,7 @@
 // 名称: 资源页分类数据
 // 描述: 定义资源分类顺序、图标样式与可见资源分组
 // 路径: Globokit/app/resources/resource-page-data.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import type { ComponentType } from 'react'

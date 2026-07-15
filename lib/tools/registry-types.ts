@@ -1,7 +1,7 @@
 // 名称: 工具注册表类型
 // 描述: 定义工具分类、元数据字段与固定分类顺序
 // 路径: Globokit/lib/tools/registry-types.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 export const TOOL_CATEGORIES = [

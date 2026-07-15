@@ -1,7 +1,7 @@
 // 名称: 空运/快递计费重计算逻辑
 // 描述: 根据外箱尺寸、毛重、净重、泡重系数和运价估算空运快递计费重量与费用
 // 路径: Globokit/lib/tools/air-freight-calculator.ts
-// 作者: Jensfrank / Codex
+// 作者: everettlabs
 // 更新时间: 2026-07-08
 
 export type AirFreightMode = 'express' | 'air' | 'economy'

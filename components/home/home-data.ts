@@ -1,7 +1,7 @@
 // 名称: 首页展示数据
 // 描述: 聚合首页工具图标、业务流程、统计与精选资源映射
 // 路径: Globokit/components/home/home-data.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import type { ComponentType } from 'react'

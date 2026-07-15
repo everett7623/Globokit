@@ -1,7 +1,7 @@
 // 名称: JSON 格式化与转换工具逻辑
 // 描述: 提供 JSON 验证、格式化、压缩及数据转换能力
 // 路径: Globokit/lib/tools/json-formatter.ts
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-07-01
 
 export interface FormatOptions {

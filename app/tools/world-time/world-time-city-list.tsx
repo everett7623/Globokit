@@ -1,7 +1,7 @@
 // 名称: 世界时间城市列表
 // 描述: 按 UTC 偏移展示城市时间卡片
 // 路径: Globokit/app/tools/world-time/world-time-city-list.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Globe, Star, StarOff } from 'lucide-react'

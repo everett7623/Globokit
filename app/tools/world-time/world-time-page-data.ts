@@ -1,7 +1,7 @@
 // 名称: 世界时间页面数据
 // 描述: 构建城市实时时间并提供页面辅助函数
 // 路径: Globokit/app/tools/world-time/world-time-page-data.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { formatTime, getTimeZoneOffset, isBusinessHours, WORLD_CITIES } from '@/lib/tools/world-time'

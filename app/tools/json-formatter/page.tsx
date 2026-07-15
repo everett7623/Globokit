@@ -1,7 +1,7 @@
 // 名称: JSON 格式化与转换
 // 描述: 验证、格式化、压缩 JSON 及转换为 CSV 等格式
 // 路径: Globokit/app/tools/json-formatter/page.tsx
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-07-01
 
 import JSONFormatterTool from './json-formatter-tool'

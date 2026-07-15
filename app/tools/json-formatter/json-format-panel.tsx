@@ -1,7 +1,7 @@
 // 名称: JSON 格式化面板
 // 描述: 展示 JSON 统计、格式化选项与输出结果
 // 路径: Globokit/app/tools/json-formatter/json-format-panel.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { AlertCircle, Check, Copy } from 'lucide-react'

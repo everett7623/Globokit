@@ -1,7 +1,7 @@
 // 名称: 装柜计算页面数据
 // 描述: 定义表单、预设及显示格式化函数
 // 路径: Globokit/app/tools/container-load-calculator/container-load-page-data.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { DEFAULT_CARTON_INPUTS, type ContainerType } from '@/lib/tools/container-load-calculator'

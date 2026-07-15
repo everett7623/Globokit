@@ -1,7 +1,7 @@
 // 名称: 进口成本页面数据
 // 描述: 定义币种、表单、预设、摘要及格式化函数
 // 路径: Globokit/app/tools/import-landed-cost-calculator/import-cost-page-data.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { DEFAULT_IMPORT_LANDED_COST_INPUTS, type ImportCurrency, type ImportLandedCostInputs, type ImportLandedCostResult } from '@/lib/tools/import-landed-cost-calculator'

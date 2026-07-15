@@ -1,7 +1,7 @@
 // 名称: 桌面导航
 // 描述: 展示桌面端主导航、工具工作台、精选工具与外部入口
 // 路径: Globokit/components/layout/navigation-desktop.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import Link from 'next/link'

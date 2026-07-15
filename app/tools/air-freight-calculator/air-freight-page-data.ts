@@ -1,7 +1,7 @@
 // 名称: 空运计费页面数据
 // 描述: 定义表单、泡重选项、预设及格式化函数
 // 路径: Globokit/app/tools/air-freight-calculator/air-freight-page-data.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { AIR_FREIGHT_DIVISORS, DEFAULT_AIR_FREIGHT_INPUTS, type AirFreightMode } from '@/lib/tools/air-freight-calculator'

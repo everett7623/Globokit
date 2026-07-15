@@ -1,7 +1,7 @@
 // 名称: 装柜计算表单
 // 描述: 展示纸箱、数量、柜型预设和操作控件
 // 路径: Globokit/app/tools/container-load-calculator/container-load-form.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Check, ClipboardCopy, Info, RotateCcw } from 'lucide-react'

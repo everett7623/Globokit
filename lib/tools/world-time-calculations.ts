@@ -1,7 +1,7 @@
 // 名称: 世界时间计算辅助函数
 // 描述: 处理时区偏移、会议时间与下一个工作时间
 // 路径: Globokit/lib/tools/world-time-calculations.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 /**

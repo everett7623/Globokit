@@ -1,7 +1,7 @@
 // 名称: JSON 转换面板
 // 描述: 展示 JSON 与 CSV 双向转换界面
 // 路径: Globokit/app/tools/json-formatter/json-conversion-panels.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { AlertCircle, Check, Copy } from 'lucide-react'

@@ -1,7 +1,7 @@
 // 名称: 节假日工具说明
 // 描述: 展示统计、外贸影响提示和使用说明
 // 路径: Globokit/app/tools/holiday-query/holiday-info.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { AlertCircle, Calendar, Clock, DollarSign, Globe, Info, Mail, Plane, TrendingUp } from 'lucide-react'

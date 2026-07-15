@@ -1,7 +1,7 @@
 // 名称: 节假日年历标签页
 // 描述: 按月份展示选定国家的年度节假日分布
 // 路径: Globokit/app/tools/holiday-query/holiday-calendar-tab.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Calendar } from 'lucide-react'

@@ -1,7 +1,7 @@
 // 名称: 特殊字符页面数据
 // 描述: 定义快速示例、历史类型与字符分类函数
 // 路径: Globokit/app/tools/special-char/special-char-data.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 export interface CheckHistoryItem {

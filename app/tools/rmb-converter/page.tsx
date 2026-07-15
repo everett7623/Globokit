@@ -1,7 +1,7 @@
 // 名称: 人民币大写转换
 // 描述: 将数字金额转换为中文大写形式，适用于发票、合同等正式文件
 // 路径: Globokit/app/tools/rmb-converter/page.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 'use client'

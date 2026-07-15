@@ -1,7 +1,7 @@
 // 名称: 全局根布局
 // 描述: 定义全站基础结构，包含SEO元数据、字体配置、Google Analytics统计及通用页头页脚
 // 路径: Globokit/app/layout.tsx
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-01-12
 
 import type { Metadata } from 'next'
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   title: 'Globokit - 外贸实用工具集',
   description: '专为外贸从业者打造的在线工具平台，提供外贸报价利润计算、人民币大写转换、文本处理、货币符号查询等实用工具',
   keywords: '外贸工具,外贸报价,利润计算,人民币大写,英文大小写,特殊字符,数字转英文,中文拼音,国际节假日,世界时间,货币符号',
-  authors: [{ name: 'Jensfrank' }],
+  authors: [{ name: 'everettlabs' }],
   openGraph: {
     title: 'Globokit - 外贸实用工具集',
     description: '专为外贸从业者打造的在线工具平台',

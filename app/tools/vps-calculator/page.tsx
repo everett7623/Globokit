@@ -1,7 +1,7 @@
 // 名称: VPS剩余价值计算器
 // 描述: 基于购买日期和到期时间精确计算VPS剩余价值，支持多币种转换，支持生成交易卡片
 // 路径: Globokit/app/tools/vps-calculator/page.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 'use client'

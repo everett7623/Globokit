@@ -1,7 +1,7 @@
 // 名称: 首页总结区域
 // 描述: 展示工作台设计方向与团队使用场景
 // 路径: Globokit/components/home/home-summary.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import Link from 'next/link'

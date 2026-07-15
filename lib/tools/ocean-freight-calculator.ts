@@ -1,7 +1,7 @@
 // 名称: 海运费用拆分计算逻辑
 // 描述: 按海运费、本地港杂、报关、保险和目的港费用测算海运总成本与摊销成本
 // 路径: Globokit/lib/tools/ocean-freight-calculator.ts
-// 作者: Jensfrank / Codex
+// 作者: everettlabs
 // 更新时间: 2026-07-08
 
 export type OceanFreightMode = 'fcl' | 'lcl'

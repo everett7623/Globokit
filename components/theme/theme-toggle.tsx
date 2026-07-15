@@ -1,7 +1,7 @@
 // 名称: 日夜主题切换按钮
 // 描述: 在导航栏中切换 Globokit 日间/夜间版本
 // 路径: Globokit/components/theme/theme-toggle.tsx
-// 作者: Jensfrank / Codex
+// 作者: everettlabs
 // 更新时间: 2026-07-06
 
 'use client'

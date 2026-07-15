@@ -1,7 +1,7 @@
 // 名称: 国家信息页面数据
 // 描述: 定义贸易国家、跨洲映射、筛选排序与 CSV 导出
 // 路径: Globokit/app/tools/global-country-info/country-page-data.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { COUNTRY_DATA, getTimeDifference, type CountryInfo } from '@/lib/tools/global-country-info'

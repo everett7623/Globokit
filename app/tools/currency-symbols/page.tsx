@@ -1,7 +1,7 @@
 // 名称: 全球货币符号大全
 // 描述: 查看和复制全球各国货币符号，便于外贸报价和合同编写
 // 路径: Globokit/app/tools/currency-symbols/page.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 'use client'

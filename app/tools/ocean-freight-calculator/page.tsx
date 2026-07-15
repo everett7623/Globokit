@@ -1,7 +1,7 @@
 // 名称: 海运费用拆分计算器
 // 描述: 按海运费、港杂、报关、保险和目的港费用测算海运成本摊销
 // 路径: Globokit/app/tools/ocean-freight-calculator/page.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 'use client'

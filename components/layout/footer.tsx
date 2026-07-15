@@ -1,7 +1,7 @@
 // 名称: 页脚组件
 // 描述: 网站底部区域，展示版权信息、友情链接及技术栈说明
 // 路径: Globokit/components/layout/footer.tsx
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-01-08
 
 import Link from 'next/link'

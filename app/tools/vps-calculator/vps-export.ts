@@ -1,7 +1,7 @@
 // 名称: VPS 报告导出
 // 描述: 构建 VPS 剩余价值 Markdown 报告
 // 路径: Globokit/app/tools/vps-calculator/vps-export.ts
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { formatCurrency, formatDate, RENEWAL_PERIODS, SUPPORTED_CURRENCIES, type CalculationResult } from '@/lib/tools/vps-calculator'

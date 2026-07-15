@@ -1,7 +1,7 @@
 // 名称: 站点地图
 // 描述: 基于工具注册表生成首页与工具页 sitemap
 // 路径: Globokit/app/sitemap.ts
-// 作者: Jensfrank
+// 作者: everettlabs
 // 更新时间: 2026-07-06
 
 import type { MetadataRoute } from 'next'

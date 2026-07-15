@@ -1,7 +1,7 @@
 // 名称: 世界时间
 // 描述: 查看全球主要贸易城市的实时时间，便于安排国际业务
 // 路径: Globokit/app/tools/world-time/page.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 'use client'

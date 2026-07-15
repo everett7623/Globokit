@@ -1,7 +1,7 @@
 // 名称: 拼音工具信息面板
 // 描述: 展示统计、功能场景与声调格式对比
 // 路径: Globokit/app/tools/pinyin/pinyin-info.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Globe, Hash, Info, Type, Zap } from 'lucide-react'

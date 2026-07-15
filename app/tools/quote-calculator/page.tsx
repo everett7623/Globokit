@@ -1,7 +1,7 @@
 // 名称: 外贸报价利润计算器
 // 描述: 根据采购成本、费用、汇率、佣金和目标利润率计算外贸报价
 // 路径: Globokit/app/tools/quote-calculator/page.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 'use client'

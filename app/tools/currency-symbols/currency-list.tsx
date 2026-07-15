@@ -1,7 +1,7 @@
 // 名称: 货币查询列表
 // 描述: 按地区展示货币卡片及复制、收藏操作
 // 路径: Globokit/app/tools/currency-symbols/currency-list.tsx
-// 作者: wwj
+// 作者: everettlabs
 // 更新时间: 2026-07-15
 
 import { Check, Coins, Copy, Star, StarOff } from 'lucide-react'
