@@ -5,6 +5,9 @@
     <a href="LICENSE">
       <img src="https://img.shields.io/badge/license-GPL--3.0--only-blue.svg" alt="License">
     </a>
+    <a href="https://github.com/everett7623/Globokit/releases/tag/v0.2.0">
+      <img src="https://img.shields.io/badge/version-v0.2.0-brightgreen.svg" alt="Version v0.2.0">
+    </a>
     <a href="https://nextjs.org">
       <img src="https://img.shields.io/badge/Built%20with-Next.js%2014-black" alt="Next.js">
     </a>
@@ -134,6 +137,21 @@
 - **国际节假日查询**
   
   - 查询全球主要贸易伙伴的公共假期安排，避免在客户休息日发送重要邮件。
+
+---
+
+## 🏷️ 版本与发布
+
+- 当前版本：[`v0.2.0`](https://github.com/everett7623/Globokit/releases/tag/v0.2.0)
+- 完整更新记录：[CHANGELOG.md](CHANGELOG.md)
+- 所有历史版本：[GitHub Releases](https://github.com/everett7623/Globokit/releases)
+
+每次发布必须同步完成以下事项：
+
+1. 按 SemVer 更新 `package.json` 与 `package-lock.json` 版本号。
+2. 在 `CHANGELOG.md` 记录新增、优化、修复及重要兼容性变化。
+3. 更新 README 当前版本、功能说明和目录结构。
+4. 通过数据校验、Lint、TypeScript 与生产构建后，再创建同版本 Git tag 和 GitHub Release。
 
 ---
 
