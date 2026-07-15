@@ -103,6 +103,11 @@
 
 ### 📝 文本与效率工具
 
+- **国际条码生成器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 依据 GS1 General Specifications 26.0 与 ISO/IEC 16022:2024，校验 GS1 应用标识符、日期与校验位，生成 GS1 DataMatrix 和 GS1-128。
+  - 支持 QR Code、Data Matrix、Code 128/39、EAN-13/EAN-8、UPC-A、ITF-14、ISBN-13，并可下载 PNG/SVG。
+
 - **专业级英文大小写转换**
   
   - 支持 **15种** 转换模式，包括基础格式 (UPPERCASE, lowercase)。
@@ -156,6 +161,7 @@ Globokit/
 │   ├── resources/              # 外贸业务资源页
 │   ├── tools/                  # 工具页面路由
 │   │   ├── air-freight-calculator/ # 空运/快递计费重计算
+│   │   ├── barcode-generator/   # 国际条码生成器
 │   │   ├── container-load-calculator/ # 装柜/箱规计算
 │   │   ├── currency-symbols/   # 全球货币符号
 │   │   ├── customs-cost-calculator/ # 报关费用估算
@@ -203,8 +209,10 @@ Globokit/
 ├── lib/                        # 核心逻辑与工具函数
 │   ├── tools/                  # 纯函数算法实现
 │   │   ├── air-freight-calculator.ts
+│   │   ├── barcode-generator.ts
 │   │   ├── container-load-calculator.ts
 │   │   ├── currency-symbols.ts
+│   │   ├── data/               # 国家与节假日 JSON 数据资产
 │   │   ├── customs-cost-calculator.ts
 │   │   ├── export-tax-rebate-calculator.ts
 │   │   ├── express-channel-comparison.ts
@@ -218,6 +226,11 @@ Globokit/
 │   │   ├── pallet-load-calculator.ts
 │   │   ├── pinyin.ts
 │   │   ├── quote-calculator.ts
+│   │   ├── registry-barcode.ts
+│   │   ├── registry-finance.ts
+│   │   ├── registry-general.ts
+│   │   ├── registry-logistics.ts
+│   │   ├── registry-types.ts
 │   │   ├── registry.ts
 │   │   ├── registry-ui.ts
 │   │   ├── rmb-converter.ts
@@ -228,6 +241,8 @@ Globokit/
 │   └── utils.ts                # 通用工具 (cn 类名合并)
 ├── public/                     # 静态资源
 │   └── favicon.ico
+├── scripts/
+│   └── validate-tool-data.cjs  # 国家与节假日数据契约校验
 ├── next.config.js              # Next.js 配置
 ├── package.json                # 项目依赖配置
 ├── postcss.config.js           # PostCSS 配置

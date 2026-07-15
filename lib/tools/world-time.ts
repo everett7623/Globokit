@@ -1,10 +1,17 @@
 // 名称: 世界时间计算函数
 // 描述: 处理不同时区的时间转换与实时更新逻辑
 // 路径: Globokit/lib/tools/world-time.ts
-// 作者: Jensfrank
-// 更新时间: 2026-07-06
+// 作者: wwj
+// 更新时间: 2026-07-15
 
 import { COUNTRY_DATA } from './global-country-info'
+
+export {
+  getBestMeetingTime,
+  getNextBusinessHours,
+  getTimeDifference,
+  getTimeZoneOffset,
+} from './world-time-calculations'
 
 export interface WorldCity {
   name: string
@@ -69,38 +76,6 @@ export function isValidTimezone(timezone: string): boolean {
 }
 
 /**
- * 获取时区偏移量（使用 Intl.DateTimeFormat 精确计算，支持DST和亚小时精度）
- * @param timezone 时区标识符
- * @returns UTC偏移量字符串 (例如: +08:00, +05:30, +05:45)，无效时区返回空字符串
- */
-export function getTimeZoneOffset(timezone: string): string {
-  try {
-    const formatter = new Intl.DateTimeFormat('en-US', {
-      timeZone: timezone,
-      timeZoneName: 'longOffset'
-    })
-    const parts = formatter.formatToParts(new Date())
-    const tzPart = parts.find(p => p.type === 'timeZoneName')
-    if (!tzPart) return ''
-    
-    const value = tzPart.value // e.g. "GMT+05:30", "GMT-05:00", "GMT"
-    if (value === 'GMT') return '+00:00'
-    
-    // Parse "GMT+05:30" → "+05:30"
-    const match = value.match(/^GMT([+-])(\d{1,2})(?::(\d{2}))?$/)
-    if (!match) return '+00:00'
-    
-    const sign = match[1]
-    const hours = match[2].padStart(2, '0')
-    const minutes = (match[3] || '00').padStart(2, '0')
-    
-    return `${sign}${hours}:${minutes}`
-  } catch {
-    return '' // Invalid timezone - caller handles omission
-  }
-}
-
-/**
  * 判断是否为工作时间
  * @param date 当地时间的Date对象
  * @returns 是否在工作时间内 (周一至周五 9:00-18:00)
@@ -119,29 +94,6 @@ export function isBusinessHours(date: Date): boolean {
 }
 
 /**
- * 计算两个时区之间的时差（使用 Intl.DateTimeFormat 精确计算，0.25小时精度）
- * @param timezone1 第一个时区
- * @param timezone2 第二个时区
- * @returns 时差（小时），0.25精度（15分钟粒度）
- */
-export function getTimeDifference(timezone1: string, timezone2: string): number {
-  const offset1 = getTimeZoneOffset(timezone1)
-  const offset2 = getTimeZoneOffset(timezone2)
-  
-  if (!offset1 || !offset2) return 0
-  
-  const parseOffset = (offset: string): number => {
-    const sign = offset[0] === '+' ? 1 : -1
-    const [hours, minutes] = offset.slice(1).split(':').map(Number)
-    return sign * (hours + minutes / 60)
-  }
-  
-  const diff = parseOffset(offset1) - parseOffset(offset2)
-  // Round to 0.25 precision (15-minute granularity)
-  return Math.round(diff * 4) / 4
-}
-
-/**
  * 获取时区的标准名称
  * @param timezone 时区标识符
  * @returns 时区的标准名称
@@ -156,89 +108,6 @@ export function getTimeZoneName(timezone: string): string {
   const timeZoneName = parts.find(part => part.type === 'timeZoneName')
   
   return timeZoneName?.value || timezone
-}
-
-/**
- * 获取最佳会议时间
- * @param timezones 参与者所在的时区列表
- * @returns 建议的会议时间段
- */
-export function getBestMeetingTime(timezones: string[]): {
-  start: number
-  end: number
-  score: number
-}[] {
-  const meetingTimes: { start: number; end: number; score: number }[] = []
-  
-  // 检查每个小时
-  for (let hour = 0; hour < 24; hour++) {
-    let score = 0
-    let validForAll = true
-    
-    for (const timezone of timezones) {
-      const now = new Date()
-      now.setHours(hour, 0, 0, 0)
-      
-      const localTime = new Date(now.toLocaleString('en-US', { timeZone: timezone }))
-      const localHour = localTime.getHours()
-      
-      // 评分规则
-      if (localHour >= 9 && localHour < 12) {
-        score += 3 // 上午最佳
-      } else if (localHour >= 14 && localHour < 17) {
-        score += 2 // 下午次佳
-      } else if (localHour >= 8 && localHour < 9) {
-        score += 1 // 早上可接受
-      } else if (localHour >= 17 && localHour < 19) {
-        score += 1 // 傍晚可接受
-      } else if (localHour < 7 || localHour >= 22) {
-        validForAll = false // 太早或太晚
-        break
-      }
-    }
-    
-    if (validForAll && score > 0) {
-      meetingTimes.push({
-        start: hour,
-        end: (hour + 1) % 24,
-        score: score / timezones.length
-      })
-    }
-  }
-  
-  // 按评分排序
-  return meetingTimes.sort((a, b) => b.score - a.score).slice(0, 3)
-}
-
-/**
- * 获取下一个工作时间
- * @param timezone 时区
- * @returns 下一个工作时间的描述
- */
-export function getNextBusinessHours(timezone: string): string {
-  const now = new Date()
-  const localTime = new Date(now.toLocaleString('en-US', { timeZone: timezone }))
-  
-  const hour = localTime.getHours()
-  const day = localTime.getDay()
-  
-  // 当前是工作时间
-  if (day >= 1 && day <= 5 && hour >= 9 && hour < 18) {
-    return '当前为工作时间'
-  }
-  
-  // 工作日但不在工作时间
-  if (day >= 1 && day <= 5) {
-    if (hour < 9) {
-      return `今天 9:00 开始工作`
-    } else {
-      return `明天 9:00 开始工作`
-    }
-  }
-  
-  // 周末
-  let daysUntilMonday = day === 0 ? 1 : 8 - day
-  return `${daysUntilMonday}天后（周一）9:00 开始工作`
 }
 
 /**

@@ -1,0 +1,765 @@
+{
+  "US": {
+    "name": "美国",
+    "flag": "🇺🇸",
+    "timezone": "America/New_York",
+    "currency": "USD",
+    "region": "北美"
+  },
+  "CA": {
+    "name": "加拿大",
+    "flag": "🇨🇦",
+    "timezone": "America/Toronto",
+    "currency": "CAD",
+    "region": "北美"
+  },
+  "MX": {
+    "name": "墨西哥",
+    "flag": "🇲🇽",
+    "timezone": "America/Mexico_City",
+    "currency": "MXN",
+    "region": "北美"
+  },
+  "GB": {
+    "name": "英国",
+    "flag": "🇬🇧",
+    "timezone": "Europe/London",
+    "currency": "GBP",
+    "region": "西欧"
+  },
+  "DE": {
+    "name": "德国",
+    "flag": "🇩🇪",
+    "timezone": "Europe/Berlin",
+    "currency": "EUR",
+    "region": "西欧"
+  },
+  "FR": {
+    "name": "法国",
+    "flag": "🇫🇷",
+    "timezone": "Europe/Paris",
+    "currency": "EUR",
+    "region": "西欧"
+  },
+  "IT": {
+    "name": "意大利",
+    "flag": "🇮🇹",
+    "timezone": "Europe/Rome",
+    "currency": "EUR",
+    "region": "西欧"
+  },
+  "ES": {
+    "name": "西班牙",
+    "flag": "🇪🇸",
+    "timezone": "Europe/Madrid",
+    "currency": "EUR",
+    "region": "西欧"
+  },
+  "NL": {
+    "name": "荷兰",
+    "flag": "🇳🇱",
+    "timezone": "Europe/Amsterdam",
+    "currency": "EUR",
+    "region": "西欧"
+  },
+  "BE": {
+    "name": "比利时",
+    "flag": "🇧🇪",
+    "timezone": "Europe/Brussels",
+    "currency": "EUR",
+    "region": "西欧"
+  },
+  "CH": {
+    "name": "瑞士",
+    "flag": "🇨🇭",
+    "timezone": "Europe/Zurich",
+    "currency": "CHF",
+    "region": "西欧"
+  },
+  "AT": {
+    "name": "奥地利",
+    "flag": "🇦🇹",
+    "timezone": "Europe/Vienna",
+    "currency": "EUR",
+    "region": "西欧"
+  },
+  "IE": {
+    "name": "爱尔兰",
+    "flag": "🇮🇪",
+    "timezone": "Europe/Dublin",
+    "currency": "EUR",
+    "region": "西欧"
+  },
+  "LU": {
+    "name": "卢森堡",
+    "flag": "🇱🇺",
+    "timezone": "Europe/Luxembourg",
+    "currency": "EUR",
+    "region": "西欧"
+  },
+  "SE": {
+    "name": "瑞典",
+    "flag": "🇸🇪",
+    "timezone": "UTC+1",
+    "currency": "SEK",
+    "region": "北欧"
+  },
+  "NO": {
+    "name": "挪威",
+    "flag": "🇳🇴",
+    "timezone": "UTC+1",
+    "currency": "NOK",
+    "region": "北欧"
+  },
+  "DK": {
+    "name": "丹麦",
+    "flag": "🇩🇰",
+    "timezone": "UTC+1",
+    "currency": "DKK",
+    "region": "北欧"
+  },
+  "FI": {
+    "name": "芬兰",
+    "flag": "🇫🇮",
+    "timezone": "UTC+2",
+    "currency": "EUR",
+    "region": "北欧"
+  },
+  "IS": {
+    "name": "冰岛",
+    "flag": "🇮🇸",
+    "timezone": "UTC+0",
+    "currency": "ISK",
+    "region": "北欧"
+  },
+  "GR": {
+    "name": "希腊",
+    "flag": "🇬🇷",
+    "timezone": "UTC+2",
+    "currency": "EUR",
+    "region": "南欧"
+  },
+  "PT": {
+    "name": "葡萄牙",
+    "flag": "🇵🇹",
+    "timezone": "UTC+0",
+    "currency": "EUR",
+    "region": "南欧"
+  },
+  "MT": {
+    "name": "马耳他",
+    "flag": "🇲🇹",
+    "timezone": "UTC+1",
+    "currency": "EUR",
+    "region": "南欧"
+  },
+  "CY": {
+    "name": "塞浦路斯",
+    "flag": "🇨🇾",
+    "timezone": "UTC+2",
+    "currency": "EUR",
+    "region": "南欧"
+  },
+  "PL": {
+    "name": "波兰",
+    "flag": "🇵🇱",
+    "timezone": "UTC+1",
+    "currency": "PLN",
+    "region": "东欧"
+  },
+  "CZ": {
+    "name": "捷克",
+    "flag": "🇨🇿",
+    "timezone": "UTC+1",
+    "currency": "CZK",
+    "region": "东欧"
+  },
+  "HU": {
+    "name": "匈牙利",
+    "flag": "🇭🇺",
+    "timezone": "UTC+1",
+    "currency": "HUF",
+    "region": "东欧"
+  },
+  "RO": {
+    "name": "罗马尼亚",
+    "flag": "🇷🇴",
+    "timezone": "UTC+2",
+    "currency": "RON",
+    "region": "东欧"
+  },
+  "BG": {
+    "name": "保加利亚",
+    "flag": "🇧🇬",
+    "timezone": "UTC+2",
+    "currency": "BGN",
+    "region": "东欧"
+  },
+  "SK": {
+    "name": "斯洛伐克",
+    "flag": "🇸🇰",
+    "timezone": "UTC+1",
+    "currency": "EUR",
+    "region": "东欧"
+  },
+  "HR": {
+    "name": "克罗地亚",
+    "flag": "🇭🇷",
+    "timezone": "UTC+1",
+    "currency": "EUR",
+    "region": "东欧"
+  },
+  "SI": {
+    "name": "斯洛文尼亚",
+    "flag": "🇸🇮",
+    "timezone": "UTC+1",
+    "currency": "EUR",
+    "region": "东欧"
+  },
+  "LT": {
+    "name": "立陶宛",
+    "flag": "🇱🇹",
+    "timezone": "UTC+2",
+    "currency": "EUR",
+    "region": "东欧"
+  },
+  "LV": {
+    "name": "拉脱维亚",
+    "flag": "🇱🇻",
+    "timezone": "UTC+2",
+    "currency": "EUR",
+    "region": "东欧"
+  },
+  "EE": {
+    "name": "爱沙尼亚",
+    "flag": "🇪🇪",
+    "timezone": "UTC+2",
+    "currency": "EUR",
+    "region": "东欧"
+  },
+  "RU": {
+    "name": "俄罗斯",
+    "flag": "🇷🇺",
+    "timezone": "UTC+3",
+    "currency": "RUB",
+    "region": "独联体"
+  },
+  "UA": {
+    "name": "乌克兰",
+    "flag": "🇺🇦",
+    "timezone": "UTC+2",
+    "currency": "UAH",
+    "region": "独联体"
+  },
+  "BY": {
+    "name": "白俄罗斯",
+    "flag": "🇧🇾",
+    "timezone": "UTC+3",
+    "currency": "BYN",
+    "region": "独联体"
+  },
+  "KZ": {
+    "name": "哈萨克斯坦",
+    "flag": "🇰🇿",
+    "timezone": "UTC+6",
+    "currency": "KZT",
+    "region": "独联体"
+  },
+  "JP": {
+    "name": "日本",
+    "flag": "🇯🇵",
+    "timezone": "UTC+9",
+    "currency": "JPY",
+    "region": "东亚"
+  },
+  "KR": {
+    "name": "韩国",
+    "flag": "🇰🇷",
+    "timezone": "UTC+9",
+    "currency": "KRW",
+    "region": "东亚"
+  },
+  "HK": {
+    "name": "中国香港",
+    "flag": "🇭🇰",
+    "timezone": "UTC+8",
+    "currency": "HKD",
+    "region": "东亚"
+  },
+  "TW": {
+    "name": "中国台湾",
+    "flag": "🇹🇼",
+    "timezone": "UTC+8",
+    "currency": "TWD",
+    "region": "东亚"
+  },
+  "MO": {
+    "name": "中国澳门",
+    "flag": "🇲🇴",
+    "timezone": "UTC+8",
+    "currency": "MOP",
+    "region": "东亚"
+  },
+  "SG": {
+    "name": "新加坡",
+    "flag": "🇸🇬",
+    "timezone": "UTC+8",
+    "currency": "SGD",
+    "region": "东南亚"
+  },
+  "MY": {
+    "name": "马来西亚",
+    "flag": "🇲🇾",
+    "timezone": "UTC+8",
+    "currency": "MYR",
+    "region": "东南亚"
+  },
+  "TH": {
+    "name": "泰国",
+    "flag": "🇹🇭",
+    "timezone": "UTC+7",
+    "currency": "THB",
+    "region": "东南亚"
+  },
+  "ID": {
+    "name": "印度尼西亚",
+    "flag": "🇮🇩",
+    "timezone": "UTC+7",
+    "currency": "IDR",
+    "region": "东南亚"
+  },
+  "PH": {
+    "name": "菲律宾",
+    "flag": "🇵🇭",
+    "timezone": "UTC+8",
+    "currency": "PHP",
+    "region": "东南亚"
+  },
+  "VN": {
+    "name": "越南",
+    "flag": "🇻🇳",
+    "timezone": "UTC+7",
+    "currency": "VND",
+    "region": "东南亚"
+  },
+  "MM": {
+    "name": "缅甸",
+    "flag": "🇲🇲",
+    "timezone": "UTC+6:30",
+    "currency": "MMK",
+    "region": "东南亚"
+  },
+  "KH": {
+    "name": "柬埔寨",
+    "flag": "🇰🇭",
+    "timezone": "UTC+7",
+    "currency": "KHR",
+    "region": "东南亚"
+  },
+  "LA": {
+    "name": "老挝",
+    "flag": "🇱🇦",
+    "timezone": "UTC+7",
+    "currency": "LAK",
+    "region": "东南亚"
+  },
+  "BN": {
+    "name": "文莱",
+    "flag": "🇧🇳",
+    "timezone": "UTC+8",
+    "currency": "BND",
+    "region": "东南亚"
+  },
+  "IN": {
+    "name": "印度",
+    "flag": "🇮🇳",
+    "timezone": "UTC+5:30",
+    "currency": "INR",
+    "region": "南亚"
+  },
+  "PK": {
+    "name": "巴基斯坦",
+    "flag": "🇵🇰",
+    "timezone": "UTC+5",
+    "currency": "PKR",
+    "region": "南亚"
+  },
+  "BD": {
+    "name": "孟加拉国",
+    "flag": "🇧🇩",
+    "timezone": "UTC+6",
+    "currency": "BDT",
+    "region": "南亚"
+  },
+  "LK": {
+    "name": "斯里兰卡",
+    "flag": "🇱🇰",
+    "timezone": "UTC+5:30",
+    "currency": "LKR",
+    "region": "南亚"
+  },
+  "NP": {
+    "name": "尼泊尔",
+    "flag": "🇳🇵",
+    "timezone": "UTC+5:45",
+    "currency": "NPR",
+    "region": "南亚"
+  },
+  "AE": {
+    "name": "阿联酋",
+    "flag": "🇦🇪",
+    "timezone": "UTC+4",
+    "currency": "AED",
+    "region": "中东"
+  },
+  "SA": {
+    "name": "沙特阿拉伯",
+    "flag": "🇸🇦",
+    "timezone": "UTC+3",
+    "currency": "SAR",
+    "region": "中东"
+  },
+  "IL": {
+    "name": "以色列",
+    "flag": "🇮🇱",
+    "timezone": "UTC+2",
+    "currency": "ILS",
+    "region": "中东"
+  },
+  "TR": {
+    "name": "土耳其",
+    "flag": "🇹🇷",
+    "timezone": "UTC+3",
+    "currency": "TRY",
+    "region": "中东"
+  },
+  "EG": {
+    "name": "埃及",
+    "flag": "🇪🇬",
+    "timezone": "UTC+2",
+    "currency": "EGP",
+    "region": "中东"
+  },
+  "IR": {
+    "name": "伊朗",
+    "flag": "🇮🇷",
+    "timezone": "UTC+3:30",
+    "currency": "IRR",
+    "region": "中东"
+  },
+  "IQ": {
+    "name": "伊拉克",
+    "flag": "🇮🇶",
+    "timezone": "UTC+3",
+    "currency": "IQD",
+    "region": "中东"
+  },
+  "JO": {
+    "name": "约旦",
+    "flag": "🇯🇴",
+    "timezone": "UTC+2",
+    "currency": "JOD",
+    "region": "中东"
+  },
+  "KW": {
+    "name": "科威特",
+    "flag": "🇰🇼",
+    "timezone": "UTC+3",
+    "currency": "KWD",
+    "region": "中东"
+  },
+  "QA": {
+    "name": "卡塔尔",
+    "flag": "🇶🇦",
+    "timezone": "UTC+3",
+    "currency": "QAR",
+    "region": "中东"
+  },
+  "BH": {
+    "name": "巴林",
+    "flag": "🇧🇭",
+    "timezone": "UTC+3",
+    "currency": "BHD",
+    "region": "中东"
+  },
+  "OM": {
+    "name": "阿曼",
+    "flag": "🇴🇲",
+    "timezone": "UTC+4",
+    "currency": "OMR",
+    "region": "中东"
+  },
+  "LB": {
+    "name": "黎巴嫩",
+    "flag": "🇱🇧",
+    "timezone": "UTC+2",
+    "currency": "LBP",
+    "region": "中东"
+  },
+  "AU": {
+    "name": "澳大利亚",
+    "flag": "🇦🇺",
+    "timezone": "UTC+10",
+    "currency": "AUD",
+    "region": "大洋洲"
+  },
+  "NZ": {
+    "name": "新西兰",
+    "flag": "🇳🇿",
+    "timezone": "UTC+12",
+    "currency": "NZD",
+    "region": "大洋洲"
+  },
+  "FJ": {
+    "name": "斐济",
+    "flag": "🇫🇯",
+    "timezone": "UTC+12",
+    "currency": "FJD",
+    "region": "大洋洲"
+  },
+  "PG": {
+    "name": "巴布亚新几内亚",
+    "flag": "🇵🇬",
+    "timezone": "UTC+10",
+    "currency": "PGK",
+    "region": "大洋洲"
+  },
+  "BR": {
+    "name": "巴西",
+    "flag": "🇧🇷",
+    "timezone": "UTC-3",
+    "currency": "BRL",
+    "region": "南美"
+  },
+  "AR": {
+    "name": "阿根廷",
+    "flag": "🇦🇷",
+    "timezone": "UTC-3",
+    "currency": "ARS",
+    "region": "南美"
+  },
+  "CL": {
+    "name": "智利",
+    "flag": "🇨🇱",
+    "timezone": "UTC-3",
+    "currency": "CLP",
+    "region": "南美"
+  },
+  "CO": {
+    "name": "哥伦比亚",
+    "flag": "🇨🇴",
+    "timezone": "UTC-5",
+    "currency": "COP",
+    "region": "南美"
+  },
+  "PE": {
+    "name": "秘鲁",
+    "flag": "🇵🇪",
+    "timezone": "UTC-5",
+    "currency": "PEN",
+    "region": "南美"
+  },
+  "VE": {
+    "name": "委内瑞拉",
+    "flag": "🇻🇪",
+    "timezone": "UTC-4",
+    "currency": "VES",
+    "region": "南美"
+  },
+  "EC": {
+    "name": "厄瓜多尔",
+    "flag": "🇪🇨",
+    "timezone": "UTC-5",
+    "currency": "USD",
+    "region": "南美"
+  },
+  "UY": {
+    "name": "乌拉圭",
+    "flag": "🇺🇾",
+    "timezone": "UTC-3",
+    "currency": "UYU",
+    "region": "南美"
+  },
+  "PY": {
+    "name": "巴拉圭",
+    "flag": "🇵🇾",
+    "timezone": "UTC-3",
+    "currency": "PYG",
+    "region": "南美"
+  },
+  "BO": {
+    "name": "玻利维亚",
+    "flag": "🇧🇴",
+    "timezone": "UTC-4",
+    "currency": "BOB",
+    "region": "南美"
+  },
+  "PA": {
+    "name": "巴拿马",
+    "flag": "🇵🇦",
+    "timezone": "UTC-5",
+    "currency": "PAB",
+    "region": "中美洲"
+  },
+  "CR": {
+    "name": "哥斯达黎加",
+    "flag": "🇨🇷",
+    "timezone": "UTC-6",
+    "currency": "CRC",
+    "region": "中美洲"
+  },
+  "GT": {
+    "name": "危地马拉",
+    "flag": "🇬🇹",
+    "timezone": "UTC-6",
+    "currency": "GTQ",
+    "region": "中美洲"
+  },
+  "SV": {
+    "name": "萨尔瓦多",
+    "flag": "🇸🇻",
+    "timezone": "UTC-6",
+    "currency": "USD",
+    "region": "中美洲"
+  },
+  "HN": {
+    "name": "洪都拉斯",
+    "flag": "🇭🇳",
+    "timezone": "UTC-6",
+    "currency": "HNL",
+    "region": "中美洲"
+  },
+  "NI": {
+    "name": "尼加拉瓜",
+    "flag": "🇳🇮",
+    "timezone": "UTC-6",
+    "currency": "NIO",
+    "region": "中美洲"
+  },
+  "CU": {
+    "name": "古巴",
+    "flag": "🇨🇺",
+    "timezone": "UTC-5",
+    "currency": "CUP",
+    "region": "加勒比"
+  },
+  "DO": {
+    "name": "多米尼加",
+    "flag": "🇩🇴",
+    "timezone": "UTC-4",
+    "currency": "DOP",
+    "region": "加勒比"
+  },
+  "JM": {
+    "name": "牙买加",
+    "flag": "🇯🇲",
+    "timezone": "UTC-5",
+    "currency": "JMD",
+    "region": "加勒比"
+  },
+  "TT": {
+    "name": "特立尼达和多巴哥",
+    "flag": "🇹🇹",
+    "timezone": "UTC-4",
+    "currency": "TTD",
+    "region": "加勒比"
+  },
+  "ZA": {
+    "name": "南非",
+    "flag": "🇿🇦",
+    "timezone": "UTC+2",
+    "currency": "ZAR",
+    "region": "非洲"
+  },
+  "NG": {
+    "name": "尼日利亚",
+    "flag": "🇳🇬",
+    "timezone": "UTC+1",
+    "currency": "NGN",
+    "region": "非洲"
+  },
+  "KE": {
+    "name": "肯尼亚",
+    "flag": "🇰🇪",
+    "timezone": "UTC+3",
+    "currency": "KES",
+    "region": "非洲"
+  },
+  "MA": {
+    "name": "摩洛哥",
+    "flag": "🇲🇦",
+    "timezone": "UTC+1",
+    "currency": "MAD",
+    "region": "非洲"
+  },
+  "GH": {
+    "name": "加纳",
+    "flag": "🇬🇭",
+    "timezone": "UTC+0",
+    "currency": "GHS",
+    "region": "非洲"
+  },
+  "ET": {
+    "name": "埃塞俄比亚",
+    "flag": "🇪🇹",
+    "timezone": "UTC+3",
+    "currency": "ETB",
+    "region": "非洲"
+  },
+  "TZ": {
+    "name": "坦桑尼亚",
+    "flag": "🇹🇿",
+    "timezone": "UTC+3",
+    "currency": "TZS",
+    "region": "非洲"
+  },
+  "UG": {
+    "name": "乌干达",
+    "flag": "🇺🇬",
+    "timezone": "UTC+3",
+    "currency": "UGX",
+    "region": "非洲"
+  },
+  "DZ": {
+    "name": "阿尔及利亚",
+    "flag": "🇩🇿",
+    "timezone": "UTC+1",
+    "currency": "DZD",
+    "region": "非洲"
+  },
+  "TN": {
+    "name": "突尼斯",
+    "flag": "🇹🇳",
+    "timezone": "UTC+1",
+    "currency": "TND",
+    "region": "非洲"
+  },
+  "ZW": {
+    "name": "津巴布韦",
+    "flag": "🇿🇼",
+    "timezone": "UTC+2",
+    "currency": "ZWL",
+    "region": "非洲"
+  },
+  "CM": {
+    "name": "喀麦隆",
+    "flag": "🇨🇲",
+    "timezone": "UTC+1",
+    "currency": "XAF",
+    "region": "非洲"
+  },
+  "CI": {
+    "name": "科特迪瓦",
+    "flag": "🇨🇮",
+    "timezone": "UTC+0",
+    "currency": "XOF",
+    "region": "非洲"
+  },
+  "SN": {
+    "name": "塞内加尔",
+    "flag": "🇸🇳",
+    "timezone": "UTC+0",
+    "currency": "XOF",
+    "region": "非洲"
+  }
+}

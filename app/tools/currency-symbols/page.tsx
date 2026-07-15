@@ -1,43 +1,17 @@
 // 名称: 全球货币符号大全
 // 描述: 查看和复制全球各国货币符号，便于外贸报价和合同编写
 // 路径: Globokit/app/tools/currency-symbols/page.tsx
-// 作者: Jensfrank
-// 更新时间: 2026-07-06
+// 作者: wwj
+// 更新时间: 2026-07-15
 
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { CurrencyControls } from './currency-controls'
+import { CurrencyReference, CurrencyStats } from './currency-info-panels'
+import { CurrencyList } from './currency-list'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Label } from '@/components/ui/label'
-import { 
-  Copy, 
-  Check, 
-  Search, 
-  Coins, 
-  Star, 
-  StarOff,
-  TrendingUp,
-  CircleDollarSign,
-  Info
-} from 'lucide-react'
-import { getCurrencyData, formatCurrencyExample, CURRENCY_REGIONS } from '@/lib/tools/currency-symbols'
-
-interface Currency {
-  code: string
-  name: string
-  nameEn: string
-  symbol: string
-  country: string
-  countryEn: string
-  region: string
-  decimals: number
-  popular?: boolean
-  trading?: boolean
-}
+import { getCurrencyData, type Currency } from '@/lib/tools/currency-symbols'
 
 export default function CurrencySymbolsPage() {
   const [currencies] = useState<Currency[]>(() => getCurrencyData())
@@ -47,371 +21,81 @@ export default function CurrencySymbolsPage() {
   const [favorites, setFavorites] = useState<string[]>([])
   const [showOnlyPopular, setShowOnlyPopular] = useState(false)
 
-  // 从localStorage加载收藏
   useEffect(() => {
     const saved = localStorage.getItem('currencyFavorites')
-    if (saved) {
-      setFavorites(JSON.parse(saved))
-    }
+    if (saved) setFavorites(JSON.parse(saved))
   }, [])
 
-  // 复制功能
   const copyToClipboard = (text: string, code: string) => {
     navigator.clipboard.writeText(text)
     setCopiedCode(code)
     setTimeout(() => setCopiedCode(null), 2000)
   }
-
-  // 切换收藏
   const toggleFavorite = (code: string) => {
-    const newFavorites = favorites.includes(code)
-      ? favorites.filter(f => f !== code)
-      : [...favorites, code]
-    
+    const newFavorites = favorites.includes(code) ? favorites.filter((favorite) => favorite !== code) : [...favorites, code]
     setFavorites(newFavorites)
     localStorage.setItem('currencyFavorites', JSON.stringify(newFavorites))
   }
-
-  // 过滤货币
-  const filteredCurrencies = currencies.filter(currency => {
-    const matchesSearch = 
-      currency.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      currency.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      currency.nameEn.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      currency.country.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      currency.countryEn.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      currency.symbol.includes(searchTerm)
-
-    const matchesRegion = 
-      selectedRegion === 'all' || 
-      (selectedRegion === 'favorites' && favorites.includes(currency.code)) ||
-      currency.region === selectedRegion
-
-    const matchesPopular = !showOnlyPopular || currency.popular
-
-    return matchesSearch && matchesRegion && matchesPopular
+  const normalizedSearchTerm = searchTerm.toLowerCase()
+  const filteredCurrencies = currencies.filter((currency) => {
+    const matchesSearch = currency.code.toLowerCase().includes(normalizedSearchTerm)
+      || currency.name.toLowerCase().includes(normalizedSearchTerm)
+      || currency.nameEn.toLowerCase().includes(normalizedSearchTerm)
+      || currency.country.toLowerCase().includes(normalizedSearchTerm)
+      || currency.countryEn.toLowerCase().includes(normalizedSearchTerm)
+      || currency.symbol.includes(searchTerm)
+    const matchesRegion = selectedRegion === 'all'
+      || (selectedRegion === 'favorites' && favorites.includes(currency.code))
+      || currency.region === selectedRegion
+    return matchesSearch && matchesRegion && (!showOnlyPopular || currency.popular)
   })
-
-  // 按地区分组
-  const groupedCurrencies = filteredCurrencies.reduce((acc, currency) => {
-    const key = currency.region
-    if (!acc[key]) {
-      acc[key] = []
-    }
-    acc[key].push(currency)
-    return acc
-  }, {} as Record<string, Currency[]>)
-
-  // 统计信息
-  const popularCount = currencies.filter(c => c.popular).length
-  const tradingCount = currencies.filter(c => c.trading).length
+  const groupedCurrencies = filteredCurrencies.reduce<Record<string, Currency[]>>((groups, currency) => {
+    if (!groups[currency.region]) groups[currency.region] = []
+    groups[currency.region].push(currency)
+    return groups
+  }, {})
 
   return (
     <>
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">全球货币符号大全</h1>
-        <p className="text-muted-foreground">
-          查看和复制全球货币符号，覆盖主要贸易国家和长尾市场
-        </p>
+        <p className="text-muted-foreground">查看和复制全球货币符号，覆盖主要贸易国家和长尾市场</p>
       </div>
-
-      {/* 统计卡片 */}
-      <div className="grid gap-4 mb-6 md:grid-cols-4">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
-              <CircleDollarSign className="h-4 w-4" />
-              货币总数
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{currencies.length}</div>
-            <p className="text-xs text-muted-foreground">种货币</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
-              <TrendingUp className="h-4 w-4" />
-              主要货币
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{popularCount}</div>
-            <p className="text-xs text-muted-foreground">种常用</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
-              <Star className="h-4 w-4" />
-              贸易货币
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{tradingCount}</div>
-            <p className="text-xs text-muted-foreground">种重点结算</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
-              <Star className="h-4 w-4" />
-              已收藏
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{favorites.length}</div>
-            <p className="text-xs text-muted-foreground">种货币</p>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* 主要功能区 */}
+      <CurrencyStats
+        totalCount={currencies.length}
+        popularCount={currencies.filter((currency) => currency.popular).length}
+        tradingCount={currencies.filter((currency) => currency.trading).length}
+        favoriteCount={favorites.length}
+      />
       <Card>
         <CardHeader>
           <CardTitle>货币符号查询</CardTitle>
-          <CardDescription>
-            查找和复制全球各种货币的符号、代码和适用国家
-          </CardDescription>
+          <CardDescription>查找和复制全球各种货币的符号、代码和适用国家</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          {/* 地区筛选 */}
-          <div className="space-y-2">
-            <Label>地区筛选</Label>
-            <Tabs value={selectedRegion} onValueChange={setSelectedRegion}>
-              <div className="flex items-center justify-between gap-4">
-                <TabsList className="flex-wrap h-auto">
-                  <TabsTrigger value="all">全部</TabsTrigger>
-                  <TabsTrigger value="favorites">
-                    收藏 {favorites.length > 0 && `(${favorites.length})`}
-                  </TabsTrigger>
-                  {Object.entries(CURRENCY_REGIONS).map(([key, name]) => (
-                    <TabsTrigger key={key} value={key}>{name}</TabsTrigger>
-                  ))}
-                </TabsList>
-                
-                <Button
-                  variant={showOnlyPopular ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setShowOnlyPopular(!showOnlyPopular)}
-                  className="shrink-0"
-                >
-                  <TrendingUp className="h-4 w-4 mr-1" />
-                  主要货币
-                </Button>
-              </div>
-            </Tabs>
-          </div>
-
-          {/* 搜索框 */}
-          <div className="space-y-2">
-            <Label htmlFor="search">搜索货币</Label>
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-              <Input
-                id="search"
-                type="text"
-                placeholder="搜索货币代码、名称、符号或国家..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
-              />
-            </div>
-          </div>
-
-          {/* 货币列表 */}
+          <CurrencyControls
+            selectedRegion={selectedRegion}
+            searchTerm={searchTerm}
+            favoriteCount={favorites.length}
+            showOnlyPopular={showOnlyPopular}
+            onRegionChange={setSelectedRegion}
+            onSearchChange={setSearchTerm}
+            onTogglePopular={() => setShowOnlyPopular((value) => !value)}
+          />
           <div className="space-y-6 max-h-[600px] overflow-y-auto">
-            {selectedRegion === 'favorites' && favorites.length === 0 ? (
-              <div className="text-center py-12">
-                <Star className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                <p className="text-muted-foreground">
-                  还没有收藏任何货币，点击星标收藏常用货币
-                </p>
-              </div>
-            ) : filteredCurrencies.length === 0 ? (
-              <div className="text-center py-12">
-                <Coins className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                <p className="text-muted-foreground">没有找到匹配的货币</p>
-              </div>
-            ) : (
-              Object.entries(groupedCurrencies).map(([region, regionCurrencies]) => (
-                <div key={region}>
-                  {selectedRegion === 'all' && (
-                    <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                      <Badge variant="outline">{CURRENCY_REGIONS[region] || region}</Badge>
-                      <span className="text-sm text-muted-foreground">
-                        ({regionCurrencies.length}种)
-                      </span>
-                    </h3>
-                  )}
-                  
-                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    {regionCurrencies.map((currency) => (
-                      <Card 
-                        key={currency.code}
-                        className={`overflow-hidden transition-all hover:shadow-lg ${
-                          favorites.includes(currency.code) ? 'ring-2 ring-yellow-400' : ''
-                        }`}
-                      >
-                        <CardHeader className="pb-3">
-                          <div className="flex items-start justify-between">
-                            <div className="flex-1">
-                              <CardTitle className="text-lg flex items-center gap-2">
-                                <span className="text-3xl font-bold text-primary">
-                                  {currency.symbol}
-                                </span>
-                                <span>{currency.code}</span>
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  className="ml-1 h-6 w-6 p-0"
-                                  onClick={() => toggleFavorite(currency.code)}
-                                >
-                                  {favorites.includes(currency.code) ? (
-                                    <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                                  ) : (
-                                    <StarOff className="h-4 w-4" />
-                                  )}
-                                </Button>
-                              </CardTitle>
-                              <CardDescription>
-                                {currency.name} ({currency.nameEn})
-                              </CardDescription>
-                            </div>
-                            <div className="flex gap-1">
-                              {currency.popular && (
-                                <Badge variant="default" className="bg-blue-500">
-                                  常用
-                                </Badge>
-                              )}
-                              {currency.trading && (
-                                <Badge variant="default" className="bg-green-500">
-                                  贸易
-                                </Badge>
-                              )}
-                            </div>
-                          </div>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="space-y-2">
-                            <div className="text-sm">
-                              <span className="text-muted-foreground">国家/地区：</span>
-                              <span className="font-medium break-words" title={`${currency.country} (${currency.countryEn})`}>
-                                {currency.country}
-                              </span>
-                            </div>
-                            <div className="text-sm">
-                              <span className="text-muted-foreground">示例：</span>
-                              <span className="font-mono">
-                                {formatCurrencyExample(currency.symbol, currency.decimals)}
-                              </span>
-                            </div>
-                            <div className="flex gap-2 mt-3">
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                className="flex-1"
-                                onClick={() => copyToClipboard(currency.symbol, currency.code + '-symbol')}
-                              >
-                                {copiedCode === currency.code + '-symbol' ? (
-                                  <>
-                                    <Check className="h-4 w-4 mr-1" />
-                                    已复制
-                                  </>
-                                ) : (
-                                  <>
-                                    <Copy className="h-4 w-4 mr-1" />
-                                    复制符号
-                                  </>
-                                )}
-                              </Button>
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                className="flex-1"
-                                onClick={() => copyToClipboard(currency.code, currency.code + '-code')}
-                              >
-                                {copiedCode === currency.code + '-code' ? (
-                                  <>
-                                    <Check className="h-4 w-4 mr-1" />
-                                    已复制
-                                  </>
-                                ) : (
-                                  <>
-                                    <Copy className="h-4 w-4 mr-1" />
-                                    复制代码
-                                  </>
-                                )}
-                              </Button>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              ))
-            )}
+            <CurrencyList
+              groupedCurrencies={groupedCurrencies}
+              filteredCount={filteredCurrencies.length}
+              selectedRegion={selectedRegion}
+              favorites={favorites}
+              copiedCode={copiedCode}
+              onToggleFavorite={toggleFavorite}
+              onCopy={copyToClipboard}
+            />
           </div>
         </CardContent>
       </Card>
-
-      {/* 示例展示 */}
-      <div className="grid gap-4 mt-6 md:grid-cols-2">
-        <Card className="bg-muted/50">
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Info className="h-5 w-5" />
-              常用货币示例
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="space-y-2 text-sm">
-              <div className="flex items-center justify-between p-2 rounded bg-background">
-                <span className="font-mono">USD ($)</span>
-                <span className="text-muted-foreground">→</span>
-                <span className="text-right flex-1 ml-2">$1,234.56</span>
-              </div>
-              <div className="flex items-center justify-between p-2 rounded bg-background">
-                <span className="font-mono">EUR (€)</span>
-                <span className="text-muted-foreground">→</span>
-                <span className="text-right flex-1 ml-2">€1.234,56</span>
-              </div>
-              <div className="flex items-center justify-between p-2 rounded bg-background">
-                <span className="font-mono">CNY (¥)</span>
-                <span className="text-muted-foreground">→</span>
-                <span className="text-right flex-1 ml-2">¥1,234.56</span>
-              </div>
-              <div className="flex items-center justify-between p-2 rounded bg-background">
-                <span className="font-mono">GBP (£)</span>
-                <span className="text-muted-foreground">→</span>
-                <span className="text-right flex-1 ml-2">£1,234.56</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-muted/50">
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Info className="h-5 w-5" />
-              使用说明
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2 text-sm text-muted-foreground">
-            <p>• 点击“复制符号”可快速复制货币符号到剪贴板</p>
-            <p>• 点击“复制代码”可复制ISO 4217标准货币代码</p>
-            <p>• 蓝色“常用”标签表示国际贸易中的主要结算货币</p>
-            <p>• 绿色“贸易”标签表示重要的国际贸易货币</p>
-            <p>• 收藏常用货币方便快速查找和使用</p>
-            <p>• 在合同中建议同时标注货币符号和代码，如：$100 USD</p>
-          </CardContent>
-        </Card>
-      </div>
+      <CurrencyReference />
     </>
   )
 }

@@ -99,6 +99,10 @@ export const TOOL_UI_CONFIG: Record<
     color: 'text-orange-500',
     bgColor: 'bg-orange-50',
   },
+  'barcode-generator': {
+    color: 'text-slate-700',
+    bgColor: 'bg-slate-100',
+  },
 }
 
 export const TOOL_BADGE_STYLES: Record<string, string> = {

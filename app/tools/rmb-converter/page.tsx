@@ -1,19 +1,19 @@
 // 名称: 人民币大写转换
 // 描述: 将数字金额转换为中文大写形式，适用于发票、合同等正式文件
 // 路径: Globokit/app/tools/rmb-converter/page.tsx
-// 作者: Jensfrank
-// 更新时间: 2026-01-08
+// 作者: wwj
+// 更新时间: 2026-07-15
 
 'use client'
 
 import { useState } from 'react'
+import { RmbReference, RmbStats } from './rmb-info-panels'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { numberToChinese } from '@/lib/tools/rmb-converter'
-import { Copy, Check, Info, Calculator, TrendingUp } from 'lucide-react'
+import { Copy, Check } from 'lucide-react'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 
 export default function RMBConverterPage() {
@@ -50,7 +50,7 @@ export default function RMBConverterPage() {
       setResult(converted)
       // 添加到历史记录（最多保留5条）
       setHistory(prev => [{amount: amount, result: converted}, ...prev.slice(0, 4)])
-    } catch (err) {
+    } catch {
       setError('转换出错，请重试')
       setResult('')
     }
@@ -79,47 +79,7 @@ export default function RMBConverterPage() {
         </p>
       </div>
 
-      {/* 统计卡片 */}
-      <div className="grid gap-4 mb-6 md:grid-cols-3">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
-              <Calculator className="h-4 w-4" />
-              今日转换
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{history.length}</div>
-            <p className="text-xs text-muted-foreground">次转换记录</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
-              <TrendingUp className="h-4 w-4" />
-              支持范围
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">千万亿</div>
-            <p className="text-xs text-muted-foreground">最大金额单位</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
-              <Info className="h-4 w-4" />
-              精确度
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">0.01</div>
-            <p className="text-xs text-muted-foreground">支持到分</p>
-          </CardContent>
-        </Card>
-      </div>
+      <RmbStats historyCount={history.length} />
 
       {/* 主要功能区 */}
       <Card>
@@ -238,58 +198,7 @@ export default function RMBConverterPage() {
         </CardContent>
       </Card>
 
-      {/* 示例展示 */}
-      <div className="grid gap-4 mt-6 md:grid-cols-2">
-        <Card className="bg-muted/50">
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Info className="h-5 w-5" />
-              转换示例
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="space-y-2 text-sm">
-              <div className="flex items-center justify-between p-2 rounded bg-background">
-                <span className="font-mono">123.45</span>
-                <span className="text-muted-foreground">→</span>
-                <span className="text-right flex-1 ml-2">人民币壹佰贰拾叁元肆角伍分</span>
-              </div>
-              <div className="flex items-center justify-between p-2 rounded bg-background">
-                <span className="font-mono">10000</span>
-                <span className="text-muted-foreground">→</span>
-                <span className="text-right flex-1 ml-2">人民币壹万元整</span>
-              </div>
-              <div className="flex items-center justify-between p-2 rounded bg-background">
-                <span className="font-mono">50000.5</span>
-                <span className="text-muted-foreground">→</span>
-                <span className="text-right flex-1 ml-2">人民币伍万元伍角</span>
-              </div>
-              <div className="flex items-center justify-between p-2 rounded bg-background">
-                <span className="font-mono">999999.99</span>
-                <span className="text-muted-foreground">→</span>
-                <span className="text-right flex-1 ml-2">人民币玖拾玖万玖仟玖佰玖拾玖元玖角玖分</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-muted/50">
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Info className="h-5 w-5" />
-              使用说明
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2 text-sm text-muted-foreground">
-            <p>• 支持小数点后两位（角、分）</p>
-            <p>• 最大支持千万亿级别的金额</p>
-            <p>• 自动添加“人民币”前缀和“元整”或“元X角X分”后缀</p>
-            <p>• 符合财务规范的大写格式</p>
-            <p>• 适用于支票、发票、合同等正式财务文件</p>
-            <p>• 转换结果可直接复制使用</p>
-          </CardContent>
-        </Card>
-      </div>
+      <RmbReference />
     </>
   )
 }

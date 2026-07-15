@@ -1,0 +1,9711 @@
+[
+  {
+    "name_cn": "中国",
+    "name_en": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "dial_code": "+86",
+    "capital_cn": "北京",
+    "capital_en": "Beijing",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".cn",
+    "timezone": "Asia/Shanghai",
+    "currency_code": "CNY",
+    "currency_name_cn": "人民币",
+    "currency_symbol": "¥",
+    "language_cn": [
+      "汉语",
+      "普通话"
+    ],
+    "language_en": [
+      "Chinese",
+      "Mandarin"
+    ],
+    "religion": [
+      "无宗教",
+      "佛教",
+      "道教",
+      "基督教"
+    ],
+    "area_km2": 9596961,
+    "population": 1411000000,
+    "major_ports": [
+      "上海港",
+      "宁波舟山港",
+      "深圳港",
+      "广州港",
+      "青岛港",
+      "天津港",
+      "大连港"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "交换名片时双手递接",
+      "初次见面握手即可",
+      "避免谈论政治敏感话题",
+      "商务宴请是建立关系的重要方式"
+    ],
+    "major_holidays": [
+      "春节(1-2月)",
+      "清明节(4月)",
+      "劳动节(5月1日)",
+      "端午节(5-6月)",
+      "中秋节(9-10月)",
+      "国庆节(10月1-7日)"
+    ],
+    "trade_notes": [
+      "注重建立长期合作关系",
+      "重视面子和人情",
+      "决策过程可能较长",
+      "合同细节需要仔细确认"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/C/I",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "日本",
+    "name_en": "Japan",
+    "iso2": "JP",
+    "iso3": "JPN",
+    "dial_code": "+81",
+    "capital_cn": "东京",
+    "capital_en": "Tokyo",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".jp",
+    "timezone": "Asia/Tokyo",
+    "currency_code": "JPY",
+    "currency_name_cn": "日元",
+    "currency_symbol": "¥",
+    "language_cn": [
+      "日语"
+    ],
+    "language_en": [
+      "Japanese"
+    ],
+    "religion": [
+      "神道教",
+      "佛教",
+      "无宗教"
+    ],
+    "area_km2": 377975,
+    "population": 125800000,
+    "major_ports": [
+      "东京港",
+      "横滨港",
+      "名古屋港",
+      "大阪港",
+      "神户港",
+      "千叶港"
+    ],
+    "business_hours": "周一至周五 9:00-17:00",
+    "business_etiquette": [
+      "交换名片(名刺)极其重要，双手递接",
+      "鞠躬是基本礼仪",
+      "避免直接说'不'",
+      "重视集体决策",
+      "守时是基本要求"
+    ],
+    "major_holidays": [
+      "新年(1月1-3日)",
+      "黄金周(4月末-5月初)",
+      "盂兰盆节(8月中旬)",
+      "体育节(10月第2个周一)"
+    ],
+    "trade_notes": [
+      "注重细节和品质",
+      "决策过程较慢但执行彻底",
+      "重视长期合作关系",
+      "偏好面对面会议"
+    ],
+    "driving_side": "left",
+    "power_plug": "A/B",
+    "voltage": "100V"
+  },
+  {
+    "name_cn": "韩国",
+    "name_en": "South Korea",
+    "iso2": "KR",
+    "iso3": "KOR",
+    "dial_code": "+82",
+    "capital_cn": "首尔",
+    "capital_en": "Seoul",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".kr",
+    "timezone": "Asia/Seoul",
+    "currency_code": "KRW",
+    "currency_name_cn": "韩元",
+    "currency_symbol": "₩",
+    "language_cn": [
+      "韩语"
+    ],
+    "language_en": [
+      "Korean"
+    ],
+    "religion": [
+      "无宗教",
+      "基督教",
+      "佛教"
+    ],
+    "area_km2": 100210,
+    "population": 51700000,
+    "major_ports": [
+      "釜山港",
+      "仁川港",
+      "光阳港",
+      "蔚山港"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "重视年龄和地位",
+      "交换名片用双手",
+      "避免直接拒绝",
+      "聚餐文化重要"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "春节(1-2月)",
+      "儿童节(5月5日)",
+      "光复节(8月15日)",
+      "中秋节(9-10月)"
+    ],
+    "trade_notes": [
+      "决策速度快",
+      "重视人际关系",
+      "加班文化普遍",
+      "等级观念较强"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "印度",
+    "name_en": "India",
+    "iso2": "IN",
+    "iso3": "IND",
+    "dial_code": "+91",
+    "capital_cn": "新德里",
+    "capital_en": "New Delhi",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".in",
+    "timezone": "Asia/Kolkata",
+    "currency_code": "INR",
+    "currency_name_cn": "印度卢比",
+    "currency_symbol": "₹",
+    "language_cn": [
+      "印地语",
+      "英语"
+    ],
+    "language_en": [
+      "Hindi",
+      "English"
+    ],
+    "religion": [
+      "印度教",
+      "伊斯兰教",
+      "基督教",
+      "锡克教"
+    ],
+    "area_km2": 3287263,
+    "population": 1380000000,
+    "major_ports": [
+      "孟买港",
+      "金奈港",
+      "加尔各答港",
+      "科钦港"
+    ],
+    "business_hours": "周一至周六 10:00-18:00",
+    "business_etiquette": [
+      "避免用左手",
+      "注意素食者较多",
+      "家庭和关系重要",
+      "时间观念较灵活"
+    ],
+    "major_holidays": [
+      "共和国日(1月26日)",
+      "洒红节(3月)",
+      "排灯节(10-11月)",
+      "独立日(8月15日)"
+    ],
+    "trade_notes": [
+      "谈判可能需要耐心",
+      "重视个人关系",
+      "等级制度明显",
+      "英语广泛使用"
+    ],
+    "driving_side": "left",
+    "power_plug": "C/D/M",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "新加坡",
+    "name_en": "Singapore",
+    "iso2": "SG",
+    "iso3": "SGP",
+    "dial_code": "+65",
+    "capital_cn": "新加坡",
+    "capital_en": "Singapore",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".sg",
+    "timezone": "Asia/Singapore",
+    "currency_code": "SGD",
+    "currency_name_cn": "新加坡元",
+    "currency_symbol": "S$",
+    "language_cn": [
+      "英语",
+      "中文",
+      "马来语",
+      "泰米尔语"
+    ],
+    "language_en": [
+      "English",
+      "Chinese",
+      "Malay",
+      "Tamil"
+    ],
+    "religion": [
+      "佛教",
+      "基督教",
+      "伊斯兰教",
+      "道教",
+      "印度教"
+    ],
+    "area_km2": 728,
+    "population": 5450000,
+    "major_ports": [
+      "新加坡港"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "准时非常重要",
+      "尊重多元文化",
+      "名片交换重要",
+      "着装正式"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "春节(1-2月)",
+      "开斋节",
+      "屠妖节",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "效率极高",
+      "法治严明",
+      "英语为商务语言",
+      "亚洲商务枢纽"
+    ],
+    "driving_side": "left",
+    "power_plug": "G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "泰国",
+    "name_en": "Thailand",
+    "iso2": "TH",
+    "iso3": "THA",
+    "dial_code": "+66",
+    "capital_cn": "曼谷",
+    "capital_en": "Bangkok",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".th",
+    "timezone": "Asia/Bangkok",
+    "currency_code": "THB",
+    "currency_name_cn": "泰铢",
+    "currency_symbol": "฿",
+    "language_cn": [
+      "泰语"
+    ],
+    "language_en": [
+      "Thai"
+    ],
+    "religion": [
+      "佛教",
+      "伊斯兰教"
+    ],
+    "area_km2": 513120,
+    "population": 69800000,
+    "major_ports": [
+      "曼谷港",
+      "林查班港"
+    ],
+    "business_hours": "周一至周五 8:30-17:30",
+    "business_etiquette": [
+      "避免触碰头部",
+      "尊重王室",
+      "保持微笑",
+      "避免当众批评"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "万佛节(2月)",
+      "宋干节(4月13-15日)",
+      "国王生日(7月28日)"
+    ],
+    "trade_notes": [
+      "重视面子",
+      "避免冲突",
+      "等级观念存在",
+      "礼物文化重要"
+    ],
+    "driving_side": "left",
+    "power_plug": "A/B/C",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "马来西亚",
+    "name_en": "Malaysia",
+    "iso2": "MY",
+    "iso3": "MYS",
+    "dial_code": "+60",
+    "capital_cn": "吉隆坡",
+    "capital_en": "Kuala Lumpur",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".my",
+    "timezone": "Asia/Kuala_Lumpur",
+    "currency_code": "MYR",
+    "currency_name_cn": "马来西亚林吉特",
+    "currency_symbol": "RM",
+    "language_cn": [
+      "马来语",
+      "英语",
+      "中文"
+    ],
+    "language_en": [
+      "Malay",
+      "English",
+      "Chinese"
+    ],
+    "religion": [
+      "伊斯兰教",
+      "佛教",
+      "基督教",
+      "印度教"
+    ],
+    "area_km2": 330803,
+    "population": 32400000,
+    "major_ports": [
+      "巴生港",
+      "槟城港",
+      "柔佛港"
+    ],
+    "business_hours": "周一至周五 9:00-17:00",
+    "business_etiquette": [
+      "尊重多元文化",
+      "避免左手",
+      "注意宗教差异",
+      "保持礼貌"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "春节(1-2月)",
+      "开斋节",
+      "屠妖节",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "英语广泛使用",
+      "关系网重要",
+      "决策较慢",
+      "注意种族敏感"
+    ],
+    "driving_side": "left",
+    "power_plug": "G",
+    "voltage": "240V"
+  },
+  {
+    "name_cn": "印度尼西亚",
+    "name_en": "Indonesia",
+    "iso2": "ID",
+    "iso3": "IDN",
+    "dial_code": "+62",
+    "capital_cn": "雅加达",
+    "capital_en": "Jakarta",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".id",
+    "timezone": "Asia/Jakarta",
+    "currency_code": "IDR",
+    "currency_name_cn": "印尼盾",
+    "currency_symbol": "Rp",
+    "language_cn": [
+      "印尼语"
+    ],
+    "language_en": [
+      "Indonesian"
+    ],
+    "religion": [
+      "伊斯兰教",
+      "基督教",
+      "印度教",
+      "佛教"
+    ],
+    "area_km2": 1904569,
+    "population": 273500000,
+    "major_ports": [
+      "丹戎不碌港",
+      "泗水港",
+      "三宝垄港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "避免左手",
+      "尊重等级",
+      "耐心重要",
+      "避免直接冲突"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "开斋节",
+      "宰牲节",
+      "独立日(8月17日)"
+    ],
+    "trade_notes": [
+      "关系优先",
+      "决策缓慢",
+      "避免施压",
+      "注意宗教习俗"
+    ],
+    "driving_side": "left",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "菲律宾",
+    "name_en": "Philippines",
+    "iso2": "PH",
+    "iso3": "PHL",
+    "dial_code": "+63",
+    "capital_cn": "马尼拉",
+    "capital_en": "Manila",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".ph",
+    "timezone": "Asia/Manila",
+    "currency_code": "PHP",
+    "currency_name_cn": "菲律宾比索",
+    "currency_symbol": "₱",
+    "language_cn": [
+      "菲律宾语",
+      "英语"
+    ],
+    "language_en": [
+      "Filipino",
+      "English"
+    ],
+    "religion": [
+      "天主教",
+      "基督教",
+      "伊斯兰教"
+    ],
+    "area_km2": 300000,
+    "population": 109600000,
+    "major_ports": [
+      "马尼拉港",
+      "苏比克港",
+      "宿务港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "重视人际关系",
+      "避免当众批评",
+      "时间观念灵活",
+      "尊重年长者"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "圣周(3-4月)",
+      "独立日(6月12日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "英语优势",
+      "关系网重要",
+      "避免冲突",
+      "家庭价值观强"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B/C",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "越南",
+    "name_en": "Vietnam",
+    "iso2": "VN",
+    "iso3": "VNM",
+    "dial_code": "+84",
+    "capital_cn": "河内",
+    "capital_en": "Hanoi",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".vn",
+    "timezone": "Asia/Ho_Chi_Minh",
+    "currency_code": "VND",
+    "currency_name_cn": "越南盾",
+    "currency_symbol": "₫",
+    "language_cn": [
+      "越南语"
+    ],
+    "language_en": [
+      "Vietnamese"
+    ],
+    "religion": [
+      "无宗教",
+      "佛教",
+      "天主教"
+    ],
+    "area_km2": 331212,
+    "population": 97300000,
+    "major_ports": [
+      "西贡港",
+      "海防港",
+      "岘港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "尊重年长者",
+      "名片双手递接",
+      "避免过度直接",
+      "建立关系重要"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "春节(1-2月)",
+      "雄王节(农历3月10日)",
+      "国庆日(9月2日)"
+    ],
+    "trade_notes": [
+      "关系网络关键",
+      "耐心很重要",
+      "等级制度明显",
+      "礼物交换常见"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/C/D",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "阿联酋",
+    "name_en": "United Arab Emirates",
+    "iso2": "AE",
+    "iso3": "ARE",
+    "dial_code": "+971",
+    "capital_cn": "阿布扎比",
+    "capital_en": "Abu Dhabi",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".ae",
+    "timezone": "Asia/Dubai",
+    "currency_code": "AED",
+    "currency_name_cn": "阿联酋迪拉姆",
+    "currency_symbol": "د.إ",
+    "language_cn": [
+      "阿拉伯语",
+      "英语"
+    ],
+    "language_en": [
+      "Arabic",
+      "English"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 83600,
+    "population": 9890000,
+    "major_ports": [
+      "迪拜港",
+      "阿布扎比港",
+      "沙迦港"
+    ],
+    "business_hours": "周日至周四 8:00-17:00",
+    "business_etiquette": [
+      "避免左手",
+      "尊重伊斯兰文化",
+      "建立信任重要",
+      "避免直接拒绝"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "开斋节",
+      "宰牲节",
+      "国庆日(12月2日)"
+    ],
+    "trade_notes": [
+      "周五周六是周末",
+      "斋月期间特殊",
+      "重视个人关系",
+      "决策可能缓慢"
+    ],
+    "driving_side": "right",
+    "power_plug": "G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "沙特阿拉伯",
+    "name_en": "Saudi Arabia",
+    "iso2": "SA",
+    "iso3": "SAU",
+    "dial_code": "+966",
+    "capital_cn": "利雅得",
+    "capital_en": "Riyadh",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".sa",
+    "timezone": "Asia/Riyadh",
+    "currency_code": "SAR",
+    "currency_name_cn": "沙特里亚尔",
+    "currency_symbol": "﷼",
+    "language_cn": [
+      "阿拉伯语"
+    ],
+    "language_en": [
+      "Arabic"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 2149690,
+    "population": 34800000,
+    "major_ports": [
+      "吉达港",
+      "达曼港",
+      "朱拜勒港"
+    ],
+    "business_hours": "周日至周四 8:00-15:00",
+    "business_etiquette": [
+      "严格遵守伊斯兰教规",
+      "男女商务分开",
+      "避免左手",
+      "耐心和尊重"
+    ],
+    "major_holidays": [
+      "开斋节",
+      "宰牲节",
+      "国庆日(9月23日)"
+    ],
+    "trade_notes": [
+      "周五周六周末",
+      "斋月特殊安排",
+      "决策较慢",
+      "个人关系关键"
+    ],
+    "driving_side": "right",
+    "power_plug": "G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "土耳其",
+    "name_en": "Turkey",
+    "iso2": "TR",
+    "iso3": "TUR",
+    "dial_code": "+90",
+    "capital_cn": "安卡拉",
+    "capital_en": "Ankara",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".tr",
+    "timezone": "Europe/Istanbul",
+    "currency_code": "TRY",
+    "currency_name_cn": "土耳其里拉",
+    "currency_symbol": "₺",
+    "language_cn": [
+      "土耳其语"
+    ],
+    "language_en": [
+      "Turkish"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 783562,
+    "population": 84300000,
+    "major_ports": [
+      "伊斯坦布尔港",
+      "伊兹密尔港",
+      "梅尔辛港"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "建立个人关系",
+      "茶文化重要",
+      "避免左手",
+      "尊重长者"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "国家主权日(4月23日)",
+      "开斋节",
+      "共和国日(10月29日)"
+    ],
+    "trade_notes": [
+      "关系导向",
+      "谈判需耐心",
+      "等级制度存在",
+      "好客文化"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "以色列",
+    "name_en": "Israel",
+    "iso2": "IL",
+    "iso3": "ISR",
+    "dial_code": "+972",
+    "capital_cn": "耶路撒冷",
+    "capital_en": "Jerusalem",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".il",
+    "timezone": "Asia/Jerusalem",
+    "currency_code": "ILS",
+    "currency_name_cn": "以色列谢克尔",
+    "currency_symbol": "₪",
+    "language_cn": [
+      "希伯来语",
+      "阿拉伯语"
+    ],
+    "language_en": [
+      "Hebrew",
+      "Arabic"
+    ],
+    "religion": [
+      "犹太教",
+      "伊斯兰教",
+      "基督教"
+    ],
+    "area_km2": 20770,
+    "population": 9300000,
+    "major_ports": [
+      "海法港",
+      "阿什杜德港"
+    ],
+    "business_hours": "周日至周四 8:00-17:00",
+    "business_etiquette": [
+      "直接坦率",
+      "非正式风格",
+      "创新思维",
+      "注意宗教差异"
+    ],
+    "major_holidays": [
+      "犹太新年(9-10月)",
+      "赎罪日(9-10月)",
+      "逾越节(3-4月)",
+      "独立日(4-5月)"
+    ],
+    "trade_notes": [
+      "周五周六安息日",
+      "高科技发达",
+      "英语普及",
+      "安全考虑重要"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/H",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "巴基斯坦",
+    "name_en": "Pakistan",
+    "iso2": "PK",
+    "iso3": "PAK",
+    "dial_code": "+92",
+    "capital_cn": "伊斯兰堡",
+    "capital_en": "Islamabad",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".pk",
+    "timezone": "Asia/Karachi",
+    "currency_code": "PKR",
+    "currency_name_cn": "巴基斯坦卢比",
+    "currency_symbol": "₨",
+    "language_cn": [
+      "乌尔都语",
+      "英语"
+    ],
+    "language_en": [
+      "Urdu",
+      "English"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 881913,
+    "population": 220900000,
+    "major_ports": [
+      "卡拉奇港",
+      "卡西姆港",
+      "瓜达尔港"
+    ],
+    "business_hours": "周一至周五 9:00-17:00, 周六 9:00-13:00",
+    "business_etiquette": [
+      "避免左手",
+      "尊重伊斯兰习俗",
+      "建立信任重要",
+      "男女交往谨慎"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "巴基斯坦日(3月23日)",
+      "独立日(8月14日)",
+      "开斋节",
+      "宰牲节"
+    ],
+    "trade_notes": [
+      "关系网络关键",
+      "决策层级多",
+      "斋月特殊安排",
+      "英语商务通用"
+    ],
+    "driving_side": "left",
+    "power_plug": "C/D",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "孟加拉国",
+    "name_en": "Bangladesh",
+    "iso2": "BD",
+    "iso3": "BGD",
+    "dial_code": "+880",
+    "capital_cn": "达卡",
+    "capital_en": "Dhaka",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".bd",
+    "timezone": "Asia/Dhaka",
+    "currency_code": "BDT",
+    "currency_name_cn": "孟加拉塔卡",
+    "currency_symbol": "৳",
+    "language_cn": [
+      "孟加拉语"
+    ],
+    "language_en": [
+      "Bengali"
+    ],
+    "religion": [
+      "伊斯兰教",
+      "印度教"
+    ],
+    "area_km2": 147570,
+    "population": 164700000,
+    "major_ports": [
+      "吉大港",
+      "蒙格拉港"
+    ],
+    "business_hours": "周日至周四 9:00-17:00",
+    "business_etiquette": [
+      "尊重年长者",
+      "避免左手",
+      "建立关系重要",
+      "耐心必要"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(3月26日)",
+      "孟加拉新年(4月14日)",
+      "开斋节",
+      "杜尔加女神节"
+    ],
+    "trade_notes": [
+      "纺织业发达",
+      "等级制度明显",
+      "决策缓慢",
+      "个人关系优先"
+    ],
+    "driving_side": "left",
+    "power_plug": "C/D/G/K",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "斯里兰卡",
+    "name_en": "Sri Lanka",
+    "iso2": "LK",
+    "iso3": "LKA",
+    "dial_code": "+94",
+    "capital_cn": "科伦坡",
+    "capital_en": "Colombo",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".lk",
+    "timezone": "Asia/Colombo",
+    "currency_code": "LKR",
+    "currency_name_cn": "斯里兰卡卢比",
+    "currency_symbol": "Rs",
+    "language_cn": [
+      "僧伽罗语",
+      "泰米尔语"
+    ],
+    "language_en": [
+      "Sinhala",
+      "Tamil"
+    ],
+    "religion": [
+      "佛教",
+      "印度教",
+      "伊斯兰教",
+      "基督教"
+    ],
+    "area_km2": 65610,
+    "population": 21900000,
+    "major_ports": [
+      "科伦坡港",
+      "汉班托塔港"
+    ],
+    "business_hours": "周一至周五 8:30-17:00",
+    "business_etiquette": [
+      "尊重等级",
+      "避免用左手",
+      "保守着装",
+      "建立关系重要"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(2月4日)",
+      "泰米尔新年(4月)",
+      "卫塞节(5月)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "茶叶出口大国",
+      "英语广泛使用",
+      "官僚程序多",
+      "时间观念灵活"
+    ],
+    "driving_side": "left",
+    "power_plug": "D/G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "尼泊尔",
+    "name_en": "Nepal",
+    "iso2": "NP",
+    "iso3": "NPL",
+    "dial_code": "+977",
+    "capital_cn": "加德满都",
+    "capital_en": "Kathmandu",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".np",
+    "timezone": "Asia/Kathmandu",
+    "currency_code": "NPR",
+    "currency_name_cn": "尼泊尔卢比",
+    "currency_symbol": "₨",
+    "language_cn": [
+      "尼泊尔语"
+    ],
+    "language_en": [
+      "Nepali"
+    ],
+    "religion": [
+      "印度教",
+      "佛教"
+    ],
+    "area_km2": 147516,
+    "population": 29100000,
+    "major_ports": [],
+    "business_hours": "周日至周五 10:00-17:00",
+    "business_etiquette": [
+      "双手合十问候",
+      "尊重宗教习俗",
+      "避免用左手",
+      "保守着装"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "共和国日(5月29日)",
+      "宪法日(9月20日)",
+      "德赛节(10月)"
+    ],
+    "trade_notes": [
+      "内陆国家依赖印度",
+      "基础设施薄弱",
+      "官僚程序复杂",
+      "现金交易为主"
+    ],
+    "driving_side": "left",
+    "power_plug": "C/D/M",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "不丹",
+    "name_en": "Bhutan",
+    "iso2": "BT",
+    "iso3": "BTN",
+    "dial_code": "+975",
+    "capital_cn": "廷布",
+    "capital_en": "Thimphu",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".bt",
+    "timezone": "Asia/Thimphu",
+    "currency_code": "BTN",
+    "currency_name_cn": "不丹努尔特鲁姆",
+    "currency_symbol": "Nu.",
+    "language_cn": [
+      "宗卡语"
+    ],
+    "language_en": [
+      "Dzongkha"
+    ],
+    "religion": [
+      "佛教",
+      "印度教"
+    ],
+    "area_km2": 38394,
+    "population": 771600,
+    "major_ports": [],
+    "business_hours": "周一至周五 9:00-17:00",
+    "business_etiquette": [
+      "重视环保和幸福",
+      "尊重佛教传统",
+      "正式场合穿传统服装",
+      "避免吸烟"
+    ],
+    "major_holidays": [
+      "国王生日(2月21-23日)",
+      "不丹新年(2-3月)",
+      "国庆日(12月17日)"
+    ],
+    "trade_notes": [
+      "重视国民幸福总值",
+      "旅游业受限制",
+      "水电出口重要",
+      "与印度关系密切"
+    ],
+    "driving_side": "left",
+    "power_plug": "C/D/F/G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "缅甸",
+    "name_en": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "dial_code": "+95",
+    "capital_cn": "内比都",
+    "capital_en": "Naypyidaw",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".mm",
+    "timezone": "Asia/Yangon",
+    "currency_code": "MMK",
+    "currency_name_cn": "缅甸元",
+    "currency_symbol": "K",
+    "language_cn": [
+      "缅甸语"
+    ],
+    "language_en": [
+      "Burmese"
+    ],
+    "religion": [
+      "佛教",
+      "基督教",
+      "伊斯兰教"
+    ],
+    "area_km2": 676578,
+    "population": 54400000,
+    "major_ports": [
+      "仰光港",
+      "毛淡棉港"
+    ],
+    "business_hours": "周一至周五 9:30-16:30",
+    "business_etiquette": [
+      "尊重佛教传统",
+      "避免触碰头部",
+      "脱鞋进入某些场所",
+      "保持礼貌谦逊"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(1月4日)",
+      "泼水节(4月)",
+      "烈士节(7月19日)"
+    ],
+    "trade_notes": [
+      "政治环境复杂",
+      "基础设施发展中",
+      "现金交易普遍",
+      "关系网络重要"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/D/F/G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "老挝",
+    "name_en": "Laos",
+    "iso2": "LA",
+    "iso3": "LAO",
+    "dial_code": "+856",
+    "capital_cn": "万象",
+    "capital_en": "Vientiane",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".la",
+    "timezone": "Asia/Vientiane",
+    "currency_code": "LAK",
+    "currency_name_cn": "老挝基普",
+    "currency_symbol": "₭",
+    "language_cn": [
+      "老挝语"
+    ],
+    "language_en": [
+      "Lao"
+    ],
+    "religion": [
+      "佛教"
+    ],
+    "area_km2": 236800,
+    "population": 7270000,
+    "major_ports": [],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "双手合十问候",
+      "尊重佛教传统",
+      "避免公开批评",
+      "保持冷静耐心"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "老挝新年(4月13-15日)",
+      "国庆日(12月2日)"
+    ],
+    "trade_notes": [
+      "内陆国家",
+      "基础设施有限",
+      "与中国贸易增长",
+      "决策过程缓慢"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B/C/E/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "柬埔寨",
+    "name_en": "Cambodia",
+    "iso2": "KH",
+    "iso3": "KHM",
+    "dial_code": "+855",
+    "capital_cn": "金边",
+    "capital_en": "Phnom Penh",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".kh",
+    "timezone": "Asia/Phnom_Penh",
+    "currency_code": "KHR",
+    "currency_name_cn": "柬埔寨瑞尔",
+    "currency_symbol": "៛",
+    "language_cn": [
+      "高棉语"
+    ],
+    "language_en": [
+      "Khmer"
+    ],
+    "religion": [
+      "佛教"
+    ],
+    "area_km2": 181035,
+    "population": 16700000,
+    "major_ports": [
+      "西哈努克港",
+      "金边港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "双手合十问候",
+      "尊重年长者",
+      "避免触碰头部",
+      "保持微笑"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "高棉新年(4月13-15日)",
+      "独立日(11月9日)",
+      "水节(11月)"
+    ],
+    "trade_notes": [
+      "美元广泛使用",
+      "纺织业重要",
+      "基础设施改善中",
+      "与中国关系密切"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/C/G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "文莱",
+    "name_en": "Brunei",
+    "iso2": "BN",
+    "iso3": "BRN",
+    "dial_code": "+673",
+    "capital_cn": "斯里巴加湾市",
+    "capital_en": "Bandar Seri Begawan",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".bn",
+    "timezone": "Asia/Brunei",
+    "currency_code": "BND",
+    "currency_name_cn": "文莱元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "马来语"
+    ],
+    "language_en": [
+      "Malay"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 5765,
+    "population": 437500,
+    "major_ports": [
+      "摩拉港"
+    ],
+    "business_hours": "周一至周四、周六 8:00-17:00",
+    "business_etiquette": [
+      "严格遵守伊斯兰教规",
+      "避免用左手",
+      "正式着装",
+      "尊重苏丹"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "国庆日(2月23日)",
+      "苏丹生日(7月15日)",
+      "开斋节"
+    ],
+    "trade_notes": [
+      "石油天然气经济",
+      "禁酒令严格",
+      "周五祈祷时间",
+      "政府主导经济"
+    ],
+    "driving_side": "left",
+    "power_plug": "G",
+    "voltage": "240V"
+  },
+  {
+    "name_cn": "东帝汶",
+    "name_en": "Timor-Leste",
+    "iso2": "TL",
+    "iso3": "TLS",
+    "dial_code": "+670",
+    "capital_cn": "帝力",
+    "capital_en": "Dili",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".tl",
+    "timezone": "Asia/Dili",
+    "currency_code": "USD",
+    "currency_name_cn": "美元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "德顿语",
+      "葡萄牙语"
+    ],
+    "language_en": [
+      "Tetum",
+      "Portuguese"
+    ],
+    "religion": [
+      "天主教"
+    ],
+    "area_km2": 14874,
+    "population": 1318000,
+    "major_ports": [
+      "帝力港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "握手问候",
+      "尊重天主教传统",
+      "时间观念灵活",
+      "葡语有优势"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立恢复日(5月20日)",
+      "独立公投日(8月30日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "石油依赖经济",
+      "基础设施薄弱",
+      "美元为官方货币",
+      "发展潜力大"
+    ],
+    "driving_side": "left",
+    "power_plug": "C/E/F/I",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "马尔代夫",
+    "name_en": "Maldives",
+    "iso2": "MV",
+    "iso3": "MDV",
+    "dial_code": "+960",
+    "capital_cn": "马累",
+    "capital_en": "Malé",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".mv",
+    "timezone": "Indian/Maldives",
+    "currency_code": "MVR",
+    "currency_name_cn": "马尔代夫拉菲亚",
+    "currency_symbol": "Rf",
+    "language_cn": [
+      "迪维希语"
+    ],
+    "language_en": [
+      "Dhivehi"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 298,
+    "population": 540500,
+    "major_ports": [
+      "马累港"
+    ],
+    "business_hours": "周日至周四 8:00-16:00",
+    "business_etiquette": [
+      "严格遵守伊斯兰教规",
+      "禁酒",
+      "保守着装",
+      "避免公开亲密行为"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(7月26日)",
+      "共和国日(11月11日)",
+      "开斋节"
+    ],
+    "trade_notes": [
+      "旅游业为主",
+      "进口依赖严重",
+      "环保要求高",
+      "岛屿物流复杂"
+    ],
+    "driving_side": "left",
+    "power_plug": "C/D/G/J/K/L",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "哈萨克斯坦",
+    "name_en": "Kazakhstan",
+    "iso2": "KZ",
+    "iso3": "KAZ",
+    "dial_code": "+7",
+    "capital_cn": "阿斯塔纳",
+    "capital_en": "Astana",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".kz",
+    "timezone": "Asia/Almaty",
+    "currency_code": "KZT",
+    "currency_name_cn": "哈萨克斯坦坚戈",
+    "currency_symbol": "₸",
+    "language_cn": [
+      "哈萨克语",
+      "俄语"
+    ],
+    "language_en": [
+      "Kazakh",
+      "Russian"
+    ],
+    "religion": [
+      "伊斯兰教",
+      "基督教"
+    ],
+    "area_km2": 2724900,
+    "population": 18800000,
+    "major_ports": [
+      "阿克套港"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "握手问候",
+      "重视年龄和地位",
+      "款待文化重要",
+      "耐心和尊重"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(12月16日)",
+      "纳吾肉孜节(3月21日)"
+    ],
+    "trade_notes": [
+      "石油资源丰富",
+      "俄语商务通用",
+      "关系网络重要",
+      "官僚程序存在"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "乌兹别克斯坦",
+    "name_en": "Uzbekistan",
+    "iso2": "UZ",
+    "iso3": "UZB",
+    "dial_code": "+998",
+    "capital_cn": "塔什干",
+    "capital_en": "Tashkent",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".uz",
+    "timezone": "Asia/Tashkent",
+    "currency_code": "UZS",
+    "currency_name_cn": "乌兹别克斯坦索姆",
+    "currency_symbol": "so'm",
+    "language_cn": [
+      "乌兹别克语"
+    ],
+    "language_en": [
+      "Uzbek"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 447400,
+    "population": 34000000,
+    "major_ports": [],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "尊重长者",
+      "款待重要",
+      "避免左手",
+      "建立信任关键"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "纳吾肉孜节(3月21日)",
+      "独立日(9月1日)",
+      "宪法日(12月8日)"
+    ],
+    "trade_notes": [
+      "棉花出口大国",
+      "俄语仍通用",
+      "官僚主义存在",
+      "现金交易多"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "吉尔吉斯斯坦",
+    "name_en": "Kyrgyzstan",
+    "iso2": "KG",
+    "iso3": "KGZ",
+    "dial_code": "+996",
+    "capital_cn": "比什凯克",
+    "capital_en": "Bishkek",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".kg",
+    "timezone": "Asia/Bishkek",
+    "currency_code": "KGS",
+    "currency_name_cn": "吉尔吉斯斯坦索姆",
+    "currency_symbol": "с",
+    "language_cn": [
+      "吉尔吉斯语",
+      "俄语"
+    ],
+    "language_en": [
+      "Kyrgyz",
+      "Russian"
+    ],
+    "religion": [
+      "伊斯兰教",
+      "基督教"
+    ],
+    "area_km2": 199951,
+    "population": 6600000,
+    "major_ports": [],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "热情好客",
+      "尊重传统",
+      "茶文化重要",
+      "关系导向"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "国际妇女节(3月8日)",
+      "纳吾肉孜节(3月21日)",
+      "独立日(8月31日)"
+    ],
+    "trade_notes": [
+      "黄金出口重要",
+      "中国贸易增长",
+      "基础设施发展中",
+      "山地物流挑战"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "塔吉克斯坦",
+    "name_en": "Tajikistan",
+    "iso2": "TJ",
+    "iso3": "TJK",
+    "dial_code": "+992",
+    "capital_cn": "杜尚别",
+    "capital_en": "Dushanbe",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".tj",
+    "timezone": "Asia/Dushanbe",
+    "currency_code": "TJS",
+    "currency_name_cn": "塔吉克斯坦索莫尼",
+    "currency_symbol": "ЅМ",
+    "language_cn": [
+      "塔吉克语"
+    ],
+    "language_en": [
+      "Tajik"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 143100,
+    "population": 9500000,
+    "major_ports": [],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "尊重伊斯兰传统",
+      "热情款待",
+      "等级观念",
+      "耐心重要"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "纳吾肉孜节(3月21日)",
+      "独立日(9月9日)"
+    ],
+    "trade_notes": [
+      "铝和棉花出口",
+      "水电资源丰富",
+      "基础设施薄弱",
+      "依赖侨汇"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "土库曼斯坦",
+    "name_en": "Turkmenistan",
+    "iso2": "TM",
+    "iso3": "TKM",
+    "dial_code": "+993",
+    "capital_cn": "阿什哈巴德",
+    "capital_en": "Ashgabat",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".tm",
+    "timezone": "Asia/Ashgabat",
+    "currency_code": "TMT",
+    "currency_name_cn": "土库曼斯坦马纳特",
+    "currency_symbol": "m",
+    "language_cn": [
+      "土库曼语"
+    ],
+    "language_en": [
+      "Turkmen"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 488100,
+    "population": 6000000,
+    "major_ports": [
+      "土库曼巴希港"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "正式保守",
+      "尊重传统",
+      "避免政治话题",
+      "礼物交换"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(10月27日)",
+      "中立日(12月12日)"
+    ],
+    "trade_notes": [
+      "天然气资源丰富",
+      "国家控制经济",
+      "签证困难",
+      "现金经济"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "阿富汗",
+    "name_en": "Afghanistan",
+    "iso2": "AF",
+    "iso3": "AFG",
+    "dial_code": "+93",
+    "capital_cn": "喀布尔",
+    "capital_en": "Kabul",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".af",
+    "timezone": "Asia/Kabul",
+    "currency_code": "AFN",
+    "currency_name_cn": "阿富汗尼",
+    "currency_symbol": "؋",
+    "language_cn": [
+      "达里语",
+      "普什图语"
+    ],
+    "language_en": [
+      "Dari",
+      "Pashto"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 652230,
+    "population": 38900000,
+    "major_ports": [],
+    "business_hours": "周六至周三 8:00-16:00",
+    "business_etiquette": [
+      "尊重伊斯兰传统",
+      "男女分开",
+      "建立信任缓慢",
+      "避免左手"
+    ],
+    "major_holidays": [
+      "新年(3月21日)",
+      "独立日(8月19日)",
+      "开斋节",
+      "宰牲节"
+    ],
+    "trade_notes": [
+      "安全形势复杂",
+      "现金经济",
+      "基础设施薄弱",
+      "部落影响大"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "伊朗",
+    "name_en": "Iran",
+    "iso2": "IR",
+    "iso3": "IRN",
+    "dial_code": "+98",
+    "capital_cn": "德黑兰",
+    "capital_en": "Tehran",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".ir",
+    "timezone": "Asia/Tehran",
+    "currency_code": "IRR",
+    "currency_name_cn": "伊朗里亚尔",
+    "currency_symbol": "﷼",
+    "language_cn": [
+      "波斯语"
+    ],
+    "language_en": [
+      "Persian"
+    ],
+    "religion": [
+      "伊斯兰教(什叶派)"
+    ],
+    "area_km2": 1648195,
+    "population": 83900000,
+    "major_ports": [
+      "阿巴斯港",
+      "伊玛目霍梅尼港"
+    ],
+    "business_hours": "周六至周三 8:00-16:00",
+    "business_etiquette": [
+      "建立个人关系",
+      "耐心谈判",
+      "避免左手",
+      "尊重伊斯兰习俗"
+    ],
+    "major_holidays": [
+      "诺鲁孜节(3月21日)",
+      "伊斯兰革命日(2月11日)",
+      "开斋节"
+    ],
+    "trade_notes": [
+      "制裁影响贸易",
+      "石油经济",
+      "波斯语重要",
+      "关系网络关键"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "伊拉克",
+    "name_en": "Iraq",
+    "iso2": "IQ",
+    "iso3": "IRQ",
+    "dial_code": "+964",
+    "capital_cn": "巴格达",
+    "capital_en": "Baghdad",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".iq",
+    "timezone": "Asia/Baghdad",
+    "currency_code": "IQD",
+    "currency_name_cn": "伊拉克第纳尔",
+    "currency_symbol": "ع.د",
+    "language_cn": [
+      "阿拉伯语",
+      "库尔德语"
+    ],
+    "language_en": [
+      "Arabic",
+      "Kurdish"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 438317,
+    "population": 40200000,
+    "major_ports": [
+      "乌姆盖萨尔港",
+      "巴士拉港"
+    ],
+    "business_hours": "周日至周四 8:00-15:00",
+    "business_etiquette": [
+      "建立信任重要",
+      "尊重部落传统",
+      "避免左手",
+      "耐心必要"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "军队日(1月6日)",
+      "国庆日(10月3日)",
+      "开斋节"
+    ],
+    "trade_notes": [
+      "石油主导经济",
+      "安全考虑重要",
+      "现金交易普遍",
+      "基础设施重建中"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/D/G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "叙利亚",
+    "name_en": "Syria",
+    "iso2": "SY",
+    "iso3": "SYR",
+    "dial_code": "+963",
+    "capital_cn": "大马士革",
+    "capital_en": "Damascus",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".sy",
+    "timezone": "Asia/Damascus",
+    "currency_code": "SYP",
+    "currency_name_cn": "叙利亚镑",
+    "currency_symbol": "£",
+    "language_cn": [
+      "阿拉伯语"
+    ],
+    "language_en": [
+      "Arabic"
+    ],
+    "religion": [
+      "伊斯兰教",
+      "基督教"
+    ],
+    "area_km2": 185180,
+    "population": 17500000,
+    "major_ports": [
+      "拉塔基亚港",
+      "塔尔图斯港"
+    ],
+    "business_hours": "周日至周四 8:00-15:00",
+    "business_etiquette": [
+      "关系优先",
+      "款待文化",
+      "避免政治话题",
+      "耐心谈判"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(4月17日)",
+      "烈士节(5月6日)",
+      "开斋节"
+    ],
+    "trade_notes": [
+      "战争影响严重",
+      "制裁限制",
+      "基础设施受损",
+      "贸易风险高"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/E/L",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "黎巴嫩",
+    "name_en": "Lebanon",
+    "iso2": "LB",
+    "iso3": "LBN",
+    "dial_code": "+961",
+    "capital_cn": "贝鲁特",
+    "capital_en": "Beirut",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".lb",
+    "timezone": "Asia/Beirut",
+    "currency_code": "LBP",
+    "currency_name_cn": "黎巴嫩镑",
+    "currency_symbol": "ل.ل",
+    "language_cn": [
+      "阿拉伯语",
+      "法语"
+    ],
+    "language_en": [
+      "Arabic",
+      "French"
+    ],
+    "religion": [
+      "伊斯兰教",
+      "基督教"
+    ],
+    "area_km2": 10452,
+    "population": 6800000,
+    "major_ports": [
+      "贝鲁特港",
+      "的黎波里港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "多语言能力",
+      "社交重要",
+      "着装时尚",
+      "灵活变通"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "劳动节(5月1日)",
+      "独立日(11月22日)"
+    ],
+    "trade_notes": [
+      "银行业发达",
+      "法语英语通用",
+      "关系导向强",
+      "经济挑战多"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/D/G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "约旦",
+    "name_en": "Jordan",
+    "iso2": "JO",
+    "iso3": "JOR",
+    "dial_code": "+962",
+    "capital_cn": "安曼",
+    "capital_en": "Amman",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".jo",
+    "timezone": "Asia/Amman",
+    "currency_code": "JOD",
+    "currency_name_cn": "约旦第纳尔",
+    "currency_symbol": "د.ا",
+    "language_cn": [
+      "阿拉伯语"
+    ],
+    "language_en": [
+      "Arabic"
+    ],
+    "religion": [
+      "伊斯兰教",
+      "基督教"
+    ],
+    "area_km2": 89342,
+    "population": 10200000,
+    "major_ports": [
+      "亚喀巴港"
+    ],
+    "business_hours": "周日至周四 8:30-15:30",
+    "business_etiquette": [
+      "握手问候",
+      "尊重王室",
+      "建立关系重要",
+      "保守着装"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "劳动节(5月1日)",
+      "独立日(5月25日)",
+      "开斋节"
+    ],
+    "trade_notes": [
+      "英语广泛使用",
+      "稳定的商业环境",
+      "服务业发达",
+      "地区贸易枢纽"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/D/F/G/J",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "科威特",
+    "name_en": "Kuwait",
+    "iso2": "KW",
+    "iso3": "KWT",
+    "dial_code": "+965",
+    "capital_cn": "科威特城",
+    "capital_en": "Kuwait City",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".kw",
+    "timezone": "Asia/Kuwait",
+    "currency_code": "KWD",
+    "currency_name_cn": "科威特第纳尔",
+    "currency_symbol": "د.ك",
+    "language_cn": [
+      "阿拉伯语"
+    ],
+    "language_en": [
+      "Arabic"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 17818,
+    "population": 4300000,
+    "major_ports": [
+      "舒韦赫港",
+      "舒艾巴港"
+    ],
+    "business_hours": "周日至周四 8:00-15:00",
+    "business_etiquette": [
+      "尊重伊斯兰传统",
+      "建立个人关系",
+      "避免左手",
+      "款待重要"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "国庆日(2月25日)",
+      "解放日(2月26日)",
+      "开斋节"
+    ],
+    "trade_notes": [
+      "石油经济主导",
+      "免税购物天堂",
+      "决策层级化",
+      "外籍劳工多"
+    ],
+    "driving_side": "right",
+    "power_plug": "G",
+    "voltage": "240V"
+  },
+  {
+    "name_cn": "巴林",
+    "name_en": "Bahrain",
+    "iso2": "BH",
+    "iso3": "BHR",
+    "dial_code": "+973",
+    "capital_cn": "麦纳麦",
+    "capital_en": "Manama",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".bh",
+    "timezone": "Asia/Bahrain",
+    "currency_code": "BHD",
+    "currency_name_cn": "巴林第纳尔",
+    "currency_symbol": ".د.ب",
+    "language_cn": [
+      "阿拉伯语"
+    ],
+    "language_en": [
+      "Arabic"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 765,
+    "population": 1700000,
+    "major_ports": [
+      "米纳萨勒曼港"
+    ],
+    "business_hours": "周日至周四 8:00-15:00",
+    "business_etiquette": [
+      "重视个人关系",
+      "尊重伊斯兰习俗",
+      "英语通用",
+      "商务相对开放"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "国庆日(12月16日)",
+      "开斋节",
+      "宰牲节"
+    ],
+    "trade_notes": [
+      "金融中心",
+      "相对自由开放",
+      "外籍人口多",
+      "周末是周五周六"
+    ],
+    "driving_side": "right",
+    "power_plug": "G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "卡塔尔",
+    "name_en": "Qatar",
+    "iso2": "QA",
+    "iso3": "QAT",
+    "dial_code": "+974",
+    "capital_cn": "多哈",
+    "capital_en": "Doha",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".qa",
+    "timezone": "Asia/Qatar",
+    "currency_code": "QAR",
+    "currency_name_cn": "卡塔尔里亚尔",
+    "currency_symbol": "﷼",
+    "language_cn": [
+      "阿拉伯语"
+    ],
+    "language_en": [
+      "Arabic"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 11586,
+    "population": 2900000,
+    "major_ports": [
+      "哈马德港"
+    ],
+    "business_hours": "周日至周四 7:30-14:30",
+    "business_etiquette": [
+      "建立信任关键",
+      "尊重当地习俗",
+      "耐心谈判",
+      "重视款待"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "体育日(2月第二个周二)",
+      "国庆日(12月18日)",
+      "开斋节"
+    ],
+    "trade_notes": [
+      "天然气出口大国",
+      "基础设施先进",
+      "2022世界杯主办国",
+      "航空枢纽"
+    ],
+    "driving_side": "right",
+    "power_plug": "G",
+    "voltage": "240V"
+  },
+  {
+    "name_cn": "阿曼",
+    "name_en": "Oman",
+    "iso2": "OM",
+    "iso3": "OMN",
+    "dial_code": "+968",
+    "capital_cn": "马斯喀特",
+    "capital_en": "Muscat",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".om",
+    "timezone": "Asia/Muscat",
+    "currency_code": "OMR",
+    "currency_name_cn": "阿曼里亚尔",
+    "currency_symbol": "﷼",
+    "language_cn": [
+      "阿拉伯语"
+    ],
+    "language_en": [
+      "Arabic"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 309500,
+    "population": 5100000,
+    "major_ports": [
+      "苏丹卡布斯港",
+      "塞拉莱港"
+    ],
+    "business_hours": "周日至周四 8:00-15:00",
+    "business_etiquette": [
+      "保守传统",
+      "尊重苏丹",
+      "耐心重要",
+      "关系导向"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "国庆日(11月18日)",
+      "苏丹生日(11月19日)",
+      "开斋节"
+    ],
+    "trade_notes": [
+      "石油天然气经济",
+      "战略位置重要",
+      "旅游业发展中",
+      "传统与现代结合"
+    ],
+    "driving_side": "right",
+    "power_plug": "G",
+    "voltage": "240V"
+  },
+  {
+    "name_cn": "也门",
+    "name_en": "Yemen",
+    "iso2": "YE",
+    "iso3": "YEM",
+    "dial_code": "+967",
+    "capital_cn": "萨那",
+    "capital_en": "Sana'a",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".ye",
+    "timezone": "Asia/Aden",
+    "currency_code": "YER",
+    "currency_name_cn": "也门里亚尔",
+    "currency_symbol": "﷼",
+    "language_cn": [
+      "阿拉伯语"
+    ],
+    "language_en": [
+      "Arabic"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 527968,
+    "population": 29800000,
+    "major_ports": [
+      "亚丁港",
+      "荷台达港"
+    ],
+    "business_hours": "周六至周三 8:00-14:00",
+    "business_etiquette": [
+      "部落传统重要",
+      "建立信任缓慢",
+      "款待文化",
+      "保守社会"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "劳动节(5月1日)",
+      "统一日(5月22日)",
+      "革命日(9月26日)"
+    ],
+    "trade_notes": [
+      "安全形势严峻",
+      "经济困难",
+      "咖啡出口传统",
+      "基础设施薄弱"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/D/G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "格鲁吉亚",
+    "name_en": "Georgia",
+    "iso2": "GE",
+    "iso3": "GEO",
+    "dial_code": "+995",
+    "capital_cn": "第比利斯",
+    "capital_en": "Tbilisi",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".ge",
+    "timezone": "Asia/Tbilisi",
+    "currency_code": "GEL",
+    "currency_name_cn": "格鲁吉亚拉里",
+    "currency_symbol": "₾",
+    "language_cn": [
+      "格鲁吉亚语"
+    ],
+    "language_en": [
+      "Georgian"
+    ],
+    "religion": [
+      "东正教"
+    ],
+    "area_km2": 69700,
+    "population": 3700000,
+    "major_ports": [
+      "巴统港",
+      "波季港"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "热情好客",
+      "重视敬酒文化",
+      "尊重长者",
+      "关系导向"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "东正教圣诞节(1月7日)",
+      "独立日(5月26日)",
+      "圣乔治日(11月23日)"
+    ],
+    "trade_notes": [
+      "葡萄酒出口国",
+      "旅游业增长",
+      "改革开放政策",
+      "地理位置战略"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "亚美尼亚",
+    "name_en": "Armenia",
+    "iso2": "AM",
+    "iso3": "ARM",
+    "dial_code": "+374",
+    "capital_cn": "埃里温",
+    "capital_en": "Yerevan",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".am",
+    "timezone": "Asia/Yerevan",
+    "currency_code": "AMD",
+    "currency_name_cn": "亚美尼亚德拉姆",
+    "currency_symbol": "֏",
+    "language_cn": [
+      "亚美尼亚语"
+    ],
+    "language_en": [
+      "Armenian"
+    ],
+    "religion": [
+      "亚美尼亚使徒教会"
+    ],
+    "area_km2": 29743,
+    "population": 3000000,
+    "major_ports": [],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "握手问候",
+      "重视款待",
+      "尊重传统",
+      "家庭价值观强"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "亚美尼亚圣诞节(1月6日)",
+      "独立日(9月21日)",
+      "种族灭绝纪念日(4月24日)"
+    ],
+    "trade_notes": [
+      "内陆国家",
+      "IT产业发展",
+      "钻石加工业",
+      "侨民网络强大"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "阿塞拜疆",
+    "name_en": "Azerbaijan",
+    "iso2": "AZ",
+    "iso3": "AZE",
+    "dial_code": "+994",
+    "capital_cn": "巴库",
+    "capital_en": "Baku",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".az",
+    "timezone": "Asia/Baku",
+    "currency_code": "AZN",
+    "currency_name_cn": "阿塞拜疆马纳特",
+    "currency_symbol": "₼",
+    "language_cn": [
+      "阿塞拜疆语"
+    ],
+    "language_en": [
+      "Azerbaijani"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 86600,
+    "population": 10100000,
+    "major_ports": [
+      "巴库港"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "重视关系",
+      "茶文化重要",
+      "尊重长者",
+      "避免敏感话题"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "国际妇女节(3月8日)",
+      "诺鲁孜节(3月20-21日)",
+      "独立日(10月18日)"
+    ],
+    "trade_notes": [
+      "石油天然气丰富",
+      "里海沿岸国家",
+      "交通枢纽地位",
+      "与土耳其关系密切"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "蒙古",
+    "name_en": "Mongolia",
+    "iso2": "MN",
+    "iso3": "MNG",
+    "dial_code": "+976",
+    "capital_cn": "乌兰巴托",
+    "capital_en": "Ulaanbaatar",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".mn",
+    "timezone": "Asia/Ulaanbaatar",
+    "currency_code": "MNT",
+    "currency_name_cn": "蒙古图格里克",
+    "currency_symbol": "₮",
+    "language_cn": [
+      "蒙古语"
+    ],
+    "language_en": [
+      "Mongolian"
+    ],
+    "religion": [
+      "佛教",
+      "萨满教"
+    ],
+    "area_km2": 1564110,
+    "population": 3300000,
+    "major_ports": [],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "尊重传统文化",
+      "避免拒绝款待",
+      "礼物交换重要",
+      "耐心和尊重"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "白月节(1-2月)",
+      "那达慕(7月11-13日)",
+      "独立日(12月29日)"
+    ],
+    "trade_notes": [
+      "矿产资源丰富",
+      "内陆国家物流挑战",
+      "与中俄贸易密切",
+      "畜牧业传统重要"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/E",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "朝鲜",
+    "name_en": "North Korea",
+    "iso2": "KP",
+    "iso3": "PRK",
+    "dial_code": "+850",
+    "capital_cn": "平壤",
+    "capital_en": "Pyongyang",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".kp",
+    "timezone": "Asia/Pyongyang",
+    "currency_code": "KPW",
+    "currency_name_cn": "朝鲜圆",
+    "currency_symbol": "₩",
+    "language_cn": [
+      "朝鲜语"
+    ],
+    "language_en": [
+      "Korean"
+    ],
+    "religion": [
+      "无宗教",
+      "天道教",
+      "佛教"
+    ],
+    "area_km2": 120538,
+    "population": 25800000,
+    "major_ports": [
+      "南浦港",
+      "清津港",
+      "元山港"
+    ],
+    "business_hours": "周一至周六 8:00-17:00",
+    "business_etiquette": [
+      "严格遵守当地规定",
+      "尊重领导人",
+      "正式着装",
+      "避免敏感话题"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "金正日诞辰(2月16日)",
+      "金日成诞辰(4月15日)",
+      "建国日(9月9日)"
+    ],
+    "trade_notes": [
+      "贸易受制裁影响",
+      "国家控制经济",
+      "特殊审批程序",
+      "现金交易为主"
+    ],
+    "driving_side": "right",
+    "power_plug": "C",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "美国",
+    "name_en": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "dial_code": "+1",
+    "capital_cn": "华盛顿",
+    "capital_en": "Washington, D.C.",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".us",
+    "timezone": "America/New_York",
+    "currency_code": "USD",
+    "currency_name_cn": "美元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语"
+    ],
+    "language_en": [
+      "English"
+    ],
+    "religion": [
+      "基督教",
+      "天主教",
+      "犹太教",
+      "无宗教"
+    ],
+    "area_km2": 9833517,
+    "population": 331900000,
+    "major_ports": [
+      "洛杉矶港",
+      "长滩港",
+      "纽约新泽西港",
+      "萨凡纳港",
+      "休斯顿港",
+      "西雅图港"
+    ],
+    "business_hours": "周一至周五 9:00-17:00",
+    "business_etiquette": [
+      "准时非常重要",
+      "握手要有力",
+      "直接坦率的沟通风格",
+      "注重个人空间"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(7月4日)",
+      "感恩节(11月第4个周四)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "重视合同和法律条款",
+      "决策速度较快",
+      "注重效率和结果",
+      "电子邮件是主要沟通方式"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B",
+    "voltage": "120V"
+  },
+  {
+    "name_cn": "加拿大",
+    "name_en": "Canada",
+    "iso2": "CA",
+    "iso3": "CAN",
+    "dial_code": "+1",
+    "capital_cn": "渥太华",
+    "capital_en": "Ottawa",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".ca",
+    "timezone": "America/Toronto",
+    "currency_code": "CAD",
+    "currency_name_cn": "加拿大元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语",
+      "法语"
+    ],
+    "language_en": [
+      "English",
+      "French"
+    ],
+    "religion": [
+      "基督教",
+      "天主教",
+      "无宗教"
+    ],
+    "area_km2": 9984670,
+    "population": 38000000,
+    "major_ports": [
+      "温哥华港",
+      "蒙特利尔港",
+      "哈利法克斯港",
+      "鲁珀特王子港"
+    ],
+    "business_hours": "周一至周五 9:00-17:00",
+    "business_etiquette": [
+      "准时但不过分正式",
+      "尊重多元文化",
+      "避免与美国比较",
+      "重视环保理念"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "维多利亚日(5月倒数第二个周一)",
+      "加拿大日(7月1日)",
+      "感恩节(10月第2个周一)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "USMCA成员国",
+      "资源出口大国",
+      "双语环境(魁北克省法语)",
+      "重视可持续发展"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B",
+    "voltage": "120V"
+  },
+  {
+    "name_cn": "墨西哥",
+    "name_en": "Mexico",
+    "iso2": "MX",
+    "iso3": "MEX",
+    "dial_code": "+52",
+    "capital_cn": "墨西哥城",
+    "capital_en": "Mexico City",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".mx",
+    "timezone": "America/Mexico_City",
+    "currency_code": "MXN",
+    "currency_name_cn": "墨西哥比索",
+    "currency_symbol": "$",
+    "language_cn": [
+      "西班牙语"
+    ],
+    "language_en": [
+      "Spanish"
+    ],
+    "religion": [
+      "天主教",
+      "基督教"
+    ],
+    "area_km2": 1964375,
+    "population": 128900000,
+    "major_ports": [
+      "曼萨尼约港",
+      "拉萨罗卡德纳斯港",
+      "韦拉克鲁斯港",
+      "阿尔塔米拉港"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "重视个人关系",
+      "时间观念较灵活",
+      "午餐是重要社交时间",
+      "避免过于直接"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "宪法日(2月第1个周一)",
+      "独立日(9月16日)",
+      "亡灵节(11月1-2日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "USMCA成员国",
+      "制造业发达",
+      "家族企业文化",
+      "重视面对面交流"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B",
+    "voltage": "127V"
+  },
+  {
+    "name_cn": "危地马拉",
+    "name_en": "Guatemala",
+    "iso2": "GT",
+    "iso3": "GTM",
+    "dial_code": "+502",
+    "capital_cn": "危地马拉城",
+    "capital_en": "Guatemala City",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".gt",
+    "timezone": "America/Guatemala",
+    "currency_code": "GTQ",
+    "currency_name_cn": "危地马拉格查尔",
+    "currency_symbol": "Q",
+    "language_cn": [
+      "西班牙语"
+    ],
+    "language_en": [
+      "Spanish"
+    ],
+    "religion": [
+      "天主教",
+      "基督教",
+      "玛雅宗教"
+    ],
+    "area_km2": 108889,
+    "population": 17900000,
+    "major_ports": [
+      "圣何塞港",
+      "巴里奥斯港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "正式称呼重要",
+      "建立信任需时间",
+      "尊重等级制度",
+      "避免敏感政治话题"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "圣周(3-4月)",
+      "劳动节(5月1日)",
+      "独立日(9月15日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "咖啡主要出口国",
+      "纺织业重要",
+      "美国是最大贸易伙伴",
+      "基础设施发展中"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B",
+    "voltage": "120V"
+  },
+  {
+    "name_cn": "伯利兹",
+    "name_en": "Belize",
+    "iso2": "BZ",
+    "iso3": "BLZ",
+    "dial_code": "+501",
+    "capital_cn": "贝尔莫潘",
+    "capital_en": "Belmopan",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".bz",
+    "timezone": "America/Belize",
+    "currency_code": "BZD",
+    "currency_name_cn": "伯利兹元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语"
+    ],
+    "language_en": [
+      "English"
+    ],
+    "religion": [
+      "天主教",
+      "基督教"
+    ],
+    "area_km2": 22966,
+    "population": 419000,
+    "major_ports": [
+      "伯利兹港",
+      "大溪港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "轻松友好氛围",
+      "时间观念灵活",
+      "英语为官方语言",
+      "避免过于正式"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "英联邦日(5月24日)",
+      "独立日(9月21日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "旅游业重要",
+      "农产品出口",
+      "离岸金融服务",
+      "加勒比共同体成员"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B/G",
+    "voltage": "110V/220V"
+  },
+  {
+    "name_cn": "萨尔瓦多",
+    "name_en": "El Salvador",
+    "iso2": "SV",
+    "iso3": "SLV",
+    "dial_code": "+503",
+    "capital_cn": "圣萨尔瓦多",
+    "capital_en": "San Salvador",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".sv",
+    "timezone": "America/El_Salvador",
+    "currency_code": "USD",
+    "currency_name_cn": "美元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "西班牙语"
+    ],
+    "language_en": [
+      "Spanish"
+    ],
+    "religion": [
+      "天主教",
+      "基督教"
+    ],
+    "area_km2": 21041,
+    "population": 6500000,
+    "major_ports": [
+      "阿卡胡特拉港",
+      "拉乌尼翁港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "握手问候",
+      "正式但友好",
+      "家族企业多",
+      "重视个人关系"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "圣周(3-4月)",
+      "劳动节(5月1日)",
+      "独立日(9月15日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "使用美元",
+      "咖啡出口国",
+      "纺织业发达",
+      "侨汇经济重要"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B",
+    "voltage": "115V"
+  },
+  {
+    "name_cn": "洪都拉斯",
+    "name_en": "Honduras",
+    "iso2": "HN",
+    "iso3": "HND",
+    "dial_code": "+504",
+    "capital_cn": "特古西加尔巴",
+    "capital_en": "Tegucigalpa",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".hn",
+    "timezone": "America/Tegucigalpa",
+    "currency_code": "HNL",
+    "currency_name_cn": "洪都拉斯伦皮拉",
+    "currency_symbol": "L",
+    "language_cn": [
+      "西班牙语"
+    ],
+    "language_en": [
+      "Spanish"
+    ],
+    "religion": [
+      "天主教",
+      "基督教"
+    ],
+    "area_km2": 112492,
+    "population": 9900000,
+    "major_ports": [
+      "科尔特斯港",
+      "卡斯蒂利亚港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "尊重等级",
+      "建立信任重要",
+      "时间观念灵活",
+      "正式着装"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "美洲日(4月14日)",
+      "劳动节(5月1日)",
+      "独立日(9月15日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "香蕉主要出口国",
+      "咖啡产业重要",
+      "纺织加工业",
+      "基础设施薄弱"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B",
+    "voltage": "110V"
+  },
+  {
+    "name_cn": "尼加拉瓜",
+    "name_en": "Nicaragua",
+    "iso2": "NI",
+    "iso3": "NIC",
+    "dial_code": "+505",
+    "capital_cn": "马那瓜",
+    "capital_en": "Managua",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".ni",
+    "timezone": "America/Managua",
+    "currency_code": "NIO",
+    "currency_name_cn": "尼加拉瓜科多巴",
+    "currency_symbol": "C$",
+    "language_cn": [
+      "西班牙语"
+    ],
+    "language_en": [
+      "Spanish"
+    ],
+    "religion": [
+      "天主教",
+      "基督教"
+    ],
+    "area_km2": 130373,
+    "population": 6600000,
+    "major_ports": [
+      "科林托港",
+      "布拉夫港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "保守传统",
+      "重视礼貌",
+      "等级观念存在",
+      "避免政治话题"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "圣周(3-4月)",
+      "劳动节(5月1日)",
+      "独立日(9月15日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "农产品出口为主",
+      "咖啡重要出口品",
+      "自由贸易区",
+      "政治影响经济"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B",
+    "voltage": "120V"
+  },
+  {
+    "name_cn": "哥斯达黎加",
+    "name_en": "Costa Rica",
+    "iso2": "CR",
+    "iso3": "CRI",
+    "dial_code": "+506",
+    "capital_cn": "圣何塞",
+    "capital_en": "San José",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".cr",
+    "timezone": "America/Costa_Rica",
+    "currency_code": "CRC",
+    "currency_name_cn": "哥斯达黎加科朗",
+    "currency_symbol": "₡",
+    "language_cn": [
+      "西班牙语"
+    ],
+    "language_en": [
+      "Spanish"
+    ],
+    "religion": [
+      "天主教",
+      "基督教"
+    ],
+    "area_km2": 51100,
+    "population": 5100000,
+    "major_ports": [
+      "利蒙港",
+      "卡尔德拉港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "友好有礼",
+      "环保意识强",
+      "教育水平高",
+      "避免冲突"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "圣周(3-4月)",
+      "劳动节(5月1日)",
+      "独立日(9月15日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "生态旅游发达",
+      "高科技产业增长",
+      "政治稳定",
+      "无军队国家"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B",
+    "voltage": "120V"
+  },
+  {
+    "name_cn": "巴拿马",
+    "name_en": "Panama",
+    "iso2": "PA",
+    "iso3": "PAN",
+    "dial_code": "+507",
+    "capital_cn": "巴拿马城",
+    "capital_en": "Panama City",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".pa",
+    "timezone": "America/Panama",
+    "currency_code": "PAB",
+    "currency_name_cn": "巴拿马巴波亚",
+    "currency_symbol": "B/.",
+    "language_cn": [
+      "西班牙语"
+    ],
+    "language_en": [
+      "Spanish"
+    ],
+    "religion": [
+      "天主教",
+      "基督教"
+    ],
+    "area_km2": 75417,
+    "population": 4300000,
+    "major_ports": [
+      "巴尔博亚港",
+      "克里斯托瓦尔港",
+      "曼萨尼约国际码头"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "正式但友好",
+      "时间观念重要",
+      "国际化程度高",
+      "英语使用广泛"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "烈士节(1月9日)",
+      "独立日(11月3日)",
+      "母亲节(12月8日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "运河经济核心",
+      "国际金融中心",
+      "自由贸易区发达",
+      "美元为法定货币"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B",
+    "voltage": "110V"
+  },
+  {
+    "name_cn": "古巴",
+    "name_en": "Cuba",
+    "iso2": "CU",
+    "iso3": "CUB",
+    "dial_code": "+53",
+    "capital_cn": "哈瓦那",
+    "capital_en": "Havana",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".cu",
+    "timezone": "America/Havana",
+    "currency_code": "CUP",
+    "currency_name_cn": "古巴比索",
+    "currency_symbol": "$",
+    "language_cn": [
+      "西班牙语"
+    ],
+    "language_en": [
+      "Spanish"
+    ],
+    "religion": [
+      "天主教",
+      "萨泰里阿教"
+    ],
+    "area_km2": 109884,
+    "population": 11300000,
+    "major_ports": [
+      "哈瓦那港",
+      "马里埃尔港",
+      "圣地亚哥港"
+    ],
+    "business_hours": "周一至周五 8:30-17:30",
+    "business_etiquette": [
+      "关系网络重要",
+      "耐心必要",
+      "避免政治话题",
+      "礼物交换常见"
+    ],
+    "major_holidays": [
+      "解放日(1月1日)",
+      "劳动节(5月1日)",
+      "国家起义日(7月26日)",
+      "独立日(10月10日)"
+    ],
+    "trade_notes": [
+      "贸易受限制",
+      "旅游业重要",
+      "双货币体系",
+      "国营企业主导"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B/C/L",
+    "voltage": "110V/220V"
+  },
+  {
+    "name_cn": "牙买加",
+    "name_en": "Jamaica",
+    "iso2": "JM",
+    "iso3": "JAM",
+    "dial_code": "+1-876",
+    "capital_cn": "金斯敦",
+    "capital_en": "Kingston",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".jm",
+    "timezone": "America/Jamaica",
+    "currency_code": "JMD",
+    "currency_name_cn": "牙买加元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语"
+    ],
+    "language_en": [
+      "English"
+    ],
+    "religion": [
+      "基督教",
+      "拉斯塔法里教"
+    ],
+    "area_km2": 10991,
+    "population": 2700000,
+    "major_ports": [
+      "金斯敦港",
+      "蒙特哥贝港"
+    ],
+    "business_hours": "周一至周五 8:30-16:30",
+    "business_etiquette": [
+      "轻松友好",
+      "时间观念灵活",
+      "尊重个人空间",
+      "避免过于正式"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "解放日(8月1日)",
+      "独立日(8月6日)",
+      "国家英雄日(10月第3个周一)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "旅游业支柱",
+      "铝土矿出口",
+      "音乐文化出口",
+      "侨汇重要"
+    ],
+    "driving_side": "left",
+    "power_plug": "A/B",
+    "voltage": "110V"
+  },
+  {
+    "name_cn": "海地",
+    "name_en": "Haiti",
+    "iso2": "HT",
+    "iso3": "HTI",
+    "dial_code": "+509",
+    "capital_cn": "太子港",
+    "capital_en": "Port-au-Prince",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".ht",
+    "timezone": "America/Port-au-Prince",
+    "currency_code": "HTG",
+    "currency_name_cn": "海地古德",
+    "currency_symbol": "G",
+    "language_cn": [
+      "法语",
+      "海地克里奥尔语"
+    ],
+    "language_en": [
+      "French",
+      "Haitian Creole"
+    ],
+    "religion": [
+      "天主教",
+      "基督教",
+      "伏都教"
+    ],
+    "area_km2": 27750,
+    "population": 11400000,
+    "major_ports": [
+      "太子港"
+    ],
+    "business_hours": "周一至周五 8:00-16:00",
+    "business_etiquette": [
+      "法语为官方语言",
+      "正式礼貌",
+      "耐心重要",
+      "建立信任缓慢"
+    ],
+    "major_holidays": [
+      "独立日(1月1日)",
+      "嘉年华(2月)",
+      "劳动节(5月1日)",
+      "海地国旗日(5月18日)"
+    ],
+    "trade_notes": [
+      "最不发达国家之一",
+      "纺织品出口",
+      "基础设施薄弱",
+      "援助依赖大"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B",
+    "voltage": "110V"
+  },
+  {
+    "name_cn": "多米尼加",
+    "name_en": "Dominican Republic",
+    "iso2": "DO",
+    "iso3": "DOM",
+    "dial_code": "+1-809",
+    "capital_cn": "圣多明各",
+    "capital_en": "Santo Domingo",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".do",
+    "timezone": "America/Santo_Domingo",
+    "currency_code": "DOP",
+    "currency_name_cn": "多米尼加比索",
+    "currency_symbol": "$",
+    "language_cn": [
+      "西班牙语"
+    ],
+    "language_en": [
+      "Spanish"
+    ],
+    "religion": [
+      "天主教",
+      "基督教"
+    ],
+    "area_km2": 48671,
+    "population": 10800000,
+    "major_ports": [
+      "考塞多港",
+      "海纳港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "热情友好",
+      "重视个人关系",
+      "时间观念灵活",
+      "家族企业多"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(2月27日)",
+      "圣周(3-4月)",
+      "恢复日(8月16日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "旅游业发达",
+      "自由贸易区",
+      "雪茄出口",
+      "美国重要贸易伙伴"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B",
+    "voltage": "110V"
+  },
+  {
+    "name_cn": "巴哈马",
+    "name_en": "Bahamas",
+    "iso2": "BS",
+    "iso3": "BHS",
+    "dial_code": "+1-242",
+    "capital_cn": "拿骚",
+    "capital_en": "Nassau",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".bs",
+    "timezone": "America/Nassau",
+    "currency_code": "BSD",
+    "currency_name_cn": "巴哈马元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语"
+    ],
+    "language_en": [
+      "English"
+    ],
+    "religion": [
+      "基督教",
+      "天主教"
+    ],
+    "area_km2": 13943,
+    "population": 393000,
+    "major_ports": [
+      "拿骚港",
+      "自由港"
+    ],
+    "business_hours": "周一至周五 9:00-17:00",
+    "business_etiquette": [
+      "英式礼仪影响",
+      "商务休闲风格",
+      "准时重要",
+      "友好专业"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(7月10日)",
+      "解放日(8月第1个周一)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "旅游业为主",
+      "离岸金融中心",
+      "与美元挂钩",
+      "免税购物"
+    ],
+    "driving_side": "left",
+    "power_plug": "A/B",
+    "voltage": "120V"
+  },
+  {
+    "name_cn": "巴巴多斯",
+    "name_en": "Barbados",
+    "iso2": "BB",
+    "iso3": "BRB",
+    "dial_code": "+1-246",
+    "capital_cn": "布里奇敦",
+    "capital_en": "Bridgetown",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".bb",
+    "timezone": "America/Barbados",
+    "currency_code": "BBD",
+    "currency_name_cn": "巴巴多斯元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语"
+    ],
+    "language_en": [
+      "English"
+    ],
+    "religion": [
+      "基督教",
+      "天主教"
+    ],
+    "area_km2": 430,
+    "population": 287000,
+    "major_ports": [
+      "布里奇敦港"
+    ],
+    "business_hours": "周一至周五 8:00-16:30",
+    "business_etiquette": [
+      "英式传统",
+      "正式礼貌",
+      "准时重要",
+      "保守着装"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "英雄日(4月28日)",
+      "独立日(11月30日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "旅游业发达",
+      "朗姆酒出口",
+      "教育水平高",
+      "服务业为主"
+    ],
+    "driving_side": "left",
+    "power_plug": "A/B",
+    "voltage": "115V"
+  },
+  {
+    "name_cn": "安提瓜和巴布达",
+    "name_en": "Antigua and Barbuda",
+    "iso2": "AG",
+    "iso3": "ATG",
+    "dial_code": "+1-268",
+    "capital_cn": "圣约翰",
+    "capital_en": "St. John's",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".ag",
+    "timezone": "America/Antigua",
+    "currency_code": "XCD",
+    "currency_name_cn": "东加勒比元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语"
+    ],
+    "language_en": [
+      "English"
+    ],
+    "religion": [
+      "基督教"
+    ],
+    "area_km2": 442,
+    "population": 98000,
+    "major_ports": [
+      "圣约翰港"
+    ],
+    "business_hours": "周一至周五 8:00-16:00",
+    "business_etiquette": [
+      "英式礼仪",
+      "休闲氛围",
+      "友好热情",
+      "旅游服务意识"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "复活节(3-4月)",
+      "独立日(11月1日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "旅游业主导",
+      "投资入籍项目",
+      "离岸金融",
+      "游艇注册"
+    ],
+    "driving_side": "left",
+    "power_plug": "A/B",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "圣基茨和尼维斯",
+    "name_en": "Saint Kitts and Nevis",
+    "iso2": "KN",
+    "iso3": "KNA",
+    "dial_code": "+1-869",
+    "capital_cn": "巴斯特尔",
+    "capital_en": "Basseterre",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".kn",
+    "timezone": "America/St_Kitts",
+    "currency_code": "XCD",
+    "currency_name_cn": "东加勒比元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语"
+    ],
+    "language_en": [
+      "English"
+    ],
+    "religion": [
+      "基督教"
+    ],
+    "area_km2": 261,
+    "population": 53000,
+    "major_ports": [
+      "巴斯特尔港"
+    ],
+    "business_hours": "周一至周五 8:00-16:00",
+    "business_etiquette": [
+      "正式有礼",
+      "英国传统",
+      "小型社区氛围",
+      "重视教育"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(9月19日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "投资入籍先驱",
+      "旅游业重要",
+      "糖业历史",
+      "金融服务"
+    ],
+    "driving_side": "left",
+    "power_plug": "D/G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "多米尼克",
+    "name_en": "Dominica",
+    "iso2": "DM",
+    "iso3": "DMA",
+    "dial_code": "+1-767",
+    "capital_cn": "罗索",
+    "capital_en": "Roseau",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".dm",
+    "timezone": "America/Dominica",
+    "currency_code": "XCD",
+    "currency_name_cn": "东加勒比元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语"
+    ],
+    "language_en": [
+      "English"
+    ],
+    "religion": [
+      "天主教",
+      "基督教"
+    ],
+    "area_km2": 751,
+    "population": 72000,
+    "major_ports": [
+      "罗索港"
+    ],
+    "business_hours": "周一至周五 8:00-16:00",
+    "business_etiquette": [
+      "友好随和",
+      "自然环保意识",
+      "社区联系紧密",
+      "传统价值观"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(11月3日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "生态旅游",
+      "农产品出口",
+      "投资入籍",
+      "可再生能源"
+    ],
+    "driving_side": "left",
+    "power_plug": "D/G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "圣卢西亚",
+    "name_en": "Saint Lucia",
+    "iso2": "LC",
+    "iso3": "LCA",
+    "dial_code": "+1-758",
+    "capital_cn": "卡斯特里",
+    "capital_en": "Castries",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".lc",
+    "timezone": "America/St_Lucia",
+    "currency_code": "XCD",
+    "currency_name_cn": "东加勒比元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语"
+    ],
+    "language_en": [
+      "English"
+    ],
+    "religion": [
+      "天主教",
+      "基督教"
+    ],
+    "area_km2": 617,
+    "population": 184000,
+    "major_ports": [
+      "卡斯特里港",
+      "维约堡港"
+    ],
+    "business_hours": "周一至周五 8:00-16:30",
+    "business_etiquette": [
+      "轻松专业",
+      "法语影响",
+      "旅游服务导向",
+      "友好开放"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(2月22日)",
+      "嘉年华(7月)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "旅游业支柱",
+      "香蕉出口",
+      "离岸金融",
+      "投资项目"
+    ],
+    "driving_side": "left",
+    "power_plug": "G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "圣文森特和格林纳丁斯",
+    "name_en": "Saint Vincent and the Grenadines",
+    "iso2": "VC",
+    "iso3": "VCT",
+    "dial_code": "+1-784",
+    "capital_cn": "金斯敦",
+    "capital_en": "Kingstown",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".vc",
+    "timezone": "America/St_Vincent",
+    "currency_code": "XCD",
+    "currency_name_cn": "东加勒比元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语"
+    ],
+    "language_en": [
+      "English"
+    ],
+    "religion": [
+      "基督教"
+    ],
+    "area_km2": 389,
+    "population": 111000,
+    "major_ports": [
+      "金斯敦港"
+    ],
+    "business_hours": "周一至周五 8:00-16:00",
+    "business_etiquette": [
+      "传统保守",
+      "友好礼貌",
+      "社区导向",
+      "英式影响"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(10月27日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "农业出口",
+      "游艇旅游",
+      "离岸服务",
+      "小型经济体"
+    ],
+    "driving_side": "left",
+    "power_plug": "A/C/E/G/I/K",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "格林纳达",
+    "name_en": "Grenada",
+    "iso2": "GD",
+    "iso3": "GRD",
+    "dial_code": "+1-473",
+    "capital_cn": "圣乔治",
+    "capital_en": "St. George's",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".gd",
+    "timezone": "America/Grenada",
+    "currency_code": "XCD",
+    "currency_name_cn": "东加勒比元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语"
+    ],
+    "language_en": [
+      "English"
+    ],
+    "religion": [
+      "天主教",
+      "基督教"
+    ],
+    "area_km2": 344,
+    "population": 113000,
+    "major_ports": [
+      "圣乔治港"
+    ],
+    "business_hours": "周一至周五 8:00-16:00",
+    "business_etiquette": [
+      "热情友好",
+      "香料岛文化",
+      "英式传统",
+      "社区紧密"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(2月7日)",
+      "嘉年华(8月)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "香料出口(肉豆蔻)",
+      "旅游业重要",
+      "投资入籍",
+      "农业传统"
+    ],
+    "driving_side": "left",
+    "power_plug": "G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "格陵兰",
+    "name_en": "Greenland",
+    "iso2": "GL",
+    "iso3": "GRL",
+    "dial_code": "+299",
+    "capital_cn": "努克",
+    "capital_en": "Nuuk",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".gl",
+    "timezone": "America/Godthab",
+    "currency_code": "DKK",
+    "currency_name_cn": "丹麦克朗",
+    "currency_symbol": "kr",
+    "language_cn": [
+      "格陵兰语",
+      "丹麦语"
+    ],
+    "language_en": [
+      "Greenlandic",
+      "Danish"
+    ],
+    "religion": [
+      "基督教"
+    ],
+    "area_km2": 2166086,
+    "population": 56000,
+    "major_ports": [
+      "努克港",
+      "西西缪特港"
+    ],
+    "business_hours": "周一至周五 8:00-16:00",
+    "business_etiquette": [
+      "尊重因纽特文化",
+      "环保意识强",
+      "社区导向",
+      "丹麦影响"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "国庆日(6月21日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "渔业为主",
+      "矿产潜力",
+      "旅游业增长",
+      "丹麦自治领"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/E/F/K",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "百慕大",
+    "name_en": "Bermuda",
+    "iso2": "BM",
+    "iso3": "BMU",
+    "dial_code": "+1-441",
+    "capital_cn": "汉密尔顿",
+    "capital_en": "Hamilton",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".bm",
+    "timezone": "Atlantic/Bermuda",
+    "currency_code": "BMD",
+    "currency_name_cn": "百慕大元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语"
+    ],
+    "language_en": [
+      "English"
+    ],
+    "religion": [
+      "基督教"
+    ],
+    "area_km2": 54,
+    "population": 64000,
+    "major_ports": [
+      "汉密尔顿港",
+      "圣乔治港"
+    ],
+    "business_hours": "周一至周五 9:00-17:00",
+    "business_etiquette": [
+      "英式正式",
+      "保守着装",
+      "准时重要",
+      "国际化程度高"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "百慕大日(5月24日)",
+      "英女王生日(6月)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "再保险中心",
+      "离岸金融",
+      "旅游业发达",
+      "英国海外领地"
+    ],
+    "driving_side": "left",
+    "power_plug": "A/B",
+    "voltage": "120V"
+  },
+  {
+    "name_cn": "开曼群岛",
+    "name_en": "Cayman Islands",
+    "iso2": "KY",
+    "iso3": "CYM",
+    "dial_code": "+1-345",
+    "capital_cn": "乔治敦",
+    "capital_en": "George Town",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".ky",
+    "timezone": "America/Cayman",
+    "currency_code": "KYD",
+    "currency_name_cn": "开曼群岛元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语"
+    ],
+    "language_en": [
+      "English"
+    ],
+    "religion": [
+      "基督教"
+    ],
+    "area_km2": 264,
+    "population": 66000,
+    "major_ports": [
+      "乔治敦港"
+    ],
+    "business_hours": "周一至周五 9:00-17:00",
+    "business_etiquette": [
+      "国际商务标准",
+      "专业正式",
+      "保密意识强",
+      "效率导向"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "宪法日(7月第1个周一)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "全球金融中心",
+      "零税率",
+      "对冲基金中心",
+      "英国海外领地"
+    ],
+    "driving_side": "left",
+    "power_plug": "A/B",
+    "voltage": "120V"
+  },
+  {
+    "name_cn": "英属维尔京群岛",
+    "name_en": "British Virgin Islands",
+    "iso2": "VG",
+    "iso3": "VGB",
+    "dial_code": "+1-284",
+    "capital_cn": "罗德城",
+    "capital_en": "Road Town",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".vg",
+    "timezone": "America/Tortola",
+    "currency_code": "USD",
+    "currency_name_cn": "美元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语"
+    ],
+    "language_en": [
+      "English"
+    ],
+    "religion": [
+      "基督教"
+    ],
+    "area_km2": 151,
+    "population": 30000,
+    "major_ports": [
+      "罗德城港"
+    ],
+    "business_hours": "周一至周五 9:00-17:00",
+    "business_etiquette": [
+      "离岸业务专业",
+      "英式传统",
+      "保密严格",
+      "国际化"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "领土日(7月1日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "离岸公司注册",
+      "金融服务",
+      "游艇产业",
+      "旅游业"
+    ],
+    "driving_side": "left",
+    "power_plug": "A/B",
+    "voltage": "110V"
+  },
+  {
+    "name_cn": "美属维尔京群岛",
+    "name_en": "U.S. Virgin Islands",
+    "iso2": "VI",
+    "iso3": "VIR",
+    "dial_code": "+1-340",
+    "capital_cn": "夏洛特阿马利亚",
+    "capital_en": "Charlotte Amalie",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".vi",
+    "timezone": "America/St_Thomas",
+    "currency_code": "USD",
+    "currency_name_cn": "美元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语"
+    ],
+    "language_en": [
+      "English"
+    ],
+    "religion": [
+      "基督教"
+    ],
+    "area_km2": 346,
+    "population": 104000,
+    "major_ports": [
+      "夏洛特阿马利亚港",
+      "克里斯琴斯特德港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "美式风格",
+      "休闲友好",
+      "旅游服务导向",
+      "多元文化"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "马丁路德金日(1月第3个周一)",
+      "独立日(7月4日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "免税购物",
+      "旅游业主导",
+      "朗姆酒生产",
+      "美国领地"
+    ],
+    "driving_side": "left",
+    "power_plug": "A/B",
+    "voltage": "110V"
+  },
+  {
+    "name_cn": "波多黎各",
+    "name_en": "Puerto Rico",
+    "iso2": "PR",
+    "iso3": "PRI",
+    "dial_code": "+1-787",
+    "capital_cn": "圣胡安",
+    "capital_en": "San Juan",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".pr",
+    "timezone": "America/Puerto_Rico",
+    "currency_code": "USD",
+    "currency_name_cn": "美元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "西班牙语",
+      "英语"
+    ],
+    "language_en": [
+      "Spanish",
+      "English"
+    ],
+    "religion": [
+      "天主教",
+      "基督教"
+    ],
+    "area_km2": 9104,
+    "population": 3200000,
+    "major_ports": [
+      "圣胡安港",
+      "庞塞港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "双语环境",
+      "拉丁文化",
+      "美式影响",
+      "关系导向"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "三王节(1月6日)",
+      "独立日(7月4日)",
+      "发现日(11月19日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "制药业发达",
+      "美国自治领",
+      "税收优惠",
+      "服务业重要"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B",
+    "voltage": "120V"
+  },
+  {
+    "name_cn": "圣皮埃尔和密克隆",
+    "name_en": "Saint Pierre and Miquelon",
+    "iso2": "PM",
+    "iso3": "SPM",
+    "dial_code": "+508",
+    "capital_cn": "圣皮埃尔",
+    "capital_en": "Saint-Pierre",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".pm",
+    "timezone": "America/Miquelon",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "法语"
+    ],
+    "language_en": [
+      "French"
+    ],
+    "religion": [
+      "天主教"
+    ],
+    "area_km2": 242,
+    "population": 6000,
+    "major_ports": [
+      "圣皮埃尔港"
+    ],
+    "business_hours": "周一至周五 8:30-17:30",
+    "business_etiquette": [
+      "法式礼仪",
+      "正式传统",
+      "小社区氛围",
+      "渔业文化"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "法国国庆日(7月14日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "渔业为主",
+      "法国海外领地",
+      "欧元区",
+      "与加拿大贸易"
+    ],
+    "driving_side": "right",
+    "power_plug": "E",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "特克斯和凯科斯群岛",
+    "name_en": "Turks and Caicos Islands",
+    "iso2": "TC",
+    "iso3": "TCA",
+    "dial_code": "+1-649",
+    "capital_cn": "科伯恩城",
+    "capital_en": "Cockburn Town",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".tc",
+    "timezone": "America/Grand_Turk",
+    "currency_code": "USD",
+    "currency_name_cn": "美元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语"
+    ],
+    "language_en": [
+      "English"
+    ],
+    "religion": [
+      "基督教"
+    ],
+    "area_km2": 948,
+    "population": 39000,
+    "major_ports": [
+      "大特克港",
+      "普罗维登西亚莱斯港"
+    ],
+    "business_hours": "周一至周五 8:30-16:30",
+    "business_etiquette": [
+      "英式传统",
+      "旅游导向",
+      "轻松专业",
+      "国际化"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "英联邦日(3月第2个周一)",
+      "英女王生日(6月)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "高端旅游",
+      "离岸金融",
+      "房地产投资",
+      "英国海外领地"
+    ],
+    "driving_side": "left",
+    "power_plug": "A/B",
+    "voltage": "120V"
+  },
+  {
+    "name_cn": "马提尼克",
+    "name_en": "Martinique",
+    "iso2": "MQ",
+    "iso3": "MTQ",
+    "dial_code": "+596",
+    "capital_cn": "法兰西堡",
+    "capital_en": "Fort-de-France",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".mq",
+    "timezone": "America/Martinique",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "法语"
+    ],
+    "language_en": [
+      "French"
+    ],
+    "religion": [
+      "天主教"
+    ],
+    "area_km2": 1128,
+    "population": 375000,
+    "major_ports": [
+      "法兰西堡港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "法式文化",
+      "正式礼貌",
+      "时间观念灵活",
+      "美食文化重要"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "狂欢节(2-3月)",
+      "法国国庆日(7月14日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "朗姆酒出口",
+      "法国海外省",
+      "欧盟成员",
+      "旅游业发达"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/D/E",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "瓜德罗普",
+    "name_en": "Guadeloupe",
+    "iso2": "GP",
+    "iso3": "GLP",
+    "dial_code": "+590",
+    "capital_cn": "巴斯特尔",
+    "capital_en": "Basse-Terre",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".gp",
+    "timezone": "America/Guadeloupe",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "法语"
+    ],
+    "language_en": [
+      "French"
+    ],
+    "religion": [
+      "天主教"
+    ],
+    "area_km2": 1705,
+    "population": 400000,
+    "major_ports": [
+      "皮特尔角港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "法式传统",
+      "克里奥尔文化",
+      "休闲氛围",
+      "家庭价值观"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "狂欢节(2-3月)",
+      "废奴日(5月27日)",
+      "法国国庆日(7月14日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "香蕉和糖出口",
+      "法国海外省",
+      "欧盟成员",
+      "旅游业重要"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/D/E",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "荷属圣马丁",
+    "name_en": "Sint Maarten",
+    "iso2": "SX",
+    "iso3": "SXM",
+    "dial_code": "+1-721",
+    "capital_cn": "菲利普斯堡",
+    "capital_en": "Philipsburg",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".sx",
+    "timezone": "America/Lower_Princes",
+    "currency_code": "ANG",
+    "currency_name_cn": "荷属安的列斯盾",
+    "currency_symbol": "ƒ",
+    "language_cn": [
+      "荷兰语",
+      "英语"
+    ],
+    "language_en": [
+      "Dutch",
+      "English"
+    ],
+    "religion": [
+      "基督教"
+    ],
+    "area_km2": 34,
+    "population": 42000,
+    "major_ports": [
+      "菲利普斯堡港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "国际化氛围",
+      "旅游服务导向",
+      "多语言环境",
+      "轻松专业"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "国王日(4月27日)",
+      "圣马丁日(11月11日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "免税购物",
+      "邮轮港口",
+      "旅游业主导",
+      "荷兰王国构成国"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B",
+    "voltage": "110V"
+  },
+  {
+    "name_cn": "阿鲁巴",
+    "name_en": "Aruba",
+    "iso2": "AW",
+    "iso3": "ABW",
+    "dial_code": "+297",
+    "capital_cn": "奥拉涅斯塔德",
+    "capital_en": "Oranjestad",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".aw",
+    "timezone": "America/Aruba",
+    "currency_code": "AWG",
+    "currency_name_cn": "阿鲁巴弗罗林",
+    "currency_symbol": "ƒ",
+    "language_cn": [
+      "荷兰语",
+      "帕皮阿门托语"
+    ],
+    "language_en": [
+      "Dutch",
+      "Papiamento"
+    ],
+    "religion": [
+      "天主教"
+    ],
+    "area_km2": 180,
+    "population": 107000,
+    "major_ports": [
+      "奥拉涅斯塔德港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "多元文化",
+      "友好开放",
+      "时间观念灵活",
+      "旅游服务意识"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "国旗日(3月18日)",
+      "国王日(4月27日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "旅游业核心",
+      "炼油业",
+      "离岸金融",
+      "荷兰王国构成国"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B/F",
+    "voltage": "127V"
+  },
+  {
+    "name_cn": "特立尼达和多巴哥",
+    "name_en": "Trinidad and Tobago",
+    "iso2": "TT",
+    "iso3": "TTO",
+    "dial_code": "+1-868",
+    "capital_cn": "西班牙港",
+    "capital_en": "Port of Spain",
+    "continent_cn": "北美洲",
+    "continent_en": "North America",
+    "tld": ".tt",
+    "timezone": "America/Port_of_Spain",
+    "currency_code": "TTD",
+    "currency_name_cn": "特立尼达和多巴哥元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语"
+    ],
+    "language_en": [
+      "English"
+    ],
+    "religion": [
+      "基督教",
+      "印度教",
+      "伊斯兰教"
+    ],
+    "area_km2": 5130,
+    "population": 1400000,
+    "major_ports": [
+      "西班牙港",
+      "利萨斯角港"
+    ],
+    "business_hours": "周一至周五 8:00-16:00",
+    "business_etiquette": [
+      "多元文化融合",
+      "轻松友好",
+      "时间观念灵活",
+      "嘉年华文化"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "嘉年华(2-3月)",
+      "印度到达日(5月30日)",
+      "独立日(8月31日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "石油天然气出口",
+      "加勒比最工业化",
+      "金融服务发达",
+      "文化多样性"
+    ],
+    "driving_side": "left",
+    "power_plug": "A/B",
+    "voltage": "115V"
+  },
+  {
+    "name_cn": "巴西",
+    "name_en": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "dial_code": "+55",
+    "capital_cn": "巴西利亚",
+    "capital_en": "Brasília",
+    "continent_cn": "南美洲",
+    "continent_en": "South America",
+    "tld": ".br",
+    "timezone": "America/Sao_Paulo",
+    "currency_code": "BRL",
+    "currency_name_cn": "巴西雷亚尔",
+    "currency_symbol": "R$",
+    "language_cn": [
+      "葡萄牙语"
+    ],
+    "language_en": [
+      "Portuguese"
+    ],
+    "religion": [
+      "天主教",
+      "基督教新教",
+      "无宗教",
+      "唯心论"
+    ],
+    "area_km2": 8515767,
+    "population": 214300000,
+    "major_ports": [
+      "桑托斯港",
+      "里约热内卢港",
+      "巴拉那瓜港",
+      "里约格兰德港",
+      "伊塔基港"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "重视个人关系建立",
+      "握手时保持眼神接触",
+      "会议可能比预定时间晚开始",
+      "着装正式但风格较为轻松"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "狂欢节(2月/3月)",
+      "独立日(9月7日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "建立信任关系很重要",
+      "决策过程可能较长",
+      "葡萄牙语是商务首选语言",
+      "注重面对面会谈"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/N",
+    "voltage": "127V/220V"
+  },
+  {
+    "name_cn": "阿根廷",
+    "name_en": "Argentina",
+    "iso2": "AR",
+    "iso3": "ARG",
+    "dial_code": "+54",
+    "capital_cn": "布宜诺斯艾利斯",
+    "capital_en": "Buenos Aires",
+    "continent_cn": "南美洲",
+    "continent_en": "South America",
+    "tld": ".ar",
+    "timezone": "America/Argentina/Buenos_Aires",
+    "currency_code": "ARS",
+    "currency_name_cn": "阿根廷比索",
+    "currency_symbol": "$",
+    "language_cn": [
+      "西班牙语"
+    ],
+    "language_en": [
+      "Spanish"
+    ],
+    "religion": [
+      "天主教",
+      "基督教新教",
+      "无宗教"
+    ],
+    "area_km2": 2780400,
+    "population": 45800000,
+    "major_ports": [
+      "布宜诺斯艾利斯港",
+      "罗萨里奥港",
+      "拉普拉塔港",
+      "巴伊亚布兰卡港"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "握手并亲吻脸颊（商务场合通常只握手）",
+      "重视个人关系",
+      "会议可能延迟开始",
+      "着装考究，注重外表"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "五月革命日(5月25日)",
+      "独立日(7月9日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "建立个人关系是成功的关键",
+      "谈判节奏较慢",
+      "晚餐会议很常见",
+      "避免急于谈生意"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/I",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "哥伦比亚",
+    "name_en": "Colombia",
+    "iso2": "CO",
+    "iso3": "COL",
+    "dial_code": "+57",
+    "capital_cn": "波哥大",
+    "capital_en": "Bogotá",
+    "continent_cn": "南美洲",
+    "continent_en": "South America",
+    "tld": ".co",
+    "timezone": "America/Bogota",
+    "currency_code": "COP",
+    "currency_name_cn": "哥伦比亚比索",
+    "currency_symbol": "$",
+    "language_cn": [
+      "西班牙语"
+    ],
+    "language_en": [
+      "Spanish"
+    ],
+    "religion": [
+      "天主教",
+      "基督教新教",
+      "无宗教"
+    ],
+    "area_km2": 1141748,
+    "population": 51900000,
+    "major_ports": [
+      "卡塔赫纳港",
+      "布埃纳文图拉港",
+      "巴兰基亚港",
+      "圣玛尔塔港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "握手是标准问候方式",
+      "使用正式称谓",
+      "准时很重要",
+      "保持专业但友好的态度"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(7月20日)",
+      "博亚卡战役日(8月7日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "关系建立很重要",
+      "正式的商务着装",
+      "等级制度明显",
+      "避免直接说'不'"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B",
+    "voltage": "110V"
+  },
+  {
+    "name_cn": "秘鲁",
+    "name_en": "Peru",
+    "iso2": "PE",
+    "iso3": "PER",
+    "dial_code": "+51",
+    "capital_cn": "利马",
+    "capital_en": "Lima",
+    "continent_cn": "南美洲",
+    "continent_en": "South America",
+    "tld": ".pe",
+    "timezone": "America/Lima",
+    "currency_code": "PEN",
+    "currency_name_cn": "秘鲁索尔",
+    "currency_symbol": "S/",
+    "language_cn": [
+      "西班牙语",
+      "克丘亚语",
+      "艾马拉语"
+    ],
+    "language_en": [
+      "Spanish",
+      "Quechua",
+      "Aymara"
+    ],
+    "religion": [
+      "天主教",
+      "基督教新教",
+      "其他"
+    ],
+    "area_km2": 1285216,
+    "population": 33700000,
+    "major_ports": [
+      "卡亚俄港",
+      "派塔港",
+      "伊洛港",
+      "马塔拉尼港"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "握手问候",
+      "使用头衔和姓氏",
+      "保守的着装",
+      "等级观念较强"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(7月28-29日)",
+      "圣罗莎日(8月30日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "建立信任需要时间",
+      "正式的商务礼仪",
+      "决策过程较慢",
+      "注重礼貌和尊重"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B/C",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "委内瑞拉",
+    "name_en": "Venezuela",
+    "iso2": "VE",
+    "iso3": "VEN",
+    "dial_code": "+58",
+    "capital_cn": "加拉加斯",
+    "capital_en": "Caracas",
+    "continent_cn": "南美洲",
+    "continent_en": "South America",
+    "tld": ".ve",
+    "timezone": "America/Caracas",
+    "currency_code": "VES",
+    "currency_name_cn": "委内瑞拉玻利瓦尔",
+    "currency_symbol": "Bs.",
+    "language_cn": [
+      "西班牙语"
+    ],
+    "language_en": [
+      "Spanish"
+    ],
+    "religion": [
+      "天主教",
+      "基督教新教",
+      "其他"
+    ],
+    "area_km2": 912050,
+    "population": 28200000,
+    "major_ports": [
+      "拉瓜伊拉港",
+      "马拉开波港",
+      "卡贝略港",
+      "拉克鲁斯港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "热情友好的问候",
+      "个人关系很重要",
+      "时间观念较为灵活",
+      "正式场合着装考究"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(7月5日)",
+      "玻利瓦尔诞辰(7月24日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "关系网络重要",
+      "谈判可能很长",
+      "等级制度明显",
+      "避免政治话题"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B",
+    "voltage": "120V"
+  },
+  {
+    "name_cn": "智利",
+    "name_en": "Chile",
+    "iso2": "CL",
+    "iso3": "CHL",
+    "dial_code": "+56",
+    "capital_cn": "圣地亚哥",
+    "capital_en": "Santiago",
+    "continent_cn": "南美洲",
+    "continent_en": "South America",
+    "tld": ".cl",
+    "timezone": "America/Santiago",
+    "currency_code": "CLP",
+    "currency_name_cn": "智利比索",
+    "currency_symbol": "$",
+    "language_cn": [
+      "西班牙语"
+    ],
+    "language_en": [
+      "Spanish"
+    ],
+    "religion": [
+      "天主教",
+      "基督教新教",
+      "无宗教"
+    ],
+    "area_km2": 756102,
+    "population": 19500000,
+    "major_ports": [
+      "瓦尔帕莱索港",
+      "圣安东尼奥港",
+      "伊基克港",
+      "安托法加斯塔港"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "准时非常重要",
+      "正式的商务风格",
+      "握手问候",
+      "保守的着装"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(9月18日)",
+      "军队日(9月19日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "商务文化较为正式",
+      "重视专业性",
+      "决策过程谨慎",
+      "书面协议很重要"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/L",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "厄瓜多尔",
+    "name_en": "Ecuador",
+    "iso2": "EC",
+    "iso3": "ECU",
+    "dial_code": "+593",
+    "capital_cn": "基多",
+    "capital_en": "Quito",
+    "continent_cn": "南美洲",
+    "continent_en": "South America",
+    "tld": ".ec",
+    "timezone": "America/Guayaquil",
+    "currency_code": "USD",
+    "currency_name_cn": "美元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "西班牙语"
+    ],
+    "language_en": [
+      "Spanish"
+    ],
+    "religion": [
+      "天主教",
+      "基督教新教",
+      "其他"
+    ],
+    "area_km2": 283561,
+    "population": 17800000,
+    "major_ports": [
+      "瓜亚基尔港",
+      "曼塔港",
+      "埃斯梅拉达斯港",
+      "玻利瓦尔港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "友好但正式的态度",
+      "使用头衔",
+      "建立个人关系",
+      "保守的着装"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(8月10日)",
+      "瓜亚基尔独立日(10月9日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "关系导向的文化",
+      "等级制度重要",
+      "谈判节奏较慢",
+      "面子文化"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B",
+    "voltage": "120V"
+  },
+  {
+    "name_cn": "玻利维亚",
+    "name_en": "Bolivia",
+    "iso2": "BO",
+    "iso3": "BOL",
+    "dial_code": "+591",
+    "capital_cn": "苏克雷/拉巴斯",
+    "capital_en": "Sucre/La Paz",
+    "continent_cn": "南美洲",
+    "continent_en": "South America",
+    "tld": ".bo",
+    "timezone": "America/La_Paz",
+    "currency_code": "BOB",
+    "currency_name_cn": "玻利维亚诺",
+    "currency_symbol": "Bs",
+    "language_cn": [
+      "西班牙语",
+      "克丘亚语",
+      "艾马拉语"
+    ],
+    "language_en": [
+      "Spanish",
+      "Quechua",
+      "Aymara"
+    ],
+    "religion": [
+      "天主教",
+      "基督教新教",
+      "传统信仰"
+    ],
+    "area_km2": 1098581,
+    "population": 12100000,
+    "major_ports": [
+      "内陆国家，主要使用智利和秘鲁港口"
+    ],
+    "business_hours": "周一至周五 8:30-17:30",
+    "business_etiquette": [
+      "正式的问候方式",
+      "尊重等级制度",
+      "时间观念较为灵活",
+      "保守的着装"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(8月6日)",
+      "万灵节(11月2日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "耐心很重要",
+      "建立信任关系",
+      "避免急于求成",
+      "尊重当地文化"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/C",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "巴拉圭",
+    "name_en": "Paraguay",
+    "iso2": "PY",
+    "iso3": "PRY",
+    "dial_code": "+595",
+    "capital_cn": "亚松森",
+    "capital_en": "Asunción",
+    "continent_cn": "南美洲",
+    "continent_en": "South America",
+    "tld": ".py",
+    "timezone": "America/Asuncion",
+    "currency_code": "PYG",
+    "currency_name_cn": "巴拉圭瓜拉尼",
+    "currency_symbol": "₲",
+    "language_cn": [
+      "西班牙语",
+      "瓜拉尼语"
+    ],
+    "language_en": [
+      "Spanish",
+      "Guaraní"
+    ],
+    "religion": [
+      "天主教",
+      "基督教新教"
+    ],
+    "area_km2": 406752,
+    "population": 7300000,
+    "major_ports": [
+      "亚松森港",
+      "恩卡纳西翁港",
+      "康塞普西翁港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "友好的握手",
+      "个人关系重要",
+      "正式但轻松的氛围",
+      "时间观念灵活"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(5月14-15日)",
+      "查科停战日(6月12日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "关系网络关键",
+      "决策缓慢",
+      "面对面会议重要",
+      "礼貌和耐心"
+    ],
+    "driving_side": "right",
+    "power_plug": "C",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "乌拉圭",
+    "name_en": "Uruguay",
+    "iso2": "UY",
+    "iso3": "URY",
+    "dial_code": "+598",
+    "capital_cn": "蒙得维的亚",
+    "capital_en": "Montevideo",
+    "continent_cn": "南美洲",
+    "continent_en": "South America",
+    "tld": ".uy",
+    "timezone": "America/Montevideo",
+    "currency_code": "UYU",
+    "currency_name_cn": "乌拉圭比索",
+    "currency_symbol": "$",
+    "language_cn": [
+      "西班牙语"
+    ],
+    "language_en": [
+      "Spanish"
+    ],
+    "religion": [
+      "天主教",
+      "基督教新教",
+      "无宗教"
+    ],
+    "area_km2": 176215,
+    "population": 3500000,
+    "major_ports": [
+      "蒙得维的亚港",
+      "新帕尔米拉港",
+      "弗赖本托斯港"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "正式但友好",
+      "准时相对重要",
+      "保守的着装",
+      "尊重个人空间"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(8月25日)",
+      "宪法日(7月18日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "专业性重要",
+      "直接的沟通方式",
+      "重视教育和文化",
+      "稳健的商业环境"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F/L",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "圭亚那",
+    "name_en": "Guyana",
+    "iso2": "GY",
+    "iso3": "GUY",
+    "dial_code": "+592",
+    "capital_cn": "乔治敦",
+    "capital_en": "Georgetown",
+    "continent_cn": "南美洲",
+    "continent_en": "South America",
+    "tld": ".gy",
+    "timezone": "America/Guyana",
+    "currency_code": "GYD",
+    "currency_name_cn": "圭亚那元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语"
+    ],
+    "language_en": [
+      "English"
+    ],
+    "religion": [
+      "基督教",
+      "印度教",
+      "伊斯兰教"
+    ],
+    "area_km2": 214969,
+    "population": 790000,
+    "major_ports": [
+      "乔治敦港",
+      "新阿姆斯特丹港",
+      "林登港"
+    ],
+    "business_hours": "周一至周五 8:00-16:30",
+    "business_etiquette": [
+      "正式的握手",
+      "使用头衔",
+      "准时重要",
+      "商务休闲装"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(5月26日)",
+      "解放日(8月1日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "英语为商务语言",
+      "多元文化影响",
+      "关系建立重要",
+      "正式的商务流程"
+    ],
+    "driving_side": "left",
+    "power_plug": "A/B/D/G",
+    "voltage": "240V"
+  },
+  {
+    "name_cn": "苏里南",
+    "name_en": "Suriname",
+    "iso2": "SR",
+    "iso3": "SUR",
+    "dial_code": "+597",
+    "capital_cn": "帕拉马里博",
+    "capital_en": "Paramaribo",
+    "continent_cn": "南美洲",
+    "continent_en": "South America",
+    "tld": ".sr",
+    "timezone": "America/Paramaribo",
+    "currency_code": "SRD",
+    "currency_name_cn": "苏里南元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "荷兰语"
+    ],
+    "language_en": [
+      "Dutch"
+    ],
+    "religion": [
+      "基督教",
+      "印度教",
+      "伊斯兰教"
+    ],
+    "area_km2": 163820,
+    "population": 600000,
+    "major_ports": [
+      "帕拉马里博港",
+      "新尼克里港",
+      "帕拉南港"
+    ],
+    "business_hours": "周一至周五 7:30-15:30",
+    "business_etiquette": [
+      "正式的问候",
+      "多元文化敏感性",
+      "时间观念灵活",
+      "尊重等级"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(11月25日)",
+      "废奴日(7月1日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "多语言环境",
+      "关系网络重要",
+      "谈判节奏慢",
+      "文化多样性"
+    ],
+    "driving_side": "left",
+    "power_plug": "C/F",
+    "voltage": "127V/220V"
+  },
+  {
+    "name_cn": "法属圭亚那",
+    "name_en": "French Guiana",
+    "iso2": "GF",
+    "iso3": "GUF",
+    "dial_code": "+594",
+    "capital_cn": "卡宴",
+    "capital_en": "Cayenne",
+    "continent_cn": "南美洲",
+    "continent_en": "South America",
+    "tld": ".gf",
+    "timezone": "America/Cayenne",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "法语"
+    ],
+    "language_en": [
+      "French"
+    ],
+    "religion": [
+      "天主教",
+      "基督教新教",
+      "其他"
+    ],
+    "area_km2": 83534,
+    "population": 300000,
+    "major_ports": [
+      "卡宴港",
+      "库鲁港",
+      "圣洛朗港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "法式商务礼仪",
+      "正式的着装",
+      "使用法语",
+      "准时重要"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "巴士底日(7月14日)",
+      "废奴日(6月10日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "遵循法国商业法规",
+      "欧盟标准适用",
+      "法语是必需的",
+      "正式的商务文化"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/D/E",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "德国",
+    "name_en": "Germany",
+    "iso2": "DE",
+    "iso3": "DEU",
+    "dial_code": "+49",
+    "capital_cn": "柏林",
+    "capital_en": "Berlin",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".de",
+    "timezone": "Europe/Berlin",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "德语"
+    ],
+    "language_en": [
+      "German"
+    ],
+    "religion": [
+      "基督教新教",
+      "天主教",
+      "无宗教",
+      "伊斯兰教"
+    ],
+    "area_km2": 357022,
+    "population": 83200000,
+    "major_ports": [
+      "汉堡港",
+      "不来梅港",
+      "威廉港",
+      "罗斯托克港",
+      "吕贝克港"
+    ],
+    "business_hours": "周一至周五 9:00-17:00",
+    "business_etiquette": [
+      "极其准时",
+      "正式的称呼和握手",
+      "直接坦率的沟通",
+      "重视头衔和学位"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "复活节",
+      "劳动节(5月1日)",
+      "德国统一日(10月3日)",
+      "圣诞节(12月25-26日)"
+    ],
+    "trade_notes": [
+      "高度重视质量和精确性",
+      "详细的计划和准备",
+      "保守的商务着装",
+      "决策过程谨慎但坚定"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "法国",
+    "name_en": "France",
+    "iso2": "FR",
+    "iso3": "FRA",
+    "dial_code": "+33",
+    "capital_cn": "巴黎",
+    "capital_en": "Paris",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".fr",
+    "timezone": "Europe/Paris",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "法语"
+    ],
+    "language_en": [
+      "French"
+    ],
+    "religion": [
+      "天主教",
+      "无宗教",
+      "伊斯兰教",
+      "基督教新教"
+    ],
+    "area_km2": 643801,
+    "population": 67500000,
+    "major_ports": [
+      "马赛港",
+      "勒阿弗尔港",
+      "敦刻尔克港",
+      "南特港",
+      "波尔多港"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "正式的问候和告别",
+      "重视礼貌和优雅",
+      "午餐时间较长",
+      "着装讲究时尚"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "复活节",
+      "劳动节(5月1日)",
+      "巴士底日(7月14日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "建立个人关系很重要",
+      "欣赏法语交流",
+      "等级制度明显",
+      "商务午餐是重要场合"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/E",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "英国",
+    "name_en": "United Kingdom",
+    "iso2": "GB",
+    "iso3": "GBR",
+    "dial_code": "+44",
+    "capital_cn": "伦敦",
+    "capital_en": "London",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".uk",
+    "timezone": "Europe/London",
+    "currency_code": "GBP",
+    "currency_name_cn": "英镑",
+    "currency_symbol": "£",
+    "language_cn": [
+      "英语"
+    ],
+    "language_en": [
+      "English"
+    ],
+    "religion": [
+      "基督教",
+      "无宗教",
+      "伊斯兰教",
+      "印度教"
+    ],
+    "area_km2": 242495,
+    "population": 67500000,
+    "major_ports": [
+      "费利克斯托港",
+      "南安普顿港",
+      "伦敦港",
+      "利物浦港",
+      "格里姆斯比港"
+    ],
+    "business_hours": "周一至周五 9:00-17:30",
+    "business_etiquette": [
+      "准时但不要太早",
+      "保持礼貌和克制",
+      "幽默感受欢迎",
+      "尊重个人隐私"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "复活节",
+      "五月银行假日",
+      "圣诞节(12月25-26日)"
+    ],
+    "trade_notes": [
+      "重视传统和礼仪",
+      "间接的沟通方式",
+      "耐心和外交手腕",
+      "书面确认重要"
+    ],
+    "driving_side": "left",
+    "power_plug": "G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "意大利",
+    "name_en": "Italy",
+    "iso2": "IT",
+    "iso3": "ITA",
+    "dial_code": "+39",
+    "capital_cn": "罗马",
+    "capital_en": "Rome",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".it",
+    "timezone": "Europe/Rome",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "意大利语"
+    ],
+    "language_en": [
+      "Italian"
+    ],
+    "religion": [
+      "天主教",
+      "无宗教",
+      "其他基督教"
+    ],
+    "area_km2": 301340,
+    "population": 60300000,
+    "major_ports": [
+      "热那亚港",
+      "的里雅斯特港",
+      "那不勒斯港",
+      "威尼斯港",
+      "利沃诺港"
+    ],
+    "business_hours": "周一至周五 9:00-13:00, 14:00-18:00",
+    "business_etiquette": [
+      "热情的问候方式",
+      "重视外表和形象",
+      "灵活的时间观念",
+      "建立个人关系关键"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "主显节(1月6日)",
+      "复活节",
+      "解放日(4月25日)",
+      "共和国日(6月2日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "关系和信任至关重要",
+      "决策可能缓慢",
+      "注重风格和品质",
+      "避免过于直接"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F/L",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "西班牙",
+    "name_en": "Spain",
+    "iso2": "ES",
+    "iso3": "ESP",
+    "dial_code": "+34",
+    "capital_cn": "马德里",
+    "capital_en": "Madrid",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".es",
+    "timezone": "Europe/Madrid",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "西班牙语",
+      "加泰罗尼亚语",
+      "巴斯克语",
+      "加利西亚语"
+    ],
+    "language_en": [
+      "Spanish",
+      "Catalan",
+      "Basque",
+      "Galician"
+    ],
+    "religion": [
+      "天主教",
+      "无宗教",
+      "其他"
+    ],
+    "area_km2": 505990,
+    "population": 47400000,
+    "major_ports": [
+      "巴塞罗那港",
+      "瓦伦西亚港",
+      "阿尔赫西拉斯港",
+      "毕尔巴鄂港",
+      "塔拉戈纳港"
+    ],
+    "business_hours": "周一至周五 9:00-14:00, 16:00-19:00",
+    "business_etiquette": [
+      "两次贴面礼",
+      "较晚的商务晚餐",
+      "个人关系优先",
+      "灵活的时间观念"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "主显节(1月6日)",
+      "圣周",
+      "劳动节(5月1日)",
+      "国庆日(10月12日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "建立信任需要时间",
+      "避免在8月安排会议",
+      "决策过程较长",
+      "重视面对面交流"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "荷兰",
+    "name_en": "Netherlands",
+    "iso2": "NL",
+    "iso3": "NLD",
+    "dial_code": "+31",
+    "capital_cn": "阿姆斯特丹",
+    "capital_en": "Amsterdam",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".nl",
+    "timezone": "Europe/Amsterdam",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "荷兰语"
+    ],
+    "language_en": [
+      "Dutch"
+    ],
+    "religion": [
+      "无宗教",
+      "天主教",
+      "基督教新教",
+      "伊斯兰教"
+    ],
+    "area_km2": 41543,
+    "population": 17500000,
+    "major_ports": [
+      "鹿特丹港",
+      "阿姆斯特丹港",
+      "弗利辛恩港",
+      "格罗宁根港"
+    ],
+    "business_hours": "周一至周五 8:30-17:00",
+    "business_etiquette": [
+      "极其准时",
+      "直接坦率的沟通",
+      "平等主义文化",
+      "简约务实的风格"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "国王日(4月27日)",
+      "解放日(5月5日)",
+      "圣诞节(12月25-26日)"
+    ],
+    "trade_notes": [
+      "效率和务实",
+      "共识决策",
+      "英语水平高",
+      "环保意识强"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "比利时",
+    "name_en": "Belgium",
+    "iso2": "BE",
+    "iso3": "BEL",
+    "dial_code": "+32",
+    "capital_cn": "布鲁塞尔",
+    "capital_en": "Brussels",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".be",
+    "timezone": "Europe/Brussels",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "荷兰语",
+      "法语",
+      "德语"
+    ],
+    "language_en": [
+      "Dutch",
+      "French",
+      "German"
+    ],
+    "religion": [
+      "天主教",
+      "无宗教",
+      "其他基督教",
+      "伊斯兰教"
+    ],
+    "area_km2": 30528,
+    "population": 11600000,
+    "major_ports": [
+      "安特卫普港",
+      "泽布吕赫港",
+      "根特港",
+      "奥斯坦德港"
+    ],
+    "business_hours": "周一至周五 8:30-17:30",
+    "business_etiquette": [
+      "正式和保守",
+      "使用适当的语言",
+      "准时很重要",
+      "等级制度明确"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "复活节",
+      "劳动节(5月1日)",
+      "国庆日(7月21日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "多语言能力重要",
+      "谨慎的决策过程",
+      "重视协议和合同",
+      "地区差异明显"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/E",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "瑞士",
+    "name_en": "Switzerland",
+    "iso2": "CH",
+    "iso3": "CHE",
+    "dial_code": "+41",
+    "capital_cn": "伯尔尼",
+    "capital_en": "Bern",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".ch",
+    "timezone": "Europe/Zurich",
+    "currency_code": "CHF",
+    "currency_name_cn": "瑞士法郎",
+    "currency_symbol": "CHF",
+    "language_cn": [
+      "德语",
+      "法语",
+      "意大利语",
+      "罗曼什语"
+    ],
+    "language_en": [
+      "German",
+      "French",
+      "Italian",
+      "Romansh"
+    ],
+    "religion": [
+      "天主教",
+      "基督教新教",
+      "无宗教",
+      "其他"
+    ],
+    "area_km2": 41285,
+    "population": 8700000,
+    "major_ports": [
+      "巴塞尔港（莱茵河港）"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "极度准时",
+      "保守和正式",
+      "尊重隐私",
+      "高质量标准"
+    ],
+    "major_holidays": [
+      "新年(1月1-2日)",
+      "耶稣受难日",
+      "复活节",
+      "劳动节(5月1日)",
+      "国庆日(8月1日)",
+      "圣诞节(12月25-26日)"
+    ],
+    "trade_notes": [
+      "极高的质量要求",
+      "长期关系导向",
+      "谨慎的决策",
+      "多语言能力有利"
+    ],
+    "driving_side": "right",
+    "power_plug": "J",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "奥地利",
+    "name_en": "Austria",
+    "iso2": "AT",
+    "iso3": "AUT",
+    "dial_code": "+43",
+    "capital_cn": "维也纳",
+    "capital_en": "Vienna",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".at",
+    "timezone": "Europe/Vienna",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "德语"
+    ],
+    "language_en": [
+      "German"
+    ],
+    "religion": [
+      "天主教",
+      "基督教新教",
+      "无宗教",
+      "伊斯兰教"
+    ],
+    "area_km2": 83879,
+    "population": 9000000,
+    "major_ports": [
+      "林茨港",
+      "维也纳港",
+      "恩斯港（均为多瑙河港口）"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "正式的头衔使用",
+      "准时非常重要",
+      "保守的着装",
+      "握手问候"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "主显节(1月6日)",
+      "复活节",
+      "劳动节(5月1日)",
+      "国庆日(10月26日)",
+      "圣诞节(12月25-26日)"
+    ],
+    "trade_notes": [
+      "重视等级和头衔",
+      "详细的计划和准备",
+      "保守的商业文化",
+      "长期关系建立"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "波兰",
+    "name_en": "Poland",
+    "iso2": "PL",
+    "iso3": "POL",
+    "dial_code": "+48",
+    "capital_cn": "华沙",
+    "capital_en": "Warsaw",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".pl",
+    "timezone": "Europe/Warsaw",
+    "currency_code": "PLN",
+    "currency_name_cn": "波兰兹罗提",
+    "currency_symbol": "zł",
+    "language_cn": [
+      "波兰语"
+    ],
+    "language_en": [
+      "Polish"
+    ],
+    "religion": [
+      "天主教",
+      "东正教",
+      "基督教新教",
+      "无宗教"
+    ],
+    "area_km2": 312696,
+    "population": 37800000,
+    "major_ports": [
+      "格但斯克港",
+      "格丁尼亚港",
+      "什切青港",
+      "希维诺乌伊希切港"
+    ],
+    "business_hours": "周一至周五 8:00-16:00",
+    "business_etiquette": [
+      "正式的称呼",
+      "坚定的握手",
+      "保守的着装",
+      "尊重等级"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "主显节(1月6日)",
+      "复活节",
+      "劳动节(5月1日)",
+      "宪法日(5月3日)",
+      "独立日(11月11日)",
+      "圣诞节(12月25-26日)"
+    ],
+    "trade_notes": [
+      "建立个人关系",
+      "耐心的谈判",
+      "重视传统",
+      "正式的商务礼仪"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/E",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "瑞典",
+    "name_en": "Sweden",
+    "iso2": "SE",
+    "iso3": "SWE",
+    "dial_code": "+46",
+    "capital_cn": "斯德哥尔摩",
+    "capital_en": "Stockholm",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".se",
+    "timezone": "Europe/Stockholm",
+    "currency_code": "SEK",
+    "currency_name_cn": "瑞典克朗",
+    "currency_symbol": "kr",
+    "language_cn": [
+      "瑞典语"
+    ],
+    "language_en": [
+      "Swedish"
+    ],
+    "religion": [
+      "路德教",
+      "无宗教",
+      "其他基督教",
+      "伊斯兰教"
+    ],
+    "area_km2": 450295,
+    "population": 10400000,
+    "major_ports": [
+      "哥德堡港",
+      "斯德哥尔摩港",
+      "马尔默港",
+      "特雷勒堡港",
+      "赫尔辛堡港"
+    ],
+    "business_hours": "周一至周五 8:00-16:30",
+    "business_etiquette": [
+      "准时极其重要",
+      "平等和非正式",
+      "共识决策",
+      "环保意识强"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "主显节(1月6日)",
+      "复活节",
+      "仲夏节(6月)",
+      "圣诞节(12月24-26日)"
+    ],
+    "trade_notes": [
+      "扁平化组织结构",
+      "工作生活平衡",
+      "直接的沟通",
+      "英语普及率高"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "挪威",
+    "name_en": "Norway",
+    "iso2": "NO",
+    "iso3": "NOR",
+    "dial_code": "+47",
+    "capital_cn": "奥斯陆",
+    "capital_en": "Oslo",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".no",
+    "timezone": "Europe/Oslo",
+    "currency_code": "NOK",
+    "currency_name_cn": "挪威克朗",
+    "currency_symbol": "kr",
+    "language_cn": [
+      "挪威语"
+    ],
+    "language_en": [
+      "Norwegian"
+    ],
+    "religion": [
+      "路德教",
+      "无宗教",
+      "其他基督教"
+    ],
+    "area_km2": 385207,
+    "population": 5400000,
+    "major_ports": [
+      "奥斯陆港",
+      "卑尔根港",
+      "斯塔万格港",
+      "特隆赫姆港",
+      "纳尔维克港"
+    ],
+    "business_hours": "周一至周五 8:00-16:00",
+    "business_etiquette": [
+      "准时非常重要",
+      "非正式和平等",
+      "直接的沟通",
+      "尊重个人空间"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "复活节",
+      "劳动节(5月1日)",
+      "宪法日(5月17日)",
+      "圣诞节(12月24-26日)"
+    ],
+    "trade_notes": [
+      "平等主义文化",
+      "环保和可持续性",
+      "高英语水平",
+      "工作生活平衡"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "丹麦",
+    "name_en": "Denmark",
+    "iso2": "DK",
+    "iso3": "DNK",
+    "dial_code": "+45",
+    "capital_cn": "哥本哈根",
+    "capital_en": "Copenhagen",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".dk",
+    "timezone": "Europe/Copenhagen",
+    "currency_code": "DKK",
+    "currency_name_cn": "丹麦克朗",
+    "currency_symbol": "kr",
+    "language_cn": [
+      "丹麦语"
+    ],
+    "language_en": [
+      "Danish"
+    ],
+    "religion": [
+      "路德教",
+      "无宗教",
+      "其他基督教",
+      "伊斯兰教"
+    ],
+    "area_km2": 43094,
+    "population": 5900000,
+    "major_ports": [
+      "哥本哈根港",
+      "奥胡斯港",
+      "腓特烈西亚港",
+      "奥尔堡港"
+    ],
+    "business_hours": "周一至周五 8:00-16:00",
+    "business_etiquette": [
+      "准时很重要",
+      "非正式的氛围",
+      "平等和谦逊",
+      "直接但友好"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "复活节",
+      "大祈祷日",
+      "耶稣升天节",
+      "宪法日(6月5日)",
+      "圣诞节(12月24-26日)"
+    ],
+    "trade_notes": [
+      "共识文化",
+      "工作生活平衡",
+      "环保意识",
+      "高度信任社会"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/E/F/K",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "芬兰",
+    "name_en": "Finland",
+    "iso2": "FI",
+    "iso3": "FIN",
+    "dial_code": "+358",
+    "capital_cn": "赫尔辛基",
+    "capital_en": "Helsinki",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".fi",
+    "timezone": "Europe/Helsinki",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "芬兰语",
+      "瑞典语"
+    ],
+    "language_en": [
+      "Finnish",
+      "Swedish"
+    ],
+    "religion": [
+      "路德教",
+      "无宗教",
+      "东正教"
+    ],
+    "area_km2": 338424,
+    "population": 5500000,
+    "major_ports": [
+      "赫尔辛基港",
+      "科特卡港",
+      "图尔库港",
+      "拉赫港",
+      "奥卢港"
+    ],
+    "business_hours": "周一至周五 8:00-16:15",
+    "business_etiquette": [
+      "极度准时",
+      "安静和内敛",
+      "直接的沟通",
+      "尊重个人空间"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "主显节(1月6日)",
+      "复活节",
+      "仲夏节(6月)",
+      "独立日(12月6日)",
+      "圣诞节(12月24-26日)"
+    ],
+    "trade_notes": [
+      "重视诚信",
+      "决策可能缓慢",
+      "技术导向",
+      "桑拿文化"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "爱尔兰",
+    "name_en": "Ireland",
+    "iso2": "IE",
+    "iso3": "IRL",
+    "dial_code": "+353",
+    "capital_cn": "都柏林",
+    "capital_en": "Dublin",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".ie",
+    "timezone": "Europe/Dublin",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "英语",
+      "爱尔兰语"
+    ],
+    "language_en": [
+      "English",
+      "Irish"
+    ],
+    "religion": [
+      "天主教",
+      "无宗教",
+      "其他基督教"
+    ],
+    "area_km2": 70273,
+    "population": 5000000,
+    "major_ports": [
+      "都柏林港",
+      "科克港",
+      "香农福因斯港",
+      "贝尔法斯特港"
+    ],
+    "business_hours": "周一至周五 9:00-17:30",
+    "business_etiquette": [
+      "友好和随和",
+      "幽默感重要",
+      "建立个人关系",
+      "相对轻松的氛围"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "圣帕特里克节(3月17日)",
+      "复活节",
+      "圣诞节(12月25-26日)"
+    ],
+    "trade_notes": [
+      "关系导向",
+      "灵活的时间观",
+      "非正式的风格",
+      "口头协议后需书面确认"
+    ],
+    "driving_side": "left",
+    "power_plug": "G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "葡萄牙",
+    "name_en": "Portugal",
+    "iso2": "PT",
+    "iso3": "PRT",
+    "dial_code": "+351",
+    "capital_cn": "里斯本",
+    "capital_en": "Lisbon",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".pt",
+    "timezone": "Europe/Lisbon",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "葡萄牙语"
+    ],
+    "language_en": [
+      "Portuguese"
+    ],
+    "religion": [
+      "天主教",
+      "无宗教",
+      "其他基督教"
+    ],
+    "area_km2": 92090,
+    "population": 10300000,
+    "major_ports": [
+      "里斯本港",
+      "锡尼什港",
+      "莱雄伊什港",
+      "塞图巴尔港",
+      "阿威罗港"
+    ],
+    "business_hours": "周一至周五 9:00-13:00, 14:00-18:00",
+    "business_etiquette": [
+      "正式的初次会面",
+      "建立个人关系",
+      "保守的着装",
+      "尊重等级"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "自由日(4月25日)",
+      "劳动节(5月1日)",
+      "葡萄牙日(6月10日)",
+      "共和国日(10月5日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "耐心的谈判过程",
+      "重视面子",
+      "决策较慢",
+      "正式的商务礼仪"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "希腊",
+    "name_en": "Greece",
+    "iso2": "GR",
+    "iso3": "GRC",
+    "dial_code": "+30",
+    "capital_cn": "雅典",
+    "capital_en": "Athens",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".gr",
+    "timezone": "Europe/Athens",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "希腊语"
+    ],
+    "language_en": [
+      "Greek"
+    ],
+    "religion": [
+      "东正教",
+      "无宗教",
+      "其他"
+    ],
+    "area_km2": 131957,
+    "population": 10700000,
+    "major_ports": [
+      "比雷埃夫斯港",
+      "塞萨洛尼基港",
+      "帕特雷港",
+      "伊拉克利翁港",
+      "沃洛斯港"
+    ],
+    "business_hours": "周一至周五 8:00-16:00",
+    "business_etiquette": [
+      "热情的问候",
+      "建立个人关系关键",
+      "灵活的时间观念",
+      "激烈的讨论正常"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "主显节(1月6日)",
+      "独立日(3月25日)",
+      "复活节",
+      "圣母升天节(8月15日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "关系和信任至关重要",
+      "谈判可能漫长",
+      "避免催促决定",
+      "社交活动重要"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "捷克",
+    "name_en": "Czech Republic",
+    "iso2": "CZ",
+    "iso3": "CZE",
+    "dial_code": "+420",
+    "capital_cn": "布拉格",
+    "capital_en": "Prague",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".cz",
+    "timezone": "Europe/Prague",
+    "currency_code": "CZK",
+    "currency_name_cn": "捷克克朗",
+    "currency_symbol": "Kč",
+    "language_cn": [
+      "捷克语"
+    ],
+    "language_en": [
+      "Czech"
+    ],
+    "religion": [
+      "无宗教",
+      "天主教",
+      "基督教新教"
+    ],
+    "area_km2": 78867,
+    "population": 10700000,
+    "major_ports": [
+      "德辛港",
+      "洛夫西采港",
+      "梅尔尼克港（均为易北河港口）"
+    ],
+    "business_hours": "周一至周五 8:00-16:30",
+    "business_etiquette": [
+      "正式的称呼",
+      "准时很重要",
+      "保守的着装",
+      "初次见面较为保守"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "复活节",
+      "劳动节(5月1日)",
+      "解放日(5月8日)",
+      "圣瓦茨拉夫日(9月28日)",
+      "独立日(10月28日)",
+      "圣诞节(12月24-26日)"
+    ],
+    "trade_notes": [
+      "重视学历和头衔",
+      "谨慎的决策过程",
+      "正式的商务文化",
+      "书面确认重要"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/E",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "匈牙利",
+    "name_en": "Hungary",
+    "iso2": "HU",
+    "iso3": "HUN",
+    "dial_code": "+36",
+    "capital_cn": "布达佩斯",
+    "capital_en": "Budapest",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".hu",
+    "timezone": "Europe/Budapest",
+    "currency_code": "HUF",
+    "currency_name_cn": "匈牙利福林",
+    "currency_symbol": "Ft",
+    "language_cn": [
+      "匈牙利语"
+    ],
+    "language_en": [
+      "Hungarian"
+    ],
+    "religion": [
+      "天主教",
+      "加尔文教",
+      "无宗教",
+      "路德教"
+    ],
+    "area_km2": 93028,
+    "population": 9700000,
+    "major_ports": [
+      "布达佩斯港",
+      "杜纳乌伊瓦罗什港",
+      "贝凯什乔包港（多瑙河港口）"
+    ],
+    "business_hours": "周一至周五 8:00-16:30",
+    "business_etiquette": [
+      "正式的问候和称呼",
+      "握手时保持眼神接触",
+      "准时非常重要",
+      "着装正式"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "国庆日(3月15日)",
+      "复活节",
+      "五一劳动节(5月1日)",
+      "圣斯蒂芬日(8月20日)",
+      "圣诞节(12月25-26日)"
+    ],
+    "trade_notes": [
+      "等级制度明显",
+      "决策过程较慢",
+      "重视礼仪和形式",
+      "建立信任需要时间"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "罗马尼亚",
+    "name_en": "Romania",
+    "iso2": "RO",
+    "iso3": "ROU",
+    "dial_code": "+40",
+    "capital_cn": "布加勒斯特",
+    "capital_en": "Bucharest",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".ro",
+    "timezone": "Europe/Bucharest",
+    "currency_code": "RON",
+    "currency_name_cn": "罗马尼亚列伊",
+    "currency_symbol": "lei",
+    "language_cn": [
+      "罗马尼亚语"
+    ],
+    "language_en": [
+      "Romanian"
+    ],
+    "religion": [
+      "东正教",
+      "天主教",
+      "基督教新教",
+      "无宗教"
+    ],
+    "area_km2": 238391,
+    "population": 19100000,
+    "major_ports": [
+      "康斯坦察港",
+      "加拉茨港",
+      "布勒伊拉港",
+      "图尔恰港"
+    ],
+    "business_hours": "周一至周五 9:00-17:00",
+    "business_etiquette": [
+      "正式的称呼和问候",
+      "准时受到重视",
+      "等级观念强",
+      "着装保守正式"
+    ],
+    "major_holidays": [
+      "新年(1月1-2日)",
+      "复活节",
+      "劳动节(5月1日)",
+      "圣母升天节(8月15日)",
+      "国庆日(12月1日)",
+      "圣诞节(12月25-26日)"
+    ],
+    "trade_notes": [
+      "建立个人关系重要",
+      "决策过程可能缓慢",
+      "官僚主义可能存在",
+      "耐心和礼貌关键"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "保加利亚",
+    "name_en": "Bulgaria",
+    "iso2": "BG",
+    "iso3": "BGR",
+    "dial_code": "+359",
+    "capital_cn": "索非亚",
+    "capital_en": "Sofia",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".bg",
+    "timezone": "Europe/Sofia",
+    "currency_code": "BGN",
+    "currency_name_cn": "保加利亚列弗",
+    "currency_symbol": "лв",
+    "language_cn": [
+      "保加利亚语"
+    ],
+    "language_en": [
+      "Bulgarian"
+    ],
+    "religion": [
+      "东正教",
+      "伊斯兰教",
+      "无宗教"
+    ],
+    "area_km2": 110879,
+    "population": 6900000,
+    "major_ports": [
+      "瓦尔纳港",
+      "布尔加斯港",
+      "鲁塞港"
+    ],
+    "business_hours": "周一至周五 9:00-17:30",
+    "business_etiquette": [
+      "正式的商务风格",
+      "握手问候",
+      "注意点头摇头含义相反",
+      "保守的着装"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "解放日(3月3日)",
+      "复活节",
+      "劳动节(5月1日)",
+      "独立日(9月22日)",
+      "圣诞节(12月25-26日)"
+    ],
+    "trade_notes": [
+      "等级制度重要",
+      "决策过程较慢",
+      "建立信任关键",
+      "正式的商务礼仪"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "克罗地亚",
+    "name_en": "Croatia",
+    "iso2": "HR",
+    "iso3": "HRV",
+    "dial_code": "+385",
+    "capital_cn": "萨格勒布",
+    "capital_en": "Zagreb",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".hr",
+    "timezone": "Europe/Zagreb",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "克罗地亚语"
+    ],
+    "language_en": [
+      "Croatian"
+    ],
+    "religion": [
+      "天主教",
+      "东正教",
+      "无宗教"
+    ],
+    "area_km2": 56594,
+    "population": 4000000,
+    "major_ports": [
+      "里耶卡港",
+      "斯普利特港",
+      "普洛切港",
+      "扎达尔港",
+      "希贝尼克港"
+    ],
+    "business_hours": "周一至周五 8:00-16:00",
+    "business_etiquette": [
+      "正式的商务礼仪",
+      "准时很重要",
+      "保守的着装",
+      "尊重等级"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "主显节(1月6日)",
+      "复活节",
+      "劳动节(5月1日)",
+      "国庆日(6月25日)",
+      "圣诞节(12月25-26日)"
+    ],
+    "trade_notes": [
+      "建立个人关系",
+      "正式的沟通方式",
+      "决策可能缓慢",
+      "重视教育和资历"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "斯洛文尼亚",
+    "name_en": "Slovenia",
+    "iso2": "SI",
+    "iso3": "SVN",
+    "dial_code": "+386",
+    "capital_cn": "卢布尔雅那",
+    "capital_en": "Ljubljana",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".si",
+    "timezone": "Europe/Ljubljana",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "斯洛文尼亚语"
+    ],
+    "language_en": [
+      "Slovene"
+    ],
+    "religion": [
+      "天主教",
+      "无宗教",
+      "其他"
+    ],
+    "area_km2": 20273,
+    "population": 2100000,
+    "major_ports": [
+      "科佩尔港",
+      "伊佐拉港",
+      "皮兰港"
+    ],
+    "business_hours": "周一至周五 8:00-16:00",
+    "business_etiquette": [
+      "准时很重要",
+      "正式的初次会面",
+      "谦虚和内敛",
+      "环保意识强"
+    ],
+    "major_holidays": [
+      "新年(1月1-2日)",
+      "普雷舍伦日(2月8日)",
+      "复活节",
+      "劳动节(5月1-2日)",
+      "国庆日(6月25日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "重视质量",
+      "谨慎的决策",
+      "正式但友好",
+      "多语言能力普遍"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "斯洛伐克",
+    "name_en": "Slovakia",
+    "iso2": "SK",
+    "iso3": "SVK",
+    "dial_code": "+421",
+    "capital_cn": "布拉迪斯拉发",
+    "capital_en": "Bratislava",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".sk",
+    "timezone": "Europe/Bratislava",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "斯洛伐克语"
+    ],
+    "language_en": [
+      "Slovak"
+    ],
+    "religion": [
+      "天主教",
+      "基督教新教",
+      "无宗教"
+    ],
+    "area_km2": 49035,
+    "population": 5500000,
+    "major_ports": [
+      "布拉迪斯拉发港",
+      "科马尔诺港（多瑙河港口）"
+    ],
+    "business_hours": "周一至周五 8:00-16:30",
+    "business_etiquette": [
+      "正式的商务风格",
+      "使用头衔",
+      "准时重要",
+      "保守的着装"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "主显节(1月6日)",
+      "复活节",
+      "劳动节(5月1日)",
+      "国庆日(9月1日)",
+      "圣诞节(12月24-26日)"
+    ],
+    "trade_notes": [
+      "等级制度明显",
+      "建立信任需要时间",
+      "正式的沟通",
+      "决策过程谨慎"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/E",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "爱沙尼亚",
+    "name_en": "Estonia",
+    "iso2": "EE",
+    "iso3": "EST",
+    "dial_code": "+372",
+    "capital_cn": "塔林",
+    "capital_en": "Tallinn",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".ee",
+    "timezone": "Europe/Tallinn",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "爱沙尼亚语"
+    ],
+    "language_en": [
+      "Estonian"
+    ],
+    "religion": [
+      "无宗教",
+      "路德教",
+      "东正教"
+    ],
+    "area_km2": 45228,
+    "population": 1300000,
+    "major_ports": [
+      "塔林港",
+      "锡拉迈埃港",
+      "派尔努港",
+      "昆达港"
+    ],
+    "business_hours": "周一至周五 9:00-17:00",
+    "business_etiquette": [
+      "准时非常重要",
+      "直接的沟通方式",
+      "保守和正式",
+      "技术导向"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(2月24日)",
+      "耶稣受难日",
+      "复活节",
+      "仲夏节(6月23-24日)",
+      "圣诞节(12月24-26日)"
+    ],
+    "trade_notes": [
+      "数字化程度高",
+      "效率导向",
+      "英语水平好",
+      "北欧风格的商务文化"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "拉脱维亚",
+    "name_en": "Latvia",
+    "iso2": "LV",
+    "iso3": "LVA",
+    "dial_code": "+371",
+    "capital_cn": "里加",
+    "capital_en": "Riga",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".lv",
+    "timezone": "Europe/Riga",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "拉脱维亚语"
+    ],
+    "language_en": [
+      "Latvian"
+    ],
+    "religion": [
+      "路德教",
+      "天主教",
+      "东正教",
+      "无宗教"
+    ],
+    "area_km2": 64589,
+    "population": 1900000,
+    "major_ports": [
+      "里加港",
+      "文茨皮尔斯港",
+      "利耶帕亚港"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "正式的商务礼仪",
+      "准时很重要",
+      "保守的着装",
+      "初次见面较为拘谨"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "耶稣受难日",
+      "复活节",
+      "劳动节(5月1日)",
+      "仲夏节(6月23-24日)",
+      "独立日(11月18日)",
+      "圣诞节(12月24-26日)"
+    ],
+    "trade_notes": [
+      "建立信任需要时间",
+      "正式的沟通方式",
+      "尊重等级制度",
+      "耐心的谈判过程"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "立陶宛",
+    "name_en": "Lithuania",
+    "iso2": "LT",
+    "iso3": "LTU",
+    "dial_code": "+370",
+    "capital_cn": "维尔纽斯",
+    "capital_en": "Vilnius",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".lt",
+    "timezone": "Europe/Vilnius",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "立陶宛语"
+    ],
+    "language_en": [
+      "Lithuanian"
+    ],
+    "religion": [
+      "天主教",
+      "东正教",
+      "无宗教"
+    ],
+    "area_km2": 65300,
+    "population": 2800000,
+    "major_ports": [
+      "克莱佩达港",
+      "布廷盖港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "正式的问候方式",
+      "准时受到重视",
+      "保守的商务风格",
+      "尊重个人空间"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(2月16日)",
+      "复活节",
+      "劳动节(5月1日)",
+      "仲夏节(6月24日)",
+      "圣诞节(12月24-26日)"
+    ],
+    "trade_notes": [
+      "等级制度存在",
+      "建立关系重要",
+      "谨慎的决策过程",
+      "正式的商务礼仪"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "卢森堡",
+    "name_en": "Luxembourg",
+    "iso2": "LU",
+    "iso3": "LUX",
+    "dial_code": "+352",
+    "capital_cn": "卢森堡市",
+    "capital_en": "Luxembourg City",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".lu",
+    "timezone": "Europe/Luxembourg",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "卢森堡语",
+      "法语",
+      "德语"
+    ],
+    "language_en": [
+      "Luxembourgish",
+      "French",
+      "German"
+    ],
+    "religion": [
+      "天主教",
+      "无宗教",
+      "基督教新教"
+    ],
+    "area_km2": 2586,
+    "population": 640000,
+    "major_ports": [
+      "默特尔特港（摩泽尔河港）"
+    ],
+    "business_hours": "周一至周五 8:30-17:30",
+    "business_etiquette": [
+      "多语言能力重要",
+      "正式但友好",
+      "准时很重要",
+      "国际化视野"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "复活节",
+      "劳动节(5月1日)",
+      "国庆日(6月23日)",
+      "圣诞节(12月25-26日)"
+    ],
+    "trade_notes": [
+      "金融中心地位",
+      "多元文化环境",
+      "保守的商务文化",
+      "高效的决策"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "马耳他",
+    "name_en": "Malta",
+    "iso2": "MT",
+    "iso3": "MLT",
+    "dial_code": "+356",
+    "capital_cn": "瓦莱塔",
+    "capital_en": "Valletta",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".mt",
+    "timezone": "Europe/Malta",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "马耳他语",
+      "英语"
+    ],
+    "language_en": [
+      "Maltese",
+      "English"
+    ],
+    "religion": [
+      "天主教",
+      "其他"
+    ],
+    "area_km2": 316,
+    "population": 520000,
+    "major_ports": [
+      "马尔萨什洛克港",
+      "瓦莱塔大港"
+    ],
+    "business_hours": "周一至周五 8:30-17:00",
+    "business_etiquette": [
+      "正式但友好",
+      "英语广泛使用",
+      "地中海式的时间观",
+      "关系导向"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "圣保罗海难日(2月10日)",
+      "自由日(3月31日)",
+      "劳动节(5月1日)",
+      "共和国日(12月13日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "英联邦背景",
+      "服务业导向",
+      "小型经济体的灵活性",
+      "国际化程度高"
+    ],
+    "driving_side": "left",
+    "power_plug": "G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "塞浦路斯",
+    "name_en": "Cyprus",
+    "iso2": "CY",
+    "iso3": "CYP",
+    "dial_code": "+357",
+    "capital_cn": "尼科西亚",
+    "capital_en": "Nicosia",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".cy",
+    "timezone": "Asia/Nicosia",
+    "currency_code": "EUR",
+    "currency_name_cn": "欧元",
+    "currency_symbol": "€",
+    "language_cn": [
+      "希腊语",
+      "土耳其语"
+    ],
+    "language_en": [
+      "Greek",
+      "Turkish"
+    ],
+    "religion": [
+      "东正教",
+      "伊斯兰教"
+    ],
+    "area_km2": 9251,
+    "population": 1200000,
+    "major_ports": [
+      "利马索尔港",
+      "拉纳卡港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "热情友好",
+      "个人关系重要",
+      "较为轻松的氛围",
+      "时间观念灵活"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "主显节(1月6日)",
+      "希腊独立日(3月25日)",
+      "复活节",
+      "独立日(10月1日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "地中海商业文化",
+      "英语普及率高",
+      "服务业发达",
+      "关系网络重要"
+    ],
+    "driving_side": "left",
+    "power_plug": "G",
+    "voltage": "240V"
+  },
+  {
+    "name_cn": "冰岛",
+    "name_en": "Iceland",
+    "iso2": "IS",
+    "iso3": "ISL",
+    "dial_code": "+354",
+    "capital_cn": "雷克雅未克",
+    "capital_en": "Reykjavik",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".is",
+    "timezone": "Atlantic/Reykjavik",
+    "currency_code": "ISK",
+    "currency_name_cn": "冰岛克朗",
+    "currency_symbol": "kr",
+    "language_cn": [
+      "冰岛语"
+    ],
+    "language_en": [
+      "Icelandic"
+    ],
+    "religion": [
+      "路德教",
+      "无宗教"
+    ],
+    "area_km2": 103000,
+    "population": 370000,
+    "major_ports": [
+      "雷克雅未克港",
+      "格伦达菲厄泽港",
+      "阿克雷里港"
+    ],
+    "business_hours": "周一至周五 9:00-17:00",
+    "business_etiquette": [
+      "非正式和平等",
+      "直呼其名",
+      "准时重要",
+      "环保意识强"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "复活节",
+      "劳动节(5月1日)",
+      "国庆日(6月17日)",
+      "圣诞节(12月24-26日)"
+    ],
+    "trade_notes": [
+      "平等主义文化",
+      "创新和可持续性",
+      "英语水平高",
+      "小型紧密的商业社区"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "俄罗斯",
+    "name_en": "Russia",
+    "iso2": "RU",
+    "iso3": "RUS",
+    "dial_code": "+7",
+    "capital_cn": "莫斯科",
+    "capital_en": "Moscow",
+    "continent_cn": "欧洲/亚洲",
+    "continent_en": "Europe/Asia",
+    "tld": ".ru",
+    "timezone": "Europe/Moscow",
+    "currency_code": "RUB",
+    "currency_name_cn": "俄罗斯卢布",
+    "currency_symbol": "₽",
+    "language_cn": [
+      "俄语"
+    ],
+    "language_en": [
+      "Russian"
+    ],
+    "religion": [
+      "东正教",
+      "伊斯兰教",
+      "佛教",
+      "无宗教"
+    ],
+    "area_km2": 17098242,
+    "population": 146000000,
+    "major_ports": [
+      "圣彼得堡港",
+      "新罗西斯克港",
+      "符拉迪沃斯托克港",
+      "摩尔曼斯克港",
+      "加里宁格勒港",
+      "纳霍德卡港"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "正式的商务礼仪",
+      "重视头衔和地位",
+      "建立个人关系至关重要",
+      "耐心的谈判过程"
+    ],
+    "major_holidays": [
+      "新年(1月1-8日)",
+      "东正教圣诞节(1月7日)",
+      "祖国保卫者日(2月23日)",
+      "国际妇女节(3月8日)",
+      "劳动节(5月1日)",
+      "胜利日(5月9日)",
+      "俄罗斯日(6月12日)",
+      "统一日(11月4日)"
+    ],
+    "trade_notes": [
+      "等级制度明显",
+      "决策过程集中",
+      "书面协议重要",
+      "商务娱乐常见"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "埃及",
+    "name_en": "Egypt",
+    "iso2": "EG",
+    "iso3": "EGY",
+    "dial_code": "+20",
+    "capital_cn": "开罗",
+    "capital_en": "Cairo",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".eg",
+    "timezone": "Africa/Cairo",
+    "currency_code": "EGP",
+    "currency_name_cn": "埃及镑",
+    "currency_symbol": "£",
+    "language_cn": [
+      "阿拉伯语"
+    ],
+    "language_en": [
+      "Arabic"
+    ],
+    "religion": [
+      "伊斯兰教",
+      "基督教科普特派"
+    ],
+    "area_km2": 1001450,
+    "population": 104300000,
+    "major_ports": [
+      "亚历山大港",
+      "塞得港",
+      "苏伊士港",
+      "杜姆亚特港",
+      "萨法贾港"
+    ],
+    "business_hours": "周日至周四 9:00-17:00",
+    "business_etiquette": [
+      "重视个人关系",
+      "耐心的谈判过程",
+      "尊重伊斯兰习俗",
+      "正式的称呼"
+    ],
+    "major_holidays": [
+      "科普特圣诞节(1月7日)",
+      "革命日(1月25日)",
+      "斋月",
+      "开斋节",
+      "宰牲节",
+      "先知诞辰"
+    ],
+    "trade_notes": [
+      "建立信任至关重要",
+      "避免周五安排会议",
+      "礼品交换常见",
+      "等级制度明显"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "南非",
+    "name_en": "South Africa",
+    "iso2": "ZA",
+    "iso3": "ZAF",
+    "dial_code": "+27",
+    "capital_cn": "比勒陀利亚/开普敦/布隆方丹",
+    "capital_en": "Pretoria/Cape Town/Bloemfontein",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".za",
+    "timezone": "Africa/Johannesburg",
+    "currency_code": "ZAR",
+    "currency_name_cn": "南非兰特",
+    "currency_symbol": "R",
+    "language_cn": [
+      "南非荷兰语",
+      "英语",
+      "祖鲁语",
+      "科萨语"
+    ],
+    "language_en": [
+      "Afrikaans",
+      "English",
+      "Zulu",
+      "Xhosa"
+    ],
+    "religion": [
+      "基督教",
+      "传统信仰",
+      "伊斯兰教",
+      "印度教"
+    ],
+    "area_km2": 1219090,
+    "population": 60100000,
+    "major_ports": [
+      "德班港",
+      "开普敦港",
+      "伊丽莎白港",
+      "理查兹湾港",
+      "萨尔达尼亚港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "多元文化敏感性",
+      "准时重要",
+      "正式的初次会面",
+      "尊重不同背景"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "人权日(3月21日)",
+      "自由日(4月27日)",
+      "青年日(6月16日)",
+      "遗产日(9月24日)",
+      "和解日(12月16日)"
+    ],
+    "trade_notes": [
+      "英语为商务语言",
+      "重视B-BBEE政策",
+      "关系建立重要",
+      "安全意识必要"
+    ],
+    "driving_side": "left",
+    "power_plug": "M",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "尼日利亚",
+    "name_en": "Nigeria",
+    "iso2": "NG",
+    "iso3": "NGA",
+    "dial_code": "+234",
+    "capital_cn": "阿布贾",
+    "capital_en": "Abuja",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".ng",
+    "timezone": "Africa/Lagos",
+    "currency_code": "NGN",
+    "currency_name_cn": "尼日利亚奈拉",
+    "currency_symbol": "₦",
+    "language_cn": [
+      "英语",
+      "豪萨语",
+      "约鲁巴语",
+      "伊博语"
+    ],
+    "language_en": [
+      "English",
+      "Hausa",
+      "Yoruba",
+      "Igbo"
+    ],
+    "religion": [
+      "伊斯兰教",
+      "基督教",
+      "传统信仰"
+    ],
+    "area_km2": 923768,
+    "population": 213400000,
+    "major_ports": [
+      "拉各斯港",
+      "哈科特港",
+      "卡拉巴尔港",
+      "瓦里港",
+      "奥尼港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "重视头衔和地位",
+      "建立个人关系关键",
+      "时间观念较灵活",
+      "正式的着装"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "耶稣受难日",
+      "复活节",
+      "劳动节(5月1日)",
+      "民主日(6月12日)",
+      "独立日(10月1日)",
+      "圣诞节(12月25-26日)"
+    ],
+    "trade_notes": [
+      "关系网络至关重要",
+      "耐心的谈判过程",
+      "尊重宗教差异",
+      "等级制度明显"
+    ],
+    "driving_side": "right",
+    "power_plug": "D/G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "摩洛哥",
+    "name_en": "Morocco",
+    "iso2": "MA",
+    "iso3": "MAR",
+    "dial_code": "+212",
+    "capital_cn": "拉巴特",
+    "capital_en": "Rabat",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".ma",
+    "timezone": "Africa/Casablanca",
+    "currency_code": "MAD",
+    "currency_name_cn": "摩洛哥迪拉姆",
+    "currency_symbol": "د.م.",
+    "language_cn": [
+      "阿拉伯语",
+      "柏柏尔语",
+      "法语"
+    ],
+    "language_en": [
+      "Arabic",
+      "Berber",
+      "French"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 446550,
+    "population": 37300000,
+    "major_ports": [
+      "卡萨布兰卡港",
+      "丹吉尔港",
+      "杰迪代港",
+      "阿加迪尔港",
+      "萨非港"
+    ],
+    "business_hours": "周一至周五 8:30-12:00, 14:30-18:30",
+    "business_etiquette": [
+      "法语广泛使用",
+      "建立信任重要",
+      "正式的商务礼仪",
+      "尊重伊斯兰传统"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立宣言日(1月11日)",
+      "劳动节(5月1日)",
+      "登基日(7月30日)",
+      "绿色进军日(8月20日)",
+      "独立日(11月18日)"
+    ],
+    "trade_notes": [
+      "耐心的谈判风格",
+      "避免周五下午会议",
+      "茶文化重要",
+      "礼品交换习俗"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/E",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "肯尼亚",
+    "name_en": "Kenya",
+    "iso2": "KE",
+    "iso3": "KEN",
+    "dial_code": "+254",
+    "capital_cn": "内罗毕",
+    "capital_en": "Nairobi",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".ke",
+    "timezone": "Africa/Nairobi",
+    "currency_code": "KES",
+    "currency_name_cn": "肯尼亚先令",
+    "currency_symbol": "KSh",
+    "language_cn": [
+      "斯瓦希里语",
+      "英语"
+    ],
+    "language_en": [
+      "Swahili",
+      "English"
+    ],
+    "religion": [
+      "基督教",
+      "伊斯兰教",
+      "传统信仰"
+    ],
+    "area_km2": 580367,
+    "population": 54000000,
+    "major_ports": [
+      "蒙巴萨港",
+      "拉穆港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "握手问候普遍",
+      "尊重长者",
+      "建立关系重要",
+      "正装或商务休闲装"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "耶稣受难日",
+      "复活节",
+      "劳动节(5月1日)",
+      "马达拉卡日(6月1日)",
+      "马休加日(10月20日)",
+      "独立日(12月12日)",
+      "圣诞节(12月25-26日)"
+    ],
+    "trade_notes": [
+      "英语为商务语言",
+      "时间观念较灵活",
+      "个人关系优先",
+      "东非商业中心"
+    ],
+    "driving_side": "left",
+    "power_plug": "G",
+    "voltage": "240V"
+  },
+  {
+    "name_cn": "埃塞俄比亚",
+    "name_en": "Ethiopia",
+    "iso2": "ET",
+    "iso3": "ETH",
+    "dial_code": "+251",
+    "capital_cn": "亚的斯亚贝巴",
+    "capital_en": "Addis Ababa",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".et",
+    "timezone": "Africa/Addis_Ababa",
+    "currency_code": "ETB",
+    "currency_name_cn": "埃塞俄比亚比尔",
+    "currency_symbol": "Br",
+    "language_cn": [
+      "阿姆哈拉语",
+      "奥罗莫语"
+    ],
+    "language_en": [
+      "Amharic",
+      "Oromo"
+    ],
+    "religion": [
+      "埃塞俄比亚正教",
+      "伊斯兰教",
+      "基督教新教"
+    ],
+    "area_km2": 1104300,
+    "population": 120300000,
+    "major_ports": [
+      "吉布提港（通过邻国）"
+    ],
+    "business_hours": "周一至周五 8:30-17:30",
+    "business_etiquette": [
+      "尊重等级制度",
+      "耐心和礼貌",
+      "正式的问候",
+      "建立信任关键"
+    ],
+    "major_holidays": [
+      "埃塞俄比亚圣诞节(1月7日)",
+      "主显节(1月19日)",
+      "阿杜瓦胜利日(3月2日)",
+      "埃塞俄比亚新年(9月11日)",
+      "马斯卡尔节(9月27日)"
+    ],
+    "trade_notes": [
+      "使用埃塞俄比亚历",
+      "咖啡文化重要",
+      "决策过程较慢",
+      "关系导向文化"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/E/F/L",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "加纳",
+    "name_en": "Ghana",
+    "iso2": "GH",
+    "iso3": "GHA",
+    "dial_code": "+233",
+    "capital_cn": "阿克拉",
+    "capital_en": "Accra",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".gh",
+    "timezone": "Africa/Accra",
+    "currency_code": "GHS",
+    "currency_name_cn": "加纳塞地",
+    "currency_symbol": "₵",
+    "language_cn": [
+      "英语",
+      "契维语",
+      "阿肯语"
+    ],
+    "language_en": [
+      "English",
+      "Twi",
+      "Akan"
+    ],
+    "religion": [
+      "基督教",
+      "伊斯兰教",
+      "传统信仰"
+    ],
+    "area_km2": 238533,
+    "population": 31700000,
+    "major_ports": [
+      "特马港",
+      "塔科拉迪港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "热情友好的问候",
+      "尊重长者和权威",
+      "正式的称呼",
+      "色彩鲜艳的传统服装受欢迎"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(3月6日)",
+      "耶稣受难日",
+      "复活节",
+      "劳动节(5月1日)",
+      "共和国日(7月1日)",
+      "圣诞节(12月25-26日)"
+    ],
+    "trade_notes": [
+      "英语为官方语言",
+      "时间观念灵活",
+      "个人关系重要",
+      "握手礼仪复杂"
+    ],
+    "driving_side": "right",
+    "power_plug": "D/G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "阿尔及利亚",
+    "name_en": "Algeria",
+    "iso2": "DZ",
+    "iso3": "DZA",
+    "dial_code": "+213",
+    "capital_cn": "阿尔及尔",
+    "capital_en": "Algiers",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".dz",
+    "timezone": "Africa/Algiers",
+    "currency_code": "DZD",
+    "currency_name_cn": "阿尔及利亚第纳尔",
+    "currency_symbol": "د.ج",
+    "language_cn": [
+      "阿拉伯语",
+      "柏柏尔语",
+      "法语"
+    ],
+    "language_en": [
+      "Arabic",
+      "Berber",
+      "French"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 2381741,
+    "population": 44700000,
+    "major_ports": [
+      "阿尔及尔港",
+      "奥兰港",
+      "安纳巴港",
+      "贝贾亚港",
+      "斯基克达港"
+    ],
+    "business_hours": "周日至周四 8:00-16:30",
+    "business_etiquette": [
+      "法语商务交流常见",
+      "正式的礼仪",
+      "建立个人关系",
+      "尊重伊斯兰习俗"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "劳动节(5月1日)",
+      "独立日(7月5日)",
+      "革命日(11月1日)",
+      "伊斯兰节日"
+    ],
+    "trade_notes": [
+      "官僚程序可能复杂",
+      "耐心非常重要",
+      "避免周五会议",
+      "茶文化社交重要"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "突尼斯",
+    "name_en": "Tunisia",
+    "iso2": "TN",
+    "iso3": "TUN",
+    "dial_code": "+216",
+    "capital_cn": "突尼斯市",
+    "capital_en": "Tunis",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".tn",
+    "timezone": "Africa/Tunis",
+    "currency_code": "TND",
+    "currency_name_cn": "突尼斯第纳尔",
+    "currency_symbol": "د.ت",
+    "language_cn": [
+      "阿拉伯语",
+      "法语"
+    ],
+    "language_en": [
+      "Arabic",
+      "French"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 163610,
+    "population": 11900000,
+    "major_ports": [
+      "拉迪斯港",
+      "比塞大港",
+      "斯法克斯港",
+      "苏塞港",
+      "加贝斯港"
+    ],
+    "business_hours": "周一至周五 8:00-12:00, 14:00-18:00",
+    "business_etiquette": [
+      "法语广泛使用",
+      "握手问候",
+      "正式的商务风格",
+      "建立信任重要"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "革命日(1月14日)",
+      "独立日(3月20日)",
+      "烈士日(4月9日)",
+      "共和国日(7月25日)",
+      "撤离日(10月15日)"
+    ],
+    "trade_notes": [
+      "地中海商业文化",
+      "个人关系关键",
+      "午休时间长",
+      "谈判需要耐心"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/E",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "利比亚",
+    "name_en": "Libya",
+    "iso2": "LY",
+    "iso3": "LBY",
+    "dial_code": "+218",
+    "capital_cn": "的黎波里",
+    "capital_en": "Tripoli",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".ly",
+    "timezone": "Africa/Tripoli",
+    "currency_code": "LYD",
+    "currency_name_cn": "利比亚第纳尔",
+    "currency_symbol": "ل.د",
+    "language_cn": [
+      "阿拉伯语"
+    ],
+    "language_en": [
+      "Arabic"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 1759540,
+    "population": 6900000,
+    "major_ports": [
+      "的黎波里港",
+      "班加西港",
+      "米苏拉塔港",
+      "托布鲁克港"
+    ],
+    "business_hours": "周日至周四 8:00-14:00",
+    "business_etiquette": [
+      "伊斯兰礼仪重要",
+      "建立个人关系",
+      "正式的称呼",
+      "耐心必要"
+    ],
+    "major_holidays": [
+      "解放日(2月17日)",
+      "劳动节(5月1日)",
+      "独立日(12月24日)",
+      "伊斯兰节日"
+    ],
+    "trade_notes": [
+      "石油经济主导",
+      "关系网络关键",
+      "决策过程慢",
+      "现金交易常见"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/D/F/L",
+    "voltage": "127V/230V"
+  },
+  {
+    "name_cn": "苏丹",
+    "name_en": "Sudan",
+    "iso2": "SD",
+    "iso3": "SDN",
+    "dial_code": "+249",
+    "capital_cn": "喀土穆",
+    "capital_en": "Khartoum",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".sd",
+    "timezone": "Africa/Khartoum",
+    "currency_code": "SDG",
+    "currency_name_cn": "苏丹镑",
+    "currency_symbol": "SDG",
+    "language_cn": [
+      "阿拉伯语",
+      "英语"
+    ],
+    "language_en": [
+      "Arabic",
+      "English"
+    ],
+    "religion": [
+      "伊斯兰教",
+      "基督教",
+      "传统信仰"
+    ],
+    "area_km2": 1861484,
+    "population": 45700000,
+    "major_ports": [
+      "苏丹港",
+      "萨瓦金港"
+    ],
+    "business_hours": "周日至周四 8:00-15:00",
+    "business_etiquette": [
+      "尊重伊斯兰传统",
+      "正式的问候",
+      "耐心和礼貌",
+      "等级制度明显"
+    ],
+    "major_holidays": [
+      "独立日(1月1日)",
+      "革命日(6月30日)",
+      "伊斯兰节日"
+    ],
+    "trade_notes": [
+      "建立信任缓慢",
+      "官僚程序复杂",
+      "个人关系关键",
+      "商务节奏慢"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/D",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "坦桑尼亚",
+    "name_en": "Tanzania",
+    "iso2": "TZ",
+    "iso3": "TZA",
+    "dial_code": "+255",
+    "capital_cn": "多多马",
+    "capital_en": "Dodoma",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".tz",
+    "timezone": "Africa/Dar_es_Salaam",
+    "currency_code": "TZS",
+    "currency_name_cn": "坦桑尼亚先令",
+    "currency_symbol": "TSh",
+    "language_cn": [
+      "斯瓦希里语",
+      "英语"
+    ],
+    "language_en": [
+      "Swahili",
+      "English"
+    ],
+    "religion": [
+      "基督教",
+      "伊斯兰教",
+      "传统信仰"
+    ],
+    "area_km2": 947303,
+    "population": 61500000,
+    "major_ports": [
+      "达累斯萨拉姆港",
+      "姆特瓦拉港",
+      "坦噶港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "尊重和礼貌重要",
+      "握手问候",
+      "耐心的交流",
+      "保守的着装"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "桑给巴尔革命日(1月12日)",
+      "耶稣受难日",
+      "复活节",
+      "联合日(4月26日)",
+      "劳动节(5月1日)",
+      "独立日(12月9日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "斯瓦希里语有优势",
+      "建立关系需时间",
+      "共识决策文化",
+      "避免直接拒绝"
+    ],
+    "driving_side": "left",
+    "power_plug": "D/G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "乌干达",
+    "name_en": "Uganda",
+    "iso2": "UG",
+    "iso3": "UGA",
+    "dial_code": "+256",
+    "capital_cn": "坎帕拉",
+    "capital_en": "Kampala",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".ug",
+    "timezone": "Africa/Kampala",
+    "currency_code": "UGX",
+    "currency_name_cn": "乌干达先令",
+    "currency_symbol": "USh",
+    "language_cn": [
+      "英语",
+      "斯瓦希里语",
+      "卢干达语"
+    ],
+    "language_en": [
+      "English",
+      "Swahili",
+      "Luganda"
+    ],
+    "religion": [
+      "基督教",
+      "伊斯兰教",
+      "传统信仰"
+    ],
+    "area_km2": 241038,
+    "population": 47100000,
+    "major_ports": [
+      "金贾港",
+      "恩德培港（均为内陆港）"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "正式的问候方式",
+      "尊重长者",
+      "建立个人关系",
+      "时间观念灵活"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "解放日(1月26日)",
+      "耶稣受难日",
+      "复活节",
+      "劳动节(5月1日)",
+      "烈士日(6月3日)",
+      "独立日(10月9日)",
+      "圣诞节(12月25-26日)"
+    ],
+    "trade_notes": [
+      "英语为官方语言",
+      "等级制度存在",
+      "耐心谈判必要",
+      "关系网络重要"
+    ],
+    "driving_side": "left",
+    "power_plug": "G",
+    "voltage": "240V"
+  },
+  {
+    "name_cn": "津巴布韦",
+    "name_en": "Zimbabwe",
+    "iso2": "ZW",
+    "iso3": "ZWE",
+    "dial_code": "+263",
+    "capital_cn": "哈拉雷",
+    "capital_en": "Harare",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".zw",
+    "timezone": "Africa/Harare",
+    "currency_code": "ZWL",
+    "currency_name_cn": "津巴布韦元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语",
+      "绍纳语",
+      "恩德贝莱语"
+    ],
+    "language_en": [
+      "English",
+      "Shona",
+      "Ndebele"
+    ],
+    "religion": [
+      "基督教",
+      "传统信仰"
+    ],
+    "area_km2": 390757,
+    "population": 15100000,
+    "major_ports": [
+      "贝拉港",
+      "马普托港（通过邻国）"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "正式的商务礼仪",
+      "准时受重视",
+      "尊重等级",
+      "保守的着装"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "耶稣受难日",
+      "复活节",
+      "独立日(4月18日)",
+      "劳动节(5月1日)",
+      "英雄日(8月第二个周一)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "英语为商务语言",
+      "关系建立重要",
+      "现金经济普遍",
+      "灵活应对必要"
+    ],
+    "driving_side": "left",
+    "power_plug": "D/G",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "科特迪瓦",
+    "name_en": "Côte d'Ivoire",
+    "iso2": "CI",
+    "iso3": "CIV",
+    "dial_code": "+225",
+    "capital_cn": "亚穆苏克罗",
+    "capital_en": "Yamoussoukro",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".ci",
+    "timezone": "Africa/Abidjan",
+    "currency_code": "XOF",
+    "currency_name_cn": "西非法郎",
+    "currency_symbol": "CFA",
+    "language_cn": [
+      "法语"
+    ],
+    "language_en": [
+      "French"
+    ],
+    "religion": [
+      "伊斯兰教",
+      "基督教",
+      "传统信仰"
+    ],
+    "area_km2": 322463,
+    "population": 27500000,
+    "major_ports": [
+      "阿比让港",
+      "圣佩德罗港"
+    ],
+    "business_hours": "周一至周五 8:00-12:00, 14:00-17:30",
+    "business_etiquette": [
+      "法语必需",
+      "正式的礼仪",
+      "尊重等级",
+      "建立关系重要"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "劳动节(5月1日)",
+      "独立日(8月7日)",
+      "和平日(11月15日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "法国商务文化影响",
+      "个人关系关键",
+      "正式的谈判",
+      "耐心必要"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/E",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "喀麦隆",
+    "name_en": "Cameroon",
+    "iso2": "CM",
+    "iso3": "CMR",
+    "dial_code": "+237",
+    "capital_cn": "雅温得",
+    "capital_en": "Yaoundé",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".cm",
+    "timezone": "Africa/Douala",
+    "currency_code": "XAF",
+    "currency_name_cn": "中非法郎",
+    "currency_symbol": "FCFA",
+    "language_cn": [
+      "法语",
+      "英语"
+    ],
+    "language_en": [
+      "French",
+      "English"
+    ],
+    "religion": [
+      "基督教",
+      "伊斯兰教",
+      "传统信仰"
+    ],
+    "area_km2": 475442,
+    "population": 27900000,
+    "major_ports": [
+      "杜阿拉港",
+      "克里比港",
+      "林贝港"
+    ],
+    "business_hours": "周一至周五 7:30-15:30",
+    "business_etiquette": [
+      "双语环境",
+      "正式的称呼",
+      "等级制度明显",
+      "耐心的交流"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "青年日(2月11日)",
+      "劳动节(5月1日)",
+      "国庆日(5月20日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "语言选择重要",
+      "建立信任缓慢",
+      "官僚程序复杂",
+      "关系网络关键"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/E",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "安哥拉",
+    "name_en": "Angola",
+    "iso2": "AO",
+    "iso3": "AGO",
+    "dial_code": "+244",
+    "capital_cn": "罗安达",
+    "capital_en": "Luanda",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".ao",
+    "timezone": "Africa/Luanda",
+    "currency_code": "AOA",
+    "currency_name_cn": "安哥拉宽扎",
+    "currency_symbol": "Kz",
+    "language_cn": [
+      "葡萄牙语"
+    ],
+    "language_en": [
+      "Portuguese"
+    ],
+    "religion": [
+      "天主教",
+      "基督教新教",
+      "传统信仰"
+    ],
+    "area_km2": 1246700,
+    "population": 34500000,
+    "major_ports": [
+      "罗安达港",
+      "洛比托港",
+      "纳米贝港",
+      "卡宾达港"
+    ],
+    "business_hours": "周一至周五 8:00-12:30, 14:00-17:30",
+    "business_etiquette": [
+      "葡萄牙语必需",
+      "正式的商务礼仪",
+      "建立个人关系",
+      "耐心的谈判"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "解放日(2月4日)",
+      "国际妇女节(3月8日)",
+      "和平日(4月4日)",
+      "劳动节(5月1日)",
+      "独立日(11月11日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "石油经济影响大",
+      "官僚程序复杂",
+      "关系网络重要",
+      "现金交易常见"
+    ],
+    "driving_side": "right",
+    "power_plug": "C",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "莫桑比克",
+    "name_en": "Mozambique",
+    "iso2": "MZ",
+    "iso3": "MOZ",
+    "dial_code": "+258",
+    "capital_cn": "马普托",
+    "capital_en": "Maputo",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".mz",
+    "timezone": "Africa/Maputo",
+    "currency_code": "MZN",
+    "currency_name_cn": "莫桑比克梅蒂卡尔",
+    "currency_symbol": "MT",
+    "language_cn": [
+      "葡萄牙语"
+    ],
+    "language_en": [
+      "Portuguese"
+    ],
+    "religion": [
+      "基督教",
+      "伊斯兰教",
+      "传统信仰"
+    ],
+    "area_km2": 801590,
+    "population": 32200000,
+    "major_ports": [
+      "马普托港",
+      "贝拉港",
+      "纳卡拉港",
+      "彭巴港"
+    ],
+    "business_hours": "周一至周五 7:30-12:00, 14:00-17:30",
+    "business_etiquette": [
+      "葡萄牙语重要",
+      "正式的问候",
+      "建立信任关键",
+      "时间观念灵活"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "英雄日(2月3日)",
+      "妇女节(4月7日)",
+      "劳动节(5月1日)",
+      "独立日(6月25日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "关系导向文化",
+      "耐心谈判必要",
+      "等级制度存在",
+      "基础设施改善中"
+    ],
+    "driving_side": "left",
+    "power_plug": "C/F/M",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "马达加斯加",
+    "name_en": "Madagascar",
+    "iso2": "MG",
+    "iso3": "MDG",
+    "dial_code": "+261",
+    "capital_cn": "塔那那利佛",
+    "capital_en": "Antananarivo",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".mg",
+    "timezone": "Indian/Antananarivo",
+    "currency_code": "MGA",
+    "currency_name_cn": "马达加斯加阿里亚里",
+    "currency_symbol": "Ar",
+    "language_cn": [
+      "马拉加斯语",
+      "法语"
+    ],
+    "language_en": [
+      "Malagasy",
+      "French"
+    ],
+    "religion": [
+      "基督教",
+      "传统信仰",
+      "伊斯兰教"
+    ],
+    "area_km2": 587041,
+    "population": 28900000,
+    "major_ports": [
+      "图阿马西纳港",
+      "马任加港",
+      "图莱亚尔港",
+      "安齐拉纳纳港"
+    ],
+    "business_hours": "周一至周五 8:00-12:00, 14:00-17:00",
+    "business_etiquette": [
+      "法语商务交流",
+      "尊重传统文化",
+      "正式的礼仪",
+      "建立关系重要"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "烈士日(3月29日)",
+      "复活节",
+      "劳动节(5月1日)",
+      "独立日(6月26日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "等级观念明显",
+      "决策过程缓慢",
+      "避免直接拒绝",
+      "家族企业普遍"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/D/E/J/K",
+    "voltage": "127V/220V"
+  },
+  {
+    "name_cn": "塞内加尔",
+    "name_en": "Senegal",
+    "iso2": "SN",
+    "iso3": "SEN",
+    "dial_code": "+221",
+    "capital_cn": "达喀尔",
+    "capital_en": "Dakar",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".sn",
+    "timezone": "Africa/Dakar",
+    "currency_code": "XOF",
+    "currency_name_cn": "西非法郎",
+    "currency_symbol": "CFA",
+    "language_cn": [
+      "法语",
+      "沃洛夫语"
+    ],
+    "language_en": [
+      "French",
+      "Wolof"
+    ],
+    "religion": [
+      "伊斯兰教",
+      "基督教",
+      "传统信仰"
+    ],
+    "area_km2": 196722,
+    "population": 17700000,
+    "major_ports": [
+      "达喀尔港",
+      "圣路易港",
+      "考拉克港"
+    ],
+    "business_hours": "周一至周五 8:00-13:00, 15:00-18:00",
+    "business_etiquette": [
+      "法语必需",
+      "热情的问候",
+      "个人关系优先",
+      "时间观念灵活"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(4月4日)",
+      "劳动节(5月1日)",
+      "圣母升天节(8月15日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "teranga(好客)文化",
+      "耐心谈判重要",
+      "社交礼仪复杂",
+      "等级制度明显"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/D/E/K",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "马里",
+    "name_en": "Mali",
+    "iso2": "ML",
+    "iso3": "MLI",
+    "dial_code": "+223",
+    "capital_cn": "巴马科",
+    "capital_en": "Bamako",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".ml",
+    "timezone": "Africa/Bamako",
+    "currency_code": "XOF",
+    "currency_name_cn": "西非法郎",
+    "currency_symbol": "CFA",
+    "language_cn": [
+      "法语",
+      "班巴拉语"
+    ],
+    "language_en": [
+      "French",
+      "Bambara"
+    ],
+    "religion": [
+      "伊斯兰教",
+      "传统信仰",
+      "基督教"
+    ],
+    "area_km2": 1240192,
+    "population": 21900000,
+    "major_ports": [
+      "内陆国家，主要使用达喀尔港和阿比让港"
+    ],
+    "business_hours": "周一至周五 8:00-12:00, 14:30-17:30",
+    "business_etiquette": [
+      "法语商务语言",
+      "尊重长者",
+      "建立信任缓慢",
+      "正式的礼仪"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "军队日(1月20日)",
+      "烈士日(3月26日)",
+      "劳动节(5月1日)",
+      "独立日(9月22日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "关系网络关键",
+      "等级制度重要",
+      "决策过程长",
+      "口头协议后需书面"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/E",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "布基纳法索",
+    "name_en": "Burkina Faso",
+    "iso2": "BF",
+    "iso3": "BFA",
+    "dial_code": "+226",
+    "capital_cn": "瓦加杜古",
+    "capital_en": "Ouagadougou",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".bf",
+    "timezone": "Africa/Ouagadougou",
+    "currency_code": "XOF",
+    "currency_name_cn": "西非法郎",
+    "currency_symbol": "CFA",
+    "language_cn": [
+      "法语",
+      "摩尔语"
+    ],
+    "language_en": [
+      "French",
+      "Mooré"
+    ],
+    "religion": [
+      "伊斯兰教",
+      "基督教",
+      "传统信仰"
+    ],
+    "area_km2": 274200,
+    "population": 22100000,
+    "major_ports": [
+      "内陆国家，使用邻国港口"
+    ],
+    "business_hours": "周一至周五 7:30-12:30, 15:00-17:30",
+    "business_etiquette": [
+      "法语必需",
+      "尊重传统",
+      "耐心交流",
+      "正式礼仪"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "妇女节(3月8日)",
+      "劳动节(5月1日)",
+      "独立日(8月5日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "农业经济为主",
+      "关系建立重要",
+      "决策缓慢",
+      "传统价值观强"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/E",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "尼日尔",
+    "name_en": "Niger",
+    "iso2": "NE",
+    "iso3": "NER",
+    "dial_code": "+227",
+    "capital_cn": "尼亚美",
+    "capital_en": "Niamey",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".ne",
+    "timezone": "Africa/Niamey",
+    "currency_code": "XOF",
+    "currency_name_cn": "西非法郎",
+    "currency_symbol": "CFA",
+    "language_cn": [
+      "法语",
+      "豪萨语"
+    ],
+    "language_en": [
+      "French",
+      "Hausa"
+    ],
+    "religion": [
+      "伊斯兰教",
+      "传统信仰",
+      "基督教"
+    ],
+    "area_km2": 1267000,
+    "population": 25300000,
+    "major_ports": [
+      "内陆国家，使用贝宁和尼日利亚港口"
+    ],
+    "business_hours": "周一至周五 8:00-12:30, 15:00-18:00",
+    "business_etiquette": [
+      "法语商务语言",
+      "伊斯兰礼仪",
+      "等级观念强",
+      "耐心必要"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "协和日(4月24日)",
+      "劳动节(5月1日)",
+      "独立日(8月3日)",
+      "共和国日(12月18日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "关系网络重要",
+      "决策过程慢",
+      "传统影响大",
+      "基础设施有限"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B/C/D/E/F",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "赞比亚",
+    "name_en": "Zambia",
+    "iso2": "ZM",
+    "iso3": "ZMB",
+    "dial_code": "+260",
+    "capital_cn": "卢萨卡",
+    "capital_en": "Lusaka",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".zm",
+    "timezone": "Africa/Lusaka",
+    "currency_code": "ZMW",
+    "currency_name_cn": "赞比亚克瓦查",
+    "currency_symbol": "ZK",
+    "language_cn": [
+      "英语",
+      "本巴语",
+      "尼昂加语"
+    ],
+    "language_en": [
+      "English",
+      "Bemba",
+      "Nyanja"
+    ],
+    "religion": [
+      "基督教",
+      "传统信仰"
+    ],
+    "area_km2": 752618,
+    "population": 19600000,
+    "major_ports": [
+      "内陆国家，使用坦桑尼亚和南非港口"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "英语商务语言",
+      "握手问候",
+      "尊重长者",
+      "正式着装"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "青年日(3月12日)",
+      "耶稣受难日",
+      "复活节",
+      "劳动节(5月1日)",
+      "英雄日(7月第一个周一)",
+      "独立日(10月24日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "铜矿经济重要",
+      "关系建立关键",
+      "共识决策",
+      "时间观念改善中"
+    ],
+    "driving_side": "left",
+    "power_plug": "C/D/G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "博茨瓦纳",
+    "name_en": "Botswana",
+    "iso2": "BW",
+    "iso3": "BWA",
+    "dial_code": "+267",
+    "capital_cn": "哈博罗内",
+    "capital_en": "Gaborone",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".bw",
+    "timezone": "Africa/Gaborone",
+    "currency_code": "BWP",
+    "currency_name_cn": "博茨瓦纳普拉",
+    "currency_symbol": "P",
+    "language_cn": [
+      "英语",
+      "茨瓦纳语"
+    ],
+    "language_en": [
+      "English",
+      "Setswana"
+    ],
+    "religion": [
+      "基督教",
+      "传统信仰"
+    ],
+    "area_km2": 581730,
+    "population": 2400000,
+    "major_ports": [
+      "内陆国家，使用南非和纳米比亚港口"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "英语商务语言",
+      "正式的礼仪",
+      "准时重要",
+      "保守着装"
+    ],
+    "major_holidays": [
+      "新年(1月1日-2日)",
+      "耶稣受难日",
+      "复活节",
+      "劳动节(5月1日)",
+      "塞雷茨·卡马爵士日(7月1日)",
+      "独立日(9月30日-10月1日)",
+      "圣诞节(12月25-26日)"
+    ],
+    "trade_notes": [
+      "钻石经济重要",
+      "稳定的商业环境",
+      "正式的谈判",
+      "重视教育和专业"
+    ],
+    "driving_side": "left",
+    "power_plug": "D/G/M",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "纳米比亚",
+    "name_en": "Namibia",
+    "iso2": "NA",
+    "iso3": "NAM",
+    "dial_code": "+264",
+    "capital_cn": "温得和克",
+    "capital_en": "Windhoek",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".na",
+    "timezone": "Africa/Windhoek",
+    "currency_code": "NAD",
+    "currency_name_cn": "纳米比亚元",
+    "currency_symbol": "$",
+    "language_cn": [
+      "英语",
+      "南非荷兰语",
+      "德语"
+    ],
+    "language_en": [
+      "English",
+      "Afrikaans",
+      "German"
+    ],
+    "religion": [
+      "基督教",
+      "传统信仰"
+    ],
+    "area_km2": 824292,
+    "population": 2600000,
+    "major_ports": [
+      "沃尔维斯湾港",
+      "吕德里茨港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "英语商务语言",
+      "德国文化影响",
+      "准时很重要",
+      "正式的商务风格"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "独立日(3月21日)",
+      "耶稣受难日",
+      "复活节",
+      "劳动节(5月1日)",
+      "英雄日(8月26日)",
+      "圣诞节(12月25-26日)"
+    ],
+    "trade_notes": [
+      "矿业经济主导",
+      "多元文化环境",
+      "正式的谈判",
+      "环保意识强"
+    ],
+    "driving_side": "left",
+    "power_plug": "D/M",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "毛里求斯",
+    "name_en": "Mauritius",
+    "iso2": "MU",
+    "iso3": "MUS",
+    "dial_code": "+230",
+    "capital_cn": "路易港",
+    "capital_en": "Port Louis",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".mu",
+    "timezone": "Indian/Mauritius",
+    "currency_code": "MUR",
+    "currency_name_cn": "毛里求斯卢比",
+    "currency_symbol": "₨",
+    "language_cn": [
+      "英语",
+      "法语",
+      "克里奥尔语"
+    ],
+    "language_en": [
+      "English",
+      "French",
+      "Creole"
+    ],
+    "religion": [
+      "印度教",
+      "基督教",
+      "伊斯兰教"
+    ],
+    "area_km2": 2040,
+    "population": 1300000,
+    "major_ports": [
+      "路易港"
+    ],
+    "business_hours": "周一至周五 9:00-16:00",
+    "business_etiquette": [
+      "多语言环境",
+      "多元文化敏感",
+      "正式的商务礼仪",
+      "准时重要"
+    ],
+    "major_holidays": [
+      "新年(1月1-2日)",
+      "春节",
+      "废奴日(2月1日)",
+      "独立日(3月12日)",
+      "劳动节(5月1日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "金融中心地位",
+      "英法混合体系",
+      "服务业发达",
+      "国际化程度高"
+    ],
+    "driving_side": "left",
+    "power_plug": "C/G",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "塞舌尔",
+    "name_en": "Seychelles",
+    "iso2": "SC",
+    "iso3": "SYC",
+    "dial_code": "+248",
+    "capital_cn": "维多利亚",
+    "capital_en": "Victoria",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".sc",
+    "timezone": "Indian/Mahe",
+    "currency_code": "SCR",
+    "currency_name_cn": "塞舌尔卢比",
+    "currency_symbol": "₨",
+    "language_cn": [
+      "英语",
+      "法语",
+      "克里奥尔语"
+    ],
+    "language_en": [
+      "English",
+      "French",
+      "Seychellois Creole"
+    ],
+    "religion": [
+      "天主教",
+      "英国国教",
+      "其他基督教"
+    ],
+    "area_km2": 455,
+    "population": 99000,
+    "major_ports": [
+      "维多利亚港"
+    ],
+    "business_hours": "周一至周五 8:00-16:00",
+    "business_etiquette": [
+      "轻松的商务氛围",
+      "多语言能力有利",
+      "岛国时间观念",
+      "环保意识强"
+    ],
+    "major_holidays": [
+      "新年(1月1-2日)",
+      "耶稣受难日",
+      "复活节",
+      "劳动节(5月1日)",
+      "解放日(6月5日)",
+      "独立日(6月29日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "旅游业主导",
+      "小型经济体",
+      "国际化程度高",
+      "可持续发展重视"
+    ],
+    "driving_side": "left",
+    "power_plug": "G",
+    "voltage": "240V"
+  },
+  {
+    "name_cn": "索马里",
+    "name_en": "Somalia",
+    "iso2": "SO",
+    "iso3": "SOM",
+    "dial_code": "+252",
+    "capital_cn": "摩加迪沙",
+    "capital_en": "Mogadishu",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".so",
+    "timezone": "Africa/Mogadishu",
+    "currency_code": "SOS",
+    "currency_name_cn": "索马里先令",
+    "currency_symbol": "S",
+    "language_cn": [
+      "索马里语",
+      "阿拉伯语"
+    ],
+    "language_en": [
+      "Somali",
+      "Arabic"
+    ],
+    "religion": [
+      "伊斯兰教"
+    ],
+    "area_km2": 637657,
+    "population": 17100000,
+    "major_ports": [
+      "摩加迪沙港",
+      "柏培拉港",
+      "基斯马尤港"
+    ],
+    "business_hours": "周六至周四 8:00-14:00",
+    "business_etiquette": [
+      "伊斯兰礼仪重要",
+      "部落关系影响",
+      "口头协议普遍",
+      "现金交易为主"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "劳动节(5月1日)",
+      "独立日(6月26日-7月1日)",
+      "伊斯兰节日"
+    ],
+    "trade_notes": [
+      "安全考虑重要",
+      "非正式经济大",
+      "汇款经济重要",
+      "基础设施有限"
+    ],
+    "driving_side": "right",
+    "power_plug": "C",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "吉布提",
+    "name_en": "Djibouti",
+    "iso2": "DJ",
+    "iso3": "DJI",
+    "dial_code": "+253",
+    "capital_cn": "吉布提市",
+    "capital_en": "Djibouti City",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".dj",
+    "timezone": "Africa/Djibouti",
+    "currency_code": "DJF",
+    "currency_name_cn": "吉布提法郎",
+    "currency_symbol": "Fdj",
+    "language_cn": [
+      "法语",
+      "阿拉伯语"
+    ],
+    "language_en": [
+      "French",
+      "Arabic"
+    ],
+    "religion": [
+      "伊斯兰教",
+      "基督教"
+    ],
+    "area_km2": 23200,
+    "population": 1000000,
+    "major_ports": [
+      "吉布提港"
+    ],
+    "business_hours": "周六至周四 8:00-13:00",
+    "business_etiquette": [
+      "法语商务语言",
+      "港口经济重要",
+      "多元文化环境",
+      "正式礼仪"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "劳动节(5月1日)",
+      "独立日(6月27日)",
+      "圣诞节(12月25日)",
+      "伊斯兰节日"
+    ],
+    "trade_notes": [
+      "战略位置重要",
+      "转口贸易中心",
+      "军事基地经济",
+      "多国影响"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/E",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "厄立特里亚",
+    "name_en": "Eritrea",
+    "iso2": "ER",
+    "iso3": "ERI",
+    "dial_code": "+291",
+    "capital_cn": "阿斯马拉",
+    "capital_en": "Asmara",
+    "continent_cn": "非洲",
+    "continent_en": "Africa",
+    "tld": ".er",
+    "timezone": "Africa/Asmara",
+    "currency_code": "ERN",
+    "currency_name_cn": "厄立特里亚纳克法",
+    "currency_symbol": "Nfk",
+    "language_cn": [
+      "提格雷尼亚语",
+      "阿拉伯语",
+      "英语"
+    ],
+    "language_en": [
+      "Tigrinya",
+      "Arabic",
+      "English"
+    ],
+    "religion": [
+      "基督教",
+      "伊斯兰教"
+    ],
+    "area_km2": 117600,
+    "population": 3600000,
+    "major_ports": [
+      "马萨瓦港",
+      "阿萨布港"
+    ],
+    "business_hours": "周一至周五 8:00-12:00, 14:00-17:00",
+    "business_etiquette": [
+      "正式的礼仪",
+      "等级制度明显",
+      "耐心必要",
+      "建立信任缓慢"
+    ],
+    "major_holidays": [
+      "新年(1月1日)",
+      "厄立特里亚圣诞节(1月7日)",
+      "独立日(5月24日)",
+      "烈士日(6月20日)",
+      "圣诞节(12月25日)"
+    ],
+    "trade_notes": [
+      "政府控制经济",
+      "外汇管制严格",
+      "基础设施有限",
+      "程序复杂"
+    ],
+    "driving_side": "right",
+    "power_plug": "C",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "中国香港",
+    "name_en": "Hong Kong",
+    "iso2": "HK",
+    "iso3": "HKG",
+    "dial_code": "+852",
+    "capital_cn": "香港",
+    "capital_en": "Hong Kong",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".hk",
+    "timezone": "Asia/Hong_Kong",
+    "currency_code": "HKD",
+    "currency_name_cn": "港元",
+    "currency_symbol": "HK$",
+    "language_cn": [
+      "中文",
+      "英语",
+      "粤语"
+    ],
+    "language_en": [
+      "Chinese",
+      "English",
+      "Cantonese"
+    ],
+    "religion": [
+      "佛教",
+      "道教",
+      "基督教",
+      "无宗教"
+    ],
+    "area_km2": 1106,
+    "population": 7500000,
+    "major_ports": [
+      "香港港",
+      "葵青货柜码头"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "商务节奏快",
+      "重视合同细节",
+      "准时守约",
+      "中英文沟通普遍"
+    ],
+    "major_holidays": [
+      "农历新年",
+      "清明节",
+      "复活节",
+      "端午节",
+      "中秋节",
+      "国庆日",
+      "圣诞节"
+    ],
+    "trade_notes": [
+      "自由港",
+      "金融和转口贸易中心",
+      "国际物流网络成熟"
+    ],
+    "driving_side": "left",
+    "power_plug": "G",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "中国澳门",
+    "name_en": "Macau",
+    "iso2": "MO",
+    "iso3": "MAC",
+    "dial_code": "+853",
+    "capital_cn": "澳门",
+    "capital_en": "Macau",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".mo",
+    "timezone": "Asia/Macau",
+    "currency_code": "MOP",
+    "currency_name_cn": "澳门元",
+    "currency_symbol": "MOP$",
+    "language_cn": [
+      "中文",
+      "葡萄牙语",
+      "粤语"
+    ],
+    "language_en": [
+      "Chinese",
+      "Portuguese",
+      "Cantonese"
+    ],
+    "religion": [
+      "佛教",
+      "道教",
+      "天主教",
+      "无宗教"
+    ],
+    "area_km2": 33,
+    "population": 680000,
+    "major_ports": [
+      "澳门港",
+      "内港码头"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "重视正式文件",
+      "中葡双语场景常见",
+      "商务会面应提前预约"
+    ],
+    "major_holidays": [
+      "农历新年",
+      "清明节",
+      "复活节",
+      "端午节",
+      "中秋节",
+      "国庆日",
+      "圣诞节"
+    ],
+    "trade_notes": [
+      "旅游服务业发达",
+      "与粤港澳大湾区贸易联系紧密",
+      "澳门元与港元联系紧密"
+    ],
+    "driving_side": "left",
+    "power_plug": "G",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "中国台湾",
+    "name_en": "Taiwan",
+    "iso2": "TW",
+    "iso3": "TWN",
+    "dial_code": "+886",
+    "capital_cn": "台北",
+    "capital_en": "Taipei",
+    "continent_cn": "亚洲",
+    "continent_en": "Asia",
+    "tld": ".tw",
+    "timezone": "Asia/Taipei",
+    "currency_code": "TWD",
+    "currency_name_cn": "新台币",
+    "currency_symbol": "NT$",
+    "language_cn": [
+      "中文",
+      "闽南语",
+      "客家语"
+    ],
+    "language_en": [
+      "Chinese",
+      "Taiwanese Hokkien",
+      "Hakka"
+    ],
+    "religion": [
+      "佛教",
+      "道教",
+      "基督教",
+      "无宗教"
+    ],
+    "area_km2": 36197,
+    "population": 23400000,
+    "major_ports": [
+      "高雄港",
+      "基隆港",
+      "台中港",
+      "台北港"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "重视礼貌和关系维护",
+      "邮件沟通需清晰正式",
+      "交期和品质要求明确"
+    ],
+    "major_holidays": [
+      "农历新年",
+      "和平纪念日",
+      "清明节",
+      "端午节",
+      "中秋节",
+      "双十节"
+    ],
+    "trade_notes": [
+      "电子制造供应链成熟",
+      "半导体和精密制造优势明显",
+      "港口和航空物流便利"
+    ],
+    "driving_side": "right",
+    "power_plug": "A/B",
+    "voltage": "110V"
+  },
+  {
+    "name_cn": "乌克兰",
+    "name_en": "Ukraine",
+    "iso2": "UA",
+    "iso3": "UKR",
+    "dial_code": "+380",
+    "capital_cn": "基辅",
+    "capital_en": "Kyiv",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".ua",
+    "timezone": "Europe/Kyiv",
+    "currency_code": "UAH",
+    "currency_name_cn": "乌克兰格里夫纳",
+    "currency_symbol": "₴",
+    "language_cn": [
+      "乌克兰语"
+    ],
+    "language_en": [
+      "Ukrainian"
+    ],
+    "religion": [
+      "东正教",
+      "天主教",
+      "无宗教"
+    ],
+    "area_km2": 603500,
+    "population": 37000000,
+    "major_ports": [
+      "敖德萨港",
+      "切尔诺莫斯克港",
+      "皮夫登尼港"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "正式称呼常用",
+      "合同条款需写清",
+      "付款和物流风险需提前确认"
+    ],
+    "major_holidays": [
+      "新年",
+      "东正教圣诞节",
+      "复活节",
+      "劳动节",
+      "宪法日",
+      "独立日"
+    ],
+    "trade_notes": [
+      "农业和金属出口重要",
+      "物流路线可能受地区形势影响",
+      "建议确认保险和付款安全"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "白俄罗斯",
+    "name_en": "Belarus",
+    "iso2": "BY",
+    "iso3": "BLR",
+    "dial_code": "+375",
+    "capital_cn": "明斯克",
+    "capital_en": "Minsk",
+    "continent_cn": "欧洲",
+    "continent_en": "Europe",
+    "tld": ".by",
+    "timezone": "Europe/Minsk",
+    "currency_code": "BYN",
+    "currency_name_cn": "白俄罗斯卢布",
+    "currency_symbol": "Br",
+    "language_cn": [
+      "白俄罗斯语",
+      "俄语"
+    ],
+    "language_en": [
+      "Belarusian",
+      "Russian"
+    ],
+    "religion": [
+      "东正教",
+      "天主教",
+      "无宗教"
+    ],
+    "area_km2": 207600,
+    "population": 9200000,
+    "major_ports": [
+      "内陆国家",
+      "明斯克铁路枢纽"
+    ],
+    "business_hours": "周一至周五 9:00-18:00",
+    "business_etiquette": [
+      "商务沟通偏正式",
+      "俄语使用广泛",
+      "重视书面合同"
+    ],
+    "major_holidays": [
+      "新年",
+      "东正教圣诞节",
+      "胜利日",
+      "独立日",
+      "劳动节"
+    ],
+    "trade_notes": [
+      "内陆物流依赖铁路和公路",
+      "机械和化工产业较重要",
+      "需关注贸易合规要求"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/F",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "澳大利亚",
+    "name_en": "Australia",
+    "iso2": "AU",
+    "iso3": "AUS",
+    "dial_code": "+61",
+    "capital_cn": "堪培拉",
+    "capital_en": "Canberra",
+    "continent_cn": "大洋洲",
+    "continent_en": "Oceania",
+    "tld": ".au",
+    "timezone": "Australia/Sydney",
+    "currency_code": "AUD",
+    "currency_name_cn": "澳大利亚元",
+    "currency_symbol": "A$",
+    "language_cn": [
+      "英语"
+    ],
+    "language_en": [
+      "English"
+    ],
+    "religion": [
+      "基督教",
+      "无宗教",
+      "伊斯兰教",
+      "佛教"
+    ],
+    "area_km2": 7692024,
+    "population": 26700000,
+    "major_ports": [
+      "悉尼港",
+      "墨尔本港",
+      "布里斯班港",
+      "弗里曼特尔港",
+      "阿德莱德港"
+    ],
+    "business_hours": "周一至周五 9:00-17:00",
+    "business_etiquette": [
+      "沟通直接务实",
+      "重视准时",
+      "合同和合规要求严格",
+      "工作生活边界较清晰"
+    ],
+    "major_holidays": [
+      "新年",
+      "澳大利亚日",
+      "耶稣受难日",
+      "复活节",
+      "澳新军团日",
+      "圣诞节",
+      "节礼日"
+    ],
+    "trade_notes": [
+      "矿产、农产品和服务贸易重要",
+      "进口合规和检疫要求严格",
+      "注意各州假日差异"
+    ],
+    "driving_side": "left",
+    "power_plug": "I",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "新西兰",
+    "name_en": "New Zealand",
+    "iso2": "NZ",
+    "iso3": "NZL",
+    "dial_code": "+64",
+    "capital_cn": "惠灵顿",
+    "capital_en": "Wellington",
+    "continent_cn": "大洋洲",
+    "continent_en": "Oceania",
+    "tld": ".nz",
+    "timezone": "Pacific/Auckland",
+    "currency_code": "NZD",
+    "currency_name_cn": "新西兰元",
+    "currency_symbol": "NZ$",
+    "language_cn": [
+      "英语",
+      "毛利语"
+    ],
+    "language_en": [
+      "English",
+      "Māori"
+    ],
+    "religion": [
+      "基督教",
+      "无宗教"
+    ],
+    "area_km2": 268021,
+    "population": 5200000,
+    "major_ports": [
+      "奥克兰港",
+      "陶朗加港",
+      "惠灵顿港",
+      "利特尔顿港"
+    ],
+    "business_hours": "周一至周五 9:00-17:00",
+    "business_etiquette": [
+      "沟通友好直接",
+      "重视可持续和合规",
+      "预约和准时很重要"
+    ],
+    "major_holidays": [
+      "新年",
+      "怀唐伊日",
+      "耶稣受难日",
+      "复活节",
+      "澳新军团日",
+      "圣诞节",
+      "节礼日"
+    ],
+    "trade_notes": [
+      "乳制品、肉类和木材出口重要",
+      "检疫和食品安全标准严格",
+      "时差对沟通安排影响明显"
+    ],
+    "driving_side": "left",
+    "power_plug": "I",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "斐济",
+    "name_en": "Fiji",
+    "iso2": "FJ",
+    "iso3": "FJI",
+    "dial_code": "+679",
+    "capital_cn": "苏瓦",
+    "capital_en": "Suva",
+    "continent_cn": "大洋洲",
+    "continent_en": "Oceania",
+    "tld": ".fj",
+    "timezone": "Pacific/Fiji",
+    "currency_code": "FJD",
+    "currency_name_cn": "斐济元",
+    "currency_symbol": "FJ$",
+    "language_cn": [
+      "英语",
+      "斐济语",
+      "印地语"
+    ],
+    "language_en": [
+      "English",
+      "Fijian",
+      "Hindi"
+    ],
+    "religion": [
+      "基督教",
+      "印度教",
+      "伊斯兰教"
+    ],
+    "area_km2": 18274,
+    "population": 930000,
+    "major_ports": [
+      "苏瓦港",
+      "劳托卡港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "沟通礼貌友好",
+      "商务节奏相对从容",
+      "尊重本地礼仪和宗教习惯"
+    ],
+    "major_holidays": [
+      "新年",
+      "耶稣受难日",
+      "斐济日",
+      "排灯节",
+      "圣诞节",
+      "节礼日"
+    ],
+    "trade_notes": [
+      "旅游、糖业和渔业重要",
+      "海运班期需提前确认",
+      "区域贸易以太平洋市场为主"
+    ],
+    "driving_side": "left",
+    "power_plug": "I",
+    "voltage": "240V"
+  },
+  {
+    "name_cn": "巴布亚新几内亚",
+    "name_en": "Papua New Guinea",
+    "iso2": "PG",
+    "iso3": "PNG",
+    "dial_code": "+675",
+    "capital_cn": "莫尔兹比港",
+    "capital_en": "Port Moresby",
+    "continent_cn": "大洋洲",
+    "continent_en": "Oceania",
+    "tld": ".pg",
+    "timezone": "Pacific/Port_Moresby",
+    "currency_code": "PGK",
+    "currency_name_cn": "巴布亚新几内亚基那",
+    "currency_symbol": "K",
+    "language_cn": [
+      "英语",
+      "托克皮辛语",
+      "希里摩图语"
+    ],
+    "language_en": [
+      "English",
+      "Tok Pisin",
+      "Hiri Motu"
+    ],
+    "religion": [
+      "基督教",
+      "传统信仰"
+    ],
+    "area_km2": 462840,
+    "population": 10300000,
+    "major_ports": [
+      "莫尔兹比港",
+      "莱城港",
+      "马当港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "建立信任很重要",
+      "沟通需预留时间",
+      "注意地区差异和安全安排"
+    ],
+    "major_holidays": [
+      "新年",
+      "耶稣受难日",
+      "复活节",
+      "独立日",
+      "圣诞节"
+    ],
+    "trade_notes": [
+      "矿产、能源和农林产品重要",
+      "基础设施和内陆物流需提前评估",
+      "港口和清关时间需预留余量"
+    ],
+    "driving_side": "left",
+    "power_plug": "I",
+    "voltage": "240V"
+  },
+  {
+    "name_cn": "萨摩亚",
+    "name_en": "Samoa",
+    "iso2": "WS",
+    "iso3": "WSM",
+    "dial_code": "+685",
+    "capital_cn": "阿皮亚",
+    "capital_en": "Apia",
+    "continent_cn": "大洋洲",
+    "continent_en": "Oceania",
+    "tld": ".ws",
+    "timezone": "Pacific/Apia",
+    "currency_code": "WST",
+    "currency_name_cn": "萨摩亚塔拉",
+    "currency_symbol": "T",
+    "language_cn": [
+      "萨摩亚语",
+      "英语"
+    ],
+    "language_en": [
+      "Samoan",
+      "English"
+    ],
+    "religion": [
+      "基督教"
+    ],
+    "area_km2": 2842,
+    "population": 220000,
+    "major_ports": [
+      "阿皮亚港"
+    ],
+    "business_hours": "周一至周五 9:00-17:00",
+    "business_etiquette": [
+      "重视礼貌和社区关系",
+      "商务沟通节奏较慢",
+      "节日前后需提前确认安排"
+    ],
+    "major_holidays": [
+      "新年",
+      "耶稣受难日",
+      "独立日",
+      "白色星期日",
+      "圣诞节",
+      "节礼日"
+    ],
+    "trade_notes": [
+      "市场规模较小",
+      "海运频次有限",
+      "农产品和侨汇相关服务重要"
+    ],
+    "driving_side": "left",
+    "power_plug": "I",
+    "voltage": "230V"
+  },
+  {
+    "name_cn": "汤加",
+    "name_en": "Tonga",
+    "iso2": "TO",
+    "iso3": "TON",
+    "dial_code": "+676",
+    "capital_cn": "努库阿洛法",
+    "capital_en": "Nukuʻalofa",
+    "continent_cn": "大洋洲",
+    "continent_en": "Oceania",
+    "tld": ".to",
+    "timezone": "Pacific/Tongatapu",
+    "currency_code": "TOP",
+    "currency_name_cn": "汤加潘加",
+    "currency_symbol": "T$",
+    "language_cn": [
+      "汤加语",
+      "英语"
+    ],
+    "language_en": [
+      "Tongan",
+      "English"
+    ],
+    "religion": [
+      "基督教"
+    ],
+    "area_km2": 747,
+    "population": 106000,
+    "major_ports": [
+      "努库阿洛法港"
+    ],
+    "business_hours": "周一至周五 9:00-17:00",
+    "business_etiquette": [
+      "尊重王室和传统礼仪",
+      "沟通应礼貌耐心",
+      "周日商业活动有限"
+    ],
+    "major_holidays": [
+      "新年",
+      "耶稣受难日",
+      "解放日",
+      "国王生日",
+      "圣诞节"
+    ],
+    "trade_notes": [
+      "市场规模小",
+      "进口依赖度高",
+      "海运和库存周期需提前规划"
+    ],
+    "driving_side": "left",
+    "power_plug": "I",
+    "voltage": "240V"
+  },
+  {
+    "name_cn": "瓦努阿图",
+    "name_en": "Vanuatu",
+    "iso2": "VU",
+    "iso3": "VUT",
+    "dial_code": "+678",
+    "capital_cn": "维拉港",
+    "capital_en": "Port Vila",
+    "continent_cn": "大洋洲",
+    "continent_en": "Oceania",
+    "tld": ".vu",
+    "timezone": "Pacific/Efate",
+    "currency_code": "VUV",
+    "currency_name_cn": "瓦努阿图瓦图",
+    "currency_symbol": "VT",
+    "language_cn": [
+      "比斯拉马语",
+      "英语",
+      "法语"
+    ],
+    "language_en": [
+      "Bislama",
+      "English",
+      "French"
+    ],
+    "religion": [
+      "基督教",
+      "传统信仰"
+    ],
+    "area_km2": 12189,
+    "population": 335000,
+    "major_ports": [
+      "维拉港",
+      "卢甘维尔港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "商务关系重视信任",
+      "英语和法语场景并存",
+      "沟通需确认具体岛屿安排"
+    ],
+    "major_holidays": [
+      "新年",
+      "耶稣受难日",
+      "独立日",
+      "圣诞节"
+    ],
+    "trade_notes": [
+      "海岛分布影响物流",
+      "农业和旅游相关贸易重要",
+      "注意台风季运输风险"
+    ],
+    "driving_side": "right",
+    "power_plug": "I",
+    "voltage": "220V"
+  },
+  {
+    "name_cn": "所罗门群岛",
+    "name_en": "Solomon Islands",
+    "iso2": "SB",
+    "iso3": "SLB",
+    "dial_code": "+677",
+    "capital_cn": "霍尼亚拉",
+    "capital_en": "Honiara",
+    "continent_cn": "大洋洲",
+    "continent_en": "Oceania",
+    "tld": ".sb",
+    "timezone": "Pacific/Guadalcanal",
+    "currency_code": "SBD",
+    "currency_name_cn": "所罗门群岛元",
+    "currency_symbol": "SI$",
+    "language_cn": [
+      "英语",
+      "所罗门皮钦语"
+    ],
+    "language_en": [
+      "English",
+      "Solomon Pijin"
+    ],
+    "religion": [
+      "基督教"
+    ],
+    "area_km2": 28896,
+    "population": 740000,
+    "major_ports": [
+      "霍尼亚拉港",
+      "诺罗港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "重视关系和耐心沟通",
+      "商务安排需提前确认",
+      "岛际运输时间差异较大"
+    ],
+    "major_holidays": [
+      "新年",
+      "耶稣受难日",
+      "独立日",
+      "圣诞节"
+    ],
+    "trade_notes": [
+      "木材、渔业和矿产重要",
+      "港口和岛际物流需预留时间",
+      "市场规模较小"
+    ],
+    "driving_side": "left",
+    "power_plug": "I/G",
+    "voltage": "240V"
+  },
+  {
+    "name_cn": "法属波利尼西亚",
+    "name_en": "French Polynesia",
+    "iso2": "PF",
+    "iso3": "PYF",
+    "dial_code": "+689",
+    "capital_cn": "帕皮提",
+    "capital_en": "Papeete",
+    "continent_cn": "大洋洲",
+    "continent_en": "Oceania",
+    "tld": ".pf",
+    "timezone": "Pacific/Tahiti",
+    "currency_code": "XPF",
+    "currency_name_cn": "太平洋法郎",
+    "currency_symbol": "₣",
+    "language_cn": [
+      "法语",
+      "塔希提语"
+    ],
+    "language_en": [
+      "French",
+      "Tahitian"
+    ],
+    "religion": [
+      "基督教"
+    ],
+    "area_km2": 4167,
+    "population": 280000,
+    "major_ports": [
+      "帕皮提港"
+    ],
+    "business_hours": "周一至周五 8:00-17:00",
+    "business_etiquette": [
+      "法语商务文件常见",
+      "沟通节奏较从容",
+      "旅游和服务业联系紧密"
+    ],
+    "major_holidays": [
+      "新年",
+      "复活节",
+      "法国国庆日",
+      "自治日",
+      "圣诞节"
+    ],
+    "trade_notes": [
+      "与法国及太平洋市场联系紧密",
+      "进口依赖度高",
+      "海运周期较长"
+    ],
+    "driving_side": "right",
+    "power_plug": "C/E",
+    "voltage": "220V"
+  }
+]
