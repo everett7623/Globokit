@@ -10,7 +10,7 @@ export const barcodeGeneratorTool: ToolMeta = {
   id: 'barcode-generator',
   slug: 'barcode-generator',
   title: '国际条码生成器',
-  shortTitle: '条码生成器',
+  shortTitle: '国际条码生成器',
   description: '按 GS1 26.0 规范生成 GS1 DataMatrix、GS1-128 及常用一维和二维条码',
   category: '文件与格式转换',
   iconName: 'ScanBarcode',
