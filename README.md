@@ -293,4 +293,4 @@ pnpm dev
 
 本项目采用 **GPL-3.0 协议** 开源。你可以在遵守 GNU General Public License v3 条款的前提下使用、复制、修改和分发本项目。
 
-Built with ❤️ by **[Jensfrank](https://github.com/everett7623)**.
+Built with ❤️ by **[everettlabs](https://github.com/everett7623)**.
