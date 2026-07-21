@@ -172,6 +172,18 @@ export function formatDeliveryDate(dateKey: string): string {
   }).format(date)
 }
 
+export function formatDeliveryDateEnglish(dateKey: string): string {
+  const date = parseCalendarDate(dateKey)
+  if (!date) return dateKey
+  return new Intl.DateTimeFormat('en-US', {
+    timeZone: 'UTC',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    weekday: 'long',
+  }).format(date)
+}
+
 export function calculateDeliveryDate(inputs: DeliveryDateInputs): DeliveryDateCalculation {
   const start = parseCalendarDate(inputs.startDate)
   if (!start) return { result: null, error: '请选择有效的起始日期。' }

@@ -10,7 +10,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { DeliveryDateForm } from './delivery-date-form'
 import { createInitialDeliveryForm, toStageDays, type DayField } from './delivery-date-page-data'
 import { DeliveryDateResults } from './delivery-date-results'
-import { calculateDeliveryDate, formatDeliveryDate, getDateKeyInTimeZone, type DeliveryDayMode } from '@/lib/tools/delivery-date-calculator'
+import { calculateDeliveryDate, formatDeliveryDateEnglish, getDateKeyInTimeZone, type DeliveryDayMode } from '@/lib/tools/delivery-date-calculator'
 
 export function DeliveryDateTool({ defaultStartDate }: { defaultStartDate: string }) {
   const [form, setForm] = useState(() => createInitialDeliveryForm(defaultStartDate))
@@ -35,7 +35,8 @@ export function DeliveryDateTool({ defaultStartDate }: { defaultStartDate: strin
   const copySummary = async () => {
     if (!calculation.result) return
     const result = calculation.result
-    const lines = ['外贸交期测算', `起始日期：${formatDeliveryDate(result.startDate)}`, `计算口径：${form.dayMode === 'business' ? '工作日' : '自然日'}`, ...result.milestones.map((milestone) => `${milestone.label}：${formatDeliveryDate(milestone.date)}（+${milestone.days} 天）`), `周末排除：${result.weekendDaysSkipped} 天`, `公共假日排除：${result.holidayDaysSkipped} 天`]
+    const milestoneLabels = { production: 'Production Complete', transit: 'Transit Complete', delivery: 'Estimated Delivery' } as const
+    const lines = ['Delivery Lead Time Estimate', `Start Date: ${formatDeliveryDateEnglish(result.startDate)}`, `Calculation Basis: ${form.dayMode === 'business' ? 'Business days' : 'Calendar days'}`, ...result.milestones.map((milestone) => `${milestoneLabels[milestone.key]}: ${formatDeliveryDateEnglish(milestone.date)} (+${milestone.days} days)`), `Weekend Days Excluded: ${result.weekendDaysSkipped}`, `Public Holidays Excluded: ${result.holidayDaysSkipped}`]
     await navigator.clipboard.writeText(lines.join('\n'))
     setCopied(true)
     window.setTimeout(() => setCopied(false), 1800)

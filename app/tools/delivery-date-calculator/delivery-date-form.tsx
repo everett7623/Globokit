@@ -45,7 +45,7 @@ export function DeliveryDateForm(props: DeliveryDateFormProps) {
           <div className="space-y-2"><Label htmlFor="holidayCountry">节假日国家/地区</Label><Select value={props.form.countryCode} onValueChange={props.onCountry} disabled={!holidaysEnabled || !props.form.excludeHolidays}><SelectTrigger id="holidayCountry" className="h-11"><SelectValue /></SelectTrigger><SelectContent>{DELIVERY_COUNTRIES.map((country) => <SelectItem key={country.code} value={country.code}>{country.label}</SelectItem>)}</SelectContent></Select></div>
         </div>
         <Alert><Info className="h-4 w-4" /><AlertDescription>工作日口径统一应用于生产、运输和缓冲阶段；实际交期仍应结合供应商排产、船期和清关安排确认。</AlertDescription></Alert>
-        <div className="flex flex-wrap gap-2"><Button type="button" disabled={!props.canCopy} onClick={props.onCopy}>{props.copied ? <Check className="mr-2 h-4 w-4" /> : <ClipboardCopy className="mr-2 h-4 w-4" />}{props.copied ? '已复制' : '复制交期摘要'}</Button><Button type="button" variant="outline" onClick={props.onReset}><RotateCcw className="mr-2 h-4 w-4" />重置</Button></div>
+        <div className="flex flex-wrap gap-2"><Button type="button" disabled={!props.canCopy} onClick={props.onCopy}>{props.copied ? <Check className="mr-2 h-4 w-4" /> : <ClipboardCopy className="mr-2 h-4 w-4" />}{props.copied ? '英文摘要已复制' : '复制英文摘要'}</Button><Button type="button" variant="outline" onClick={props.onReset}><RotateCcw className="mr-2 h-4 w-4" />重置</Button></div>
       </CardContent>
     </Card>
   )
