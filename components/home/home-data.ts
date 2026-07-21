@@ -30,6 +30,7 @@ import {
   Network,
   Plane,
   ReceiptText,
+  Ruler,
   ScanBarcode,
   Server,
   ShieldCheck,
@@ -63,6 +64,7 @@ const ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
   GitCompareArrows,
   HandCoins,
   ScanBarcode,
+  Ruler,
 }
 
 export const HOME_TOOLS = TOOL_REGISTRY.map((tool) => {

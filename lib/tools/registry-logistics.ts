@@ -8,6 +8,23 @@ import type { ToolMeta } from './registry-types'
 
 export const LOGISTICS_TOOLS: ToolMeta[] = [
   {
+    id: 'unit-converter',
+    slug: 'unit-converter',
+    title: '外贸单位换算器',
+    shortTitle: '单位换算',
+    description: '换算物流与产品规格常用的公制、英制长度、重量和体积单位',
+    category: '物流与装柜',
+    iconName: 'Ruler',
+    href: '/tools/unit-converter',
+    updatedAt: '2026-07-21',
+    badge: '新增',
+    keywords: ['unit converter', '单位换算', '长度', '重量', '体积', 'CBM', '英寸', '磅'],
+    seoTitle: '外贸单位换算器 - 长度重量体积在线换算 | Globokit',
+    seoDescription: '免费在线外贸单位换算器，支持物流和产品规格常用的公制与英制长度、重量、体积单位换算',
+    useCases: ['产品尺寸单位换算', '装箱重量换算', 'CBM 与立方英尺换算'],
+    relatedTools: ['container-load-calculator', 'pallet-load-calculator', 'air-freight-calculator', 'ocean-freight-calculator'],
+  },
+  {
     id: 'container-load-calculator',
     slug: 'container-load-calculator',
     title: '装柜/箱规计算器',

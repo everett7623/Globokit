@@ -103,6 +103,10 @@ export const TOOL_UI_CONFIG: Record<
     color: 'text-slate-700',
     bgColor: 'bg-slate-100',
   },
+  'unit-converter': {
+    color: 'text-teal-600',
+    bgColor: 'bg-teal-50',
+  },
 }
 
 export const TOOL_BADGE_STYLES: Record<string, string> = {

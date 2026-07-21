@@ -73,6 +73,11 @@
 
 ### 🚢 物流与出货工具
 
+- **外贸单位换算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 支持物流与产品规格常用的公制、英制长度、重量和体积单位换算。
+  - 提供 CBM、立方英尺、千克、磅、厘米、英寸等同量纲速览和结果复制。
+
 - **托盘装载计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
 
   - 支持中国标准、欧标与北美标准托盘，按纸箱尺寸估算每层码放数量。
@@ -198,6 +203,7 @@ Globokit/
 │   │   ├── rmb-converter/      # 人民币大写转换
 │   │   ├── special-char/       # 特殊字符检查
 │   │   ├── text-case/          # 英文大小写转换
+│   │   ├── unit-converter/     # 外贸单位换算
 │   │   ├── vps-calculator/     # VPS剩余价值计算器
 │   │   ├── world-time/         # 世界时间
 │   │   └── layout.tsx          # 工具页通用布局
@@ -254,6 +260,7 @@ Globokit/
 │   │   ├── rmb-converter.ts
 │   │   ├── special-char.ts
 │   │   ├── text-case.ts
+│   │   ├── unit-converter.ts
 │   │   ├── vps-calculator.ts
 │   │   └── world-time.ts
 │   └── utils.ts                # 通用工具 (cn 类名合并)
