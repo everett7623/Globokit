@@ -139,6 +139,10 @@
 - **世界时间与时区**
   
   - 实时查看全球主要贸易城市（纽约、伦敦、东京等）的当地时间，辅助跨时区会议安排。
+- **外贸交期计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 按生产、运输和缓冲周期依次推算阶段里程碑及最终交付日期。
+  - 支持自然日、工作日，以及排除指定国家法定公共假日的计算口径。
 - **国际节假日查询**
   
   - 查询全球主要贸易伙伴的公共假期安排，避免在客户休息日发送重要邮件。
@@ -188,6 +192,7 @@ Globokit/
 │   │   ├── container-load-calculator/ # 装柜/箱规计算
 │   │   ├── currency-symbols/   # 全球货币符号
 │   │   ├── customs-cost-calculator/ # 报关费用估算
+│   │   ├── delivery-date-calculator/ # 外贸交期计算
 │   │   ├── export-tax-rebate-calculator/ # 出口退税计算
 │   │   ├── express-channel-comparison/ # 快递渠道价格对比
 │   │   ├── global-country-info/# 全球国家信息
@@ -238,6 +243,7 @@ Globokit/
 │   │   ├── currency-symbols.ts
 │   │   ├── data/               # 国家与节假日 JSON 数据资产
 │   │   ├── customs-cost-calculator.ts
+│   │   ├── delivery-date-calculator.ts
 │   │   ├── export-tax-rebate-calculator.ts
 │   │   ├── express-channel-comparison.ts
 │   │   ├── global-country-info.ts

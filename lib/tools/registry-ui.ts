@@ -39,6 +39,10 @@ export const TOOL_UI_CONFIG: Record<
     color: 'text-orange-500',
     bgColor: 'bg-orange-50',
   },
+  'delivery-date-calculator': {
+    color: 'text-amber-600',
+    bgColor: 'bg-amber-50',
+  },
   'world-time': {
     color: 'text-indigo-500',
     bgColor: 'bg-indigo-50',
