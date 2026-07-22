@@ -2,11 +2,28 @@
 // 描述: 集中维护物流与装柜分类的工具元数据
 // 路径: Globokit/lib/tools/registry-logistics.ts
 // 作者: everettlabs
-// 更新时间: 2026-07-15
+// 更新时间: 2026-07-22
 
 import type { ToolMeta } from './registry-types'
 
 export const LOGISTICS_TOOLS: ToolMeta[] = [
+  {
+    id: 'freight-charge-audit',
+    slug: 'freight-charge-audit',
+    title: 'FOB/CIF 货代收费核对',
+    shortTitle: '货代收费核对',
+    description: '核对 FOB 卖方账单与 CIF 目的港客户账单，识别高收费、责任不匹配与待确认项目',
+    category: '物流与装柜',
+    iconName: 'ReceiptText',
+    href: '/tools/freight-charge-audit',
+    updatedAt: '2026-07-22',
+    badge: '新增',
+    keywords: ['FOB', 'CIF', 'freight forwarder', '货代', '收费核对', '港杂费', '海运费', '目的港费'],
+    seoTitle: 'FOB/CIF 货代收费核对 - 货代账单高收费检查 | Globokit',
+    seoDescription: '免费在线 FOB/CIF 货代收费核对工具，支持出口卖方和海外客户账单，按责任边界与同行价或约定价识别高收费和责任不匹配项目',
+    useCases: ['FOB 指定货代卖方账单复核', 'CIF 目的港客户费用核对', '货代费用议价前准备'],
+    relatedTools: ['ocean-freight-calculator', 'incoterms', 'customs-cost-calculator', 'quote-calculator', 'import-landed-cost-calculator'],
+  },
   {
     id: 'unit-converter',
     slug: 'unit-converter',
@@ -90,7 +107,7 @@ export const LOGISTICS_TOOLS: ToolMeta[] = [
     seoTitle: '海运费用拆分计算器 - FCL/LCL 每件每CBM成本测算 | Globokit',
     seoDescription: '免费在线海运费用拆分计算器，按海运费、起运港杂费、拖车、报关、保险和目的港费用测算 FCL/LCL 每件与每CBM成本',
     useCases: ['海运报价前成本拆分', '整柜和拼箱费用摊销', '核算每件与每CBM物流成本'],
-    relatedTools: ['container-load-calculator', 'air-freight-calculator', 'customs-cost-calculator', 'quote-calculator', 'import-landed-cost-calculator', 'incoterms'],
+    relatedTools: ['freight-charge-audit', 'container-load-calculator', 'customs-cost-calculator', 'quote-calculator', 'import-landed-cost-calculator', 'incoterms'],
   },
   {
     id: 'customs-cost-calculator',

@@ -93,6 +93,12 @@
   - 汇总海运费、起运港杂费、拖车、报关、文件、保险和目的港费用。
   - 支持整柜 FCL 与拼箱 LCL 两种测算口径，拼箱可设置最低计费 CBM。
   - 自动折算每件、每公斤、每 CBM 与每柜成本，便于报价前拆分物流费用。
+- **FOB/CIF 货代收费核对** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 支持出口卖方与海外客户两种账单对象，区分 FOB/CIF 下卖方、买方及需核对约定的费用责任。
+  - 将货代实际收费与同港口、同票型或柜型、同货量的同行价或约定价逐项比较。
+  - FOB 默认核对指定货代卖方账单，CIF 默认核对目的港向客户收取的换单、拆箱、操作、清关与派送费用。
+  - 识别高于基准、责任不匹配和缺少基准的项目，并生成可复制的复核清单。
 - **快递渠道价格对比** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
 
   - 统一汇总基础运费、燃油、偏远、报关和其他附加费，对比不同渠道真实成本。
@@ -195,6 +201,7 @@ Globokit/
 │   │   ├── delivery-date-calculator/ # 外贸交期计算
 │   │   ├── export-tax-rebate-calculator/ # 出口退税计算
 │   │   ├── express-channel-comparison/ # 快递渠道价格对比
+│   │   ├── freight-charge-audit/ # FOB/CIF 货代收费核对
 │   │   ├── global-country-info/# 全球国家信息
 │   │   ├── holiday-query/      # 国际节假日
 │   │   ├── import-landed-cost-calculator/ # 进口到岸成本计算
@@ -246,6 +253,7 @@ Globokit/
 │   │   ├── delivery-date-calculator.ts
 │   │   ├── export-tax-rebate-calculator.ts
 │   │   ├── express-channel-comparison.ts
+│   │   ├── freight-charge-audit.ts
 │   │   ├── global-country-info.ts
 │   │   ├── holiday-query.ts
 │   │   ├── import-landed-cost-calculator.ts
