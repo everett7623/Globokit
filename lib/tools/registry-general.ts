@@ -2,7 +2,7 @@
 // 描述: 维护文本、时间、国家、站长、沟通与文件工具元数据
 // 路径: Globokit/lib/tools/registry-general.ts
 // 作者: everettlabs
-// 更新时间: 2026-07-15
+// 更新时间: 2026-07-24
 
 import type { ToolMeta } from './registry-types'
 
@@ -96,7 +96,7 @@ export const GENERAL_TOOLS: ToolMeta[] = [
     category: '时间与节假日',
     iconName: 'CalendarClock',
     href: '/tools/delivery-date-calculator',
-    updatedAt: '2026-07-21',
+    updatedAt: '2026-07-24',
     badge: '新增',
     keywords: ['delivery date', '交期', '工作日', '生产周期', '运输周期', '节假日'],
     seoTitle: '外贸交期计算器 - 工作日与节假日交付日期推算 | Globokit',

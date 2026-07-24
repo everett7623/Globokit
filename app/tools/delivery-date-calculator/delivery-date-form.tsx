@@ -12,7 +12,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { DELIVERY_COUNTRIES, type DeliveryDayMode } from '@/lib/tools/delivery-date-calculator'
-import type { DayField, DeliveryDateFormState } from './delivery-date-page-data'
+import { ScenarioPresets } from '@/components/tools/scenario-presets'
+import { DELIVERY_PRESETS, type DayField, type DeliveryDateFormState } from './delivery-date-page-data'
 
 interface DeliveryDateFormProps {
   form: DeliveryDateFormState
@@ -23,6 +24,7 @@ interface DeliveryDateFormProps {
   onMode: (value: DeliveryDayMode) => void
   onHolidayToggle: () => void
   onCountry: (value: string) => void
+  onPreset: (values: Partial<DeliveryDateFormState>) => void
   onCopy: () => void
   onReset: () => void
 }
@@ -39,6 +41,7 @@ export function DeliveryDateForm(props: DeliveryDateFormProps) {
           <DayInput field="transitDays" label="运输周期" value={props.form.transitDays} onChange={props.onDayField} />
           <DayInput field="bufferDays" label="缓冲时间" value={props.form.bufferDays} onChange={props.onDayField} />
         </div>
+        <ScenarioPresets presets={DELIVERY_PRESETS} onSelect={props.onPreset} />
         <div className="space-y-2"><Label htmlFor="dayMode">计算口径</Label><Select value={props.form.dayMode} onValueChange={(value) => props.onMode(value as DeliveryDayMode)}><SelectTrigger id="dayMode" className="h-11"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="calendar">自然日</SelectItem><SelectItem value="business">工作日（排除周末）</SelectItem></SelectContent></Select></div>
         <div className="space-y-3 rounded-md border p-4">
           <div className="flex flex-wrap items-center justify-between gap-3"><div><p className="text-sm font-medium">排除法定公共假日</p><p className="text-xs text-muted-foreground">仅工作日模式可用，数据覆盖 2025–2027</p></div><Button type="button" size="sm" variant={props.form.excludeHolidays ? 'default' : 'outline'} disabled={!holidaysEnabled} aria-pressed={props.form.excludeHolidays} onClick={props.onHolidayToggle}>{props.form.excludeHolidays ? '已启用' : '未启用'}</Button></div>

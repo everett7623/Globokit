@@ -35,9 +35,9 @@ export const NAV_CATEGORY_META: Record<ToolCategory, { icon: ComponentType<{ cla
 
 const featuredToolIds = [
   'quote-calculator',
+  'express-channel-comparison',
   'container-load-calculator',
-  'air-freight-calculator',
-  'holiday-query',
+  'delivery-date-calculator',
   'global-country-info',
 ]
 

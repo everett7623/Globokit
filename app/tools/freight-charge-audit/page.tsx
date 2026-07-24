@@ -37,6 +37,8 @@ export default function FreightChargeAuditPage() {
     setCurrency(preset.currency)
     setTolerancePercent(preset.tolerancePercent)
     setLines(clonePresetLines(preset.lines))
+    setCopied(false)
+    setCopyFailed(false)
   }
 
   const changeTerm = (value: FreightTradeTerm) => {
@@ -78,7 +80,7 @@ export default function FreightChargeAuditPage() {
       <div className="mb-8 max-w-4xl"><h1 className="mb-2 text-3xl font-bold">FOB/CIF 货代收费核对</h1><p className="leading-7 text-muted-foreground">核对 FOB 指定货代向卖方收取的起运端费用，也核对 CIF 目的港向海外客户收取的本地费用是否偏高。</p></div>
       <FreightAuditStats result={result} />
       <div className="mt-6 grid items-start gap-6 xl:grid-cols-[minmax(0,1.45fr)_minmax(360px,0.75fr)]">
-        <div className="min-w-0 space-y-6"><FreightAuditControls term={term} auditParty={auditParty} currency={currency} tolerancePercent={tolerancePercent} onTermChange={changeTerm} onAuditPartyChange={setAuditParty} onCurrencyChange={setCurrency} onToleranceChange={setTolerancePercent} onPreset={applyPreset} /><FreightAuditTable currency={currency} lines={lines} onAdd={() => setLines((current) => [...current, createEmptyLine()])} onRemove={(id) => setLines((current) => current.filter((line) => line.id !== id))} onChange={updateLine} /></div>
+        <div className="min-w-0 space-y-6"><FreightAuditControls term={term} auditParty={auditParty} currency={currency} tolerancePercent={tolerancePercent} onTermChange={changeTerm} onAuditPartyChange={setAuditParty} onCurrencyChange={setCurrency} onToleranceChange={setTolerancePercent} onPreset={applyPreset} onReset={() => applyPreset(DEFAULT_PRESET)} /><FreightAuditTable currency={currency} lines={lines} onAdd={() => setLines((current) => [...current, createEmptyLine()])} onRemove={(id) => setLines((current) => current.filter((line) => line.id !== id))} onChange={updateLine} /></div>
         <FreightAuditResults result={result} copied={copied} copyFailed={copyFailed} onCopy={copyReview} />
       </div>
     </>

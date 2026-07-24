@@ -7,15 +7,15 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { HOME_TOOLS_BY_CATEGORY, WORKFLOW_GROUPS } from './home-data'
+import { HOME_TOOLS, WORKFLOW_GROUPS } from './home-data'
 
 export function HomeWorkflows() {
   return (
     <section className="grid gap-4 lg:grid-cols-4">
       {WORKFLOW_GROUPS.map((workflow) => {
         const Icon = workflow.icon
-        const categoryTools = HOME_TOOLS_BY_CATEGORY[workflow.category] ?? []
-        const firstTool = categoryTools[0]
+        const workflowTools = workflow.toolIds.map((id) => HOME_TOOLS.find((tool) => tool.id === id)).filter(Boolean)
+        const firstTool = workflowTools[0]
 
         return (
           <Link
@@ -29,7 +29,7 @@ export function HomeWorkflows() {
             <p className="text-lg font-semibold text-slate-950 dark:text-white">{workflow.title}</p>
             <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">{workflow.caption}</p>
             <div className="mt-4 flex items-center justify-between text-xs font-medium text-slate-500 dark:text-slate-400">
-              <span>{categoryTools.length} 款工具</span>
+              <span>{workflowTools.length} 款工具</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </div>
           </Link>

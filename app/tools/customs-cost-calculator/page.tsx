@@ -11,6 +11,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Calculator, Check, ClipboardCopy, FileCheck2, Info, Package, RotateCcw, ShieldCheck, Wallet } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { calculateCustomsCost, CustomsCostInputs, CustomsDirection, DEFAULT_CUSTOMS_COST_INPUTS } from '@/lib/tools/customs-cost-calculator'
+import { ScenarioPresets, type ScenarioPreset } from '@/components/tools/scenario-presets'
 
 type NumericField = Exclude<keyof CustomsCostInputs, 'direction'>
 type FormState = Record<NumericField, string> & { direction: CustomsDirection }
@@ -40,6 +41,12 @@ const fields: Array<{ field: NumericField; label: string; suffix: string; intege
 
 const money = new Intl.NumberFormat('zh-CN', { style: 'currency', currency: 'CNY', maximumFractionDigits: 2 })
 const number = (value: string) => Number.isFinite(Number.parseFloat(value)) ? Number.parseFloat(value) : 0
+const CUSTOMS_PRESETS: Array<ScenarioPreset<Partial<FormState>>> = [
+  { label: '出口普货单票', description: '常规出口报关，5 个以内申报品名，低查验预算', values: { direction: 'export', declarationItemCount: '5', includedItemCount: '5', inspectionProbabilityPercent: '5', portOperationFeeCny: '300', storageFeeCny: '0' } },
+  { label: '出口多品名', description: '申报品名较多，预留超项费和一般查验预算', values: { direction: 'export', declarationItemCount: '15', includedItemCount: '5', inspectionProbabilityPercent: '10', portOperationFeeCny: '300', storageFeeCny: '0' } },
+  { label: '进口清关', description: '进口代理、场站、仓储与国内派送预算', values: { direction: 'import', declarationFeeCny: '500', documentFeeCny: '250', agencyFeeCny: '500', inspectionProbabilityPercent: '15', inspectionFeeCny: '1500', portOperationFeeCny: '800', storageFeeCny: '300', domesticTransportFeeCny: '1000' } },
+  { label: '高查验预算', description: '对品名、监管条件或资料不确定的货物提高查验与仓储预留', values: { inspectionProbabilityPercent: '50', inspectionFeeCny: '1800', storageFeeCny: '500', otherFeeCny: '300' } },
+]
 
 export default function CustomsCostCalculatorPage() {
   const [form, setForm] = useState<FormState>(initialForm)
@@ -53,8 +60,9 @@ export default function CustomsCostCalculatorPage() {
   const copySummary = async () => {
     await navigator.clipboard.writeText([
       '报关费用估算', `业务方向：${result.directionLabel}`, `预计总费用：${money.format(result.totalExpectedCostCny)}`,
+      `报关票数：${result.shipmentCount} 票`, `申报品名：${form.declarationItemCount} 项（基础含 ${form.includedItemCount} 项）`,
       `每票费用：${money.format(result.perShipmentCny)}`, `每件摊费：${money.format(result.perItemCny)}`,
-      `货值占比：${result.cargoValueRatioPercent.toFixed(2)}%`, `查验期望成本：${money.format(result.expectedInspectionCostCny)}`,
+      `货值占比：${result.cargoValueRatioPercent.toFixed(2)}%`, `查验概率：${form.inspectionProbabilityPercent}%`, `查验期望成本：${money.format(result.expectedInspectionCostCny)}`,
     ].join('\n'))
     setCopied(true)
     window.setTimeout(() => setCopied(false), 1800)
@@ -73,6 +81,7 @@ export default function CustomsCostCalculatorPage() {
     <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_430px]">
       <Card><CardHeader><div className="flex items-start justify-between gap-3"><div><CardTitle>费用参数</CardTitle><CardDescription>按实际代理报价填写；查验费用以概率折算为预算期望值</CardDescription></div><Button variant="outline" size="sm" onClick={() => setForm(initialForm)}><RotateCcw className="mr-2 h-4 w-4" />重置</Button></div></CardHeader><CardContent className="space-y-6">
         <Tabs value={form.direction} onValueChange={(value) => setForm((current) => ({ ...current, direction: value as CustomsDirection }))}><TabsList className="grid w-full grid-cols-2"><TabsTrigger value="export">出口报关</TabsTrigger><TabsTrigger value="import">进口清关</TabsTrigger></TabsList></Tabs>
+        <ScenarioPresets presets={CUSTOMS_PRESETS} onSelect={(values) => setForm((current) => ({ ...current, ...values }))} />
         <div className="grid gap-4 md:grid-cols-2">{fields.map(({ field, label, suffix, integer }) => <div key={field} className="space-y-2"><Label htmlFor={field}>{label}</Label><div className="relative"><Input id={field} type="text" inputMode={integer ? 'numeric' : 'decimal'} value={form[field]} onChange={(event) => setForm((current) => ({ ...current, [field]: event.target.value }))} className="h-11 pr-20 tabular-nums" /><span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-xs text-muted-foreground">{suffix}</span></div></div>)}</div>
         <Alert><Info className="h-4 w-4" /><AlertDescription>本工具不含关税、进口增值税和消费税。进口税费请使用“进口到岸成本计算器”，实际费用以报关行、港区和海关单据为准。</AlertDescription></Alert>
         <Button onClick={copySummary}>{copied ? <Check className="mr-2 h-4 w-4" /> : <ClipboardCopy className="mr-2 h-4 w-4" />}{copied ? '已复制' : '复制估算摘要'}</Button>

@@ -4,7 +4,7 @@
 // 作者: everettlabs
 // 更新时间: 2026-07-22
 
-import { Info, SlidersHorizontal } from 'lucide-react'
+import { Info, RotateCcw, SlidersHorizontal } from 'lucide-react'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -25,6 +25,7 @@ interface FreightAuditControlsProps {
   onCurrencyChange: (value: FreightAuditCurrency) => void
   onToleranceChange: (value: string) => void
   onPreset: (preset: FreightAuditPreset) => void
+  onReset: () => void
 }
 
 export function FreightAuditControls(props: FreightAuditControlsProps) {
@@ -39,10 +40,7 @@ export function FreightAuditControls(props: FreightAuditControlsProps) {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2"><SlidersHorizontal className="h-5 w-5" />核价口径</CardTitle>
-        <CardDescription>{partyDescription}</CardDescription>
-      </CardHeader>
+      <CardHeader><div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between"><div><CardTitle className="flex items-center gap-2"><SlidersHorizontal className="h-5 w-5" />核价口径</CardTitle><CardDescription>{partyDescription}</CardDescription></div><Button type="button" variant="outline" size="sm" onClick={props.onReset}><RotateCcw className="mr-2 h-4 w-4" />重置</Button></div></CardHeader>
       <CardContent className="space-y-5">
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-2"><Label>贸易条款</Label><Tabs value={props.term} onValueChange={(value) => props.onTermChange(value as FreightTradeTerm)}><TabsList className="grid w-full grid-cols-2"><TabsTrigger value="FOB">FOB</TabsTrigger><TabsTrigger value="CIF">CIF</TabsTrigger></TabsList></Tabs></div>

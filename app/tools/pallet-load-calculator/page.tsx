@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Boxes, Check, ClipboardCopy, Info, Layers3, RotateCcw, Weight } from 'lucide-react'
 import { calculatePalletLoad, DEFAULT_PALLET_LOAD_INPUTS, PALLET_SPECS, PalletLoadInputs, PalletType } from '@/lib/tools/pallet-load-calculator'
+import { ScenarioPresets, type ScenarioPreset } from '@/components/tools/scenario-presets'
 
 type NumericField = Exclude<keyof PalletLoadInputs, 'palletType'>
 type FormState = Record<NumericField, string> & { palletType: PalletType }
@@ -22,6 +23,12 @@ const fields: Array<{ field: NumericField; label: string; suffix: string }> = [
   { field: 'cartonQuantity', label: '货物总箱数', suffix: '箱' }, { field: 'maxLoadedHeightCm', label: '最大含托高度', suffix: 'cm' },
   { field: 'maxGrossWeightKg', label: '单托限重', suffix: 'kg' },
 ]
+const PALLET_PRESETS: Array<ScenarioPreset<Partial<FormState>>> = [
+  { label: '国内/海运托', description: '120×100 cm 中国标准托盘，常用含托高度和载重预算', values: { palletType: 'china', maxLoadedHeightCm: '180', maxGrossWeightKg: '1000' } },
+  { label: '欧洲 EUR 托', description: '120×80 cm 欧标托盘，适合欧洲仓库和客户收货要求初算', values: { palletType: 'euro', maxLoadedHeightCm: '180', maxGrossWeightKg: '1000' } },
+  { label: '北美 48×40', description: '北美常用 48×40 inch 托盘规格', values: { palletType: 'north-america', maxLoadedHeightCm: '180', maxGrossWeightKg: '1000' } },
+  { label: '空运低托', description: '按较低含托高度和较轻载重预估，最终以航空公司或货代限制为准', values: { palletType: 'china', maxLoadedHeightCm: '160', maxGrossWeightKg: '700' } },
+]
 
 export default function PalletLoadCalculatorPage() {
   const [form, setForm] = useState<FormState>(initialForm)
@@ -30,7 +37,7 @@ export default function PalletLoadCalculatorPage() {
   const result = useMemo(() => calculatePalletLoad(inputs), [inputs])
   const noFit = result.cartonsPerPallet === 0
   const copy = async () => {
-    await navigator.clipboard.writeText(['托盘装载测算', `托盘：${result.pallet.name}`, `单层：${result.bestOrientation.cartonsPerLayer} 箱`, `层数：${result.maxLayers} 层`, `单托：${result.cartonsPerPallet} 箱`, `预计托盘数：${result.requiredPallets} 托`, `单托毛重：${result.grossWeightKg} kg`, `含托高度：${result.loadedHeightCm} cm`].join('\n'))
+    await navigator.clipboard.writeText(['托盘装载测算', `纸箱：${form.cartonLengthCm} × ${form.cartonWidthCm} × ${form.cartonHeightCm} cm，${form.cartonWeightKg} kg/箱`, `货物总数：${form.cartonQuantity} 箱`, `托盘：${result.pallet.name}`, `限制：含托高 ${form.maxLoadedHeightCm} cm，单托毛重 ${form.maxGrossWeightKg} kg`, `单层：${result.bestOrientation.cartonsPerLayer} 箱`, `层数：${result.maxLayers} 层`, `单托：${result.cartonsPerPallet} 箱`, `预计托盘数：${result.requiredPallets} 托（末托 ${result.lastPalletCartons} 箱）`, `单托毛重：${result.grossWeightKg} kg`, `含托高度：${result.loadedHeightCm} cm`, `限制因素：${result.limitingFactor === 'weight' ? '载重' : '尺寸/高度'}`].join('\n'))
     setCopied(true); window.setTimeout(() => setCopied(false), 1800)
   }
   const cards = [
@@ -45,6 +52,7 @@ export default function PalletLoadCalculatorPage() {
     <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_420px]">
       <Card><CardHeader><div className="flex justify-between gap-3"><div><CardTitle>装载参数</CardTitle><CardDescription>高度包含托盘本体，限重包含托盘自重</CardDescription></div><Button size="sm" variant="outline" onClick={() => setForm(initialForm)}><RotateCcw className="mr-2 h-4 w-4" />重置</Button></div></CardHeader><CardContent className="space-y-5">
         <div className="space-y-2"><Label>托盘规格</Label><Select value={form.palletType} onValueChange={(value) => setForm(current => ({ ...current, palletType: value as PalletType }))}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent>{Object.values(PALLET_SPECS).map(pallet => <SelectItem key={pallet.type} value={pallet.type}>{pallet.name} · {pallet.lengthCm} x {pallet.widthCm} cm</SelectItem>)}</SelectContent></Select></div>
+        <ScenarioPresets presets={PALLET_PRESETS} onSelect={(values) => setForm((current) => ({ ...current, ...values }))} />
         <div className="grid gap-4 md:grid-cols-2">{fields.map(({ field, label, suffix }) => <div key={field} className="space-y-2"><Label htmlFor={field}>{label}</Label><div className="relative"><Input id={field} type="text" inputMode="decimal" value={form[field]} onChange={event => setForm(current => ({ ...current, [field]: event.target.value }))} className="h-11 pr-16 tabular-nums" /><span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-xs text-muted-foreground">{suffix}</span></div></div>)}</div>
         <Alert><Info className="h-4 w-4" /><AlertDescription>结果按同一朝向规则码放，未考虑交错码放、纸箱承压、托盘外沿、绑带和仓库安全间距。实际出货前请复核包装强度与承运方限制。</AlertDescription></Alert>
         <Button onClick={copy}>{copied ? <Check className="mr-2 h-4 w-4" /> : <ClipboardCopy className="mr-2 h-4 w-4" />}{copied ? '已复制' : '复制装载摘要'}</Button>

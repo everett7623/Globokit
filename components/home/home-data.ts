@@ -41,7 +41,7 @@ import {
   Zap,
 } from 'lucide-react'
 import { PARTNER_RESOURCES, type PartnerResourceType } from '@/lib/partner-resources'
-import { TOOL_REGISTRY, type ToolCategory, getActiveCategories, getToolsByCategory } from '@/lib/tools/registry'
+import { TOOL_REGISTRY, getActiveCategories, getToolsByCategory } from '@/lib/tools/registry'
 import { TOOL_UI_CONFIG, getToolBadgeClassName } from '@/lib/tools/registry-ui'
 
 const ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
@@ -108,14 +108,14 @@ export const HOME_STATS = [
 export const WORKFLOW_GROUPS: Array<{
   title: string
   caption: string
-  category: ToolCategory
+  toolIds: string[]
   icon: ComponentType<{ className?: string }>
   accent: string
 }> = [
-  { title: '报价与利润', caption: '报价、金额、货币符号', category: '财务报价', icon: CircleDollarSign, accent: 'from-emerald-500 to-cyan-500' },
-  { title: '出货与条款', caption: '装柜、贸易术语、交付边界', category: '物流与装柜', icon: Ship, accent: 'from-lime-500 to-emerald-500' },
-  { title: '全球市场资料', caption: '国家、时区、节假日', category: '国家与货币', icon: Globe, accent: 'from-cyan-500 to-sky-500' },
-  { title: '文本与单据', caption: '邮件、名称、数据格式', category: '文本处理', icon: Type, accent: 'from-amber-500 to-orange-500' },
+  { title: '客户报价', caption: '核算成本、装量、退税和成交利润', toolIds: ['quote-calculator', 'unit-converter', 'container-load-calculator', 'export-tax-rebate-calculator'], icon: CircleDollarSign, accent: 'from-emerald-500 to-cyan-500' },
+  { title: '货代询价', caption: '确认计费重、渠道总价与费用责任', toolIds: ['express-channel-comparison', 'air-freight-calculator', 'ocean-freight-calculator', 'freight-charge-audit'], icon: Plane, accent: 'from-lime-500 to-emerald-500' },
+  { title: '出货执行', caption: '核对装柜、码托、报关和交付日期', toolIds: ['container-load-calculator', 'pallet-load-calculator', 'customs-cost-calculator', 'delivery-date-calculator'], icon: Container, accent: 'from-cyan-500 to-sky-500' },
+  { title: '市场跟进', caption: '确认国家资料、工作时间、假日与条款', toolIds: ['global-country-info', 'world-time', 'holiday-query', 'incoterms'], icon: Globe, accent: 'from-amber-500 to-orange-500' },
 ]
 
 export const PARTNER_TYPE_META: Record<PartnerResourceType, { icon: ComponentType<{ className?: string }>; tone: string }> = {

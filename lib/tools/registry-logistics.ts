@@ -2,7 +2,7 @@
 // 描述: 集中维护物流与装柜分类的工具元数据
 // 路径: Globokit/lib/tools/registry-logistics.ts
 // 作者: everettlabs
-// 更新时间: 2026-07-22
+// 更新时间: 2026-07-24
 
 import type { ToolMeta } from './registry-types'
 
@@ -16,7 +16,7 @@ export const LOGISTICS_TOOLS: ToolMeta[] = [
     category: '物流与装柜',
     iconName: 'ReceiptText',
     href: '/tools/freight-charge-audit',
-    updatedAt: '2026-07-22',
+    updatedAt: '2026-07-24',
     badge: '新增',
     keywords: ['FOB', 'CIF', 'freight forwarder', '货代', '收费核对', '港杂费', '海运费', '目的港费'],
     seoTitle: 'FOB/CIF 货代收费核对 - 货代账单高收费检查 | Globokit',
@@ -67,7 +67,7 @@ export const LOGISTICS_TOOLS: ToolMeta[] = [
     category: '物流与装柜',
     iconName: 'Pallet',
     href: '/tools/pallet-load-calculator',
-    updatedAt: '2026-07-12',
+    updatedAt: '2026-07-24',
     badge: '新增',
     keywords: ['pallet', '托盘', '栈板', '码托', '装载', '纸箱', '欧标托盘'],
     seoTitle: '托盘装载计算器 - 纸箱码托与托盘数量估算 | Globokit',
@@ -118,7 +118,7 @@ export const LOGISTICS_TOOLS: ToolMeta[] = [
     category: '物流与装柜',
     iconName: 'FileCheck2',
     href: '/tools/customs-cost-calculator',
-    updatedAt: '2026-07-11',
+    updatedAt: '2026-07-24',
     badge: '新增',
     keywords: ['customs', '报关', '清关', '查验', '单证', '代理费', '出口', '进口'],
     seoTitle: '报关费用估算器 - 出口报关与进口清关成本测算 | Globokit',
@@ -129,18 +129,18 @@ export const LOGISTICS_TOOLS: ToolMeta[] = [
   {
     id: 'express-channel-comparison',
     slug: 'express-channel-comparison',
-    title: '快递渠道价格对比',
-    shortTitle: '快递比价',
-    description: '统一燃油、偏远、报关等附加费口径，对比快递渠道真实成本与时效',
+    title: '国际快递/专线报价对比',
+    shortTitle: '快递专线比价',
+    description: '按箱规自动判断实重或体积重，对比空运、快递和 DDP 专线的报价方式、费用与时效',
     category: '物流与装柜',
     iconName: 'GitCompareArrows',
     href: '/tools/express-channel-comparison',
-    updatedAt: '2026-07-11',
+    updatedAt: '2026-07-24',
     badge: '新增',
-    keywords: ['express', '快递', '渠道', '比价', '燃油附加', '偏远费', '时效'],
-    seoTitle: '快递渠道价格对比 - 运费附加费与时效比较 | Globokit',
-    seoDescription: '免费在线快递渠道价格对比工具，统一计算基础运费、燃油、偏远、报关和其他附加费，对比每公斤成本与运输时效',
-    useCases: ['国际快递渠道比价', '货代报价成本核对', '成本与时效方案选择'],
+    keywords: ['express', 'air freight', 'DDP', '快递', '空运', '专线', '计费重', '体积重', '实重', '货代报价', '时效'],
+    seoTitle: '国际快递/专线报价对比 - 空运 DDP 体积重费用计算 | Globokit',
+    seoDescription: '免费在线国际快递与专线报价对比工具，按箱规自动判断实重或体积重，支持空运、商业快递和 DDP 专线的按公斤及整票报价',
+    useCases: ['空运快递计费重判断', 'DDP 专线货代报价核对', '按公斤与整票价格对比'],
     relatedTools: ['air-freight-calculator', 'customs-cost-calculator', 'quote-calculator', 'container-load-calculator'],
   },
 ]

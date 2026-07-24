@@ -2,7 +2,7 @@
 // 描述: 集中维护财务报价分类的工具元数据
 // 路径: Globokit/lib/tools/registry-finance.ts
 // 作者: everettlabs
-// 更新时间: 2026-07-15
+// 更新时间: 2026-07-24
 
 import type { ToolMeta } from './registry-types'
 
@@ -82,7 +82,7 @@ export const FINANCE_TOOLS: ToolMeta[] = [
     category: '财务报价',
     iconName: 'HandCoins',
     href: '/tools/export-tax-rebate-calculator',
-    updatedAt: '2026-07-11',
+    updatedAt: '2026-07-24',
     badge: '新增',
     keywords: ['export tax rebate', '出口', '退税', '增值税', 'FOB', '利润', '进项税'],
     seoTitle: '出口退税计算器 - 退税额与出口利润测算 | Globokit',
