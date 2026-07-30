@@ -1,0 +1,136 @@
+# Cursor AI Rules for Globokit
+
+## Project Context
+
+**Globokit** is a modern online toolkit for international trade professionals, built with Next.js 14 App Router. Pure frontend architecture with all calculations running locally in the browser.
+
+- **Stack**: Next.js 14, TypeScript, Tailwind CSS, Shadcn UI, Radix UI
+- **Deployment**: Vercel
+- **License**: GPL-3.0-only
+
+## Development Commands
+
+```bash
+npm run dev              # Start dev server (http://localhost:3000)
+npm run build            # Build for production
+npm run lint             # ESLint check
+npx tsc --noEmit         # TypeScript type check
+npm run validate:data    # Validate JSON data assets
+```
+
+## Core Architecture
+
+### Tool Registry System
+
+Centralized registry pattern manages all tool metadata:
+
+- **Registry Entry**: `lib/tools/registry.ts`
+- **Category Registries**: `lib/tools/registry-{finance|logistics|general|barcode}.ts`
+- **Type Definitions**: `lib/tools/registry-types.ts`
+
+**Tool Categories**: 财务报价, 文本处理, 时间与节假日, 国家与货币, 物流与装柜, VPS/站长工具, 外贸沟通, 文件与格式转换
+
+### Adding New Tools
+
+1. Add metadata to category registry (`registry-{category}.ts`)
+2. Required fields: `id`, `slug`, `title`, `shortTitle`, `description`, `category`, `iconName`, `href`, `updatedAt`
+3. Registry automatically drives: homepage directory, navigation, sitemap, SEO metadata
+
+### Directory Structure
+
+```
+app/tools/{tool-slug}/
+  ├── page.tsx              # Entry point
+  ├── {tool}-form.tsx       # Form component
+  ├── {tool}-result.tsx     # Result component
+  └── {tool}-data.ts        # Static data (optional)
+
+lib/tools/
+  ├── registry.ts           # Registry entry
+  ├── {tool-name}.ts        # Pure function algorithms
+  └── data/                 # JSON data assets
+```
+
+### Separation of Concerns
+
+- **Algorithm Layer** (`lib/tools/{tool-name}.ts`): Pure functions, no side effects
+- **UI Layer** (`app/tools/{tool-slug}/`): React components for state & interaction
+- **Data Assets** (`lib/tools/data/`): Large static data as JSON
+
+## Development Constraints
+
+### Path Aliases
+
+```typescript
+import { SITE_NAME } from '@/lib/site'
+import { Button } from '@/components/ui/button'
+```
+
+### Styling
+
+- Use Tailwind CSS utility classes
+- Dark mode: `dark:` prefix
+- Custom colors: CSS variables `hsl(var(--primary))`
+- Reuse Shadcn UI components
+
+### TypeScript
+
+- Strict mode enabled
+- Explicit types, avoid `any`
+- Exported functions require return types
+
+### File Header Comments
+
+```typescript
+// 名称: {Component/Module Name}
+// 描述: {Description}
+// 路径: Globokit/{relative-path}
+// 作者: everettlabs
+// 更新时间: YYYY-MM-DD
+```
+
+## Data Asset Validation
+
+Structured country info and holidays (2025-2027) in `lib/tools/data/`:
+
+- `global-country-info.json` - 171 countries
+- `holidays-{year}.json` - Annual holidays
+- `holiday-country-overrides.json` - Manual corrections
+- `holiday-observances.json` - International & religious holidays
+
+**After modifying data assets, run**: `npm run validate:data`
+
+## Partner Resources
+
+Business resources (proxies, hosting, AI tools) managed in `lib/partner-resources.ts`:
+
+```typescript
+export interface PartnerResource {
+  id: string
+  name: string
+  type: PartnerResourceType
+  href: string
+  description: string
+  bestFor: string[]
+  badge?: string
+}
+```
+
+Resources automatically appear on `/resources` page.
+
+## Version Release Checklist
+
+1. Update `package.json` and `package-lock.json` version (SemVer)
+2. Document changes in `CHANGELOG.md`
+3. Update version in `README.md`
+4. Run `npm run validate:data` and `npm run build`
+5. Create Git tag and GitHub Release
+
+## Important Notes
+
+- All tool calculations run locally in browser, no backend API
+- Don't hardcode tool lists, use registry system
+- When adding tools, update registry, navigation, README, and CHANGELOG
+- Large datasets (>1000 lines) should be JSON data assets
+- Run `npm run validate:data` after modifying data assets
+- Git commit messages in Simplified Chinese, tech terms in English
