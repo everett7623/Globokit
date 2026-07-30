@@ -69,7 +69,8 @@ export default function ResourcesPage() {
           {VISIBLE_RESOURCE_GROUPS.map((group) => {
             const meta = RESOURCE_TYPE_META[group.type]
             const Icon = meta.icon
-            const isWideGroup = group.type === '主机与建站' || group.type === '域名服务'
+            // 资源数量 >= 4 的分类使用宽布局，占据两列并且内部使用网格布局
+            const isWideGroup = group.resources.length >= 4
 
             return (
               <section key={group.type} id={meta.slug} className={cn('scroll-mt-28 space-y-3', isWideGroup && 'xl:col-span-2')}>
