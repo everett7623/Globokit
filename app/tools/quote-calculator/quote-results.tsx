@@ -4,10 +4,10 @@
 // 作者: everettlabs
 // 更新时间: 2026-07-15
 
-import { Check, Copy, DollarSign, Info, Package, Percent, ReceiptText, TrendingUp } from 'lucide-react'
+import { DollarSign, Info, Package, Percent, ReceiptText, TrendingUp } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { EnhancedCopyButton } from '@/components/tools/enhanced-copy-button'
 import { cn } from '@/lib/utils'
 import type { QuoteMode, QuoteResult } from '@/lib/tools/quote-calculator'
 import { formatCny, formatPercent, type QuoteCurrency } from './quote-page-data'
@@ -22,7 +22,13 @@ export function QuoteStats({ result, formatForeign }: { result: QuoteResult; for
   return <div className="mb-6 grid gap-4 md:grid-cols-4">{cards.map((card) => { const Icon = card.icon; return <Card key={card.label}><CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-medium"><Icon className="h-4 w-4" />{card.label}</CardTitle></CardHeader><CardContent><div className={cn('text-2xl font-bold', card.tone)}>{card.value}</div><p className="text-xs text-muted-foreground">{card.note}</p></CardContent></Card> })}</div>
 }
 
-interface QuoteResultsProps { result: QuoteResult | null; mode: QuoteMode; currency: QuoteCurrency; copied: boolean; formatForeign: (value: number) => string; onCopy: () => void }
+interface QuoteResultsProps {
+  result: QuoteResult | null
+  mode: QuoteMode
+  currency: QuoteCurrency
+  summaryText: string
+  formatForeign: (value: number) => string
+}
 
 export function QuoteResults(props: QuoteResultsProps) {
   const rows = props.result?.costRows ?? []
@@ -32,7 +38,26 @@ export function QuoteResults(props: QuoteResultsProps) {
   const result = props.result
   return <div className="space-y-6">
     <Card>
-      <CardHeader><div className="flex items-start justify-between gap-3"><div><CardTitle className="flex items-center gap-2"><ReceiptText className="h-5 w-5" />报价结果</CardTitle><CardDescription>以当前参数测算出的单价、利润和成本结构</CardDescription></div>{result && <Button variant="outline" size="sm" onClick={props.onCopy}>{props.copied ? <Check className="mr-2 h-4 w-4" /> : <Copy className="mr-2 h-4 w-4" />}{props.copied ? '已复制' : '复制'}</Button>}</div></CardHeader>
+      <CardHeader>
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <CardTitle className="flex items-center gap-2">
+              <ReceiptText className="h-5 w-5" />
+              报价结果
+            </CardTitle>
+            <CardDescription>以当前参数测算出的单价、利润和成本结构</CardDescription>
+          </div>
+          {result && (
+            <EnhancedCopyButton
+              text={props.summaryText}
+              variant="outline"
+              size="sm"
+            >
+              复制
+            </EnhancedCopyButton>
+          )}
+        </div>
+      </CardHeader>
       <CardContent>{result ? <div className="space-y-5">
         <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-4"><div className="flex items-center justify-between gap-4"><span className="text-sm font-medium text-emerald-800">{props.mode === 'target-margin' ? '建议报价单价' : '当前报价单价'}</span><Badge variant="outline" className="border-0 bg-white text-emerald-700 shadow-sm">{props.currency}</Badge></div><div className="mt-3 text-4xl font-bold text-emerald-700">{props.formatForeign(result.quotedUnitPriceForeign)}</div><p className="mt-2 text-sm text-emerald-800/80">盈亏平衡单价 {props.formatForeign(result.breakevenUnitPriceForeign)}</p></div>
         <div className="grid gap-3 sm:grid-cols-2"><ValueBox label="订单总额" value={props.formatForeign(result.totalQuoteForeign)} /><ValueBox label="人民币收入" value={formatCny(result.revenueCny)} /><ValueBox label="综合成本" value={formatCny(result.effectiveCostCny)} note={`${result.quoteTerm} 计入卖方成本`} /><ValueBox label="加价率" value={formatPercent(result.markupPercent)} /></div>
