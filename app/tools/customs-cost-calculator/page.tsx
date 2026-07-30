@@ -78,7 +78,7 @@ export default function CustomsCostCalculatorPage() {
   return <>
     <div className="mb-8"><h1 className="mb-2 text-3xl font-bold">报关费用估算器</h1><p className="text-muted-foreground">汇总报关、单证、代理、查验和本地操作费用，快速测算每票与每件成本。</p></div>
     <div className="grid gap-4 md:grid-cols-4">{cards.map(({ label, value, caption, icon: Icon }) => <Card key={label}><CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-medium"><Icon className="h-4 w-4" />{label}</CardTitle></CardHeader><CardContent><div className="text-2xl font-bold">{value}</div><p className="text-xs text-muted-foreground">{caption}</p></CardContent></Card>)}</div>
-    <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_430px]">
+    <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_420px]">
       <Card><CardHeader><div className="flex items-start justify-between gap-3"><div><CardTitle>费用参数</CardTitle><CardDescription>按实际代理报价填写；查验费用以概率折算为预算期望值</CardDescription></div><Button variant="outline" size="sm" onClick={() => setForm(initialForm)}><RotateCcw className="mr-2 h-4 w-4" />重置</Button></div></CardHeader><CardContent className="space-y-6">
         <Tabs value={form.direction} onValueChange={(value) => setForm((current) => ({ ...current, direction: value as CustomsDirection }))}><TabsList className="grid w-full grid-cols-2"><TabsTrigger value="export">出口报关</TabsTrigger><TabsTrigger value="import">进口清关</TabsTrigger></TabsList></Tabs>
         <ScenarioPresets presets={CUSTOMS_PRESETS} onSelect={(values) => setForm((current) => ({ ...current, ...values }))} />

@@ -41,7 +41,7 @@ export default function OceanFreightCalculatorPage() {
     <>
       <div className="mb-8"><h1 className="mb-2 text-3xl font-bold">海运费用拆分计算器</h1><p className="text-muted-foreground">汇总海运费、起运港杂费、拖车、报关、保险和目的港费用，快速折算每件、每 CBM 与每柜成本。</p></div>
       <OceanFreightStats result={result} form={form} />
-      <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_430px]">
+      <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_420px]">
         <OceanFreightForm form={form} copied={copied} onFieldChange={updateField} onModeChange={(mode: OceanFreightMode) => setForm((current) => ({ ...current, mode }))} onPreset={(values) => setForm((current) => ({ ...current, ...values }))} onCopy={copySummary} onReset={() => setForm(INITIAL_FORM)} />
         <OceanFreightResults result={result} form={form} />
       </div>
