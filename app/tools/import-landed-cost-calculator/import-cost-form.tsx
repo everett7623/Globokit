@@ -2,27 +2,27 @@
 // 描述: 展示币种、采购、税率、本地费用和预设控件
 // 路径: Globokit/app/tools/import-landed-cost-calculator/import-cost-form.tsx
 // 作者: everettlabs
-// 更新时间: 2026-07-15
+// 更新时间: 2026-07-30
 
-import { Calculator, Check, ClipboardCopy, Info, RotateCcw } from 'lucide-react'
+import { Calculator, Info, RotateCcw } from 'lucide-react'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { EnhancedCopyButton } from '@/components/tools/enhanced-copy-button'
 import type { ImportCurrency } from '@/lib/tools/import-landed-cost-calculator'
 import { CURRENCY_OPTIONS, IMPORT_PRESETS, type FormState, type NumericField } from './import-cost-page-data'
 
 interface ImportCostFormProps {
   form: FormState
-  copied: boolean
   goodsValue: string
   foreignCostTotal: string
   onFieldChange: (field: NumericField, value: string) => void
   onCurrencyChange: (currency: ImportCurrency, rate: string) => void
   onPreset: (values: Partial<FormState>) => void
-  onCopy: () => void
+  summaryText: string
   onReset: () => void
 }
 
@@ -41,7 +41,7 @@ export function ImportCostForm(props: ImportCostFormProps) {
       <FieldGrid><NumberField field="customsFeeCny" label="报关/清关费" suffix="CNY" value={props.form.customsFeeCny} onValueChange={props.onFieldChange} /><NumberField field="portChargeCny" label="港杂/查验费" suffix="CNY" value={props.form.portChargeCny} onValueChange={props.onFieldChange} /><NumberField field="domesticFreightCny" label="国内运输费" suffix="CNY" value={props.form.domesticFreightCny} onValueChange={props.onFieldChange} /><NumberField field="otherLocalCostCny" label="其他本地费用" suffix="CNY" value={props.form.otherLocalCostCny} onValueChange={props.onFieldChange} /></FieldGrid>
       <div className="grid gap-4 md:grid-cols-2"><NumberField field="targetSellingPriceCny" label="目标销售单价" suffix="CNY" value={props.form.targetSellingPriceCny} onValueChange={props.onFieldChange} /><div className="rounded-md border bg-muted/40 p-4"><p className="text-xs text-muted-foreground">采购货值</p><p className="mt-2 text-xl font-semibold">{props.goodsValue}</p><p className="mt-1 text-xs text-muted-foreground">外币费用合计 {props.foreignCostTotal}</p></div></div>
       <Alert><Info className="h-4 w-4" /><AlertDescription>结果用于报价和预算测算，实际税费以报关单、税则归类、进口环节税单和财务口径为准。</AlertDescription></Alert>
-      <Button type="button" onClick={props.onCopy}>{props.copied ? <Check className="mr-2 h-4 w-4" /> : <ClipboardCopy className="mr-2 h-4 w-4" />}{props.copied ? '已复制' : '复制测算摘要'}</Button>
+      <EnhancedCopyButton text={props.summaryText}>复制测算摘要</EnhancedCopyButton>
     </CardContent>
   </Card>
 }
