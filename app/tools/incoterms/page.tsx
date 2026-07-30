@@ -1,4 +1,5 @@
 // 名称: 国际贸易术语速查
+import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
 // 描述: 查询 Incoterms 2020 术语定义、风险转移点与费用责任边界
 // 路径: Globokit/app/tools/incoterms/page.tsx
 // 作者: everettlabs
@@ -8,7 +9,7 @@ import IncotermsTool from './incoterms-tool'
 
 export default function IncotermsPage() {
   return (
-    <>
+    <MobileFriendlyWrapper>
       <div className="mb-8">
         <h1 className="mb-2 text-3xl font-bold">国际贸易术语速查</h1>
         <p className="text-muted-foreground">
@@ -17,6 +18,6 @@ export default function IncotermsPage() {
       </div>
 
       <IncotermsTool />
-    </>
+    </MobileFriendlyWrapper>
   )
 }

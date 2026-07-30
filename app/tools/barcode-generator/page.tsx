@@ -1,4 +1,5 @@
 // 名称: 国际条码生成器
+import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
 // 描述: 生成符合 GS1 数据规则及常见国际条码规范的 PNG/SVG 条码
 // 路径: Globokit/app/tools/barcode-generator/page.tsx
 // 作者: everettlabs
@@ -30,7 +31,7 @@ const notes = [
 
 export default function BarcodeGeneratorPage() {
   return (
-    <>
+    <MobileFriendlyWrapper>
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h1 className="mb-2 text-3xl font-bold">国际条码生成器</h1>
@@ -69,6 +70,6 @@ export default function BarcodeGeneratorPage() {
           {' '}生成数据和符号，但不能替代 ISO/IEC 15415:2024、15416:2025 等实体条码质量检测。
         </AlertDescription>
       </Alert>
-    </>
+    </MobileFriendlyWrapper>
   )
 }

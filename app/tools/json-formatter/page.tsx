@@ -1,4 +1,5 @@
 // 名称: JSON 格式化与转换
+import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
 // 描述: 验证、格式化、压缩 JSON 及转换为 CSV 等格式
 // 路径: Globokit/app/tools/json-formatter/page.tsx
 // 作者: everettlabs
@@ -8,7 +9,7 @@ import JSONFormatterTool from './json-formatter-tool'
 
 export default function JSONFormatterPage() {
   return (
-    <>
+    <MobileFriendlyWrapper>
       <div className="mb-8">
         <h1 className="mb-2 text-3xl font-bold">JSON 格式化与转换</h1>
         <p className="text-muted-foreground">
@@ -17,6 +18,6 @@ export default function JSONFormatterPage() {
       </div>
 
       <JSONFormatterTool />
-    </>
+    </MobileFriendlyWrapper>
   )
 }

@@ -15,6 +15,7 @@ import { ReligiousHolidayTab } from './holiday-religious-tab'
 import { Card, CardContent } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { countries, filterHolidaysByMonth, generateHolidayData, getCountriesByRegion, getCountryHolidays, getUpcomingHolidays, SUPPORTED_HOLIDAY_YEARS } from '@/lib/tools/holiday-query'
+import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
 
 export default function HolidayQueryPage() {
   const currentYear = new Date().getFullYear()

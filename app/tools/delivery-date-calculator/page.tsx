@@ -6,6 +6,7 @@
 
 import { DeliveryDateTool } from './delivery-date-tool'
 import { getDateKeyInTimeZone } from '@/lib/tools/delivery-date-calculator'
+import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
 
 export default function DeliveryDateCalculatorPage() {
   return <DeliveryDateTool defaultStartDate={getDateKeyInTimeZone(new Date())} />

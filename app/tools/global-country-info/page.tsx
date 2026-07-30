@@ -13,6 +13,7 @@ import { exportCountriesCsv, filterAndSortCountries, type SortField, type SortOr
 import { CountryTable } from './country-table'
 import { CountryTips } from './country-tips'
 import type { CountryInfo } from '@/lib/tools/global-country-info'
+import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
 
 export default function GlobalCountryInfoPage() {
   const [searchTerm, setSearchTerm] = useState('')

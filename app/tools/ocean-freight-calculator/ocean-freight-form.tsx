@@ -2,9 +2,9 @@
 // 描述: 展示运输模式、费用字段、预设和操作控件
 // 路径: Globokit/app/tools/ocean-freight-calculator/ocean-freight-form.tsx
 // 作者: everettlabs
-// 更新时间: 2026-07-15
+// 更新时间: 2026-07-30
 
-import { Calculator, Check, ClipboardCopy, Info, RotateCcw } from 'lucide-react'
+import { Calculator, Info, RotateCcw } from 'lucide-react'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -12,15 +12,16 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import type { OceanFreightMode } from '@/lib/tools/ocean-freight-calculator'
+import { EnhancedCopyButton } from '@/components/tools/enhanced-copy-button'
+import { MobileButtonGroup } from '@/components/tools/mobile-friendly-wrapper'
 import { OCEAN_PRESETS, type FormState, type NumericField } from './ocean-freight-page-data'
 
 interface OceanFreightFormProps {
   form: FormState
-  copied: boolean
+  summaryText: string
   onFieldChange: (field: NumericField, value: string) => void
   onModeChange: (mode: OceanFreightMode) => void
   onPreset: (values: Partial<FormState>) => void
-  onCopy: () => void
   onReset: () => void
 }
 
@@ -37,7 +38,9 @@ export function OceanFreightForm(props: OceanFreightFormProps) {
           <NumberField field="totalWeightKg" label="总毛重" suffix="kg" value={props.form.totalWeightKg} onValueChange={props.onFieldChange} />
         </div>
         <div className="grid gap-4 md:grid-cols-[repeat(3,minmax(0,1fr))]">
-          {props.form.mode === 'fcl' ? <NumberField field="containerCount" label="柜数" suffix="柜" step="1" value={props.form.containerCount} onValueChange={props.onFieldChange} /> : <NumberField field="minChargeableCbm" label="最低计费" suffix="CBM" value={props.form.minChargeableCbm} onValueChange={props.onFieldChange} />}
+          {props.form.mode === 'fcl'
+            ? <NumberField field="containerCount" label="柜数" suffix="柜" step="1" value={props.form.containerCount} onValueChange={props.onFieldChange} />
+            : <NumberField field="minChargeableCbm" label="最低计费" suffix="CBM" value={props.form.minChargeableCbm} onValueChange={props.onFieldChange} />}
           <NumberField field="exchangeRate" label="美元汇率" suffix="CNY" step="0.0001" value={props.form.exchangeRate} onValueChange={props.onFieldChange} />
           <NumberField field="oceanFreightForeign" label="海运费合计" suffix="USD" value={props.form.oceanFreightForeign} onValueChange={props.onFieldChange} />
         </div>
@@ -51,10 +54,10 @@ export function OceanFreightForm(props: OceanFreightFormProps) {
           <NumberField field="insuranceRatePercent" label="保险费率" suffix="%" value={props.form.insuranceRatePercent} onValueChange={props.onFieldChange} />
         </div>
         <Alert><Info className="h-4 w-4" /><AlertDescription>结果用于报价前快速拆分成本，未包含查验、滞港、甩柜、仓储、超重和特殊品名附加费。</AlertDescription></Alert>
-        <div className="flex flex-wrap gap-2">
-          <Button type="button" onClick={props.onCopy}>{props.copied ? <Check className="mr-2 h-4 w-4" /> : <ClipboardCopy className="mr-2 h-4 w-4" />}{props.copied ? '已复制' : '复制测算摘要'}</Button>
+        <MobileButtonGroup>
+          <EnhancedCopyButton text={props.summaryText}>复制测算摘要</EnhancedCopyButton>
           <Button type="button" variant="outline" onClick={props.onReset}><RotateCcw className="mr-2 h-4 w-4" />重置</Button>
-        </div>
+        </MobileButtonGroup>
       </CardContent>
     </Card>
   )

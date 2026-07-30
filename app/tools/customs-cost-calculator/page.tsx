@@ -8,7 +8,9 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Calculator, Check, ClipboardCopy, FileCheck2, Info, Package, RotateCcw, ShieldCheck, Wallet } from 'lucide-react'
+import { Calculator, FileCheck2, Info, Package, RotateCcw, ShieldCheck, Wallet } from 'lucide-react'
+import { EnhancedCopyButton } from '@/components/tools/enhanced-copy-button'
+import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
 import { cn } from '@/lib/utils'
 import { calculateCustomsCost, CustomsCostInputs, CustomsDirection, DEFAULT_CUSTOMS_COST_INPUTS } from '@/lib/tools/customs-cost-calculator'
 import { ScenarioPresets, type ScenarioPreset } from '@/components/tools/scenario-presets'
@@ -50,23 +52,18 @@ const CUSTOMS_PRESETS: Array<ScenarioPreset<Partial<FormState>>> = [
 
 export default function CustomsCostCalculatorPage() {
   const [form, setForm] = useState<FormState>(initialForm)
-  const [copied, setCopied] = useState(false)
   const inputs = useMemo(() => Object.fromEntries(
     Object.entries(form).map(([key, value]) => [key, key === 'direction' ? value : number(value)])
   ) as unknown as CustomsCostInputs, [form])
   const result = useMemo(() => calculateCustomsCost(inputs), [inputs])
   const maxCost = Math.max(...result.costBreakdown.map((row) => row.value), 1)
 
-  const copySummary = async () => {
-    await navigator.clipboard.writeText([
+  const getSummaryText = () => [
       '报关费用估算', `业务方向：${result.directionLabel}`, `预计总费用：${money.format(result.totalExpectedCostCny)}`,
       `报关票数：${result.shipmentCount} 票`, `申报品名：${form.declarationItemCount} 项（基础含 ${form.includedItemCount} 项）`,
       `每票费用：${money.format(result.perShipmentCny)}`, `每件摊费：${money.format(result.perItemCny)}`,
       `货值占比：${result.cargoValueRatioPercent.toFixed(2)}%`, `查验概率：${form.inspectionProbabilityPercent}%`, `查验期望成本：${money.format(result.expectedInspectionCostCny)}`,
-    ].join('\n'))
-    setCopied(true)
-    window.setTimeout(() => setCopied(false), 1800)
-  }
+    ].join('\n')
 
   const cards = [
     { label: '预计费用合计', value: money.format(result.totalExpectedCostCny), caption: result.directionLabel, icon: Wallet },
@@ -75,7 +72,7 @@ export default function CustomsCostCalculatorPage() {
     { label: '货值占比', value: `${result.cargoValueRatioPercent.toFixed(2)}%`, caption: '费用 / 申报货值', icon: Calculator },
   ]
 
-  return <>
+  return <MobileFriendlyWrapper>
     <div className="mb-8"><h1 className="mb-2 text-3xl font-bold">报关费用估算器</h1><p className="text-muted-foreground">汇总报关、单证、代理、查验和本地操作费用，快速测算每票与每件成本。</p></div>
     <div className="grid gap-4 md:grid-cols-4">{cards.map(({ label, value, caption, icon: Icon }) => <Card key={label}><CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-medium"><Icon className="h-4 w-4" />{label}</CardTitle></CardHeader><CardContent><div className="text-2xl font-bold">{value}</div><p className="text-xs text-muted-foreground">{caption}</p></CardContent></Card>)}</div>
     <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_420px]">
@@ -84,10 +81,10 @@ export default function CustomsCostCalculatorPage() {
         <ScenarioPresets presets={CUSTOMS_PRESETS} onSelect={(values) => setForm((current) => ({ ...current, ...values }))} />
         <div className="grid gap-4 md:grid-cols-2">{fields.map(({ field, label, suffix, integer }) => <div key={field} className="space-y-2"><Label htmlFor={field}>{label}</Label><div className="relative"><Input id={field} type="text" inputMode={integer ? 'numeric' : 'decimal'} value={form[field]} onChange={(event) => setForm((current) => ({ ...current, [field]: event.target.value }))} className="h-11 pr-20 tabular-nums" /><span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-xs text-muted-foreground">{suffix}</span></div></div>)}</div>
         <Alert><Info className="h-4 w-4" /><AlertDescription>本工具不含关税、进口增值税和消费税。进口税费请使用“进口到岸成本计算器”，实际费用以报关行、港区和海关单据为准。</AlertDescription></Alert>
-        <Button onClick={copySummary}>{copied ? <Check className="mr-2 h-4 w-4" /> : <ClipboardCopy className="mr-2 h-4 w-4" />}{copied ? '已复制' : '复制估算摘要'}</Button>
+        <EnhancedCopyButton text={getSummaryText()}>复制估算摘要</EnhancedCopyButton>
       </CardContent></Card>
       <div className="space-y-6"><Card><CardHeader><CardTitle className="flex items-center justify-between"><span>费用拆分</span><Badge variant="secondary">{result.directionLabel}</Badge></CardTitle><CardDescription>超出基础范围的申报品名 {result.extraItemCount} 项</CardDescription></CardHeader><CardContent className="space-y-4">{result.costBreakdown.map((row) => <div key={row.key} className="space-y-1"><div className="flex justify-between gap-3 text-sm"><span className="text-muted-foreground">{row.label}</span><span className="font-medium">{money.format(row.value)}</span></div><div className="h-2 overflow-hidden rounded-full bg-muted"><div className={cn('h-full rounded-full', row.key === 'declaration' ? 'bg-emerald-500' : row.key === 'inspection' ? 'bg-amber-500' : 'bg-slate-500')} style={{ width: `${row.value ? Math.max(3, row.value / maxCost * 100) : 0}%` }} /></div><p className="text-right text-[11px] text-muted-foreground">{row.sharePercent.toFixed(1)}%</p></div>)}</CardContent></Card>
       <Card><CardHeader><CardTitle className="flex items-center gap-2"><ShieldCheck className="h-5 w-5" />预算提示</CardTitle></CardHeader><CardContent className="space-y-2 text-sm text-muted-foreground"><p>查验期望成本：{money.format(result.expectedInspectionCostCny)}</p><p>报关与品名附加：{money.format(result.declarationSubtotalCny)}</p><p>本地操作费用：{money.format(result.localOperationCostCny)}</p></CardContent></Card></div>
     </div>
-  </>
+  </MobileFriendlyWrapper>
 }

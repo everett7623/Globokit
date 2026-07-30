@@ -10,11 +10,11 @@ import { useMemo, useState } from 'react'
 import { OceanFreightForm } from './ocean-freight-form'
 import { INITIAL_FORM, formatCny, formatNumber, toNumber, type FormState, type NumericField } from './ocean-freight-page-data'
 import { OceanFreightResults, OceanFreightStats } from './ocean-freight-results'
+import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
 import { calculateOceanFreight, type OceanFreightInputs, type OceanFreightMode } from '@/lib/tools/ocean-freight-calculator'
 
 export default function OceanFreightCalculatorPage() {
   const [form, setForm] = useState<FormState>(INITIAL_FORM)
-  const [copied, setCopied] = useState(false)
   const inputs = useMemo<OceanFreightInputs>(() => ({
     mode: form.mode, quantity: toNumber(form.quantity), totalCbm: toNumber(form.totalCbm), totalWeightKg: toNumber(form.totalWeightKg),
     containerCount: toNumber(form.containerCount), minChargeableCbm: toNumber(form.minChargeableCbm), oceanFreightForeign: toNumber(form.oceanFreightForeign),
@@ -24,27 +24,22 @@ export default function OceanFreightCalculatorPage() {
   }), [form])
   const result = useMemo(() => calculateOceanFreight(inputs), [inputs])
 
-  const copySummary = async () => {
-    const summary = [
+  const getSummaryText = () => [
       '海运费用拆分测算', `运输方式：${result.modeLabel}`, `数量：${result.quantity} 件`, `计费体积：${formatNumber(result.chargeableCbm, 3)} CBM`,
       `总毛重：${formatNumber(toNumber(form.totalWeightKg), 2)} kg`, `海运费：${formatCny(result.freightCny)}`, `目的港费用：${formatCny(result.destinationChargeCny)}`,
       `起运端费用：${formatCny(result.originSubtotalCny)}`, `保险费：${formatCny(result.insuranceFeeCny)}`, `总费用：${formatCny(result.totalCostCny)}`,
       `每CBM：${formatCny(result.perCbmCny)}`, `每件摊费：${formatCny(result.perCartonCny)}`,
     ].join('\n')
-    await navigator.clipboard.writeText(summary)
-    setCopied(true)
-    window.setTimeout(() => setCopied(false), 1800)
-  }
   const updateField = (field: NumericField, value: string) => setForm((current) => ({ ...current, [field]: value }))
 
   return (
-    <>
+    <MobileFriendlyWrapper>
       <div className="mb-8"><h1 className="mb-2 text-3xl font-bold">海运费用拆分计算器</h1><p className="text-muted-foreground">汇总海运费、起运港杂费、拖车、报关、保险和目的港费用，快速折算每件、每 CBM 与每柜成本。</p></div>
       <OceanFreightStats result={result} form={form} />
       <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_420px]">
-        <OceanFreightForm form={form} copied={copied} onFieldChange={updateField} onModeChange={(mode: OceanFreightMode) => setForm((current) => ({ ...current, mode }))} onPreset={(values) => setForm((current) => ({ ...current, ...values }))} onCopy={copySummary} onReset={() => setForm(INITIAL_FORM)} />
+        <OceanFreightForm form={form} onFieldChange={updateField} onModeChange={(mode: OceanFreightMode) => setForm((current) => ({ ...current, mode }))} onPreset={(values) => setForm((current) => ({ ...current, ...values }))} summaryText={getSummaryText()} onReset={() => setForm(INITIAL_FORM)} />
         <OceanFreightResults result={result} form={form} />
       </div>
-    </>
+    </MobileFriendlyWrapper>
   )
 }
