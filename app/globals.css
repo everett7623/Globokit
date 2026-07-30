@@ -166,4 +166,126 @@
     --tw-shadow-color: rgb(0 0 0 / 0.3);
     --tw-shadow: var(--tw-shadow-colored);
   }
+
+  /* 用户体验优化 - 2026-07-30 */
+
+  /* 屏幕阅读器专用（视觉隐藏） */
+  .sr-only {
+    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  /* 键盘导航焦点样式 */
+  .using-keyboard *:focus {
+    @apply outline-2 outline-offset-2 outline-emerald-500 dark:outline-cyan-400;
+  }
+
+  /* 移动端触摸优化 */
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* 按钮最小触摸区域（WCAG 2.1 AA 标准：44x44px） */
+  .min-touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  /* 输入框聚焦增强 */
+  input:focus,
+  textarea:focus,
+  select:focus {
+    @apply ring-2 ring-emerald-500 ring-offset-2 dark:ring-cyan-400;
+  }
+
+  /* 禁用状态视觉反馈 */
+  button:disabled,
+  input:disabled,
+  select:disabled,
+  textarea:disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+
+  /* 加载动画 */
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  .skeleton-loading {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--muted)) 25%,
+      hsl(var(--muted-foreground) / 0.1) 50%,
+      hsl(var(--muted)) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* 平滑滚动 */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  /* 减少动画（尊重用户偏好） */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* 移动端优化 - 防止横向溢出 */
+  @media (max-width: 640px) {
+    body {
+      overflow-x: hidden;
+    }
+  }
+
+  /* 数字等宽字体优化 */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+  }
+
+  /* 成功状态动画 */
+  @keyframes success-bounce {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  .success-feedback {
+    animation: success-bounce 0.3s ease-in-out;
+  }
+
+  /* 错误抖动动画 */
+  @keyframes error-shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-10px);
+    }
+    75% {
+      transform: translateX(10px);
+    }
+  }
+
+  .error-shake {
+    animation: error-shake 0.4s ease-in-out;
+  }
 }
