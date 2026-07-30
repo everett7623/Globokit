@@ -7,13 +7,15 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { ArrowLeftRight, Check, ClipboardCopy, Info, RotateCcw } from 'lucide-react'
+import { ArrowLeftRight, Info, RotateCcw } from 'lucide-react'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { EnhancedCopyButton } from '@/components/tools/enhanced-copy-button'
+import { FormattedInput } from '@/components/ui/formatted-input'
+import { MobileFriendlyWrapper, MobileButtonGroup } from '@/components/tools/mobile-friendly-wrapper'
 import {
   DEFAULT_UNIT_SELECTIONS,
   UNIT_CATEGORY_LABELS,
@@ -31,7 +33,6 @@ export default function UnitConverterPage() {
   const [sourceUnit, setSourceUnit] = useState(DEFAULT_UNIT_SELECTIONS.length.source)
   const [targetUnit, setTargetUnit] = useState(DEFAULT_UNIT_SELECTIONS.length.target)
   const [inputValue, setInputValue] = useState(DEFAULT_UNIT_SELECTIONS.length.value)
-  const [copied, setCopied] = useState(false)
   const units = UNIT_GROUPS[category]
   const numericValue = inputValue.trim() === '' ? Number.NaN : Number(inputValue)
   const result = useMemo(
@@ -47,7 +48,6 @@ export default function UnitConverterPage() {
     setSourceUnit(defaults.source)
     setTargetUnit(defaults.target)
     setInputValue(defaults.value)
-    setCopied(false)
   }
 
   const reset = () => selectCategory(category)
@@ -55,29 +55,26 @@ export default function UnitConverterPage() {
     setSourceUnit(targetUnit)
     setTargetUnit(sourceUnit)
     if (result !== null) setInputValue(formatUnitInput(result))
-    setCopied(false)
   }
-  const copyResult = async () => {
-    if (result === null || !source || !target) return
-    await navigator.clipboard.writeText(`${formatUnitValue(numericValue)} ${source.symbol} = ${formatUnitValue(result)} ${target.symbol}`)
-    setCopied(true)
-    window.setTimeout(() => setCopied(false), 1800)
+  const getCopyText = () => {
+    if (result === null || !source || !target) return ''
+    return `${formatUnitValue(numericValue)} ${source.symbol} = ${formatUnitValue(result)} ${target.symbol}`
   }
 
   return (
-    <>
+    <MobileFriendlyWrapper>
       <div className="mb-8">
         <h1 className="mb-2 text-3xl font-bold">外贸单位换算器</h1>
         <p className="text-muted-foreground">快速换算物流、包装与产品规格中的公制和英制长度、重量、体积单位</p>
       </div>
 
-      <div className="mb-6 flex flex-wrap gap-2">
+      <MobileButtonGroup className="mb-6">
         {CATEGORIES.map((item) => (
           <Button key={item} type="button" variant={category === item ? 'default' : 'outline'} onClick={() => selectCategory(item)}>
             {UNIT_CATEGORY_LABELS[item]}
           </Button>
         ))}
-      </div>
+      </MobileButtonGroup>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_420px]">
         <Card>
@@ -88,7 +85,15 @@ export default function UnitConverterPage() {
           <CardContent className="space-y-5">
             <div className="space-y-2">
               <Label htmlFor="unit-value">数值</Label>
-              <Input id="unit-value" type="text" inputMode="decimal" value={inputValue} onChange={(event) => setInputValue(event.target.value)} className="h-12 text-lg tabular-nums" />
+              <FormattedInput
+                id="unit-value"
+                value={inputValue}
+                onChange={setInputValue}
+                format="decimal"
+                autoFocusFirst
+                placeholder="请输入数字"
+                className="h-12 text-lg"
+              />
             </div>
             <div className="grid items-end gap-3 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
               <UnitSelect id="source-unit" label="原单位" value={sourceUnit} units={units} onChange={setSourceUnit} />
@@ -96,10 +101,10 @@ export default function UnitConverterPage() {
               <UnitSelect id="target-unit" label="目标单位" value={targetUnit} units={units} onChange={setTargetUnit} />
             </div>
             {result === null && <Alert variant="destructive"><Info className="h-4 w-4" /><AlertDescription>请输入大于或等于 0 的有效数字。</AlertDescription></Alert>}
-            <div className="flex flex-wrap gap-2">
-              <Button type="button" onClick={copyResult} disabled={result === null}>{copied ? <Check className="mr-2 h-4 w-4" /> : <ClipboardCopy className="mr-2 h-4 w-4" />}{copied ? '已复制' : '复制结果'}</Button>
+            <MobileButtonGroup>
+              <EnhancedCopyButton text={getCopyText()} disabled={result === null}>复制结果</EnhancedCopyButton>
               <Button type="button" variant="outline" onClick={reset}><RotateCcw className="mr-2 h-4 w-4" />重置</Button>
-            </div>
+            </MobileButtonGroup>
           </CardContent>
         </Card>
 
@@ -123,7 +128,7 @@ export default function UnitConverterPage() {
           </CardContent>
         </Card>
       </div>
-    </>
+    </MobileFriendlyWrapper>
   )
 }
 
