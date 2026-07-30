@@ -2,26 +2,27 @@
 // 描述: 展示纸箱、数量、柜型预设和操作控件
 // 路径: Globokit/app/tools/container-load-calculator/container-load-form.tsx
 // 作者: everettlabs
-// 更新时间: 2026-07-15
+// 更新时间: 2026-07-30
 
-import { Check, ClipboardCopy, Info, RotateCcw } from 'lucide-react'
+import { Info, RotateCcw } from 'lucide-react'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { EnhancedCopyButton } from '@/components/tools/enhanced-copy-button'
+import { MobileButtonGroup } from '@/components/tools/mobile-friendly-wrapper'
 import { CONTAINER_SPECS, type ContainerType } from '@/lib/tools/container-load-calculator'
 import { CONTAINER_PRESETS, type FormState, type NumericField } from './container-load-page-data'
 
 interface ContainerLoadFormProps {
   form: FormState
-  copied: boolean
   doesNotFit: boolean
   onFieldChange: (field: NumericField, value: string) => void
   onContainerChange: (value: ContainerType) => void
   onPreset: (values: Partial<FormState>) => void
-  onCopy: () => void
+  summaryText: string
   onReset: () => void
 }
 
@@ -49,10 +50,18 @@ export function ContainerLoadForm(props: ContainerLoadFormProps) {
         </div>
         <Alert><Info className="h-4 w-4" /><AlertDescription>结果为规则摆放估算，未考虑托盘、纸箱变形、装卸间隙、限重法规和船公司具体柜况。</AlertDescription></Alert>
         {props.doesNotFit && <Alert variant="destructive"><Info className="h-4 w-4" /><AlertDescription>当前纸箱在所有旋转方向下都无法通过所选柜型内尺寸，请调整包装尺寸或运输方案。</AlertDescription></Alert>}
-        <div className="flex flex-wrap gap-2">
-          <Button type="button" onClick={props.onCopy}>{props.copied ? <Check className="mr-2 h-4 w-4" /> : <ClipboardCopy className="mr-2 h-4 w-4" />}{props.copied ? '已复制' : '复制测算摘要'}</Button>
-          <Button type="button" variant="outline" onClick={props.onReset}><RotateCcw className="mr-2 h-4 w-4" />重置</Button>
-        </div>
+        <MobileButtonGroup>
+          <EnhancedCopyButton
+            text={props.summaryText}
+            disabled={props.doesNotFit}
+          >
+            复制测算摘要
+          </EnhancedCopyButton>
+          <Button type="button" variant="outline" onClick={props.onReset}>
+            <RotateCcw className="mr-2 h-4 w-4" />
+            重置
+          </Button>
+        </MobileButtonGroup>
       </CardContent>
     </Card>
   )
