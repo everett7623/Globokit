@@ -112,6 +112,11 @@
   - FOB 默认核对指定货代卖方账单，CIF 默认核对目的港向客户收取的换单、拆箱、操作、清关与派送费用。
   - 识别高于基准、责任不匹配和缺少基准的项目，并生成可复制的复核清单。
   - 可一键恢复默认账单，方便连续核对不同货代报价。
+- **集装箱滞箱/滞港费计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 分开估算码头或堆场内的滞港费，以及提柜到还空柜期间的滞箱费。
+  - 支持免费天数、第一/第二阶梯和后续日费率，按柜量汇总总费用与平均每柜费用。
+  - 提供港区拥堵、延长免费期和美元账单场景，最终以船公司条款与正式账单为准。
 - **国际快递/专线报价对比** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
 
   - 按箱规、毛重和渠道泡重系数自动判断按实重或体积重计费。
@@ -214,6 +219,7 @@ Globokit/
 │   │   ├── container-load-calculator/ # 装柜/箱规计算
 │   │   ├── currency-symbols/   # 全球货币符号
 │   │   ├── customs-cost-calculator/ # 报关费用估算
+│   │   ├── demurrage-detention-calculator/ # 集装箱滞箱滞港费
 │   │   ├── delivery-date-calculator/ # 外贸交期计算
 │   │   ├── export-tax-rebate-calculator/ # 出口退税计算
 │   │   ├── express-channel-comparison/ # 快递渠道价格对比
@@ -268,6 +274,7 @@ Globokit/
 │   │   ├── currency-symbols.ts
 │   │   ├── data/               # 国家与节假日 JSON 数据资产
 │   │   ├── customs-cost-calculator.ts
+│   │   ├── demurrage-detention-calculator.ts
 │   │   ├── delivery-date-calculator.ts
 │   │   ├── export-tax-rebate-calculator.ts
 │   │   ├── express-channel-comparison.ts

@@ -91,6 +91,10 @@ export const TOOL_UI_CONFIG: Record<
     color: 'text-cyan-600',
     bgColor: 'bg-cyan-50',
   },
+  'demurrage-detention-calculator': {
+    color: 'text-orange-700',
+    bgColor: 'bg-orange-50',
+  },
   'freight-charge-audit': {
     color: 'text-rose-600',
     bgColor: 'bg-rose-50',

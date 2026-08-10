@@ -117,7 +117,7 @@ export const WORKFLOW_GROUPS: Array<{
 }> = [
   { title: '客户报价', caption: '核算成本、付款条件、汇率、退税和成交利润', toolIds: ['quote-calculator', 'payment-terms-calculator', 'fx-sensitivity-calculator', 'unit-converter', 'container-load-calculator', 'export-tax-rebate-calculator'], icon: CircleDollarSign, accent: 'from-emerald-500 to-cyan-500' },
   { title: '货代询价', caption: '确认计费重、渠道总价与费用责任', toolIds: ['express-channel-comparison', 'air-freight-calculator', 'ocean-freight-calculator', 'freight-charge-audit'], icon: Plane, accent: 'from-lime-500 to-emerald-500' },
-  { title: '出货执行', caption: '核对装柜、码托、报关和交付日期', toolIds: ['container-load-calculator', 'pallet-load-calculator', 'customs-cost-calculator', 'delivery-date-calculator'], icon: Container, accent: 'from-cyan-500 to-sky-500' },
+  { title: '出货执行', caption: '核对装柜、码托、报关、异常费用和交付日期', toolIds: ['container-load-calculator', 'pallet-load-calculator', 'customs-cost-calculator', 'demurrage-detention-calculator', 'delivery-date-calculator'], icon: Container, accent: 'from-cyan-500 to-sky-500' },
   { title: '市场跟进', caption: '确认国家资料、工作时间、假日与条款', toolIds: ['global-country-info', 'world-time', 'holiday-query', 'incoterms'], icon: Globe, accent: 'from-amber-500 to-orange-500' },
 ]
 

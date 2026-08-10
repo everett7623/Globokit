@@ -2,7 +2,7 @@
 // 描述: 集中维护物流与装柜分类的工具元数据
 // 路径: Globokit/lib/tools/registry-logistics.ts
 // 作者: everettlabs
-// 更新时间: 2026-07-24
+// 更新时间: 2026-08-11
 
 import type { ToolMeta } from './registry-types'
 
@@ -22,7 +22,7 @@ export const LOGISTICS_TOOLS: ToolMeta[] = [
     seoTitle: 'FOB/CIF 货代收费核对 - 货代账单高收费检查 | Globokit',
     seoDescription: '免费在线 FOB/CIF 货代收费核对工具，支持出口卖方和海外客户账单，按责任边界与同行价或约定价识别高收费和责任不匹配项目',
     useCases: ['FOB 指定货代卖方账单复核', 'CIF 目的港客户费用核对', '货代费用议价前准备'],
-    relatedTools: ['ocean-freight-calculator', 'incoterms', 'customs-cost-calculator', 'quote-calculator', 'import-landed-cost-calculator'],
+    relatedTools: ['ocean-freight-calculator', 'demurrage-detention-calculator', 'incoterms', 'customs-cost-calculator', 'quote-calculator', 'import-landed-cost-calculator'],
   },
   {
     id: 'unit-converter',
@@ -107,7 +107,24 @@ export const LOGISTICS_TOOLS: ToolMeta[] = [
     seoTitle: '海运费用拆分计算器 - FCL/LCL 每件每CBM成本测算 | Globokit',
     seoDescription: '免费在线海运费用拆分计算器，按海运费、起运港杂费、拖车、报关、保险和目的港费用测算 FCL/LCL 每件与每CBM成本',
     useCases: ['海运报价前成本拆分', '整柜和拼箱费用摊销', '核算每件与每CBM物流成本'],
-    relatedTools: ['freight-charge-audit', 'container-load-calculator', 'customs-cost-calculator', 'quote-calculator', 'import-landed-cost-calculator', 'incoterms'],
+    relatedTools: ['freight-charge-audit', 'demurrage-detention-calculator', 'container-load-calculator', 'customs-cost-calculator', 'quote-calculator', 'import-landed-cost-calculator', 'incoterms'],
+  },
+  {
+    id: 'demurrage-detention-calculator',
+    slug: 'demurrage-detention-calculator',
+    title: '集装箱滞箱/滞港费计算器',
+    shortTitle: '滞箱滞港费',
+    description: '按免费期、占用天数和阶梯日费率估算集装箱滞港费与滞箱费',
+    category: '物流与装柜',
+    iconName: 'Clock',
+    href: '/tools/demurrage-detention-calculator',
+    updatedAt: '2026-08-11',
+    badge: '新增',
+    keywords: ['demurrage', 'detention', '滞箱费', '滞港费', '免费期', '集装箱', '船公司账单'],
+    seoTitle: '集装箱滞箱滞港费计算器 - 免费期与阶梯费用估算 | Globokit',
+    seoDescription: '免费在线集装箱滞箱滞港费计算器，按场内场外占用天数、免费期和阶梯日费率估算异常费用与每柜成本',
+    useCases: ['进口柜异常费用预算', '船公司账单复核', '延长免费期谈判测算'],
+    relatedTools: ['ocean-freight-calculator', 'freight-charge-audit', 'container-load-calculator', 'delivery-date-calculator', 'customs-cost-calculator'],
   },
   {
     id: 'customs-cost-calculator',
@@ -124,7 +141,7 @@ export const LOGISTICS_TOOLS: ToolMeta[] = [
     seoTitle: '报关费用估算器 - 出口报关与进口清关成本测算 | Globokit',
     seoDescription: '免费在线报关费用估算器，汇总报关、单证、代理、查验、港区操作和国内运输费用，测算每票与每件成本',
     useCases: ['出口报价前报关预算', '进口清关费用预估', '多票货物费用摊销'],
-    relatedTools: ['express-channel-comparison', 'import-landed-cost-calculator', 'ocean-freight-calculator', 'quote-calculator', 'incoterms'],
+    relatedTools: ['express-channel-comparison', 'import-landed-cost-calculator', 'ocean-freight-calculator', 'demurrage-detention-calculator', 'quote-calculator', 'incoterms'],
   },
   {
     id: 'express-channel-comparison',

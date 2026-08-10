@@ -102,7 +102,7 @@ export const GENERAL_TOOLS: ToolMeta[] = [
     seoTitle: '外贸交期计算器 - 工作日与节假日交付日期推算 | Globokit',
     seoDescription: '免费在线外贸交期计算器，按生产、运输和缓冲周期推算交付日期，支持自然日、工作日及国家公共假日口径',
     useCases: ['订单交期预估', '生产运输排期', '节假日交付风险核对'],
-    relatedTools: ['holiday-query', 'world-time', 'incoterms', 'ocean-freight-calculator'],
+    relatedTools: ['holiday-query', 'world-time', 'incoterms', 'ocean-freight-calculator', 'demurrage-detention-calculator'],
   },
   {
     id: 'global-country-info',
