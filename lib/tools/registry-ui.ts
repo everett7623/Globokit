@@ -2,7 +2,7 @@
 // 描述: 为工具注册表条目提供 UI 样式映射（颜色、徽章颜色等）
 // 路径: Globokit/lib/tools/registry-ui.ts
 // 作者: everettlabs
-// 更新时间: 2026-08-10
+// 更新时间: 2026-08-11
 
 /**
  * UI styling configuration for tools on the homepage.
@@ -58,6 +58,10 @@ export const TOOL_UI_CONFIG: Record<
   'quote-calculator': {
     color: 'text-sky-500',
     bgColor: 'bg-sky-50',
+  },
+  'tiered-quote-calculator': {
+    color: 'text-indigo-700',
+    bgColor: 'bg-indigo-50',
   },
   'payment-terms-calculator': {
     color: 'text-amber-700',

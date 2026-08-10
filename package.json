@@ -13,6 +13,7 @@
     "test:fx-sensitivity": "node scripts/assert-fx-sensitivity.cjs",
     "test:packaging-plans": "node scripts/assert-packaging-plan-comparison.cjs",
     "test:payment-terms": "node scripts/assert-payment-terms.cjs",
+    "test:tiered-quote": "node scripts/assert-tiered-quote.cjs",
     "validate:data": "node scripts/validate-tool-data.cjs"
   },
   "dependencies": {

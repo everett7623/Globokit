@@ -2,7 +2,7 @@
 // 描述: 集中维护财务报价分类的工具元数据
 // 路径: Globokit/lib/tools/registry-finance.ts
 // 作者: everettlabs
-// 更新时间: 2026-08-10
+// 更新时间: 2026-08-11
 
 import type { ToolMeta } from './registry-types'
 
@@ -71,7 +71,24 @@ export const FINANCE_TOOLS: ToolMeta[] = [
     seoTitle: '外贸报价利润计算器 - EXW/FOB/CIF/DDP 条款报价测算 | Globokit',
     seoDescription: '免费在线外贸报价利润计算器，支持 EXW、FCA、FOB、CFR、CIF、CPT、CIP、DAP、DDP 等条款，按采购成本、运费、保险、税费、佣金和目标利润率测算报价',
     useCases: ['外贸报价核算', 'Incoterms 条款报价', '含运费含税报价评估'],
-    relatedTools: ['payment-terms-calculator', 'fx-sensitivity-calculator', 'export-tax-rebate-calculator', 'currency-symbols', 'import-landed-cost-calculator', 'container-load-calculator', 'air-freight-calculator', 'ocean-freight-calculator', 'incoterms'],
+    relatedTools: ['tiered-quote-calculator', 'payment-terms-calculator', 'fx-sensitivity-calculator', 'export-tax-rebate-calculator', 'currency-symbols', 'import-landed-cost-calculator', 'container-load-calculator', 'air-freight-calculator', 'ocean-freight-calculator', 'incoterms'],
+  },
+  {
+    id: 'tiered-quote-calculator',
+    slug: 'tiered-quote-calculator',
+    title: '外贸阶梯报价计算器',
+    shortTitle: '阶梯报价',
+    description: '按订购数量、采购单价、固定费用和目标利润率反算外币阶梯报价',
+    category: '财务报价',
+    iconName: 'ListOrdered',
+    href: '/tools/tiered-quote-calculator',
+    updatedAt: '2026-08-11',
+    badge: '新增',
+    keywords: ['tiered quote', '阶梯报价', '数量折扣', '批量报价', 'MOQ', '采购成本', '利润率', '外贸'],
+    seoTitle: '外贸阶梯报价计算器 - 数量折扣与批量单价测算 | Globokit',
+    seoDescription: '免费在线外贸阶梯报价计算器，按不同订购数量与采购单价摊薄固定费用，结合佣金、收款费、汇率和目标利润率生成外币阶梯单价',
+    useCases: ['客户询盘阶梯报价', 'MOQ 与批量折扣设计', '采购成本降幅测算'],
+    relatedTools: ['quote-calculator', 'payment-terms-calculator', 'fx-sensitivity-calculator', 'export-tax-rebate-calculator', 'currency-symbols', 'container-load-calculator'],
   },
   {
     id: 'payment-terms-calculator',
@@ -88,7 +105,7 @@ export const FINANCE_TOOLS: ToolMeta[] = [
     seoTitle: '外贸收款账期成本对比 - T/T、L/C、D/P、OA 利润测算 | Globokit',
     seoDescription: '免费比较 T/T、L/C、D/P 与 OA 收款条件，估算资金占用、银行手续费、风险准备金、回款周期和订单实际利润',
     useCases: ['客户付款条件谈判', '账期资金成本测算', 'T/T 与 L/C 方案对比'],
-    relatedTools: ['quote-calculator', 'fx-sensitivity-calculator', 'export-tax-rebate-calculator', 'currency-symbols', 'delivery-date-calculator'],
+    relatedTools: ['tiered-quote-calculator', 'quote-calculator', 'fx-sensitivity-calculator', 'export-tax-rebate-calculator', 'currency-symbols', 'delivery-date-calculator'],
   },
   {
     id: 'fx-sensitivity-calculator',
@@ -105,7 +122,7 @@ export const FINANCE_TOOLS: ToolMeta[] = [
     seoTitle: '外贸汇率敏感性分析 - 汇率波动与订单利润测算 | Globokit',
     seoDescription: '免费在线外贸汇率敏感性分析工具，比较人民币升值、基准和贬值情景下的 CNY 收入、收款手续费、订单利润与盈亏平衡汇率',
     useCases: ['外币订单利润预算', '报价汇率风险评估', '结汇谈判与汇兑损益测算'],
-    relatedTools: ['quote-calculator', 'payment-terms-calculator', 'export-tax-rebate-calculator', 'currency-symbols'],
+    relatedTools: ['tiered-quote-calculator', 'quote-calculator', 'payment-terms-calculator', 'export-tax-rebate-calculator', 'currency-symbols'],
   },
   {
     id: 'export-tax-rebate-calculator',

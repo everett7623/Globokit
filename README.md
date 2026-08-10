@@ -55,6 +55,11 @@
   - 支持 EXW、FCA、FAS、FOB、CFR、CIF、CPT、CIP、DAP、DPU、DDP 等 Incoterms 2020 常见报价口径。
   - 按条款自动判断卖方计入成本，含运费/到门/完税条款会提示补充运费、保险、目的地费用或进口税费。
   - 可按已知售价快速核算销售利润率，展示盈亏平衡价、订单利润与成本拆分。
+- **外贸阶梯报价计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 同时比较 2–5 个订购数量档位，并允许每档使用不同的采购单价。
+  - 按数量摊薄每单固定费用，结合汇率、佣金、收款费和目标利润率反算外币建议价。
+  - 支持报价步长向上取整，展示盈亏平衡单价、订单总额、实际利润率和相对试单价降幅。
 - **外贸收款账期成本对比** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
 
   - 支持 T/T 预付、发货前/提单副本付尾款、即期/远期 L/C、D/P 和 OA 等常用收款条件。
@@ -246,6 +251,7 @@ Globokit/
 │   │   ├── rmb-converter/      # 人民币大写转换
 │   │   ├── special-char/       # 特殊字符检查
 │   │   ├── text-case/          # 英文大小写转换
+│   │   ├── tiered-quote-calculator/ # 外贸阶梯报价计算
 │   │   ├── unit-converter/     # 外贸单位换算
 │   │   ├── vps-calculator/     # VPS剩余价值计算器
 │   │   ├── world-time/         # 世界时间
@@ -309,6 +315,7 @@ Globokit/
 │   │   ├── rmb-converter.ts
 │   │   ├── special-char.ts
 │   │   ├── text-case.ts
+│   │   ├── tiered-quote-calculator.ts
 │   │   ├── unit-converter.ts
 │   │   ├── vps-calculator.ts
 │   │   └── world-time.ts
