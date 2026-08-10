@@ -20,7 +20,6 @@ export default function JSONFormatterTool() {
   const [sortKeys, setSortKeys] = useState(false)
   const [removeNull, setRemoveNull] = useState(false)
   const [activeTab, setActiveTab] = useState('format')
-  const [copied, setCopied] = useState(false)
   const [csvInput, setCsvInput] = useState('')
 
   const validation = useMemo(() => validateJSON(input), [input])
@@ -57,11 +56,6 @@ export default function JSONFormatterTool() {
     }
   }, [csvInput])
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 1800)
-  }
   const stats = {
     size: input.length,
     lines: input ? input.split('\n').length : 0,
@@ -86,22 +80,18 @@ export default function JSONFormatterTool() {
           validation={validation}
           formatted={formatted}
           minified={minified}
-          copied={copied}
           onInputChange={setInput}
           onIndentChange={setIndent}
           onToggleSortKeys={() => setSortKeys((value) => !value)}
           onToggleRemoveNull={() => setRemoveNull((value) => !value)}
-          onCopy={copyToClipboard}
         />
         <JsonConversionPanels
           input={input}
           csvInput={csvInput}
           jsonToCsvResult={jsonToCsvResult}
           csvToJsonResult={csvToJsonResult}
-          copied={copied}
           onInputChange={setInput}
           onCsvInputChange={setCsvInput}
-          onCopy={copyToClipboard}
         />
       </Tabs>
     </div>

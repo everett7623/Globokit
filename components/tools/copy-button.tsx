@@ -4,11 +4,7 @@
 // 作者: everettlabs
 // 更新时间: 2026-01-08
 
-'use client'
-
-import { useState } from 'react'
-import { Copy, Check } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { EnhancedCopyButton } from '@/components/tools/enhanced-copy-button'
 
 interface CopyButtonProps {
   text: string
@@ -16,30 +12,5 @@ interface CopyButtonProps {
 }
 
 export function CopyButton({ text, className }: CopyButtonProps) {
-  const [copied, setCopied] = useState(false)
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(text)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    } catch (err) {
-      console.error('Failed to copy text: ', err)
-    }
-  }
-
-  return (
-    <Button
-      variant="outline"
-      size="icon"
-      onClick={handleCopy}
-      className={className}
-    >
-      {copied ? (
-        <Check className="h-4 w-4" />
-      ) : (
-        <Copy className="h-4 w-4" />
-      )}
-    </Button>
-  )
+  return <EnhancedCopyButton text={text} variant="outline" size="icon" iconOnly title="复制" className={className} />
 }

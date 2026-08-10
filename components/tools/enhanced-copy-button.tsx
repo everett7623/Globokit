@@ -19,6 +19,26 @@ export interface EnhancedCopyButtonProps {
   variant?: 'default' | 'outline' | 'ghost' | 'secondary'
   size?: 'default' | 'sm' | 'lg' | 'icon'
   disabled?: boolean
+  iconOnly?: boolean
+  title?: string
+}
+
+async function copyText(text: string) {
+  try {
+    await navigator.clipboard.writeText(text)
+    return true
+  } catch {
+    const textarea = document.createElement('textarea')
+    textarea.value = text
+    textarea.style.position = 'fixed'
+    textarea.style.opacity = '0'
+    document.body.appendChild(textarea)
+    textarea.focus()
+    textarea.select()
+    const copied = document.execCommand('copy')
+    textarea.remove()
+    return copied
+  }
 }
 
 /**
@@ -38,13 +58,16 @@ export function EnhancedCopyButton({
   variant = 'default',
   size = 'default',
   disabled = false,
+  iconOnly = false,
+  title,
 }: EnhancedCopyButtonProps) {
   const [copied, setCopied] = useState(false)
   const [error, setError] = useState(false)
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(text)
+      const success = await copyText(text)
+      if (!success) throw new Error('浏览器拒绝了剪贴板写入')
       setCopied(true)
       setError(false)
       onCopy?.()
@@ -69,6 +92,8 @@ export function EnhancedCopyButton({
       size={size}
       onClick={handleCopy}
       disabled={disabled || !text}
+      aria-label={iconOnly ? title || '复制内容' : undefined}
+      title={title}
       className={cn(
         'transition-all',
         copied && 'bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-500',
@@ -78,18 +103,18 @@ export function EnhancedCopyButton({
     >
       {copied ? (
         <>
-          <Check className="mr-2 h-4 w-4" />
-          已复制
+          <Check className={cn('h-4 w-4', !iconOnly && 'mr-2')} />
+          {!iconOnly && '已复制'}
         </>
       ) : error ? (
         <>
-          <ClipboardCopy className="mr-2 h-4 w-4" />
-          复制失败
+          <ClipboardCopy className={cn('h-4 w-4', !iconOnly && 'mr-2')} />
+          {!iconOnly && '复制失败'}
         </>
       ) : (
         <>
-          <ClipboardCopy className="mr-2 h-4 w-4" />
-          {children || '复制结果'}
+          <ClipboardCopy className={cn('h-4 w-4', !iconOnly && 'mr-2')} />
+          {!iconOnly && (children || '复制结果')}
         </>
       )}
     </Button>

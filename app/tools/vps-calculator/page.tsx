@@ -12,6 +12,7 @@ import { buildVpsMarkdown } from './vps-export'
 import { VpsForm } from './vps-form'
 import { VpsHeader } from './vps-header'
 import { VpsReport } from './vps-report'
+import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
 import { calculateVPSValue, fetchExchangeRates, SUPPORTED_CURRENCIES, type CalculationResult, type PriceMode } from '@/lib/tools/vps-calculator'
 
 export default function VPSCalculatorPage() {
@@ -24,7 +25,6 @@ export default function VPSCalculatorPage() {
   const [modeInput, setModeInput] = useState('')
   const [exchangeRates, setExchangeRates] = useState<Record<string, number>>({})
   const [result, setResult] = useState<CalculationResult | null>(null)
-  const [copySuccess, setCopySuccess] = useState(false)
   const [generatingImg, setGeneratingImg] = useState(false)
   const [rateError, setRateError] = useState(false)
   const resultRef = useRef<HTMLDivElement>(null)
@@ -54,10 +54,6 @@ export default function VPSCalculatorPage() {
   }, [handleCalculate, purchaseDate, purchasePrice, tradeDate])
 
   const handleReset = () => { setPurchaseDate(''); setTradeDate(today); setPurchasePrice(''); setModeInput(''); setPriceMode('total'); setResult(null) }
-  const exportToMarkdown = () => {
-    if (!result) return
-    navigator.clipboard.writeText(buildVpsMarkdown({ result, currency, renewalPeriod, purchaseDate, purchasePrice })).then(() => { setCopySuccess(true); window.setTimeout(() => setCopySuccess(false), 2000) })
-  }
   const exportToImage = async () => {
     if (!resultRef.current) return
     setGeneratingImg(true)
@@ -67,6 +63,7 @@ export default function VPSCalculatorPage() {
     } catch (error) { console.error(error) } finally { setGeneratingImg(false) }
   }
   const currencySymbol = SUPPORTED_CURRENCIES.find((item) => item.code === currency)?.symbol
+  const markdownText = result ? buildVpsMarkdown({ result, currency, renewalPeriod, purchaseDate, purchasePrice }) : ''
 
-  return <div className="space-y-8"><VpsHeader rateError={rateError} /><div className="grid gap-6 lg:grid-cols-[minmax(320px,0.42fr)_minmax(0,0.58fr)]"><VpsForm purchaseDate={purchaseDate} tradeDate={tradeDate} renewalPeriod={renewalPeriod} purchasePrice={purchasePrice} currency={currency} currencySymbol={currencySymbol} priceMode={priceMode} modeInput={modeInput} today={today} remainingValue={result?.remainingValue} onPurchaseDate={setPurchaseDate} onTradeDate={setTradeDate} onRenewalPeriod={setRenewalPeriod} onPurchasePrice={setPurchasePrice} onCurrency={setCurrency} onPriceMode={(mode) => { setPriceMode(mode); setModeInput('') }} onModeInput={setModeInput} onReset={handleReset} /><VpsReport ref={resultRef} result={result} tradeDate={tradeDate} purchasePrice={purchasePrice} currencySymbol={currencySymbol} renewalPeriod={renewalPeriod} priceMode={priceMode} modeInput={modeInput} copySuccess={copySuccess} generatingImg={generatingImg} onCopyMarkdown={exportToMarkdown} onExportImage={exportToImage} /></div></div>
+  return <MobileFriendlyWrapper><VpsHeader rateError={rateError} /><div className="grid gap-6 lg:grid-cols-[minmax(320px,0.42fr)_minmax(0,0.58fr)]"><VpsForm purchaseDate={purchaseDate} tradeDate={tradeDate} renewalPeriod={renewalPeriod} purchasePrice={purchasePrice} currency={currency} currencySymbol={currencySymbol} priceMode={priceMode} modeInput={modeInput} today={today} remainingValue={result?.remainingValue} onPurchaseDate={setPurchaseDate} onTradeDate={setTradeDate} onRenewalPeriod={setRenewalPeriod} onPurchasePrice={setPurchasePrice} onCurrency={setCurrency} onPriceMode={(mode) => { setPriceMode(mode); setModeInput('') }} onModeInput={setModeInput} onReset={handleReset} /><VpsReport ref={resultRef} result={result} tradeDate={tradeDate} purchasePrice={purchasePrice} currencySymbol={currencySymbol} renewalPeriod={renewalPeriod} priceMode={priceMode} modeInput={modeInput} markdownText={markdownText} generatingImg={generatingImg} onExportImage={exportToImage} /></div></MobileFriendlyWrapper>
 }

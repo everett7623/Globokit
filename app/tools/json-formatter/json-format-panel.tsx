@@ -4,9 +4,10 @@
 // 作者: everettlabs
 // 更新时间: 2026-07-15
 
-import { AlertCircle, Check, Copy } from 'lucide-react'
+import { AlertCircle } from 'lucide-react'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
+import { EnhancedCopyButton } from '@/components/tools/enhanced-copy-button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
@@ -67,24 +68,14 @@ interface JsonFormatPanelProps {
   validation: ValidationResult
   formatted: string
   minified: string
-  copied: boolean
   onInputChange: (value: string) => void
   onIndentChange: (value: number) => void
   onToggleSortKeys: () => void
   onToggleRemoveNull: () => void
-  onCopy: (text: string) => void
-}
-
-function CopyButton({ copied, text, onCopy }: { copied: boolean; text: string; onCopy: (text: string) => void }) {
-  return (
-    <Button variant="ghost" size="sm" onClick={() => onCopy(text)}>
-      {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-    </Button>
-  )
 }
 
 export function JsonFormatPanel(props: JsonFormatPanelProps) {
-  const { input, indent, sortKeys, removeNull, validation, formatted, minified, copied } = props
+  const { input, indent, sortKeys, removeNull, validation, formatted, minified } = props
 
   return (
     <TabsContent value="format" className="space-y-4">
@@ -128,11 +119,11 @@ export function JsonFormatPanel(props: JsonFormatPanelProps) {
       </div>
 
       <div className="space-y-2">
-        <div className="flex items-center justify-between"><Label>格式化结果</Label><CopyButton copied={copied} text={formatted} onCopy={props.onCopy} /></div>
+        <div className="flex items-center justify-between"><Label>格式化结果</Label><EnhancedCopyButton text={formatted} variant="ghost" size="icon" iconOnly title="复制格式化结果" /></div>
         <textarea readOnly value={formatted} className="h-48 w-full rounded-md border border-input bg-muted px-3 py-2 text-sm font-mono" />
       </div>
       <div className="space-y-2">
-        <div className="flex items-center justify-between"><Label>压缩结果</Label><CopyButton copied={copied} text={minified} onCopy={props.onCopy} /></div>
+        <div className="flex items-center justify-between"><Label>压缩结果</Label><EnhancedCopyButton text={minified} variant="ghost" size="icon" iconOnly title="复制压缩结果" /></div>
         <textarea readOnly value={minified} className="h-24 w-full rounded-md border border-input bg-muted px-3 py-2 text-sm font-mono" />
       </div>
     </TabsContent>

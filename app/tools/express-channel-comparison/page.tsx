@@ -7,9 +7,10 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { Alert, AlertDescription } from '@/components/ui/alert'
+import { EnhancedCopyButton } from '@/components/tools/enhanced-copy-button'
+import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
 import { Button } from '@/components/ui/button'
-import { Check, ClipboardCopy, RotateCcw } from 'lucide-react'
+import { RotateCcw } from 'lucide-react'
 import {
   compareExpressChannels,
   EXPRESS_PRICING_MODE_LABELS,
@@ -41,8 +42,6 @@ import { ExpressShipmentForm } from './express-shipment-form'
 export default function ExpressChannelComparisonPage() {
   const [shipment, setShipment] = useState<ShipmentForm>(INITIAL_SHIPMENT)
   const [channels, setChannels] = useState<ChannelForm[]>(INITIAL_CHANNELS)
-  const [copied, setCopied] = useState(false)
-  const [copyError, setCopyError] = useState('')
   const inputs = useMemo(() => ({
     lengthCm: toNumber(shipment.lengthCm), widthCm: toNumber(shipment.widthCm), heightCm: toNumber(shipment.heightCm),
     grossWeightKg: toNumber(shipment.grossWeightKg), netWeightKg: toNumber(shipment.netWeightKg), packageCount: toNumber(shipment.packageCount),
@@ -66,8 +65,8 @@ export default function ExpressChannelComparisonPage() {
       ...(serviceType === 'ddp-line' ? { tradeTerm: 'DDP' as const } : {}),
     } : channel))
   }
-  const reset = () => { setShipment(INITIAL_SHIPMENT); setChannels(INITIAL_CHANNELS); setCopied(false); setCopyError('') }
-  const copy = async () => {
+  const reset = () => { setShipment(INITIAL_SHIPMENT); setChannels(INITIAL_CHANNELS) }
+  const copySummary = () => {
     const cargoType = CARGO_TYPE_OPTIONS.find((option) => option.value === shipment.cargoType)?.label ?? '未填写'
     const lines = [
       '国际快递/专线报价对比',
@@ -83,22 +82,14 @@ export default function ExpressChannelComparisonPage() {
         `时效：${row.transitDaysMin}-${row.transitDaysMax} 天`,
       ].join('\n')),
     ]
-    try {
-      await navigator.clipboard.writeText(lines.join('\n'))
-      setCopyError('')
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1800)
-    } catch {
-      setCopyError('复制失败，请检查浏览器剪贴板权限。')
-    }
+    return lines.join('\n')
   }
 
-  return <>
+  return <MobileFriendlyWrapper>
     <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
       <div><h1 className="mb-2 text-3xl font-bold">国际快递/专线报价对比</h1><p className="text-muted-foreground">自动判断实重或体积重，并区分空运、商业快递、DDP 专线及货代报价方式。</p></div>
-      <div className="flex shrink-0 gap-2"><Button variant="outline" onClick={reset}><RotateCcw className="mr-2 h-4 w-4" />重置</Button><Button onClick={copy} disabled={!results.length}>{copied ? <Check className="mr-2 h-4 w-4" /> : <ClipboardCopy className="mr-2 h-4 w-4" />}{copied ? '已复制' : '复制结果'}</Button></div>
+      <div className="flex shrink-0 gap-2"><Button variant="outline" onClick={reset}><RotateCcw className="mr-2 h-4 w-4" />重置</Button><EnhancedCopyButton text={copySummary()} disabled={!results.length}>复制结果</EnhancedCopyButton></div>
     </div>
-    {copyError && <Alert variant="destructive" className="mb-6"><AlertDescription>{copyError}</AlertDescription></Alert>}
     <div className="space-y-6">
       <ExpressShipmentForm form={shipment} onTextChange={updateShipment} onNumericChange={updateShipment} onCargoTypeChange={(cargoType: CargoType) => setShipment((current) => ({ ...current, cargoType }))} />
       <ExpressWeightSummary shipment={shipment} />
@@ -113,5 +104,5 @@ export default function ExpressChannelComparisonPage() {
       <ExpressComparisonStats results={results} />
       <ExpressComparisonResults results={results} />
     </div>
-  </>
+  </MobileFriendlyWrapper>
 }

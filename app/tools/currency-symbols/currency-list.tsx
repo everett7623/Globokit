@@ -4,9 +4,10 @@
 // 作者: everettlabs
 // 更新时间: 2026-07-15
 
-import { Check, Coins, Copy, Star, StarOff } from 'lucide-react'
+import { Coins, Star, StarOff } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { EnhancedCopyButton } from '@/components/tools/enhanced-copy-button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { CURRENCY_REGIONS, formatCurrencyExample, type Currency } from '@/lib/tools/currency-symbols'
 
@@ -15,9 +16,7 @@ interface CurrencyListProps {
   filteredCount: number
   selectedRegion: string
   favorites: string[]
-  copiedCode: string | null
   onToggleFavorite: (code: string) => void
-  onCopy: (text: string, code: string) => void
 }
 
 export function CurrencyList(props: CurrencyListProps) {
@@ -78,8 +77,8 @@ export function CurrencyList(props: CurrencyListProps) {
                   <span className="font-mono">{formatCurrencyExample(currency.symbol, currency.decimals)}</span>
                 </div>
                 <div className="flex gap-2 mt-3">
-                  <CopyAction label="复制符号" copied={props.copiedCode === `${currency.code}-symbol`} onClick={() => props.onCopy(currency.symbol, `${currency.code}-symbol`)} />
-                  <CopyAction label="复制代码" copied={props.copiedCode === `${currency.code}-code`} onClick={() => props.onCopy(currency.code, `${currency.code}-code`)} />
+                  <CopyAction label="复制符号" text={currency.symbol} />
+                  <CopyAction label="复制代码" text={currency.code} />
                 </div>
               </div>
             </CardContent>
@@ -90,10 +89,6 @@ export function CurrencyList(props: CurrencyListProps) {
   ))
 }
 
-function CopyAction({ label, copied, onClick }: { label: string; copied: boolean; onClick: () => void }) {
-  return (
-    <Button variant="outline" size="sm" className="flex-1" onClick={onClick}>
-      {copied ? <><Check className="h-4 w-4 mr-1" />已复制</> : <><Copy className="h-4 w-4 mr-1" />{label}</>}
-    </Button>
-  )
+function CopyAction({ label, text }: { label: string; text: string }) {
+  return <EnhancedCopyButton text={text} variant="outline" size="sm" className="flex-1">{label}</EnhancedCopyButton>
 }

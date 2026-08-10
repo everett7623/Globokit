@@ -4,10 +4,10 @@
 // 作者: everettlabs
 // 更新时间: 2026-07-15
 
-import { AlertCircle, Check, CheckCircle, Copy } from 'lucide-react'
+import { AlertCircle, CheckCircle } from 'lucide-react'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
+import { EnhancedCopyButton } from '@/components/tools/enhanced-copy-button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Textarea } from '@/components/ui/textarea'
@@ -17,8 +17,6 @@ import type { SpecialCharStats } from './special-char-data'
 interface SpecialCharResultProps {
   result: SpecialCharResult
   stats: SpecialCharStats
-  copiedText: string | null
-  onCopy: (text: string, type: string) => void
 }
 
 const STAT_LABELS: Array<[keyof SpecialCharStats, string]> = [
@@ -29,7 +27,7 @@ const STAT_LABELS: Array<[keyof SpecialCharStats, string]> = [
   ['other', '其他字符'],
 ]
 
-export function SpecialCharCheckResult({ result, stats, copiedText, onCopy }: SpecialCharResultProps) {
+export function SpecialCharCheckResult({ result, stats }: SpecialCharResultProps) {
   return (
     <>
       <Alert variant={result.hasSpecialChars ? 'destructive' : 'default'}>
@@ -65,8 +63,8 @@ export function SpecialCharCheckResult({ result, stats, copiedText, onCopy }: Sp
               <TabsTrigger value="smart">智能替换</TabsTrigger>
               <TabsTrigger value="clean">完全清理</TabsTrigger>
             </TabsList>
-            <ResultTab value="smart" title="智能替换结果" description="将特殊字符替换为相近的标准字符，保留原意" text={result.replacedText} copied={copiedText === 'replaced'} onCopy={() => onCopy(result.replacedText, 'replaced')} />
-            <ResultTab value="clean" title="完全清理结果" description="仅保留ASCII字符，适合纯英文环境" text={result.cleanedText} copied={copiedText === 'cleaned'} onCopy={() => onCopy(result.cleanedText, 'cleaned')} />
+            <ResultTab value="smart" title="智能替换结果" description="将特殊字符替换为相近的标准字符，保留原意" text={result.replacedText} />
+            <ResultTab value="clean" title="完全清理结果" description="仅保留ASCII字符，适合纯英文环境" text={result.cleanedText} />
           </Tabs>
         </>
       )}
@@ -79,20 +77,16 @@ interface ResultTabProps {
   title: string
   description: string
   text: string
-  copied: boolean
-  onCopy: () => void
 }
 
-function ResultTab({ value, title, description, text, copied, onCopy }: ResultTabProps) {
+function ResultTab({ value, title, description, text }: ResultTabProps) {
   return (
     <TabsContent value={value} className="space-y-2">
       <Card>
         <CardHeader className="pb-3">
           <CardTitle className="text-base flex items-center justify-between">
             {title}
-            <Button variant="ghost" size="sm" onClick={onCopy}>
-              {copied ? <><Check className="h-4 w-4 mr-1" />已复制</> : <><Copy className="h-4 w-4 mr-1" />复制</>}
-            </Button>
+            <EnhancedCopyButton text={text} variant="ghost" size="sm">复制</EnhancedCopyButton>
           </CardTitle>
           <CardDescription>{description}</CardDescription>
         </CardHeader>

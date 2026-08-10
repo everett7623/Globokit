@@ -12,6 +12,7 @@ import { EMPTY_STATS, EXAMPLE_BUTTONS, TONE_OPTIONS, type PinyinHistoryItem, typ
 import { PinyinInfo, PinyinStats } from './pinyin-info'
 import { PinyinHistory, PinyinResults } from './pinyin-results'
 import { Button } from '@/components/ui/button'
+import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
@@ -22,15 +23,9 @@ export default function PinyinPage() {
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [toneType, setToneType] = useState<ToneType>('none')
-  const [copiedText, setCopiedText] = useState<string | null>(null)
   const [history, setHistory] = useState<PinyinHistoryItem[]>([])
   const [stats, setStats] = useState(EMPTY_STATS)
 
-  const copyToClipboard = (text: string, type: string) => {
-    navigator.clipboard.writeText(text)
-    setCopiedText(type)
-    setTimeout(() => setCopiedText(null), 2000)
-  }
   const handleConvert = () => {
     if (!input.trim()) {
       alert('请输入中文文本'); return
@@ -47,7 +42,7 @@ export default function PinyinPage() {
   }
 
   return (
-    <>
+    <MobileFriendlyWrapper>
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">中文转拼音</h1>
         <p className="text-muted-foreground">将中文文本转换为拼音，使用专业的 pinyin-pro 库，支持多种声调格式</p>
@@ -69,11 +64,11 @@ export default function PinyinPage() {
             </Select>
           </div>
           <div className="flex gap-2"><Button onClick={handleConvert} className="flex-1" size="lg">转换拼音</Button><Button onClick={handleReset} variant="outline" size="lg"><RotateCcw className="h-4 w-4" /></Button></div>
-          <PinyinResults output={output} stats={stats} copiedText={copiedText} onCopy={copyToClipboard} />
-          <PinyinHistory history={history} copiedText={copiedText} onCopy={copyToClipboard} />
+          <PinyinResults output={output} stats={stats} />
+          <PinyinHistory history={history} />
         </CardContent>
       </Card>
       <PinyinInfo />
-    </>
+    </MobileFriendlyWrapper>
   )
 }

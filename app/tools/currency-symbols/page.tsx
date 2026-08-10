@@ -11,12 +11,12 @@ import { CurrencyControls } from './currency-controls'
 import { CurrencyReference, CurrencyStats } from './currency-info-panels'
 import { CurrencyList } from './currency-list'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
 import { getCurrencyData, type Currency } from '@/lib/tools/currency-symbols'
 
 export default function CurrencySymbolsPage() {
   const [currencies] = useState<Currency[]>(() => getCurrencyData())
   const [searchTerm, setSearchTerm] = useState('')
-  const [copiedCode, setCopiedCode] = useState<string | null>(null)
   const [selectedRegion, setSelectedRegion] = useState('all')
   const [favorites, setFavorites] = useState<string[]>([])
   const [showOnlyPopular, setShowOnlyPopular] = useState(false)
@@ -26,11 +26,6 @@ export default function CurrencySymbolsPage() {
     if (saved) setFavorites(JSON.parse(saved))
   }, [])
 
-  const copyToClipboard = (text: string, code: string) => {
-    navigator.clipboard.writeText(text)
-    setCopiedCode(code)
-    setTimeout(() => setCopiedCode(null), 2000)
-  }
   const toggleFavorite = (code: string) => {
     const newFavorites = favorites.includes(code) ? favorites.filter((favorite) => favorite !== code) : [...favorites, code]
     setFavorites(newFavorites)
@@ -56,7 +51,7 @@ export default function CurrencySymbolsPage() {
   }, {})
 
   return (
-    <>
+    <MobileFriendlyWrapper>
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">全球货币符号大全</h1>
         <p className="text-muted-foreground">查看和复制全球货币符号，覆盖主要贸易国家和长尾市场</p>
@@ -88,14 +83,12 @@ export default function CurrencySymbolsPage() {
               filteredCount={filteredCurrencies.length}
               selectedRegion={selectedRegion}
               favorites={favorites}
-              copiedCode={copiedCode}
               onToggleFavorite={toggleFavorite}
-              onCopy={copyToClipboard}
             />
           </div>
         </CardContent>
       </Card>
       <CurrencyReference />
-    </>
+    </MobileFriendlyWrapper>
   )
 }

@@ -5,9 +5,9 @@
 // 更新时间: 2026-07-22
 
 import type { ComponentType } from 'react'
-import { Check, CheckCircle2, CircleDollarSign, ClipboardCopy, FileWarning, Scale, ShieldAlert, WalletCards } from 'lucide-react'
+import { CheckCircle2, CircleDollarSign, FileWarning, Scale, ShieldAlert, WalletCards } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
+import { EnhancedCopyButton } from '@/components/tools/enhanced-copy-button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { FREIGHT_AUDIT_PARTY_LABELS, type AuditedChargeLine, type ChargeAuditStatus, type FreightAuditResult } from '@/lib/tools/freight-charge-audit'
@@ -33,7 +33,7 @@ export function FreightAuditStats({ result }: { result: FreightAuditResult }) {
   return <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">{cards.map((card) => { const Icon = card.icon; return <Card key={card.label}><CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-medium"><Icon className="h-4 w-4" />{card.label}</CardTitle></CardHeader><CardContent><div className="text-2xl font-bold tabular-nums">{card.value}</div><p className="mt-1 text-xs text-muted-foreground">{card.caption}</p></CardContent></Card> })}</div>
 }
 
-export function FreightAuditResults({ result, copied, copyFailed, onCopy }: { result: FreightAuditResult; copied: boolean; copyFailed: boolean; onCopy: () => void }) {
+export function FreightAuditResults({ result, copyText }: { result: FreightAuditResult; copyText: string }) {
   const issues = result.lines.filter((line) => line.status !== 'normal')
   const partyLabel = FREIGHT_AUDIT_PARTY_LABELS[result.auditParty]
   const hasLines = result.lines.length > 0
@@ -53,7 +53,7 @@ export function FreightAuditResults({ result, copied, copyFailed, onCopy }: { re
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-2 gap-3 rounded-md bg-muted/50 p-4 text-sm"><Metric label="账单基准合计" value={formatMoney(result.benchmarkTotal, result.currency)} /><Metric label="需核对约定费用" value={formatMoney(result.agreementReviewTotal, result.currency)} /><Metric label="高于基准" value={`${result.highCount} 项`} /><Metric label="缺少基准" value={`${result.missingReferenceCount} 项`} /></div>
-          <div><Button type="button" disabled={!hasLines} onClick={onCopy}>{copied ? <Check className="mr-2 h-4 w-4" /> : <ClipboardCopy className="mr-2 h-4 w-4" />}{copied ? '已复制' : '复制给货代复核'}</Button>{copyFailed && <p className="mt-2 text-xs text-rose-600">复制失败，请检查浏览器剪贴板权限后重试。</p>}</div>
+          <div><EnhancedCopyButton text={copyText} disabled={!hasLines}>复制给货代复核</EnhancedCopyButton></div>
         </CardContent>
       </Card>
 

@@ -12,6 +12,7 @@ import { SpecialCharHistory, SpecialCharStats } from './special-char-dashboard'
 import { SpecialCharInfo } from './special-char-info'
 import { SpecialCharCheckResult } from './special-char-result'
 import { Button } from '@/components/ui/button'
+import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
@@ -20,14 +21,8 @@ import { checkSpecialChars } from '@/lib/tools/special-char'
 export default function SpecialCharPage() {
   const [input, setInput] = useState('')
   const [result, setResult] = useState<ReturnType<typeof checkSpecialChars> | null>(null)
-  const [copiedText, setCopiedText] = useState<string | null>(null)
   const [checkHistory, setCheckHistory] = useState<CheckHistoryItem[]>([])
 
-  const copyToClipboard = (text: string, type: string) => {
-    navigator.clipboard.writeText(text)
-    setCopiedText(type)
-    setTimeout(() => setCopiedText(null), 2000)
-  }
   const handleCheck = () => {
     if (!input) return
     const checkResult = checkSpecialChars(input)
@@ -40,7 +35,7 @@ export default function SpecialCharPage() {
   }
 
   return (
-    <>
+    <MobileFriendlyWrapper>
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">特殊字符检查与转换</h1>
         <p className="text-muted-foreground">检查文本中的特殊字符，并提供清理或替换选项，避免在邮件或文档中出现乱码</p>
@@ -66,11 +61,11 @@ export default function SpecialCharPage() {
             </div>
           </div>
           <Button onClick={handleCheck} className="w-full" size="lg">检查特殊字符</Button>
-          {result && <SpecialCharCheckResult result={result} stats={categorizeSpecialChars(result.specialChars)} copiedText={copiedText} onCopy={copyToClipboard} />}
+          {result && <SpecialCharCheckResult result={result} stats={categorizeSpecialChars(result.specialChars)} />}
           <SpecialCharHistory history={checkHistory} />
         </CardContent>
       </Card>
       <SpecialCharInfo />
-    </>
+    </MobileFriendlyWrapper>
   )
 }

@@ -4,7 +4,8 @@
 // 作者: everettlabs
 // 更新时间: 2026-07-21
 
-import { Check, ClipboardCopy, Info, RotateCcw } from 'lucide-react'
+import { Info, RotateCcw } from 'lucide-react'
+import { EnhancedCopyButton } from '@/components/tools/enhanced-copy-button'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -17,7 +18,7 @@ import { DELIVERY_PRESETS, type DayField, type DeliveryDateFormState } from './d
 
 interface DeliveryDateFormProps {
   form: DeliveryDateFormState
-  copied: boolean
+  copyText: string
   canCopy: boolean
   onStartDate: (value: string) => void
   onDayField: (field: DayField, value: string) => void
@@ -25,7 +26,6 @@ interface DeliveryDateFormProps {
   onHolidayToggle: () => void
   onCountry: (value: string) => void
   onPreset: (values: Partial<DeliveryDateFormState>) => void
-  onCopy: () => void
   onReset: () => void
 }
 
@@ -48,7 +48,7 @@ export function DeliveryDateForm(props: DeliveryDateFormProps) {
           <div className="space-y-2"><Label htmlFor="holidayCountry">节假日国家/地区</Label><Select value={props.form.countryCode} onValueChange={props.onCountry} disabled={!holidaysEnabled || !props.form.excludeHolidays}><SelectTrigger id="holidayCountry" className="h-11"><SelectValue /></SelectTrigger><SelectContent>{DELIVERY_COUNTRIES.map((country) => <SelectItem key={country.code} value={country.code}>{country.label}</SelectItem>)}</SelectContent></Select></div>
         </div>
         <Alert><Info className="h-4 w-4" /><AlertDescription>工作日口径统一应用于生产、运输和缓冲阶段；实际交期仍应结合供应商排产、船期和清关安排确认。</AlertDescription></Alert>
-        <div className="flex flex-wrap gap-2"><Button type="button" disabled={!props.canCopy} onClick={props.onCopy}>{props.copied ? <Check className="mr-2 h-4 w-4" /> : <ClipboardCopy className="mr-2 h-4 w-4" />}{props.copied ? '英文摘要已复制' : '复制英文摘要'}</Button><Button type="button" variant="outline" onClick={props.onReset}><RotateCcw className="mr-2 h-4 w-4" />重置</Button></div>
+        <div className="flex flex-wrap gap-2"><EnhancedCopyButton text={props.copyText} disabled={!props.canCopy}>复制英文摘要</EnhancedCopyButton><Button type="button" variant="outline" onClick={props.onReset}><RotateCcw className="mr-2 h-4 w-4" />重置</Button></div>
       </CardContent>
     </Card>
   )

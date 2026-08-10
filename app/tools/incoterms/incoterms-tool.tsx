@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
+import { EnhancedCopyButton } from '@/components/tools/enhanced-copy-button'
 import {
   Select,
   SelectContent,
@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Check, Copy, Search, Ship, Truck } from 'lucide-react'
+import { Search, Ship, Truck } from 'lucide-react'
 import {
   INCOTERMS_2020,
   type IncotermTransportMode,
@@ -23,15 +23,8 @@ import {
 export default function IncotermsTool() {
   const [query, setQuery] = useState('')
   const [mode, setMode] = useState<IncotermTransportMode>('any')
-  const [copied, setCopied] = useState<string | null>(null)
 
   const results = useMemo(() => searchIncoterms(query, mode), [query, mode])
-
-  const copyTerm = async (text: string) => {
-    await navigator.clipboard.writeText(text)
-    setCopied(text)
-    setTimeout(() => setCopied(null), 1800)
-  }
 
   return (
     <div className="space-y-6">
@@ -132,17 +125,7 @@ export default function IncotermsTool() {
                       {isSeaOnly ? <Ship className="h-3 w-3" /> : <Truck className="h-3 w-3" />}
                       {isSeaOnly ? '仅海运' : '全运输方式'}
                     </Badge>
-                    <Button variant="ghost" size="sm" onClick={() => copyTerm(copyText)}>
-                      {copied === copyText ? (
-                        <>
-                          <Check className="mr-1 h-4 w-4" />已复制
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="mr-1 h-4 w-4" />复制
-                        </>
-                      )}
-                    </Button>
+                    <EnhancedCopyButton text={copyText} variant="ghost" size="sm">复制</EnhancedCopyButton>
                   </div>
                 </div>
               </CardHeader>

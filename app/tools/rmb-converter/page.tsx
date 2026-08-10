@@ -12,15 +12,15 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/com
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
+import { EnhancedCopyButton } from '@/components/tools/enhanced-copy-button'
+import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
 import { numberToChinese } from '@/lib/tools/rmb-converter'
-import { Copy, Check } from 'lucide-react'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 
 export default function RMBConverterPage() {
   const [amount, setAmount] = useState('')
   const [result, setResult] = useState('')
   const [error, setError] = useState('')
-  const [copiedText, setCopiedText] = useState<string | null>(null)
   const [history, setHistory] = useState<Array<{amount: string, result: string}>>([])
 
   const handleConvert = () => {
@@ -56,12 +56,6 @@ export default function RMBConverterPage() {
     }
   }
 
-  const copyToClipboard = (text: string, type: string) => {
-    navigator.clipboard.writeText(text)
-    setCopiedText(type)
-    setTimeout(() => setCopiedText(null), 2000)
-  }
-
   const commonAmounts = [
     { value: '100', label: '100元' },
     { value: '1000', label: '1千元' },
@@ -71,7 +65,7 @@ export default function RMBConverterPage() {
   ]
 
   return (
-    <>
+    <MobileFriendlyWrapper>
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">人民币大写转换器</h1>
         <p className="text-muted-foreground">
@@ -137,23 +131,7 @@ export default function RMBConverterPage() {
               <CardHeader className="pb-3">
                 <CardTitle className="text-base flex items-center justify-between">
                   转换结果
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => copyToClipboard(result, 'result')}
-                  >
-                    {copiedText === 'result' ? (
-                      <>
-                        <Check className="h-4 w-4 mr-1" />
-                        已复制
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="h-4 w-4 mr-1" />
-                        复制
-                      </>
-                    )}
-                  </Button>
+                  <EnhancedCopyButton text={result} variant="ghost" size="sm">复制</EnhancedCopyButton>
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -176,18 +154,7 @@ export default function RMBConverterPage() {
                           <span className="mx-2 text-muted-foreground">→</span>
                           <span className="text-sm">{item.result}</span>
                         </div>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => copyToClipboard(item.result, `history-${index}`)}
-                          className="h-8 w-8 p-0"
-                        >
-                          {copiedText === `history-${index}` ? (
-                            <Check className="h-3 w-3" />
-                          ) : (
-                            <Copy className="h-3 w-3" />
-                          )}
-                        </Button>
+                        <EnhancedCopyButton text={item.result} variant="ghost" size="icon" iconOnly title="复制历史结果" className="h-8 w-8" />
                       </div>
                     </CardContent>
                   </Card>
@@ -199,6 +166,6 @@ export default function RMBConverterPage() {
       </Card>
 
       <RmbReference />
-    </>
+    </MobileFriendlyWrapper>
   )
 }

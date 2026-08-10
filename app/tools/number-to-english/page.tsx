@@ -12,6 +12,7 @@ import { NumberEnglishInfo, NumberEnglishStats } from './number-english-info'
 import { NumberEnglishHistory, NumberEnglishResults } from './number-english-results'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
+import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -21,15 +22,9 @@ export default function NumberToEnglishPage() {
   const [number, setNumber] = useState('')
   const [cardinalResult, setCardinalResult] = useState('')
   const [ordinalResult, setOrdinalResult] = useState('')
-  const [copiedText, setCopiedText] = useState<string | null>(null)
   const [history, setHistory] = useState<NumberEnglishHistoryItem[]>([])
   const [error, setError] = useState('')
 
-  const copyToClipboard = (text: string, type: string) => {
-    navigator.clipboard.writeText(text)
-    setCopiedText(type)
-    setTimeout(() => setCopiedText(null), 2000)
-  }
   const fail = (message: string) => {
     setError(message); setCardinalResult(''); setOrdinalResult('')
   }
@@ -49,7 +44,7 @@ export default function NumberToEnglishPage() {
   }
 
   return (
-    <>
+    <MobileFriendlyWrapper>
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">数字转英文</h1>
         <p className="text-muted-foreground">将数字转换为英文表达形式，支持基数词和序数词，适用于支票、合同等正式文件</p>
@@ -68,11 +63,11 @@ export default function NumberToEnglishPage() {
             <div className="flex flex-wrap gap-2">{COMMON_NUMBERS.map((item) => <Button key={item.value} variant="outline" size="sm" onClick={() => { setNumber(item.value); setError('') }}>{item.label}</Button>)}</div>
           </div>
           <Button onClick={handleConvert} className="w-full" size="lg">转换为英文</Button>
-          <NumberEnglishResults number={number} cardinal={cardinalResult} ordinal={ordinalResult} copiedText={copiedText} onCopy={copyToClipboard} />
-          <NumberEnglishHistory history={history} copiedText={copiedText} onCopy={copyToClipboard} />
+          <NumberEnglishResults number={number} cardinal={cardinalResult} ordinal={ordinalResult} />
+          <NumberEnglishHistory history={history} />
         </CardContent>
       </Card>
       <NumberEnglishInfo />
-    </>
+    </MobileFriendlyWrapper>
   )
 }

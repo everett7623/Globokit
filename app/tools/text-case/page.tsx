@@ -13,6 +13,7 @@ import { TextCaseHistory, TextCaseResult } from './text-case-history'
 import { TextCaseInfo, TextCaseStats } from './text-case-info'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
+import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
@@ -24,14 +25,8 @@ export default function TextCasePage() {
   const [output, setOutput] = useState('')
   const [caseType, setCaseType] = useState<TextCase>('upper')
   const [error, setError] = useState('')
-  const [copiedText, setCopiedText] = useState<string | null>(null)
   const [history, setHistory] = useState<TextCaseHistoryItem[]>([])
 
-  const copyToClipboard = (text: string, type: string) => {
-    navigator.clipboard.writeText(text)
-    setCopiedText(type)
-    setTimeout(() => setCopiedText(null), 2000)
-  }
   const handleConvert = () => {
     setError('')
     if (!input.trim()) {
@@ -62,7 +57,7 @@ export default function TextCasePage() {
   })()
 
   return (
-    <>
+    <MobileFriendlyWrapper>
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">英文大小写转换</h1>
         <p className="text-muted-foreground">快速转换英文文本的大小写格式，支持编程命名规范与文件名格式化</p>
@@ -94,11 +89,11 @@ export default function TextCasePage() {
             <Button onClick={handleConvert} className="flex-1" size="lg">转换文本</Button>
             <Button variant="outline" size="lg" onClick={() => { setInput(''); setOutput(''); setError('') }} title="清空所有内容"><Trash2 className="h-4 w-4" /></Button>
           </div>
-          <TextCaseResult output={output} copiedText={copiedText} onUseAsInput={() => { setInput(output); setOutput(''); setError('') }} onCopy={copyToClipboard} />
-          <TextCaseHistory history={history} copiedText={copiedText} onCopy={copyToClipboard} />
+          <TextCaseResult output={output} onUseAsInput={() => { setInput(output); setOutput(''); setError('') }} />
+          <TextCaseHistory history={history} />
         </CardContent>
       </Card>
       <TextCaseInfo />
-    </>
+    </MobileFriendlyWrapper>
   )
 }

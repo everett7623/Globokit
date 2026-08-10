@@ -1,5 +1,21 @@
 # 开发进度记录
 
+## 2026-08-11
+
+### 已完成
+
+- 重新同步远程并扫描任务记录、TODO 与用户体验迁移计划；未发现开放 Issue/PR 或未合入远程分支任务。
+- 完成剩余工具体验迁移：26 个工具全部接入 `MobileFriendlyWrapper`，复制操作统一使用 `EnhancedCopyButton` 或其兼容包装。
+- `EnhancedCopyButton` 增加 Clipboard API 失败时的 `execCommand` 降级路径，并支持 `iconOnly`、标题和 ARIA 标签，覆盖表格/历史记录等紧凑操作。
+- 移除交期、快递比价、货代核对、货币符号、人民币大写、Incoterms、JSON、文本大小写、拼音、数字转英文、特殊字符和 VPS 工具中的重复复制状态。
+
+### 验证结果
+
+- `npm run lint` 通过，无警告；`npx tsc --noEmit` 通过；`git diff --check` 通过。
+- `npm run validate:data`、`npm run test:payment-terms` 和 `npm run build` 均通过，生产构建生成 33 个静态页面。
+- 本地 HTTP 烟测覆盖本轮迁移的 12 个工具路由，全部返回 200。
+- 已扫描 `app/tools`：未发现工具页残留 `navigator.clipboard`、`setCopied` 或同类自定义复制状态。
+
 ## 2026-08-10
 
 ### 已完成

@@ -4,9 +4,8 @@
 // 作者: everettlabs
 // 更新时间: 2026-07-15
 
-import { Check, Copy } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
+import { EnhancedCopyButton } from '@/components/tools/enhanced-copy-button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
@@ -16,11 +15,9 @@ import type { PinyinHistoryItem } from './pinyin-page-data'
 interface PinyinResultsProps {
   output: string
   stats: ReturnType<typeof analyzeText>
-  copiedText: string | null
-  onCopy: (text: string, type: string) => void
 }
 
-export function PinyinResults({ output, stats, copiedText, onCopy }: PinyinResultsProps) {
+export function PinyinResults({ output, stats }: PinyinResultsProps) {
   if (!output) return null
   const statItems = [
     { label: '总字符数', value: stats.totalChars, className: '' },
@@ -34,9 +31,7 @@ export function PinyinResults({ output, stats, copiedText, onCopy }: PinyinResul
         <CardHeader className="pb-3">
           <CardTitle className="text-base flex items-center justify-between">
             转换结果
-            <Button variant="ghost" size="sm" onClick={() => onCopy(output, 'output')}>
-              {copiedText === 'output' ? <><Check className="h-4 w-4 mr-1" />已复制</> : <><Copy className="h-4 w-4 mr-1" />复制</>}
-            </Button>
+            <EnhancedCopyButton text={output} variant="ghost" size="sm">复制</EnhancedCopyButton>
           </CardTitle>
         </CardHeader>
         <CardContent><Textarea value={output} readOnly className="h-32 bg-background font-mono text-base" /></CardContent>
@@ -53,11 +48,9 @@ export function PinyinResults({ output, stats, copiedText, onCopy }: PinyinResul
 
 interface PinyinHistoryProps {
   history: PinyinHistoryItem[]
-  copiedText: string | null
-  onCopy: (text: string, type: string) => void
 }
 
-export function PinyinHistory({ history, copiedText, onCopy }: PinyinHistoryProps) {
+export function PinyinHistory({ history }: PinyinHistoryProps) {
   if (history.length === 0) return null
   return (
     <div className="space-y-2">
@@ -67,9 +60,7 @@ export function PinyinHistory({ history, copiedText, onCopy }: PinyinHistoryProp
           <Card key={index} className="bg-muted/50"><CardContent className="pt-3 pb-3"><div className="space-y-2">
             <div className="flex items-center justify-between">
               <Badge variant="outline">{item.toneType}</Badge>
-              <Button variant="ghost" size="sm" onClick={() => onCopy(item.output, `history-${index}`)} className="h-8 w-8 p-0">
-                {copiedText === `history-${index}` ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
-              </Button>
+              <EnhancedCopyButton text={item.output} variant="ghost" size="icon" iconOnly title="复制历史结果" className="h-8 w-8" />
             </div>
             <div className="text-sm space-y-1">
               <p className="text-muted-foreground">{item.input}{item.input.length >= 50 ? '...' : ''}</p>
