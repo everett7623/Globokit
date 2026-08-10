@@ -65,6 +65,11 @@
   - 从已知售价反推覆盖订单固定成本所需的最低销量，以及达到目标利润所需的销量。
   - 将佣金、收款费和售后损耗预留从销售额中扣除，输出单件贡献毛利和贡献毛利率。
   - 对照计划销量展示订单利润、安全余量，并测算计划数量下的保本单价和目标利润单价。
+- **供应商报价对比** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 同时比较 2–5 家供应商，将含税与未税报价统一为含 VAT 的现金采购口径。
+  - 按计划合格品数量、次品预留率和 MOQ 反推实际采购量，再叠加固定费用与国内运费。
+  - 分别展示现金成本、交期和货款首付排名，并提示 MOQ 抬量与预期剩余合格品。
 - **外贸收款账期成本对比** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
 
   - 支持 T/T 预付、发货前/提单副本付尾款、即期/远期 L/C、D/P 和 OA 等常用收款条件。
@@ -256,6 +261,7 @@ Globokit/
 │   │   ├── quote-calculator/   # 外贸报价利润计算
 │   │   ├── rmb-converter/      # 人民币大写转换
 │   │   ├── special-char/       # 特殊字符检查
+│   │   ├── supplier-quote-comparison/ # 供应商报价对比
 │   │   ├── text-case/          # 英文大小写转换
 │   │   ├── tiered-quote-calculator/ # 外贸阶梯报价计算
 │   │   ├── unit-converter/     # 外贸单位换算
@@ -321,6 +327,7 @@ Globokit/
 │   │   ├── registry-ui.ts
 │   │   ├── rmb-converter.ts
 │   │   ├── special-char.ts
+│   │   ├── supplier-quote-comparison.ts
 │   │   ├── text-case.ts
 │   │   ├── tiered-quote-calculator.ts
 │   │   ├── unit-converter.ts

@@ -14,6 +14,7 @@
     "test:order-break-even": "node scripts/assert-order-break-even.cjs",
     "test:packaging-plans": "node scripts/assert-packaging-plan-comparison.cjs",
     "test:payment-terms": "node scripts/assert-payment-terms.cjs",
+    "test:supplier-quotes": "node scripts/assert-supplier-quote-comparison.cjs",
     "test:tiered-quote": "node scripts/assert-tiered-quote.cjs",
     "validate:data": "node scripts/validate-tool-data.cjs"
   },

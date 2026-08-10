@@ -67,6 +67,10 @@ export const TOOL_UI_CONFIG: Record<
     color: 'text-emerald-700',
     bgColor: 'bg-emerald-50',
   },
+  'supplier-quote-comparison': {
+    color: 'text-cyan-700',
+    bgColor: 'bg-cyan-50',
+  },
   'payment-terms-calculator': {
     color: 'text-amber-700',
     bgColor: 'bg-amber-50',
