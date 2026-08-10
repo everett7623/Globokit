@@ -6,7 +6,7 @@
 
 'use client'
 
-import { forwardRef, useEffect, useRef, useState } from 'react'
+import { forwardRef, useCallback, useEffect, useRef, useState } from 'react'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 
@@ -32,8 +32,14 @@ export const FormattedInput = forwardRef<HTMLInputElement, FormattedInputProps>(
   ({ value, onChange, onEnter, format = 'decimal', maxDecimals = 2, autoFocusFirst = false, className, ...props }, ref) => {
     const [isFocused, setIsFocused] = useState(false)
     const [displayValue, setDisplayValue] = useState(value)
-    const inputRef = useRef<HTMLInputElement>(null)
+    const inputRef = useRef<HTMLInputElement | null>(null)
     const isFirstMount = useRef(true)
+
+    const setInputRefs = useCallback((node: HTMLInputElement | null) => {
+      inputRef.current = node
+      if (typeof ref === 'function') ref(node)
+      else if (ref) (ref as React.MutableRefObject<HTMLInputElement | null>).current = node
+    }, [ref])
 
     // 自动聚焦第一个输入框
     useEffect(() => {
@@ -48,7 +54,7 @@ export const FormattedInput = forwardRef<HTMLInputElement, FormattedInputProps>(
     }, [autoFocusFirst])
 
     // 格式化数字为千分位
-    const formatNumber = (val: string): string => {
+    const formatNumber = useCallback((val: string): string => {
       if (format === 'none' || !val || val === '-') return val
 
       const num = parseFloat(val)
@@ -58,7 +64,7 @@ export const FormattedInput = forwardRef<HTMLInputElement, FormattedInputProps>(
         minimumFractionDigits: 0,
         maximumFractionDigits: maxDecimals,
       }).format(num)
-    }
+    }, [format, maxDecimals])
 
     // 移除格式化字符，保留原始数字
     const unformatNumber = (val: string): string => {
@@ -67,12 +73,8 @@ export const FormattedInput = forwardRef<HTMLInputElement, FormattedInputProps>(
 
     // 更新显示值
     useEffect(() => {
-      if (!isFocused && value) {
-        setDisplayValue(formatNumber(value))
-      } else {
-        setDisplayValue(value)
-      }
-    }, [value, isFocused, format])
+      setDisplayValue(!isFocused ? formatNumber(value) : value)
+    }, [value, isFocused, formatNumber])
 
     const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
       setIsFocused(true)
@@ -92,10 +94,12 @@ export const FormattedInput = forwardRef<HTMLInputElement, FormattedInputProps>(
       const rawValue = e.target.value
       const unformatted = unformatNumber(rawValue)
 
-      // 只允许数字、小数点、负号
-      if (format !== 'none' && unformatted && !/^-?\d*\.?\d*$/.test(unformatted)) {
-        return
-      }
+      // number 只允许整数；decimal 同时限制小数位数。
+      const decimalPattern = new RegExp(`^-?\\d*(?:\\.\\d{0,${Math.max(0, maxDecimals)}})?$`)
+      const isValid = format === 'none'
+        || !unformatted
+        || (format === 'number' ? /^-?\d*$/.test(unformatted) : decimalPattern.test(unformatted))
+      if (!isValid) return
 
       setDisplayValue(rawValue)
       onChange(unformatted)
@@ -111,7 +115,8 @@ export const FormattedInput = forwardRef<HTMLInputElement, FormattedInputProps>(
 
     return (
       <Input
-        ref={inputRef}
+        {...props}
+        ref={setInputRefs}
         type="text"
         inputMode={format === 'number' ? 'numeric' : format === 'decimal' ? 'decimal' : 'text'}
         value={displayValue}
@@ -120,7 +125,6 @@ export const FormattedInput = forwardRef<HTMLInputElement, FormattedInputProps>(
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
         className={cn('tabular-nums', className)}
-        {...props}
       />
     )
   }

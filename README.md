@@ -55,6 +55,11 @@
   - 支持 EXW、FCA、FAS、FOB、CFR、CIF、CPT、CIP、DAP、DPU、DDP 等 Incoterms 2020 常见报价口径。
   - 按条款自动判断卖方计入成本，含运费/到门/完税条款会提示补充运费、保险、目的地费用或进口税费。
   - 可按已知售价快速核算销售利润率，展示盈亏平衡价、订单利润与成本拆分。
+- **外贸收款账期成本对比** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 支持 T/T 预付、发货前/提单副本付尾款、即期/远期 L/C、D/P 和 OA 等常用收款条件。
+  - 将预付款、生产周期、资金年化成本、收款手续费和风险准备金折算为条款总成本。
+  - 对比各方案的资金缺口、加权回款天数、实际利润与利润率，并生成可复制的谈判摘要。
 - **进口到岸成本计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
   
   - 按货值、运费、保险、关税、进口增值税和清关/本地费用汇总到岸成本。
@@ -216,6 +221,7 @@ Globokit/
 │   │   ├── number-to-english/  # 数字转英文
 │   │   ├── ocean-freight-calculator/ # 海运费用拆分计算
 │   │   ├── pallet-load-calculator/ # 托盘装载计算
+│   │   ├── payment-terms-calculator/ # 外贸收款账期成本对比
 │   │   ├── pinyin/             # 中文转拼音
 │   │   ├── quote-calculator/   # 外贸报价利润计算
 │   │   ├── rmb-converter/      # 人民币大写转换
@@ -268,6 +274,7 @@ Globokit/
 │   │   ├── number-english.ts
 │   │   ├── ocean-freight-calculator.ts
 │   │   ├── pallet-load-calculator.ts
+│   │   ├── payment-terms-calculator.ts
 │   │   ├── pinyin.ts
 │   │   ├── quote-calculator.ts
 │   │   ├── registry-barcode.ts

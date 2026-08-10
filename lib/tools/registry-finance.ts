@@ -2,7 +2,7 @@
 // 描述: 集中维护财务报价分类的工具元数据
 // 路径: Globokit/lib/tools/registry-finance.ts
 // 作者: everettlabs
-// 更新时间: 2026-07-24
+// 更新时间: 2026-08-10
 
 import type { ToolMeta } from './registry-types'
 
@@ -71,7 +71,24 @@ export const FINANCE_TOOLS: ToolMeta[] = [
     seoTitle: '外贸报价利润计算器 - EXW/FOB/CIF/DDP 条款报价测算 | Globokit',
     seoDescription: '免费在线外贸报价利润计算器，支持 EXW、FCA、FOB、CFR、CIF、CPT、CIP、DAP、DDP 等条款，按采购成本、运费、保险、税费、佣金和目标利润率测算报价',
     useCases: ['外贸报价核算', 'Incoterms 条款报价', '含运费含税报价评估'],
-    relatedTools: ['export-tax-rebate-calculator', 'currency-symbols', 'import-landed-cost-calculator', 'container-load-calculator', 'air-freight-calculator', 'ocean-freight-calculator', 'incoterms'],
+    relatedTools: ['payment-terms-calculator', 'export-tax-rebate-calculator', 'currency-symbols', 'import-landed-cost-calculator', 'container-load-calculator', 'air-freight-calculator', 'ocean-freight-calculator', 'incoterms'],
+  },
+  {
+    id: 'payment-terms-calculator',
+    slug: 'payment-terms-calculator',
+    title: '外贸收款账期成本对比',
+    shortTitle: '收款账期成本',
+    description: '比较 T/T、L/C、D/P 与 OA 的资金占用、收款费用、风险准备金和实际利润',
+    category: '财务报价',
+    iconName: 'Landmark',
+    href: '/tools/payment-terms-calculator',
+    updatedAt: '2026-08-10',
+    badge: '新增',
+    keywords: ['payment terms', 'T/T', 'L/C', 'D/P', 'OA', '账期', '收款', '资金成本', '外贸'],
+    seoTitle: '外贸收款账期成本对比 - T/T、L/C、D/P、OA 利润测算 | Globokit',
+    seoDescription: '免费比较 T/T、L/C、D/P 与 OA 收款条件，估算资金占用、银行手续费、风险准备金、回款周期和订单实际利润',
+    useCases: ['客户付款条件谈判', '账期资金成本测算', 'T/T 与 L/C 方案对比'],
+    relatedTools: ['quote-calculator', 'export-tax-rebate-calculator', 'currency-symbols', 'delivery-date-calculator'],
   },
   {
     id: 'export-tax-rebate-calculator',

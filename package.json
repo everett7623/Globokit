@@ -9,6 +9,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test:payment-terms": "node scripts/assert-payment-terms.cjs",
     "validate:data": "node scripts/validate-tool-data.cjs"
   },
   "dependencies": {

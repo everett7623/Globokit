@@ -1,5 +1,24 @@
 # 开发进度记录
 
+## 2026-08-10
+
+### 已完成
+
+- 拉取远程引用并核对本地与远程：`main` 与 `origin/main` 一致，工作区初始干净，GitHub 无开放 Issue 或开放 PR。
+- 确认 `codex/barcode-and-file-size-optimization` 已是 `main` 祖先；`codex/remove-redundant-vercel-workflow` 的等价改动已通过主线提交合入，两个远程分支均不是未完成开发任务。
+- 新增外贸收款账期成本对比工具：
+  - 支持 T/T、L/C、D/P、OA 七种预设，并允许逐项调整预付款、账期、费率、固定费用与风险准备金。
+  - 按订单金额、总成本、生产周期和资金年化成本计算资金缺口、资金成本、加权回款周期与实际利润。
+  - 输出方案排名、成本拆分、首选方案和可复制摘要，并接入注册表、首页、导航、相关工具与 sitemap 自动链路。
+- 完善 `FormattedInput` 的小数位限制、整数输入校验、转发引用与 Hook 依赖，消除公共组件 Lint 警告。
+
+### 验证结果
+
+- `npm run test:payment-terms` 通过，16 条核心断言覆盖默认排名、100% 预付、长账期 OA、非法比例和 2/3 方案边界。
+- `npm run validate:data`、`npm run lint`、`npx tsc --noEmit` 和 `npm run build` 均通过，新路由 `/tools/payment-terms-calculator` 已进入静态页面列表。
+- 本地 HTTP 烟测 `http://localhost:3010/tools/payment-terms-calculator` 返回 200，页面包含标题、默认方案、结果区和复制入口。
+- 浏览器技能运行时初始化因环境错误 `failed to write kernel assets: 系统找不到指定的路径。 (os error 3)` 失败，未能完成真实点击及 390px 视口验收；需在浏览器运行时恢复后补测。
+
 ## 2026-07-22
 
 ### 已完成
