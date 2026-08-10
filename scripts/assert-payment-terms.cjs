@@ -1,32 +1,11 @@
 const assert = require('node:assert/strict')
-const fs = require('node:fs')
-const path = require('node:path')
-const ts = require('typescript')
-
-const modulePath = path.join(__dirname, '..', 'lib', 'tools', 'payment-terms-calculator.ts')
-const source = fs.readFileSync(modulePath, 'utf8')
-const compiled = ts.transpileModule(source, {
-  compilerOptions: {
-    module: ts.ModuleKind.CommonJS,
-    target: ts.ScriptTarget.ES2020,
-  },
-  fileName: modulePath,
-}).outputText
-const paymentTermsModule = { exports: {} }
-
-Function('exports', 'require', 'module', '__filename', '__dirname', compiled)(
-  paymentTermsModule.exports,
-  require,
-  paymentTermsModule,
-  modulePath,
-  path.dirname(modulePath),
-)
+const { loadTypescriptModule } = require('./load-typescript-module.cjs')
 
 const {
   DEFAULT_PAYMENT_TERMS_INPUTS,
   calculatePaymentTerms,
   createPaymentTermOption,
-} = paymentTermsModule.exports
+} = loadTypescriptModule('lib/tools/payment-terms-calculator.ts')
 
 let assertionCount = 0
 const check = (condition, message) => {

@@ -60,6 +60,11 @@
   - 支持 T/T 预付、发货前/提单副本付尾款、即期/远期 L/C、D/P 和 OA 等常用收款条件。
   - 将预付款、生产周期、资金年化成本、收款手续费和风险准备金折算为条款总成本。
   - 对比各方案的资金缺口、加权回款天数、实际利润与利润率，并生成可复制的谈判摘要。
+- **外贸汇率敏感性分析** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 输入外币订单金额、CNY 成本、收款手续费率和基准汇率，比较人民币升值、基准和贬值三个情景。
+  - 输出 CNY 收入、收款手续费、实际利润、利润率、利润波动范围和盈亏平衡汇率。
+  - 所有汇率均由用户输入，不依赖实时外部数据，适合报价预算、结汇谈判和汇兑风险评估。
 - **进口到岸成本计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
   
   - 按货值、运费、保险、关税、进口增值税和清关/本地费用汇总到岸成本。
@@ -213,6 +218,7 @@ Globokit/
 │   │   ├── export-tax-rebate-calculator/ # 出口退税计算
 │   │   ├── express-channel-comparison/ # 快递渠道价格对比
 │   │   ├── freight-charge-audit/ # FOB/CIF 货代收费核对
+│   │   ├── fx-sensitivity-calculator/ # 外贸汇率敏感性分析
 │   │   ├── global-country-info/# 全球国家信息
 │   │   ├── holiday-query/      # 国际节假日
 │   │   ├── import-landed-cost-calculator/ # 进口到岸成本计算
@@ -266,6 +272,7 @@ Globokit/
 │   │   ├── export-tax-rebate-calculator.ts
 │   │   ├── express-channel-comparison.ts
 │   │   ├── freight-charge-audit.ts
+│   │   ├── fx-sensitivity-calculator.ts
 │   │   ├── global-country-info.ts
 │   │   ├── holiday-query.ts
 │   │   ├── import-landed-cost-calculator.ts

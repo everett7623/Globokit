@@ -63,6 +63,10 @@ export const TOOL_UI_CONFIG: Record<
     color: 'text-amber-700',
     bgColor: 'bg-amber-50',
   },
+  'fx-sensitivity-calculator': {
+    color: 'text-teal-700',
+    bgColor: 'bg-teal-50',
+  },
   'export-tax-rebate-calculator': {
     color: 'text-green-600',
     bgColor: 'bg-green-50',
