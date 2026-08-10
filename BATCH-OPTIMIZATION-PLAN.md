@@ -80,11 +80,11 @@ const copySummary = async () => { /* ... */ }
 ---
 
 **目标**: 完成所有工具的用户体验优化
-**当前进度**: 28/28 (100%)
+**当前进度**: 29/29 (100%)
 **剩余**: 0 个工具
 
 ## 2026-08-11 核对结果
 
-- 代码扫描确认 `app/tools` 下 28 个工具页面均包含 `MobileFriendlyWrapper`。
+- 代码扫描确认 `app/tools` 下 29 个工具页面均包含 `MobileFriendlyWrapper`。
 - 所有工具页的剪贴板写入已收敛到 `EnhancedCopyButton`，国家资料查询的旧 `CopyButton` 仅保留兼容调用接口并委托给增强组件。
 - 复制组件支持现代 Clipboard API、权限受限时的文本框降级、复制失败反馈以及紧凑的 `iconOnly` 模式。

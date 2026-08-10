@@ -127,6 +127,10 @@ export const TOOL_UI_CONFIG: Record<
     color: 'text-teal-600',
     bgColor: 'bg-teal-50',
   },
+  'packaging-plan-comparison': {
+    color: 'text-indigo-600',
+    bgColor: 'bg-indigo-50',
+  },
 }
 
 export const TOOL_BADGE_STYLES: Record<string, string> = {

@@ -25,6 +25,23 @@ export const LOGISTICS_TOOLS: ToolMeta[] = [
     relatedTools: ['ocean-freight-calculator', 'demurrage-detention-calculator', 'incoterms', 'customs-cost-calculator', 'quote-calculator', 'import-landed-cost-calculator'],
   },
   {
+    id: 'packaging-plan-comparison',
+    slug: 'packaging-plan-comparison',
+    title: '纸箱包装方案对比',
+    shortTitle: '包装方案对比',
+    description: '比较不同箱规的箱数、CBM、计费重和包装加运输成本',
+    category: '物流与装柜',
+    iconName: 'Boxes',
+    href: '/tools/packaging-plan-comparison',
+    updatedAt: '2026-08-11',
+    badge: '新增',
+    keywords: ['packaging', 'carton', '纸箱', '箱规', '包装方案', 'CBM', '计费重', '物流成本'],
+    seoTitle: '纸箱包装方案对比 - 箱数CBM计费重与物流成本 | Globokit',
+    seoDescription: '免费在线纸箱包装方案对比工具，比较不同箱规的箱数、总体积、毛重、体积重、计费重和包装运输成本',
+    useCases: ['出口包装方案评审', '空运体积重优化', '海运纸箱 CBM 对比'],
+    relatedTools: ['container-load-calculator', 'pallet-load-calculator', 'air-freight-calculator', 'ocean-freight-calculator', 'express-channel-comparison', 'unit-converter'],
+  },
+  {
     id: 'unit-converter',
     slug: 'unit-converter',
     title: '外贸单位换算器',
@@ -39,7 +56,7 @@ export const LOGISTICS_TOOLS: ToolMeta[] = [
     seoTitle: '外贸单位换算器 - 长度重量体积在线换算 | Globokit',
     seoDescription: '免费在线外贸单位换算器，支持物流和产品规格常用的公制与英制长度、重量、体积单位换算',
     useCases: ['产品尺寸单位换算', '装箱重量换算', 'CBM 与立方英尺换算'],
-    relatedTools: ['container-load-calculator', 'pallet-load-calculator', 'air-freight-calculator', 'ocean-freight-calculator'],
+    relatedTools: ['packaging-plan-comparison', 'container-load-calculator', 'pallet-load-calculator', 'air-freight-calculator', 'ocean-freight-calculator'],
   },
   {
     id: 'container-load-calculator',
@@ -56,7 +73,7 @@ export const LOGISTICS_TOOLS: ToolMeta[] = [
     seoTitle: '装柜/箱规计算器 - 纸箱 CBM 与整柜装载估算 | Globokit',
     seoDescription: '免费在线装柜/箱规计算器，按纸箱尺寸、毛重、箱数和 20GP/40GP/40HQ/45HQ 柜型估算装载数量、柜数和利用率',
     useCases: ['报价前估算装柜量', '核对纸箱 CBM', '评估整柜数量和载重限制'],
-    relatedTools: ['pallet-load-calculator', 'quote-calculator', 'air-freight-calculator', 'ocean-freight-calculator', 'incoterms', 'currency-symbols'],
+    relatedTools: ['packaging-plan-comparison', 'pallet-load-calculator', 'quote-calculator', 'air-freight-calculator', 'ocean-freight-calculator', 'incoterms', 'currency-symbols'],
   },
   {
     id: 'pallet-load-calculator',
@@ -73,7 +90,7 @@ export const LOGISTICS_TOOLS: ToolMeta[] = [
     seoTitle: '托盘装载计算器 - 纸箱码托与托盘数量估算 | Globokit',
     seoDescription: '免费在线托盘装载计算器，按纸箱尺寸、重量、托盘规格、限高和限重估算每层箱数、码放层数、单托装载量及所需托盘数',
     useCases: ['出货前估算码托数量', '核对单托高度与毛重', '比较中欧及北美托盘装载量'],
-    relatedTools: ['container-load-calculator', 'air-freight-calculator', 'ocean-freight-calculator', 'express-channel-comparison'],
+    relatedTools: ['packaging-plan-comparison', 'container-load-calculator', 'air-freight-calculator', 'ocean-freight-calculator', 'express-channel-comparison'],
   },
   {
     id: 'air-freight-calculator',
@@ -90,7 +107,7 @@ export const LOGISTICS_TOOLS: ToolMeta[] = [
     seoTitle: '空运/快递计费重计算器 - 泡重体积重费用测算 | Globokit',
     seoDescription: '免费在线空运/快递计费重计算器，按纸箱尺寸、实重、泡重系数、每公斤运价、燃油附加和操作费估算计费重量与费用',
     useCases: ['空运快递报价核算', '判断实重或体积重计费', '比较不同泡重系数费用'],
-    relatedTools: ['container-load-calculator', 'express-channel-comparison', 'ocean-freight-calculator', 'quote-calculator', 'incoterms', 'currency-symbols'],
+    relatedTools: ['packaging-plan-comparison', 'container-load-calculator', 'express-channel-comparison', 'ocean-freight-calculator', 'quote-calculator', 'incoterms', 'currency-symbols'],
   },
   {
     id: 'ocean-freight-calculator',
@@ -107,7 +124,7 @@ export const LOGISTICS_TOOLS: ToolMeta[] = [
     seoTitle: '海运费用拆分计算器 - FCL/LCL 每件每CBM成本测算 | Globokit',
     seoDescription: '免费在线海运费用拆分计算器，按海运费、起运港杂费、拖车、报关、保险和目的港费用测算 FCL/LCL 每件与每CBM成本',
     useCases: ['海运报价前成本拆分', '整柜和拼箱费用摊销', '核算每件与每CBM物流成本'],
-    relatedTools: ['freight-charge-audit', 'demurrage-detention-calculator', 'container-load-calculator', 'customs-cost-calculator', 'quote-calculator', 'import-landed-cost-calculator', 'incoterms'],
+    relatedTools: ['packaging-plan-comparison', 'freight-charge-audit', 'demurrage-detention-calculator', 'container-load-calculator', 'customs-cost-calculator', 'quote-calculator', 'import-landed-cost-calculator', 'incoterms'],
   },
   {
     id: 'demurrage-detention-calculator',
@@ -158,6 +175,6 @@ export const LOGISTICS_TOOLS: ToolMeta[] = [
     seoTitle: '国际快递/专线报价对比 - 空运 DDP 体积重费用计算 | Globokit',
     seoDescription: '免费在线国际快递与专线报价对比工具，按箱规自动判断实重或体积重，支持空运、商业快递和 DDP 专线的按公斤及整票报价',
     useCases: ['空运快递计费重判断', 'DDP 专线货代报价核对', '按公斤与整票价格对比'],
-    relatedTools: ['air-freight-calculator', 'customs-cost-calculator', 'quote-calculator', 'container-load-calculator'],
+    relatedTools: ['packaging-plan-comparison', 'air-freight-calculator', 'customs-cost-calculator', 'quote-calculator', 'container-load-calculator'],
   },
 ]

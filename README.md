@@ -89,6 +89,12 @@
   - 支持物流与产品规格常用的公制、英制长度、重量和体积单位换算。
   - 提供 CBM、立方英尺、千克、磅、厘米、英寸等同量纲速览和结果复制。
 
+- **纸箱包装方案对比** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 同时比较 2–4 个纸箱方案的箱数、尾箱余量、总 CBM、总毛重和体积重。
+  - 支持空运/快递按计费重估算，以及海运/拼箱按 CBM 估算。
+  - 将单箱包装成本与预估运输成本合并排名，并输出单件物流成本和可复制摘要。
+
 - **托盘装载计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
 
   - 支持中国标准、欧标与北美标准托盘，按纸箱尺寸估算每层码放数量。
@@ -232,6 +238,7 @@ Globokit/
 │   │   ├── json-formatter/     # JSON 格式化与转换
 │   │   ├── number-to-english/  # 数字转英文
 │   │   ├── ocean-freight-calculator/ # 海运费用拆分计算
+│   │   ├── packaging-plan-comparison/ # 纸箱包装方案对比
 │   │   ├── pallet-load-calculator/ # 托盘装载计算
 │   │   ├── payment-terms-calculator/ # 外贸收款账期成本对比
 │   │   ├── pinyin/             # 中文转拼音
@@ -287,6 +294,7 @@ Globokit/
 │   │   ├── json-formatter.ts
 │   │   ├── number-english.ts
 │   │   ├── ocean-freight-calculator.ts
+│   │   ├── packaging-plan-comparison.ts
 │   │   ├── pallet-load-calculator.ts
 │   │   ├── payment-terms-calculator.ts
 │   │   ├── pinyin.ts
