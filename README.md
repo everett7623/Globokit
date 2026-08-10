@@ -60,6 +60,11 @@
   - 同时比较 2–5 个订购数量档位，并允许每档使用不同的采购单价。
   - 按数量摊薄每单固定费用，结合汇率、佣金、收款费和目标利润率反算外币建议价。
   - 支持报价步长向上取整，展示盈亏平衡单价、订单总额、实际利润率和相对试单价降幅。
+- **外贸订单保本销量计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 从已知售价反推覆盖订单固定成本所需的最低销量，以及达到目标利润所需的销量。
+  - 将佣金、收款费和售后损耗预留从销售额中扣除，输出单件贡献毛利和贡献毛利率。
+  - 对照计划销量展示订单利润、安全余量，并测算计划数量下的保本单价和目标利润单价。
 - **外贸收款账期成本对比** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
 
   - 支持 T/T 预付、发货前/提单副本付尾款、即期/远期 L/C、D/P 和 OA 等常用收款条件。
@@ -243,6 +248,7 @@ Globokit/
 │   │   ├── json-formatter/     # JSON 格式化与转换
 │   │   ├── number-to-english/  # 数字转英文
 │   │   ├── ocean-freight-calculator/ # 海运费用拆分计算
+│   │   ├── order-break-even-calculator/ # 外贸订单保本销量计算
 │   │   ├── packaging-plan-comparison/ # 纸箱包装方案对比
 │   │   ├── pallet-load-calculator/ # 托盘装载计算
 │   │   ├── payment-terms-calculator/ # 外贸收款账期成本对比
@@ -300,6 +306,7 @@ Globokit/
 │   │   ├── json-formatter.ts
 │   │   ├── number-english.ts
 │   │   ├── ocean-freight-calculator.ts
+│   │   ├── order-break-even-calculator.ts
 │   │   ├── packaging-plan-comparison.ts
 │   │   ├── pallet-load-calculator.ts
 │   │   ├── payment-terms-calculator.ts

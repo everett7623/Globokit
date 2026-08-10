@@ -63,6 +63,10 @@ export const TOOL_UI_CONFIG: Record<
     color: 'text-indigo-700',
     bgColor: 'bg-indigo-50',
   },
+  'order-break-even-calculator': {
+    color: 'text-emerald-700',
+    bgColor: 'bg-emerald-50',
+  },
   'payment-terms-calculator': {
     color: 'text-amber-700',
     bgColor: 'bg-amber-50',
