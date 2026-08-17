@@ -24,6 +24,7 @@ interface FilterOptions {
   sortOrder: SortOrder
   showOnlyFavorites: boolean
   showOnlyMajorTrade: boolean
+  localTimezone: string | null
 }
 
 export function filterAndSortCountries(options: FilterOptions) {
@@ -59,7 +60,7 @@ export function filterAndSortCountries(options: FilterOptions) {
     let comparison = 0
     if (options.sortField === 'name') comparison = a.name_cn.localeCompare(b.name_cn)
     else if (options.sortField === 'continent') comparison = a.continent_cn.localeCompare(b.continent_cn)
-    else comparison = getTimeDifference(a.timezone) - getTimeDifference(b.timezone)
+    else if (options.localTimezone) comparison = getTimeDifference(a.timezone, options.localTimezone) - getTimeDifference(b.timezone, options.localTimezone)
     return options.sortOrder === 'asc' ? comparison : -comparison
   })
   return filtered

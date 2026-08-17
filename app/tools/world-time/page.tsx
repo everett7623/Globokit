@@ -14,11 +14,13 @@ import { buildCityTimes, getUpcomingWorkingCities, readStoredStringArray, type C
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { getTimeZoneOffset, getWorldTimeRegion } from '@/lib/tools/world-time'
 import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
+import { CardSkeleton } from '@/components/ui/loading-indicator'
 
 export default function WorldTimePage() {
-  const [cityTimes, setCityTimes] = useState<CityTime[]>(() => buildCityTimes(new Date(), '24'))
+  const [cityTimes, setCityTimes] = useState<CityTime[]>([])
   const [searchTerm, setSearchTerm] = useState('')
-  const [currentDateTime, setCurrentDateTime] = useState(new Date())
+  const [currentDateTime, setCurrentDateTime] = useState<Date | null>(null)
+  const [localTimezone, setLocalTimezone] = useState<string | null>(null)
   const [favorites, setFavorites] = useState<string[]>([])
   const [activeTab, setActiveTab] = useState('all')
   const [quickFilter, setQuickFilter] = useState('')
@@ -26,6 +28,7 @@ export default function WorldTimePage() {
 
   useEffect(() => setFavorites(readStoredStringArray('worldTimeFavorites')), [])
   useEffect(() => {
+    setLocalTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone)
     const updateTimes = () => {
       const now = new Date()
       setCurrentDateTime(now)
@@ -54,18 +57,16 @@ export default function WorldTimePage() {
     groups[city.offset].push(city)
     return groups
   }, {})
-  const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone
-
   return (
     <MobileFriendlyWrapper>
       <div className="mb-8"><h1 className="text-3xl font-bold mb-2">世界时间</h1><p className="text-muted-foreground">查看全球主要贸易城市和各国首都实时时间，便于安排国际业务</p></div>
       <WorldTimeStats cities={cityTimes} coveredCountries={new Set(cityTimes.map((city) => city.countryCode)).size} upcomingCount={getUpcomingWorkingCities(cityTimes).length} favoriteCount={favorites.length} />
-      <LocalTimeCard currentDateTime={currentDateTime} localTimezone={localTimezone} localOffset={getTimeZoneOffset(localTimezone)} timeFormat={timeFormat} onFormatChange={setTimeFormat} />
+      <LocalTimeCard currentDateTime={currentDateTime} localTimezone={localTimezone} localOffset={localTimezone ? getTimeZoneOffset(localTimezone) : null} timeFormat={timeFormat} onFormatChange={setTimeFormat} />
       <Card>
         <CardHeader><CardTitle>城市时间查询</CardTitle><CardDescription>查看全球主要贸易城市、各国首都的实时时间和工作状态</CardDescription></CardHeader>
         <CardContent className="space-y-4">
           <WorldTimeControls activeTab={activeTab} favoriteCount={favorites.length} quickFilter={quickFilter} searchTerm={searchTerm} onTabChange={setActiveTab} onQuickFilterChange={setQuickFilter} onSearchChange={setSearchTerm} />
-          <div className="space-y-6 max-h-[600px] overflow-y-auto"><WorldTimeCityList groupedCities={groupedCities} filteredCount={filteredCities.length} activeTab={activeTab} favorites={favorites} localTimezone={localTimezone} onToggleFavorite={toggleFavorite} /></div>
+          <div className="space-y-6 max-h-[600px] overflow-y-auto">{localTimezone ? <WorldTimeCityList groupedCities={groupedCities} filteredCount={filteredCities.length} activeTab={activeTab} favorites={favorites} localTimezone={localTimezone} onToggleFavorite={toggleFavorite} /> : <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3" aria-busy="true"><CardSkeleton /><CardSkeleton /><CardSkeleton /></div>}</div>
         </CardContent>
       </Card>
       <WorldTimeInfo />

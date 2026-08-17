@@ -7,7 +7,7 @@
 import { Clock, Globe, Info, Star } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 import type { CityTime } from './world-time-page-data'
 
@@ -34,9 +34,9 @@ export function WorldTimeStats(props: WorldTimeStatsProps) {
 }
 
 interface LocalTimeCardProps {
-  currentDateTime: Date
-  localTimezone: string
-  localOffset: string
+  currentDateTime: Date | null
+  localTimezone: string | null
+  localOffset: string | null
   timeFormat: '12' | '24'
   onFormatChange: (format: '12' | '24') => void
 }
@@ -45,18 +45,18 @@ export function LocalTimeCard(props: LocalTimeCardProps) {
   return (
     <Card className="mb-6 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2"><Clock className="h-5 w-5" />本地时间<Badge variant="outline" className="ml-2">{props.localTimezone}</Badge><Badge variant="secondary">UTC{props.localOffset}</Badge></CardTitle>
-        <CardDescription><div className="flex items-center gap-2 mt-2">
+        <CardTitle className="flex items-center gap-2"><Clock className="h-5 w-5" />本地时间<Badge variant="outline" className="ml-2">{props.localTimezone ?? '本地时区'}</Badge><Badge variant="secondary">UTC{props.localOffset ?? '--:--'}</Badge></CardTitle>
+        <div className="flex items-center gap-2 mt-2 text-sm text-muted-foreground">
           <Label>时间格式：</Label>
           <Button variant={props.timeFormat === '12' ? 'default' : 'outline'} size="sm" onClick={() => props.onFormatChange('12')}>12小时</Button>
           <Button variant={props.timeFormat === '24' ? 'default' : 'outline'} size="sm" onClick={() => props.onFormatChange('24')}>24小时</Button>
-        </div></CardDescription>
+        </div>
       </CardHeader>
       <CardContent>
         <div className="text-4xl font-mono font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-          {props.timeFormat === '24' ? props.currentDateTime.toLocaleTimeString('zh-CN') : props.currentDateTime.toLocaleTimeString('en-US', { hour12: true })}
+          {props.currentDateTime ? (props.timeFormat === '24' ? props.currentDateTime.toLocaleTimeString('zh-CN') : props.currentDateTime.toLocaleTimeString('en-US', { hour12: true })) : '--:--:--'}
         </div>
-        <div className="text-muted-foreground mt-1">{props.currentDateTime.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' })}</div>
+        <div className="text-muted-foreground mt-1">{props.currentDateTime ? props.currentDateTime.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' }) : '----年--月--日'}</div>
       </CardContent>
     </Card>
   )

@@ -142,8 +142,8 @@ export function getCountryHolidays(countryCode: string, year: number = new Date(
 }
 
 // 获取即将到来的节假日
-export function getUpcomingHolidays(daysAhead: number = 30): UpcomingHoliday[] {
-  const today = new Date()
+export function getUpcomingHolidays(daysAhead: number = 30, referenceDate: Date = new Date()): UpcomingHoliday[] {
+  const today = new Date(referenceDate.getTime())
   today.setHours(0, 0, 0, 0)
   const currentYear = today.getFullYear()
   const upcoming: UpcomingHoliday[] = []

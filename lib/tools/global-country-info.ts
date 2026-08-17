@@ -63,12 +63,15 @@ export function getFlagEmoji(countryCode: string): string {
 /**
  * 获取指定时区与本地的时差（小时）
  */
-export function getTimeDifference(targetTimezone: string): number {
+export function getTimeDifference(targetTimezone: string, baseTimezone?: string): number {
   try {
     const now = new Date();
-    const localTimeString = now.toLocaleString('en-US', { timeZone: targetTimezone });
-    const targetDate = new Date(localTimeString);
-    const diff = now.getTime() - targetDate.getTime();
+    const resolvedBaseTimezone = baseTimezone ?? Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const targetTimeString = now.toLocaleString('en-US', { timeZone: targetTimezone });
+    const baseTimeString = now.toLocaleString('en-US', { timeZone: resolvedBaseTimezone });
+    const targetDate = new Date(targetTimeString);
+    const baseDate = new Date(baseTimeString);
+    const diff = targetDate.getTime() - baseDate.getTime();
     return Math.round(diff / (1000 * 60 * 30)) / 2;
   } catch (e) {
     console.error(`Invalid timezone provided: ${targetTimezone}`);

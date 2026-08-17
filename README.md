@@ -208,7 +208,7 @@
 1. 按 SemVer 更新 `package.json` 与 `package-lock.json` 版本号。
 2. 在 `CHANGELOG.md` 记录新增、优化、修复及重要兼容性变化。
 3. 更新 README 当前版本、功能说明和目录结构。
-4. 通过数据校验、Lint、TypeScript 与生产构建后，再创建同版本 Git tag 和 GitHub Release。
+4. 通过专项测试、数据校验、Lint、TypeScript 与生产构建后，再创建同版本 Git tag 和 GitHub Release。
 
 ---
 
@@ -231,7 +231,7 @@
 Globokit/
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml          # CI/CD 部署配置
+│       └── ci.yml              # 测试、Lint、类型检查与构建
 ├── app/                        # Next.js App Router 页面
 │   ├── resources/              # 外贸业务资源页
 │   ├── tools/                  # 工具页面路由

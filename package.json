@@ -9,6 +9,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "node scripts/run-tests.cjs",
+    "test:unit-converter": "node scripts/assert-unit-converter.cjs",
+    "test:delivery-date": "node scripts/assert-delivery-date.cjs",
+    "test:freight-audit": "node scripts/assert-freight-charge-audit.cjs",
+    "test:time-data": "node scripts/assert-time-dependent-data.cjs",
     "test:demurrage-detention": "node scripts/assert-demurrage-detention.cjs",
     "test:fx-sensitivity": "node scripts/assert-fx-sensitivity.cjs",
     "test:order-break-even": "node scripts/assert-order-break-even.cjs",
@@ -16,6 +21,7 @@
     "test:payment-terms": "node scripts/assert-payment-terms.cjs",
     "test:supplier-quotes": "node scripts/assert-supplier-quote-comparison.cjs",
     "test:tiered-quote": "node scripts/assert-tiered-quote.cjs",
+    "typecheck": "tsc --noEmit",
     "validate:data": "node scripts/validate-tool-data.cjs"
   },
   "dependencies": {

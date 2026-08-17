@@ -19,6 +19,7 @@ interface CountryTableProps {
   expandedRows: string[]
   sortField: SortField
   sortOrder: SortOrder
+  localTimezone: string | null
   onSort: (field: SortField) => void
   onToggleFavorite: (iso2: string) => void
   onToggleRow: (iso2: string) => void
@@ -26,12 +27,12 @@ interface CountryTableProps {
 }
 
 export function CountryTable(props: CountryTableProps) {
-  return <Card><CardContent className="p-0"><div className="overflow-x-auto"><table className="w-full"><thead><tr className="border-b bg-muted/50"><SortHeading label="国家/地区" field="name" onSort={props.onSort} sortField={props.sortField} sortOrder={props.sortOrder} /><SortHeading label="大洲" field="continent" className="hidden md:table-cell" onSort={props.onSort} sortField={props.sortField} sortOrder={props.sortOrder} /><th className="text-left p-4 font-medium">国际区号</th><th className="text-left p-4 font-medium hidden lg:table-cell">国家代码</th><SortHeading label="时差" field="timezone" className="hidden xl:table-cell" onSort={props.onSort} sortField={props.sortField} sortOrder={props.sortOrder} /><th className="text-left p-4 font-medium hidden xl:table-cell">货币</th><th className="text-center p-4 font-medium">操作</th></tr></thead><tbody>{props.countries.map((country) => <CountryRows key={country.iso2} country={country} favorite={props.favorites.includes(country.iso2)} expanded={props.expandedRows.includes(country.iso2)} onToggleFavorite={props.onToggleFavorite} onToggleRow={props.onToggleRow} onSelect={props.onSelect} />)}</tbody></table>{props.countries.length === 0 && <div className="text-center py-16"><Globe className="h-12 w-12 text-muted-foreground mx-auto mb-4" /><p className="text-muted-foreground">未找到匹配的国家信息</p><p className="text-sm text-muted-foreground mt-1">请尝试调整搜索条件</p></div>}</div></CardContent></Card>
+  return <Card><CardContent className="p-0"><div className="overflow-x-auto"><table className="w-full"><thead><tr className="border-b bg-muted/50"><SortHeading label="国家/地区" field="name" onSort={props.onSort} sortField={props.sortField} sortOrder={props.sortOrder} /><SortHeading label="大洲" field="continent" className="hidden md:table-cell" onSort={props.onSort} sortField={props.sortField} sortOrder={props.sortOrder} /><th className="text-left p-4 font-medium">国际区号</th><th className="text-left p-4 font-medium hidden lg:table-cell">国家代码</th><SortHeading label="时差" field="timezone" className="hidden xl:table-cell" onSort={props.onSort} sortField={props.sortField} sortOrder={props.sortOrder} /><th className="text-left p-4 font-medium hidden xl:table-cell">货币</th><th className="text-center p-4 font-medium">操作</th></tr></thead><tbody>{props.countries.map((country) => <CountryRows key={country.iso2} country={country} favorite={props.favorites.includes(country.iso2)} expanded={props.expandedRows.includes(country.iso2)} localTimezone={props.localTimezone} onToggleFavorite={props.onToggleFavorite} onToggleRow={props.onToggleRow} onSelect={props.onSelect} />)}</tbody></table>{props.countries.length === 0 && <div className="text-center py-16"><Globe className="h-12 w-12 text-muted-foreground mx-auto mb-4" /><p className="text-muted-foreground">未找到匹配的国家信息</p><p className="text-sm text-muted-foreground mt-1">请尝试调整搜索条件</p></div>}</div></CardContent></Card>
 }
 
-function CountryRows({ country, favorite, expanded, onToggleFavorite, onToggleRow, onSelect }: { country: CountryInfo; favorite: boolean; expanded: boolean; onToggleFavorite: (iso2: string) => void; onToggleRow: (iso2: string) => void; onSelect: (country: CountryInfo) => void }) {
-  const difference = getTimeDifference(country.timezone)
-  const timeDisplay = `UTC${difference >= 0 ? '+' : ''}${difference}`
+function CountryRows({ country, favorite, expanded, localTimezone, onToggleFavorite, onToggleRow, onSelect }: { country: CountryInfo; favorite: boolean; expanded: boolean; localTimezone: string | null; onToggleFavorite: (iso2: string) => void; onToggleRow: (iso2: string) => void; onSelect: (country: CountryInfo) => void }) {
+  const difference = localTimezone ? getTimeDifference(country.timezone, localTimezone) : null
+  const timeDisplay = difference === null ? '--' : `${difference >= 0 ? '+' : ''}${difference}h`
   const major = MAJOR_TRADE_COUNTRIES.includes(country.iso2)
   const transcontinental = Object.prototype.hasOwnProperty.call(TRANSCONTINENTAL_COUNTRIES, country.iso2)
   return <Fragment><tr className={`border-b transition-colors hover:bg-muted/50 ${favorite ? 'bg-yellow-50/50 dark:bg-yellow-900/10' : ''}`}>
