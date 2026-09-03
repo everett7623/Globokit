@@ -4,6 +4,9 @@
   "private": true,
   "author": "everettlabs",
   "license": "GPL-3.0-only",
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
