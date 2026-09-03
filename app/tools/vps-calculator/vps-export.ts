@@ -12,10 +12,11 @@ interface VpsMarkdownOptions {
   renewalPeriod: string
   purchaseDate: string
   purchasePrice: string
+  rateLabel: string
 }
 
 export function buildVpsMarkdown(options: VpsMarkdownOptions) {
-  const { result, currency, renewalPeriod, purchaseDate, purchasePrice } = options
+  const { result, currency, renewalPeriod, purchaseDate, purchasePrice, rateLabel } = options
   const symbol = SUPPORTED_CURRENCIES.find((item) => item.code === currency)?.symbol
   const cycleLabel = RENEWAL_PERIODS.find((item) => item.value === Number.parseInt(renewalPeriod))?.label
   const isProfit = result.premium >= 0
@@ -53,6 +54,7 @@ ${isProfit
 
 报告生成时间：${formattedTime}
 数据来源：VPS 剩余价值计算器
+汇率来源：${rateLabel}
 更多工具请访问：Globokit.com
 `.trim()
 }

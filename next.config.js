@@ -11,7 +11,7 @@ const contentSecurityPolicy = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
-  "connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com",
+  "connect-src 'self' https://open.er-api.com https://www.googletagmanager.com https://*.google-analytics.com",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
@@ -31,7 +31,6 @@ const securityHeaders = [
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   // 优化图片
   images: {
     formats: ['image/avif', 'image/webp'],

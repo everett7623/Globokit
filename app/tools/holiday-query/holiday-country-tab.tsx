@@ -11,6 +11,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { getHolidayTypeName, getImpactLevelName, impactDescriptions, SUPPORTED_HOLIDAY_YEARS, type Country, type Holiday } from '@/lib/tools/holiday-query'
+import { formatCalendarDateKey } from '@/lib/date-utils'
 
 const HOT_COUNTRIES = ['US', 'GB', 'DE', 'JP', 'FR', 'IN', 'AU', 'CA', 'KR', 'BR', 'AE', 'SG']
 
@@ -48,6 +49,7 @@ export function HolidayCountryTab(props: HolidayCountryTabProps) {
 function SelectField({ id, label, value, onChange, children }: { id: string; label: string; value: string; onChange: (value: string) => void; children: React.ReactNode }) { return <div><Label htmlFor={id}>{label}</Label><Select value={value} onValueChange={onChange}><SelectTrigger id={id}><SelectValue /></SelectTrigger><SelectContent>{children}</SelectContent></Select></div> }
 
 function HolidayCard({ holiday }: { holiday: Holiday }) {
-  const date = new Date(holiday.date)
-  return <Card><CardContent className="pt-6"><div className="flex items-start justify-between"><div className="space-y-2 flex-1"><div className="flex items-center gap-2"><h4 className="font-semibold">{holiday.name}{(holiday.nameCN || holiday.localName) && <span className="text-sm text-muted-foreground ml-2">({holiday.nameCN || holiday.localName})</span>}</h4><Badge variant={holiday.type === 'public' ? 'default' : 'secondary'}>{getHolidayTypeName(holiday.type)}</Badge></div><p className="text-sm text-muted-foreground"><Calendar className="inline h-3 w-3 mr-1" />{date.toLocaleDateString('zh-CN')} ({date.toLocaleDateString('zh-CN', { weekday: 'long' })})</p><div className="flex items-center gap-2"><Badge variant={holiday.impact === 'high' ? 'destructive' : holiday.impact === 'medium' ? 'default' : 'secondary'} className="text-xs">{getImpactLevelName(holiday.impact)}影响</Badge><span className="text-xs text-muted-foreground">{impactDescriptions[holiday.impact]}</span></div></div></div></CardContent></Card>
+  const formattedDate = formatCalendarDateKey(holiday.date)
+  const weekday = formatCalendarDateKey(holiday.date, { weekday: 'long' })
+  return <Card><CardContent className="pt-6"><div className="flex items-start justify-between"><div className="space-y-2 flex-1"><div className="flex items-center gap-2"><h4 className="font-semibold">{holiday.name}{(holiday.nameCN || holiday.localName) && <span className="text-sm text-muted-foreground ml-2">({holiday.nameCN || holiday.localName})</span>}</h4><Badge variant={holiday.type === 'public' ? 'default' : 'secondary'}>{getHolidayTypeName(holiday.type)}</Badge></div><p className="text-sm text-muted-foreground"><Calendar className="inline h-3 w-3 mr-1" />{formattedDate} ({weekday})</p><div className="flex items-center gap-2"><Badge variant={holiday.impact === 'high' ? 'destructive' : holiday.impact === 'medium' ? 'default' : 'secondary'} className="text-xs">{getImpactLevelName(holiday.impact)}影响</Badge><span className="text-xs text-muted-foreground">{impactDescriptions[holiday.impact]}</span></div></div></div></CardContent></Card>
 }

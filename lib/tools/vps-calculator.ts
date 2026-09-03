@@ -20,6 +20,14 @@ export interface CalculationResult {
 }
 
 export type PriceMode = 'total' | 'premium' | 'discount'
+export type ExchangeRateSource = 'live' | 'cache' | 'fallback'
+
+export interface ExchangeRateSnapshot {
+  rates: Record<string, number>
+  source: ExchangeRateSource
+  fetchedAt: string | null
+  stale: boolean
+}
 
 export const SUPPORTED_CURRENCIES = [
   { code: 'CNY', name: '人民币', symbol: '¥' },
@@ -45,24 +53,71 @@ export const RENEWAL_PERIODS = [
   { value: 120, label: '十年' },
 ]
 
-let exchangeRatesCache: Record<string, number> = { 
+export const FALLBACK_EXCHANGE_RATES: Record<string, number> = {
   CNY: 1, USD: 0.138, EUR: 0.128, GBP: 0.11, JPY: 21.5, 
   HKD: 1.08, KRW: 192.5, AUD: 0.21, CAD: 0.19, SGD: 0.19 
 }
-let lastFetchTime = 0
 
-export async function fetchExchangeRates(): Promise<Record<string, number>> {
-  const now = Date.now()
-  if (now - lastFetchTime < 3600000 && Object.keys(exchangeRatesCache).length > 5) return exchangeRatesCache
+interface ExchangeRateCache {
+  rates: Record<string, number>
+  fetchedAt: string
+  fetchedAtMs: number
+}
+
+type ExchangeRateFetcher = (
+  input: string,
+  init?: RequestInit
+) => Promise<{ ok: boolean; json: () => Promise<unknown> }>
+
+let exchangeRatesCache: ExchangeRateCache | null = null
+const CACHE_DURATION_MS = 3_600_000
+
+function normalizeExchangeRates(data: unknown): Record<string, number> | null {
+  if (!data || typeof data !== 'object' || !('rates' in data)) return null
+  const rawRates = (data as { rates?: unknown }).rates
+  if (!rawRates || typeof rawRates !== 'object') return null
+
+  const rates = Object.fromEntries(
+    Object.entries(rawRates).filter((entry): entry is [string, number] => (
+      typeof entry[1] === 'number' && Number.isFinite(entry[1]) && entry[1] > 0
+    ))
+  )
+  const hasSupportedRates = SUPPORTED_CURRENCIES.every((currency) => rates[currency.code] > 0)
+  return hasSupportedRates ? rates : null
+}
+
+export function getExchangeRateSourceLabel(snapshot: ExchangeRateSnapshot): string {
+  if (snapshot.source === 'live') return '实时汇率'
+  if (snapshot.source === 'cache') return snapshot.stale ? '历史缓存汇率' : '近期缓存汇率'
+  return '内置参考汇率'
+}
+
+export async function fetchExchangeRates(
+  fetcher: ExchangeRateFetcher = fetch,
+  now = Date.now()
+): Promise<ExchangeRateSnapshot> {
+  if (exchangeRatesCache && now - exchangeRatesCache.fetchedAtMs < CACHE_DURATION_MS) {
+    return { rates: exchangeRatesCache.rates, source: 'cache', fetchedAt: exchangeRatesCache.fetchedAt, stale: false }
+  }
+
   try {
-    const res = await fetch('https://open.er-api.com/v6/latest/CNY')
+    const res = await fetcher('https://open.er-api.com/v6/latest/CNY', {
+      signal: AbortSignal.timeout(8_000),
+    })
+    if (!res.ok) throw new Error('汇率服务响应异常')
     const data = await res.json()
-    if (data.rates) {
-      exchangeRatesCache = data.rates
-      lastFetchTime = now
+    const rates = normalizeExchangeRates(data)
+    if (!rates) throw new Error('汇率数据格式异常')
+
+    const fetchedAt = new Date(now).toISOString()
+    exchangeRatesCache = { rates, fetchedAt, fetchedAtMs: now }
+    return { rates, source: 'live', fetchedAt, stale: false }
+  } catch {
+    if (exchangeRatesCache) {
+      return { rates: exchangeRatesCache.rates, source: 'cache', fetchedAt: exchangeRatesCache.fetchedAt, stale: true }
     }
-    return exchangeRatesCache
-  } catch (e) { return exchangeRatesCache }
+    return { rates: { ...FALLBACK_EXCHANGE_RATES }, source: 'fallback', fetchedAt: null, stale: true }
+  }
 }
 
 export function formatCurrency(amount: number): string {

@@ -5,9 +5,20 @@
 // 更新时间: 2026-07-15
 
 import Image from 'next/image'
-import { AlertTriangle, ExternalLink, Server } from 'lucide-react'
+import { AlertTriangle, CheckCircle2, ExternalLink, Server } from 'lucide-react'
+import { BUSINESS_TIME_ZONE } from '@/lib/date-utils'
+import { getExchangeRateSourceLabel, type ExchangeRateSnapshot } from '@/lib/tools/vps-calculator'
 
-export function VpsHeader({ rateError }: { rateError: boolean }) {
+export function VpsHeader({ rateSnapshot }: { rateSnapshot: ExchangeRateSnapshot }) {
+  const sourceLabel = getExchangeRateSourceLabel(rateSnapshot)
+  const fetchedAt = rateSnapshot.fetchedAt
+    ? new Date(rateSnapshot.fetchedAt).toLocaleString('zh-CN', { timeZone: BUSINESS_TIME_ZONE })
+    : null
+  const statusMessage = rateSnapshot.source === 'fallback'
+    ? '实时汇率获取失败，当前使用内置参考汇率；交易前请手动复核。'
+    : `${sourceLabel}，更新时间：${fetchedAt ?? '未知'}${rateSnapshot.stale ? '；数据已过期，请刷新重试。' : ''}`
+  const StatusIcon = rateSnapshot.stale ? AlertTriangle : CheckCircle2
+
   return (
     <>
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
@@ -22,7 +33,7 @@ export function VpsHeader({ rateError }: { rateError: boolean }) {
           <ExternalLink className="h-4 w-4 shrink-0 text-gray-400 transition-colors group-hover:text-violet-600" />
         </a>
       </div>
-      {rateError && <div className="flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800"><AlertTriangle className="h-4 w-4 shrink-0" /><span>实时汇率获取失败，计算结果可能不准确，请稍后刷新重试。</span></div>}
+      <div className={`flex items-center gap-2 rounded-lg border px-4 py-3 text-sm ${rateSnapshot.stale ? 'border-amber-200 bg-amber-50 text-amber-800' : 'border-emerald-200 bg-emerald-50 text-emerald-800'}`}><StatusIcon className="h-4 w-4 shrink-0" /><span>{statusMessage}</span></div>
     </>
   )
 }

@@ -5,6 +5,7 @@
 // 更新时间: 2026-07-21
 
 import { countries, generateHolidayData, SUPPORTED_HOLIDAY_YEARS, type Holiday } from './holiday-query'
+import { BUSINESS_TIME_ZONE, getDateKeyInTimeZone as getSharedDateKeyInTimeZone } from '@/lib/date-utils'
 
 export type DeliveryDayMode = 'calendar' | 'business'
 
@@ -41,7 +42,7 @@ export type DeliveryDateCalculation =
   | { result: DeliveryDateResult; error: null }
   | { result: null; error: string }
 
-export const DELIVERY_BUSINESS_TIME_ZONE = 'Asia/Shanghai'
+export const DELIVERY_BUSINESS_TIME_ZONE = BUSINESS_TIME_ZONE
 export const MAX_DELIVERY_STAGE_DAYS = 3650
 const MILLISECONDS_PER_DAY = 86_400_000
 const SUPPORTED_YEAR_SET = new Set<number>(SUPPORTED_HOLIDAY_YEARS)
@@ -150,14 +151,7 @@ function addStageDays(start: Date, days: number, mode: DeliveryDayMode, context:
 }
 
 export function getDateKeyInTimeZone(date: Date, timeZone = DELIVERY_BUSINESS_TIME_ZONE): string {
-  const parts = new Intl.DateTimeFormat('en-US', {
-    timeZone,
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  }).formatToParts(date)
-  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]))
-  return `${values.year}-${values.month}-${values.day}`
+  return getSharedDateKeyInTimeZone(date, timeZone)
 }
 
 export function formatDeliveryDate(dateKey: string): string {

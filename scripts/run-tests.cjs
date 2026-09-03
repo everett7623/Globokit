@@ -6,6 +6,7 @@ const scripts = [
   'assert-delivery-date.cjs',
   'assert-freight-charge-audit.cjs',
   'assert-time-dependent-data.cjs',
+  'assert-vps-calculator.cjs',
   'assert-payment-terms.cjs',
   'assert-fx-sensitivity.cjs',
   'assert-demurrage-detention.cjs',

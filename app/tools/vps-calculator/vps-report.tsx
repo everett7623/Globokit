@@ -20,6 +20,7 @@ interface VpsReportProps {
   renewalPeriod: string
   priceMode: PriceMode
   modeInput: string
+  rateLabel: string
   markdownText: string
   generatingImg: boolean
   onExportImage: () => void
@@ -32,7 +33,7 @@ export const VpsReport = forwardRef<HTMLDivElement, VpsReportProps>(function Vps
   const usedPercent = (1 - result.remainingRatio) * 100
   const renewal = RENEWAL_PERIODS.find((item) => item.value === Number.parseInt(props.renewalPeriod))
   return <Card ref={ref} className="flex min-h-[620px] flex-col overflow-hidden border-gray-200 bg-white shadow-sm">
-    <CardHeader className="border-b border-gray-100"><div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between"><div><CardTitle className="flex items-center gap-2 text-xl"><ReceiptText className="h-5 w-5 text-violet-600" />剩余价值分析报告</CardTitle><CardDescription>基于 {props.tradeDate} 汇率结算</CardDescription></div><div className="flex gap-2" data-html2canvas-ignore><EnhancedCopyButton text={props.markdownText} variant="outline" size="sm">复制MD</EnhancedCopyButton><Button size="sm" onClick={props.onExportImage} disabled={props.generatingImg}>{props.generatingImg ? <RefreshCw className="mr-2 h-4 w-4 animate-spin" /> : <Download className="mr-2 h-4 w-4" />}下载图片</Button></div></div></CardHeader>
+    <CardHeader className="border-b border-gray-100"><div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between"><div><CardTitle className="flex items-center gap-2 text-xl"><ReceiptText className="h-5 w-5 text-violet-600" />剩余价值分析报告</CardTitle><CardDescription>估值日期 {props.tradeDate} · {props.rateLabel}</CardDescription></div><div className="flex gap-2" data-html2canvas-ignore><EnhancedCopyButton text={props.markdownText} variant="outline" size="sm">复制MD</EnhancedCopyButton><Button size="sm" onClick={props.onExportImage} disabled={props.generatingImg}>{props.generatingImg ? <RefreshCw className="mr-2 h-4 w-4 animate-spin" /> : <Download className="mr-2 h-4 w-4" />}下载图片</Button></div></div></CardHeader>
     <CardContent className="flex flex-1 flex-col gap-6 p-6">
       <div className="grid gap-4 md:grid-cols-3"><MetricCard icon={Gauge} label="剩余价值" value={`¥${formatCurrency(result.remainingValue)}`} caption={`剩余 ${(result.remainingRatio * 100).toFixed(1)}%`} tone="blue" /><MetricCard icon={Wallet} label="期望售价" value={`¥${formatCurrency(result.expectedPrice)}`} caption={props.priceMode === 'discount' ? `${(Number.parseFloat(props.modeInput || '1') * 10).toFixed(1)}折` : '汇率转换后'} tone="violet" /><MetricCard icon={result.premium >= 0 ? TrendingUp : TrendingDown} label={result.premium >= 0 ? '预期溢价' : '预期折价'} value={`${result.premium >= 0 ? '+' : '-'}¥${formatCurrency(Math.abs(result.premium))}`} caption={`${result.premium >= 0 ? '+' : '-'}${Math.abs(result.premiumPercent).toFixed(2)}%`} tone={result.premium >= 0 ? 'emerald' : 'rose'} /></div>
       <div className="rounded-lg border border-gray-200 bg-slate-50/70 p-5">

@@ -7,16 +7,21 @@
   "engines": {
     "node": "20.x"
   },
+  "overrides": {
+    "nanoid": "3.3.18",
+    "postcss": "$postcss"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint app components lib --ext .js,.jsx,.ts,.tsx",
     "test": "node scripts/run-tests.cjs",
     "test:unit-converter": "node scripts/assert-unit-converter.cjs",
     "test:delivery-date": "node scripts/assert-delivery-date.cjs",
     "test:freight-audit": "node scripts/assert-freight-charge-audit.cjs",
     "test:time-data": "node scripts/assert-time-dependent-data.cjs",
+    "test:vps": "node scripts/assert-vps-calculator.cjs",
     "test:demurrage-detention": "node scripts/assert-demurrage-detention.cjs",
     "test:fx-sensitivity": "node scripts/assert-fx-sensitivity.cjs",
     "test:order-break-even": "node scripts/assert-order-break-even.cjs",
@@ -38,23 +43,23 @@
     "@radix-ui/react-tabs": "^1.0.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
-    "lucide-react": "^0.395.0",
-    "next": "14.1.0",
+    "html2canvas": "^1.4.1",
+    "lucide-react": "0.475.0",
+    "next": "15.5.24",
     "pinyin-pro": "^3.18.4",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
     "tailwind-merge": "^2.2.0",
-    "tailwindcss-animate": "^1.0.7",
-    "html2canvas": "^1.4.1"
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.5",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
-    "eslint-config-next": "14.1.0",
-    "postcss": "^8",
+    "eslint-config-next": "15.5.24",
+    "postcss": "8.5.26",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }

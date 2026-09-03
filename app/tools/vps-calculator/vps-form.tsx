@@ -26,6 +26,7 @@ interface VpsFormProps {
   modeInput: string
   today: string
   remainingValue?: number
+  rateLabel: string
   onPurchaseDate: (value: string) => void
   onTradeDate: (value: string) => void
   onRenewalPeriod: (value: string) => void
@@ -52,7 +53,7 @@ export function VpsForm(props: VpsFormProps) {
         {props.priceMode === 'discount' ? <DiscountFields value={props.modeInput} onChange={props.onModeInput} /> : <div className="flex overflow-hidden rounded-md border border-input bg-white focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2"><span className="flex items-center border-r border-gray-100 bg-gray-50 px-3 text-sm font-semibold text-gray-500">¥</span><Input type="number" value={props.modeInput} onChange={(event) => props.onModeInput(event.target.value)} className="border-0 font-mono shadow-none focus-visible:ring-0" placeholder={props.priceMode === 'total' ? (props.remainingValue !== undefined ? Math.round(props.remainingValue).toString() : '期望卖多少钱？') : '输入溢价金额'} /></div>}
       </div>
       <Button variant="outline" className="w-full" onClick={props.onReset}><RotateCcw className="mr-2 h-4 w-4" />重置所有选项</Button>
-      <div className="flex gap-2 rounded-lg bg-slate-50 p-3 text-xs leading-5 text-muted-foreground"><Info className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" /><p>剩余价值 = 剩余天数 ÷ 总天数 × 购买价格。所有外币均按实时汇率折算为人民币进行评估。</p></div>
+      <div className="flex gap-2 rounded-lg bg-slate-50 p-3 text-xs leading-5 text-muted-foreground"><Info className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" /><p>剩余价值 = 剩余天数 ÷ 总天数 × 购买价格。所有外币均按{props.rateLabel}折算为人民币进行评估。</p></div>
     </CardContent>
   </Card>
 }
