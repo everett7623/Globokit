@@ -2,6 +2,7 @@ const { spawnSync } = require('node:child_process')
 const path = require('node:path')
 
 const scripts = [
+  'assert-barcode-renderer.cjs',
   'assert-unit-converter.cjs',
   'assert-delivery-date.cjs',
   'assert-freight-charge-audit.cjs',
