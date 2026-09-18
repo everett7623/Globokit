@@ -29,6 +29,7 @@
     "test:payment-terms": "node scripts/assert-payment-terms.cjs",
     "test:supplier-quotes": "node scripts/assert-supplier-quote-comparison.cjs",
     "test:tiered-quote": "node scripts/assert-tiered-quote.cjs",
+    "test:category-backfill": "node scripts/assert-category-backfill.cjs",
     "typecheck": "tsc --noEmit",
     "validate:data": "node scripts/validate-tool-data.cjs"
   },

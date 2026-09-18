@@ -238,10 +238,12 @@ Globokit/
 │   │   ├── air-freight-calculator/ # 空运/快递计费重计算
 │   │   ├── barcode-generator/   # 国际条码生成器
 │   │   ├── container-load-calculator/ # 装柜/箱规计算
+│   │   ├── csv-to-markdown/    # CSV 与 Markdown 表格互转
 │   │   ├── currency-symbols/   # 全球货币符号
 │   │   ├── customs-cost-calculator/ # 报关费用估算
 │   │   ├── demurrage-detention-calculator/ # 集装箱滞箱滞港费
 │   │   ├── delivery-date-calculator/ # 外贸交期计算
+│   │   ├── email-phrase-library/ # 外贸邮件话术库
 │   │   ├── export-tax-rebate-calculator/ # 出口退税计算
 │   │   ├── express-channel-comparison/ # 快递渠道价格对比
 │   │   ├── freight-charge-audit/ # FOB/CIF 货代收费核对
@@ -264,7 +266,9 @@ Globokit/
 │   │   ├── supplier-quote-comparison/ # 供应商报价对比
 │   │   ├── text-case/          # 英文大小写转换
 │   │   ├── tiered-quote-calculator/ # 外贸阶梯报价计算
+│   │   ├── timestamp-converter/ # Unix 时间戳转换
 │   │   ├── unit-converter/     # 外贸单位换算
+│   │   ├── voltage-plug-guide/ # 目标市场电压与插头速查
 │   │   ├── vps-calculator/     # VPS剩余价值计算器
 │   │   ├── world-time/         # 世界时间
 │   │   └── layout.tsx          # 工具页通用布局
@@ -296,6 +300,7 @@ Globokit/
 │   │   ├── air-freight-calculator.ts
 │   │   ├── barcode-generator.ts
 │   │   ├── container-load-calculator.ts
+│   │   ├── csv-to-markdown.ts
 │   │   ├── currency-symbols.ts
 │   │   ├── data/               # 国家与节假日 JSON 数据资产
 │   │   ├── customs-cost-calculator.ts
@@ -330,6 +335,7 @@ Globokit/
 │   │   ├── supplier-quote-comparison.ts
 │   │   ├── text-case.ts
 │   │   ├── tiered-quote-calculator.ts
+│   │   ├── timestamp-converter.ts
 │   │   ├── unit-converter.ts
 │   │   ├── vps-calculator.ts
 │   │   └── world-time.ts

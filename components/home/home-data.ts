@@ -77,6 +77,8 @@ const ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
   Ruler,
   TrendingUp,
   Boxes,
+  MailCheck,
+  Zap,
 }
 
 export const HOME_TOOLS = TOOL_REGISTRY.map((tool) => {

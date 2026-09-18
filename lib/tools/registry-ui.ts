@@ -143,6 +143,22 @@ export const TOOL_UI_CONFIG: Record<
     color: 'text-indigo-600',
     bgColor: 'bg-indigo-50',
   },
+  'csv-to-markdown': {
+    color: 'text-orange-600',
+    bgColor: 'bg-orange-50',
+  },
+  'timestamp-converter': {
+    color: 'text-sky-600',
+    bgColor: 'bg-sky-50',
+  },
+  'email-phrase-library': {
+    color: 'text-blue-700',
+    bgColor: 'bg-blue-50',
+  },
+  'voltage-plug-guide': {
+    color: 'text-amber-600',
+    bgColor: 'bg-amber-50',
+  },
 }
 
 export const TOOL_BADGE_STYLES: Record<string, string> = {
