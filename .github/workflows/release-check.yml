@@ -1,0 +1,43 @@
+name: Release check
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Tag matches package version
+        run: |
+          tag="${GITHUB_REF_NAME}"
+          version="v$(node -p "require('./package.json').version")"
+          if [ "$tag" != "$version" ]; then
+            echo "tag $tag 与 package.json 版本 $version 不一致"
+            exit 1
+          fi
+          echo "tag $tag 与 package.json 版本一致"
+
+      - name: Release exists
+        run: npm run test:release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

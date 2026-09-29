@@ -72,6 +72,25 @@ async function main() {
     record(item.name + ' 结构化数据', ldJson >= 1, 'ld+json=' + ldJson)
   }
 
+  // 全量工具页烟测：状态码、H1、canonical 与结构化数据
+  const sitemap = await fetch(BASE + '/sitemap.xml').then((r) => (r.ok ? r.text() : '')).catch(() => '')
+  const toolPaths = Array.from(sitemap.matchAll(/<loc>([^<]+)<\/loc>/g))
+    .map((match) => match[1])
+    .filter((url) => url.includes('/tools/'))
+    .map((url) => url.replace(/^https?:\/\/[^/]+/, ''))
+  record('sitemap 覆盖工具页', toolPaths.length >= 40, 'tools=' + toolPaths.length)
+  for (const toolPath of toolPaths) {
+    const toolResponse = await page.goto(BASE + toolPath, { waitUntil: 'domcontentloaded' })
+    const statusOk = Boolean(toolResponse && toolResponse.status() === 200)
+    const toolHeading = statusOk ? (await page.locator('h1').first().innerText().catch(() => '')).trim() : ''
+    const canonical = await page.locator('link[rel="canonical"]').first().getAttribute('href').catch(() => null)
+    const ldJsonCount = await page.evaluate(() => document.querySelectorAll('script[type="application/ld+json"]').length)
+    record(toolPath + ' 状态码', statusOk, 'status=' + (toolResponse ? toolResponse.status() : 'none'))
+    record(toolPath + ' H1', toolHeading.length > 0, toolHeading.slice(0, 40))
+    record(toolPath + ' canonical', Boolean(canonical && canonical.includes(toolPath)), String(canonical))
+    record(toolPath + ' 结构化数据', ldJsonCount >= 1, 'ld+json=' + ldJsonCount)
+  }
+
   // 交互验证：四页关键控件与错误态
   await page.goto(BASE + '/tools/remittance-cost-calculator', { waitUntil: 'domcontentloaded' })
   await page.waitForSelector('#orderAmount')
