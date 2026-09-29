@@ -33,6 +33,9 @@ jobs:
         run: npm run validate:data
 
       - name: Lint
+
+      - name: Tool page interaction tests
+        run: npm run test:ui
         run: npm run lint
 
       - name: Typecheck

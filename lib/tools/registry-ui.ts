@@ -15,6 +15,22 @@ export const TOOL_UI_CONFIG: Record<
     bgColor: string
   }
 > = {
+  'remittance-cost-calculator': {
+    color: 'text-sky-500',
+    bgColor: 'bg-sky-50',
+  },
+  'inquiry-priority-scorer': {
+    color: 'text-rose-500',
+    bgColor: 'bg-rose-50',
+  },
+  'server-cost-comparison': {
+    color: 'text-indigo-500',
+    bgColor: 'bg-indigo-50',
+  },
+  'yaml-json-converter': {
+    color: 'text-teal-500',
+    bgColor: 'bg-teal-50',
+  },
   'rmb-converter': {
     color: 'text-blue-500',
     bgColor: 'bg-blue-50',

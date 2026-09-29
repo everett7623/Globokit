@@ -8,3 +8,9 @@ build
 *.err
 *.tsbuildinfo
 .DS_Store
+
+# 交互测试临时打包产物
+.ui-test-bundles/
+tmp-*
+# 真实浏览器验证产物（截图与报告）
+.web-verify/

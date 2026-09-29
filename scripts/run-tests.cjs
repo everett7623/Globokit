@@ -14,6 +14,11 @@ const scripts = [
   'assert-packaging-plan-comparison.cjs',
   'assert-tiered-quote.cjs',
   'assert-order-break-even.cjs',
+  'assert-catalog-integrity.cjs',
+  'assert-remittance-cost.cjs',
+  'assert-inquiry-priority.cjs',
+  'assert-server-cost-comparison.cjs',
+  'assert-yaml-json-converter.cjs',
   'assert-supplier-quote-comparison.cjs',
 ]
 
