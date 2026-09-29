@@ -43,3 +43,23 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Start production server
+        run: |
+          npm start > /tmp/globokit-start.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            if curl -sf http://127.0.0.1:3000/ > /dev/null; then
+              echo "server ready after ${attempt} attempts"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo 'server did not become ready'
+          cat /tmp/globokit-start.log
+          exit 1
+
+      - name: Real browser verification
+        run: npm run test:web

@@ -6,8 +6,8 @@
 //
 // 前置条件：
 //   1. 站点已启动（npm run build && npm start，默认 http://localhost:3000，可用 WEB_BASE 覆盖）
-//   2. 已安装 playwright 与浏览器内核：npm i --no-save playwright && npx playwright install chromium
-// 未满足前置条件时脚本以退出码 0 跳过，避免影响常规 CI。
+//   2. 已安装 playwright 与浏览器内核：npm i -D playwright && npx playwright install chromium
+// 未满足前置条件时脚本以退出码 1 失败，避免浏览器验证被静默跳过。
 
 const fs = require('node:fs')
 const path = require('node:path')
@@ -27,13 +27,15 @@ async function main() {
   try {
     ({ chromium } = require('playwright'))
   } catch {
-    console.log('跳过真实浏览器验证：未安装 playwright（npm i --no-save playwright && npx playwright install chromium）')
+    console.error('真实浏览器验证失败：未安装 playwright（先执行 npm i -D playwright && npx playwright install chromium）')
+    process.exitCode = 1
     return
   }
 
   const reachable = await fetch(BASE, { method: 'GET' }).then((response) => response.ok).catch(() => false)
   if (!reachable) {
-    console.log('跳过真实浏览器验证：站点未启动（' + BASE + '）')
+    console.error('真实浏览器验证失败：站点未启动（' + BASE + '），请先执行 npm run build && npm start')
+    process.exitCode = 1
     return
   }
 
