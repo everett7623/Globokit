@@ -420,6 +420,7 @@ npm test              # 定向断言（含工具目录一致性校验）
 npm run typecheck     # TypeScript 全量类型检查
 npm run lint          # ESLint
 npm run test:ui       # 工具页交互测试（需先安装 esbuild 与 jsdom）
+npm run test:web      # 真实浏览器验证（需站点已启动 + playwright + chromium）
 npm run validate:data # 国家与节假日数据资产校验
 ```
 
