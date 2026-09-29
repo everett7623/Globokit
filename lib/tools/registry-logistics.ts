@@ -82,7 +82,7 @@ export const LOGISTICS_TOOLS: ToolMeta[] = [
     shortTitle: '托盘装载',
     description: '按纸箱、托盘规格、高度和载重限制估算每层箱数、单托装载量与所需托盘数',
     category: '物流与装柜',
-    iconName: 'Pallet',
+    iconName: 'Layers3',
     href: '/tools/pallet-load-calculator',
     updatedAt: '2026-07-24',
     badge: '新增',

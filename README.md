@@ -97,6 +97,11 @@
   
   - 汇集全球主要贸易国家的货币代码 (ISO 4217)、符号及其中英文名称对照。
 
+- **国际收款渠道费用对比**
+
+  - 按订单金额与汇率折算，比较电汇、信用证、托收与第三方渠道的手续费、电报费、汇损与资金占用。
+  - 输出实际到手金额、成本率、回款周期与渠道排名，并区分卖方承担还是买方承担渠道费用。
+
 ### 🚢 物流与出货工具
 
 - **外贸单位换算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
@@ -155,6 +160,11 @@
 - **国际贸易术语速查**
 
   - 快速查询 Incoterms 2020 条款，明确风险转移点、费用责任和交付边界。
+
+- **外贸询盘优先级评估**
+
+  - 按信息完整度、客户可信度与商务价值三个维度给询盘打分，输出优先级、建议回应时限与跟进节奏。
+  - 列出待补齐信息清单，并生成可直接粘贴的中英文追问话术。
 
 ### 📝 文本与效率工具
 
@@ -239,6 +249,10 @@ Globokit/
 │   │   ├── barcode-generator/   # 国际条码生成器
 │   │   ├── container-load-calculator/ # 装柜/箱规计算
 │   │   ├── csv-to-markdown/    # CSV 与 Markdown 表格互转
+│   │   ├── yaml-json-converter/ # YAML 与 JSON 互转
+│   │   ├── remittance-cost-calculator/ # 国际收款渠道费用对比
+│   │   ├── inquiry-priority-scorer/ # 外贸询盘优先级评估
+│   │   ├── server-cost-comparison/ # 服务器成本对比
 │   │   ├── currency-symbols/   # 全球货币符号
 │   │   ├── customs-cost-calculator/ # 报关费用估算
 │   │   ├── demurrage-detention-calculator/ # 集装箱滞箱滞港费
@@ -300,6 +314,10 @@ Globokit/
 │   │   ├── air-freight-calculator.ts
 │   │   ├── barcode-generator.ts
 │   │   ├── container-load-calculator.ts
+│   │   ├── yaml-json-converter.ts
+│   │   ├── remittance-cost-calculator.ts
+│   │   ├── inquiry-priority-scorer.ts
+│   │   ├── server-cost-comparison.ts
 │   │   ├── csv-to-markdown.ts
 │   │   ├── currency-symbols.ts
 │   │   ├── data/               # 国家与节假日 JSON 数据资产
@@ -388,10 +406,58 @@ pnpm dev
 4. **访问**
    打开浏览器访问 http://localhost:3000 即可看到效果。
 
+5. **生产环境运行**
+
+```bash
+npm run build   # 生成静态页面与构建产物
+npm start       # 以生产模式启动，默认监听 3000 端口
+```
+
+6. **质量校验（提交前建议全部跑一遍）**
+
+```bash
+npm test              # 18 组定向断言（含工具目录一致性校验）
+npm run typecheck     # TypeScript 全量类型检查
+npm run lint          # ESLint
+npm run validate:data # 国家与节假日数据资产校验
+```
+
 ---
 
-## 📄 开源协议
+## 🚢 部署
 
-本项目采用 **GPL-3.0 协议** 开源。你可以在遵守 GNU General Public License v3 条款的前提下使用、复制、修改和分发本项目。
+本项目是纯前端静态应用，没有数据库、环境变量或服务端依赖，任何能跑 Next.js 的平台都可以承载。
 
-Built with ❤️ by **[everettlabs](https://github.com/everett7623)**.
+**Vercel（最省事）**：点击上方的 Deploy 按钮导入仓库即可，构建命令用默认的 `npm run build`，无需配置环境变量。
+
+**自有服务器**：构建后以生产模式常驻，用进程管理器或系统服务托管：
+
+```bash
+git clone https://github.com/everett7623/Globokit.git && cd Globokit
+npm ci && npm run build
+npm start   # 默认 3000 端口，可用 PORT 环境变量覆盖
+```
+
+**Linux systemd 示例**（把路径换成实际部署目录）：
+
+```ini
+[Unit]
+Description=Globokit
+After=network.target
+
+[Service]
+WorkingDirectory=/opt/globokit
+ExecStart=/usr/bin/npm start
+Environment=PORT=3000
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+**Nginx 反向代理要点**：把 `/` 转发到 `127.0.0.1:3000`，并透传 `Host`、`X-Forwarded-For`、`X-Forwarded-Proto`；站点已自带 CSP、`X-Frame-Options`、`Referrer-Policy` 等安全响应头，反向代理层无需重复设置。
+
+**发布流程**：版本号、`CHANGELOG.md`、README 与 Git tag 需同步更新；`main` 分支的 CI（`npm ci` → `npm test` → `npm run validate:data` → `npm run lint` → `npm run typecheck` → `npm run build`）必须全绿后再打 tag。
+
+---
+
