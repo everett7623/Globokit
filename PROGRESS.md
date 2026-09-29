@@ -1,5 +1,40 @@
 # 开发进度记录
 
+## 2026-09-18（第三轮：项目收尾）
+
+### 已完成
+
+- 新增长期校验 `npm run test:catalog`（`scripts/assert-catalog-integrity.cjs`），补齐项目此前完全没有的一致性盲区：
+  - 注册表条目与 `app/tools` 目录一一对应（无多余目录、无缺失目录、slug 不重复）；
+  - 每个工具目录同时具备 `layout.tsx` 与 `page.tsx`，且 layout 的 slug 正确传入 `createToolMetadata` / `createToolLayout`；
+  - `id === slug`、`href === '/tools/' + slug`；
+  - 首页 `ICON_MAP` 覆盖全部 `iconName`、`TOOL_UI_CONFIG` 覆盖全部工具 id；
+  - `relatedTools` 引用均指向存在的 id 且无自引用；
+  - sitemap 由注册表派生、首页目录组件无硬编码路由、工具总量不低于 40。
+  该脚本已接入 `npm test` 与 CI 的 `npm run test:catalog`。
+- 修复两处既有缺陷：
+  - 托盘装载工具的首页图标缺失：注册表 `iconName: 'Pallet'` 在 lucide-react 中并不存在，首页自始至终静默回退为兜底图标；已改为 `Layers3` 并纳入一致性校验。
+  - 国际贸易术语速查页的文件头注释被一行 import 截断，已恢复标准头格式。
+- 文档与版本收口：
+  - `CHANGELOG.md` 重新分段：v0.3.0（本轮四个新工具与修复）与 v0.2.0（此前未发布的工具与优化）各自归档，`[Unreleased]` 清空；
+  - `README.md` 新增「部署」章节，覆盖 Vercel、自有服务器、systemd 示例、Nginx 反向代理要点与发布流程；
+  - `package.json` 版本推进至 0.3.0。
+- 客户端交互实测尝试与结论：
+  - 尝试 `--dump-dom`、`playwright-core`（channel: chrome）与原生 CDP（`--remote-debugging-port`）三种路径，Chrome 进程虽能启动，但渲染进程无法建立连接，输出恒为空；已在放宽文件沙箱（danger-full-access）后重试，仍失败，判定为本机执行环境的进程间通信限制，与项目代码无关；
+  - 改用源码级接线审计替代（见 `test:catalog`），覆盖注册表、路由、SEO 接线与图标配色映射，但不覆盖真实点击行为。
+- 提交：`a327e5a`，29 个文件、4214 行新增、311 行删除。
+
+### 验证结果
+
+- `npm run typecheck`、`npm run lint` 通过；`npm test` 18 组断言全绿；`npm run build` 通过。
+- `npm run test:catalog` 15 条校验通过（40 个工具）。
+- 生产站 HTTP 烟测：四个新工具路由均返回 200，标题、canonical 与结构化数据正确，首页与 sitemap 已收录。
+
+### 未完成
+
+- `git push`：沙箱内 git 的 HTTP 传输通道不可用（已配置系统代理 `127.0.0.1:9674` 并验证 CONNECT 隧道可建立、`info/refs` 可由 PowerShell 正常拉取，但 git 客户端在隧道建立后停止推进），需在一台网络可用的终端执行 `git push origin main`。
+- 真实浏览器点击验证：受上述环境限制未能执行，需人工在浏览器中确认交互。
+
 ## 2026-09-18（第二轮：薄弱分类补齐）
 
 ### 已完成
@@ -18,33 +53,3 @@
 - 新增服务器成本对比（VPS/站长工具）：
   - 计算逻辑 `lib/tools/server-cost-comparison.ts`，支持 2–5 台服务器的套餐价、续费价、首期优惠、开通费与每月附加费。
   - 输出首期月均、续费月均、首期优惠差额、持有期总成本、三年总成本，以及每 GB 内存、每 vCPU 与单位算力月成本。
-  - 识别续费价高于套餐价的活动机情形，并对非整周期持有给出尾部折算提示。
-  - 校验覆盖持有期整周期与尾部折算、汇率不改变排名、方案数量上下限与多项非法输入。
-- 三个工具均接入注册表、首页配色、首页图标（Wallet / Gauge / Server）、相关工具与 sitemap 自动派生链路，并新增对应 `npm run test:*` 脚本与 `npm test` 聚合入口。
-- 更新 `README.md` 功能说明、目录树与算法目录，以及 `CHANGELOG.md` 未发布条目。
-
-### 验证结果
-
-- `npm run typecheck` 通过；`npm run lint` 通过且无警告。
-- `npm test` 通过，共 17 组专项测试（新增收款渠道 53 条、询盘评估 86 条、服务器成本 41 条断言）。
-- `npm run build` 通过，生产构建包含三个新路由。
-- 分类分布由 11/10/3/3/2/2/2/4 调整为 11/10/3/3/3/3/3/4，八个分类全部不少于 3 个工具。
-
-## 2026-09-18
-
-### 已完成
-
-- 继续按分类均衡补齐工具：文件与格式转换分类此前仅有 2 个工具（csv-to-markdown、barcode-generator 计入后为 3），本轮新增 YAML 与 JSON 互转工具。
-- 新增 YAML 与 JSON 互转工具的纯计算层 `lib/tools/yaml-json-converter.ts`：
-  - YAML 解析采用单遍扫描 + 缩进栈，支持块映射、块序列、内联 `- key: value` 映射、引号字符串（含转义与双写单引号）、行尾注释、文档标记行与行内 `[]` / `{}` 集合。
-  - 块标量 `|` / `|-` / `|+` / `>` 及其修饰符按缩进边界折叠，保留块内相对缩进与空行。
-  - 锚点 `&` 取内联值，别名 `*` 以 `$ref` 显式标注，不静默丢数据。
-  - JSON 解析复用原生 `JSON.parse`，错误信息还原为中文并给出行列位置。
-  - 输出侧支持 2/4 空格缩进、紧凑 JSON、键排序、单引号/双引号/自动引号策略，并对含换行的字符串改用转义双引号或块标量。
-  - 每次转换都执行往返一致性校验（YAML→JSON→YAML 与 JSON→YAML→JSON），结果以 `roundTripOk` 返回。
-- 新增工具页面 `app/tools/yaml-json-converter/`，包含 SEO 布局、表单状态与样例数据模块，提供四组常用场景（K8s 配置、接口返回、强引号输出、紧凑 JSON）、结构统计卡片与结果/摘要复制。
-- 接入工具注册表、首页配色与首页图标映射（`FileJson`），导航、首页目录、相关工具与 sitemap 由注册表自动派生。
-- 新增 `npm run test:yaml-json` 与 `scripts/assert-yaml-json-converter.cjs`，覆盖标量类型识别、嵌套结构、顶层序列、引号与注释、流式集合、块标量、空容器、文档标记、错误处理（制表符缩进、重复键、非法 JSON、空输入）与双向往返一致性，共 75 条断言，并加入 `npm test` 聚合入口。
-- 更新 `README.md` 目录结构与 `CHANGELOG.md` 未发布条目。
-
-### 验证结果
