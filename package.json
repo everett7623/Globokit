@@ -33,6 +33,7 @@
     "test:inquiry-priority": "node scripts/assert-inquiry-priority.cjs",
     "test:ui": "node scripts/build-ui-bundles.cjs && node scripts/assert-ui-remittance.cjs && node scripts/assert-ui-inquiry.cjs && node scripts/assert-ui-server-cost.cjs && node scripts/assert-ui-yaml-json.cjs",
     "test:version": "node scripts/assert-version-consistency.cjs",
+    "test:release": "node scripts/assert-release-consistency.cjs",
     "test:web": "node scripts/verify-web.cjs",
     "test:catalog": "node scripts/assert-catalog-integrity.cjs",
     "test:server-cost": "node scripts/assert-server-cost-comparison.cjs",
@@ -70,6 +71,7 @@
     "eslint": "^8",
     "eslint-config-next": "15.5.24",
     "jsdom": "^30.1.1",
+    "playwright": "^1.63.0",
     "postcss": "8.5.26",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"

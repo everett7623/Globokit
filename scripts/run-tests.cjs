@@ -16,6 +16,7 @@ const scripts = [
   'assert-tiered-quote.cjs',
   'assert-order-break-even.cjs',
   'assert-catalog-integrity.cjs',
+  'assert-category-backfill.cjs',
   'assert-remittance-cost.cjs',
   'assert-inquiry-priority.cjs',
   'assert-server-cost-comparison.cjs',

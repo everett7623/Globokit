@@ -34,9 +34,12 @@ export default function TimestampConverterPage() {
   const [timestamp, setTimestamp] = useState('')
   const [unit, setUnit] = useState<TimestampUnit>('auto')
   const [dateTime, setDateTime] = useState('')
-  const [now, setNow] = useState(() => nowTimestamps())
+  // 当前时间戳只在客户端挂载后填充：服务端没有稳定的当前时间，
+  // 初始化阶段求值会让首屏文本与客户端不一致（React #418 hydration mismatch）
+  const [now, setNow] = useState<ReturnType<typeof nowTimestamps> | null>(null)
 
   useEffect(() => {
+    setNow(nowTimestamps())
     const timer = window.setInterval(() => setNow(nowTimestamps()), 1000)
     return () => window.clearInterval(timer)
   }, [])
@@ -55,10 +58,12 @@ export default function TimestampConverterPage() {
         <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
           <Clock className="h-4 w-4" />
           当前时间（每秒刷新）
-          <EnhancedCopyButton text={String(now.seconds)} iconOnly title="复制当前秒级时间戳">复制秒</EnhancedCopyButton>
-          <EnhancedCopyButton text={String(now.milliseconds)} iconOnly title="复制当前毫秒时间戳">复制毫秒</EnhancedCopyButton>
+          <EnhancedCopyButton text={now ? String(now.seconds) : ''} disabled={!now} iconOnly title="复制当前秒级时间戳">复制秒</EnhancedCopyButton>
+          <EnhancedCopyButton text={now ? String(now.milliseconds) : ''} disabled={!now} iconOnly title="复制当前毫秒时间戳">复制毫秒</EnhancedCopyButton>
         </div>
-        <p className="mt-2 font-mono text-lg font-semibold tabular-nums">{now.seconds} s ／ {now.milliseconds} ms</p>
+        <p className="mt-2 font-mono text-lg font-semibold tabular-nums">
+          {now ? `${now.seconds} s ／ ${now.milliseconds} ms` : '—'}
+        </p>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
@@ -105,7 +110,7 @@ export default function TimestampConverterPage() {
             </div>
             <MobileButtonGroup>
               <EnhancedCopyButton text={breakdown ? breakdown.display : ''} disabled={!breakdown}>复制日期</EnhancedCopyButton>
-              <Button type="button" variant="outline" onClick={() => setTimestamp(String(now.seconds))}>填入当前秒级</Button>
+              <Button type="button" variant="outline" disabled={!now} onClick={() => now && setTimestamp(String(now.seconds))}>填入当前秒级</Button>
             </MobileButtonGroup>
           </CardContent>
         </Card>

@@ -6,8 +6,8 @@
 //
 // 前置条件：
 //   1. 站点已启动（npm run build && npm start，默认 http://localhost:3000，可用 WEB_BASE 覆盖）
-//   2. 已安装 playwright 与浏览器内核：npm i --no-save playwright && npx playwright install chromium
-// 未满足前置条件时脚本以退出码 0 跳过，避免影响常规 CI。
+//   2. 已安装 playwright 与浏览器内核：npm i -D playwright && npx playwright install chromium
+// 未满足前置条件时脚本以退出码 1 失败，避免浏览器验证被静默跳过。
 
 const fs = require('node:fs')
 const path = require('node:path')
@@ -27,13 +27,15 @@ async function main() {
   try {
     ({ chromium } = require('playwright'))
   } catch {
-    console.log('跳过真实浏览器验证：未安装 playwright（npm i --no-save playwright && npx playwright install chromium）')
+    console.error('真实浏览器验证失败：未安装 playwright（先执行 npm i -D playwright && npx playwright install chromium）')
+    process.exitCode = 1
     return
   }
 
   const reachable = await fetch(BASE, { method: 'GET' }).then((response) => response.ok).catch(() => false)
   if (!reachable) {
-    console.log('跳过真实浏览器验证：站点未启动（' + BASE + '）')
+    console.error('真实浏览器验证失败：站点未启动（' + BASE + '），请先执行 npm run build && npm start')
+    process.exitCode = 1
     return
   }
 
@@ -68,6 +70,25 @@ async function main() {
       () => document.querySelectorAll('script[type="application/ld+json"]').length
     )
     record(item.name + ' 结构化数据', ldJson >= 1, 'ld+json=' + ldJson)
+  }
+
+  // 全量工具页烟测：状态码、H1、canonical 与结构化数据
+  const sitemap = await fetch(BASE + '/sitemap.xml').then((r) => (r.ok ? r.text() : '')).catch(() => '')
+  const toolPaths = Array.from(sitemap.matchAll(/<loc>([^<]+)<\/loc>/g))
+    .map((match) => match[1])
+    .filter((url) => url.includes('/tools/'))
+    .map((url) => url.replace(/^https?:\/\/[^/]+/, ''))
+  record('sitemap 覆盖工具页', toolPaths.length >= 40, 'tools=' + toolPaths.length)
+  for (const toolPath of toolPaths) {
+    const toolResponse = await page.goto(BASE + toolPath, { waitUntil: 'domcontentloaded' })
+    const statusOk = Boolean(toolResponse && toolResponse.status() === 200)
+    const toolHeading = statusOk ? (await page.locator('h1').first().innerText().catch(() => '')).trim() : ''
+    const canonical = await page.locator('link[rel="canonical"]').first().getAttribute('href').catch(() => null)
+    const ldJsonCount = await page.evaluate(() => document.querySelectorAll('script[type="application/ld+json"]').length)
+    record(toolPath + ' 状态码', statusOk, 'status=' + (toolResponse ? toolResponse.status() : 'none'))
+    record(toolPath + ' H1', toolHeading.length > 0, toolHeading.slice(0, 40))
+    record(toolPath + ' canonical', Boolean(canonical && canonical.includes(toolPath)), String(canonical))
+    record(toolPath + ' 结构化数据', ldJsonCount >= 1, 'ld+json=' + ldJsonCount)
   }
 
   // 交互验证：四页关键控件与错误态
