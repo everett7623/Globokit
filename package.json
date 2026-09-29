@@ -32,6 +32,7 @@
     "test:remittance-cost": "node scripts/assert-remittance-cost.cjs",
     "test:inquiry-priority": "node scripts/assert-inquiry-priority.cjs",
     "test:ui": "node scripts/build-ui-bundles.cjs && node scripts/assert-ui-remittance.cjs && node scripts/assert-ui-inquiry.cjs && node scripts/assert-ui-server-cost.cjs && node scripts/assert-ui-yaml-json.cjs",
+    "test:version": "node scripts/assert-version-consistency.cjs",
     "test:web": "node scripts/verify-web.cjs",
     "test:catalog": "node scripts/assert-catalog-integrity.cjs",
     "test:server-cost": "node scripts/assert-server-cost-comparison.cjs",

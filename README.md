@@ -5,8 +5,8 @@
     <a href="LICENSE">
       <img src="https://img.shields.io/badge/license-GPL--3.0--only-blue.svg" alt="License">
     </a>
-    <a href="https://github.com/everett7623/Globokit/releases/tag/v0.2.0">
-      <img src="https://img.shields.io/badge/version-v0.2.0-brightgreen.svg" alt="Version v0.2.0">
+    <a href="https://github.com/everett7623/Globokit/releases/tag/v0.3.0">
+      <img src="https://img.shields.io/badge/version-v0.3.0-brightgreen.svg" alt="Version v0.3.0">
     </a>
     <a href="https://nextjs.org">
       <img src="https://img.shields.io/badge/Built%20with-Next.js%2014-black" alt="Next.js">
@@ -209,7 +209,7 @@
 
 ## 🏷️ 版本与发布
 
-- 当前版本：[`v0.2.0`](https://github.com/everett7623/Globokit/releases/tag/v0.2.0)
+- 当前版本：[`v0.3.0`](https://github.com/everett7623/Globokit/releases/tag/v0.3.0)
 - 完整更新记录：[CHANGELOG.md](CHANGELOG.md)
 - 所有历史版本：[GitHub Releases](https://github.com/everett7623/Globokit/releases)
 
@@ -461,7 +461,7 @@ WantedBy=multi-user.target
 
 **Nginx 反向代理要点**：把 `/` 转发到 `127.0.0.1:3000`，并透传 `Host`、`X-Forwarded-For`、`X-Forwarded-Proto`；站点已自带 CSP、`X-Frame-Options`、`Referrer-Policy` 等安全响应头，反向代理层无需重复设置。
 
-**发布流程**：版本号、`CHANGELOG.md`、README 与 Git tag 需同步更新；`main` 分支的 CI（`npm ci` → `npm test` → `npm run validate:data` → `npm run lint` → `npm run typecheck` → `npm run build`）必须全绿后再打 tag。
+**发布流程**：遵循 [`VERSIONING.md`](VERSIONING.md)，以 `package.json` 为唯一版本来源；`npm run test:version` 会强制校验 README、锁文件、CHANGELOG 与 Release 链接一致。`main` 分支 CI 必须全绿后再创建同版本 tag 和 GitHub Release。
 
 ---
 

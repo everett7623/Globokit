@@ -45,11 +45,11 @@ npm run validate:data    # 数据验证
 4. 注册表自动驱动导航、首页、sitemap
 
 ### 6. 版本发布流程
-1. 更新 `package.json` 版本号
-2. 记录 `CHANGELOG.md`
-3. 更新 `README.md`
-4. 运行 `npm run validate:data` 和 `npm run build`
-5. 创建 Git tag 和 GitHub Release
+1. 遵循 [`VERSIONING.md`](VERSIONING.md)：`package.json` 是唯一版本来源
+2. 用 `npm install --package-lock-only` 同步 `package-lock.json`
+3. 同步 `CHANGELOG.md`、`README.md`、Git tag 和 GitHub Release
+4. 运行 `npm run test:version`（已接入 `npm test` 和 CI）
+5. 再运行 `npm run validate:data`、`npm run build`，全部通过后发布
 
 ## 🔄 配置同步
 

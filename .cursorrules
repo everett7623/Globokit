@@ -10,6 +10,8 @@
 
 ## Development Commands
 
+Versioning is governed by `VERSIONING.md`: `package.json` is the single source of truth. Run `npm run test:version` before every release or version-related change; never maintain a second current-version value.
+
 ```bash
 npm run dev              # Start dev server (http://localhost:3000)
 npm run build            # Build for production

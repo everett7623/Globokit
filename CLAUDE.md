@@ -171,6 +171,8 @@ export interface PartnerResource {
 
 ## 版本发布流程
 
+版本号唯一来源是 `package.json` 的 `version`；必须遵循 [`VERSIONING.md`](VERSIONING.md)，并在提交前运行 `npm run test:version`。不得单独修改 README、CHANGELOG 或 Release 中的版本号。
+
 每次发布必须同步完成：
 1. 更新 `package.json` 和 `package-lock.json` 版本号（遵循 SemVer）
 2. 在 `CHANGELOG.md` 记录新增、优化、修复
