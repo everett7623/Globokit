@@ -1,5 +1,33 @@
 # 开发进度记录
 
+
+## 2026-09-18（第三轮：收尾与交互验证）
+
+### 已完成
+
+- 新增工具目录一致性校验 `npm run test:catalog`（`scripts/assert-catalog-integrity.cjs`），15 条校验补齐项目此前完全缺失的盲区：
+  - 注册表条目与 `app/tools` 目录一一对应（无多余目录、无缺失目录、slug 不重复）；
+  - 每个工具目录同时具备 `layout.tsx` 与 `page.tsx`，且 layout 的 slug 正确传入 `createToolMetadata` / `createToolLayout`；
+  - `id === slug`、`href === '/tools/' + slug`；首页 `ICON_MAP` 覆盖全部 `iconName`、`TOOL_UI_CONFIG` 覆盖全部工具 id；
+  - `relatedTools` 引用有效且无自引用；sitemap 由注册表派生、首页目录组件无硬编码路由。
+- 新增工具页交互测试 `npm run test:ui`，绕开本机无法启动无头浏览器的限制：
+  - 用 esbuild 把四个工具页打成 CommonJS bundle，在 jsdom 中渲染真实组件并派发 input/change/click 事件；
+  - 覆盖收款渠道页 14 条（金额联动、费用承担方切换、渠道开关、复制入口）、询盘评估页 12 条（维度开关改分、响应时限、追问按钮）、服务器成本页 11 条（方案增删、套餐价与持有月数联动、汇率联动、配置开关）、YAML 互转页 19 条（默认示例、输入跟随、非法输入报错与行号、方向切换）；
+  - 入口脚本 `scripts/build-ui-bundles.cjs` 与环境模块 `scripts/ui-test-env.cjs`，产物目录 `.ui-test-bundles/` 已加入 `.gitignore`。
+- 修复两处既有缺陷：托盘装载工具首页图标（`Pallet` 在 lucide-react 中不存在，改为 `Layers3`）、国际贸易术语速查页文件头注释被 import 截断。
+- 文档与版本收口：`CHANGELOG.md` 重新分段为 v0.3.0 与 v0.2.0，`README.md` 补充部署章节与质量校验命令，`package.json` 推进至 0.3.0，本地创建 `v0.2.0`、`v0.3.0` 标签。
+- 提交：`a327e5a`（v0.3.0 功能与修复，29 文件 +4214/−311）、`951dcca`（进度记录）。
+
+### 验证结果
+
+- `npm run typecheck`、`npm run lint` 通过；`npm test` 18 组断言通过；`npm run test:catalog` 15 条通过；`npm run test:ui` 56 条交互断言通过；`npm run build` 通过。
+- 生产站全站烟测：40 条工具路由全部返回 200，首页与 sitemap（42 条 URL）正常。
+
+### 未完成
+
+- `git push`：本机 git 在受限会话中无法完成 HTTP 传输（已确认系统代理可建立到 github.com:443 的 CONNECT 隧道，PowerShell 直连 `info/refs` 返回 200，但 git 客户端在隧道后停止推进）；另外 GitHub 未存有可用凭证（credential helper 为 manager 但凭据库为空，无 token 环境变量），原始 pack 推送被服务端以 401 拒绝。需在一台已授权的终端执行 `git push origin main --tags`。
+- 真实浏览器验证：本机 Chrome 无法建立渲染进程连接（`--dump-dom`、playwright-core、原生 CDP 三条路径均失败，放宽文件沙箱后依旧），已用 jsdom 交互测试替代覆盖四页交互，但未覆盖真实浏览器的布局与样式表现。
+
 ## 2026-09-18（第三轮：项目收尾）
 
 ### 已完成

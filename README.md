@@ -416,13 +416,16 @@ npm start       # 以生产模式启动，默认监听 3000 端口
 6. **质量校验（提交前建议全部跑一遍）**
 
 ```bash
-npm test              # 18 组定向断言（含工具目录一致性校验）
+npm test              # 定向断言（含工具目录一致性校验）
 npm run typecheck     # TypeScript 全量类型检查
 npm run lint          # ESLint
+npm run test:ui       # 工具页交互测试（需先安装 esbuild 与 jsdom）
 npm run validate:data # 国家与节假日数据资产校验
 ```
 
 ---
+
+**关于交互测试**：`npm run test:ui` 会用 esbuild 把四个工具页打成 CommonJS bundle，在 jsdom 环境中渲染组件并派发真实 DOM 事件，覆盖输入联动、维度开关、方案增删、错误提示与复制入口。它需要 `esbuild` 与 `jsdom` 两个开发依赖，未安装时该命令会跳过。
 
 ## 🚢 部署
 
