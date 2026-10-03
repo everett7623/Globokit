@@ -192,4 +192,5 @@ export const FINANCE_TOOLS: ToolMeta[] = [
     useCases: ['进口报价前成本核算', '关税增值税预算', '销售单价毛利评估'],
     relatedTools: ['quote-calculator', 'currency-symbols', 'customs-cost-calculator', 'ocean-freight-calculator', 'air-freight-calculator', 'incoterms'],
   },
+  { id: 'invoice-generator', slug: 'invoice-generator', title: '商业发票/形式发票生成器', shortTitle: '发票生成器', description: '填写买卖双方与货物明细，生成可打印的商业发票或形式发票', category: '财务报价', iconName: 'FileText', href: '/tools/invoice-generator', updatedAt: '2026-09-30', badge: '新增', keywords: ['invoice', '发票', '商业发票'], seoTitle: '商业发票与形式发票生成器 | Globokit', seoDescription: '在线生成商业发票和形式发票', useCases: ['报价单随附发票', '出货单证准备'], relatedTools: ['quote-calculator', 'incoterms'] },
 ]

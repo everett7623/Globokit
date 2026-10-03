@@ -15,6 +15,22 @@ export const TOOL_UI_CONFIG: Record<
     bgColor: string
   }
 > = {
+  'invoice-generator': {
+    color: 'text-violet-500',
+    bgColor: 'bg-violet-50',
+  },
+  'shipping-mark-generator': {
+    color: 'text-lime-700',
+    bgColor: 'bg-lime-50',
+  },
+  'lc-discrepancy-checklist': {
+    color: 'text-red-600',
+    bgColor: 'bg-red-50',
+  },
+  'cargo-insurance-calculator': {
+    color: 'text-sky-700',
+    bgColor: 'bg-sky-50',
+  },
   'remittance-cost-calculator': {
     color: 'text-sky-500',
     bgColor: 'bg-sky-50',

@@ -306,4 +306,5 @@ export const GENERAL_TOOLS: ToolMeta[] = [
     useCases: ['活动机与月付机取舍', '续费涨价前的成本复核', '多机房预算横向比较'],
     relatedTools: ['vps-calculator', 'world-time', 'express-channel-comparison'],
   },
+  { id: 'lc-discrepancy-checklist', slug: 'lc-discrepancy-checklist', title: '信用证不符点检查清单', shortTitle: '信用证审单', description: '按信用证常见单证要素检查潜在不符点', category: '外贸沟通', iconName: 'ClipboardCheck', href: '/tools/lc-discrepancy-checklist', updatedAt: '2026-09-30', badge: '新增', keywords: ['LC', '信用证', '不符点', '审单'], seoTitle: '信用证不符点检查清单 | Globokit', seoDescription: '在线检查信用证交单风险', useCases: ['交单前自查', '信用证审单培训'], relatedTools: ['incoterms', 'email-phrase-library'] },
 ]
