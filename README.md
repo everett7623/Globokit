@@ -5,8 +5,8 @@
     <a href="LICENSE">
       <img src="https://img.shields.io/badge/license-GPL--3.0--only-blue.svg" alt="License">
     </a>
-    <a href="https://github.com/everett7623/Globokit/releases/tag/v0.3.0">
-      <img src="https://img.shields.io/badge/version-v0.3.0-brightgreen.svg" alt="Version v0.3.0">
+    <a href="https://github.com/everett7623/Globokit/releases/tag/v0.4.0">
+      <img src="https://img.shields.io/badge/version-v0.4.0-brightgreen.svg" alt="Version v0.4.0">
     </a>
     <a href="https://nextjs.org">
       <img src="https://img.shields.io/badge/Built%20with-Next.js%2014-black" alt="Next.js">
@@ -102,6 +102,12 @@
   - 按订单金额与汇率折算，比较电汇、信用证、托收与第三方渠道的手续费、电报费、汇损与资金占用。
   - 输出实际到手金额、成本率、回款周期与渠道排名，并区分卖方承担还是买方承担渠道费用。
 
+- **商业发票/形式发票生成器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 填写买卖双方、付款条款、贸易术语与最多 20 行明细，实时生成 A4 版式的商业发票（CI）或形式发票（PI）。
+  - 金额按分位整数运算避免浮点误差，自动生成英文金额大写（SAY US DOLLARS ... ONLY）。
+  - 支持一键复制纯文本粘贴到邮件，或直接打印/导出 PDF，内置 CI 与 PI 的使用要点和常用条款速查。
+
 ### 🚢 物流与出货工具
 
 - **外贸单位换算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
@@ -157,6 +163,16 @@
 
   - 按纸箱尺寸、毛重、数量和柜型估算整柜装载数量、柜数与利用率。
   - 支持 20GP、40GP、40HQ、45HQ 等常见柜型参数。
+- **出口货物保险费计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 按 FOB/CFR/CIF 口径自动换算 CIF 价值与 110% 投保金额，公式为 CIF = (FOB + 运费) / (1 − 投保加成 × 总费率)。
+  - 拆分基础险与战争险附加保费，输出口径说明、保费占 CIF 比例与风险提示。
+  - 附 ICC (A)/(B)/(C) 条款承保范围速查与投保注意事项。
+- **信用证交单自查清单** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 按信用证条款、商业发票、提单、保险、附加单证与跨单一致性六组核对 27 项审单要点。
+  - 按致命 10 分/重要 5 分/次要 2 分加权计分，输出完成度、自查得分、风险等级与下一步建议。
+  - 为未通过的致命项自动生成带信用证号的英文改证片段，可直接粘贴进邮件。
 - **国际贸易术语速查**
 
   - 快速查询 Incoterms 2020 条款，明确风险转移点、费用责任和交付边界。
@@ -172,6 +188,12 @@
 
   - 依据 GS1 General Specifications 26.0 与 ISO/IEC 16022:2024，校验 GS1 应用标识符、日期与校验位，生成 GS1 DataMatrix 和 GS1-128。
   - 支持 QR Code、Data Matrix、Code 128/39、EAN-13/EAN-8、UPC-A、ITF-14、ISBN-13，并可下载 PNG/SVG。
+
+- **外贸唛头生成器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 按收货人代号、订单号、目的港与箱号风格（区间 1-50 / 逐箱 1 OF 50 / 不输出）生成外箱印刷唛头。
+  - 支持毛重 G.W.、外箱尺寸、MADE IN CHINA 开关与自定义附加行，右侧实时模拟纸箱印刷面预览。
+  - 生成逐箱标签预览并可复制全文到标签软件，内置标准外箱、亚马逊 FBA、带毛重尺寸三种预设。
 
 - **专业级英文大小写转换**
   
@@ -209,7 +231,7 @@
 
 ## 🏷️ 版本与发布
 
-- 当前版本：[`v0.3.0`](https://github.com/everett7623/Globokit/releases/tag/v0.3.0)
+- 当前版本：[`v0.4.0`](https://github.com/everett7623/Globokit/releases/tag/v0.4.0)
 - 完整更新记录：[CHANGELOG.md](CHANGELOG.md)
 - 所有历史版本：[GitHub Releases](https://github.com/everett7623/Globokit/releases)
 
@@ -247,11 +269,15 @@ Globokit/
 │   ├── tools/                  # 工具页面路由
 │   │   ├── air-freight-calculator/ # 空运/快递计费重计算
 │   │   ├── barcode-generator/   # 国际条码生成器
+│   │   ├── cargo-insurance-calculator/ # 出口货物保险费计算
 │   │   ├── container-load-calculator/ # 装柜/箱规计算
 │   │   ├── csv-to-markdown/    # CSV 与 Markdown 表格互转
 │   │   ├── yaml-json-converter/ # YAML 与 JSON 互转
 │   │   ├── remittance-cost-calculator/ # 国际收款渠道费用对比
 │   │   ├── inquiry-priority-scorer/ # 外贸询盘优先级评估
+│   │   ├── invoice-generator/  # 商业发票/形式发票生成
+│   │   ├── lc-discrepancy-checklist/ # 信用证交单自查清单
+│   │   ├── shipping-mark-generator/ # 外贸唛头生成
 │   │   ├── server-cost-comparison/ # 服务器成本对比
 │   │   ├── currency-symbols/   # 全球货币符号
 │   │   ├── customs-cost-calculator/ # 报关费用估算

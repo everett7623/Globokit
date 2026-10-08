@@ -194,5 +194,4 @@ export const LOGISTICS_TOOLS: ToolMeta[] = [
     useCases: ['CIF 报价中保费测算', 'FOB/CFR 换算 CIF 投保', '核对货代保险报价'],
     relatedTools: ['ocean-freight-calculator', 'freight-charge-audit', 'import-landed-cost-calculator', 'incoterms'],
   },
-  { id: 'shipping-mark-generator', slug: 'shipping-mark-generator', title: '外贸唛头生成器', shortTitle: '唛头生成器', description: '按收货人代号、订单号与箱数生成外箱唛头和逐箱标签', category: '物流与装柜', iconName: 'Tag', href: '/tools/shipping-mark-generator', updatedAt: '2026-09-30', badge: '新增', keywords: ['shipping mark', '唛头', '箱唛'], seoTitle: '外贸唛头生成器 - 外箱箱唛与箱号标签 | Globokit', seoDescription: '免费生成外贸外箱唛头和逐箱标签', useCases: ['制作出口箱唛', '生成逐箱箱号'], relatedTools: ['packaging-plan-comparison', 'container-load-calculator'] },
 ]

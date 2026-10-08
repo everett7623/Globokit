@@ -1,6 +1,6 @@
 {
   "name": "Globokit",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "author": "everettlabs",
   "license": "GPL-3.0-only",
@@ -37,6 +37,10 @@
     "test:catalog": "node scripts/assert-catalog-integrity.cjs",
     "test:server-cost": "node scripts/assert-server-cost-comparison.cjs",
     "test:yaml-json": "node scripts/assert-yaml-json-converter.cjs",
+    "test:cargo-insurance": "node scripts/assert-cargo-insurance.cjs",
+    "test:lc-checklist": "node scripts/assert-lc-checklist.cjs",
+    "test:shipping-mark": "node scripts/assert-shipping-mark.cjs",
+    "test:invoice-generator": "node scripts/assert-invoice-generator.cjs",
     "test:category-backfill": "node scripts/assert-category-backfill.cjs",
     "typecheck": "tsc --noEmit",
     "validate:data": "node scripts/validate-tool-data.cjs"

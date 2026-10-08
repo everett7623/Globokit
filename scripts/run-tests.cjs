@@ -21,6 +21,10 @@ const scripts = [
   'assert-server-cost-comparison.cjs',
   'assert-yaml-json-converter.cjs',
   'assert-supplier-quote-comparison.cjs',
+  'assert-cargo-insurance.cjs',
+  'assert-lc-checklist.cjs',
+  'assert-shipping-mark.cjs',
+  'assert-invoice-generator.cjs',
 ]
 
 for (const script of scripts) {

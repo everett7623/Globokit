@@ -1,6 +1,28 @@
 # 开发进度记录
 
 
+## 2026-10-08（v0.4.0：单证与风险工具补齐）
+
+### 已完成
+
+- 盘点 40 个工具的分类与能力分布后，补齐四个此前缺失的外贸单证与风险场景：
+  - 商业发票/形式发票生成器（invoice-generator）：明细动态增删、分位整数运算、英文金额大写复用 number-english、A4 版式实时预览、复制纯文本与打印导出；
+  - 外贸唛头生成器（shipping-mark-generator）：区间/逐箱/不输出三种箱号风格、毛重尺寸开关、逐箱标签预览、三种场景预设；
+  - 信用证交单自查清单（lc-discrepancy-checklist）：六组 27 项审单要点、10/5/2 加权计分、三档风险分级、英文改证片段生成；
+  - 出口货物保险费计算器（cargo-insurance-calculator）：FOB/CFR/CIF 闭式换算 CIF、110% 投保加成、基础险与战争险保费拆分、ICC 条款速查。
+- 四组专项测试（共 133 条断言）接入 `npm test` 与独立 npm scripts；工具总数 40 → 44，目录一致性校验 15 条通过。
+- 版本推进 0.4.0：package.json/package-lock、CHANGELOG 0.4.0 段落、README 徽章/版本/功能/目录结构同步更新。
+
+### 协同冲突处理
+
+- 会话期间另一台机器经 Syncthing 同步提交了 d30605e（同一批四工具的混合版本：本机实现为主，但发票/唛头算法层被替换为无文件头、弱校验的精简版，并在 registry-finance/registry-logistics 重复注册）。
+- 处理方式：从 `.sync-conflict-*` 副本恢复完整算法层与富 SEO 注册表条目，移除 registry-finance 与 registry-logistics 中的重复精简条目，删除全部冲突副本文件；保留 d30605e 中的 UI 页面与 CHANGELOG 思路并扩写为正式 0.4.0 段落。
+- 建议：多机同步场景下避免两台机器同时改动同一批文件；同步工具应排除 `.git/` 目录。
+
+### 验证结果
+
+- `npx tsc --noEmit`、`npm run lint`、`npm test`（23 组）、`test:catalog`（44 工具）、`test:version` 通过；`npm run build` 通过。
+
 ## 2026-09-18（第三轮：收尾与交互验证）
 
 ### 已完成
