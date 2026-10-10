@@ -26,7 +26,7 @@ export function NavigationToolItem({ tool, active, compact = false, onClick }: N
         'group block rounded-lg border p-3 transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-50/70 hover:shadow-md hover:shadow-emerald-900/5 dark:hover:border-cyan-300/50 dark:hover:bg-cyan-300/10',
         active
           ? 'border-emerald-300 bg-emerald-50/80 dark:border-cyan-300/50 dark:bg-cyan-300/10'
-          : 'border-slate-200 bg-white/80 dark:border-white/10 dark:bg-white/[0.03]',
+          : 'border-slate-200 bg-white/80 dark:border-white/10 dark:bg-white/3',
         compact && 'p-3'
       )}
     >

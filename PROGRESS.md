@@ -1,6 +1,28 @@
 # 开发进度记录
 
 
+## 2026-10-09（v0.5.0：站点框架全量升级）
+
+### 已完成
+
+- 依赖全量升级至当前最新：Next.js 15.5 → 16.4（Turbopack 构建引擎）、React 19.2 → 19.3、Tailwind CSS 3.4 → 4.3、ESLint 8 → 10、lucide-react 0.475 → 1.54、tailwind-merge 2 → 3、Radix UI 全家桶、@bwip-js/browser、pinyin-pro、postcss。@types/node 保持 24.x 与运行时对齐（npm latest 为 26，故意不跟）。
+- Next.js 16 迁移：接受官方自动变更（`jsx: react-jsx`、`next-env.d.ts` 路由类型）；构建走 Turbopack 后全部 46 条路由保持静态预渲染。
+- Tailwind CSS v4 迁移：官方 `@tailwindcss/upgrade` 完成 62 个文件类名迁移（比例类 shadow-sm → shadow-xs 等），`tailwind.config.ts` 内联为 `globals.css` 的 `@theme`/`@custom-variant dark`/`@utility container`，PostCSS 切换 `@tailwindcss/postcss` 并移除 autoprefixer。
+- ESLint flat config：`.eslintrc.json` → `eslint.config.mjs`（原生 import `eslint-config-next/core-web-vitals`，无需 FlatCompat）。
+- react-hooks v7 新规则 `set-state-in-effect` 达标：新增 `lib/client-hooks.ts`（useSyncExternalStore 封装 localStorage 收藏、本地时区、客户端时钟），重构 7 处 effect 内 setState（主题、货币符号、交期、国家资料、节假日、世界时间、VPS），彻底消除级联渲染且保持 SSR 首帧一致。
+- lucide-react 1.x 品牌图标移除：页脚 Github 图标改内联 SVG。
+- 版本推进 0.5.0，CHANGELOG/README（徽章、当前版本、技术栈 Next.js 16 / Tailwind v4）/CLAUDE.md 同步。
+
+### 踩坑记录
+
+- `@tailwindcss/upgrade` 会把源码里的业务字符串字面量 `'outline'`（Button/Badge 的 variant 名）误当 Tailwind 类替换为 `'outline-solid'`，产生约 20 处类型错误；已按「仅还原带引号的 variant 字面量」批量修复，className 中的真实类不受影响。
+- Windows Git Bash 下 `grep -rl | xargs sed` 会因反斜杠路径失败，需用 `find -exec sed`。
+- 本机 Chrome 自动化（MCP 截图/DOM 快照）在本环境持续超时，沿用 HTTP 层验证：CSS 产物含 `--color-primary`/`.bg-primary`/`.dark`/`.text-muted-foreground` 等令牌、44 个工具链接与工具页标题渲染正常。
+
+### 验证结果
+
+- `npx tsc --noEmit`、`npm run lint`（flat config）、`npm test`（23 组）、`npm run test:ui`（56 条交互断言）、`test:catalog`（44 工具）、`npm run build`（Next 16 + Tailwind 4，46 路由静态输出）全部通过。
+
 ## 2026-10-08（v0.4.0：单证与风险工具补齐）
 
 ### 已完成

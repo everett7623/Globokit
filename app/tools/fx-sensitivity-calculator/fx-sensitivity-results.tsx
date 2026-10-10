@@ -20,7 +20,7 @@ export function FxSensitivityStats({ result }: { result: FxSensitivityResult }) 
     { label: '最佳情景', value: best.label, note: `${formatMoney(best.profitCny)} 实际利润`, icon: TrendingUp, tone: 'text-emerald-600' },
     { label: '利润波动范围', value: formatMoney(result.profitRangeCny), note: '升值到贬值情景', icon: TrendingDown, tone: 'text-amber-600' },
   ]
-  return <div className="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">{stats.map((stat) => { const Icon = stat.icon; return <Card key={stat.label}><CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-medium"><Icon className="h-4 w-4" />{stat.label}</CardTitle></CardHeader><CardContent><div className={cn('break-words text-xl font-bold', stat.tone)}>{stat.value}</div><p className="mt-1 text-xs text-muted-foreground">{stat.note}</p></CardContent></Card> })}</div>
+  return <div className="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">{stats.map((stat) => { const Icon = stat.icon; return <Card key={stat.label}><CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-medium"><Icon className="h-4 w-4" />{stat.label}</CardTitle></CardHeader><CardContent><div className={cn('wrap-break-word text-xl font-bold', stat.tone)}>{stat.value}</div><p className="mt-1 text-xs text-muted-foreground">{stat.note}</p></CardContent></Card> })}</div>
 }
 
 export function FxSensitivityResults({ result }: { result: FxSensitivityResult }) {
@@ -46,5 +46,5 @@ function ScenarioRow({ scenario, rateUnitLabel, best, worst }: { scenario: FxSce
 }
 
 function Value({ label, value }: { label: string; value: string }) {
-  return <div className="rounded-md bg-slate-100 px-3 py-2 dark:bg-white/[0.06]"><p className="text-xs text-muted-foreground">{label}</p><p className="mt-1 font-semibold tabular-nums">{value}</p></div>
+  return <div className="rounded-md bg-slate-100 px-3 py-2 dark:bg-white/6"><p className="text-xs text-muted-foreground">{label}</p><p className="mt-1 font-semibold tabular-nums">{value}</p></div>
 }

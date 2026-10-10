@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-**Globokit** 是一个专为外贸从业者打造的现代化在线工具平台，基于 Next.js 14 App Router 构建。项目采用纯前端架构，所有计算逻辑在浏览器本地执行，无后端服务依赖。
+**Globokit** 是一个专为外贸从业者打造的现代化在线工具平台，基于 Next.js 16 App Router 构建。项目采用纯前端架构，所有计算逻辑在浏览器本地执行，无后端服务依赖。
 
-- **技术栈**: Next.js 14, TypeScript, Tailwind CSS, Shadcn UI, Radix UI
+- **技术栈**: Next.js 16, TypeScript, Tailwind CSS v4, Shadcn UI, Radix UI
 - **部署**: Vercel
 - **许可**: GPL-3.0-only
 
@@ -122,8 +122,8 @@ import { Button } from '@/components/ui/button'
 
 ### 样式系统
 
-- 使用 Tailwind CSS utility classes
-- 深色模式通过 `dark:` 前缀实现
+- 使用 Tailwind CSS v4 utility classes，主题令牌以 CSS 变量定义在 `app/globals.css` 的 `@theme` 中（无 `tailwind.config.ts`）
+- 深色模式通过 `.dark` 类实现（`@custom-variant dark`）
 - 自定义颜色通过 CSS 变量 (`hsl(var(--primary))`)
 - 复用 Shadcn UI 组件而非从头构建
 

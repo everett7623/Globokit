@@ -81,7 +81,7 @@ export function JsonFormatPanel(props: JsonFormatPanelProps) {
     <TabsContent value="format" className="space-y-4">
       <div className="space-y-2">
         <Label htmlFor="json-input">JSON 输入</Label>
-        <textarea id="json-input" placeholder="粘贴或输入 JSON 数据..." value={input} onChange={(event) => props.onInputChange(event.target.value)} className="h-48 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" />
+        <textarea id="json-input" placeholder="粘贴或输入 JSON 数据..." value={input} onChange={(event) => props.onInputChange(event.target.value)} className="h-48 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" />
       </div>
 
       {!validation.valid && input.trim() && (

@@ -11,7 +11,7 @@ export function ResourceHero() {
   return (
     <section className="relative overflow-hidden rounded-lg border border-slate-900 bg-slate-950 p-6 text-white shadow-2xl shadow-slate-900/20 dark:border-white/10 md:p-8">
       <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(20,184,166,0.22),transparent_36%),linear-gradient(250deg,rgba(217,70,239,0.16),transparent_30%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:52px_52px] opacity-40" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-size-[52px_52px] opacity-40" />
 
       <div className="relative grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
         <div>

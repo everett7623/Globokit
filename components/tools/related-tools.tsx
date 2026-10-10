@@ -48,7 +48,7 @@ export function RelatedTools() {
             <Link
               key={tool.id}
               href={tool.href}
-              className="group rounded-lg border border-slate-200/80 bg-white/80 p-4 shadow-sm shadow-slate-900/[0.04] backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md hover:shadow-emerald-900/[0.05] dark:border-white/10 dark:bg-slate-950/60 dark:hover:border-cyan-300/50"
+              className="group rounded-lg border border-slate-200/80 bg-white/80 p-4 shadow-xs shadow-slate-900/4 backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md hover:shadow-emerald-900/[0.05] dark:border-white/10 dark:bg-slate-950/60 dark:hover:border-cyan-300/50"
             >
               <div className="mb-3 flex items-start justify-between gap-3">
                 <div>

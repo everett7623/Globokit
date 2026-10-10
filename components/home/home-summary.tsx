@@ -11,14 +11,14 @@ import { Card, CardContent } from '@/components/ui/card'
 export function HomeSummary() {
   return (
     <section className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_360px]">
-      <div className="rounded-lg border border-slate-200/80 bg-white/80 p-6 shadow-lg shadow-slate-900/[0.04] backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/60">
+      <div className="rounded-lg border border-slate-200/80 bg-white/80 p-6 shadow-lg shadow-slate-900/4 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/60">
         <p className="text-sm font-semibold text-slate-950 dark:text-white">外贸工作台设计方向</p>
         <div className="mt-5 grid gap-3 md:grid-cols-3">
           {['报价更快', '资料更全', '跨区协作'].map((item) => (
-            <div key={item} className="rounded-md border border-slate-200 bg-slate-50 p-4 dark:border-white/10 dark:bg-white/[0.04]">
+            <div key={item} className="rounded-md border border-slate-200 bg-slate-50 p-4 dark:border-white/10 dark:bg-white/4">
               <p className="text-sm font-semibold text-slate-900 dark:text-white">{item}</p>
               <div className="mt-3 h-1.5 rounded-full bg-slate-200 dark:bg-white/10">
-                <div className="h-full w-3/4 rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500" />
+                <div className="h-full w-3/4 rounded-full bg-linear-to-r from-emerald-500 to-cyan-500" />
               </div>
             </div>
           ))}

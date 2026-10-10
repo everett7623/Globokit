@@ -25,7 +25,7 @@ export function HomeToolDirectory() {
 
         <div className="flex flex-wrap gap-2">
           {HOME_ACTIVE_CATEGORIES.map((category) => (
-            <span key={category} className="rounded-md border border-slate-200 bg-white/80 px-3 py-1.5 text-xs font-medium text-slate-600 shadow-sm shadow-slate-900/[0.02] dark:border-white/10 dark:bg-slate-950/60 dark:text-slate-300">
+            <span key={category} className="rounded-md border border-slate-200 bg-white/80 px-3 py-1.5 text-xs font-medium text-slate-600 shadow-xs shadow-slate-900/2 dark:border-white/10 dark:bg-slate-950/60 dark:text-slate-300">
               {category} · {HOME_TOOLS_BY_CATEGORY[category].length}
             </span>
           ))}
@@ -43,7 +43,7 @@ export function HomeToolDirectory() {
 
 function CategorySection({ category, tools: categoryTools }: { category: ToolCategory; tools: ToolMeta[] }) {
   return (
-    <div className="rounded-lg border border-white/70 bg-white/80 p-4 shadow-lg shadow-slate-900/[0.04] backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/60">
+    <div className="rounded-lg border border-white/70 bg-white/80 p-4 shadow-lg shadow-slate-900/4 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/60">
       <div className="mb-4 flex items-center justify-between">
         <h3 className="text-sm font-semibold text-slate-950 dark:text-white">{category}</h3>
         <span className="text-xs text-slate-400">{categoryTools.length}</span>
@@ -59,7 +59,7 @@ function CategorySection({ category, tools: categoryTools }: { category: ToolCat
             <Link
               key={tool.id}
               href={tool.href}
-              className="group flex gap-3 rounded-md border border-slate-200/80 bg-white/80 p-3 transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-50/70 hover:shadow-md hover:shadow-emerald-900/[0.05] dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-cyan-300/50 dark:hover:bg-cyan-300/10"
+              className="group flex gap-3 rounded-md border border-slate-200/80 bg-white/80 p-3 transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-50/70 hover:shadow-md hover:shadow-emerald-900/[0.05] dark:border-white/10 dark:bg-white/3 dark:hover:border-cyan-300/50 dark:hover:bg-cyan-300/10"
             >
               <div className={cn('flex h-10 w-10 shrink-0 items-center justify-center rounded-md', tool.bgColor, tool.color)}>
                 <Icon className="h-5 w-5" />

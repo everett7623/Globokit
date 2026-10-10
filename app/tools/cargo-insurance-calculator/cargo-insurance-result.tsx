@@ -41,7 +41,7 @@ export function CargoInsuranceResult({ result, summaryText }: CargoInsuranceResu
             {stats.map((stat) => (
               <div key={stat.label} className="rounded-md border bg-muted/20 px-3 py-2">
                 <p className="text-xs text-muted-foreground">{stat.label}</p>
-                <p className="mt-1 break-words text-xl font-bold tabular-nums">{stat.value}</p>
+                <p className="mt-1 wrap-break-word text-xl font-bold tabular-nums">{stat.value}</p>
                 <p className="mt-1 text-xs text-muted-foreground">{stat.note}</p>
               </div>
             ))}

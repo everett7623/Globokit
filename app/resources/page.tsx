@@ -35,7 +35,7 @@ export default function ResourcesPage() {
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {stats.map((item) => (
-          <div key={item.label} className="rounded-lg border border-white/70 bg-white/80 p-5 shadow-lg shadow-slate-900/[0.04] backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/60">
+          <div key={item.label} className="rounded-lg border border-white/70 bg-white/80 p-5 shadow-lg shadow-slate-900/4 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/60">
             <p className="text-3xl font-semibold text-slate-950 dark:text-white">{item.value}</p>
             <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">{item.label}</p>
           </div>
@@ -44,7 +44,7 @@ export default function ResourcesPage() {
 
       <section className="grid gap-6 lg:grid-cols-[260px_minmax(0,1fr)]">
         <aside className="lg:sticky lg:top-24 lg:self-start">
-          <div className="rounded-lg border border-white/70 bg-white/85 p-4 shadow-lg shadow-slate-900/[0.04] backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/70">
+          <div className="rounded-lg border border-white/70 bg-white/85 p-4 shadow-lg shadow-slate-900/4 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/70">
             <p className="mb-3 text-sm font-semibold text-slate-950 dark:text-white">资源分类</p>
             <div className="space-y-1">
               {VISIBLE_RESOURCE_GROUPS.map((group) => {
@@ -84,14 +84,14 @@ export default function ResourcesPage() {
                       <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{meta.note}</p>
                     </div>
                   </div>
-                  <Badge variant="outline" className="w-fit border-slate-200 bg-white/80 text-slate-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300">
+                  <Badge variant="outline" className="w-fit border-slate-200 bg-white/80 text-slate-600 dark:border-white/10 dark:bg-white/4 dark:text-slate-300">
                     {group.resources.length} 个入口
                   </Badge>
                 </div>
 
                 <div className={cn('grid gap-3', isWideGroup && 'md:grid-cols-2 xl:grid-cols-3')}>
                   {group.resources.map((resource) => (
-                    <a key={resource.id} href={resource.href} target="_blank" rel="sponsored noopener noreferrer" className="group flex min-h-[160px] flex-col rounded-lg border border-slate-200/80 bg-white/85 p-4 shadow-sm shadow-slate-900/[0.03] transition-all hover:-translate-y-0.5 hover:border-cyan-300 hover:shadow-md hover:shadow-cyan-900/[0.05] dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-cyan-300/50">
+                    <a key={resource.id} href={resource.href} target="_blank" rel="sponsored noopener noreferrer" className="group flex min-h-[160px] flex-col rounded-lg border border-slate-200/80 bg-white/85 p-4 shadow-xs shadow-slate-900/3 transition-all hover:-translate-y-0.5 hover:border-cyan-300 hover:shadow-md hover:shadow-cyan-900/5 dark:border-white/10 dark:bg-white/4 dark:hover:border-cyan-300/50">
                       <div className="mb-4 flex items-start justify-between gap-3">
                         <div className="min-w-0">
                           <p className="truncate text-base font-semibold text-slate-950 group-hover:text-cyan-700 dark:text-white dark:group-hover:text-cyan-200">{resource.name}</p>
@@ -105,7 +105,7 @@ export default function ResourcesPage() {
                       <p className="line-clamp-3 text-sm leading-6 text-slate-600 dark:text-slate-400">{resource.description}</p>
                       <div className="mt-auto flex flex-wrap gap-2 pt-5">
                         {resource.bestFor.map((item) => (
-                          <span key={item} className="rounded-md border border-slate-200 bg-slate-50 px-2 py-1 text-[11px] font-medium text-slate-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300">{item}</span>
+                          <span key={item} className="rounded-md border border-slate-200 bg-slate-50 px-2 py-1 text-[11px] font-medium text-slate-600 dark:border-white/10 dark:bg-white/4 dark:text-slate-300">{item}</span>
                         ))}
                       </div>
                     </a>
@@ -117,7 +117,7 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      <section className="flex flex-col gap-4 rounded-lg border border-slate-200/80 bg-white/80 p-5 shadow-lg shadow-slate-900/[0.04] backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/60 md:flex-row md:items-center md:justify-between">
+      <section className="flex flex-col gap-4 rounded-lg border border-slate-200/80 bg-white/80 p-5 shadow-lg shadow-slate-900/4 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/60 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="text-sm font-semibold text-slate-950 dark:text-white">回到工具主线</p>
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">报价、装柜、国家资料和节假日仍然是站点的核心入口。</p>

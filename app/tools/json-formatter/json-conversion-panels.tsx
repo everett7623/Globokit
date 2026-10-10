@@ -59,7 +59,7 @@ export function JsonConversionPanels(props: JsonConversionPanelsProps) {
       <TabsContent value="convert" className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="json-to-csv">JSON 数组</Label>
-          <textarea id="json-to-csv" placeholder='输入 JSON 数组，例如: [{"name":"张三","age":30},{"name":"李四","age":25}]' value={props.input} onChange={(event) => props.onInputChange(event.target.value)} className="h-48 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" />
+          <textarea id="json-to-csv" placeholder='输入 JSON 数组，例如: [{"name":"张三","age":30},{"name":"李四","age":25}]' value={props.input} onChange={(event) => props.onInputChange(event.target.value)} className="h-48 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" />
         </div>
         <ConversionResultView label="CSV 结果" result={props.jsonToCsvResult} className="h-24 w-full rounded-md border border-input bg-muted px-3 py-2 text-sm font-mono" />
       </TabsContent>
@@ -67,7 +67,7 @@ export function JsonConversionPanels(props: JsonConversionPanelsProps) {
       <TabsContent value="csv" className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="csv-to-json">CSV 输入</Label>
-          <textarea id="csv-to-json" placeholder="输入 CSV 数据，首行为列名" value={props.csvInput} onChange={(event) => props.onCsvInputChange(event.target.value)} className="h-24 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" />
+          <textarea id="csv-to-json" placeholder="输入 CSV 数据，首行为列名" value={props.csvInput} onChange={(event) => props.onCsvInputChange(event.target.value)} className="h-24 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" />
         </div>
         <ConversionResultView label="JSON 结果" result={props.csvToJsonResult} className="h-48 w-full rounded-md border border-input bg-muted px-3 py-2 text-sm font-mono" />
       </TabsContent>

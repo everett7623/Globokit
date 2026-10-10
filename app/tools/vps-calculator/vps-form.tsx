@@ -38,7 +38,7 @@ interface VpsFormProps {
 }
 
 export function VpsForm(props: VpsFormProps) {
-  return <Card className="border-gray-200 shadow-sm">
+  return <Card className="border-gray-200 shadow-xs">
     <CardHeader className="border-b border-gray-100"><CardTitle className="flex items-center gap-2 text-lg"><Calculator className="h-5 w-5 text-violet-600" />参数配置</CardTitle><CardDescription>填写购买信息与定价策略，结果会自动刷新</CardDescription></CardHeader>
     <CardContent className="space-y-6 pt-6">
       <div className="space-y-3"><Label className="flex items-center gap-2 text-sm font-medium text-gray-700"><Wallet className="h-4 w-4 text-violet-600" />购买价格与币种</Label><div className="flex gap-3"><div className="flex flex-1 overflow-hidden rounded-md border border-input bg-white focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2"><span className="flex items-center border-r border-gray-100 bg-gray-50 px-3 text-sm font-semibold text-gray-500">{props.currencySymbol}</span><Input type="number" value={props.purchasePrice} onChange={(event) => props.onPurchasePrice(event.target.value)} className="border-0 font-mono shadow-none focus-visible:ring-0" placeholder="0.00" /></div><Select value={props.currency} onValueChange={props.onCurrency}><SelectTrigger className="w-[112px]"><SelectValue /></SelectTrigger><SelectContent>{SUPPORTED_CURRENCIES.map((item) => <SelectItem key={item.code} value={item.code}><span className="mr-1">{item.symbol}</span>{item.code}</SelectItem>)}</SelectContent></Select></div></div>

@@ -6,9 +6,639 @@
  * 更新时间: 2026-01-12
  */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@source '../Components/**/*.{js,ts,jsx,tsx,mdx}';
+
+@custom-variant dark (&:is(.dark *));
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+  @media (width >= --theme(--breakpoint-sm)) {
+    max-width: none;
+  }
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
+}
+
+@theme {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility trade-grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(15, 23, 42, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, black, transparent 82%);
+
+  .dark & {
+    background-image:
+      linear-gradient(to right, rgba(148, 163, 184, 0.12) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.09) 1px, transparent 1px);
+  }
+}
+
+@utility dark {
+  & .trade-grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(148, 163, 184, 0.12) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.09) 1px, transparent 1px);
+  }
+
+  & .bg-white {
+    background-color: hsl(var(--card) / 0.86);
+  }
+
+  & .bg-white\/75 {
+    background-color: hsl(var(--card) / 0.86);
+  }
+
+  & .bg-white\/80 {
+    background-color: hsl(var(--card) / 0.86);
+  }
+
+  & .bg-white\/90 {
+    background-color: hsl(var(--card) / 0.86);
+  }
+
+  & .bg-white\/95 {
+    background-color: hsl(var(--card) / 0.86);
+  }
+
+  & .bg-gray-50 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  & .bg-gray-50\/80 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  & .bg-slate-50 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  & .bg-slate-50\/70 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  & .bg-emerald-50 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  & .bg-emerald-50\/60 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  & .bg-emerald-50\/70 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  & .bg-emerald-50\/80 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  & .bg-blue-50 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  & .bg-cyan-50 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  & .bg-green-50 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  & .bg-indigo-50 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  & .bg-lime-50 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  & .bg-orange-50 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  & .bg-purple-50 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  & .bg-red-50 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  & .bg-sky-50 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  & .bg-teal-50 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  & .bg-violet-50 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  & .bg-yellow-50 {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+
+  & .text-gray-950 {
+    color: hsl(210 40% 98%);
+  }
+
+  & .text-gray-900 {
+    color: hsl(210 40% 98%);
+  }
+
+  & .text-slate-950 {
+    color: hsl(210 40% 98%);
+  }
+
+  & .text-slate-900 {
+    color: hsl(210 40% 98%);
+  }
+
+  & .text-gray-800 {
+    color: hsl(214 32% 86%);
+  }
+
+  & .text-gray-700 {
+    color: hsl(214 32% 86%);
+  }
+
+  & .text-slate-800 {
+    color: hsl(214 32% 86%);
+  }
+
+  & .text-slate-700 {
+    color: hsl(214 32% 86%);
+  }
+
+  & .text-gray-600 {
+    color: hsl(215 20% 70%);
+  }
+
+  & .text-slate-600 {
+    color: hsl(215 20% 70%);
+  }
+
+  & .text-gray-500 {
+    color: hsl(215 20% 62%);
+  }
+
+  & .text-slate-500 {
+    color: hsl(215 20% 62%);
+  }
+
+  & .border-gray-100 {
+    border-color: hsl(217 33% 22% / 0.9);
+  }
+
+  & .border-gray-200 {
+    border-color: hsl(217 33% 22% / 0.9);
+  }
+
+  & .border-gray-300 {
+    border-color: hsl(217 33% 22% / 0.9);
+  }
+
+  & .border-slate-100 {
+    border-color: hsl(217 33% 22% / 0.9);
+  }
+
+  & .border-slate-200 {
+    border-color: hsl(217 33% 22% / 0.9);
+  }
+
+  & .shadow-slate-900\/10 {
+    --tw-shadow-color: rgb(0 0 0 / 0.3);
+    --tw-shadow: var(--tw-shadow-colored);
+  }
+
+  & .shadow-emerald-900\/5 {
+    --tw-shadow-color: rgb(0 0 0 / 0.3);
+    --tw-shadow: var(--tw-shadow-colored);
+  }
+
+  & .shadow-violet-900\/5 {
+    --tw-shadow-color: rgb(0 0 0 / 0.3);
+    --tw-shadow: var(--tw-shadow-colored);
+  }
+}
+
+@utility premium-panel {
+  @apply rounded-lg border border-white/70 bg-white/80 shadow-xl shadow-slate-900/6 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/60 dark:shadow-black/20;
+}
+
+@utility tool-panel {
+  @apply rounded-lg border border-slate-200/80 bg-white/90 shadow-xs shadow-slate-900/4 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/70 dark:shadow-black/20;
+}
+
+@utility bg-white {
+  .dark & {
+    background-color: hsl(var(--card) / 0.86);
+  }
+}
+
+@utility bg-white/75 {
+  .dark & {
+    background-color: hsl(var(--card) / 0.86);
+  }
+}
+
+@utility bg-white/80 {
+  .dark & {
+    background-color: hsl(var(--card) / 0.86);
+  }
+}
+
+@utility bg-white/90 {
+  .dark & {
+    background-color: hsl(var(--card) / 0.86);
+  }
+}
+
+@utility bg-white/95 {
+  .dark & {
+    background-color: hsl(var(--card) / 0.86);
+  }
+}
+
+@utility bg-gray-50 {
+  .dark & {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+}
+
+@utility bg-gray-50/80 {
+  .dark & {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+}
+
+@utility bg-slate-50 {
+  .dark & {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+}
+
+@utility bg-slate-50/70 {
+  .dark & {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+}
+
+@utility bg-emerald-50 {
+  .dark & {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+}
+
+@utility bg-emerald-50/60 {
+  .dark & {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+}
+
+@utility bg-emerald-50/70 {
+  .dark & {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+}
+
+@utility bg-emerald-50/80 {
+  .dark & {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+}
+
+@utility bg-blue-50 {
+  .dark & {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+}
+
+@utility bg-cyan-50 {
+  .dark & {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+}
+
+@utility bg-green-50 {
+  .dark & {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+}
+
+@utility bg-indigo-50 {
+  .dark & {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+}
+
+@utility bg-lime-50 {
+  .dark & {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+}
+
+@utility bg-orange-50 {
+  .dark & {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+}
+
+@utility bg-purple-50 {
+  .dark & {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+}
+
+@utility bg-red-50 {
+  .dark & {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+}
+
+@utility bg-sky-50 {
+  .dark & {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+}
+
+@utility bg-teal-50 {
+  .dark & {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+}
+
+@utility bg-violet-50 {
+  .dark & {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+}
+
+@utility bg-yellow-50 {
+  .dark & {
+    background-color: hsl(217 33% 17% / 0.72);
+  }
+}
+
+@utility text-gray-950 {
+  .dark & {
+    color: hsl(210 40% 98%);
+  }
+}
+
+@utility text-gray-900 {
+  .dark & {
+    color: hsl(210 40% 98%);
+  }
+}
+
+@utility text-slate-950 {
+  .dark & {
+    color: hsl(210 40% 98%);
+  }
+}
+
+@utility text-slate-900 {
+  .dark & {
+    color: hsl(210 40% 98%);
+  }
+}
+
+@utility text-gray-800 {
+  .dark & {
+    color: hsl(214 32% 86%);
+  }
+}
+
+@utility text-gray-700 {
+  .dark & {
+    color: hsl(214 32% 86%);
+  }
+}
+
+@utility text-slate-800 {
+  .dark & {
+    color: hsl(214 32% 86%);
+  }
+}
+
+@utility text-slate-700 {
+  .dark & {
+    color: hsl(214 32% 86%);
+  }
+}
+
+@utility text-gray-600 {
+  .dark & {
+    color: hsl(215 20% 70%);
+  }
+}
+
+@utility text-slate-600 {
+  .dark & {
+    color: hsl(215 20% 70%);
+  }
+}
+
+@utility text-gray-500 {
+  .dark & {
+    color: hsl(215 20% 62%);
+  }
+}
+
+@utility text-slate-500 {
+  .dark & {
+    color: hsl(215 20% 62%);
+  }
+}
+
+@utility border-gray-100 {
+  .dark & {
+    border-color: hsl(217 33% 22% / 0.9);
+  }
+}
+
+@utility border-gray-200 {
+  .dark & {
+    border-color: hsl(217 33% 22% / 0.9);
+  }
+}
+
+@utility border-gray-300 {
+  .dark & {
+    border-color: hsl(217 33% 22% / 0.9);
+  }
+}
+
+@utility border-slate-100 {
+  .dark & {
+    border-color: hsl(217 33% 22% / 0.9);
+  }
+}
+
+@utility border-slate-200 {
+  .dark & {
+    border-color: hsl(217 33% 22% / 0.9);
+  }
+}
+
+@utility shadow-slate-900/10 {
+  .dark & {
+    --tw-shadow-color: rgb(0 0 0 / 0.3);
+    --tw-shadow: var(--tw-shadow-colored);
+  }
+}
+
+@utility shadow-emerald-900/5 {
+  .dark & {
+    --tw-shadow-color: rgb(0 0 0 / 0.3);
+    --tw-shadow: var(--tw-shadow-colored);
+  }
+}
+
+@utility shadow-violet-900/5 {
+  .dark & {
+    --tw-shadow-color: rgb(0 0 0 / 0.3);
+    --tw-shadow: var(--tw-shadow-colored);
+  }
+}
+
+@utility sr-only {
+  /* 用户体验优化 - 2026-07-30 */
+
+  /* 屏幕阅读器专用（视觉隐藏） */
+  @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+  clip: rect(0, 0, 0, 0);
+}
+
+@utility using-keyboard {
+  /* 键盘导航焦点样式 */
+  & *:focus {
+    @apply outline-2 outline-offset-2 outline-emerald-500 dark:outline-cyan-400;
+  }
+}
+
+@utility touch-manipulation {
+  /* 移动端触摸优化 */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@utility min-touch-target {
+  /* 按钮最小触摸区域（WCAG 2.1 AA 标准：44x44px） */
+  @apply min-h-[44px] min-w-[44px];
+}
+
+@utility skeleton-loading {
+  /* 加载动画 */
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted)) 25%,
+    hsl(var(--muted-foreground) / 0.1) 50%,
+    hsl(var(--muted)) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@utility tabular-nums {
+  /* 平滑滚动 */
+
+  /* 减少动画（尊重用户偏好） */
+
+  /* 移动端优化 - 防止横向溢出 */
+
+  /* 数字等宽字体优化 */
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+@utility success-feedback {
+  /* 成功状态动画 */
+  animation: success-bounce 0.3s ease-in-out;
+}
+
+@utility error-shake {
+  /* 错误抖动动画 */
+  animation: error-shake 0.4s ease-in-out;
+}
 
 @layer base {
   :root {
@@ -75,122 +705,6 @@
 }
 
 @layer utilities {
-  .trade-grid-bg {
-    background-image:
-      linear-gradient(to right, rgba(15, 23, 42, 0.06) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
-    background-size: 44px 44px;
-    mask-image: linear-gradient(to bottom, black, transparent 82%);
-  }
-
-  .dark .trade-grid-bg {
-    background-image:
-      linear-gradient(to right, rgba(148, 163, 184, 0.12) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(148, 163, 184, 0.09) 1px, transparent 1px);
-  }
-
-  .premium-panel {
-    @apply rounded-lg border border-white/70 bg-white/80 shadow-xl shadow-slate-900/[0.06] backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/60 dark:shadow-black/20;
-  }
-
-  .tool-panel {
-    @apply rounded-lg border border-slate-200/80 bg-white/90 shadow-sm shadow-slate-900/[0.04] backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/70 dark:shadow-black/20;
-  }
-
-  .dark .bg-white,
-  .dark .bg-white\/75,
-  .dark .bg-white\/80,
-  .dark .bg-white\/90,
-  .dark .bg-white\/95 {
-    background-color: hsl(var(--card) / 0.86);
-  }
-
-  .dark .bg-gray-50,
-  .dark .bg-gray-50\/80,
-  .dark .bg-slate-50,
-  .dark .bg-slate-50\/70,
-  .dark .bg-emerald-50,
-  .dark .bg-emerald-50\/60,
-  .dark .bg-emerald-50\/70,
-  .dark .bg-emerald-50\/80,
-  .dark .bg-blue-50,
-  .dark .bg-cyan-50,
-  .dark .bg-green-50,
-  .dark .bg-indigo-50,
-  .dark .bg-lime-50,
-  .dark .bg-orange-50,
-  .dark .bg-purple-50,
-  .dark .bg-red-50,
-  .dark .bg-sky-50,
-  .dark .bg-teal-50,
-  .dark .bg-violet-50,
-  .dark .bg-yellow-50 {
-    background-color: hsl(217 33% 17% / 0.72);
-  }
-
-  .dark .text-gray-950,
-  .dark .text-gray-900,
-  .dark .text-slate-950,
-  .dark .text-slate-900 {
-    color: hsl(210 40% 98%);
-  }
-
-  .dark .text-gray-800,
-  .dark .text-gray-700,
-  .dark .text-slate-800,
-  .dark .text-slate-700 {
-    color: hsl(214 32% 86%);
-  }
-
-  .dark .text-gray-600,
-  .dark .text-slate-600 {
-    color: hsl(215 20% 70%);
-  }
-
-  .dark .text-gray-500,
-  .dark .text-slate-500 {
-    color: hsl(215 20% 62%);
-  }
-
-  .dark .border-gray-100,
-  .dark .border-gray-200,
-  .dark .border-gray-300,
-  .dark .border-slate-100,
-  .dark .border-slate-200 {
-    border-color: hsl(217 33% 22% / 0.9);
-  }
-
-  .dark .shadow-slate-900\/10,
-  .dark .shadow-emerald-900\/5,
-  .dark .shadow-violet-900\/5 {
-    --tw-shadow-color: rgb(0 0 0 / 0.3);
-    --tw-shadow: var(--tw-shadow-colored);
-  }
-
-  /* 用户体验优化 - 2026-07-30 */
-
-  /* 屏幕阅读器专用（视觉隐藏） */
-  .sr-only {
-    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
-    clip: rect(0, 0, 0, 0);
-  }
-
-  /* 键盘导航焦点样式 */
-  .using-keyboard *:focus {
-    @apply outline-2 outline-offset-2 outline-emerald-500 dark:outline-cyan-400;
-  }
-
-  /* 移动端触摸优化 */
-  .touch-manipulation {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  /* 按钮最小触摸区域（WCAG 2.1 AA 标准：44x44px） */
-  .min-touch-target {
-    @apply min-h-[44px] min-w-[44px];
-  }
-
   /* 输入框聚焦增强 */
   input:focus,
   textarea:focus,
@@ -205,8 +719,6 @@
   textarea:disabled {
     @apply cursor-not-allowed opacity-50;
   }
-
-  /* 加载动画 */
   @keyframes shimmer {
     0% {
       background-position: -200% 0;
@@ -215,26 +727,11 @@
       background-position: 200% 0;
     }
   }
-
-  .skeleton-loading {
-    background: linear-gradient(
-      90deg,
-      hsl(var(--muted)) 25%,
-      hsl(var(--muted-foreground) / 0.1) 50%,
-      hsl(var(--muted)) 75%
-    );
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-  }
-
-  /* 平滑滚动 */
   @media (prefers-reduced-motion: no-preference) {
     html {
       scroll-behavior: smooth;
     }
   }
-
-  /* 减少动画（尊重用户偏好） */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -244,21 +741,11 @@
       transition-duration: 0.01ms !important;
     }
   }
-
-  /* 移动端优化 - 防止横向溢出 */
   @media (max-width: 640px) {
     body {
       overflow-x: hidden;
     }
   }
-
-  /* 数字等宽字体优化 */
-  .tabular-nums {
-    font-variant-numeric: tabular-nums;
-    font-feature-settings: 'tnum';
-  }
-
-  /* 成功状态动画 */
   @keyframes success-bounce {
     0%, 100% {
       transform: scale(1);
@@ -267,12 +754,6 @@
       transform: scale(1.05);
     }
   }
-
-  .success-feedback {
-    animation: success-bounce 0.3s ease-in-out;
-  }
-
-  /* 错误抖动动画 */
   @keyframes error-shake {
     0%, 100% {
       transform: translateX(0);
@@ -283,9 +764,5 @@
     75% {
       transform: translateX(10px);
     }
-  }
-
-  .error-shake {
-    animation: error-shake 0.4s ease-in-out;
   }
 }

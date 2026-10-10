@@ -48,7 +48,7 @@ export function MobileNavigation({
           aria-expanded={open}
           aria-controls="mobile-tools-menu"
           aria-label={open ? '关闭导航菜单' : '打开导航菜单'}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-200/80 bg-white/80 text-slate-700 shadow-sm shadow-slate-900/[0.03] transition-colors hover:text-emerald-700 dark:border-white/10 dark:bg-slate-900/80 dark:text-slate-200"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-200/80 bg-white/80 text-slate-700 shadow-xs shadow-slate-900/3 transition-colors hover:text-emerald-700 dark:border-white/10 dark:bg-slate-900/80 dark:text-slate-200"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
@@ -91,7 +91,7 @@ export function MobileNavigation({
                 value={query}
                 onChange={(event) => onQueryChange(event.target.value)}
                 placeholder="搜索工具"
-                className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-slate-400 dark:text-white"
+                className="min-w-0 flex-1 bg-transparent text-sm outline-hidden placeholder:text-slate-400 dark:text-white"
               />
             </div>
 

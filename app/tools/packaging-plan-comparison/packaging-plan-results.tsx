@@ -21,7 +21,7 @@ export function PackagingPlanStats({ result }: { result: PackagingComparisonResu
     { label: result.shippingMode === 'air' ? '计费重最低' : '总毛重最低', value: lowestWeight.name, note: formatWeight(result.shippingMode === 'air' ? lowestWeight.chargeableWeightKg : lowestWeight.totalGrossWeightKg), icon: Scale },
     { label: '最高可节省', value: formatMoney(highestCost - best.totalLogisticsCostCny), note: '相对当前最贵方案', icon: CircleDollarSign },
   ]
-  return <div className="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">{stats.map((stat) => { const Icon = stat.icon; return <Card key={stat.label}><CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-medium"><Icon className="h-4 w-4" />{stat.label}</CardTitle></CardHeader><CardContent><div className="break-words text-xl font-bold">{stat.value}</div><p className="mt-1 text-xs text-muted-foreground">{stat.note}</p></CardContent></Card> })}</div>
+  return <div className="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">{stats.map((stat) => { const Icon = stat.icon; return <Card key={stat.label}><CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-medium"><Icon className="h-4 w-4" />{stat.label}</CardTitle></CardHeader><CardContent><div className="wrap-break-word text-xl font-bold">{stat.value}</div><p className="mt-1 text-xs text-muted-foreground">{stat.note}</p></CardContent></Card> })}</div>
 }
 
 export function PackagingPlanResults({ result }: { result: PackagingComparisonResult }) {
@@ -38,7 +38,7 @@ function findPlan(result: PackagingComparisonResult, id: string) {
 }
 
 function Metric({ label, value }: { label: string; value: string }) {
-  return <div className="rounded-md bg-slate-100 px-3 py-2 dark:bg-white/[0.06]"><p className="text-xs text-muted-foreground">{label}</p><p className="mt-1 break-words font-semibold tabular-nums">{value}</p></div>
+  return <div className="rounded-md bg-slate-100 px-3 py-2 dark:bg-white/6"><p className="text-xs text-muted-foreground">{label}</p><p className="mt-1 wrap-break-word font-semibold tabular-nums">{value}</p></div>
 }
 
 function CostRow({ label, value }: { label: string; value: number }) {

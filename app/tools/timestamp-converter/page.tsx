@@ -98,7 +98,7 @@ export default function TimestampConverterPage() {
             )}
             <div className="rounded-lg border border-emerald-200 bg-emerald-50/80 p-4 dark:border-cyan-300/20 dark:bg-cyan-300/10">
               <p className="text-sm text-emerald-800 dark:text-cyan-100">北京时间</p>
-              <p className="mt-1 break-words text-2xl font-bold tabular-nums text-emerald-950 dark:text-white">
+              <p className="mt-1 wrap-break-word text-2xl font-bold tabular-nums text-emerald-950 dark:text-white">
                 {breakdown ? breakdown.display : '—'}
               </p>
               {breakdown && <p className="mt-2 break-all font-mono text-xs text-emerald-700 dark:text-cyan-200">{breakdown.iso}</p>}

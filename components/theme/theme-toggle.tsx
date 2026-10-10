@@ -20,7 +20,7 @@ export function ThemeToggle({ compact = false }: { compact?: boolean }) {
       onClick={toggleTheme}
       aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
       className={cn(
-        'inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-200/80 bg-white/80 text-slate-700 shadow-sm shadow-slate-900/[0.03] transition-all hover:border-emerald-300 hover:text-emerald-700 dark:border-white/10 dark:bg-slate-900/80 dark:text-slate-200 dark:hover:border-cyan-300/60 dark:hover:text-cyan-200',
+        'inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-200/80 bg-white/80 text-slate-700 shadow-xs shadow-slate-900/3 transition-all hover:border-emerald-300 hover:text-emerald-700 dark:border-white/10 dark:bg-slate-900/80 dark:text-slate-200 dark:hover:border-cyan-300/60 dark:hover:text-cyan-200',
         compact && 'h-10 w-10'
       )}
     >

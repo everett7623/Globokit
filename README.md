@@ -5,14 +5,14 @@
     <a href="LICENSE">
       <img src="https://img.shields.io/badge/license-GPL--3.0--only-blue.svg" alt="License">
     </a>
-    <a href="https://github.com/everett7623/Globokit/releases/tag/v0.4.0">
-      <img src="https://img.shields.io/badge/version-v0.4.0-brightgreen.svg" alt="Version v0.4.0">
+    <a href="https://github.com/everett7623/Globokit/releases/tag/v0.5.0">
+      <img src="https://img.shields.io/badge/version-v0.5.0-brightgreen.svg" alt="Version v0.5.0">
     </a>
     <a href="https://nextjs.org">
-      <img src="https://img.shields.io/badge/Built%20with-Next.js%2014-black" alt="Next.js">
+      <img src="https://img.shields.io/badge/Built%20with-Next.js%2016-black" alt="Next.js">
     </a>
     <a href="https://tailwindcss.com">
-      <img src="https://img.shields.io/badge/Styled%20with-Tailwind%20CSS-38B2AC" alt="Tailwind CSS">
+      <img src="https://img.shields.io/badge/Styled%20with-Tailwind%20CSS%20v4-38B2AC" alt="Tailwind CSS">
     </a>
   </p>
 
@@ -231,7 +231,7 @@
 
 ## 🏷️ 版本与发布
 
-- 当前版本：[`v0.4.0`](https://github.com/everett7623/Globokit/releases/tag/v0.4.0)
+- 当前版本：[`v0.5.0`](https://github.com/everett7623/Globokit/releases/tag/v0.5.0)
 - 完整更新记录：[CHANGELOG.md](CHANGELOG.md)
 - 所有历史版本：[GitHub Releases](https://github.com/everett7623/Globokit/releases)
 
@@ -248,12 +248,12 @@
 
 本项目基于现代化的前端技术栈构建，注重性能与用户体验：
 
-- **核心框架**: [Next.js 14](https://nextjs.org/) (App Router, Server Components)
+- **核心框架**: [Next.js 16](https://nextjs.org/) (App Router, Turbopack, Server Components)
 - **开发语言**: [TypeScript](https://www.typescriptlang.org/)
-- **样式方案**: [Tailwind CSS](https://tailwindcss.com/)
+- **样式方案**: [Tailwind CSS v4](https://tailwindcss.com/)（CSS-first `@theme` 配置）
 - **UI 组件库**: [Shadcn UI](https://ui.shadcn.com/) / [Radix UI](https://www.radix-ui.com/)
 - **图标库**: [Lucide React](https://lucide.dev/)
-- **工具库**: `date-fns`, `clsx`, `tailwind-merge`
+- **工具库**: `clsx`, `tailwind-merge`
 
 ---
 

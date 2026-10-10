@@ -32,7 +32,7 @@ export function InvoicePreview({ input, totals, plainText }: InvoicePreviewProps
         <EnhancedCopyButton text={plainText} variant="outline" size="sm">复制纯文本</EnhancedCopyButton>
       </div>
 
-      <div className="mx-auto w-full max-w-[820px] bg-white p-8 text-slate-900 shadow-sm print:max-w-none print:p-0 print:shadow-none dark:bg-slate-900 dark:text-slate-100">
+      <div className="mx-auto w-full max-w-[820px] bg-white p-8 text-slate-900 shadow-xs print:max-w-none print:p-0 print:shadow-none dark:bg-slate-900 dark:text-slate-100">
         <div className="flex items-start justify-between border-b-2 border-slate-900 pb-4 dark:border-slate-100">
           <div>
             <h2 className="text-2xl font-black tracking-wide">{title}</h2>

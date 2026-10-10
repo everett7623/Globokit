@@ -32,12 +32,12 @@ export function ContainerLoadForm(props: ContainerLoadFormProps) {
       <CardHeader><CardTitle>装柜参数</CardTitle><CardDescription>输入外箱尺寸和订单箱数，柜型参数按常见内尺寸估算</CardDescription></CardHeader>
       <CardContent className="space-y-5">
         <div className="flex flex-wrap gap-2">{CONTAINER_PRESETS.map((preset) => <Button key={preset.label} type="button" variant="outline" size="sm" onClick={() => props.onPreset(preset.values)}>{preset.label}</Button>)}</div>
-        <div className="grid gap-4 md:grid-cols-[repeat(3,minmax(0,1fr))]">
+        <div className="grid gap-4 md:grid-cols-3">
           <NumberField field="lengthCm" label="外箱长" suffix="cm" value={props.form.lengthCm} onValueChange={props.onFieldChange} />
           <NumberField field="widthCm" label="外箱宽" suffix="cm" value={props.form.widthCm} onValueChange={props.onFieldChange} />
           <NumberField field="heightCm" label="外箱高" suffix="cm" value={props.form.heightCm} onValueChange={props.onFieldChange} />
         </div>
-        <div className="grid gap-4 md:grid-cols-[repeat(3,minmax(0,1fr))]">
+        <div className="grid gap-4 md:grid-cols-3">
           <NumberField field="grossWeightKg" label="单箱毛重" suffix="kg" step="0.1" value={props.form.grossWeightKg} onValueChange={props.onFieldChange} />
           <NumberField field="quantity" label="总箱数" suffix="箱" value={props.form.quantity} onValueChange={props.onFieldChange} />
           <div className="space-y-2">

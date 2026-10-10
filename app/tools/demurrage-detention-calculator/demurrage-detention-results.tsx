@@ -19,7 +19,7 @@ export function DemurrageDetentionStats({ result }: { result: DemurrageDetention
     { label: '总超期天数', value: `${result.totalChargeableDays} 天`, note: '两个计费环节合计', icon: Clock, tone: 'text-amber-700' },
     { label: '费用较高环节', value: highest ? highest.type === 'demurrage' ? '滞港费' : '滞箱费' : '暂无费用', note: highest ? formatMoney(highest.feeTotal, result.currency) : '均未超免费期', icon: AlertTriangle, tone: 'text-emerald-700' },
   ]
-  return <div className="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">{stats.map((stat) => { const Icon = stat.icon; return <Card key={stat.label}><CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-medium"><Icon className="h-4 w-4" />{stat.label}</CardTitle></CardHeader><CardContent><div className={cn('break-words text-xl font-bold tabular-nums', stat.tone)}>{stat.value}</div><p className="mt-1 text-xs text-muted-foreground">{stat.note}</p></CardContent></Card> })}</div>
+  return <div className="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">{stats.map((stat) => { const Icon = stat.icon; return <Card key={stat.label}><CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-medium"><Icon className="h-4 w-4" />{stat.label}</CardTitle></CardHeader><CardContent><div className={cn('wrap-break-word text-xl font-bold tabular-nums', stat.tone)}>{stat.value}</div><p className="mt-1 text-xs text-muted-foreground">{stat.note}</p></CardContent></Card> })}</div>
 }
 
 export function DemurrageDetentionResults({ result }: { result: DemurrageDetentionResult }) {
@@ -33,5 +33,5 @@ function ChargeSection({ result, currency }: { result: ChargeTypeResult; currenc
 }
 
 function Metric({ label, value }: { label: string; value: string }) {
-  return <div className="rounded-md bg-slate-100 px-3 py-2 dark:bg-white/[0.06]"><p className="text-xs text-muted-foreground">{label}</p><p className="mt-1 break-words font-semibold tabular-nums">{value}</p></div>
+  return <div className="rounded-md bg-slate-100 px-3 py-2 dark:bg-white/6"><p className="text-xs text-muted-foreground">{label}</p><p className="mt-1 wrap-break-word font-semibold tabular-nums">{value}</p></div>
 }

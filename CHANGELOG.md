@@ -2,6 +2,23 @@
 
 本项目的重要变更均记录于此。版本号遵循 [Semantic Versioning](https://semver.org/lang/zh-CN/)。
 
+## [0.5.0] - 2026-10-09
+
+### 新增
+
+- 站点框架全量升级：Next.js 15.5 → 16.4（构建引擎切换为 Turbopack，`jsx` 配置与路由类型按官方迁移自动更新）、React 19.2 → 19.3、TypeScript 5.9、Tailwind CSS 3.4 → 4.3、ESLint 8 → 10、lucide-react 0.475 → 1.54、tailwind-merge 2 → 3、Radix UI 全家桶与 @bwip-js/browser、pinyin-pro 同步升级。
+
+### 优化
+
+- Tailwind CSS 迁移至 v4：`tailwind.config.ts` 内联为 `globals.css` 的 `@theme` / `@custom-variant dark` / `@utility container`，PostCSS 切换到 `@tailwindcss/postcss` 并移除 autoprefixer（v4 内置前缀处理），62 个文件的比例类名（shadow-sm → shadow-xs 等）由官方升级工具迁移。
+- ESLint 迁移至 flat config：`.eslintrc.json` 替换为 `eslint.config.mjs`，原生接入 `eslint-config-next/core-web-vitals`。
+- 新增 `lib/client-hooks.ts`：以 `useSyncExternalStore` 统一读取 localStorage 收藏、本地时区与客户端时钟；按 react-hooks v7 新规则重构主题 Provider、货币符号、交期计算、国家资料、节假日查询、世界时间、VPS 计算器共 7 处 effect 内 setState，消除级联渲染。
+- lucide-react 1.x 移除品牌图标，页脚 GitHub 图标改为内联 SVG，与品牌资产规范一致。
+
+### 修复
+
+- 修复 Tailwind 升级工具将 Button/Badge 业务 variant 字面量 `'outline'` 误替换为 `'outline-solid'` 导致的类型错误。
+
 ## [0.4.0] - 2026-10-08
 
 ### 新增
@@ -86,6 +103,7 @@
 - 统一国际条码生成器在搜索结果和页面中的展示名称。
 - 将条码载入示例替换为不关联外部供应商的虚构 GS1 受限流通测试数据。
 
+[0.5.0]: https://github.com/everett7623/Globokit/releases/tag/v0.5.0
 [0.4.0]: https://github.com/everett7623/Globokit/releases/tag/v0.4.0
 [0.3.0]: https://github.com/everett7623/Globokit/releases/tag/v0.3.0
 [0.2.0]: https://github.com/everett7623/Globokit/releases/tag/v0.2.0

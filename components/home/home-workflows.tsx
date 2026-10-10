@@ -21,9 +21,9 @@ export function HomeWorkflows() {
           <Link
             key={workflow.title}
             href={firstTool?.href ?? '/#tools'}
-            className="group rounded-lg border border-white/70 bg-white/80 p-5 shadow-lg shadow-slate-900/[0.04] backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-emerald-300 hover:shadow-xl hover:shadow-emerald-900/[0.07] dark:border-white/10 dark:bg-slate-950/60 dark:hover:border-cyan-300/50"
+            className="group rounded-lg border border-white/70 bg-white/80 p-5 shadow-lg shadow-slate-900/4 backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-emerald-300 hover:shadow-xl hover:shadow-emerald-900/[0.07] dark:border-white/10 dark:bg-slate-950/60 dark:hover:border-cyan-300/50"
           >
-            <div className={cn('mb-5 flex h-11 w-11 items-center justify-center rounded-md bg-gradient-to-br text-white shadow-lg', workflow.accent)}>
+            <div className={cn('mb-5 flex h-11 w-11 items-center justify-center rounded-md bg-linear-to-br text-white shadow-lg', workflow.accent)}>
               <Icon className="h-5 w-5" />
             </div>
             <p className="text-lg font-semibold text-slate-950 dark:text-white">{workflow.title}</p>

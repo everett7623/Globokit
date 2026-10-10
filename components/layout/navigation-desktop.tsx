@@ -46,7 +46,7 @@ export function DesktopNavigation({
       <Link
         href="/"
         className={cn(
-          'inline-flex h-10 items-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-slate-900/[0.04] hover:text-emerald-700 dark:hover:bg-white/10 dark:hover:text-cyan-200',
+          'inline-flex h-10 items-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-slate-900/4 hover:text-emerald-700 dark:hover:bg-white/10 dark:hover:text-cyan-200',
           pathname === '/' ? 'text-slate-950 dark:text-white' : 'text-slate-600 dark:text-slate-300'
         )}
       >
@@ -64,7 +64,7 @@ export function DesktopNavigation({
           aria-controls="desktop-tools-menu"
           onClick={() => onToolsDropdownOpenChange(!toolsDropdownOpen)}
           className={cn(
-            'inline-flex h-10 items-center gap-2 rounded-md px-3 text-sm font-semibold transition-colors hover:bg-slate-900/[0.04] hover:text-emerald-700 dark:hover:bg-white/10 dark:hover:text-cyan-200',
+            'inline-flex h-10 items-center gap-2 rounded-md px-3 text-sm font-semibold transition-colors hover:bg-slate-900/4 hover:text-emerald-700 dark:hover:bg-white/10 dark:hover:text-cyan-200',
             isToolPage ? 'text-slate-950 dark:text-white' : 'text-slate-600 dark:text-slate-300'
           )}
         >
@@ -90,7 +90,7 @@ export function DesktopNavigation({
       <Link
         href="/resources"
         className={cn(
-          'inline-flex h-10 items-center gap-2 rounded-md px-3 text-sm font-medium transition-colors hover:bg-slate-900/[0.04] hover:text-emerald-700 dark:hover:bg-white/10 dark:hover:text-cyan-200',
+          'inline-flex h-10 items-center gap-2 rounded-md px-3 text-sm font-medium transition-colors hover:bg-slate-900/4 hover:text-emerald-700 dark:hover:bg-white/10 dark:hover:text-cyan-200',
           pathname === '/resources' ? 'text-slate-950 dark:text-white' : 'text-slate-600 dark:text-slate-300'
         )}
       >
@@ -105,7 +105,7 @@ export function DesktopNavigation({
           key={tool.id}
           href={tool.href}
           className={cn(
-            'hidden h-10 items-center rounded-md px-3 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-900/[0.04] hover:text-emerald-700 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-cyan-200 xl:inline-flex',
+            'hidden h-10 items-center rounded-md px-3 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-900/4 hover:text-emerald-700 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-cyan-200 xl:inline-flex',
             pathname === tool.href && 'bg-emerald-50 text-emerald-700 dark:bg-cyan-300/10 dark:text-cyan-200'
           )}
         >
@@ -122,7 +122,7 @@ export function DesktopNavigation({
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-10 items-center gap-2 rounded-md border border-slate-200/80 bg-white/70 px-3 text-sm font-medium text-slate-700 shadow-sm shadow-slate-900/[0.03] transition-all hover:border-emerald-300 hover:text-emerald-700 dark:border-white/10 dark:bg-slate-900/70 dark:text-slate-200 dark:hover:border-cyan-300/60 dark:hover:text-cyan-200"
+              className="inline-flex h-10 items-center gap-2 rounded-md border border-slate-200/80 bg-white/70 px-3 text-sm font-medium text-slate-700 shadow-xs shadow-slate-900/3 transition-all hover:border-emerald-300 hover:text-emerald-700 dark:border-white/10 dark:bg-slate-900/70 dark:text-slate-200 dark:hover:border-cyan-300/60 dark:hover:text-cyan-200"
             >
               <Icon className="h-4 w-4" />
               {link.label}

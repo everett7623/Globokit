@@ -43,7 +43,7 @@ interface LocalTimeCardProps {
 
 export function LocalTimeCard(props: LocalTimeCardProps) {
   return (
-    <Card className="mb-6 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950">
+    <Card className="mb-6 bg-linear-to-r from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950">
       <CardHeader>
         <CardTitle className="flex items-center gap-2"><Clock className="h-5 w-5" />本地时间<Badge variant="outline" className="ml-2">{props.localTimezone ?? '本地时区'}</Badge><Badge variant="secondary">UTC{props.localOffset ?? '--:--'}</Badge></CardTitle>
         <div className="flex items-center gap-2 mt-2 text-sm text-muted-foreground">
@@ -53,7 +53,7 @@ export function LocalTimeCard(props: LocalTimeCardProps) {
         </div>
       </CardHeader>
       <CardContent>
-        <div className="text-4xl font-mono font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+        <div className="text-4xl font-mono font-bold bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
           {props.currentDateTime ? (props.timeFormat === '24' ? props.currentDateTime.toLocaleTimeString('zh-CN') : props.currentDateTime.toLocaleTimeString('en-US', { hour12: true })) : '--:--:--'}
         </div>
         <div className="text-muted-foreground mt-1">{props.currentDateTime ? props.currentDateTime.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' }) : '----年--月--日'}</div>

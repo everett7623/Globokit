@@ -44,11 +44,11 @@ export function HomeResources() {
               href={resource.href}
               target="_blank"
               rel="sponsored noopener noreferrer"
-              className="group rounded-lg border border-white/70 bg-white/80 p-5 shadow-lg shadow-slate-900/[0.04] backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-cyan-300 hover:shadow-xl hover:shadow-cyan-900/[0.06] dark:border-white/10 dark:bg-slate-950/60 dark:hover:border-cyan-300/50"
+              className="group rounded-lg border border-white/70 bg-white/80 p-5 shadow-lg shadow-slate-900/4 backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-cyan-300 hover:shadow-xl hover:shadow-cyan-900/6 dark:border-white/10 dark:bg-slate-950/60 dark:hover:border-cyan-300/50"
             >
               <div className="mb-4 flex items-start justify-between gap-3">
                 <div className="flex min-w-0 items-center gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-slate-50 ring-1 ring-slate-200/80 dark:bg-white/[0.04] dark:ring-white/10">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-slate-50 ring-1 ring-slate-200/80 dark:bg-white/4 dark:ring-white/10">
                     <Icon className={cn('h-5 w-5', meta.tone)} />
                   </div>
                   <div className="min-w-0">

@@ -50,8 +50,8 @@ export function CategorySidebar({ activeCategory, onActiveCategoryChange, onClos
               onFocus={() => onActiveCategoryChange(category)}
               onClick={() => onActiveCategoryChange(category)}
               className={cn(
-                'group flex w-full items-center justify-between rounded-md px-3 py-2.5 text-left text-sm transition-all hover:bg-white hover:shadow-sm dark:hover:bg-white/10',
-                activeCategory === category && 'bg-white text-emerald-700 shadow-sm ring-1 ring-emerald-200/80 dark:bg-cyan-300/10 dark:text-cyan-200 dark:ring-cyan-300/20'
+                'group flex w-full items-center justify-between rounded-md px-3 py-2.5 text-left text-sm transition-all hover:bg-white hover:shadow-xs dark:hover:bg-white/10',
+                activeCategory === category && 'bg-white text-emerald-700 shadow-xs ring-1 ring-emerald-200/80 dark:bg-cyan-300/10 dark:text-cyan-200 dark:ring-cyan-300/20'
               )}
             >
               <span className="flex min-w-0 items-center gap-2">
@@ -106,7 +106,7 @@ export function NewToolsSidebar({ onClose }: { onClose: () => void }) {
             key={tool.id}
             href={tool.href}
             onClick={onClose}
-            className="block rounded-md border border-white/10 bg-white/[0.04] p-3 transition-colors hover:border-emerald-300/50 hover:bg-emerald-300/10"
+            className="block rounded-md border border-white/10 bg-white/4 p-3 transition-colors hover:border-emerald-300/50 hover:bg-emerald-300/10"
           >
             <div className="mb-1 flex items-center justify-between gap-2">
               <span className="truncate text-sm font-semibold">{tool.shortTitle}</span>

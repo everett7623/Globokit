@@ -32,12 +32,12 @@ export function OceanFreightForm(props: OceanFreightFormProps) {
       <CardContent className="space-y-6">
         <Tabs value={props.form.mode} onValueChange={(value) => props.onModeChange(value as OceanFreightMode)}><TabsList className="grid w-full grid-cols-2"><TabsTrigger value="fcl">整柜 FCL</TabsTrigger><TabsTrigger value="lcl">拼箱 LCL</TabsTrigger></TabsList></Tabs>
         <div className="flex flex-wrap gap-2">{OCEAN_PRESETS.map((preset) => <Button key={preset.label} type="button" variant="outline" size="sm" onClick={() => props.onPreset(preset.values)}>{preset.label}</Button>)}</div>
-        <div className="grid gap-4 md:grid-cols-[repeat(3,minmax(0,1fr))]">
+        <div className="grid gap-4 md:grid-cols-3">
           <NumberField field="quantity" label="货物数量" suffix="件" step="1" value={props.form.quantity} onValueChange={props.onFieldChange} />
           <NumberField field="totalCbm" label="总体积" suffix="CBM" value={props.form.totalCbm} onValueChange={props.onFieldChange} />
           <NumberField field="totalWeightKg" label="总毛重" suffix="kg" value={props.form.totalWeightKg} onValueChange={props.onFieldChange} />
         </div>
-        <div className="grid gap-4 md:grid-cols-[repeat(3,minmax(0,1fr))]">
+        <div className="grid gap-4 md:grid-cols-3">
           {props.form.mode === 'fcl'
             ? <NumberField field="containerCount" label="柜数" suffix="柜" step="1" value={props.form.containerCount} onValueChange={props.onFieldChange} />
             : <NumberField field="minChargeableCbm" label="最低计费" suffix="CBM" value={props.form.minChargeableCbm} onValueChange={props.onFieldChange} />}

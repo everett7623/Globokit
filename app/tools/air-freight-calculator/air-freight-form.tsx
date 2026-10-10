@@ -32,12 +32,12 @@ export function AirFreightForm(props: AirFreightFormProps) {
       <CardHeader><CardTitle>计费重参数</CardTitle><CardDescription>输入箱规、重量、运价及附加费用</CardDescription></CardHeader>
       <CardContent className="space-y-5">
         <div className="flex flex-wrap gap-2">{AIR_PRESETS.map((preset) => <Button key={preset.label} type="button" variant="outline" size="sm" onClick={() => props.onPreset(preset.values)}>{preset.label}</Button>)}</div>
-        <div className="grid gap-4 md:grid-cols-[repeat(3,minmax(0,1fr))]">
+        <div className="grid gap-4 md:grid-cols-3">
           <NumberField field="lengthCm" label="外箱长" suffix="cm" value={props.form.lengthCm} onValueChange={props.onFieldChange} />
           <NumberField field="widthCm" label="外箱宽" suffix="cm" value={props.form.widthCm} onValueChange={props.onFieldChange} />
           <NumberField field="heightCm" label="外箱高" suffix="cm" value={props.form.heightCm} onValueChange={props.onFieldChange} />
         </div>
-        <div className="grid gap-4 md:grid-cols-[repeat(3,minmax(0,1fr))]">
+        <div className="grid gap-4 md:grid-cols-3">
           <NumberField field="grossWeightKg" label="单箱毛重" suffix="kg" step="0.01" value={props.form.grossWeightKg} onValueChange={props.onFieldChange} />
           <NumberField field="netWeightKg" label="单箱净重" suffix="kg" step="0.01" value={props.form.netWeightKg} onValueChange={props.onFieldChange} />
           <NumberField field="quantity" label="箱数" suffix="箱" value={props.form.quantity} onValueChange={props.onFieldChange} />
@@ -56,7 +56,7 @@ export function AirFreightForm(props: AirFreightFormProps) {
           {props.form.divisorChoice === 'custom' && <NumberField field="divisor" label="自定义系数" suffix="" value={props.form.divisor} onValueChange={props.onFieldChange} />}
           <p className="text-xs text-muted-foreground">{props.divisorNote}</p>
         </div>
-        <div className="grid gap-4 md:grid-cols-[repeat(3,minmax(0,1fr))]">
+        <div className="grid gap-4 md:grid-cols-3">
           <NumberField field="ratePerKg" label="运价" suffix="元/kg" step="0.01" value={props.form.ratePerKg} onValueChange={props.onFieldChange} />
           <NumberField field="minCharge" label="最低消费" suffix="元" step="0.01" value={props.form.minCharge} onValueChange={props.onFieldChange} />
           <NumberField field="fuelSurchargePercent" label="燃油附加" suffix="%" step="0.1" value={props.form.fuelSurchargePercent} onValueChange={props.onFieldChange} />

@@ -93,7 +93,7 @@ export function LcChecklistResult({ evaluation, amendmentRequests }: LcChecklist
           ) : (
             amendmentRequests.map((sentence) => (
               <div key={sentence} className="flex items-start justify-between gap-3 rounded-md border bg-muted/20 p-3">
-                <p className="min-w-0 flex-1 break-words text-sm leading-6">{sentence}</p>
+                <p className="min-w-0 flex-1 wrap-break-word text-sm leading-6">{sentence}</p>
                 <EnhancedCopyButton text={sentence} variant="outline" size="sm">复制</EnhancedCopyButton>
               </div>
             ))

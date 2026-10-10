@@ -70,7 +70,7 @@ export function CurrencyList(props: CurrencyListProps) {
               <div className="space-y-2">
                 <div className="text-sm">
                   <span className="text-muted-foreground">国家/地区：</span>
-                  <span className="font-medium break-words" title={`${currency.country} (${currency.countryEn})`}>{currency.country}</span>
+                  <span className="font-medium wrap-break-word" title={`${currency.country} (${currency.countryEn})`}>{currency.country}</span>
                 </div>
                 <div className="text-sm">
                   <span className="text-muted-foreground">示例：</span>

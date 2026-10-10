@@ -113,7 +113,7 @@ export default function UnitConverterPage() {
           <CardContent className="space-y-5">
             <div className="rounded-lg border border-emerald-200 bg-emerald-50/80 p-5 dark:border-cyan-300/20 dark:bg-cyan-300/10">
               <p className="text-sm text-emerald-800 dark:text-cyan-100">目标数值</p>
-              <p className="mt-2 break-words text-3xl font-bold tabular-nums text-emerald-950 dark:text-white">{result === null || !target ? '—' : `${formatUnitValue(result)} ${target.symbol}`}</p>
+              <p className="mt-2 wrap-break-word text-3xl font-bold tabular-nums text-emerald-950 dark:text-white">{result === null || !target ? '—' : `${formatUnitValue(result)} ${target.symbol}`}</p>
               {result !== null && source && target && <p className="mt-2 text-sm text-emerald-700 dark:text-cyan-200">{formatUnitValue(numericValue)} {source.symbol} = {formatUnitValue(result)} {target.symbol}</p>}
             </div>
             <div>

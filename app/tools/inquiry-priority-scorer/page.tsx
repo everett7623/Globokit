@@ -225,7 +225,7 @@ export default function InquiryPriorityScorerPage() {
                   </div>
                   <div className="h-2.5 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700">
                     <div
-                      className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-emerald-600 transition-all duration-700"
+                      className="h-full rounded-full bg-linear-to-r from-emerald-400 to-emerald-600 transition-all duration-700"
                       style={{ width: result.data.total + '%' }}
                     />
                   </div>

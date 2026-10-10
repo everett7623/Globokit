@@ -54,13 +54,13 @@ export function DesktopToolsMenu({
         />
 
         <section className="h-full overflow-y-auto p-5">
-          <div className="mb-5 flex items-center gap-3 rounded-lg border border-slate-200 bg-white px-4 py-3 shadow-sm dark:border-white/10 dark:bg-slate-900/70">
+          <div className="mb-5 flex items-center gap-3 rounded-lg border border-slate-200 bg-white px-4 py-3 shadow-xs dark:border-white/10 dark:bg-slate-900/70">
             <Search className="h-4 w-4 text-slate-400" />
             <input
               value={query}
               onChange={(event) => onQueryChange(event.target.value)}
               placeholder="搜索报价、装柜、空运、国家、节假日、JSON..."
-              className="min-w-0 flex-1 bg-transparent text-sm text-slate-900 outline-none placeholder:text-slate-400 dark:text-white"
+              className="min-w-0 flex-1 bg-transparent text-sm text-slate-900 outline-hidden placeholder:text-slate-400 dark:text-white"
             />
           </div>
 

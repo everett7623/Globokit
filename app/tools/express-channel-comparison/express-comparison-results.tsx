@@ -59,7 +59,7 @@ function ResultCard({ row }: { row: ExpressChannelResult }) {
 
   return <Card className={row.costRank === 1 ? 'border-emerald-300' : ''}>
     <CardHeader>
-      <CardTitle className="flex items-start justify-between gap-3"><span className="min-w-0 break-words">{row.name}</span><Badge variant={row.costRank === 1 ? 'default' : 'secondary'} className="shrink-0">成本第 {row.costRank}</Badge></CardTitle>
+      <CardTitle className="flex items-start justify-between gap-3"><span className="min-w-0 wrap-break-word">{row.name}</span><Badge variant={row.costRank === 1 ? 'default' : 'secondary'} className="shrink-0">成本第 {row.costRank}</Badge></CardTitle>
       <CardDescription>{EXPRESS_SERVICE_LABELS[row.serviceType]} · {EXPRESS_TRADE_TERM_LABELS[row.tradeTerm]} · {row.transitDaysMin}-{row.transitDaysMax} 天</CardDescription>
     </CardHeader>
     <CardContent className="space-y-4">
