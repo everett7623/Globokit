@@ -15,7 +15,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint app components lib --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint app components lib",
     "test": "node scripts/run-tests.cjs",
     "test:unit-converter": "node scripts/assert-unit-converter.cjs",
     "test:delivery-date": "node scripts/assert-delivery-date.cjs",
