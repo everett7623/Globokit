@@ -6,43 +6,30 @@
 
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useMemo, useState } from 'react'
+import { useLocalTimeZone, useNow, useStoredStringArray } from '@/lib/client-hooks'
 import { WorldTimeCityList } from './world-time-city-list'
 import { WorldTimeControls } from './world-time-controls'
 import { LocalTimeCard, WorldTimeInfo, WorldTimeStats } from './world-time-dashboard'
-import { buildCityTimes, getUpcomingWorkingCities, readStoredStringArray, type CityTime } from './world-time-page-data'
+import { buildCityTimes, getUpcomingWorkingCities, type CityTime } from './world-time-page-data'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { getTimeZoneOffset, getWorldTimeRegion } from '@/lib/tools/world-time'
 import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
 import { CardSkeleton } from '@/components/ui/loading-indicator'
 
 export default function WorldTimePage() {
-  const [cityTimes, setCityTimes] = useState<CityTime[]>([])
   const [searchTerm, setSearchTerm] = useState('')
-  const [currentDateTime, setCurrentDateTime] = useState<Date | null>(null)
-  const [localTimezone, setLocalTimezone] = useState<string | null>(null)
-  const [favorites, setFavorites] = useState<string[]>([])
   const [activeTab, setActiveTab] = useState('all')
   const [quickFilter, setQuickFilter] = useState('')
   const [timeFormat, setTimeFormat] = useState<'12' | '24'>('24')
-
-  useEffect(() => setFavorites(readStoredStringArray('worldTimeFavorites')), [])
-  useEffect(() => {
-    setLocalTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone)
-    const updateTimes = () => {
-      const now = new Date()
-      setCurrentDateTime(now)
-      setCityTimes(buildCityTimes(now, timeFormat))
-    }
-    updateTimes()
-    const interval = setInterval(updateTimes, 1000)
-    return () => clearInterval(interval)
-  }, [timeFormat])
+  const [favorites, setFavorites] = useStoredStringArray('worldTimeFavorites')
+  const localTimezone = useLocalTimeZone()
+  const now = useNow(1000)
+  const currentDateTime = now
+  const cityTimes = useMemo<CityTime[]>(() => (now ? buildCityTimes(now, timeFormat) : []), [now, timeFormat])
 
   const toggleFavorite = (cityName: string) => {
-    const newFavorites = favorites.includes(cityName) ? favorites.filter((favorite) => favorite !== cityName) : [...favorites, cityName]
-    setFavorites(newFavorites)
-    localStorage.setItem('worldTimeFavorites', JSON.stringify(newFavorites))
+    setFavorites((current) => current.includes(cityName) ? current.filter((favorite) => favorite !== cityName) : [...current, cityName])
   }
   const normalizedSearchTerm = searchTerm.toLowerCase()
   const filteredCities = cityTimes.filter((city) => {

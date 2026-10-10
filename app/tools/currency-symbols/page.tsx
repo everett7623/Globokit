@@ -6,7 +6,8 @@
 
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { useStoredStringArray } from '@/lib/client-hooks'
 import { CurrencyControls } from './currency-controls'
 import { CurrencyReference, CurrencyStats } from './currency-info-panels'
 import { CurrencyList } from './currency-list'
@@ -18,18 +19,11 @@ export default function CurrencySymbolsPage() {
   const [currencies] = useState<Currency[]>(() => getCurrencyData())
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedRegion, setSelectedRegion] = useState('all')
-  const [favorites, setFavorites] = useState<string[]>([])
+  const [favorites, setFavorites] = useStoredStringArray('currencyFavorites')
   const [showOnlyPopular, setShowOnlyPopular] = useState(false)
 
-  useEffect(() => {
-    const saved = localStorage.getItem('currencyFavorites')
-    if (saved) setFavorites(JSON.parse(saved))
-  }, [])
-
   const toggleFavorite = (code: string) => {
-    const newFavorites = favorites.includes(code) ? favorites.filter((favorite) => favorite !== code) : [...favorites, code]
-    setFavorites(newFavorites)
-    localStorage.setItem('currencyFavorites', JSON.stringify(newFavorites))
+    setFavorites((current) => current.includes(code) ? current.filter((favorite) => favorite !== code) : [...current, code])
   }
   const normalizedSearchTerm = searchTerm.toLowerCase()
   const filteredCurrencies = currencies.filter((currency) => {

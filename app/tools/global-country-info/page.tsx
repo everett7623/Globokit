@@ -6,7 +6,8 @@
 
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
+import { useLocalTimeZone, useStoredStringArray } from '@/lib/client-hooks'
 import { CountryControls, MajorTradeCountries } from './country-controls'
 import { CountryDetailModal } from './country-detail-modal'
 import { exportCountriesCsv, filterAndSortCountries, type SortField, type SortOrder } from './country-page-data'
@@ -18,24 +19,17 @@ import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrappe
 export default function GlobalCountryInfoPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [continentFilter, setContinentFilter] = useState('all')
-  const [favorites, setFavorites] = useState<string[]>([])
+  const [favorites, setFavorites] = useStoredStringArray('countryFavorites')
   const [sortField, setSortField] = useState<SortField>('none')
   const [sortOrder, setSortOrder] = useState<SortOrder>('asc')
   const [showOnlyFavorites, setShowOnlyFavorites] = useState(false)
   const [showOnlyMajorTrade, setShowOnlyMajorTrade] = useState(false)
   const [expandedRows, setExpandedRows] = useState<string[]>([])
   const [selectedCountry, setSelectedCountry] = useState<CountryInfo | null>(null)
-  const [localTimezone, setLocalTimezone] = useState<string | null>(null)
-
-  useEffect(() => {
-    setLocalTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone)
-    const saved = localStorage.getItem('countryFavorites')
-    if (saved) setFavorites(JSON.parse(saved))
-  }, [])
+  const localTimezone = useLocalTimeZone()
   const countries = useMemo(() => filterAndSortCountries({ searchTerm, continentFilter, favorites, sortField, sortOrder, showOnlyFavorites, showOnlyMajorTrade, localTimezone }), [searchTerm, continentFilter, favorites, sortField, sortOrder, showOnlyFavorites, showOnlyMajorTrade, localTimezone])
   const toggleFavorite = (iso2: string) => {
-    const next = favorites.includes(iso2) ? favorites.filter((favorite) => favorite !== iso2) : [...favorites, iso2]
-    setFavorites(next); localStorage.setItem('countryFavorites', JSON.stringify(next))
+    setFavorites((current) => current.includes(iso2) ? current.filter((favorite) => favorite !== iso2) : [...current, iso2])
   }
   const handleSort = (field: SortField) => {
     if (sortField === field) setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')

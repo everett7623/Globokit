@@ -6,7 +6,8 @@
 
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useMemo, useState } from 'react'
+import { useClientDate } from '@/lib/client-hooks'
 import { HolidayCalendarTab } from './holiday-calendar-tab'
 import { HolidayCountryTab } from './holiday-country-tab'
 import { HolidayInfo, HolidayStats } from './holiday-info'
@@ -21,17 +22,19 @@ import { CardSkeleton } from '@/components/ui/loading-indicator'
 export default function HolidayQueryPage() {
   const [selectedCountry, setSelectedCountry] = useState('US')
   const [selectedYear, setSelectedYear] = useState('')
-  const [upcomingHolidays, setUpcomingHolidays] = useState<ReturnType<typeof getUpcomingHolidays>>([])
   const [selectedMonth, setSelectedMonth] = useState('all')
   const [selectedRegion, setSelectedRegion] = useState('all')
-  useEffect(() => {
-    const currentYear = new Date().getFullYear()
-    const defaultYear = SUPPORTED_HOLIDAY_YEARS.includes(currentYear as typeof SUPPORTED_HOLIDAY_YEARS[number]) ? currentYear : SUPPORTED_HOLIDAY_YEARS[SUPPORTED_HOLIDAY_YEARS.length - 1]
-    setSelectedYear(defaultYear.toString())
-    setUpcomingHolidays(getUpcomingHolidays(30))
-  }, [])
+  const clientDate = useClientDate()
 
-  const year = Number.parseInt(selectedYear || SUPPORTED_HOLIDAY_YEARS[SUPPORTED_HOLIDAY_YEARS.length - 1].toString())
+  const { defaultYear, upcomingHolidays } = useMemo(() => {
+    if (!clientDate) return { defaultYear: '', upcomingHolidays: [] }
+    const currentYear = clientDate.getFullYear()
+    const resolvedYear = SUPPORTED_HOLIDAY_YEARS.includes(currentYear as typeof SUPPORTED_HOLIDAY_YEARS[number]) ? currentYear : SUPPORTED_HOLIDAY_YEARS[SUPPORTED_HOLIDAY_YEARS.length - 1]
+    return { defaultYear: resolvedYear.toString(), upcomingHolidays: getUpcomingHolidays(30, clientDate) }
+  }, [clientDate])
+  const effectiveYear = selectedYear || defaultYear
+
+  const year = Number.parseInt(effectiveYear || SUPPORTED_HOLIDAY_YEARS[SUPPORTED_HOLIDAY_YEARS.length - 1].toString())
   const countryInfo = countries[selectedCountry]
   const countryHolidays = getCountryHolidays(selectedCountry, year)
   const filteredHolidays = selectedMonth === 'all' ? countryHolidays : filterHolidaysByMonth(countryHolidays, Number.parseInt(selectedMonth))
@@ -40,5 +43,5 @@ export default function HolidayQueryPage() {
   const filteredCountries = selectedRegion === 'all' ? Object.entries(countries) : Object.entries(countries).filter(([, country]) => country.region === selectedRegion)
   const yearData = generateHolidayData(year)
 
-  return <><div className="mb-8"><h1 className="text-3xl font-bold mb-2">国际节假日查询</h1><p className="text-muted-foreground">查询全球国家目录与主要贸易国家节假日安排，合理规划外贸业务</p></div>{selectedYear ? <><HolidayStats totalCountries={Object.keys(countries).length} totalHolidays={Object.values(yearData).reduce((sum, holidays) => sum + holidays.length, 0)} upcomingCount={upcomingHolidays.filter((holiday) => holiday.daysUntil <= 7).length} detailedCountries={Object.values(yearData).filter((holidays) => holidays.length > 0).length} year={selectedYear} /><Card><CardContent className="pt-6"><Tabs defaultValue="country" className="space-y-4"><TabsList className="grid w-full grid-cols-5"><TabsTrigger value="country">按国家查询</TabsTrigger><TabsTrigger value="upcoming">即将到来</TabsTrigger><TabsTrigger value="international">国际节日</TabsTrigger><TabsTrigger value="religious">宗教节日</TabsTrigger><TabsTrigger value="calendar">年历视图</TabsTrigger></TabsList><TabsContent value="country"><HolidayCountryTab selectedCountry={selectedCountry} selectedYear={selectedYear} selectedMonth={selectedMonth} selectedRegion={selectedRegion} selectedYearNumber={year} countryInfo={countryInfo} countries={countries} filteredCountries={filteredCountries} filteredHolidays={filteredHolidays} regionNames={regionNames} onCountry={setSelectedCountry} onYear={setSelectedYear} onMonth={setSelectedMonth} onRegion={setSelectedRegion} /></TabsContent><TabsContent value="upcoming"><UpcomingHolidayTab holidays={upcomingHolidays} /></TabsContent><TabsContent value="international"><InternationalHolidayTab /></TabsContent><TabsContent value="religious"><ReligiousHolidayTab /></TabsContent><TabsContent value="calendar"><HolidayCalendarTab country={countryInfo} year={selectedYear} holidays={countryHolidays} onMonth={setSelectedMonth} /></TabsContent></Tabs></CardContent></Card><HolidayInfo /></> : <div className="grid gap-4 md:grid-cols-4" aria-busy="true"><CardSkeleton /><CardSkeleton /><CardSkeleton /><CardSkeleton /></div>}</>
+  return <><div className="mb-8"><h1 className="text-3xl font-bold mb-2">国际节假日查询</h1><p className="text-muted-foreground">查询全球国家目录与主要贸易国家节假日安排，合理规划外贸业务</p></div>{effectiveYear ? <><HolidayStats totalCountries={Object.keys(countries).length} totalHolidays={Object.values(yearData).reduce((sum, holidays) => sum + holidays.length, 0)} upcomingCount={upcomingHolidays.filter((holiday) => holiday.daysUntil <= 7).length} detailedCountries={Object.values(yearData).filter((holidays) => holidays.length > 0).length} year={effectiveYear} /><Card><CardContent className="pt-6"><Tabs defaultValue="country" className="space-y-4"><TabsList className="grid w-full grid-cols-5"><TabsTrigger value="country">按国家查询</TabsTrigger><TabsTrigger value="upcoming">即将到来</TabsTrigger><TabsTrigger value="international">国际节日</TabsTrigger><TabsTrigger value="religious">宗教节日</TabsTrigger><TabsTrigger value="calendar">年历视图</TabsTrigger></TabsList><TabsContent value="country"><HolidayCountryTab selectedCountry={selectedCountry} selectedYear={effectiveYear} selectedMonth={selectedMonth} selectedRegion={selectedRegion} selectedYearNumber={year} countryInfo={countryInfo} countries={countries} filteredCountries={filteredCountries} filteredHolidays={filteredHolidays} regionNames={regionNames} onCountry={setSelectedCountry} onYear={setSelectedYear} onMonth={setSelectedMonth} onRegion={setSelectedRegion} /></TabsContent><TabsContent value="upcoming"><UpcomingHolidayTab holidays={upcomingHolidays} /></TabsContent><TabsContent value="international"><InternationalHolidayTab /></TabsContent><TabsContent value="religious"><ReligiousHolidayTab /></TabsContent><TabsContent value="calendar"><HolidayCalendarTab country={countryInfo} year={effectiveYear} holidays={countryHolidays} onMonth={setSelectedMonth} /></TabsContent></Tabs></CardContent></Card><HolidayInfo /></> : <div className="grid gap-4 md:grid-cols-4" aria-busy="true"><CardSkeleton /><CardSkeleton /><CardSkeleton /><CardSkeleton /></div>}</>
 }

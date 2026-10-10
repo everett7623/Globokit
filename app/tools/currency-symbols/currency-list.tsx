@@ -15,7 +15,7 @@ interface CurrencyListProps {
   groupedCurrencies: Record<string, Currency[]>
   filteredCount: number
   selectedRegion: string
-  favorites: string[]
+  favorites: readonly string[]
   onToggleFavorite: (code: string) => void
 }
 

@@ -7,6 +7,7 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useClientDate } from '@/lib/client-hooks'
 import html2canvas from 'html2canvas'
 import { buildVpsMarkdown } from './vps-export'
 import { VpsForm } from './vps-form'
@@ -18,7 +19,7 @@ import { calculateVPSValue, FALLBACK_EXCHANGE_RATES, fetchExchangeRates, getExch
 
 export default function VPSCalculatorPage() {
   const [purchaseDate, setPurchaseDate] = useState('')
-  const [tradeDate, setTradeDate] = useState('')
+  const [tradeDateOverride, setTradeDateOverride] = useState('')
   const [renewalPeriod, setRenewalPeriod] = useState('36')
   const [purchasePrice, setPurchasePrice] = useState('')
   const [currency, setCurrency] = useState('USD')
@@ -33,7 +34,9 @@ export default function VPSCalculatorPage() {
   const [result, setResult] = useState<CalculationResult | null>(null)
   const [generatingImg, setGeneratingImg] = useState(false)
   const resultRef = useRef<HTMLDivElement>(null)
-  const today = useMemo(() => getDateKeyInTimeZone(new Date(), BUSINESS_TIME_ZONE), [])
+  const clientDate = useClientDate()
+  const today = useMemo(() => (clientDate ? getDateKeyInTimeZone(clientDate, BUSINESS_TIME_ZONE) : ''), [clientDate])
+  const tradeDate = tradeDateOverride || today
 
   const loadExchangeRates = useCallback(async () => {
     setRateSnapshot(await fetchExchangeRates())
@@ -51,12 +54,18 @@ export default function VPSCalculatorPage() {
     if (nextResult.totalDays > 0 && !Number.isNaN(nextResult.remainingValue)) setResult(nextResult)
   }, [currency, modeInput, priceMode, purchaseDate, purchasePrice, rateSnapshot.rates, renewalPeriod, tradeDate])
 
-  useEffect(() => { setTradeDate(today); loadExchangeRates() }, [loadExchangeRates, today])
+  useEffect(() => {
+    let cancelled = false
+    fetchExchangeRates().then((snapshot) => {
+      if (!cancelled) setRateSnapshot(snapshot)
+    })
+    return () => { cancelled = true }
+  }, [])
   useEffect(() => {
     if (purchasePrice && purchaseDate && tradeDate) { const timer = window.setTimeout(handleCalculate, 300); return () => window.clearTimeout(timer) }
   }, [handleCalculate, purchaseDate, purchasePrice, tradeDate])
 
-  const handleReset = () => { setPurchaseDate(''); setTradeDate(today); setPurchasePrice(''); setModeInput(''); setPriceMode('total'); setResult(null) }
+  const handleReset = () => { setPurchaseDate(''); setTradeDateOverride(''); setPurchasePrice(''); setModeInput(''); setPriceMode('total'); setResult(null) }
   const exportToImage = async () => {
     if (!resultRef.current) return
     setGeneratingImg(true)
@@ -69,5 +78,5 @@ export default function VPSCalculatorPage() {
   const rateLabel = getExchangeRateSourceLabel(rateSnapshot)
   const markdownText = result ? buildVpsMarkdown({ result, currency, renewalPeriod, purchaseDate, purchasePrice, rateLabel }) : ''
 
-  return <MobileFriendlyWrapper><VpsHeader rateSnapshot={rateSnapshot} /><div className="grid gap-6 lg:grid-cols-[minmax(320px,0.42fr)_minmax(0,0.58fr)]"><VpsForm purchaseDate={purchaseDate} tradeDate={tradeDate} renewalPeriod={renewalPeriod} purchasePrice={purchasePrice} currency={currency} currencySymbol={currencySymbol} priceMode={priceMode} modeInput={modeInput} today={today} remainingValue={result?.remainingValue} rateLabel={rateLabel} onPurchaseDate={setPurchaseDate} onTradeDate={setTradeDate} onRenewalPeriod={setRenewalPeriod} onPurchasePrice={setPurchasePrice} onCurrency={setCurrency} onPriceMode={(mode) => { setPriceMode(mode); setModeInput('') }} onModeInput={setModeInput} onReset={handleReset} /><VpsReport ref={resultRef} result={result} tradeDate={tradeDate} purchasePrice={purchasePrice} currencySymbol={currencySymbol} renewalPeriod={renewalPeriod} priceMode={priceMode} modeInput={modeInput} rateLabel={rateLabel} markdownText={markdownText} generatingImg={generatingImg} onExportImage={exportToImage} /></div></MobileFriendlyWrapper>
+  return <MobileFriendlyWrapper><VpsHeader rateSnapshot={rateSnapshot} /><div className="grid gap-6 lg:grid-cols-[minmax(320px,0.42fr)_minmax(0,0.58fr)]"><VpsForm purchaseDate={purchaseDate} tradeDate={tradeDate} renewalPeriod={renewalPeriod} purchasePrice={purchasePrice} currency={currency} currencySymbol={currencySymbol} priceMode={priceMode} modeInput={modeInput} today={today} remainingValue={result?.remainingValue} rateLabel={rateLabel} onPurchaseDate={setPurchaseDate} onTradeDate={setTradeDateOverride} onRenewalPeriod={setRenewalPeriod} onPurchasePrice={setPurchasePrice} onCurrency={setCurrency} onPriceMode={(mode) => { setPriceMode(mode); setModeInput('') }} onModeInput={setModeInput} onReset={handleReset} /><VpsReport ref={resultRef} result={result} tradeDate={tradeDate} purchasePrice={purchasePrice} currencySymbol={currencySymbol} renewalPeriod={renewalPeriod} priceMode={priceMode} modeInput={modeInput} rateLabel={rateLabel} markdownText={markdownText} generatingImg={generatingImg} onExportImage={exportToImage} /></div></MobileFriendlyWrapper>
 }

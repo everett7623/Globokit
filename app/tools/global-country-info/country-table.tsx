@@ -15,7 +15,7 @@ import { MAJOR_TRADE_COUNTRIES, TRANSCONTINENTAL_COUNTRIES, type SortField, type
 
 interface CountryTableProps {
   countries: CountryInfo[]
-  favorites: string[]
+  favorites: readonly string[]
   expandedRows: string[]
   sortField: SortField
   sortOrder: SortOrder

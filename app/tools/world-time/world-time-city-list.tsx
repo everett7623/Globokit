@@ -15,7 +15,7 @@ interface WorldTimeCityListProps {
   groupedCities: Record<string, CityTime[]>
   filteredCount: number
   activeTab: string
-  favorites: string[]
+  favorites: readonly string[]
   localTimezone: string
   onToggleFavorite: (cityName: string) => void
 }

@@ -19,7 +19,7 @@ export const TRANSCONTINENTAL_COUNTRIES: Record<string, string[]> = {
 interface FilterOptions {
   searchTerm: string
   continentFilter: string
-  favorites: string[]
+  favorites: readonly string[]
   sortField: SortField
   sortOrder: SortOrder
   showOnlyFavorites: boolean
