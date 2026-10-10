@@ -26,8 +26,8 @@ const INTERACTIVE_PAGES = [
 // 全站静态入口
 const STATIC_PAGES = [
   { name: '资源页', path: '/resources', title: '外贸业务资源' },
-  { name: '关于页', path: '/about', title: '关于 Globokit' },
-  { name: '隐私政策页', path: '/privacy', title: '隐私政策' },
+  { name: '关于页', path: '/about', title: '一站式工具箱' },
+  { name: '隐私政策页', path: '/privacy', title: '你的数据只属于你的浏览器' },
 ]
 
 function fail(message) {
