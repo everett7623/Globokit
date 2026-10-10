@@ -1,0 +1,38 @@
+name: Release check
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  release-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Verify tag matches package.json version
+        run: |
+          PKG_VERSION="v$(node -p "require('./package.json').version")"
+          TAG_NAME="${GITHUB_REF_NAME}"
+          if [ "$TAG_NAME" != "$PKG_VERSION" ]; then
+            echo "::error::tag $TAG_NAME 与 package.json 版本 $PKG_VERSION 不一致"
+            exit 1
+          fi
+          echo "tag $TAG_NAME 与 package.json 版本一致"
+
+      - name: Verify GitHub Release exists
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: npm run test:release

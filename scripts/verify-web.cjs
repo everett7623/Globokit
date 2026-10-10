@@ -1,13 +1,13 @@
 // 名称: 工具站真实浏览器验证脚本
-// 描述: 用 Playwright 驱动真实浏览器访问生产构建，校验四页交互、移动端布局、首页入口与 sitemap，并输出截图证据
+// 描述: 用 Playwright 驱动真实浏览器访问生产构建，遍历全站页面校验状态码、标题、canonical 与结构化数据，并对代表性页面做交互与移动端验证
 // 路径: Globokit/scripts/verify-web.cjs
 // 作者: everettlabs
-// 更新时间: 2026-09-18
+// 更新时间: 2026-10-10
 //
 // 前置条件：
 //   1. 站点已启动（npm run build && npm start，默认 http://localhost:3000，可用 WEB_BASE 覆盖）
-//   2. 已安装 playwright 与浏览器内核：npm i --no-save playwright && npx playwright install chromium
-// 未满足前置条件时脚本以退出码 0 跳过，避免影响常规 CI。
+//   2. 已安装 playwright（devDependencies）与浏览器内核：npx playwright install chromium
+// 任一前置条件不满足时脚本以退出码 1 失败——浏览器验证不允许静默跳过。
 
 const fs = require('node:fs')
 const path = require('node:path')
@@ -15,27 +15,46 @@ const path = require('node:path')
 const BASE = process.env.WEB_BASE || 'http://localhost:3000'
 const SHOT_DIR = path.join(__dirname, '..', '.web-verify')
 
-const PAGES = [
+// 交互与移动端验证的代表性页面
+const INTERACTIVE_PAGES = [
   { name: '收款渠道页', path: '/tools/remittance-cost-calculator', title: '国际收款渠道费用对比' },
   { name: '询盘评估页', path: '/tools/inquiry-priority-scorer', title: '外贸询盘优先级评估' },
   { name: '服务器成本页', path: '/tools/server-cost-comparison', title: '服务器成本对比' },
   { name: 'YAML 互转页', path: '/tools/yaml-json-converter', title: 'YAML 与 JSON 互转' },
 ]
 
+// 全站静态入口
+const STATIC_PAGES = [
+  { name: '资源页', path: '/resources', title: '外贸业务资源' },
+  { name: '关于页', path: '/about', title: '关于 Globokit' },
+  { name: '隐私政策页', path: '/privacy', title: '隐私政策' },
+]
+
+function fail(message) {
+  console.error('真实浏览器验证失败：' + message)
+  process.exitCode = 1
+}
+
 async function main() {
   let chromium
   try {
-    ({ chromium } = require('playwright'))
+    ;({ chromium } = require('playwright'))
   } catch {
-    console.log('跳过真实浏览器验证：未安装 playwright（npm i --no-save playwright && npx playwright install chromium）')
+    fail('未安装 playwright（npm install && npx playwright install chromium）')
     return
   }
 
   const reachable = await fetch(BASE, { method: 'GET' }).then((response) => response.ok).catch(() => false)
   if (!reachable) {
-    console.log('跳过真实浏览器验证：站点未启动（' + BASE + '）')
+    fail('站点未启动（' + BASE + '）。先执行 npm run build && npm start，或设置 WEB_BASE')
     return
   }
+
+  // 从 sitemap 收集全部工具页，保证新工具页自动纳入验证
+  const sitemapText = await fetch(BASE + '/sitemap.xml').then((response) => response.text())
+  const toolPaths = Array.from(sitemapText.matchAll(/<loc>([^<]*)<\/loc>/g))
+    .map((match) => new URL(match[1]).pathname)
+    .filter((pathname) => pathname.startsWith('/tools/'))
 
   fs.mkdirSync(SHOT_DIR, { recursive: true })
 
@@ -57,20 +76,34 @@ async function main() {
     )
   const bodyText = () => page.evaluate(() => document.body.innerText)
 
-  // 逐页访问：状态码、标题、结构化数据
-  for (const item of PAGES) {
+  // 全量工具页：状态码、H1、canonical、结构化数据
+  for (const toolPath of toolPaths) {
+    const response = await page.goto(BASE + toolPath, { waitUntil: 'domcontentloaded' })
+    await page.waitForSelector('h1')
+    const heading = (await page.locator('h1').first().innerText()).trim()
+    record(toolPath + ' 返回 200', response.status() === 200, 'status=' + response.status())
+    record(toolPath + ' H1 渲染', heading.length > 0, heading)
+    const canonical = await page.evaluate(() => document.querySelector('link[rel="canonical"]')?.getAttribute('href') ?? '')
+    record(toolPath + ' canonical', canonical.includes(toolPath), canonical)
+    const ldJson = await page.evaluate(() => document.querySelectorAll('script[type="application/ld+json"]').length)
+    record(toolPath + ' 结构化数据', ldJson >= 1, 'ld+json=' + ldJson)
+  }
+
+  // 全站静态页
+  for (const item of STATIC_PAGES) {
     const response = await page.goto(BASE + item.path, { waitUntil: 'domcontentloaded' })
     await page.waitForSelector('h1')
     const heading = (await page.locator('h1').first().innerText()).trim()
     record(item.name + ' 返回 200', response.status() === 200, 'status=' + response.status())
     record(item.name + ' 标题渲染', heading.includes(item.title), heading)
-    const ldJson = await page.evaluate(
-      () => document.querySelectorAll('script[type="application/ld+json"]').length
-    )
-    record(item.name + ' 结构化数据', ldJson >= 1, 'ld+json=' + ldJson)
   }
 
-  // 交互验证：四页关键控件与错误态
+  // 404 页兜底
+  const notFound = await page.goto(BASE + '/tools/not-exist-page', { waitUntil: 'domcontentloaded' })
+  record('404 页返回 404', notFound.status() === 404, 'status=' + notFound.status())
+  record('404 页中文提示', (await bodyText()).includes('页面不存在'), 'ok')
+
+  // 交互验证：代表性页面关键控件与错误态
   await page.goto(BASE + '/tools/remittance-cost-calculator', { waitUntil: 'domcontentloaded' })
   await page.waitForSelector('#orderAmount')
   const amountBefore = await numbers()
@@ -119,7 +152,7 @@ async function main() {
   // 移动端视口与首页入口
   const mobile = await context.newPage()
   await mobile.setViewportSize({ width: 390, height: 844 })
-  for (const item of PAGES) {
+  for (const item of INTERACTIVE_PAGES) {
     await mobile.goto(BASE + item.path, { waitUntil: 'domcontentloaded' })
     const overflow = await mobile.evaluate(
       () => document.documentElement.scrollWidth - document.documentElement.clientWidth
@@ -139,6 +172,10 @@ async function main() {
   fs.writeFileSync(path.join(SHOT_DIR, 'web-verify.json'), JSON.stringify({ total: results.length, passed: results.length - failed.length, failed, runtimeErrors, results }, null, 1))
   console.log('真实浏览器验证：' + (results.length - failed.length) + '/' + results.length + ' 项通过，页面错误 ' + runtimeErrors.length + ' 条')
   failed.forEach((item) => console.log('  未通过 ' + item.name + ' :: ' + item.detail))
+  if (runtimeErrors.length > 0) {
+    console.error('检测到 ' + runtimeErrors.length + ' 条页面运行时错误（React hydration、未捕获异常等），验证不通过')
+    process.exitCode = 1
+  }
   if (failed.length > 0) process.exitCode = 1
 }
 
@@ -146,4 +183,3 @@ main().catch((error) => {
   console.error('真实浏览器验证异常：' + String(error).slice(0, 300))
   process.exitCode = 1
 })
-
