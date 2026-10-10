@@ -6,13 +6,13 @@
 
 export const TOOL_CATEGORIES = [
   '财务报价',
-  '文本处理',
+  '物流与装柜',
+  '外贸沟通',
   '时间与节假日',
   '国家与货币',
-  '物流与装柜',
-  'VPS/站长工具',
-  '外贸沟通',
   '文件与格式转换',
+  '文本处理',
+  'VPS/站长工具',
 ] as const
 
 export type ToolCategory = (typeof TOOL_CATEGORIES)[number]

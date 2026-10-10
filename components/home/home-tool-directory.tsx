@@ -34,22 +34,22 @@ export function HomeToolDirectory() {
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {HOME_ACTIVE_CATEGORIES.map((category) => (
-          <CategorySection key={category} category={category} tools={HOME_TOOLS_BY_CATEGORY[category]} />
+          <CategorySection key={category} category={category} tools={HOME_TOOLS_BY_CATEGORY[category]} wide={HOME_TOOLS_BY_CATEGORY[category].length >= 6} />
         ))}
       </div>
     </section>
   )
 }
 
-function CategorySection({ category, tools: categoryTools }: { category: ToolCategory; tools: ToolMeta[] }) {
+function CategorySection({ category, tools: categoryTools, wide = false }: { category: ToolCategory; tools: ToolMeta[]; wide?: boolean }) {
   return (
-    <div className="rounded-lg border border-white/70 bg-white/80 p-4 shadow-lg shadow-slate-900/4 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/60">
+    <div className={cn('rounded-lg border border-white/70 bg-white/80 p-4 shadow-lg shadow-slate-900/4 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/60', wide && 'md:col-span-2 xl:col-span-3')}>
       <div className="mb-4 flex items-center justify-between">
         <h3 className="text-sm font-semibold text-slate-950 dark:text-white">{category}</h3>
         <span className="text-xs text-slate-400">{categoryTools.length}</span>
       </div>
 
-      <div className="space-y-2">
+      <div className={cn(wide ? 'grid gap-2 sm:grid-cols-2 xl:grid-cols-3' : 'space-y-2')}>
         {categoryTools.map((rawTool) => {
           const tool = HOME_TOOLS.find((item) => item.id === rawTool.id)
           if (!tool) return null
