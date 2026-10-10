@@ -5,8 +5,8 @@
     <a href="LICENSE">
       <img src="https://img.shields.io/badge/license-GPL--3.0--only-blue.svg" alt="License">
     </a>
-    <a href="https://github.com/everett7623/Globokit/releases/tag/v0.5.0">
-      <img src="https://img.shields.io/badge/version-v0.5.0-brightgreen.svg" alt="Version v0.5.0">
+    <a href="https://github.com/everett7623/Globokit/releases/tag/v0.6.0">
+      <img src="https://img.shields.io/badge/version-v0.6.0-brightgreen.svg" alt="Version v0.6.0">
     </a>
     <a href="https://nextjs.org">
       <img src="https://img.shields.io/badge/Built%20with-Next.js%2016-black" alt="Next.js">
@@ -108,6 +108,11 @@
   - 金额按分位整数运算避免浮点误差，自动生成英文金额大写（SAY US DOLLARS ... ONLY）。
   - 支持一键复制纯文本粘贴到邮件，或直接打印/导出 PDF，内置 CI 与 PI 的使用要点和常用条款速查。
 
+- **阶梯佣金计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 按累计销售额 2–5 档超额累进分段计提佣金，末档可设为不封顶。
+  - 折算回款率与达标奖金，输出分段明细、有效费率、回款后实得与合计发放。
+
 ### 🚢 物流与出货工具
 
 - **外贸单位换算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
@@ -182,6 +187,12 @@
   - 按信息完整度、客户可信度与商务价值三个维度给询盘打分，输出优先级、建议回应时限与跟进节奏。
   - 列出待补齐信息清单，并生成可直接粘贴的中英文追问话术。
 
+- **催款邮件生成器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 按逾期天数自动推荐友好提醒、首次催款、二次严肃、最后通牒四档语气，也可手动切换。
+  - 一键生成含发票号、金额与付款条款的英文催款邮件，支持复制全文或仅复制正文。
+  - 附四阶段催收节奏表与本档注意事项（含信用保险报损提醒）。
+
 ### 📝 文本与效率工具
 
 - **国际条码生成器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
@@ -215,6 +226,11 @@
 - **全球国家信息库**
   
   - 包含世界各国的 **中英文名称**、**ISO代码** (2位/3位)、**国际区号**、**顶级域名后缀**及所属时区。
+- **多币种报价换算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 基于实时汇率在人民币、美元、欧元等 10 个常用贸易币种间交叉换算。
+  - 支持渠道点差模拟与手动锁定 1 USD 汇率，汇率获取失败自动降级内置参考值。
+  - 输出全币种换算表，便于报价单多币种标注。
 - **世界时间与时区**
   
   - 实时查看全球主要贸易城市（纽约、伦敦、东京等）的当地时间，辅助跨时区会议安排。
@@ -231,7 +247,7 @@
 
 ## 🏷️ 版本与发布
 
-- 当前版本：[`v0.5.0`](https://github.com/everett7623/Globokit/releases/tag/v0.5.0)
+- 当前版本：[`v0.6.0`](https://github.com/everett7623/Globokit/releases/tag/v0.6.0)
 - 完整更新记录：[CHANGELOG.md](CHANGELOG.md)
 - 所有历史版本：[GitHub Releases](https://github.com/everett7623/Globokit/releases)
 

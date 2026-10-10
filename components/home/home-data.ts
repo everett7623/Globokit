@@ -7,6 +7,8 @@
 import type { ComponentType } from 'react'
 import {
   AlertCircle,
+  ArrowLeftRight,
+  BellRing,
   Bot,
   Boxes,
   Calendar,
@@ -38,6 +40,7 @@ import {
   Umbrella,
   MessageSquare,
   Network,
+  Percent,
   Plane,
   ReceiptText,
   Ruler,
@@ -58,6 +61,8 @@ import { TOOL_UI_CONFIG, getToolBadgeClassName } from '@/lib/tools/registry-ui'
 
 const ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
   AlertCircle,
+  ArrowLeftRight,
+  BellRing,
   Boxes,
   Calculator,
   Calendar,
@@ -84,6 +89,7 @@ const ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
   ClipboardCheck,
   Tag,
   Umbrella,
+  Percent,
   Plane,
   ReceiptText,
   Ruler,

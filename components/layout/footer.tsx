@@ -43,6 +43,20 @@ export function Footer() {
             </Link>
             <span className="hidden text-slate-300 dark:text-white/20 sm:inline">|</span>
             <Link
+              href="/about"
+              className="flex items-center gap-1.5 text-slate-500 transition-colors hover:text-emerald-700 dark:text-slate-400 dark:hover:text-cyan-200"
+            >
+              关于
+            </Link>
+            <span className="hidden text-slate-300 dark:text-white/20 sm:inline">|</span>
+            <Link
+              href="/privacy"
+              className="flex items-center gap-1.5 text-slate-500 transition-colors hover:text-emerald-700 dark:text-slate-400 dark:hover:text-cyan-200"
+            >
+              隐私政策
+            </Link>
+            <span className="hidden text-slate-300 dark:text-white/20 sm:inline">|</span>
+            <Link
               href="https://github.com/everett7623/Globokit"
               target="_blank"
               rel="noopener noreferrer"

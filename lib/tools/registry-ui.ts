@@ -15,6 +15,18 @@ export const TOOL_UI_CONFIG: Record<
     bgColor: string
   }
 > = {
+  'payment-reminder-generator': {
+    color: 'text-orange-500',
+    bgColor: 'bg-orange-50',
+  },
+  'currency-converter': {
+    color: 'text-teal-500',
+    bgColor: 'bg-teal-50',
+  },
+  'commission-calculator': {
+    color: 'text-fuchsia-500',
+    bgColor: 'bg-fuchsia-50',
+  },
   'invoice-generator': {
     color: 'text-violet-500',
     bgColor: 'bg-violet-50',

@@ -31,6 +31,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.7,
     },
+    {
+      url: absoluteUrl('/about'),
+      lastModified: new Date('2026-10-10'),
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: absoluteUrl('/privacy'),
+      lastModified: new Date('2026-10-10'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
     ...TOOL_REGISTRY.map((tool) => ({
       url: absoluteUrl(tool.href),
       lastModified: new Date(tool.updatedAt),

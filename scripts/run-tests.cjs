@@ -25,6 +25,9 @@ const scripts = [
   'assert-lc-checklist.cjs',
   'assert-shipping-mark.cjs',
   'assert-invoice-generator.cjs',
+  'assert-payment-reminder.cjs',
+  'assert-currency-converter.cjs',
+  'assert-commission-calculator.cjs',
 ]
 
 for (const script of scripts) {
