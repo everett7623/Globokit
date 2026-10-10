@@ -5,8 +5,8 @@
     <a href="LICENSE">
       <img src="https://img.shields.io/badge/license-GPL--3.0--only-blue.svg" alt="License">
     </a>
-    <a href="https://github.com/everett7623/Globokit/releases/tag/v0.6.0">
-      <img src="https://img.shields.io/badge/version-v0.6.0-brightgreen.svg" alt="Version v0.6.0">
+    <a href="https://github.com/everett7623/Globokit/releases/tag/v0.7.0">
+      <img src="https://img.shields.io/badge/version-v0.7.0-brightgreen.svg" alt="Version v0.7.0">
     </a>
     <a href="https://nextjs.org">
       <img src="https://img.shields.io/badge/Built%20with-Next.js%2016-black" alt="Next.js">
@@ -221,6 +221,12 @@
   
   - 支持多音字识别、声调标注及多种输出格式配置。
 
+- **外贸邮件签名生成器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 生成 Outlook、Foxmail、Gmail 兼容的 table 内联样式 HTML 签名，复制源码到签名设置即可使用。
+  - 支持 logo、座机/手机/WhatsApp/邮箱/网址/地址多行联系方式与纯文本版本。
+  - 输入自动 HTML 转义防注入，无协议网址自动补全 https。
+
 ### 🌍 全球信息查询
 
 - **全球国家信息库**
@@ -247,7 +253,7 @@
 
 ## 🏷️ 版本与发布
 
-- 当前版本：[`v0.6.0`](https://github.com/everett7623/Globokit/releases/tag/v0.6.0)
+- 当前版本：[`v0.7.0`](https://github.com/everett7623/Globokit/releases/tag/v0.7.0)
 - 完整更新记录：[CHANGELOG.md](CHANGELOG.md)
 - 所有历史版本：[GitHub Releases](https://github.com/everett7623/Globokit/releases)
 

@@ -2,6 +2,13 @@
 
 本项目的重要变更均记录于此。版本号遵循 [Semantic Versioning](https://semver.org/lang/zh-CN/)。
 
+## [0.7.0] - 2026-10-10
+
+### 新增
+
+- 新增外贸邮件签名生成器：生成 Outlook/Foxmail/Gmail 兼容的 table 内联样式 HTML 签名，支持 logo、多联系方式行（座机/手机/WhatsApp/邮箱/网址/地址）与纯文本版本，用户输入全部 HTML 转义防注入，无协议网址自动补 https（文本处理）。
+- 工具总数 47 → 48，文本处理分类补至 4 个。
+
 ## [0.6.0] - 2026-10-10
 
 ### 新增
@@ -116,6 +123,7 @@
 - 统一国际条码生成器在搜索结果和页面中的展示名称。
 - 将条码载入示例替换为不关联外部供应商的虚构 GS1 受限流通测试数据。
 
+[0.7.0]: https://github.com/everett7623/Globokit/releases/tag/v0.7.0
 [0.6.0]: https://github.com/everett7623/Globokit/releases/tag/v0.6.0
 [0.5.0]: https://github.com/everett7623/Globokit/releases/tag/v0.5.0
 [0.4.0]: https://github.com/everett7623/Globokit/releases/tag/v0.4.0

@@ -1,6 +1,6 @@
 {
   "name": "Globokit",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": true,
   "author": "everettlabs",
   "license": "GPL-3.0-only",
@@ -41,6 +41,7 @@
     "test:lc-checklist": "node scripts/assert-lc-checklist.cjs",
     "test:shipping-mark": "node scripts/assert-shipping-mark.cjs",
     "test:invoice-generator": "node scripts/assert-invoice-generator.cjs",
+    "test:email-signature": "node scripts/assert-email-signature.cjs",
     "test:category-backfill": "node scripts/assert-category-backfill.cjs",
     "typecheck": "tsc --noEmit",
     "validate:data": "node scripts/validate-tool-data.cjs"

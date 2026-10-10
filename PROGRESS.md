@@ -1,6 +1,17 @@
 # 开发进度记录
 
 
+## 2026-10-10（v0.7.0：邮件签名生成器）
+
+### 已完成
+
+- 新增外贸邮件签名生成器（文本处理 3→4，总工具 47→48）：table 内联样式 HTML 签名（Outlook/Foxmail/Gmail 兼容）、logo 支持、多联系方式行、纯文本版本；escapeHtml 全量转义防注入，无协议网址自动补 https。
+- 专项测试 28 条断言接入 npm test；版本推进 0.7.0。
+
+### 验证结果
+
+- `npx tsc --noEmit`、`npm run lint`、`npm test`（27 组）、`test:catalog`（48 工具）、`test:version`（v0.7.0）通过；`npm run build` 通过。
+
 ## 2026-10-10（v0.6.0：沟通与金融工具补齐 + 内容页）
 
 ### 已完成

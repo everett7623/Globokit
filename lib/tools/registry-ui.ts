@@ -15,6 +15,10 @@ export const TOOL_UI_CONFIG: Record<
     bgColor: string
   }
 > = {
+  'email-signature-generator': {
+    color: 'text-indigo-500',
+    bgColor: 'bg-indigo-50',
+  },
   'payment-reminder-generator': {
     color: 'text-orange-500',
     bgColor: 'bg-orange-50',
