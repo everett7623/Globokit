@@ -2,6 +2,14 @@
 
 本项目的重要变更均记录于此。版本号遵循 [Semantic Versioning](https://semver.org/lang/zh-CN/)。
 
+## [0.8.0] - 2026-10-10
+
+### 新增
+
+- 新增装箱单生成器：出货单证三件套（CI/PL/唛头）补齐，支持从 Excel 直接粘贴批量导入明细（品名/箱数/每箱数量/单位/毛重/净重/尺寸 七列 TAB 分隔），自动汇总箱数、数量、毛净重与 CBM，A4 版式 PACKING LIST 可打印导出 PDF 或导出带 BOM 的 CSV 给 Excel（物流与装柜）。
+- 针对纯前端工具的操作痛点，本工具内置三项体验改进：Excel 粘贴导入、CSV 文件下载、草稿自动保存与一键恢复（localStorage，防刷新丢失）。
+- 工具总数 48 → 49。
+
 ## [0.7.0] - 2026-10-10
 
 ### 新增
@@ -123,6 +131,7 @@
 - 统一国际条码生成器在搜索结果和页面中的展示名称。
 - 将条码载入示例替换为不关联外部供应商的虚构 GS1 受限流通测试数据。
 
+[0.8.0]: https://github.com/everett7623/Globokit/releases/tag/v0.8.0
 [0.7.0]: https://github.com/everett7623/Globokit/releases/tag/v0.7.0
 [0.6.0]: https://github.com/everett7623/Globokit/releases/tag/v0.6.0
 [0.5.0]: https://github.com/everett7623/Globokit/releases/tag/v0.5.0

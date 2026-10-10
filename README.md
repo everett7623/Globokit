@@ -5,8 +5,8 @@
     <a href="LICENSE">
       <img src="https://img.shields.io/badge/license-GPL--3.0--only-blue.svg" alt="License">
     </a>
-    <a href="https://github.com/everett7623/Globokit/releases/tag/v0.7.0">
-      <img src="https://img.shields.io/badge/version-v0.7.0-brightgreen.svg" alt="Version v0.7.0">
+    <a href="https://github.com/everett7623/Globokit/releases/tag/v0.8.0">
+      <img src="https://img.shields.io/badge/version-v0.8.0-brightgreen.svg" alt="Version v0.8.0">
     </a>
     <a href="https://nextjs.org">
       <img src="https://img.shields.io/badge/Built%20with-Next.js%2016-black" alt="Next.js">
@@ -154,6 +154,11 @@
   - 分开估算码头或堆场内的滞港费，以及提柜到还空柜期间的滞箱费。
   - 支持免费天数、第一/第二阶梯和后续日费率，按柜量汇总总费用与平均每柜费用。
   - 提供港区拥堵、延长免费期和美元账单场景，最终以船公司条款与正式账单为准。
+- **装箱单生成器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
+
+  - 支持从 Excel 直接粘贴批量导入明细（品名/箱数/每箱数量/单位/毛重/净重/尺寸），自动汇总箱数、数量、毛净重与 CBM。
+  - 生成 A4 版式 PACKING LIST，可打印导出 PDF 或导出带 BOM 的 CSV 给 Excel，与商业发票、唛头生成器凑齐出货单证三件套。
+  - 填写内容自动保存为浏览器本地草稿，刷新或误关页面后可一键恢复。
 - **国际快递/专线报价对比** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
 
   - 按箱规、毛重和渠道泡重系数自动判断按实重或体积重计费。
@@ -253,7 +258,7 @@
 
 ## 🏷️ 版本与发布
 
-- 当前版本：[`v0.7.0`](https://github.com/everett7623/Globokit/releases/tag/v0.7.0)
+- 当前版本：[`v0.8.0`](https://github.com/everett7623/Globokit/releases/tag/v0.8.0)
 - 完整更新记录：[CHANGELOG.md](CHANGELOG.md)
 - 所有历史版本：[GitHub Releases](https://github.com/everett7623/Globokit/releases)
 

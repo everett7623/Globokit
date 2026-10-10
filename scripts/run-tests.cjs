@@ -29,6 +29,7 @@ const scripts = [
   'assert-currency-converter.cjs',
   'assert-commission-calculator.cjs',
   'assert-email-signature.cjs',
+  'assert-packing-list.cjs',
 ]
 
 for (const script of scripts) {

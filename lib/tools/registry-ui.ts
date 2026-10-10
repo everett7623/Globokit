@@ -15,6 +15,10 @@ export const TOOL_UI_CONFIG: Record<
     bgColor: string
   }
 > = {
+  'packing-list-generator': {
+    color: 'text-cyan-700',
+    bgColor: 'bg-cyan-50',
+  },
   'email-signature-generator': {
     color: 'text-indigo-500',
     bgColor: 'bg-indigo-50',

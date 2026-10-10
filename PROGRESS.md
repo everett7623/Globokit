@@ -1,6 +1,25 @@
 # 开发进度记录
 
 
+## 2026-10-10（v0.8.0：装箱单生成器与操作体验补强）
+
+### 已完成
+
+- 针对用户反馈「纯前端工具不好操作」，新增装箱单生成器（物流与装柜 11→12，总工具 48→49）并内置三项体验改进：
+  - Excel 粘贴批量导入：七列 TAB/逗号分隔解析（品名/箱数/每箱数量/单位/毛重/净重/尺寸），逐行中文报错定位；
+  - CSV 文件下载：带 BOM 的 CSV，Excel 直接打开中文不乱码；
+  - 草稿自动保存与一键恢复：防抖 800ms 写 localStorage（只写外部存储不触发 set-state-in-effect 规则）。
+- 出货单证三件套就此凑齐：商业发票（invoice-generator）+ 装箱单（packing-list-generator）+ 唛头（shipping-mark-generator）。
+- 专项测试 41 条断言接入 npm test；版本推进 0.8.0。
+
+### 踩坑记录
+
+- home-data.ts 的 import 被 Syncthing 版本中已含 Package 图标，脚本追加时产生重复标识符；改用「先查再插、对 import 与 ICON_MAP 分段替换」处理。
+
+### 验证结果
+
+- `npx tsc --noEmit`、`npm run lint`、`npm test`（28 组）、`test:catalog`（49 工具）、`test:version`（v0.8.0）通过；`npm run build` 通过。
+
 ## 2026-10-10（v0.7.0：邮件签名生成器）
 
 ### 已完成
