@@ -65,15 +65,13 @@ export default function ResourcesPage() {
           </div>
         </aside>
 
-        <div className="grid gap-5 xl:grid-cols-2">
+        <div className="space-y-8">
           {VISIBLE_RESOURCE_GROUPS.map((group) => {
             const meta = RESOURCE_TYPE_META[group.type]
             const Icon = meta.icon
-            // 资源数量 >= 4 的分类使用宽布局，占据两列并且内部使用网格布局
-            const isWideGroup = group.resources.length >= 4
 
             return (
-              <section key={group.type} id={meta.slug} className={cn('scroll-mt-28 space-y-3', isWideGroup && 'xl:col-span-2')}>
+              <section key={group.type} id={meta.slug} className="scroll-mt-28 space-y-3">
                 <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                   <div className="flex min-w-0 items-center gap-3">
                     <div className={cn('flex h-11 w-11 shrink-0 items-center justify-center rounded-md ring-1 ring-slate-200/80 dark:ring-white/10', meta.bg)}>
@@ -89,7 +87,7 @@ export default function ResourcesPage() {
                   </Badge>
                 </div>
 
-                <div className={cn('grid gap-3', isWideGroup && 'md:grid-cols-2 xl:grid-cols-3')}>
+                <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
                   {group.resources.map((resource) => (
                     <a key={resource.id} href={resource.href} target="_blank" rel="sponsored noopener noreferrer" className="group flex min-h-[160px] flex-col rounded-lg border border-slate-200/80 bg-white/85 p-4 shadow-xs shadow-slate-900/3 transition-all hover:-translate-y-0.5 hover:border-cyan-300 hover:shadow-md hover:shadow-cyan-900/5 dark:border-white/10 dark:bg-white/4 dark:hover:border-cyan-300/50">
                       <div className="mb-4 flex items-start justify-between gap-3">
