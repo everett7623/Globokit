@@ -6,7 +6,8 @@
 
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
+import { useNow } from '@/lib/client-hooks'
 import { Clock, Info } from 'lucide-react'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
@@ -17,7 +18,6 @@ import { EnhancedCopyButton } from '@/components/tools/enhanced-copy-button'
 import { FormattedInput } from '@/components/ui/formatted-input'
 import { MobileFriendlyWrapper, MobileButtonGroup } from '@/components/tools/mobile-friendly-wrapper'
 import {
-  nowTimestamps,
   parseShanghaiDateTime,
   timestampToBreakdown,
 } from '@/lib/tools/timestamp-converter'
@@ -34,12 +34,10 @@ export default function TimestampConverterPage() {
   const [timestamp, setTimestamp] = useState('')
   const [unit, setUnit] = useState<TimestampUnit>('auto')
   const [dateTime, setDateTime] = useState('')
-  const [now, setNow] = useState(() => nowTimestamps())
-
-  useEffect(() => {
-    const timer = window.setInterval(() => setNow(nowTimestamps()), 1000)
-    return () => window.clearInterval(timer)
-  }, [])
+  // 服务端渲染 null 占位，挂载后由客户端时钟接管，避免 SSR/客户端时间不一致的 hydration 错误
+  const liveDate = useNow(1000)
+  const liveNow = liveDate ? { seconds: Math.floor(liveDate.getTime() / 1000), milliseconds: liveDate.getTime() } : null
+  const now = liveNow ?? { seconds: 0, milliseconds: 0 }
 
   const breakdown = useMemo(() => timestampToBreakdown(timestamp, unit), [timestamp, unit])
   const parsed = useMemo(() => parseShanghaiDateTime(dateTime), [dateTime])
@@ -55,10 +53,10 @@ export default function TimestampConverterPage() {
         <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
           <Clock className="h-4 w-4" />
           当前时间（每秒刷新）
-          <EnhancedCopyButton text={String(now.seconds)} iconOnly title="复制当前秒级时间戳">复制秒</EnhancedCopyButton>
-          <EnhancedCopyButton text={String(now.milliseconds)} iconOnly title="复制当前毫秒时间戳">复制毫秒</EnhancedCopyButton>
+          <EnhancedCopyButton text={String(now.seconds)} iconOnly title="复制当前秒级时间戳" disabled={!liveNow}>复制秒</EnhancedCopyButton>
+          <EnhancedCopyButton text={String(now.milliseconds)} iconOnly title="复制当前毫秒时间戳" disabled={!liveNow}>复制毫秒</EnhancedCopyButton>
         </div>
-        <p className="mt-2 font-mono text-lg font-semibold tabular-nums">{now.seconds} s ／ {now.milliseconds} ms</p>
+        <p className="mt-2 font-mono text-lg font-semibold tabular-nums">{liveNow ? `${now.seconds} s ／ ${now.milliseconds} ms` : '—— s ／ —— ms'}</p>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
@@ -105,7 +103,7 @@ export default function TimestampConverterPage() {
             </div>
             <MobileButtonGroup>
               <EnhancedCopyButton text={breakdown ? breakdown.display : ''} disabled={!breakdown}>复制日期</EnhancedCopyButton>
-              <Button type="button" variant="outline" onClick={() => setTimestamp(String(now.seconds))}>填入当前秒级</Button>
+              <Button type="button" variant="outline" disabled={!liveNow} onClick={() => setTimestamp(String(now.seconds))}>填入当前秒级</Button>
             </MobileButtonGroup>
           </CardContent>
         </Card>
