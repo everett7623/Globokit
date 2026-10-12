@@ -65,9 +65,12 @@ async function main() {
   const browser = await chromium.launch({ headless: true })
   const context = await browser.newContext({ viewport: { width: 1280, height: 900 } })
   const page = await context.newPage()
-  page.on('pageerror', (error) => runtimeErrors.push(String(error).slice(0, 200)))
+  let muteRuntime = false
+  page.on('pageerror', (error) => {
+    if (!muteRuntime) runtimeErrors.push(String(error).slice(0, 200))
+  })
   page.on('console', (message) => {
-    if (message.type() === 'error') {
+    if (message.type() === 'error' && !muteRuntime) {
       let location = ''
       try {
         location = message.location()?.url ?? ''
@@ -78,7 +81,7 @@ async function main() {
     }
   })
   page.on('response', (response) => {
-    if (response.status() >= 400) {
+    if (response.status() >= 400 && !muteRuntime) {
       runtimeErrors.push('[http] ' + response.status() + ' ' + response.url())
     }
   })
@@ -111,8 +114,10 @@ async function main() {
     record(item.name + ' 标题渲染', heading.includes(item.title), heading)
   }
 
-  // 404 页兜底
+  // 404 页兜底（该段必然产生 404 响应，静音运行时记录）
+  muteRuntime = true
   const notFound = await page.goto(BASE + '/tools/not-exist-page', { waitUntil: 'domcontentloaded' })
+  muteRuntime = false
   record('404 页返回 404', notFound.status() === 404, 'status=' + notFound.status())
   record('404 页中文提示', (await bodyText()).includes('页面不存在'), 'ok')
 
