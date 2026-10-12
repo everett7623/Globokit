@@ -173,7 +173,8 @@ async function main() {
   console.log('真实浏览器验证：' + (results.length - failed.length) + '/' + results.length + ' 项通过，页面错误 ' + runtimeErrors.length + ' 条')
   failed.forEach((item) => console.log('  未通过 ' + item.name + ' :: ' + item.detail))
   if (runtimeErrors.length > 0) {
-    console.error('检测到 ' + runtimeErrors.length + ' 条页面运行时错误（React hydration、未捕获异常等），验证不通过')
+    console.error('检测到 ' + runtimeErrors.length + ' 条页面运行时错误（React hydration、未捕获异常等），验证不通过：')
+    runtimeErrors.forEach((item) => console.error('  [runtime] ' + item))
     process.exitCode = 1
   }
   if (failed.length > 0) process.exitCode = 1
