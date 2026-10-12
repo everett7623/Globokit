@@ -67,7 +67,20 @@ async function main() {
   const page = await context.newPage()
   page.on('pageerror', (error) => runtimeErrors.push(String(error).slice(0, 200)))
   page.on('console', (message) => {
-    if (message.type() === 'error') runtimeErrors.push('[console] ' + message.text().slice(0, 160))
+    if (message.type() === 'error') {
+      let location = ''
+      try {
+        location = message.location()?.url ?? ''
+      } catch {
+        location = ''
+      }
+      runtimeErrors.push('[console] ' + message.text().slice(0, 160) + (location ? ' @ ' + location : ''))
+    }
+  })
+  page.on('response', (response) => {
+    if (response.status() >= 400) {
+      runtimeErrors.push('[http] ' + response.status() + ' ' + response.url())
+    }
   })
 
   const numbers = () =>
