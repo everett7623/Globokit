@@ -67,11 +67,11 @@ export function generateEmailSignature(rawInput: EmailSignatureInput): EmailSign
   const textLines: string[] = []
 
   if (phone) {
-    contactRows.push(row('Tel', `<a href="tel:${rawInput.phone.trim()}" style="color:#0f766e;text-decoration:none;">${phone}</a>`))
+    contactRows.push(row('Tel', `<a href="tel:${escapeHtml(rawInput.phone.trim().replace(/\s+/g, ''))}" style="color:#0f766e;text-decoration:none;">${phone}</a>`))
     textLines.push(`Tel: ${rawInput.phone.trim()}`)
   }
   if (mobile) {
-    contactRows.push(row('Mob', `<a href="tel:${rawInput.mobile.trim()}" style="color:#0f766e;text-decoration:none;">${mobile}</a>`))
+    contactRows.push(row('Mob', `<a href="tel:${escapeHtml(rawInput.mobile.trim().replace(/\s+/g, ''))}" style="color:#0f766e;text-decoration:none;">${mobile}</a>`))
     textLines.push(`Mobile/WhatsApp: ${rawInput.mobile.trim()}`)
   }
   if (whatsapp) {

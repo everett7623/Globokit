@@ -6,7 +6,7 @@
 
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
 import { EnhancedAlert } from '@/components/ui/enhanced-alert'
 import {
@@ -65,8 +65,11 @@ export default function PackingListGeneratorPage() {
   const [form, setForm] = useState<PackingFormState>(createInitialForm)
   const [hasDraft, setHasDraft] = useState(false)
 
-  // 草稿自动保存：防抖 800ms 写入 localStorage（仅写外部存储，不产生级联渲染）
+  const initialSnapshot = useRef(JSON.stringify(createInitialForm()))
+
+  // 草稿自动保存：内容偏离初始示例后才写入（防抖 800ms，localStorage 只写外部存储不触发级联渲染）
   useEffect(() => {
+    if (JSON.stringify(form) === initialSnapshot.current) return
     const timer = window.setTimeout(() => {
       try {
         const payload: DraftPayload = { savedAt: new Date().toISOString(), form }

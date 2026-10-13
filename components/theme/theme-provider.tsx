@@ -40,6 +40,11 @@ function applyTheme(theme: Theme) {
 }
 
 let currentTheme: Theme | null = null
+const themeListeners = new Set<() => void>()
+
+function notifyThemeChange() {
+  themeListeners.forEach((listener) => listener())
+}
 
 function getThemeSnapshot(): Theme {
   if (currentTheme === null) {
@@ -49,22 +54,24 @@ function getThemeSnapshot(): Theme {
 }
 
 function subscribeTheme(listener: () => void): () => void {
+  themeListeners.add(listener)
   const onStorage = (event: StorageEvent) => {
     if (event.key === null || event.key === THEME_STORAGE_KEY) {
       currentTheme = readStoredTheme() ?? resolveSystemTheme()
-      listener()
+      notifyThemeChange()
     }
   }
   const onSystemChange = () => {
     if (!readStoredTheme()) {
       currentTheme = resolveSystemTheme()
-      listener()
+      notifyThemeChange()
     }
   }
   const media = window.matchMedia('(prefers-color-scheme: dark)')
   window.addEventListener('storage', onStorage)
   media.addEventListener('change', onSystemChange)
   return () => {
+    themeListeners.delete(listener)
     window.removeEventListener('storage', onStorage)
     media.removeEventListener('change', onSystemChange)
   }
@@ -79,29 +86,25 @@ const themeStore = {
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const theme = useSyncExternalStore(themeStore.subscribe, themeStore.getSnapshot, themeStore.getServerSnapshot)
 
+  const persistTheme = (nextTheme: Theme) => {
+    currentTheme = nextTheme
+    applyTheme(nextTheme)
+    try {
+      window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme)
+    } catch {
+      // 隐私模式下写入失败时仅保留内存状态
+    }
+    notifyThemeChange()
+  }
+
   const value = useMemo<ThemeContextValue>(
     () => ({
       theme,
-      setTheme: (nextTheme: Theme) => {
-        currentTheme = nextTheme
-        applyTheme(nextTheme)
-        try {
-          window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme)
-        } catch {
-          // 隐私模式下写入失败时仅保留内存状态
-        }
-      },
-      toggleTheme: () => {
-        const nextTheme = getThemeSnapshot() === 'dark' ? 'light' : 'dark'
-        currentTheme = nextTheme
-        applyTheme(nextTheme)
-        try {
-          window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme)
-        } catch {
-          // 同上
-        }
-      },
+      setTheme: (nextTheme: Theme) => persistTheme(nextTheme),
+      toggleTheme: () => persistTheme(getThemeSnapshot() === 'dark' ? 'light' : 'dark'),
     }),
+    // persistTheme 只依赖模块级状态，value 随 theme 变化重建即可
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [theme]
   )
 

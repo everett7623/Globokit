@@ -6,12 +6,13 @@
 
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Link from 'next/link'
 import { RefreshCw, ShieldAlert } from 'lucide-react'
 
 export default function GlobalError({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
-  const [errorNo] = useState(() => Math.random().toString(36).slice(2, 8).toUpperCase())
+  // digest 由 Next 注入且服务端/客户端一致，避免随机编号造成 hydration mismatch
+  const errorNo = error.digest || 'CLIENT-ERROR'
 
   useEffect(() => {
     console.error(`[Globokit ${errorNo}]`, error)

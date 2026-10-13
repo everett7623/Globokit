@@ -80,6 +80,15 @@ check(!malicious.html.includes('<img src=x'), '姓名中的 HTML 标签必须被
 check(malicious.html.includes('&lt;img src=x'), '恶意输入应以转义文本呈现')
 check(malicious.html.includes('A&amp;B &quot;Quotes&quot;'), '公司名特殊字符应转义')
 
+// tel: 链接属性注入防护（引号破坏 href 结构）与空格清理
+const telInjection = generateEmailSignature(createInput({
+  phone: '" onmouseover="alert(1)',
+  mobile: '',
+}))
+check(!telInjection.html.includes('onmouseover="alert'), 'tel href 中的引号必须被转义，不得终止 href 属性')
+check(telInjection.html.includes('href="tel:&quot;onmouseover=&quot;alert(1)"'), 'tel href 中的引号应转义为 &quot;')
+check(!/href="tel:[^"]*"/.test(telInjection.html.replace(/&quot;/g, '')) === false, '转义后 href 属性结构完整')
+
 // logo
 const withLogo = generateEmailSignature(createInput({ logoUrl: 'https://example.com/logo.png' }))
 check(withLogo.html.includes('<img src="https://example.com/logo.png"'), 'logo 应输出 img 标签')

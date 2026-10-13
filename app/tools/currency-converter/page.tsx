@@ -64,11 +64,15 @@ export default function CurrencyConverterPage() {
     return () => { cancelled = true }
   }, [])
 
-  // 手动 USD 汇率覆盖：以 1 USD = ? CNY 输入，折算回 CNY 基准汇率表
+  // 手动锁定 1 USD = ? CNY：按比例整体缩放全表，保持所有交叉汇率口径一致
   const rates = useMemo(() => {
     const usdToCny = Number.parseFloat(manualUsdRate)
-    if (Number.isFinite(usdToCny) && usdToCny > 0) {
-      return { ...rateSnapshot.rates, USD: 1 / usdToCny }
+    const liveUsdRate = rateSnapshot.rates.USD
+    if (Number.isFinite(usdToCny) && usdToCny > 0 && Number.isFinite(liveUsdRate) && liveUsdRate > 0) {
+      // 目标 rates.USD = 1/usdToCny；对全表等比缩放，锁定值与实时值的偏差同等地作用于每个币种
+      const scale = 1 / usdToCny / liveUsdRate
+      const scaled = Object.fromEntries(Object.entries(rateSnapshot.rates).map(([code, rate]) => [code, rate * scale]))
+      return { ...scaled, CNY: 1 }
     }
     return rateSnapshot.rates
   }, [rateSnapshot, manualUsdRate])
