@@ -15,6 +15,10 @@ export const TOOL_UI_CONFIG: Record<
     bgColor: string
   }
 > = {
+  'lc-discount-calculator': {
+    color: 'text-amber-600',
+    bgColor: 'bg-amber-50',
+  },
   'packing-list-generator': {
     color: 'text-cyan-700',
     bgColor: 'bg-cyan-50',

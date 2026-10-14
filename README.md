@@ -5,8 +5,8 @@
     <a href="LICENSE">
       <img src="https://img.shields.io/badge/license-GPL--3.0--only-blue.svg" alt="License">
     </a>
-    <a href="https://github.com/everett7623/Globokit/releases/tag/v0.8.0">
-      <img src="https://img.shields.io/badge/version-v0.8.0-brightgreen.svg" alt="Version v0.8.0">
+    <a href="https://github.com/everett7623/Globokit/releases/tag/v0.9.0">
+      <img src="https://img.shields.io/badge/version-v0.9.0-brightgreen.svg" alt="Version v0.8.0">
     </a>
     <a href="https://nextjs.org">
       <img src="https://img.shields.io/badge/Built%20with-Next.js%2016-black" alt="Next.js">
@@ -258,7 +258,7 @@
 
 ## 🏷️ 版本与发布
 
-- 当前版本：[`v0.8.0`](https://github.com/everett7623/Globokit/releases/tag/v0.8.0)
+- 当前版本：[`v0.9.0`](https://github.com/everett7623/Globokit/releases/tag/v0.9.0)
 - 完整更新记录：[CHANGELOG.md](CHANGELOG.md)
 - 所有历史版本：[GitHub Releases](https://github.com/everett7623/Globokit/releases)
 

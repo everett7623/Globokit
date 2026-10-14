@@ -31,6 +31,7 @@ const scripts = [
   'assert-commission-calculator.cjs',
   'assert-email-signature.cjs',
   'assert-packing-list.cjs',
+  'assert-lc-discount.cjs',
 ]
 
 for (const script of scripts) {

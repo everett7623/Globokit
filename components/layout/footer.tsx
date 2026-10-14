@@ -43,6 +43,20 @@ export function Footer() {
             </Link>
             <span className="hidden text-slate-300 dark:text-white/20 sm:inline">|</span>
             <Link
+              href="/tools"
+              className="flex items-center gap-1.5 text-slate-500 transition-colors hover:text-emerald-700 dark:text-slate-400 dark:hover:text-cyan-200"
+            >
+              工具目录
+            </Link>
+            <span className="hidden text-slate-300 dark:text-white/20 sm:inline">|</span>
+            <Link
+              href="/faq"
+              className="flex items-center gap-1.5 text-slate-500 transition-colors hover:text-emerald-700 dark:text-slate-400 dark:hover:text-cyan-200"
+            >
+              常见问题
+            </Link>
+            <span className="hidden text-slate-300 dark:text-white/20 sm:inline">|</span>
+            <Link
               href="/about"
               className="flex items-center gap-1.5 text-slate-500 transition-colors hover:text-emerald-700 dark:text-slate-400 dark:hover:text-cyan-200"
             >

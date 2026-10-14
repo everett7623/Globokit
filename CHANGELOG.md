@@ -2,6 +2,15 @@
 
 本项目的重要变更均记录于此。版本号遵循 [Semantic Versioning](https://semver.org/lang/zh-CN/)。
 
+## [0.9.0] - 2026-10-12
+
+### 新增
+
+- 新增信用证远期贴现计算器：按 360 天惯例测算贴现利息、承兑费与到手净额，输出实际年化成本并与即期收款净额对比，超 180 天与高年化自动提示（外贸沟通 5→6，总工具 49→50）。
+- 新增独立工具总目录页（/tools）：50 个工具按 8 大业务分类分组展示，页脚与 sitemap 收录。
+- 新增常见问题页（/faq）：12 条关于站点使用、数据安全与典型外贸场景的高频问答，内置 FAQPage 结构化数据利于搜索收录，页脚收录。
+- 新增 1 组专项测试（28 条断言）接入 npm test。
+
 ## [0.8.0] - 2026-10-10
 
 ### 新增
@@ -131,6 +140,7 @@
 - 统一国际条码生成器在搜索结果和页面中的展示名称。
 - 将条码载入示例替换为不关联外部供应商的虚构 GS1 受限流通测试数据。
 
+[0.9.0]: https://github.com/everett7623/Globokit/releases/tag/v0.9.0
 [0.8.0]: https://github.com/everett7623/Globokit/releases/tag/v0.8.0
 [0.7.0]: https://github.com/everett7623/Globokit/releases/tag/v0.7.0
 [0.6.0]: https://github.com/everett7623/Globokit/releases/tag/v0.6.0

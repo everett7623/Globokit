@@ -32,6 +32,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: absoluteUrl('/tools'),
+      lastModified: new Date(latestToolDate),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: absoluteUrl('/faq'),
+      lastModified: new Date('2026-10-12'),
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
       url: absoluteUrl('/about'),
       lastModified: new Date('2026-10-10'),
       changeFrequency: 'monthly',

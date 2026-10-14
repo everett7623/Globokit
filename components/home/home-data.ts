@@ -8,6 +8,7 @@ import type { ComponentType } from 'react'
 import {
   AlertCircle,
   ArrowLeftRight,
+  BadgePercent,
   BellRing,
   Bot,
   Boxes,
@@ -64,6 +65,7 @@ import { TOOL_UI_CONFIG, getToolBadgeClassName } from '@/lib/tools/registry-ui'
 const ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
   AlertCircle,
   ArrowLeftRight,
+  BadgePercent,
   BellRing,
   Boxes,
   Calculator,
