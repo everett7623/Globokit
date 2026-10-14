@@ -103,8 +103,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       setTheme: (nextTheme: Theme) => persistTheme(nextTheme),
       toggleTheme: () => persistTheme(getThemeSnapshot() === 'dark' ? 'light' : 'dark'),
     }),
-    // persistTheme 只依赖模块级状态，value 随 theme 变化重建即可
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [theme]
   )
 

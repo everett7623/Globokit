@@ -69,11 +69,11 @@ export default function ImageCompressorPage() {
   const [items, setItems] = useState<CompressItem[]>([])
   const [notice, setNotice] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
-  const settingsRef = useRef({ maxSide, qualityPercent, outputType })
-  settingsRef.current = { maxSide, qualityPercent, outputType }
 
   const compressOne = useCallback(async (item: CompressItem, file: File): Promise<CompressItem> => {
-    const { maxSide: sideLimit, qualityPercent: quality, outputType: format } = settingsRef.current
+    const sideLimit = maxSide
+    const quality = qualityPercent
+    const format = outputType
     try {
       const image = await loadImage(file)
       const target = calculateTargetDimensions(image.naturalWidth, image.naturalHeight, toNumber(sideLimit))
@@ -103,7 +103,7 @@ export default function ImageCompressorPage() {
     } catch (error) {
       return { ...item, status: 'error', error: error instanceof Error ? error.message : '压缩失败' }
     }
-  }, [])
+  }, [maxSide, qualityPercent, outputType])
 
   const handleFiles = useCallback(async (fileList: FileList | null) => {
     if (!fileList || fileList.length === 0) return
