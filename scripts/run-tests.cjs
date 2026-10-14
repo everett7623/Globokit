@@ -32,6 +32,8 @@ const scripts = [
   'assert-email-signature.cjs',
   'assert-packing-list.cjs',
   'assert-lc-discount.cjs',
+  'assert-payment-risk.cjs',
+  'assert-image-compressor.cjs',
 ]
 
 for (const script of scripts) {

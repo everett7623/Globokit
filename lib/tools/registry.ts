@@ -4,7 +4,7 @@
 // 作者: everettlabs
 // 更新时间: 2026-07-15
 
-import { barcodeGeneratorTool } from './registry-barcode'
+import { barcodeGeneratorTool, imageCompressorTool } from './registry-barcode'
 import { FINANCE_TOOLS } from './registry-finance'
 import { GENERAL_TOOLS } from './registry-general'
 import { LOGISTICS_TOOLS } from './registry-logistics'
@@ -17,6 +17,7 @@ export const TOOL_REGISTRY: ToolMeta[] = [
   ...LOGISTICS_TOOLS,
   ...GENERAL_TOOLS,
   barcodeGeneratorTool,
+  imageCompressorTool,
 ]
 
 export function getToolBySlug(slug: string): ToolMeta | undefined {

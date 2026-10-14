@@ -1,6 +1,6 @@
 {
   "name": "Globokit",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "private": true,
   "author": "everettlabs",
   "license": "GPL-3.0-only",
@@ -44,6 +44,8 @@
     "test:email-signature": "node scripts/assert-email-signature.cjs",
     "test:packing-list": "node scripts/assert-packing-list.cjs",
     "test:lc-discount": "node scripts/assert-lc-discount.cjs",
+    "test:payment-risk": "node scripts/assert-payment-risk.cjs",
+    "test:image-compressor": "node scripts/assert-image-compressor.cjs",
     "test:release": "node scripts/assert-release-consistency.cjs",
     "test:category-backfill": "node scripts/assert-category-backfill.cjs",
     "typecheck": "tsc --noEmit",

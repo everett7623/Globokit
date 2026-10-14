@@ -2,6 +2,14 @@
 
 本项目的重要变更均记录于此。版本号遵循 [Semantic Versioning](https://semver.org/lang/zh-CN/)。
 
+## [0.10.0] - 2026-10-12
+
+### 新增
+
+- 新增收款方式风险速查：T/T、即期/远期 L/C、D/P、D/A、O/A、PayPal 等 8 种方式的风险等级、到账速度、费用与防坑要点，按新客户/老客户/样品单/大货订单场景筛选并按资金安全排序推荐（外贸沟通 6→7，总工具 50→52）。
+- 新增产品图片压缩工具：批量（最多 20 张）在浏览器本地压缩，支持质量滑块、最大边长等比缩放与 JPEG/WebP/PNG 输出，透明 PNG 转 JPEG 自动铺白底，输出前后体积对比与一键下载（文件与格式转换 7→8）。
+- 新增 2 组专项测试（79 条断言）接入 npm test。
+
 ## [0.9.0] - 2026-10-12
 
 ### 新增
@@ -140,6 +148,7 @@
 - 统一国际条码生成器在搜索结果和页面中的展示名称。
 - 将条码载入示例替换为不关联外部供应商的虚构 GS1 受限流通测试数据。
 
+[0.10.0]: https://github.com/everett7623/Globokit/releases/tag/v0.10.0
 [0.9.0]: https://github.com/everett7623/Globokit/releases/tag/v0.9.0
 [0.8.0]: https://github.com/everett7623/Globokit/releases/tag/v0.8.0
 [0.7.0]: https://github.com/everett7623/Globokit/releases/tag/v0.7.0

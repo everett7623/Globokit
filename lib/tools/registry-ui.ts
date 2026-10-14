@@ -15,6 +15,14 @@ export const TOOL_UI_CONFIG: Record<
     bgColor: string
   }
 > = {
+  'payment-risk-guide': {
+    color: 'text-emerald-600',
+    bgColor: 'bg-emerald-50',
+  },
+  'image-compressor': {
+    color: 'text-rose-500',
+    bgColor: 'bg-rose-50',
+  },
   'lc-discount-calculator': {
     color: 'text-amber-600',
     bgColor: 'bg-amber-50',
