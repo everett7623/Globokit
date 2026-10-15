@@ -75,6 +75,18 @@ const FAQS: Array<{ question: string; answer: string; href?: string; hrefLabel?:
     hrefLabel: '打开退税计算器',
   },
   {
+    question: '新客户要求货到付款，怎么判断收款方式的风险？',
+    answer: '收款方式风险速查把 T/T、信用证、D/P、D/A、O/A 等方式按风险等级与适用场景做了对比，并给出防坑要点。经验顺序：新客户优先前 T/T 或即期信用证；D/A 与 O/A 属于赊销，务必投保出口信用保险。',
+    href: '/tools/payment-risk-guide',
+    hrefLabel: '打开收款风险速查',
+  },
+  {
+    question: '产品图太大发不了邮件，怎么压到目标体积？',
+    answer: '产品图片压缩工具在浏览器本地批量压缩（最多 20 张），可设最大边长、质量与输出格式（JPEG/WebP/PNG），处理完直接下载，图片不会上传到任何服务器。',
+    href: '/tools/image-compressor',
+    hrefLabel: '打开图片压缩工具',
+  },
+  {
     question: '站点开源吗？可以自己部署吗？',
     answer: '开源，GPL-3.0 协议，基于 Next.js 构建，README 提供一键部署到 Vercel 的按钮。发现计算错误或想提需求，欢迎在 GitHub Issues 反馈。',
     href: '/about',
