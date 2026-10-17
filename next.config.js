@@ -11,7 +11,7 @@ const contentSecurityPolicy = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
-  "connect-src 'self' https://open.er-api.com https://www.googletagmanager.com https://*.google-analytics.com",
+  "connect-src 'self' https://open.er-api.com https://www.googletagmanager.com https://*.google-analytics.com https://www.google.com/g/collect",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",

@@ -4,7 +4,6 @@
 // 作者: everettlabs
 // 更新时间: 2026-07-15
 
-import Image from 'next/image'
 import { AlertTriangle, CheckCircle2, ExternalLink, Server } from 'lucide-react'
 import { BUSINESS_TIME_ZONE } from '@/lib/date-utils'
 import { getExchangeRateSourceLabel, type ExchangeRateSnapshot } from '@/lib/tools/vps-calculator'
@@ -28,7 +27,7 @@ export function VpsHeader({ rateSnapshot }: { rateSnapshot: ExchangeRateSnapshot
           <p className="mt-2 text-muted-foreground">基于实时汇率与精确到天的时间计算，快速分析服务器残值、期望售价与交易盈亏。</p>
         </div>
         <a href="https://vpsknow.com" target="_blank" rel="noopener noreferrer" className="group flex w-full max-w-sm items-center gap-4 rounded-lg border border-slate-200 bg-white p-4 shadow-xs transition-all hover:border-violet-200 hover:shadow-md hover:shadow-violet-900/5 lg:w-auto">
-          <Image src="https://vpsknow.com/favicon.png" alt="VPSKnow Logo" width={44} height={44} className="h-11 w-11 shrink-0 rounded-md border border-slate-100 object-contain" />
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-violet-100 bg-violet-50 text-violet-600"><Server aria-hidden="true" className="h-6 w-6" /></span>
           <div className="min-w-0 flex-1"><div className="flex items-center gap-2"><span className="rounded-md bg-violet-50 px-2 py-0.5 text-[11px] font-medium text-violet-700">推荐</span><span className="font-semibold text-gray-900 transition-colors group-hover:text-violet-700">VPSKnow</span></div><p className="mt-1 text-xs leading-5 text-muted-foreground">专业 VPS 评测、全球云服务器与网络工具指南</p></div>
           <ExternalLink className="h-4 w-4 shrink-0 text-gray-400 transition-colors group-hover:text-violet-600" />
         </a>

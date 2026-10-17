@@ -62,16 +62,18 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} bg-background text-foreground antialiased`}>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-JCBDVN470N"
-          strategy="afterInteractive"
-        />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-JCBDVN470N');
+            if (['globokit.com', 'www.globokit.com'].includes(window.location.hostname)) {
+              window.dataLayer = window.dataLayer || [];
+              window.gtag = function(){window.dataLayer.push(arguments);};
+              window.gtag('js', new Date());
+              window.gtag('config', 'G-JCBDVN470N');
+              var analyticsScript = document.createElement('script');
+              analyticsScript.async = true;
+              analyticsScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-JCBDVN470N';
+              document.head.appendChild(analyticsScript);
+            }
           `}
         </Script>
         <ThemeProvider>

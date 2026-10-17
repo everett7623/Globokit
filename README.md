@@ -6,7 +6,7 @@
       <img src="https://img.shields.io/badge/license-GPL--3.0--only-blue.svg" alt="License">
     </a>
     <a href="https://github.com/everett7623/Globokit/releases/tag/v0.10.0">
-      <img src="https://img.shields.io/badge/version-v0.10.0-brightgreen.svg" alt="Version v0.8.0">
+      <img src="https://img.shields.io/badge/version-v0.10.0-brightgreen.svg" alt="Version v0.10.0">
     </a>
     <a href="https://nextjs.org">
       <img src="https://img.shields.io/badge/Built%20with-Next.js%2016-black" alt="Next.js">
@@ -349,7 +349,7 @@ Globokit/
 │   │   └── navigation.tsx      # 导航栏
 │   ├── tools/                  # 工具页专用组件
 │   │   ├── copy-button.tsx     # 复制按钮
-│   │   └── tool-card.tsx       # 工具入口卡片
+│   │   └── related-tools.tsx   # 关联工具入口
 │   └── ui/                     # 基础 UI 组件 (Shadcn/Radix)
 │       ├── alert.tsx
 │       ├── badge.tsx
