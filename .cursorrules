@@ -2,9 +2,9 @@
 
 ## Project Context
 
-**Globokit** is a modern online toolkit for international trade professionals, built with Next.js 14 App Router. Pure frontend architecture with all calculations running locally in the browser.
+**Globokit** is a modern online toolkit for international trade professionals, built with Next.js 16 App Router (Turbopack). Pure frontend architecture with all calculations running locally in the browser.
 
-- **Stack**: Next.js 14, TypeScript, Tailwind CSS, Shadcn UI, Radix UI
+- **Stack**: Next.js 16, TypeScript, Tailwind CSS v4 (CSS-first @theme in app/globals.css), Shadcn UI, Radix UI
 - **Deployment**: Vercel
 - **License**: GPL-3.0-only
 

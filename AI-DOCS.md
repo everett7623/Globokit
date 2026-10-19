@@ -15,7 +15,7 @@
 所有 AI 工具配置文档包含以下统一内容：
 
 ### 1. 项目概述
-- 技术栈：Next.js 14, TypeScript, Tailwind CSS
+- 技术栈：Next.js 16（Turbopack）, TypeScript, Tailwind CSS v4（CSS-first @theme）
 - 架构：纯前端，无后端依赖
 - 部署：Vercel
 
@@ -118,4 +118,4 @@ npm run validate:data    # 数据验证
 ---
 
 **维护者**: everettlabs  
-**最后更新**: 2026-07-30
+**最后更新**: 2026-10-19

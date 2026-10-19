@@ -4,9 +4,9 @@ This document provides instructions for GitHub Copilot when working in this repo
 
 ## Project Overview
 
-**Globokit** is a modern online toolkit platform for international trade professionals, built with Next.js 14 App Router. The project uses a pure frontend architecture where all calculations run locally in the browser without backend dependencies.
+**Globokit** is a modern online toolkit platform for international trade professionals, built with Next.js 16 App Router (Turbopack). The project uses a pure frontend architecture where all calculations run locally in the browser without backend dependencies.
 
-- **Tech Stack**: Next.js 14, TypeScript, Tailwind CSS, Shadcn UI, Radix UI
+- **Tech Stack**: Next.js 16, TypeScript, Tailwind CSS v4 (CSS-first @theme in app/globals.css), Shadcn UI, Radix UI
 - **Deployment**: Vercel
 - **License**: GPL-3.0-only
 - **Language**: Simplified Chinese for comments and commit messages, English for technical terms
