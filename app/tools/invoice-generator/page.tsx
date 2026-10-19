@@ -8,6 +8,7 @@
 
 import { useMemo, useState } from 'react'
 import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
+import { createId } from '@/lib/utils'
 import { EnhancedAlert } from '@/components/ui/enhanced-alert'
 import { buildInvoicePlainText, calculateInvoice, type InvoiceInput } from '@/lib/tools/invoice-generator'
 import { createInvoiceFormState, InvoiceForm, type InvoiceFormState } from './invoice-form'
@@ -61,7 +62,7 @@ export default function InvoiceGeneratorPage() {
   }))
   const addLine = () => setForm((current) => ({
     ...current,
-    lines: [...current.lines, { id: `line-${Date.now()}`, description: '', quantity: '1', unit: 'PCS', unitPrice: '0' }],
+    lines: [...current.lines, { id: createId('line'), description: '', quantity: '1', unit: 'PCS', unitPrice: '0' }],
   }))
   const removeLine = (lineId: string) => setForm((current) => {
     if (current.lines.length <= 1) return current

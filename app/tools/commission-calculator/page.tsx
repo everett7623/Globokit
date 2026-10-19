@@ -9,6 +9,7 @@
 import { useMemo, useState } from 'react'
 import { Percent, Plus, RefreshCw, Trash2 } from 'lucide-react'
 import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
+import { createId } from '@/lib/utils'
 import { EnhancedAlert } from '@/components/ui/enhanced-alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -80,7 +81,7 @@ export default function CommissionCalculatorPage() {
   const addTier = () => setForm((current) => {
     if (current.tiers.length >= 5) return current
     const lastNonZero = [...current.tiers].reverse().find((tier) => tier.upToAmount !== '0')
-    return { ...current, tiers: [...current.tiers, { id: `tier-${Date.now()}`, upToAmount: '0', ratePercent: lastNonZero ? String(toNumber(lastNonZero.ratePercent) + 1) : '2' }] }
+    return { ...current, tiers: [...current.tiers, { id: createId('tier'), upToAmount: '0', ratePercent: lastNonZero ? String(toNumber(lastNonZero.ratePercent) + 1) : '2' }] }
   })
   const removeTier = (tierId: string) => setForm((current) => {
     if (current.tiers.length <= 2) return current

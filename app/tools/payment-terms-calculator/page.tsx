@@ -9,6 +9,7 @@
 import { useMemo, useState } from 'react'
 import { EnhancedAlert } from '@/components/ui/enhanced-alert'
 import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
+import { createId } from '@/lib/utils'
 import {
   calculatePaymentTerms,
   createPaymentTermOption,
@@ -74,7 +75,7 @@ export default function PaymentTermsCalculatorPage() {
     if (current.terms.length >= 3) return current
     const usedPresets = new Set(current.terms.map((term) => term.presetId))
     const presetId = (['tt-deposit-shipment', 'lc-sight', 'oa-60'] as PaymentTermPresetId[]).find((id) => !usedPresets.has(id)) ?? 'dp-30'
-    const option = createPaymentTermOption(`option-${Date.now()}`, presetId)
+    const option = createPaymentTermOption(createId('option'), presetId)
     return {
       ...current,
       terms: [...current.terms, {

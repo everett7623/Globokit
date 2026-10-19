@@ -60,6 +60,7 @@ Wallet,
   Layers3,
 } from 'lucide-react'
 import { PARTNER_RESOURCES, type PartnerResourceType } from '@/lib/partner-resources'
+import { COUNTRY_DATA } from '@/lib/tools/global-country-info'
 import { TOOL_REGISTRY, getActiveCategories, getToolsByCategory } from '@/lib/tools/registry'
 import { TOOL_UI_CONFIG, getToolBadgeClassName } from '@/lib/tools/registry-ui'
 
@@ -143,7 +144,7 @@ export const HERO_TOOLS = heroToolIds
 export const HOME_STATS = [
   { label: '工具总数', value: `${HOME_TOOLS.length}`, icon: Zap },
   { label: '业务场景', value: `${HOME_ACTIVE_CATEGORIES.length}`, icon: ShieldCheck },
-  { label: '全球资料', value: '200+', icon: Globe },
+  { label: '国家与地区资料', value: `${COUNTRY_DATA.length}`, icon: Globe },
   { label: '持续优化', value: 'Live', icon: TrendingUp },
 ]
 

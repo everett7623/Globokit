@@ -9,6 +9,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { MobileFriendlyWrapper } from '@/components/tools/mobile-friendly-wrapper'
 import { EnhancedAlert } from '@/components/ui/enhanced-alert'
+import { createId } from '@/lib/utils'
 import {
   buildPackingListCsv,
   buildPackingListPlainText,
@@ -125,7 +126,7 @@ export default function PackingListGeneratorPage() {
   }))
   const addLine = () => setForm((current) => ({
     ...current,
-    lines: [...current.lines, { id: `line-${Date.now()}`, description: '', cartons: '1', qtyPerCarton: '1', unit: 'PCS', gwPerCarton: '0', nwPerCarton: '0', dimensions: '' }],
+    lines: [...current.lines, { id: createId('line'), description: '', cartons: '1', qtyPerCarton: '1', unit: 'PCS', gwPerCarton: '0', nwPerCarton: '0', dimensions: '' }],
   }))
   const removeLine = (lineId: string) => setForm((current) => {
     if (current.lines.length <= 1) return current
