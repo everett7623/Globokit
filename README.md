@@ -44,6 +44,10 @@
 
 ### 📊 财务与计算工具
 
+- **降价保利销量计算器**
+  - 评估客户压价后同数量订单的利润损失，反推维持原利润所需的整数销量与增量比例。
+  - 支持成交费率、固定成本、结果复制，以及负贡献利润与原订单亏损提示。
+
 - **VPS剩余价值计算器** <span style="background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold;">NEW</span>
   
   - 基于购买日期与续费周期，精确计算服务器剩余残值。

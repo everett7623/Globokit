@@ -18,12 +18,12 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: 'Globokit - 外贸实用工具集',
-  description: '专为外贸从业者打造的在线工具平台，52 个免费工具覆盖报价核算、装柜出货、单证制作（发票/装箱单/唛头）、收款催款与全球资料查询，全部在浏览器本地运行',
+  description: '专为外贸从业者打造的在线工具平台，53 个免费工具覆盖报价核算、装柜出货、单证制作（发票/装箱单/唛头）、收款催款与全球资料查询，全部在浏览器本地运行',
   keywords: '外贸工具,外贸报价,利润计算,人民币大写,英文大小写,特殊字符,数字转英文,中文拼音,国际节假日,世界时间,货币符号',
   authors: [{ name: 'everettlabs' }],
   openGraph: {
     title: 'Globokit - 外贸实用工具集',
-    description: '专为外贸从业者打造的在线工具平台，52 个免费工具覆盖报价、装柜、单证、收款全链路',
+    description: '专为外贸从业者打造的在线工具平台，53 个免费工具覆盖报价、装柜、单证、收款全链路',
     url: SITE_URL,
     siteName: SITE_NAME,
     type: 'website',

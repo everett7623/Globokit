@@ -15,6 +15,10 @@ export const TOOL_UI_CONFIG: Record<
     bgColor: string
   }
 > = {
+  'discount-volume-calculator': {
+    color: 'text-teal-600',
+    bgColor: 'bg-teal-50',
+  },
   'payment-risk-guide': {
     color: 'text-emerald-600',
     bgColor: 'bg-emerald-50',

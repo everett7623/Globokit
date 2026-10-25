@@ -8,6 +8,21 @@ import type { ToolMeta } from './registry-types'
 
 export const FINANCE_TOOLS: ToolMeta[] = [
   {
+    id: 'discount-volume-calculator',
+    slug: 'discount-volume-calculator',
+    title: '降价保利销量计算器',
+    shortTitle: '降价保利',
+    description: '测算客户压价后的利润损失，以及维持原订单利润所需的增量销量',
+    category: '财务报价',
+    iconName: 'Calculator',
+    href: '/tools/discount-volume-calculator',
+    updatedAt: '2026-10-25',
+    badge: '新增',
+    keywords: ['降价', '保利销量', '客户压价', '利润', '数量折扣'],
+    useCases: ['客户压价谈判', '以量换价测算', '折扣利润评估'],
+    relatedTools: ['quote-calculator', 'tiered-quote-calculator', 'order-break-even-calculator'],
+  },
+  {
     id: 'rmb-converter',
     slug: 'rmb-converter',
     title: '人民币大写转换',
