@@ -16,6 +16,7 @@ import { cn } from '@/lib/utils'
 export const metadata: Metadata = {
   title: '外贸业务资源精选 - 代理、主机、域名、账号与 AI 服务 | Globokit',
   description: '精选可配合 Globokit 工具站使用的外贸业务资源，覆盖客户开发、代理网络、浏览器环境、主机建站、域名服务、账号支付、AI 工具和验证服务。',
+  alternates: { canonical: '/resources' },
 }
 
 export default function ResourcesPage() {
