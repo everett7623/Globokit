@@ -59,7 +59,7 @@
     "@radix-ui/react-tabs": "^1.2.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
-    "lucide-react": "^1.62.0",
+    "lucide-react": "^1.63.0",
     "next": "^16.4.3",
     "pinyin-pro": "^3.29.5",
     "react": "^19.3.1",
