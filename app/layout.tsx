@@ -11,23 +11,43 @@ import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { ThemeProvider } from '@/components/theme/theme-provider'
 import Script from 'next/script'
+import { buildAbsoluteUrl, buildRootGraphSchema } from '@/lib/seo-schema'
 import { SITE_NAME, SITE_URL } from '@/lib/site'
+import { TOOL_REGISTRY } from '@/lib/tools/registry'
 
 const inter = Inter({ subsets: ['latin'] })
+const toolCount = TOOL_REGISTRY.length
+const siteDescription = `专为外贸从业者打造的在线工具平台，${toolCount} 个免费工具覆盖报价核算、装柜出货、单证制作（发票/装箱单/唛头）、收款催款与全球资料查询，全部在浏览器本地运行`
+const ogImageUrl = buildAbsoluteUrl('/opengraph-image')
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   alternates: { canonical: '/' },
-  title: 'Globokit - 外贸实用工具集',
-  description: '专为外贸从业者打造的在线工具平台，53 个免费工具覆盖报价核算、装柜出货、单证制作（发票/装箱单/唛头）、收款催款与全球资料查询，全部在浏览器本地运行',
-  keywords: '外贸工具,外贸报价,利润计算,人民币大写,英文大小写,特殊字符,数字转英文,中文拼音,国际节假日,世界时间,货币符号',
+  title: `${SITE_NAME} - 外贸实用工具集`,
+  description: siteDescription,
+  keywords: '外贸工具,外贸报价,利润计算,人民币大写,英文大小写,特殊字符,数字转英文,中文拼音,国际节假日,世界时间,货币符号,装柜计算,商业发票,装箱单',
   authors: [{ name: 'everettlabs' }],
   openGraph: {
-    title: 'Globokit - 外贸实用工具集',
-    description: '专为外贸从业者打造的在线工具平台，53 个免费工具覆盖报价、装柜、单证、收款全链路',
+    title: `${SITE_NAME} - 外贸实用工具集`,
+    description: `专为外贸从业者打造的在线工具平台，${toolCount} 个免费工具覆盖报价、装柜、单证、收款全链路`,
     url: SITE_URL,
     siteName: SITE_NAME,
     type: 'website',
+    locale: 'zh_CN',
+    images: [
+      {
+        url: ogImageUrl,
+        width: 1200,
+        height: 630,
+        alt: `${SITE_NAME} - 外贸实用工具集`,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${SITE_NAME} - 外贸实用工具集`,
+    description: `专为外贸从业者打造的在线工具平台，${toolCount} 个免费工具覆盖报价、装柜、单证、收款全链路`,
+    images: [ogImageUrl],
   },
   // 使用 PNG 图标，保持桌面与移动端显示一致
   icons: {
@@ -42,9 +62,17 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const rootSchema = buildRootGraphSchema()
+
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <head>
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt" />
+        <script
+          id="site-structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: rootSchema }}
+        />
         <script
           id="theme-init"
           dangerouslySetInnerHTML={{

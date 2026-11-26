@@ -7,16 +7,36 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ShieldCheck } from 'lucide-react'
-import { SITE_NAME } from '@/lib/site'
+import { buildAbsoluteUrl, buildBreadcrumbSchema, serializeJsonLd } from '@/lib/seo-schema'
+import { SITE_NAME, SITE_URL } from '@/lib/site'
+
+const privacyTitle = `隐私政策 - ${SITE_NAME}`
+const privacyDescription = `${SITE_NAME} 不设账号体系、无后端存储，工具计算全部在浏览器本地完成。本页说明数据存储位置、localStorage 用途与第三方服务清单。`
 
 export const metadata: Metadata = {
-  title: `隐私政策 - ${SITE_NAME}`,
-  description: `${SITE_NAME} 不设账号体系、无后端存储，工具计算全部在浏览器本地完成。本页说明数据存储位置、localStorage 用途与第三方服务清单。`,
+  title: privacyTitle,
+  description: privacyDescription,
   alternates: { canonical: '/privacy' },
+  openGraph: {
+    title: privacyTitle,
+    description: privacyDescription,
+    url: buildAbsoluteUrl('/privacy'),
+    siteName: SITE_NAME,
+    type: 'website',
+    locale: 'zh_CN',
+    images: [{ url: buildAbsoluteUrl('/opengraph-image'), width: 1200, height: 630, alt: privacyTitle }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: privacyTitle,
+    description: privacyDescription,
+    images: [buildAbsoluteUrl('/opengraph-image')],
+  },
 }
 
 const STORAGE_KEYS = [
   { key: 'globokit-theme', usage: '记住你选择的日间/夜间主题' },
+  { key: 'globokit-packing-draft', usage: '装箱单生成器的浏览器本地自动草稿，防止刷新页面丢失填写内容' },
   { key: 'currencyFavorites', usage: '货币符号页的收藏币种' },
   { key: 'worldTimeFavorites', usage: '世界时间页的收藏城市' },
   { key: 'countryFavorites', usage: '国家信息页的收藏国家' },
@@ -29,8 +49,27 @@ const THIRD_PARTIES = [
 ]
 
 export default function PrivacyPage() {
+  const structuredData = serializeJsonLd({
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        name: privacyTitle,
+        description: privacyDescription,
+        url: buildAbsoluteUrl('/privacy'),
+        inLanguage: 'zh-CN',
+        isPartOf: { '@id': `${SITE_URL}/#website` },
+      },
+      buildBreadcrumbSchema([
+        { name: '首页', path: '/' },
+        { name: '隐私政策', path: '/privacy' },
+      ]),
+    ],
+  })
+
   return (
     <div className="mx-auto max-w-3xl space-y-8">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
       <header className="space-y-3">
         <div className="inline-flex items-center gap-2 rounded-md border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700 dark:border-cyan-300/20 dark:bg-cyan-300/10 dark:text-cyan-200">
           <ShieldCheck className="h-3.5 w-3.5" />
@@ -84,7 +123,7 @@ export default function PrivacyPage() {
         <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">
           对本政策或数据处理方式有疑问，请通过 <a href="https://github.com/everett7623/Globokit/issues" target="_blank" rel="noopener noreferrer" className="font-medium text-emerald-700 underline-offset-4 hover:underline dark:text-cyan-300">GitHub Issues</a> 联系我们。政策更新后会在此页面发布并更新日期。
         </p>
-        <p className="text-xs text-slate-400">最后更新：2026-10-10</p>
+        <p className="text-xs text-slate-400">最后更新：2026-11-25</p>
       </section>
 
       <p className="text-sm text-slate-500 dark:text-slate-400">

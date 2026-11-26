@@ -7,12 +7,31 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { CircleQuestionMark } from 'lucide-react'
+import { buildAbsoluteUrl, buildBreadcrumbSchema, serializeJsonLd } from '@/lib/seo-schema'
 import { SITE_NAME, SITE_URL } from '@/lib/site'
 
+const faqTitle = `常见问题 FAQ - ${SITE_NAME} 外贸工具站`
+const faqDescription = `${SITE_NAME} 常见问题：工具是否免费、数据是否安全、报价与装柜怎么算、信用证工具怎么用、能否离线使用等高频问答。`
+
 export const metadata: Metadata = {
-  title: `常见问题 FAQ - ${SITE_NAME} 外贸工具站`,
-  description: `${SITE_NAME} 常见问题：工具是否免费、数据是否安全、报价与装柜怎么算、信用证工具怎么用、能否离线使用等高频问答。`,
+  title: faqTitle,
+  description: faqDescription,
   alternates: { canonical: '/faq' },
+  openGraph: {
+    title: faqTitle,
+    description: faqDescription,
+    url: buildAbsoluteUrl('/faq'),
+    siteName: SITE_NAME,
+    type: 'website',
+    locale: 'zh_CN',
+    images: [{ url: buildAbsoluteUrl('/opengraph-image'), width: 1200, height: 630, alt: faqTitle }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: faqTitle,
+    description: faqDescription,
+    images: [buildAbsoluteUrl('/opengraph-image')],
+  },
 }
 
 const FAQS: Array<{ question: string; answer: string; href?: string; hrefLabel?: string }> = [
@@ -70,7 +89,7 @@ const FAQS: Array<{ question: string; answer: string; href?: string; hrefLabel?:
   },
   {
     question: '出口退税到底能退多少？',
-    answer: '出口退税计算器内置「13% 征 13% 退」「13% 征 9% 退」等常用组合，按含税/未税采购口径拆分进项税与退税额，并结合 FOB 收入测算退税后利润。具体退税率以产品 HS 编码对应的最税则为准。',
+    answer: '出口退税计算器内置「13% 征 13% 退」「13% 征 9% 退」等常用组合，按含税/未税采购口径拆分进项税与退税额，并结合 FOB 收入测算退税后利润。具体退税率以产品 HS 编码对应的最新税则为准。',
     href: '/tools/export-tax-rebate-calculator',
     hrefLabel: '打开退税计算器',
   },
@@ -99,15 +118,26 @@ const FAQS: Array<{ question: string; answer: string; href?: string; hrefLabel?:
 ]
 
 export default function FaqPage() {
-  const structuredData = JSON.stringify({
+  const structuredData = serializeJsonLd({
     '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: FAQS.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
-    })),
-  }).replace(/</g, '\\u003c')
+    '@graph': [
+      {
+        '@type': 'FAQPage',
+        url: buildAbsoluteUrl('/faq'),
+        inLanguage: 'zh-CN',
+        isPartOf: { '@id': `${SITE_URL}/#website` },
+        mainEntity: FAQS.map((faq) => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+        })),
+      },
+      buildBreadcrumbSchema([
+        { name: '首页', path: '/' },
+        { name: '常见问题', path: '/faq' },
+      ]),
+    ],
+  })
 
   return (
     <div className="mx-auto max-w-3xl space-y-8">

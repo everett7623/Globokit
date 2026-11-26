@@ -11,15 +11,44 @@ import { ResourceHero } from './resource-hero'
 import { RESOURCE_TYPE_META, VISIBLE_RESOURCE_GROUPS } from './resource-page-data'
 import { Badge } from '@/components/ui/badge'
 import { PARTNER_RESOURCES } from '@/lib/partner-resources'
+import { buildAbsoluteUrl, buildCollectionPageSchema } from '@/lib/seo-schema'
+import { SITE_NAME } from '@/lib/site'
 import { cn } from '@/lib/utils'
 
+const resourcesTitle = `外贸业务资源精选 - 代理、主机、域名、账号与 AI 服务 | ${SITE_NAME}`
+const resourcesDescription = '精选可配合 Globokit 工具站使用的外贸业务资源，覆盖客户开发、代理网络、浏览器环境、主机建站、域名服务、账号支付、AI 工具和验证服务。'
+
 export const metadata: Metadata = {
-  title: '外贸业务资源精选 - 代理、主机、域名、账号与 AI 服务 | Globokit',
-  description: '精选可配合 Globokit 工具站使用的外贸业务资源，覆盖客户开发、代理网络、浏览器环境、主机建站、域名服务、账号支付、AI 工具和验证服务。',
+  title: resourcesTitle,
+  description: resourcesDescription,
   alternates: { canonical: '/resources' },
+  openGraph: {
+    title: resourcesTitle,
+    description: resourcesDescription,
+    url: buildAbsoluteUrl('/resources'),
+    siteName: SITE_NAME,
+    type: 'website',
+    locale: 'zh_CN',
+    images: [{ url: buildAbsoluteUrl('/opengraph-image'), width: 1200, height: 630, alt: resourcesTitle }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: resourcesTitle,
+    description: resourcesDescription,
+    images: [buildAbsoluteUrl('/opengraph-image')],
+  },
 }
 
 export default function ResourcesPage() {
+  const structuredData = buildCollectionPageSchema({
+    name: resourcesTitle,
+    description: resourcesDescription,
+    path: '/resources',
+    breadcrumbs: [
+      { name: '首页', path: '/' },
+      { name: '业务资源', path: '/resources' },
+    ],
+  })
   const stats = [
     { label: '资源数量', value: PARTNER_RESOURCES.length },
     { label: '业务分类', value: VISIBLE_RESOURCE_GROUPS.length },
@@ -32,6 +61,7 @@ export default function ResourcesPage() {
 
   return (
     <div className="space-y-10">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
       <ResourceHero />
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">

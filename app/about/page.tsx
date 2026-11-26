@@ -7,6 +7,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, BadgeCheck, ShieldCheck, Zap } from 'lucide-react'
+import { buildAboutPageSchema, buildAbsoluteUrl } from '@/lib/seo-schema'
 import { SITE_NAME } from '@/lib/site'
 import { TOOL_REGISTRY } from '@/lib/tools/registry'
 import { HOME_ACTIVE_CATEGORIES, HOME_TOOLS_BY_CATEGORY } from '@/components/home/home-data'
@@ -19,15 +20,44 @@ function GithubMark({ className }: { className?: string }) {
   )
 }
 
+const aboutTitle = `关于 ${SITE_NAME} - 外贸从业者的在线工具箱`
+const aboutDescription = `${SITE_NAME} 是面向外贸从业者的免费在线工具平台，全部计算在浏览器本地完成，无需注册、不上传数据。了解站点定位、工具规模与开源信息。`
+
 export const metadata: Metadata = {
-  title: `关于 ${SITE_NAME} - 外贸从业者的在线工具箱`,
-  description: `${SITE_NAME} 是面向外贸从业者的免费在线工具平台，全部计算在浏览器本地完成，无需注册、不上传数据。了解站点定位、工具规模与开源信息。`,
+  title: aboutTitle,
+  description: aboutDescription,
   alternates: { canonical: '/about' },
+  openGraph: {
+    title: aboutTitle,
+    description: aboutDescription,
+    url: buildAbsoluteUrl('/about'),
+    siteName: SITE_NAME,
+    type: 'website',
+    locale: 'zh_CN',
+    images: [{ url: buildAbsoluteUrl('/opengraph-image'), width: 1200, height: 630, alt: aboutTitle }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: aboutTitle,
+    description: aboutDescription,
+    images: [buildAbsoluteUrl('/opengraph-image')],
+  },
 }
 
 export default function AboutPage() {
+  const structuredData = buildAboutPageSchema({
+    name: aboutTitle,
+    description: aboutDescription,
+    path: '/about',
+    breadcrumbs: [
+      { name: '首页', path: '/' },
+      { name: '关于本站', path: '/about' },
+    ],
+  })
+
   return (
     <div className="mx-auto max-w-3xl space-y-8">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
       <header className="space-y-3">
         <div className="inline-flex items-center gap-2 rounded-md border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700 dark:border-cyan-300/20 dark:bg-cyan-300/10 dark:text-cyan-200">
           <BadgeCheck className="h-3.5 w-3.5" />

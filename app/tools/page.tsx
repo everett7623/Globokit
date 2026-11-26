@@ -1,30 +1,76 @@
 // 名称: 工具总目录页
-// 描述: 独立索引页，按业务分类展示全部工具及其用途说明
+// 描述: 独立索引页，按业务分类展示全部工具及其用途说明，含 CollectionPage 结构化数据与分类锚点
 // 路径: Globokit/app/tools/page.tsx
 // 作者: everettlabs
-// 更新时间: 2026-10-12
+// 更新时间: 2026-11-25
 
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
+import { buildAbsoluteUrl, buildCollectionPageSchema } from '@/lib/seo-schema'
 import { SITE_NAME } from '@/lib/site'
 import { HOME_ACTIVE_CATEGORIES, HOME_TOOLS, HOME_TOOLS_BY_CATEGORY } from '@/components/home/home-data'
 
+const toolsTitle = `全部工具目录 - ${HOME_TOOLS.length} 个外贸实用工具 | ${SITE_NAME}`
+const toolsDescription = `${SITE_NAME} 共 ${HOME_TOOLS.length} 个外贸工具，覆盖财务报价、物流装柜、外贸沟通、单证制作、国家资料等 ${HOME_ACTIVE_CATEGORIES.length} 大业务分类，全部免费且在浏览器本地运行。`
+
 export const metadata: Metadata = {
-  title: `全部工具目录 - ${HOME_TOOLS.length} 个外贸实用工具 | ${SITE_NAME}`,
-  description: `${SITE_NAME} 共 ${HOME_TOOLS.length} 个外贸工具，覆盖财务报价、物流装柜、外贸沟通、单证制作、国家资料等 8 大业务分类，全部免费且在浏览器本地运行。`,
+  title: toolsTitle,
+  description: toolsDescription,
   alternates: { canonical: '/tools' },
+  openGraph: {
+    title: toolsTitle,
+    description: toolsDescription,
+    url: buildAbsoluteUrl('/tools'),
+    siteName: SITE_NAME,
+    type: 'website',
+    locale: 'zh_CN',
+    images: [{ url: buildAbsoluteUrl('/opengraph-image'), width: 1200, height: 630, alt: toolsTitle }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: toolsTitle,
+    description: toolsDescription,
+    images: [buildAbsoluteUrl('/opengraph-image')],
+  },
 }
 
 export default function ToolsIndexPage() {
+  const structuredData = buildCollectionPageSchema({
+    name: toolsTitle,
+    description: toolsDescription,
+    path: '/tools',
+    breadcrumbs: [
+      { name: '首页', path: '/' },
+      { name: '全部工具目录', path: '/tools' },
+    ],
+    itemUrls: HOME_TOOLS.map((tool) => ({ name: tool.title, path: tool.href })),
+  })
+
   return (
     <div className="space-y-10">
-      <header className="max-w-3xl">
-        <h1 className="text-3xl font-bold text-slate-950 dark:text-white">全部工具目录</h1>
-        <p className="mt-3 text-base leading-7 text-muted-foreground">
-          {HOME_TOOLS.length} 个工具按外贸业务流分为 {HOME_ACTIVE_CATEGORIES.length} 类：从客户报价、装柜出货，到收款催款、单证制作。全部工具免费、免注册，计算在浏览器本地完成。
-        </p>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
+
+      <header className="space-y-4">
+        <div className="max-w-3xl">
+          <h1 className="text-3xl font-bold text-slate-950 dark:text-white">全部工具目录</h1>
+          <p className="mt-3 text-base leading-7 text-muted-foreground">
+            {HOME_TOOLS.length} 个工具按外贸业务流分为 {HOME_ACTIVE_CATEGORIES.length} 类：从客户报价、装柜出货，到收款催款、单证制作。全部工具免费、免注册，计算在浏览器本地完成。
+          </p>
+        </div>
+
+        <nav aria-label="分类快速跳转" className="flex flex-wrap gap-2">
+          {HOME_ACTIVE_CATEGORIES.map((category) => (
+            <a
+              key={category}
+              href={`#${encodeURIComponent(category)}`}
+              className="rounded-md border border-slate-200 bg-white/85 px-3 py-1.5 text-xs font-medium text-slate-700 transition-colors hover:border-emerald-300 hover:text-emerald-700 dark:border-white/10 dark:bg-slate-950/60 dark:text-slate-300 dark:hover:border-cyan-300/50 dark:hover:text-cyan-200"
+            >
+              {category} · {HOME_TOOLS_BY_CATEGORY[category].length}
+            </a>
+          ))}
+        </nav>
       </header>
 
       <div className="space-y-8">

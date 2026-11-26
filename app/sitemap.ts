@@ -27,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: absoluteUrl('/resources'),
-      lastModified: new Date('2026-07-06'),
+      lastModified: new Date('2026-11-25'),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
@@ -39,19 +39,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: absoluteUrl('/faq'),
-      lastModified: new Date('2026-10-12'),
+      lastModified: new Date('2026-11-25'),
       changeFrequency: 'monthly',
-      priority: 0.5,
+      priority: 0.6,
     },
     {
       url: absoluteUrl('/about'),
-      lastModified: new Date('2026-10-10'),
+      lastModified: new Date('2026-11-25'),
       changeFrequency: 'monthly',
       priority: 0.5,
     },
     {
       url: absoluteUrl('/privacy'),
-      lastModified: new Date('2026-10-10'),
+      lastModified: new Date('2026-11-25'),
       changeFrequency: 'yearly',
       priority: 0.3,
     },

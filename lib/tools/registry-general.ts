@@ -134,7 +134,7 @@ export const GENERAL_TOOLS: ToolMeta[] = [
     seoTitle: 'VPS剩余价值计算器 - 精确计算VPS残值 | Globokit',
     seoDescription: '免费在线VPS剩余价值计算器，基于购买日期和到期时间精确计算VPS剩余价值，支持多币种转换',
     useCases: ['VPS转让定价', '续费决策参考', '多台VPS价值对比'],
-    relatedTools: [],
+    relatedTools: ['server-cost-comparison', 'currency-converter', 'timestamp-converter'],
   },
   {
     id: 'incoterms',

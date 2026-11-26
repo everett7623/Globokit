@@ -19,6 +19,8 @@ export const FINANCE_TOOLS: ToolMeta[] = [
     updatedAt: '2026-10-25',
     badge: '新增',
     keywords: ['降价', '保利销量', '客户压价', '利润', '数量折扣'],
+    seoTitle: '降价保利销量计算器 - 客户压价与以量换价测算 | Globokit',
+    seoDescription: '免费在线降价保利销量计算器，快速测算客户要求降价后的利润损失，以及维持原订单利润所需的增量销量与保利倍数',
     useCases: ['客户压价谈判', '以量换价测算', '折扣利润评估'],
     relatedTools: ['quote-calculator', 'tiered-quote-calculator', 'order-break-even-calculator'],
   },
