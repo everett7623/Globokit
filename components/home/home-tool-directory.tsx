@@ -6,13 +6,21 @@
 
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useSyncExternalStore } from 'react'
 import Link from 'next/link'
-import { BadgeCheck, Search, X } from 'lucide-react'
+import { BadgeCheck, Pin, Search, X } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
+import { trackEvent } from '@/lib/analytics'
+import {
+  getPinnedToolsServerSnapshot,
+  readPinnedToolSlugs,
+  subscribePinnedTools,
+  togglePinnedToolSlug,
+} from '@/lib/pinned-tools'
 import type { ToolCategory, ToolMeta } from '@/lib/tools/registry'
 import { cn } from '@/lib/utils'
 import { HOME_ACTIVE_CATEGORIES, HOME_TOOLS, HOME_TOOLS_BY_CATEGORY } from './home-data'
+import { PinnedToolsBar } from './pinned-tools-bar'
 
 type CategoryFilter = '全部' | ToolCategory
 
@@ -36,6 +44,12 @@ function matchesQuery(tool: ToolMeta, normalizedQuery: string): boolean {
 export function HomeToolDirectory() {
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>('全部')
   const [query, setQuery] = useState('')
+  const pinnedSlugs = useSyncExternalStore(
+    subscribePinnedTools,
+    readPinnedToolSlugs,
+    getPinnedToolsServerSnapshot
+  )
+  const pinnedSet = useMemo(() => new Set(pinnedSlugs), [pinnedSlugs])
   const normalizedQuery = query.trim().toLowerCase()
 
   const visibleGroups = useMemo(() => {
@@ -133,6 +147,8 @@ export function HomeToolDirectory() {
         })}
       </div>
 
+      <PinnedToolsBar pinnedSlugs={pinnedSlugs} />
+
       {normalizedQuery && (
         <p className="text-xs text-slate-500 dark:text-slate-400">
           共找到 <span className="font-semibold text-slate-900 dark:text-white">{matchedCount}</span> 个匹配工具
@@ -162,6 +178,7 @@ export function HomeToolDirectory() {
               key={category}
               category={category}
               tools={tools}
+              pinnedSet={pinnedSet}
               wide={selectedCategory !== '全部' || tools.length >= 6}
             />
           ))}
@@ -171,7 +188,7 @@ export function HomeToolDirectory() {
   )
 }
 
-function CategorySection({ category, tools: categoryTools, wide = false }: { category: ToolCategory; tools: ToolMeta[]; wide?: boolean }) {
+function CategorySection({ category, tools: categoryTools, pinnedSet, wide = false }: { category: ToolCategory; tools: ToolMeta[]; pinnedSet: Set<string>; wide?: boolean }) {
   return (
     <div className={cn('rounded-lg border border-white/70 bg-white/80 p-4 shadow-lg shadow-slate-900/4 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/60', wide && 'md:col-span-2 xl:col-span-3')}>
       <div className="mb-4 flex items-center justify-between">
@@ -185,31 +202,50 @@ function CategorySection({ category, tools: categoryTools, wide = false }: { cat
           if (!tool) return null
 
           const Icon = tool.icon
+          const pinned = pinnedSet.has(tool.slug)
           return (
-            <Link
-              key={tool.id}
-              href={tool.href}
-              className="group flex gap-3 rounded-md border border-slate-200/80 bg-white/80 p-3 transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-50/70 hover:shadow-md hover:shadow-emerald-900/[0.05] dark:border-white/10 dark:bg-white/3 dark:hover:border-cyan-300/50 dark:hover:bg-cyan-300/10"
-            >
-              <div className={cn('flex h-10 w-10 shrink-0 items-center justify-center rounded-md', tool.bgColor, tool.color)}>
-                <Icon className="h-5 w-5" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <div className="flex items-start justify-between gap-2">
-                  <p className="truncate text-sm font-semibold text-slate-950 group-hover:text-emerald-700 dark:text-white dark:group-hover:text-cyan-200">
-                    {tool.shortTitle}
-                  </p>
-                  {tool.badge && (
-                    <Badge variant="outline" className={cn('shrink-0 border-0 px-2 py-0 text-[10px]', tool.badgeClassName)}>
-                      {tool.badge}
-                    </Badge>
-                  )}
+            <div key={tool.id} className="group relative">
+              <Link
+                href={tool.href}
+                className="flex gap-3 rounded-md border border-slate-200/80 bg-white/80 p-3 pr-9 transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-50/70 hover:shadow-md hover:shadow-emerald-900/[0.05] dark:border-white/10 dark:bg-white/3 dark:hover:border-cyan-300/50 dark:hover:bg-cyan-300/10"
+              >
+                <div className={cn('flex h-10 w-10 shrink-0 items-center justify-center rounded-md', tool.bgColor, tool.color)}>
+                  <Icon className="h-5 w-5" />
                 </div>
-                <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-500 dark:text-slate-400">
-                  {tool.description}
-                </p>
-              </div>
-            </Link>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-start justify-between gap-2">
+                    <p className="truncate text-sm font-semibold text-slate-950 group-hover:text-emerald-700 dark:text-white dark:group-hover:text-cyan-200">
+                      {tool.shortTitle}
+                    </p>
+                    {tool.badge && (
+                      <Badge variant="outline" className={cn('shrink-0 border-0 px-2 py-0 text-[10px]', tool.badgeClassName)}>
+                        {tool.badge}
+                      </Badge>
+                    )}
+                  </div>
+                  <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-500 dark:text-slate-400">
+                    {tool.description}
+                  </p>
+                </div>
+              </Link>
+              <button
+                type="button"
+                onClick={() => {
+                  const nextPinned = togglePinnedToolSlug(tool.slug)
+                  trackEvent('tool_pin', { tool_slug: tool.slug, pinned: nextPinned })
+                }}
+                aria-label={pinned ? `取消置顶 ${tool.title}` : `置顶 ${tool.title} 到常用工具`}
+                title={pinned ? '取消置顶' : '置顶到常用工具'}
+                className={cn(
+                  'absolute right-2 top-2 rounded p-1 transition-colors',
+                  pinned
+                    ? 'text-emerald-600 dark:text-cyan-300'
+                    : 'text-slate-300 opacity-0 hover:text-slate-600 group-hover:opacity-100 focus:opacity-100 dark:text-slate-600 dark:hover:text-slate-300'
+                )}
+              >
+                <Pin className="h-3.5 w-3.5" aria-hidden="true" />
+              </button>
+            </div>
           )
         })}
       </div>

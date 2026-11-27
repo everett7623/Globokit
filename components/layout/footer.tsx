@@ -50,6 +50,13 @@ export function Footer() {
             </Link>
             <span className="hidden text-slate-300 dark:text-white/20 sm:inline">|</span>
             <Link
+              href="/country"
+              className="flex items-center gap-1.5 text-slate-500 transition-colors hover:text-emerald-700 dark:text-slate-400 dark:hover:text-cyan-200"
+            >
+              国家档案
+            </Link>
+            <span className="hidden text-slate-300 dark:text-white/20 sm:inline">|</span>
+            <Link
               href="/faq"
               className="flex items-center gap-1.5 text-slate-500 transition-colors hover:text-emerald-700 dark:text-slate-400 dark:hover:text-cyan-200"
             >

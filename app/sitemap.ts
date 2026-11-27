@@ -5,6 +5,7 @@
 // 更新时间: 2026-07-06
 
 import type { MetadataRoute } from 'next'
+import { getAllCountryCodes } from '@/lib/country-guide'
 import { SITE_URL } from '@/lib/site'
 import { TOOL_REGISTRY } from '@/lib/tools/registry'
 
@@ -38,6 +39,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: absoluteUrl('/country'),
+      lastModified: new Date('2026-11-27'),
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
       url: absoluteUrl('/faq'),
       lastModified: new Date('2026-11-25'),
       changeFrequency: 'monthly',
@@ -60,6 +67,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(tool.updatedAt),
       changeFrequency: 'monthly' as const,
       priority: tool.badge === '热门' ? 0.9 : 0.8,
+    })),
+    ...getAllCountryCodes().map((code) => ({
+      url: absoluteUrl(`/country/${code}`),
+      lastModified: new Date('2026-11-27'),
+      changeFrequency: 'yearly' as const,
+      priority: 0.65,
     })),
   ]
 }

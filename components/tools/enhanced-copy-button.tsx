@@ -9,6 +9,7 @@
 import { useState } from 'react'
 import { Check, ClipboardCopy } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { extractToolSlugFromPathname, trackEvent } from '@/lib/analytics'
 import { cn } from '@/lib/utils'
 
 export interface EnhancedCopyButtonProps {
@@ -70,6 +71,9 @@ export function EnhancedCopyButton({
       if (!success) throw new Error('浏览器拒绝了剪贴板写入')
       setCopied(true)
       setError(false)
+      trackEvent('tool_copy', {
+        tool_slug: extractToolSlugFromPathname(window.location.pathname),
+      })
       onCopy?.()
 
       // 1.8秒后重置状态

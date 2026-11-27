@@ -6,6 +6,7 @@
 
 import { ImageResponse } from 'next/og'
 import type { NextRequest } from 'next/server'
+import { getCountryByCode } from '@/lib/country-guide'
 import { SITE_NAME } from '@/lib/site'
 import { getToolBySlug, TOOL_REGISTRY, type ToolCategory } from '@/lib/tools/registry'
 
@@ -35,14 +36,30 @@ function formatSlugTitle(slug: string): string {
 
 export async function GET(request: NextRequest) {
   const slug = request.nextUrl.searchParams.get('slug')?.trim() ?? ''
+  const countryCode = request.nextUrl.searchParams.get('country')?.trim() ?? ''
   const tool = slug ? getToolBySlug(slug) : undefined
+  const country = !tool && countryCode ? getCountryByCode(countryCode) : undefined
 
-  const categoryLabel = tool ? CATEGORY_EN_MAP[tool.category] : 'GLOBAL TRADE TOOLKIT'
-  const headline = tool ? formatSlugTitle(tool.slug) : `${TOOL_REGISTRY.length} Free Trade Tools`
-  const routePath = tool ? `globokit.com${tool.href}` : 'globokit.com'
+  const categoryLabel = tool
+    ? CATEGORY_EN_MAP[tool.category]
+    : country
+      ? `TRADE PROFILE · ${country.iso2}`
+      : 'GLOBAL TRADE TOOLKIT'
+  const headline = tool
+    ? formatSlugTitle(tool.slug)
+    : country
+      ? `${country.name_en} Trade Guide`
+      : `${TOOL_REGISTRY.length} Free Trade Tools`
+  const routePath = tool
+    ? `globokit.com${tool.href}`
+    : country
+      ? `globokit.com/country/${country.iso2.toLowerCase()}`
+      : 'globokit.com'
   const subtitle = tool
     ? `Free online trade utility · Updated ${tool.updatedAt} · Runs 100% locally in your browser`
-    : 'Quoting · Container Loading · Trade Docs · Payments · World Info'
+    : country
+      ? `Currency ${country.currency_code} · Dial ${country.dial_code} · ${country.voltage} · 2026-2027 Holidays`
+      : 'Quoting · Container Loading · Trade Docs · Payments · World Info'
 
   const response = new ImageResponse(
     (

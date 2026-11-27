@@ -30,6 +30,7 @@ function buildLlmsTxt(): string {
     '',
     `- [首页与工作台](${SITE_URL}/): 高频外贸入口、业务流导航与工具总览`,
     `- [全部工具目录](${SITE_URL}/tools): 按 ${categories.length} 大业务分类索引全部 ${TOOL_REGISTRY.length} 个工具`,
+    `- [全球 171 国外贸档案](${SITE_URL}/country): 单国静态档案页，聚合 2026–2027 节假日、北京时差、货币符号、国际区号与电压插头`,
     `- [常见问题 FAQ](${SITE_URL}/faq): 报价换算、装柜、信用证贴现、单证导出与隐私安全问答`,
     `- [配套业务资源](${SITE_URL}/resources): 精选外贸客户开发、主机建站、域名、账号支付与 AI 服务`,
     `- [关于 ${SITE_NAME}](${SITE_URL}/about): 站点定位、技术架构与开源反馈入口`,

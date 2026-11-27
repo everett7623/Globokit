@@ -9,6 +9,7 @@
 import { useEffect, useMemo, useState, useSyncExternalStore } from 'react'
 import { useRouter } from 'next/navigation'
 import { ArrowRight, Clock, CornerDownLeft, Search, Trash2, X } from 'lucide-react'
+import { extractToolSlugFromPathname, trackEvent } from '@/lib/analytics'
 import {
   clearRecentToolSlugs,
   getRecentToolsServerSnapshot,
@@ -99,6 +100,10 @@ function CommandSearchModal({ onClose }: { onClose: () => void }) {
 
   const safeActiveIndex = items.length > 0 ? Math.min(activeIndex, items.length - 1) : 0
   const navigateTo = (href: string) => {
+    trackEvent('command_search_open', {
+      tool_slug: extractToolSlugFromPathname(href),
+      has_query: Boolean(normalizedQuery),
+    })
     onClose()
     router.push(href)
   }
