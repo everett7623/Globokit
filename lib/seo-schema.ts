@@ -41,6 +41,14 @@ export function buildWebsiteSchema(): Record<string, unknown> {
     inLanguage: 'zh-CN',
     description: `专为外贸从业者打造的免费在线工具平台，收录 ${TOOL_REGISTRY.length} 个纯前端本地计算工具，覆盖报价核算、物流装柜、单证制作、收款催款与全球资料查询。`,
     publisher: { '@id': `${SITE_URL}/#organization` },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE_URL}/tools?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
   }
 }
 

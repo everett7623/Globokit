@@ -10,6 +10,7 @@ import { useMemo, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { TOOL_REGISTRY, type ToolCategory } from '@/lib/tools/registry'
 import { NAV_ACTIVE_CATEGORIES, NAV_TOOLS_BY_CATEGORY } from './navigation-data'
+import { CommandSearchDialog } from './command-search-dialog'
 import { DesktopNavigation } from './navigation-desktop'
 import { MobileNavigation } from './navigation-mobile'
 
@@ -17,6 +18,7 @@ export function Navigation() {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false)
+  const [commandOpen, setCommandOpen] = useState(false)
   const [activeCategory, setActiveCategory] = useState<ToolCategory>(NAV_ACTIVE_CATEGORIES[0])
   const [query, setQuery] = useState('')
 
@@ -60,6 +62,10 @@ export function Navigation() {
         onToolsDropdownOpenChange={setToolsDropdownOpen}
         onActiveCategoryChange={setActiveCategory}
         onQueryChange={setQuery}
+        onOpenCommand={() => {
+          closeMenus()
+          setCommandOpen(true)
+        }}
         onClose={closeMenus}
       />
       <MobileNavigation
@@ -69,7 +75,16 @@ export function Navigation() {
         filteredTools={filteredTools}
         onOpenChange={setMobileMenuOpen}
         onQueryChange={setQuery}
+        onOpenCommand={() => {
+          closeMenus()
+          setCommandOpen(true)
+        }}
         onClose={closeMenus}
+      />
+      <CommandSearchDialog
+        open={commandOpen}
+        pathname={pathname}
+        onOpenChange={setCommandOpen}
       />
     </>
   )

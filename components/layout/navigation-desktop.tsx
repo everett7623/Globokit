@@ -5,7 +5,7 @@
 // 更新时间: 2026-07-15
 
 import Link from 'next/link'
-import { BriefcaseBusiness, ChevronDown, PackageCheck } from 'lucide-react'
+import { BriefcaseBusiness, ChevronDown, PackageCheck, Search } from 'lucide-react'
 import { ThemeToggle } from '@/components/theme/theme-toggle'
 import type { ToolCategory, ToolMeta } from '@/lib/tools/registry'
 import { cn } from '@/lib/utils'
@@ -23,6 +23,7 @@ interface DesktopNavigationProps {
   onToolsDropdownOpenChange: (open: boolean) => void
   onActiveCategoryChange: (category: ToolCategory) => void
   onQueryChange: (query: string) => void
+  onOpenCommand: () => void
   onClose: () => void
 }
 
@@ -37,6 +38,7 @@ export function DesktopNavigation({
   onToolsDropdownOpenChange,
   onActiveCategoryChange,
   onQueryChange,
+  onOpenCommand,
   onClose,
 }: DesktopNavigationProps) {
   const isToolPage = pathname.startsWith('/tools/')
@@ -114,6 +116,18 @@ export function DesktopNavigation({
       ))}
 
       <div className="ml-2 flex items-center gap-2">
+        <button
+          type="button"
+          onClick={onOpenCommand}
+          aria-label="打开全局工具速搜（Ctrl+K）"
+          className="inline-flex h-10 items-center gap-2 rounded-md border border-slate-200/80 bg-white/75 px-3 text-sm text-slate-600 shadow-xs shadow-slate-900/3 transition-colors hover:border-emerald-300 hover:text-emerald-700 dark:border-white/10 dark:bg-slate-900/70 dark:text-slate-300 dark:hover:border-cyan-300/60 dark:hover:text-cyan-200"
+        >
+          <Search className="h-4 w-4" aria-hidden="true" />
+          <span className="hidden 2xl:inline">速搜工具</span>
+          <kbd className="rounded border border-slate-200 bg-slate-50 px-1.5 py-0.5 font-sans text-[11px] text-slate-500 dark:border-white/15 dark:bg-white/5 dark:text-slate-400">
+            Ctrl K
+          </kbd>
+        </button>
         {NAV_EXTERNAL_LINKS.map((link) => {
           const Icon = link.icon
           return (

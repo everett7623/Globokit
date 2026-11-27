@@ -6,6 +6,7 @@
 
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
+import { ToolGuideSection } from '@/components/tools/tool-guide-section'
 import { buildAbsoluteUrl, buildBreadcrumbSchema, serializeJsonLd } from '@/lib/seo-schema'
 import { SITE_NAME, SITE_URL } from '@/lib/site'
 import { getToolBySlug } from './registry'
@@ -21,6 +22,7 @@ export function createToolMetadata(slug: string): Metadata {
   const title = tool.seoTitle ?? `${tool.title} | ${SITE_NAME}`
   const description = tool.seoDescription ?? tool.description
   const url = buildAbsoluteUrl(tool.href)
+  const ogImageUrl = buildAbsoluteUrl(`/api/og?slug=${encodeURIComponent(tool.slug)}`)
 
   return {
     title,
@@ -36,7 +38,7 @@ export function createToolMetadata(slug: string): Metadata {
       locale: 'zh_CN',
       images: [
         {
-          url: buildAbsoluteUrl('/opengraph-image'),
+          url: ogImageUrl,
           width: 1200,
           height: 630,
           alt: title,
@@ -47,7 +49,7 @@ export function createToolMetadata(slug: string): Metadata {
       card: 'summary_large_image',
       title,
       description,
-      images: [buildAbsoluteUrl('/opengraph-image')],
+      images: [ogImageUrl],
     },
   }
 }
@@ -94,6 +96,7 @@ export function createToolLayout(slug: string) {
       buildBreadcrumbSchema([
         { name: '首页', path: '/' },
         { name: '全部工具', path: '/tools' },
+        { name: tool.category, path: `/tools#${encodeURIComponent(tool.category)}` },
         { name: tool.title, path: tool.href },
       ]),
     ],
@@ -104,6 +107,7 @@ export function createToolLayout(slug: string) {
       <>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
         {children}
+        <ToolGuideSection tool={tool} />
       </>
     )
   }

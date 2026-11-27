@@ -36,6 +36,7 @@ export const metadata: Metadata = {
 
 const STORAGE_KEYS = [
   { key: 'globokit-theme', usage: '记住你选择的日间/夜间主题' },
+  { key: 'globokit-recent-tools', usage: '记录你最近访问的 6 个工具，便于全局速搜弹窗快速切换' },
   { key: 'globokit-packing-draft', usage: '装箱单生成器的浏览器本地自动草稿，防止刷新页面丢失填写内容' },
   { key: 'currencyFavorites', usage: '货币符号页的收藏币种' },
   { key: 'worldTimeFavorites', usage: '世界时间页的收藏城市' },

@@ -4,6 +4,7 @@
 // 作者: everettlabs
 // 更新时间: 2026-07-15
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Container, Sparkles } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
@@ -12,10 +13,24 @@ import { HERO_TOOLS, HOME_STATS } from './home-data'
 export function HomeHero() {
   return (
     <section className="relative overflow-hidden rounded-lg border border-cyan-100 bg-cyan-50 text-slate-950 shadow-2xl shadow-cyan-900/10 dark:border-white/10 dark:bg-slate-950 dark:text-white dark:shadow-slate-900/30">
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-cover bg-center bg-[url('/hero-trade-day.png')] dark:bg-[url('/hero-trade-night.png')]"
-      />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <Image
+          src="/hero-trade-day.png"
+          alt=""
+          fill
+          priority
+          sizes="(max-width: 1440px) 100vw, 1440px"
+          className="object-cover object-center dark:hidden"
+        />
+        <Image
+          src="/hero-trade-night.png"
+          alt=""
+          fill
+          priority
+          sizes="(max-width: 1440px) 100vw, 1440px"
+          className="hidden object-cover object-center dark:block"
+        />
+      </div>
       <div className="absolute inset-0 bg-linear-to-r from-white/90 via-white/56 to-white/6 dark:from-slate-950/90 dark:via-slate-950/62 dark:to-slate-950/10" />
       <div className="absolute inset-x-0 bottom-0 h-36 bg-linear-to-t from-cyan-50/75 to-transparent dark:from-slate-950/70" />
 

@@ -26,6 +26,7 @@ interface MobileNavigationProps {
   filteredTools: ToolMeta[]
   onOpenChange: (open: boolean) => void
   onQueryChange: (query: string) => void
+  onOpenCommand: () => void
   onClose: () => void
 }
 
@@ -36,11 +37,20 @@ export function MobileNavigation({
   filteredTools,
   onOpenChange,
   onQueryChange,
+  onOpenCommand,
   onClose,
 }: MobileNavigationProps) {
   return (
     <>
       <div className="ml-auto flex items-center gap-2 lg:hidden">
+        <button
+          type="button"
+          onClick={onOpenCommand}
+          aria-label="搜索外贸工具"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-200/80 bg-white/80 text-slate-700 shadow-xs shadow-slate-900/3 transition-colors hover:text-emerald-700 dark:border-white/10 dark:bg-slate-900/80 dark:text-slate-200"
+        >
+          <Search className="h-4 w-4" aria-hidden="true" />
+        </button>
         <ThemeToggle compact />
         <button
           type="button"

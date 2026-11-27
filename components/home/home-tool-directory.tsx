@@ -16,6 +16,8 @@ import { HOME_ACTIVE_CATEGORIES, HOME_TOOLS, HOME_TOOLS_BY_CATEGORY } from './ho
 
 type CategoryFilter = '全部' | ToolCategory
 
+const HOME_TOOL_BY_ID = new Map(HOME_TOOLS.map((tool) => [tool.id, tool]))
+
 function matchesQuery(tool: ToolMeta, normalizedQuery: string): boolean {
   if (!normalizedQuery) return true
   const haystack = [
@@ -179,7 +181,7 @@ function CategorySection({ category, tools: categoryTools, wide = false }: { cat
 
       <div className={cn(wide ? 'grid gap-2 sm:grid-cols-2 xl:grid-cols-3' : 'space-y-2')}>
         {categoryTools.map((rawTool) => {
-          const tool = HOME_TOOLS.find((item) => item.id === rawTool.id)
+          const tool = HOME_TOOL_BY_ID.get(rawTool.id)
           if (!tool) return null
 
           const Icon = tool.icon
